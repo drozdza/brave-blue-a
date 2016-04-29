@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta charset="utf8">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>Brave Blue A</title>
 <link rel="icon" type="image/png" href="brave_blue_a.png">
 <script type="text/javascript" src="jquery.js"></script>
@@ -11,6 +10,7 @@ GET={
     BLUR:0,
     FRAMES:0,
     CANVAS:0,
+    FPS:0,
 };
 (function(){
     var GETs = document.location.href.split('?')[1];
@@ -19,10 +19,11 @@ GET={
         for(var gi=0; gi<GETs.length; ++gi){
             var BUM = GETs[gi].split('=');
             switch(BUM[0]){
-                case 'debug':    GET['DEBUG'] = BUM[1]; break;
-                case 'blur':     GET['BLUR'] = BUM[1];    break;
-                case 'frames':    GET['FRAMES'] = BUM[1];break;
-                case 'canvas':    GET['CANVAS'] = BUM[1];break;
+                case 'debug':  GET['DEBUG']  = BUM[1]; break;
+                case 'blur':   GET['BLUR']   = BUM[1]; break;
+                case 'frames': GET['FRAMES'] = BUM[1]; break;
+                case 'canvas': GET['CANVAS'] = BUM[1]; break;
+                case 'fps':    GET['FPS']    = BUM[1]; break;
             }
         }
     }
@@ -86,13 +87,13 @@ NAMES.ModName = {
     healerProd: 'Heal',
     esteemProd: '<div class="smaller_title">Moves Estimation</div>',
     shieldProd: 'Shield',
-    radar:        'Radar',
+    radar:      'Radar',
     bulletProd: 'Bullets',
-    bombProd:    'Bombs',
-    missleProd:    'Missles',
-    laserProd:    'Laser',
-    teleProd:    'Teleport',
-    spotRegion:    '<div class="smaller_title">Ships Spot</div>',
+    bombProd:   'Bombs',
+    missleProd: 'Missles',
+    laserProd:  'Laser',
+    teleProd:   'Teleport',
+    spotRegion: '<div class="smaller_title">Ships Spot</div>',
 };
 
 ObjectPutDatas={
@@ -138,6 +139,25 @@ ObjectPutDatas={
         toDo: [{T:'expire'}],
         Manouver: 'goStraight',
     },
+    space_mine:{
+        viewLetter: 'R',
+        viewLetterSize: 10,
+        viewColor: '#ff0',
+        viewAngle: 0,
+
+        lifeM: 1,
+        onHit: {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 24, NailsSpeed: 6, NailsSpeedPlus: 0, NailsDec: 45, NailsDecPlus: 0, NailsAngleCenter: 8, NailsAngleBoth: 1, NailsNeutral: true},
+        onDie: {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 24, NailsSpeed: 6, NailsSpeedPlus: 0, NailsDec: 45, NailsDecPlus: 0, NailsAngleCenter: 8, NailsAngleBoth: 1, NailsNeutral: true},
+
+        // onHit: {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 24, NailsSpeed: 4, NailsSpeedPlus: 6, NailsDec: 16, NailsDecPlus: 6, NailsNeutral: true},
+        // onDie: {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 24, NailsSpeed: 4, NailsSpeedPlus: 6, NailsDec: 16, NailsDecPlus: 6, NailsNeutral: true},
+
+        squadScheme: {
+            0:{ angle: 0, radius: 0, id: -1, make: {What:{RoundField:1},objData:{x:0,y:-1000, angle: 0, radius: 150, colorInactive: false, colorActive: 'rgba(255,0,0,0.4)', OneTimeEffect: 1, OneTimeOffset: 10, OneTimeDetect: 1, dontHit:['B','BE','E','M','ME','A']}}}
+        },
+
+        detectMovementField:{ angle: 0, radius: 80, color: "rgba(255,0,0,0.4)"}
+    },
     star:{
         viewLIBpath:'StarPath', // *
         viewPathSize:30,
@@ -154,7 +174,7 @@ ObjectPutDatas={
         viewXY:180,
         radius: 90,
         undestructible: 1,
-        bounceAngle: 'straight',
+        bounceType: 'straight',
     },
     RoundField:{
         radius: 50,
@@ -271,6 +291,28 @@ ObjectPutDatas={
         viewHitPattern: 'HullFire_40',
         lifeM: 7,
         radius: 20,
+
+        weapon: [{t:'makeShieldBlob', gunSpeed: 25, lastShot: 100, shieldBlobMaxHp: 6, maxSpeed: 2}],
+
+        squadSchemeType: {t:'round', count: 16, radius: 100},
+        squadScheme: [],
+
+        AlarmLvl: 2,
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight'
+    },
+    shieldBlob:{
+        viewLetter: '#',
+        viewLetterSize: 40,
+        colorFill:[0,255,200,1],
+        viewAngle: 0,
+        lifeM: 3,
+        radius: 21,
+        viewHitPattern:'ShieldBlobHit',
+
+        backgroundCircle: 21,
+        colorCircle:[0,200,100,1],
     },
     royale:{
         viewLetter: 'R',
@@ -461,87 +503,89 @@ BoardMODS={
 
 BOARDS={
     'u1':{
-        MapRadius:60,MapRadius2:2400,O:{ K:1},
+        MapRadius:60,MapRadius2:2400,
         BoardMods:['sitOnMap','allAvoid'],
-        PlaceRandom:[
-            {X: 500, Y: 500, Radius: 200,What:{Star: 20, A: 120}},
-            // {X: -500, Y: 500, Radius: 200,What:{M: 20}},
-        ],
-
-        /*
-            Edison Field
-            Speed Cap Field (bullets, ship)
-
-            / PT ET
-
-        */
-
-
         Place:[
+            {Random:{X: 0, Y: 0, Radius: 200}, What: {K:1}},
+
             {What:{SquareField:1},objData:{x:59,y:-933, squareAngle: 45, squareLen: 500, squareWidth: 30, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 20, PeriodOffset: 20}},
 
-            {What:{SquareField:1},objData:{x:0,y:-1000, squareAngle: 45, squareLen: 500, squareWidth: 30, fieldAnim: 'WindField', bounceAngle:'wind',bounceForce:5,bounceWindAngle:60}},
+            {What:{SquareField:1},objData:{x:0,y:-1000, squareAngle: 45, squareLen: 500, squareWidth: 30, fieldAnim: 'WindField', bounceType:'wind',bounceForce:5,windAngle:60}},
+
+            {What:{SquareField:1},objData:{x:800,y:-730, squareAngle: 45, squareLen: 500, squareWidth: 70, fieldAnim: 'WindField', vectorType:'wind', vectorForce:5, windAngle:60}},
 
             {What:{ConeField:1},objData:{x:400,y:-1000, radius: 220, angle: 110, coneAngle: 40, coneRad2: 40, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 20, PeriodOffset: 20}},
-            {What:{ConeField:1},objData:{x:-200,y:-1000, radius: 220, angle: 270, coneAngle: 110, coneRad2: 0, fieldAnim:'WindField', bounceAngle:'wind',bounceForce:1,bounceWindAngle:60}},
+            {What:{ConeField:1},objData:{x:-200,y:-1000, radius: 220, angle: 270, coneAngle: 110, coneRad2: 0, fieldAnim:'WindField', bounceType:'wind',bounceForce:1,windAngle:60}},
 
-            {What:{RoundField:1},objData:{x:-1500,y:100, radius:160, fieldAnim: 'WindField', bounceAngle:'wind',bounceForce:1,bounceWindAngle:60}},
-            {What:{RoundField:1},objData:{x:-1000,y:400, radius:160, fieldAnim: 'GravityField', bounceAngle:'gravity',bounceForce:8}},
-            {What:{RoundField:1},objData:{x:-1000,y:-400, radius:200, fieldAnim: 'OrbitalField', bounceAngle:'orbital',bounceForce1:2,bounceForce2:6}},
-            {What:{RoundField:1},objData:{x:-1300,y:-100, radius:80, fieldAnim: 'ShellField', bounceAngle:'gentle',bounceForce:5}},
+            {What:{RoundField:1},objData:{x:-1500,y:100, radius:160, fieldAnim: 'WindField', bounceType:'wind',bounceForce:1,windAngle:60}},
+            {What:{RoundField:1},objData:{x:-1000,y:400, radius:160, fieldAnim: 'GravityField', bounceType:'gravity',bounceForce:8}},
+            {What:{RoundField:1},objData:{x:1400,y:-850, radius:160, fieldAnim: 'GravityField', vectorType:'gravity',vectorForce:8}},
+            {What:{RoundField:1},objData:{x:1800,y:-1100, radius:160, fieldAnim: 'GravityField', vectorType:'gentle',vectorForce:8}},
+            {What:{RoundField:1},objData:{x:-1000,y:-400, radius:200, fieldAnim: 'OrbitalField', bounceType:'orbital',bounceForce1:2,bounceForce2:6}},
+            {What:{RoundField:1},objData:{x:1400,y:-1300, radius:200, fieldAnim: 'OrbitalField', vectorType:'orbital',vectorForce:4,vectorForceAdd:4}},
+            {What:{RoundField:1},objData:{x:-1300,y:-100, radius:80, fieldAnim: 'ShellField', bounceType:'gentle',bounceForce:5}},
             {What:{Star:1},objData:{x:-1300,y:-100}},
-            {What:{RoundField:1},objData:{x:-1500,y:-150, radius:50, fieldAnim: 'ShellField', bounceAngle:'gentle',bounceForce:5}},
+            {What:{RoundField:1},objData:{x:-1500,y:-150, radius:50, fieldAnim: 'ShellField', bounceType:'gentle',bounceForce:5}},
             {What:{Star:1},objData:{x:-1500,y:-150}},
-            {What:{RoundField:1},objData:{x:-1700,y:-50, radius:50, fieldAnim: 'ShellField', bounceAngle:'gentle',bounceForce:1}},
+            {What:{RoundField:1},objData:{x:-1700,y:-50, radius:50, fieldAnim: 'ShellField', bounceType:'gentle',bounceForce:1}},
             {What:{Star:1},objData:{x:-1700,y:-50}},
             {What:{J:1},objData:{x:-1000,y:600,angle:90,toDo:[{N:0,T:'sleeping',maxAlarm:0,straightMin:10,straightPlus:50}],AlarmLvl:0}},
 
 
-            {What:{ConeField:1},objData:{x:50,y:-500, radius: 250, angle: 10, coneAngle: 40, coneRad2: 50, simpleFilling: 'rgba(255,255,0,0.6)', bounceAngle:'diagonal',bounceTeleport:true}},
+            {What:{ConeField:1},objData:{x:50,y:-500, radius: 250, angle: 10, coneAngle: 40, coneRad2: 50, simpleFilling: 'rgba(255,255,0,0.6)', bounceType:'diagonal',bounceTeleport:true}},
 
-            {What:{ConeField:1},objData:{x:50,y:-400, radius: 250, angle: 100, coneAngle: 30, coneRad2: 50, simpleFilling: 'rgba(255,255,0,0.6)', bounceAngle:'diagonal',bounceTeleport:true}},
+            {What:{ConeField:1},objData:{x:50,y:-400, radius: 250, angle: 100, coneAngle: 30, coneRad2: 50, simpleFilling: 'rgba(255,255,0,0.6)', bounceType:'diagonal',bounceTeleport:true}},
 
-            {What:{ConeField:1},objData:{x:-50,y:-400, radius: 250, angle: 230, coneAngle: 40, coneRad2: 50, simpleFilling: 'rgba(255,255,0,0.6)', bounceAngle:'diagonal',bounceTeleport:true}},
+            {What:{ConeField:1},objData:{x:-50,y:-400, radius: 250, angle: 230, coneAngle: 40, coneRad2: 50, simpleFilling: 'rgba(255,255,0,0.6)', bounceType:'diagonal',bounceTeleport:true}},
 
-            {What:{ConeField:1},objData:{x:-50,y:-500, radius: 250, angle: 300, coneAngle: 30, coneRad2: 50, simpleFilling: 'rgba(255,255,0,0.6)', bounceAngle:'diagonal',bounceTeleport:true}},
+            {What:{ConeField:1},objData:{x:-50,y:-500, radius: 250, angle: 300, coneAngle: 30, coneRad2: 50, simpleFilling: 'rgba(255,255,0,0.6)', bounceType:'diagonal',bounceTeleport:true}},
 
 
-            {What:{SquareField:1},objData:{x:-500,y:300, squareAngle: 90, squareLen: 300, squareWidth: 60, simpleFilling: 'rgba(255,255,0,0.6)', bounceAngle:'diagonal',bounceTeleport:true}},
-            {What:{SquareField:1},objData:{x:-500,y:420, squareAngle: 86, squareLen: 303, squareWidth: 20, simpleFilling: 'rgba(255,255,0,0.6)', bounceAngle:'diagonal',bounceTeleport:true}},
-            {What:{SquareField:1},objData:{x:7,y:400, squareAngle: 230, squareLen: 200, squareWidth: 100, simpleFilling: 'rgba(255,255,0,0.6)', bounceAngle:'diagonal',bounceTeleport:true}},
+            {What:{SquareField:1},objData:{x:-500,y:300, squareAngle: 90, squareLen: 300, squareWidth: 60, simpleFilling: 'rgba(255,255,0,0.6)', bounceType:'diagonal',bounceTeleport:true}},
+            {What:{SquareField:1},objData:{x:-500,y:420, squareAngle: 86, squareLen: 303, squareWidth: 20, simpleFilling: 'rgba(255,255,0,0.6)', bounceType:'diagonal',bounceTeleport:true}},
+            {What:{SquareField:1},objData:{x:7,y:400, squareAngle: 230, squareLen: 200, squareWidth: 100, simpleFilling: 'rgba(255,255,0,0.6)', bounceType:'diagonal',bounceTeleport:true}},
 
-            {What:{SquareField:1},objData:{x:667,y:-67, squareAngle: 45, squareLen: 210, squareWidth: 30, simpleFilling: 'rgba(255,255,0,0.6)', bounceAngle:'diagonal',bounceTeleport:true}},
-            {What:{ConeField:1},objData:{x:600,y:0, radius: 400, angle: 70, coneAngle: 120, coneRad2: 300, simpleFilling: 'rgba(255,255,0,0.6)', bounceAngle:'diagonal',bounceTeleport:true}},
-            {What:{RoundField:1},objData:{x:600,y:0, radius:100, simpleFilling: 'rgba(255,255,0,0.6)', bounceAngle:'diagonal',bounceTeleport:true}},
+            {What:{SquareField:1},objData:{x:667,y:-67, squareAngle: 45, squareLen: 210, squareWidth: 30, simpleFilling: 'rgba(255,255,0,0.6)', bounceType:'diagonal',bounceTeleport:true}},
+            {What:{ConeField:1},objData:{x:600,y:0, radius: 400, angle: 70, coneAngle: 120, coneRad2: 300, simpleFilling: 'rgba(255,255,0,0.6)', bounceType:'diagonal',bounceTeleport:true}},
+            {What:{RoundField:1},objData:{x:600,y:0, radius:100, simpleFilling: 'rgba(255,255,0,0.6)', bounceType:'diagonal',bounceTeleport:true}},
 
-            {What:{ConeField:1},objData:{x:2000,y:0, radius: 600, angle: 90, coneAngle: 170, coneRad2: 550, simpleFilling: 'rgba(0,180,0,0.6)', bounceAngle:'diagonal',bounceTeleport:true}},
-            {What:{RoundField:1},objData:{x:2000,y:0, radius: 480, angle: 90, simpleFilling: 'rgba(0,180,0,0.6)', bounceAngle:'diagonal',bounceTeleport:true}},
+            {What:{ConeField:1},objData:{x:2000,y:0, radius: 600, angle: 90, coneAngle: 170, coneRad2: 550, simpleFilling: 'rgba(0,180,0,0.6)', bounceType:'diagonal',bounceTeleport:true}},
+            {What:{RoundField:1},objData:{x:2000,y:0, radius: 480, angle: 90, simpleFilling: 'rgba(0,180,0,0.6)', bounceType:'diagonal',bounceTeleport:true}},
 
             {What:{RoundField:1},objData:{x:-700,y:-67, radius:10, simpleFilling: 'rgba(155,155,255,0.8)', teleportOnHit: 'random', teleportOnHitDist: 500}},
             {What:{RoundField:1},objData:{x:-600,y:0, radius:10, simpleFilling: 'rgba(155,155,255,0.8)', teleportOnHit: 120,  teleportOnHitDist: 520, teleportOnHitDistPlus: 200}},
             {What:{RoundField:1},objData:{x:-700,y:67, radius:10, simpleFilling: 'rgba(155,155,255,0.8)', teleportOnHit: 'aligned', teleportOnHitDist: 1000}},
 
 
-            {What:{RoundField:1},objData:{x:-600,y:-1200, radius:200, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 20, PeriodOffset: 20, dontHit:['B','BE']}},
-            {What:{RoundField:1},objData:{x:-975,y:-905, radius:200, fieldAnim: 'ElectricityField', PeriodDamage: 1, PeriodTime: 20, PeriodOffset: 20, dontHit:['BE']}},
+            {What:{RoundField:1},objData:{x:-600,y:-1200, radius:200, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 6, PeriodOffset: 20, dontHit:['B','BE']}},
+            {What:{RoundField:1},objData:{x:-975,y:-905, radius:200, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 20, OneTimeDamage: 4, dontHit:['B','BE']}},
             {What:{RoundField:1},objData:{x:-600,y:-600, radius:200, fieldAnim: 'ShellField', PeriodDamage: 1, PeriodTime: 20, PeriodOffset: 20, SlowDownTo: 2, SlowDownBy: 3, dontHit:['E','P']}},
 
-            {What:{Gstar:1},objData:{x:-140,y:900,bounceAngle:'diagonal',bounceTeleport:true}},
-            {What:{Gstar:1},objData:{x:140,y:900,bounceAngle:'diagonal',bounceTeleport:true}},
+            {What:{RoundField:1},objData:{x:-910,y: 850, radius:60, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 20, OneTimeDamage: 4, dontHit:['B','BE']}},
+            {What:{RoundField:1},objData:{x:-800,y: 1020, radius:60, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeDamage: 4, dontHit:['B','BE']}},
+            {What:{RoundField:1},objData:{x:-600,y: 1100, radius:60, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 20, OneTimeDamage: 4, dontHit:['B','BE']}},
+            {What:{RoundField:1},objData:{x:-600,y: 800, radius:200, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
+
+            {What:{LineOfMines:1},objData:{x:280, y:830, radius:500, angle: 45, distance: 80}},
+            {What:{LineOfMines:1},objData:{x:480, y:830, radius:500, angle: 45, distance: 80}},
+            {What:{LineOfMines:1},objData:{x:680, y:830, radius:500, angle: 45, distance: 80}},
+
+            {What:{Gstar:1},objData:{x:-140,y:900,bounceType:'diagonal',bounceTeleport:true}},
+            {What:{Gstar:1},objData:{x:140,y:900,bounceType:'diagonal',bounceTeleport:true}},
         ],
     },
     '*1':{
-        MapRadius:60,MapRadius2:2400,O:{ K:1},
+        MapRadius:60,MapRadius2:2400,
         BoardMods:['sitOnMap','allAvoid'],
-        PlaceRandom:[
-            {X: 500, Y: 500, Radius: 200,What:{Star: 20, A: 20}},
-            {X: 500, Y: -500, Radius: 200,What:{Star: 20, M: 10}},
-            {X: -500, Y: -500, Radius: 100,What:{Q: 10}},
-        ],
+
         Place:[
-            {What:{RoundField:1},objData:{x:0,y:-400, radius:200, fieldAnim: 'GravityField', bounceAngle:'gentle',bounceForce:1}},
-            {What:{Gstar:1},objData:{x:-140,y:900,bounceAngle:'diagonal',}},
-            {What:{Gstar:1},objData:{x:140,y:900,bounceAngle:'diagonal',}},
+            {Random:{X: 1000, Y: 1000, Radius: 200}, What:{Star: 20, A: 20}},
+            {Random:{X: 1000, Y: -1000, Radius: 200}, What:{Star: 20, M: 10}},
+            {Random:{X: -1000, Y: -1000, Radius: 100}, What:{Q: 10}},
+
+            {What:{RoundField:1},objData:{x:0,y:-400, radius:200, fieldAnim: 'GravityField', bounceType:'gentle',bounceForce:1}},
+            {What:{Gstar:1},objData:{x:-140,y:900,bounceType:'diagonal',}},
+            {What:{Gstar:1},objData:{x:140,y:900,bounceType:'diagonal',}},
 
             {What:{J:1},objData:{x:0,y:600,angle:90,toDo:[{N:0,T:'sleeping',maxAlarm:0,straightMin:10,straightPlus:50}],AlarmLvl:0}},
             {What:{Star:1},objData:{x:100,y:600}},
@@ -554,19 +598,51 @@ BOARDS={
     },
     '*A':{
         BoardMods:['sitOnMap','allAvoid'],
-        PlaceRandom:[
-            {X: 200, Y: 200, Radius: 200,What:{Star: 5, A: 25}},
+        Place:[
+            {Random:{X: 200, Y: 200, Radius: 200}, What:{Star: 5, A: 25}},
         ],
     },
     '*I':{
         BoardMods:['sitOnMap','allAvoid'],
-        PlaceRandom:[
-            {X: 200, Y: 200, Radius: 200,What:{Star: 20, I: 20}},
+        Place:[
+            {Random:{X: 200, Y: 200, Radius: 200}, What:{Star: 20, I: 20}},
         ],
     },
-    'Start':{MapRadius:600,MapRadius2:2400,O:{ K:1, Star: 300}}
+    '*D':{
+        BoardMods:['sitOnMap','allAvoid'],
+        Place:[
+            {Random:{X: 200, Y: 200, Radius: 200}, What:{Star: 20, D: 10, M: 5, A: 5}},
+        ],
+    },
+    '*M':{
+        BoardMods:['sitOnMap'],
+        Place:[
+            {Random:{X: 200, Y: 200, Radius: 200}, What:{Star: 20, M: 15}},
+        ],
+    },
+    'Start':{MapRadius:600,MapRadius2:2400,O:{ K:1, Star: 300}},
+    'Q':{MapRadius:1000,MapRadius2:1000,O:{ Q: 3, Star: 10}},
+    'U':{MapRadius:1200,MapRadius2:1800,O:{ A: 5, U: 10, Star: 10}},
+    'T':{MapRadius:1000,MapRadius2:1000,O:{ T: 10, Star: 10}},
+    'B':{MapRadius:1000,MapRadius2:1000,O:{ B: 115, Star: 10}},
+    'N':{MapRadius:1000,MapRadius2:1000,O:{ N: 10, Star: 10}},
+    'K':{MapRadius:1000,MapRadius2:1000,O:{ K: 5, A:15, Star: 10}},
+    'C':{MapRadius:1000,MapRadius2:1000,O:{ C: 10, Star: 10}},
+    'F':{MapRadius:1000,MapRadius2:1000,O:{ F: 10, Q:2, A:10, Star: 10}},
+    'G':{MapRadius:1000,MapRadius2:1000,O:{ G:6, Star: 10}},
+    'S':{MapRadius:1400,MapRadius2:1400,O:{ S: 10, Star: 10}},
+    'J':{MapRadius:1100,MapRadius2:1100,O:{ J: 8, N: 1, K:2, Star: 10}},
+    'V':{MapRadius:1100,MapRadius2:1100,O:{ V: 10, Star: 50}},
+    'E':{MapRadius:1100,MapRadius2:1100,O:{ E: 10, Star: 10}},
+    'H':{MapRadius:1100,MapRadius2:1100,O:{ H: 10, T:10, Star: 10}},
+    'W':{MapRadius:1100,MapRadius2:1100,O:{ W: 10, K:2, Star: 10}},
+    'R':{MapRadius:1500,MapRadius2:1800,O:{ R: 10, Star: 10}},
+    'ShieldTest':{MapRadius:1500,MapRadius2:1500,GiveEnergyFields:25,O:{ F: 2, U:2, Q:1, T:2, K:1,C:1,B:1,N:1,M:1, A:5, Star: 20}},
+    'SuperSecure':{MapRadius:1000,MapRadius2:1000,O:{ F: 10, K:10, Q:1, A:10, Star: 10}},
+    'Followers':{MapRadius:2700,MapRadius2:3200,O:{  U:10, A:10, S:10, V:10, Star: 100}},
+    'BigOnes':{MapRadius:2700,MapRadius2:3200,O:{  Q:10, F:10, K:10, D:10, G:10, J:10, W:10, Star: 100}},
+    'HardCore':{MapRadius:2700,MapRadius2:3200,O:{ M:10, T:10, B:10, N:20, Q:4, U:10, A:12, K:10, F:10, C:10, G:4, S:10, D:10, J:6, V:10, E:10, H:10, R:10, W:4, I:10, Star: 100}},
 };
-
 
 SHIPpresets={
     1:{
@@ -680,7 +756,7 @@ SHIPpresets={
 function MENUobject(){
 
     this.ShipPresetChoosen = 1;
-    this.start = function(){
+     this.start = function(){
         this.makeMenuBoards();
         this.makeMenuShip();
         this.showMenu='Boards';
@@ -691,7 +767,6 @@ function MENUobject(){
         var html = '';
         html+='<div class="keys">';
             html+='<span>1-9 - change Fire Type</span>';
-            // html+='<span>D - on/off fps</span>';
             html+='<span>P - pause</span>';
             html+='<span>ESC - end level</span>';
         html+='</div>';
@@ -783,7 +858,7 @@ function MENUobject(){
         Missles: 0,
         BombStorage: 0,
         Bombs: 0,
-        ShowFireRange: false,
+        ShowFireRange: true,
         ShowAmmoIndicator: false,
         GlueFireToEstimated: false,
         GlueFireToLaser: false,
@@ -803,12 +878,10 @@ function MENUobject(){
 
     this.showUpgrades = function(){
         var html='',up=['','','',''];
-
         for(var u in this.upgrades){
             var U = this.upgrades[u];
             up[U.K]+='<div class="upgrade upgradeClick" id="upgradeClick_'+u+'">'+U.T+'</div>';
         }
-
         for(var i=0; i < up.length; ++i)
             if(up[i]!='')
                 html+='<div class="upgradesType" id="upgradesType_'+i+'"><div class="upgradesTitle">Upgr: '+i+'</div><div class="upgradesContent">'+up[i]+'</div></div>';
@@ -820,37 +893,30 @@ function MENUobject(){
         $('.upgradesType').removeClass('wybrany');
         $('#upgradesType_'+id).addClass('wybrany');
     }
-
     this.showShipTable = function(){
         var html='';
         this.SHIP={};
-
         for(var e in this.SHIPempty){
             if(typeof this.SHIPempty[e] == 'array')    this.SHIP[e]=[];
             else if(typeof this.SHIPempty[e] == 'object')    this.SHIP[e]={};
             else this.SHIP[e] = this.SHIPempty[e];
         }
-
         var totPrice = 0;
         for(var u in this.addedUpgrades){
             var U = this.upgrades[u];
             totPrice -=- U.price;
-
             for(var a in U.attr){
                 for(var e in U.attr[a]){
                     this.SHIP[ e ] -=- U.attr[a][e];
                 }
             }
         }
-
         html+='Weight: '+this.SHIP.Weight+'<br/>';
         html+='Life: '+this.SHIP.lifeM+'<br/>';
         html+='Energy: '+this.SHIP.EnergyM+'<br/>';
-
         $('#moneyTable').html(this.money-totPrice);
         $('#shipTable').html(html);
     }
-
     this.clickUpgrade = function(id){
         if(typeof this.addedUpgrades[id] == 'undefined')  this.addUpgrade(id);
                         else                              this.removeUpgrade(id);
@@ -940,6 +1006,15 @@ function CanvasManagerObject(){
         if(O.viewHitPattern && O.life < O.lifeM)
             State = this.getHitPattern(O.viewHitPattern, parseInt((O.life/O.lifeM)*100));
 
+        if(typeof O.backgroundCircle != 'undefined'){
+            CanCon.fillStyle = 'yellow';
+            if(O.colorCircle) CanCon.fillStyle = 'rgba('+O.colorCircle[0]+','+O.colorCircle[1]+','+O.colorCircle[2]+','+O.colorCircle[3]+')';
+            if(State.colorCircle) CanCon.fillStyle = 'rgba('+State.colorCircle[0]+','+State.colorCircle[1]+','+State.colorCircle[2]+','+State.colorCircle[3]+')';
+            CanCon.beginPath();
+            CanCon.arc(X, Y, O.backgroundCircle, 0, Math.PI*2, true);
+            CanCon.fill();
+
+        }
 
         if(typeof O.viewLetter != 'undefined'){
             CanCon.font = "bold "+O.viewLetterSize+"px Arial";
@@ -947,6 +1022,7 @@ function CanvasManagerObject(){
             CanCon.textBaseline = 'middle';
             CanCon.fillStyle = O.viewColor;
             CanCon.translate(X,Y);
+            if(O.colorFill) CanCon.fillStyle = 'rgba('+O.colorFill[0]+','+O.colorFill[1]+','+O.colorFill[2]+','+O.colorFill[3]+')';
             if(State.colorFill) CanCon.fillStyle = 'rgba('+State.colorFill[0]+','+State.colorFill[1]+','+State.colorFill[2]+','+State.colorFill[3]+')';
 
             if(!isNaN(O.viewLetter)){
@@ -956,7 +1032,7 @@ function CanvasManagerObject(){
             }
         }
 
-        // 100:{letterAdd:'A',colorLetterAdd:[255,0,0,1],SizeLetterAdd:10,YOffsetLetterAdd:10},
+                    // 100:{letterAdd:'A',colorLetterAdd:[255,0,0,1],SizeLetterAdd:10,YOffsetLetterAdd:10},
 
         if(typeof State.letterAdd != 'undefined'){
             CanCon.font = "bold "+State.SizeLetterAdd+"px Arial";
@@ -993,14 +1069,15 @@ function CanvasManagerObject(){
             CanCon.fill(svgObj);
         }
 
-        // if(typeof O.viewShape != 'undefined'){
-        //     CanCon.fillStyle = O.viewColor;
-        //     var XYoffset = parseInt(X2/2);
-        //     CanCon.beginPath();
-        //     CanCon.arc(XYoffset,XYoffset, O.radius, 0, Math.PI*2, true);
-        //     CanCon.fill();
-        // }
-
+        /*
+        if(typeof O.viewShape != 'undefined'){
+            CanCon.fillStyle = O.viewColor;
+            var XYoffset = parseInt(X2/2);
+            CanCon.beginPath();
+            CanCon.arc(XYoffset,XYoffset, O.radius, 0, Math.PI*2, true);
+            CanCon.fill();
+        }
+        */
         if(O.T=='bullet'){
             CanCon.font = "bold 10px Arial";
             CanCon.fillStyle = 'yellow';
@@ -1175,6 +1252,17 @@ function CanvasManagerObject(){
                 40:{fontSize: 5, color: [0,120,255,0,0.2]},
             }
         },
+        heal_field:{
+            viewLetter: '+',
+            frames: 40,
+            sizeX: 50,
+            sizeY: 50,
+            states:{
+                0:{fontSize: 5, color: [0,255,0,0.2]},
+                20:{fontSize: 50, color: [0,255,0,0.7]},
+                40:{fontSize: 10, color: [0,255,0,1]},
+            }
+        },
     };
 
     this.renderNeeded = function(){
@@ -1300,7 +1388,7 @@ function CanvasManagerObject(){
             }
         }
 
-    //    delete(this.neededRenders);
+        // delete(this.neededRenders);
     }
 
     this.directRenders={
@@ -1501,12 +1589,47 @@ function CanvasManagerObject(){
             toExpire:20,
         },
         EleFieldEnd:{
-            frames: 20,
+            frames: 25,
+            gradientStops: 4,
+            states:{
+                0:{color0:[0,120,255,0.1],    color1:[0,120,255,0.6],    color2:[0,120,255,0.2],    color3:[0,0,0,0], stop0:0.3,stop1:1,stop2:1,stop3:1},
+                12:{color0:[0,120,255,0.2],    color1:[0,120,255,0.1],    color2:[0,120,255,0.1],    color3:[0,0,0,0], stop0:0.2,stop1:0.4,stop2:0.6,stop3:0.6},
+                25:{color0:[0,120,255,0],    color1:[0,120,255,0],    color2:[0,120,255,0],    color3:[0,0,0,0], stop0:0.1,stop1:0.1,stop2:0.2,stop3:0.2},
+            },
+        },
+        HealFieldStart:{
+            frames: 15,
             gradientStops: 3,
             states:{
-                0:{color0:[0,120,255,0.1],    color1:[0,120,255,0.6],    color2:[0,120,255,0.2],    stop0:0.75,stop1:1,stop2:1},
-                40:{color0:[0,120,255,0.2],    color1:[0,120,255,0.1],    color2:[0,120,255,0.1],    stop0:0.7,stop1:1,stop2:1},
-                50:{color0:[0,120,255,0],    color1:[0,120,255,0],    color2:[0,120,255,0],    stop0:1,stop1:1,stop2:1},
+                0:{color0:[0,255,0,0],    color1:[0,0,0,0], color2:[0,0,0,0],    stop0:0.1,stop1:0.1,stop2:0.2},
+                15:{color0:[100,255,100,0.4], color1:[100,255,100,0.1], color2:[0,0,0,0], stop0: 0, stop1: 0.8, stop2: 1},
+            },
+            makeParticles:80,
+            particleId:'heal_field',
+            particleTime:30,
+            particleXY: 25,
+            particleAnim:'randomMove',
+            particleAnimAngle: 'noRotation',
+            onEnd:'HealFieldGoing',
+        },
+        HealFieldGoing:{
+            gradientStops: 2,
+            color0:[100,255,100,0.4], color1:[100,255,100,0.1], stop0: 0, stop1: 0.8,
+            makeParticles:80,
+            particleId:'heal_field',
+            particleTime:30,
+            particleXY: 25,
+            particleAnim:'randomMove',
+            particleAnimAngle: 'noRotation',
+            onExpire:'HealFieldEnd',
+            toExpire:20,
+        },
+        HealFieldEnd:{
+            frames: 25,
+            gradientStops: 3,
+            states:{
+                0:{color0:[100,255,100,0.4], color1:[100,255,100,0.1], color2:[0,0,0,0], stop0: 0, stop1: 0.8, stop2: 1},
+                25:{color0:[0,255,0,0],    color1:[0,0,0,0], color2:[0,0,0,0],    stop0:0.1,stop1:0.1,stop2:0.2},
             },
         },
     };
@@ -1621,6 +1744,11 @@ function CanvasManagerObject(){
             1:{colorFill:[255,0,0,1]},
             0:{colorFill:[68,68,68,1]}
         },
+        ShieldBlobHit:{
+            100:{colorCircle:[0,200,100,1],colorFill:[0,255,200,1]},
+            1:{colorCircle:[0,200,100,0.2],colorFill:[0,255,200,0.1]},
+            0:{colorCircle:[0,200,100,0.2],colorFill:[0,255,200,0.1]}
+        },
     };
     this.getHitPattern = function(HitPat,percent){
         var R = this.HitPatterns[HitPat];
@@ -1640,7 +1768,7 @@ function CanvasManagerObject(){
                 State[si]=[];
                 for(var k=0; k<3; ++k)
                     State[si][k] = R[t1][si][k]- -parseInt((R[t2][si][k]-R[t1][si][k]) * ((percent-t1) / (t2-t1)));
-                State[si][3] = R[t1][si][3]- -parseInt((R[t2][si][3]-R[t1][si][3]) * ((percent-t1) / (t2-t1)));
+                State[si][3] = R[t1][si][3]- -(R[t2][si][3]-R[t1][si][3]) * ((percent-t1) / (t2-t1));
             }else if(si.substr(0,6)=='letter'){
                 State[si] = R[t1][si];
             }else{
@@ -1659,7 +1787,7 @@ function CanvasManagerObject(){
         var Radi = Math.PI*2/360;
 
         if(O.TT=='regionAnim'){
-            // Kolor k�ka
+            // Kolor koka
             var BU = DR;
             if(DR.frames) BU = DR.states[ O.animTick ];
             CanCon.save();
@@ -1719,6 +1847,10 @@ function CanvasManagerObject(){
                             rotation = angle -180;
                             rotate = 0;
                         }
+                        if(DR.particleAnimAngle && DR.particleAnimAngle=='noRotation'){
+                            rotation = 0;
+                            rotate = 0;
+                        }
                         AD.P[ ++AD.Plen ]={time:0,x:PX.x,y:PX.y,angle: angle, rotation: rotation, rotate:rotate, speed: 1, particleId: DR.particleId, particleTime: DR.particleTime, particleXY: DR.particleXY};
                     }
                     if(DR.particleAnim=='toCenter'){
@@ -1738,7 +1870,7 @@ function CanvasManagerObject(){
                         AD.P[ ++AD.Plen ]={time:0,x:PX.x,y:PX.y,angle: angle, angleChange: angleChange, rotation: angle, rotate: angleChange, speed: 3, particleId: DR.particleId, particleTime: DR.particleTime, particleXY: DR.particleXY};
                     }
                     if(DR.particleAnim=='withWind'){
-                        var angle =  O.bounceWindAngle;
+                        var angle =  O.windAngle;
                         AD.P[ ++AD.Plen ]={time:0,x:PX.x,y:PX.y,angle: angle, rotation: angle- -270, rotate:0, speed: 2, particleId: DR.particleId, particleTime: DR.particleTime, particleXY: DR.particleXY};
                     }
                     AD.Next-=1;
@@ -1813,8 +1945,8 @@ function CanvasManagerObject(){
         }
 
         if(DR.particleAnim=='withWind'){
-            x-=-30*Math.sin((O.bounceWindAngle-90)*Radi);
-            y-=-30*Math.cos((O.bounceWindAngle-90)*Radi);
+            x-=-30*Math.sin((O.windAngle-90)*Radi);
+            y-=-30*Math.cos((O.windAngle-90)*Radi);
         }
 
         return {x:x,y:y};
@@ -1860,6 +1992,7 @@ function GAMEobject(){
     this.MapTileSize = 250;
     this.Frames=30;
     this.tick=0;
+    this.tickD=0;
     this.IntervalIndex=-1;
     this.pause=false;
     this.doEndGame=false;
@@ -1912,11 +2045,15 @@ function GAMEobject(){
 
     this.FPSx=0;
     this.FPSy=0;
-    this.showDebug=true;
-    }
+    this.FPSz=0;
+    this.MSmove=0;
+    this.MSdecide=0;
+    this.MSdraw=0;
+    this.MSship=0;
 
     this.SHIP={};
     this.SHIPold={};
+    }
 
 
     this.resize = function(){
@@ -1955,9 +2092,9 @@ function GAMEobject(){
             .blur(function(e){ if(!GAME.doEndGame){ GAME.pause=true;    clearInterval(GAME.intervalIndex);    $('#pause').show();    }    })
             .resize(function(e){ GAME.resize(); });
 
-        // document.addEventListener('mousedown',function(e){     GAME.mouse_down(e); },false);
-        // document.addEventListener('mouseup',function(e){     GAME.mouse_up(e); },false);
-        // document.addEventListener('mousemove',function(e){     GAME.mousemove(e); },false);
+      //  document.addEventListener('mousedown',function(e){     GAME.mouse_down(e); },false);
+      //  document.addEventListener('mouseup',function(e){     GAME.mouse_up(e); },false);
+      //  document.addEventListener('mousemove',function(e){     GAME.mousemove(e); },false);
     }
     this.start = function(Setting,Ship){
         this.MapRadius=Setting.MapRadius;
@@ -1984,7 +2121,7 @@ function GAMEobject(){
             radius: 7,
             S: 2,
             life: this.SHIP.life,
-            lifeM:  this.SHIP.lifeM,
+            lifeM: this.SHIP.lifeM,
             energyField: 0,
             T: 'ship',
             ammo: 0,
@@ -2022,101 +2159,11 @@ function GAMEobject(){
                 }
             }
         }
-        if(Setting.MineFields > 0)
-            for(var Pi=0; Pi < Setting.MineFields; ++Pi){
-            var x,y,x2,y2,x3,y3;
-            do{
-                x = Math.random()*this.MapRadius*2-this.MapRadius;
-                y = Math.random()*this.MapRadius*2-this.MapRadius;
-            }while( Math.sqrt(x*x- -y*y) > this.MapRadius );
 
-            for(var ik=0; ik<30; ++ik){
-                do{
-                    x2 = x- -Math.random()*500 -250;
-                    y2 = y- -Math.random()*500 -250;
-                    x3 = x - x2;
-                    y3 = y - y2;
-                }while( Math.sqrt(x3*x3- -y3*y3) > 250);
-                this.putObj('space_mine','comp',1,x2,y2);
-            }
+        if(typeof Setting.Place != 'undefined')
+            for(var i=0; i<Setting.Place.length; ++i)
+                this.mapPlaceObj(Setting, Setting.Place[i]);
 
-        }
-
-        // for(var i =0; i<100;i++) this.putObj('space_mine','comp',1,200,i*20-1000);
-
-        // RANDOMLY PLACED GROUPS
-        for(var SiS in Setting.Squads){
-            var Squad = Setting.Squads[SiS];
-            var sqId = this.SquadLen++;
-            var SQ  = this.Squads[ sqId ]={Id: sqId, SquadSpeed: 0, Leader: -1, MemNum: 0, Members:{}};
-
-            for(var OPS in Squad){
-                for(var i=0; i<Squad[OPS]; ++i){
-                    var L = this.putObj(NAMES.Ships[OPS],'comp',1);
-                    if(SQ.Leader == -1){
-                        SQ.Leader = L;
-                        SQ.SquadSpeed = this.O[L].speedM;
-                    }
-                    this.O[L].squadId = sqId;
-                    SQ.MemNum++;
-                    SQ.Members[ L ]=1;
-                }
-            }
-        }
-
-        if(typeof Setting.PlaceRandom != 'undefined'){
-            for(var i=0; i<Setting.PlaceRandom.length; ++i){
-                var SET = Setting.PlaceRandom[i];
-                for(var placeWhat in SET.What){
-                    for(var j=0; j < SET.What[placeWhat]; ++j){
-                        do{
-                            var x = Math.random()*SET.Radius*2-SET.Radius;
-                            var y = Math.random()*SET.Radius*2-SET.Radius;
-                        }while( (x*x- -y*y) > SET.Radius*SET.Radius );
-                        x-=-SET.X;
-                        y-=-SET.Y;
-                        if(placeWhat=='Star'){
-                            var L = this.putObj('star','static',1,x- -SET.X,y- -SET.Y);
-                        } else {
-                            var L = this.putObj(NAMES.Ships[placeWhat],'comp',1,x- -SET.X,y- -SET.Y);
-                            if(typeof Setting.BoardMods !='undefined')
-                                for(var k in Setting.BoardMods)
-                                    this.addBoardMod(L,Setting.BoardMods[k]);
-                            if(typeof SET.BoardMods !='undefined')
-                                for(var k in SET.BoardMods)
-                                    this.addBoardMod(L,SET.BoardMods[k]);
-                            if(typeof SET.objData !='undefined')
-                                this.addBoardMod(L,SET.objData);
-        }    }    }    }    }
-
-        if(typeof Setting.Place != 'undefined'){
-            for(var i=0; i<Setting.Place.length; ++i){
-                var SET = Setting.Place[i];
-                for(var placeWhat in SET.What){
-                    for(var j=0; j < SET.What[placeWhat]; ++j){
-                        if(placeWhat=='Star'){
-                            var L = this.putObj('star','static',1);
-                        }else if(placeWhat=='Gstar'){
-                            var L = this.putObj('Gstar','static',1);
-                        }else if(placeWhat=='RoundField'){
-                            var L = this.putObj('RoundField','region',1);
-                        }else if(placeWhat=='SquareField'){
-                            var L = this.putObj('SquareField','region',1);
-                        }else if(placeWhat=='ConeField'){
-                            var L = this.putObj('ConeField','region',1);
-                        } else {
-                            var L = this.putObj(NAMES.Ships[placeWhat],'comp',1);
-                            if(typeof Setting.BoardMods !='undefined')
-                                for(var k in Setting.BoardMods)
-                                    this.addBoardMod(L,Setting.BoardMods[k]);
-                            if(typeof SET.BoardMods !='undefined')
-                                for(var k in SET.BoardMods)
-                                    this.addBoardMod(L,SET.BoardMods[k]);
-                        }
-
-                        if(typeof SET.objData !='undefined')
-                            this.addBoardMod(L,SET.objData);
-        }    }    }    }
 
 
         if(GET.CANVAS==0){
@@ -2124,6 +2171,64 @@ function GAMEobject(){
             this.frame();
             this.intervalIndex = window.requestAnimationFrame(function(){ GAME.frame(); });
         }
+    }
+    this.mapPlaceObj = function(Setting,SET,defX,defY){
+        if( typeof defX == 'undefined' ){
+            defX = 0;
+            defY = 0;
+        }
+        for(var placeWhat in SET.What){
+            for(var j=0; j < SET.What[placeWhat]; ++j){
+
+                var x = defX;
+                var y = defY;
+                if(SET.Random){
+                    do{
+                        x = Math.random()*SET.Random.Radius*2-SET.Random.Radius;
+                        y = Math.random()*SET.Random.Radius*2-SET.Random.Radius;
+                    }while( (x*x- -y*y) > SET.Random.Radius*SET.Random.Radius );
+                    x-=-SET.Random.X;
+                    y-=-SET.Random.Y;
+                }
+
+                if(placeWhat=='Star'){
+                    var L = this.putObj('star','static',1,x,y);
+                }else if(placeWhat=='Gstar'){
+                    var L = this.putObj('Gstar','static',1,x,y);
+                }else if(placeWhat=='RoundField'){
+                    var L = this.putObj('RoundField','region',1,x,y);
+                }else if(placeWhat=='SquareField'){
+                    var L = this.putObj('SquareField','region',1,x,y);
+                }else if(placeWhat=='ConeField'){
+                    var L = this.putObj('ConeField','region',1,x,y);
+                }else if(placeWhat=='LineOfMines'){
+                    var x = SET.objData.x;
+                    var y = SET.objData.y;
+                    var dist = 0;
+                    var Radi = Math.PI/180;
+                    while(dist < SET.objData.radius){
+                        this.putObj('space_mine','comp',1,x,y);
+                        x-=-SET.objData.distance*Math.sin( (-parseInt(SET.objData.angle)-180)*Radi);
+                        y-=-SET.objData.distance*Math.cos( (-parseInt(SET.objData.angle)-180)*Radi);
+                        dist-=-SET.objData.distance;
+                    }
+                    L = -1;
+
+                } else {
+                    var L = this.putObj(NAMES.Ships[placeWhat],'comp',1,x,y);
+                    if(typeof Setting.BoardMods !='undefined')
+                        for(var k in Setting.BoardMods)
+                            this.addBoardMod(L,Setting.BoardMods[k]);
+                    if(typeof SET.BoardMods !='undefined')
+                        for(var k in SET.BoardMods)
+                            this.addBoardMod(L,SET.BoardMods[k]);
+                }
+
+                if(typeof SET.objData !='undefined' && L!=-1)
+                    this.addBoardMod(L,SET.objData);
+            }
+        }
+
     }
 
     this.addBoardMod = function(o,MODname){
@@ -2264,7 +2369,7 @@ function GAMEobject(){
     }
     this.putObj_iskariot = function(O){
         O.speedLvl = 2;
-        O.speed = 8- -Math.random()*0.15;
+        O.speed = 8- -Math.random()*.15;
         O.speedT    = 2.5- -Math.random();
         O.speedArr = [0,
             {S: O.speed-4, T:O.speedT- -2},
@@ -2281,6 +2386,27 @@ function GAMEobject(){
             { T: 'single', Ref: 45, Rad: spotRad2}
         ];
         return O;
+    }
+    this.putObj_dandares = function(O){
+        O.speedLvl    = 2;
+        O.speed     = 4;
+        O.speedT    = 2;
+        O.speedArr = [0,
+            {S: O.speed - 3, T:O.speedT- -1.5},
+            {S: O.speed, T:O.speedT},
+            {S: O.speed- -4, T:O.speedT}
+        ];
+
+        var spotRad1 = 100- -parseInt(Math.random()*60);
+        var spotRad2 = 160 -parseInt(Math.random()*60);
+        O.spotTick = 8;
+        O.spotArr=[0,
+            { T: 'single', Ref: 35, Rad: spotRad1},
+            { T: 'double', Ref: 20, Rad: spotRad1, Rad2: spotRad2, Angle2: 100- -parseInt(Math.random()*20)},
+            { T: 'single', Ref: 45, Rad: spotRad2}
+        ];
+        return O;
+
     }
 
     this.putObj = function(Type,Mode,Side,x,y){
@@ -2310,6 +2436,7 @@ function GAMEobject(){
         if(Type=='carras')         O = this.putObj_carras(O);
         if(Type=='muerto')         O = this.putObj_muerto(O);
         if(Type=='iskariot')    O = this.putObj_iskariot(O);
+        if(Type=='dandares')    O = this.putObj_dandares(O);
 
         if(O.TT=='enemy'){
             Enemy=' enemy';
@@ -2320,7 +2447,7 @@ function GAMEobject(){
             O.mapCollide = ['M'];
         }
 
-        if(Type=='healing_missle' || Type=='missle' || Type=='bullet_bomb' || Type=='space_mine'){
+        if(Type=='healing_missle' || Type=='missle' || Type=='bullet_bomb' || Type=='space_mine' || Type=='shieldBlob'){
             if(Side==2){
                 O.mapType = 'M';
                 O.mapCollide = ['E','ME','A'];
@@ -2334,7 +2461,10 @@ function GAMEobject(){
             // O.mapCollide = ['P','M','ME'];
         }
         if(Type=='bullet'){
-            if(Side==2){
+            if(Side==3){
+                O.mapType = 'B';
+                O.mapCollide = ['P','M','E','ME','A','R'];
+            }else if(Side==2){
                 O.mapType = 'B';
                 O.mapCollide = ['E','ME','A','R'];
             }else{
@@ -2382,19 +2512,7 @@ function GAMEobject(){
             O.speedM    = O.speed    = 5;
             O.speedT    = 2;
         }
-        if(Type=='dandares'){
-            O.speedM    = O.speed    = 4;
-            O.speedT    = 2;
 
-            O.shieldMax    = 4;
-            O.shieldAmmo    = 20;
-            O.shieldArr    = {};
-            var ki = parseInt(Math.random()*18);
-            for(var mi=0; mi < 18; ++mi){
-                O.shieldArr[mi- -ki]={L:0,id:-1,eR:100,eQ:(mi- -ki)*20};
-                if(mi- -ki >= 18) ki-=36;
-            }
-        }
         if(Type=='orhenes'){
             O.speedM    = O.speed    = 1;
             O.speedT    = 1;
@@ -2453,15 +2571,7 @@ function GAMEobject(){
             O.Power    = 4;
             O.Dist    = 35;
         }
-        if(Type=='dandares_shield'){
-            O.life    = O.lifeM = 7;
-            O.speed    = 10;
-            O.angle    = 0;
-            O.radius= 21;
-            O.dec    = 0;
-            O.ammo    = 0;
-            O.toDo    = 0;
-        }
+
         if(Type=='hiacynt_shield'){
             O.life    = O.lifeM = 5;
             O.speed    = 10;
@@ -2485,7 +2595,17 @@ function GAMEobject(){
 
 
         this.O[ L ]= O;
-        CanvasManager.requestCanvas( L );
+
+
+        if(O.squadSchemeType)
+            this.prepareSquadScheme(O);
+
+        if(O.squadScheme)
+            this.checkSquadSchemeMakes(O);
+
+
+        if(Type!='shieldBlob')
+            CanvasManager.requestCanvas( L );
 
         if(Type!='bullet')
             this.putOnXY( L );
@@ -2522,18 +2642,22 @@ function GAMEobject(){
         if(Type=='explosion_35'){
             O.timeDeath = 25;
             O.radius = 35;
+            O.angle = parseInt(Math.random()*360);
         }
         if(Type=='explosion_80'){
             O.timeDeath = 25;
             O.radius = 80;
+            O.angle = parseInt(Math.random()*360);
         }
         if(Type=='explosion_120'){
             O.timeDeath = 25;
             O.radius = 120;
+            O.angle = parseInt(Math.random()*360);
         }
         if(Type=='explosion_210'){
             O.timeDeath = 25;
             O.radius = 210;
+            O.angle = parseInt(Math.random()*360);
         }
 
         this.Oanim[o] = 1;
@@ -2577,6 +2701,7 @@ function GAMEobject(){
 
         if(animType=='DestructionField') O.animType = 'DestrFieldStart';
         if(animType=='ElectricityField') O.animType = 'EleFieldStart';
+        if(animType=='HealingField')     O.animType = 'HealFieldStart';
         if(animType=='GravityField')     O.animType = 'GravFieldStart';
         if(animType=='OrbitalField')     O.animType = 'OrbFieldStart';
         if(animType=='ShellField')       O.animType = 'ShellFieldStart';
@@ -2616,15 +2741,6 @@ function GAMEobject(){
         delete this.Oregion[o];
         if(this.O[o].TT!='enemy' && this.O[o].T!='star')
             delete this.O[o];
-    }
-    this.disbandSquad = function(s){
-        for(var m in this.Squads[s].Members){
-            delete this.O[m].squadId;
-            this.O[m].toDo=0;
-            this.O[m].dec=0;
-            this.O[m].speed = this.O[m].speedM;
-        }
-        delete this.Squads[s];
     }
 
     this.mouse_down = function(e){
@@ -2734,30 +2850,30 @@ function GAMEobject(){
 
         if(typeof oy!='undefined'){
 
-        if(typeof O.squareCorners !='undefined'){
-            X1 = O.squareCorners.E.x1;
-            Y1 = O.squareCorners.E.y1;
-            X2 = O.squareCorners.E.x2;
-            Y2 = O.squareCorners.E.y2;
-        }else{
-            X1 = ox - O.radius;
-            Y1 = oy - O.radius;
-            X2 = ox- -O.radius;
-            Y2 = oy- -O.radius;
-        }
-        xi=X1;
-        while(true){
-            if(xi>X2) xi=X2;
-            yi=Y1;
-            while(true){
-                if(yi>Y2) yi=Y2;
-                oldS[ parseInt(xi/M)+'_'+parseInt(yi/M) ]=1;
-                if(yi==Y2) break;
-                yi-=-M;
+            if(typeof O.squareCorners !='undefined'){
+                X1 = O.squareCorners.E.x1;
+                Y1 = O.squareCorners.E.y1;
+                X2 = O.squareCorners.E.x2;
+                Y2 = O.squareCorners.E.y2;
+            }else{
+                X1 = ox - O.radius;
+                Y1 = oy - O.radius;
+                X2 = ox- -O.radius;
+                Y2 = oy- -O.radius;
             }
-            if(xi==X2) break;
-            xi-=-M;
-        }
+            xi=X1;
+            while(true){
+                if(xi>X2) xi=X2;
+                yi=Y1;
+                while(true){
+                    if(yi>Y2) yi=Y2;
+                    oldS[ parseInt(xi/M)+'_'+parseInt(yi/M) ]=1;
+                    if(yi==Y2) break;
+                    yi-=-M;
+                }
+                if(xi==X2) break;
+                xi-=-M;
+            }
         } else {
             this.Omap[O.mapType].elems++;
         }
@@ -3070,8 +3186,6 @@ function GAMEobject(){
 
         if(O.T=='star'){            var U=Q; Q=O; O=U; }
         if(O.T=='Gstar'){            var U=Q; Q=O; O=U; }
-        if(O.T=='dandares_shield'){    var U=Q; Q=O; O=U; }
-        if(O.T=='hiacynt_shield'){    var U=Q; Q=O; O=U; }
         if(Q.T=='bullet'){            var U=Q; Q=O; O=U; }
 
         if(O.dontHit){ for(var i=0; i<O.dontHit.length; ++i) if(O.dontHit[i]==Q.mapType) return 1; }
@@ -3080,19 +3194,25 @@ function GAMEobject(){
         if(typeof O.SlowDownTo !='undefined'){ this.regionSpeedChange(O,Q); return 1; }
         if(typeof Q.SlowDownTo !='undefined'){ this.regionSpeedChange(Q,O); return 1; }
 
-        if(O.bounceAngle){    this.regionAngleChange(O,Q); return 1; }
-        if(Q.bounceAngle){    this.regionAngleChange(Q,O); return 1; }
+        if(O.bounceType){    this.regionAngleChange(O,Q); return 1; }
+        if(Q.bounceType){    this.regionAngleChange(Q,O); return 1; }
+
+        if(O.vectorType){    this.regionVectorChange(O,Q); return 1; }
+        if(Q.vectorType){    this.regionVectorChange(Q,O); return 1; }
 
         if(O.teleportOnHit){ this.region_teleportOnHit(O,q); return 1; }
         if(Q.teleportOnHit){ this.region_teleportOnHit(Q,o); return 1; }
 
-        if((Q.T=='star' || Q.T=='dandares_shield' || Q.T=='hiacynt_shield') && O.T=='ship')
+        if((Q.T=='star' || Q.T=='shieldBlob') && O.T=='ship')
             if(O.speed > 3) O.speed=3;
 
         if(O.onHit && O.onHit.Do=='explode' && Q.S!=O.S && Q.M!='region'){    this.explodeBomb(o,O.onHit);    return true; }
 
-        if(O.PeriodDamage)    this.makePeriodDamage(o,q);
-        if(Q.PeriodDamage)    this.makePeriodDamage(q,o);
+        if(O.PeriodTime)    this.makePeriodEffect(o,q);
+        if(Q.PeriodTime)    this.makePeriodEffect(q,o);
+
+        if(O.OneTimeEffect)    this.makeOneTimeEffect(o,q);
+        if(Q.OneTimeEffect)    this.makeOneTimeEffect(q,o);
 
         DMG=O.Power;
 
@@ -3103,40 +3223,83 @@ function GAMEobject(){
                 this.makeDMG(q,DMG,o);
                 this.shipFunc_showHealth();
             }
-            if(Q.TT=='enemy' || Q.T=='star' || Q.T=='missle' || Q.T=='bullet_bomb' || Q.T=='dandares_shield' || Q.T=='hiacynt_shield')
+            if(Q.TT=='enemy' || Q.T=='star' || Q.T=='missle' || Q.T=='bullet_bomb' || Q.T=='shieldBlob')
                 this.makeDMG(q,DMG,o);
             if(Q.T=='space_mine'){
-                console.log('To nie powinno dzialac!');
-                this.explodeBomb(q);
+                this.explodeBomb(q,Q.onDie);
+                this.removeObj(o);
             }
             if(Q.T=='healing_missle')
                 this.removeObj(q);
         }
     }
-    this.makePeriodDamage = function(o,q){
+    this.makePeriodEffect = function(o,q){
         var O = this.O[o];
         var Q = this.O[q];
 
         if(Q.T=='bullet_bomb' && (typeof O.dontHurtOwnMissle != 'undefined' && O.dontHurtOwnMissle==true) && O.S==Q.S) return 1;
 
+        var makeAction = false;
         for(var P in Q.periodDMG)
             if(Q.periodDMG[P] < this.tick-1)
                 delete Q.periodDMG[P];
 
         if(typeof Q.periodDMG[o] == 'undefined'){
-            if(O.PeriodOffset){
+            if(O.PeriodOffset)
                 Q.periodDMG[o] = this.tick- -O.PeriodOffset;
-            }
-            else if(this.makeDMG(q,O.PeriodDamage))
-                Q.periodDMG[o] = this.tick- -O.PeriodTime;
+            else
+                makeAction = true;
+
         } else {
-            if(Q.periodDMG[o] < this.tick){
+            if(Q.periodDMG[o] < this.tick)
+                makeAction = true;
+        }
+
+        if(makeAction){
+            if(O.PeriodDamage){
                 if(this.makeDMG(q,O.PeriodDamage))
                     Q.periodDMG[o] = this.tick- -O.PeriodTime;
             }
+            if(O.PeriodHeal){
+                this.healObj(q,O.PeriodHeal);
+                Q.periodDMG[o] = this.tick- -O.PeriodTime;
+            }
         }
 
+    }
+    this.makeOneTimeEffect = function(o,q){
+        var O = this.O[o];
+        var Q = this.O[q];
 
+        var makeAction = false;
+        if(typeof Q.periodDMG[o] == 'undefined'){
+            if(O.OneTimeOffset){
+                Q.periodDMG[o] = this.tick- -O.OneTimeOffset;
+            } else {
+                makeAction = true;
+            }
+        } else {
+            if(Q.periodDMG[o] == this.tick){
+                makeAction = true;
+                delete Q.periodDMG[o];
+            }
+            if(Q.periodDMG[o] < this.tick){
+                Q.periodDMG[o] = this.tick- -O.OneTimeOffset;
+            }
+        }
+
+        if(makeAction){
+            if(O.OneTimeDamage){
+                this.makeDMG(q,O.OneTimeDamage);
+                delete(O.OneTimeDamage);
+            }
+            delete(O.OneTimeEffect);
+            if(O.fieldAnim=='ElectricityField'){
+                O.animType='EleFieldEnd';
+                O.animTick = 0;
+                O.DieTime = this.tick- -25;
+            }
+        }
     }
     this.makeDMG = function(o,DMG,q){
         var O = this.O[o];
@@ -3171,11 +3334,12 @@ function GAMEobject(){
         } else {
             this.putObj_animation('hit', O.x, O.y);
         }
-        var DagaDaga=[{x:10,y:-5},{x:-5,y:-10},{x:-10,y:5},{x:0,y:15},{x:15,y:5},{x:-20,y:-5},{x:5,y:-20},{x:20,y:-10},{x:10,y:20}];
         for(var Daga=1; Daga < DMG; ++Daga){
             if(Daga >= O.life) break;
-            if(Daga >= DagaDaga.length) break;
-            this.putObj_animation('hit', (O.x-DagaDaga[Daga].x), (O.y-DagaDaga[Daga].y));
+            var U = 20;
+            DagaDagaX = parseInt(Math.random()*U*2-U);
+            DagaDagaY = parseInt(Math.random()*U*2-U);
+            this.putObj_animation('hit', (O.x-DagaDagaX), (O.y-DagaDagaY));
         }
 
         O.life-=DMG;
@@ -3183,28 +3347,40 @@ function GAMEobject(){
         CanvasManager.requestCanvas( o );
         O.gotHitFlag = true;
 
-        if(O.T=='dandares_shield' && O.toDo!='decay')
-            this.O[ O.DandaresId ].shieldArr[ O.DandaresNum ].L = O.life;
-
         if(O.life <= 0){
-            if(O.TT=='enemy') --this.EnemiesC;
-            if(O.T!='missle' && O.T!='bullet_bomb')
-                this.putObj_animation('hitBig', O.x, O.y);
-            if(O.T=='dandares_shield' && O.toDo!='decay'){
-                this.O[ O.DandaresId ].shieldArr[ O.DandaresNum ].L=0;
-                this.O[ O.DandaresId ].shieldArr[ O.DandaresNum ].id=-1;
-            }
-            if(O.T=='dandares')
-                this.disbandDardanesShields(o);
-            if(O.T=='space_mine')    {O.toDo='doExplode'; O.dec = 2; }
-            else if(O.onDie){ this.explodeBomb(o,O.onDie); }
-            else        this.removeObj(o,true);
-            return true;
+            this.dieObj(O,o);
         }
+        return true;
+    }
+    this.dieObj = function(O,o){
+        if(O.TT=='enemy') --this.EnemiesC;
+        if(O.T!='missle' && O.T!='bullet_bomb' && O.T!='space_mine')
+            this.putObj_animation('hitBig', O.x, O.y);
+
+        if(O.squadDirectPlace){
+            var U = this.O[ O.squadDirectPlace.o ];
+            U.squadScheme[ O.squadDirectPlace.i ].Oid=-1;
+        }
+        if(O.squadScheme)
+            this.disbandSquad(O);
+
+        if(O.T=='space_mine') {
+            O.toDo=[{T:'explode'}];
+            O.gotHitFlag = false;
+            O.doingTime = 3;
+        }
+        else if(O.onDie){
+            this.explodeBomb(o,O.onDie);
+        }
+        else
+            this.removeObj(o,true);
+
+
         return true;
     }
     this.healObj = function(q,DMG,o){
         var Q = this.O[q];
+        if(Q.life == Q.lifeM) return false;
         if(o){
             this.putObj_animation('hit_blue', this.O[o].x, this.O[o].y);
             this.removeObj(o);
@@ -3213,6 +3389,8 @@ function GAMEobject(){
         }
         Q.life-=-DMG;
         if(Q.life > Q.lifeM) Q.life = Q.lifeM;
+        if(q == 0)
+            this.shipFunc_showHealth();
         CanvasManager.requestCanvas( q );
     }
     this.hitEnergyField = function(o,q,DMG){
@@ -3231,8 +3409,8 @@ function GAMEobject(){
 
     }
     this.regionAngleChange = function(Q,O){
-        if(Q.bounceAngle=='wind'){
-            var kat = Q.bounceWindAngle;
+        if(Q.bounceType=='wind'){
+            var kat = Q.windAngle;
             var kat2 = (O.angle - kat- -720)%360;
             var BF=1;
             if(Q.bounceForce) BF = Q.bounceForce;
@@ -3244,19 +3422,19 @@ function GAMEobject(){
         if(Q.coneAngle)    return this.regionAngleChange_fieldCone(Q,O);
         if(Q.squareCorners)    return this.regionAngleChange_fieldSquare(Q,O);
 
-        if(Q.bounceAngle=='straight'){
+        if(Q.bounceType=='straight'){
             var kat = (-Math.atan2(Q.x-O.x,Q.y-O.y)*(180/Math.PI))%360;
             O.angle = kat;
             return O;
         }
-        if(Q.bounceAngle=='diagonal'){
+        if(Q.bounceType=='diagonal'){
             var kat = (-Math.atan2(Q.x-O.x,Q.y-O.y)*(180/Math.PI)- -360)%360;
             var kat2 = (O.angle - kat - -720)%360;
             if(kat2 > 90 && kat2 < 270)
                 O.angle = (kat- -180 - kat2)%360;
             return O;
         }
-        if(Q.bounceAngle=='gentle'){
+        if(Q.bounceType=='gentle'){
             var kat = (-Math.atan2(Q.x-O.x,Q.y-O.y)*(180/Math.PI)- -360)%360;
             var dist = Math.sqrt(Math.pow(Q.x-O.x,2),Math.pow(Q.y-O.y,2));
             var kat2 = (O.angle - kat- -720)%360;
@@ -3268,7 +3446,7 @@ function GAMEobject(){
             if(kat2 > 180)    O.angle = (O.angle- -BF)%360;
             return O;
         }
-        if(Q.bounceAngle=='orbital'){
+        if(Q.bounceType=='orbital'){
             var kat = (-Math.atan2(Q.x-O.x,Q.y-O.y)*(180/Math.PI)- -360)%360;
             var kat2 = (O.angle - kat- -720)%360;
             var BF1 = 2, BF2 = 2;
@@ -3280,7 +3458,7 @@ function GAMEobject(){
             if(kat2 > 270)                    O.angle = (O.angle - BF2)%360;
             return O;
         }
-        if(Q.bounceAngle=='gravity'){
+        if(Q.bounceType=='gravity'){
             var kat = (-Math.atan2(Q.x-O.x,Q.y-O.y)*(180/Math.PI)- -360)%360;
             var dist = Math.sqrt(Math.pow(Q.x-O.x,2),Math.pow(Q.y-O.y,2));
             var kat2 = (O.angle - kat- -720)%360;
@@ -3350,12 +3528,12 @@ function GAMEobject(){
 
 
         if(hitAngle=='left'){
-            if(Q.bounceAngle=='straight'){
+            if(Q.bounceType=='straight'){
                 var kat = (coneAngle1-90 - -360)%360;
                 O.angle = kat;
                 return O;
             }
-            if(Q.bounceAngle=='diagonal'){
+            if(Q.bounceType=='diagonal'){
                 var kat = (coneAngle1-90 - -360)%360;
                 var kat2 = (O.angle - kat - -720)%360;
                 if(kat2 > 90 && kat2 < 270)
@@ -3364,12 +3542,12 @@ function GAMEobject(){
             }
         }
         if(hitAngle=='right'){
-            if(Q.bounceAngle=='straight'){
+            if(Q.bounceType=='straight'){
                 var kat = (coneAngle2- -90 - -360)%360;
                 O.angle = kat;
                 return O;
             }
-            if(Q.bounceAngle=='diagonal'){
+            if(Q.bounceType=='diagonal'){
                 var kat = (coneAngle2- -90 - -360)%360;
                 var kat2 = (O.angle - kat - -720)%360;
                 if(kat2 > 90 && kat2 < 270)
@@ -3378,12 +3556,12 @@ function GAMEobject(){
             }
         }
         if(hitAngle=='outside'){
-            if(Q.bounceAngle=='straight'){
+            if(Q.bounceType=='straight'){
                 var kat = (-Math.atan2(aX,aY)*(180/Math.PI))%360;
                 O.angle = kat;
                 return O;
             }
-            if(Q.bounceAngle=='diagonal'){
+            if(Q.bounceType=='diagonal'){
                 var kat = (-Math.atan2(aX,aY)*(180/Math.PI)- -360)%360;
                 var kat2 = (O.angle - kat - -720)%360;
                 if(kat2 > 90 && kat2 < 270)
@@ -3392,12 +3570,12 @@ function GAMEobject(){
             }
         }
         if(hitAngle=='inside'){
-            if(Q.bounceAngle=='straight'){
+            if(Q.bounceType=='straight'){
                 var kat = (-Math.atan2(aX,aY)*(180/Math.PI)- -180)%360;
                 O.angle = kat;
                 return O;
             }
-            if(Q.bounceAngle=='diagonal'){
+            if(Q.bounceType=='diagonal'){
                 var kat2 = (O.angle - oAngle - -720)%360;
                 if(kat2 < 90 || kat2 > 270)
                     O.angle = (oAngle- -180 - kat2)%360;
@@ -3405,7 +3583,7 @@ function GAMEobject(){
             }
         }
 
-        // return O;
+      //  return O;
     }
     this.regionAngleChange_fieldSquare = function(Q,O){
         var A1,A2,M,N,Mar = ['A','B','C','D','A'];
@@ -3419,15 +3597,15 @@ function GAMEobject(){
             A2 = (-Math.atan2(O.x-M.x,O.y-M.y)/Radi- -180)%360;
 
             if(betweenAngles(O.angle,A1,A2)){
-                // this.putObj_animation('hit', M.x, M.y);
-                // this.putObj_animation('hit', N.x, N.y);
+                //  this.putObj_animation('hit', M.x, M.y);
+                //  this.putObj_animation('hit', N.x, N.y);
 
-                if(Q.bounceAngle=='straight'){
+                if(Q.bounceType=='straight'){
                     var kat = (-Math.atan2(M.x-N.x,M.y-N.y)*(180/Math.PI)- -90)%360;
                     O.angle = kat;
                     return O;
                 }
-                if(Q.bounceAngle=='diagonal'){
+                if(Q.bounceType=='diagonal'){
                     var kat = (-Math.atan2(M.x-N.x,M.y-N.y)*(180/Math.PI)- -90)%360;
                     var kat2 = (O.angle - kat - -720)%360;
                     if(kat2 > 90 && kat2 < 270)
@@ -3439,13 +3617,44 @@ function GAMEobject(){
         }
         return O;
     }
+    this.regionVectorChange = function(Q,O){
+        if(Q.vectorType=='wind'){
+            if( typeof O.vector == 'undefined') O.vector = [];
+            O.vector[ O.vector.length ] = {angle: Q.windAngle, speed: Q.vectorForce};
+            return O;
+        }
+        if(Q.vectorType=='gentle'){
+            var dist = Math.sqrt(Math.pow(Q.x-O.x,2),Math.pow(Q.y-O.y,2));
+            var angleToCenter = (-Math.atan2(Q.x-O.x,Q.y-O.y)*(180/Math.PI)- -180)%360;
+            var force = Q.vectorForce * ((Q.radius - dist)/Q.radius);
+            if( typeof O.vector == 'undefined') O.vector = [];
+            O.vector[ O.vector.length ] = {angle: angleToCenter, speed: force};
+            return O;
+        }
+        if(Q.vectorType=='orbital'){
+            var dist = Math.sqrt(Math.pow(Q.x-O.x,2),Math.pow(Q.y-O.y,2));
+            var angleToCenter = (-Math.atan2(Q.x-O.x,Q.y-O.y)*(180/Math.PI)- -90)%360;
+            var force = Q.vectorForce- -Q.vectorForceAdd * ((Q.radius - dist)/Q.radius);
+            if( typeof O.vector == 'undefined') O.vector = [];
+            O.vector[ O.vector.length ] = {angle: angleToCenter, speed: force};
+            return O;
+        }
+        if(Q.vectorType=='gravity'){
+            var angleToCenter = (-Math.atan2(Q.x-O.x,Q.y-O.y)*(180/Math.PI)- -180)%360;
+            if( typeof O.vector == 'undefined') O.vector = [];
+            O.vector[ O.vector.length ] = {angle: angleToCenter, speed: Q.vectorForce};
+            return O;
+        }
+
+        return O;
+    }
     this.region_teleportOnHit = function(TP,o){
         var Angle=0,Dist=100,O = this.O[o];
 
 
-            // {What:{RoundField:1},objData:{x:-700,y:-67, radius:10, simpleFilling: 'rgba(155,155,255,0.8)', teleportOnHit: 'random', teleportOnHitDist: 500}},
-            // {What:{RoundField:1},objData:{x:-600,y:0, radius:10, simpleFilling: 'rgba(155,155,255,0.8)', teleportOnHit: 120,  teleportOnHitDist: 300, teleportOnHitDistPlus: 300}},
-            // {What:{RoundField:1},objData:{x:-700,y:67, radius:10, simpleFilling: 'rgba(155,155,255,0.8)', teleportOnHit: 'aligned', teleportOnHitDist: 1000}},
+          //  {What:{RoundField:1},objData:{x:-700,y:-67, radius:10, simpleFilling: 'rgba(155,155,255,0.8)', teleportOnHit: 'random', teleportOnHitDist: 500}},
+          //  {What:{RoundField:1},objData:{x:-600,y:0, radius:10, simpleFilling: 'rgba(155,155,255,0.8)', teleportOnHit: 120,  teleportOnHitDist: 300, teleportOnHitDistPlus: 300}},
+          //  {What:{RoundField:1},objData:{x:-700,y:67, radius:10, simpleFilling: 'rgba(155,155,255,0.8)', teleportOnHit: 'aligned', teleportOnHitDist: 1000}},
 
         if(!isNaN(TP.teleportOnHit)){
             Angle = TP.teleportOnHit;
@@ -3463,7 +3672,6 @@ function GAMEobject(){
         }
     }
     this.regionSpeedChange = function(Q,O){
-        console.log('Slow');
         if(Q.SlowDownTo >= O.speed) return 1;
         if(Q.SlowDownBy){
             O.speed-=Q.SlowDownBy;
@@ -3553,7 +3761,10 @@ function GAMEobject(){
 
         if(explodeObj.explodeType=='nails'){
             for(i=0; i<360; i-=-explodeObj.NailsRad){
-                L = this.putObj('bullet','comp',O.S,O.x,O.y);
+                if(explodeObj.NailsNeutral)
+                    L = this.putObj('bullet','comp',3,O.x,O.y);
+                else
+                    L = this.putObj('bullet','comp',O.S,O.x,O.y);
                 this.O[ L ].speed = explodeObj.NailsSpeed;
                 if(explodeObj.NailsSpeedPlus)
                     this.O[ L ].speed-=-Math.random()*explodeObj.NailsSpeedPlus;
@@ -3562,10 +3773,20 @@ function GAMEobject(){
                     this.O[ L ].dec-=-parseInt(Math.random()*explodeObj.NailsDecPlus);
                 this.O[ L ].angle = i;
                 this.O[ L ].Power = 1;
+                if(explodeObj.NailsAngleCenter){
+                    if(explodeObj.NailsAngleBoth==1 && L%2==0)
+                        this.O[ L ].speedT = - explodeObj.NailsAngleCenter;
+                    else
+                        this.O[ L ].speedT = explodeObj.NailsAngleCenter;
+                }
             }
-        }else if(explodeObj.explodeType=='nailsCone'){
+        }
+        else if(explodeObj.explodeType=='nailsCone'){
             for(i=0; i<explodeObj.Nails; ++i){
-                L = this.putObj('bullet','comp',O.S,O.x,O.y);
+                if(explodeObj.NailsNeutral)
+                    L = this.putObj('bullet','comp',3,O.x,O.y);
+                else
+                    L = this.putObj('bullet','comp',O.S,O.x,O.y);
                 this.O[ L ].angle = O.angle - explodeObj.NailsRad/2- -i*(explodeObj.NailsRad/explodeObj.Nails);
                 this.O[ L ].speed = explodeObj.NailsSpeed;
                 if(explodeObj.NailsSpeedPlus)
@@ -3574,8 +3795,13 @@ function GAMEobject(){
                 if(explodeObj.NailsDecPlus)
                     this.O[ L ].dec-=-parseInt(Math.random()*explodeObj.NailsDecPlus);
                 this.O[ L ].Power = 1;
+                if(explodeObj.NailsAngleCenter)
+                    this.O[ L ].speedT = -((i- -0.5)/(explodeObj.Nails/2)- 1) * explodeObj.NailsAngleCenter;
+
+
             }
-        }else if(explodeObj.explodeType=='roundField'){
+        }
+        else if(explodeObj.explodeType=='roundField'){
             L = this.putObj('RoundField','region',O.S,O.x,O.y);
             this.O[ L ].radius = explodeObj.radius;
             if(explodeObj.PeriodDamage){
@@ -3583,13 +3809,17 @@ function GAMEobject(){
                 this.O[ L ].PeriodTime = explodeObj.PeriodTime;
                 this.O[ L ].PeriodOffset = explodeObj.PeriodOffset;
             }
+            if(explodeObj.dontHit){
+                this.O[ L ].dontHit = cloneObj(explodeObj.dontHit);
+            }
             if(explodeObj.BounceForce){
                 this.O[ L ].bounceForce = explodeObj.BounceForce;
-                this.O[ L ].bounceAngle = explodeObj.BounceAngle;
+                this.O[ L ].bounceType = explodeObj.BounceAngle;
             }
             this.O[L].DieTime = this.tick- -explodeObj.ExpireTime;
             this.setRegionAnimation(L,explodeObj.fieldAnim);
-        } else {
+        }
+        else {
             L = this.putObj('destruction_field','region',O.S,O.x,O.y);
             this.O[L].radius = explodeObj.Dist;
             this.O[L].ActiveTime = this.tick- -2;
@@ -3597,6 +3827,8 @@ function GAMEobject(){
             this.O[L].PeriodDamage = explodeObj.Power;
             this.O[L].PeriodTime = 10;
             this.O[L].dontHurtOwnMissle = true;
+            this.O[L].dontHit=['B','BE'];
+            this.O[L].undestructible=1;
             this.putObj_animation('explosion_'+explodeObj.Dist, O.x, O.y);
         }
         if(explodeObj.Shards)
@@ -3612,9 +3844,9 @@ function GAMEobject(){
                     if(explodeObj.Shards.DecPlus)
                         this.O[ L ].doingTime-=-parseInt(Math.random()*explodeObj.Shards.DecPlus);
 
-                    if(this.O[L].onHit)        this.O[L].onHit = cloneObj( explodeObj.Shards.onHit );
-                    if(this.O[L].onDie)        this.O[L].onDie = cloneObj( explodeObj.Shards.onDie );
-                    if(this.O[L].onExpire)    this.O[L].onExpire = cloneObj( explodeObj.Shards.onExpire );
+                    if(explodeObj.Shards.onHit)        this.O[L].onHit = cloneObj( explodeObj.Shards.onHit );
+                    if(explodeObj.Shards.onDie)        this.O[L].onDie = cloneObj( explodeObj.Shards.onDie );
+                    if(explodeObj.Shards.onExpire)    this.O[L].onExpire = cloneObj( explodeObj.Shards.onExpire );
                 }
             } else {
                 for(i in explodeObj.Shards){
@@ -3641,11 +3873,26 @@ function GAMEobject(){
             SpeedPlus: 3,
         }};
 
+        {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 8, NailsSpeed: 10, NailsSpeedPlus: 0, NailsDec: 36, NailsDecPlus: 10, NailsAngleCenter: 8, NailsAngleBoth: 1};
+
         this.O[L].onExpire = {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 12, NailsSpeed: 5, NailsSpeedPlus: 5, NailsDec: 6, NailsDecPlus: 6};
+
+        this.O[L].onExpire = {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 8, NailsSpeed: 5, NailsSpeedPlus: 5, NailsDec: 36, NailsDecPlus: 6, NailsAngleCenter: 8};
+
+        this.O[L].onExpire = {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 8, NailsSpeed: 0, NailsSpeedPlus: 10, NailsDec: 36, NailsDecPlus: 6, NailsAngleCenter: 8, NailsAngleBoth: 1};
+
+        this.O[L].onHit = this.O[L].onExpire = this.O[L].onDie = {Do:'explode',explodeType: 'nailsCone', Nails: 40, NailsRad: 220, NailsSpeed: 5, NailsSpeedPlus: 2, NailsDec: 28, NailsDecPlus: 6, NailsAngleCenter: 3};
+
+        Bullet mine:
+        onHit: {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 24, NailsSpeed: 4, NailsSpeedPlus: 6, NailsDec: 16, NailsDecPlus: 6, NailsNeutral: true},
+        onDie: {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 24, NailsSpeed: 4, NailsSpeedPlus: 6, NailsDec: 16, NailsDecPlus: 6, NailsNeutral: true}
+
 
         this.O[L].onExpire = {Do:'explode',explodeType: 'nailsCone', Nails: 20, NailsRad: 30, NailsSpeed: 5, NailsSpeedPlus: 5, NailsDec: 6, NailsDecPlus: 6};
 
-        this.O[L].onExpire = {Do:'explode',explodeType: 'roundField', radius:200, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 40, PeriodOffset: 50};
+        this.O[L].onExpire = {Do:'explode',explodeType: 'nailsCone', Nails: 20, NailsRad: 120, NailsSpeed: 5, NailsSpeedPlus: 2, NailsDec: 28, NailsDecPlus: 6, NailsAngleCenter: 3};
+
+        this.O[L].onExpire = {Do:'explode',explodeType: 'roundField', radius:200, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 40, PeriodOffset: 50, dontHit:['B','BE']};
 
         this.O[L].onHit = {Do:'explode',Power: Power || 4, Dist: Dist || 35};
         this.O[L].onExpire = {Do:'explode',explodeType: 'roundField', radius:80, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300};
@@ -3695,8 +3942,8 @@ function GAMEobject(){
     this.addShield = function(o,Duration){
         var O = this.O[o];
         if(O.T=='koriaz' || O.T=='dandares' || O.T=='star' || O.T=='starG' || O.T=='missle') return false;
-        // if(typeof O.shieldD == 'undefined' || O.shieldD < 0)
-        //     $('#O_'+o).append('<div class="shield"></div>');
+        //  if(typeof O.shieldD == 'undefined' || O.shieldD < 0)
+        //      $('#O_'+o).append('<div class="shield"></div>');
         O.shieldD = Duration;
     }
     this.addEnergyField = function(o,Amount,ReliefTime){
@@ -3705,7 +3952,7 @@ function GAMEobject(){
         O.energyFieldMax = Amount;
         O.enegryFieldRelief = 0;
         O.enegryFieldRefielTime = ReliefTime;
-        // $('#O_'+o).prepend('<div class="energyField"></div>');
+        //  $('#O_'+o).prepend('<div class="energyField"></div>');
     }
     this.shootLaser = function(o,Distance,Damage,angle){
         var X,Y,Ox,Oy,Found,D,F,shipShoot=false, O = this.O[o];
@@ -3730,7 +3977,7 @@ function GAMEobject(){
             Found = this.getCollidingWithCircle(Ox, Oy, 10, enemyArr);
 
             for(F in Found){
-                if(this.O[F].bounceAngle){
+                if(this.O[F].bounceType){
                     pathD=pathD.concat(['L',{x: Ox, y: Oy}]);
                     Angle = this.regionAngleChange(this.O[F],{x:Ox,y:Oy,angle:Angle,speed:20}).angle;
                 } else {
@@ -3747,22 +3994,6 @@ function GAMEobject(){
 
 
     }
-    this.disbandDardanesShields = function(Dend){
-        var O = this.O[ Dend ];
-
-        for(var oS in O.shieldArr){
-            var Sid = O.shieldArr[ oS ].id;
-            if(Sid == -1) continue;
-            var Q = this.O[ Sid ];
-
-            Q.angle = ((parseInt(O.angle- -O.shieldArr[ oS ].eQ- -180)- -720)%360);
-            Q.toDo = 'decay';
-            Q.dec = 10;
-            Q.speed = 8;
-            this.Ocomp[Sid]=1;
-            Q.M = "comp";
-        }
-    }
     this.teleportJump = function(o,Distance,angle){
         var L,Angle,F,Found,oldX,oldY,Ox,Oy,O = this.O[o];
 
@@ -3773,7 +4004,7 @@ function GAMEobject(){
         Angle = angle;
 
         var pathD =['M',{x: Ox, y: Oy}];
-        for(D=0; D<=Distance; D+=10){
+        for(var D=0; D<=Distance; D+=10){
             Ox = Ox- - 10 * Math.sin( (-parseInt(Angle)-180)*(Math.PI/180));
             Oy = Oy- - 10 * Math.cos( (-parseInt(Angle)-180)*(Math.PI/180));
 
@@ -3817,15 +4048,68 @@ function GAMEobject(){
 
             html='<svg class="spotRegion"><path  fill="yellow" fill-opacity="0.1" d="'+d+'"></svg>';
         }
-        // if(ST.T=='single'){
-        //     var d ='M0 '+ST.Rad+' A'+ST.Rad+' '+ST.Rad+' 0 0,0 0 -'+ST.Rad+' A'+ST.Rad+' '+ST.Rad+' 0 0,0 0 '+ST.Rad+'';
-        //     html='<svg class="spotRegion"><path  fill="yellow" fill-opacity="0.1" d="'+d+'"></svg>';
-        // }
-        // $('#O_'+o+' .spotRegion').remove();
-        // $('#O_'+o+'').append(html);
+        //  if(ST.T=='single'){
+        //      var d ='M0 '+ST.Rad+' A'+ST.Rad+' '+ST.Rad+' 0 0,0 0 -'+ST.Rad+' A'+ST.Rad+' '+ST.Rad+' 0 0,0 0 '+ST.Rad+'';
+        //      html='<svg class="spotRegion"><path  fill="yellow" fill-opacity="0.1" d="'+d+'"></svg>';
+        //  }
+        //  $('#O_'+o+' .spotRegion').remove();
+        //  $('#O_'+o+'').append(html);
 
     }
 
+    this.prepareSquadScheme = function(O){
+        O.squadScheme = [];
+        var SST = O.squadSchemeType;
+
+        if(SST.t == 'round'){
+            var u = parseInt(Math.random()*SST.count);
+            for(var i= 0; i<SST.count; ++i){
+                O.squadScheme[i] = {
+                    angle: ((360/SST.count)*(i- -u))%360,
+                    radius: SST.radius,
+                    Oid: -1
+                };
+            }
+        }
+    }
+    this.bindWithSquad = function(o,i,s){
+        var O = this.O[o];
+        var S = this.O[s];
+
+        S.squadDirectPlace = {o:o, i:i};
+        S.speed = 0;
+        O.squadScheme[i].Oid = s;
+    }
+    this.disbandSquad = function(O){
+        // Maybe we want to change squad chef?
+
+        // If we disband then:
+        for(var i=0; i<O.squadScheme.length; ++i)
+            if(O.squadScheme[i].Oid != -1){
+                var sO = this.O[ O.squadScheme[i].Oid ];
+                if(sO.T=='shieldBlob'){
+                    sO.speed = 8;
+                    sO.angle = O.angle- -O.squadScheme[i].angle;
+                    this.Ocomp[ O.squadScheme[i].Oid ]=1;
+                    sO.M = 'comp';
+                    sO.Manouver = 'decay';
+                    sO.doingTime = 500;
+                }
+
+                delete sO.squadDirectPlace;
+            }
+    }
+    this.checkSquadSchemeMakes = function(O){
+
+        //  0:{ angle: 0, radius: 0, id: -1, make: {What:{RoundField:1},objData:{x:0,y:-1000, angle: 0, radius: 150, colorInactive: false, colorActive: 'rgba(255,0,0,0.4)', OneTimeEffect: 1, OneTimeOffset: 10, OneTimeDetect: 1, dontHit:['B','BE','E','M','ME','A']}}}
+
+        for(var i in O.squadScheme)
+            if(typeof O.squadScheme[i].make != 'undefined'){
+
+
+            }
+
+    }
 
     this.shipShoot = function(AngleMod,Speed,Dec,Power){
         var O = this.O[0];
@@ -3857,7 +4141,7 @@ function GAMEobject(){
         this.O[L].Power = Power;
         this.O[L].angle = Angle;
         this.O[L].onHit = {Do:'explode',Power: 3,Dist: 35};
-        //this.O[L].onDie = {Do:'explode',Power: 3,Dist: 35};
+        // this.O[L].onDie = {Do:'explode',Power: 3,Dist: 35};
         this.O[L].onExpire = {Do:'explode',Power: 3,Dist: 35};
     }
     this.shipShootBomb = function(Speed,Dec,Power,Dist){
@@ -3866,14 +4150,9 @@ function GAMEobject(){
         var L = this.putObj('bullet_bomb','comp',O.S,O.x,O.y);
         this.O[L].speed = Speed || 10;
         this.O[L].doingTime = Dec || 30;
-        this.O[L].doingTime = 35;
         this.O[L].angle = Angle;
-        this.O[L].onHit = {Do:'explode',Power: Power || 4, Dist: Dist || 35};
-        this.O[L].onDie = {Do:'explode',explodeType: 'roundField', radius:80, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300};
-        this.O[L].onExpire = {Do:'explode',explodeType: 'roundField', radius: 210, fieldAnim: 'GravityField', BounceAngle:'gravity', BounceForce:8, ExpireTime: 300};
 
-            // {What:{RoundField:1},objData:{x:-500,y:0, radius:160, circleColor:[100,100,100,0.3], bounceAngle:'wind',bounceForce:3,bounceWindAngle:60}},
-            // {What:{RoundField:1},objData:{x:0,y:400, radius:160, circleColor:[255,255,0,0.3], bounceAngle:'gravity',bounceForce:8}},
+        this.O[L].onHit = this.O[L].onDie = this.O[L].onExpire = {Do:'explode',Power: 7, Dist: 80};
 
     }
     this.shipShootLaser = function(Distance,Damage){
@@ -3934,6 +4213,8 @@ function GAMEobject(){
             Y = this.O[missleAim].y-this.O[0].y- -this.Dy/2;
             $('#gameboardMarkers').append('<div class="estimationMarkers MissleAim" style="top: '+Y+'px; left: '+X+'px;"><span style="width: '+(2*aimRadius)+'px; height: '+(2*aimRadius)+'px; top: -'+(aimRadius- -2)+'px; left: -'+(aimRadius- -2)+'px;"></span></div>');
 
+        } else {
+            this.missleAim = false;
         }
     }
     this.shipFunc_esteemedPositions = function(O,F){
@@ -3943,6 +4224,7 @@ function GAMEobject(){
         for(var Fo in Found){
             if(this.O[Fo].shieldD > 0) continue;
             if(this.O[Fo].undestructible > 0) continue;
+            if(this.O[Fo].life < 1) continue;
             WU = this.countFutureShoot(Fo,O.x,O.y,F.Speed,F.Dec);
             if(WU.r){
                 EsteemedPos[Fo]={x:WU.x,y:WU.y};
@@ -3953,33 +4235,55 @@ function GAMEobject(){
         }
         return EsteemedPos;
     }
-    this.shipFunc_glueFireToEstimated = function(EsteemedPos){    // Cza zmieni�
-        var jest =false;
+    this.shipFunc_glueFireToEstimated = function(EsteemedPos){
+
+        var jest = false;
         var Rad = this.SHIP.GlueFireToEstimated;
-        for(var Enemy in EsteemedPos){
-            var tiX = this.mouseX - EsteemedPos[Enemy].x;
-            var tiY = this.mouseY - EsteemedPos[Enemy].y;
-            if(Rad >= Math.sqrt(tiX*tiX- -tiY*tiY)){
-                jest=true;
-                this.mouseX = EsteemedPos[Enemy].x;
-                this.mouseY = EsteemedPos[Enemy].y;
-                var wX = this.mouseX - this.O[0].x- -this.Dx/2;
-                var wY = this.mouseY - this.O[0].y- -this.Dy/2;
-                $('#gameboardMarkers').append('<div class="estimationMarkers GluedOne" style="top: '+wY+'px; left: '+wX+'px;"><span style="width: '+(2*Rad)+'px; height: '+(2*Rad)+'px; top: -'+(Rad- -2)+'px; left: -'+(Rad- -2)+'px;"></span></div>');
-                break;
+        var Rad2 = Rad*Rad;
+        var dist = 1000000;
+        for(F in EsteemedPos){
+            if(this.O[F].shieldD > 0) continue;
+            if(this.O[F].undestructible > 0) continue;
+            if(this.O[F].life < 1) continue;
+            X = this.mouseX - EsteemedPos[F].x;
+            Y = this.mouseY - EsteemedPos[F].y;
+            R = X*X- -Y*Y;
+            if(R < dist && R < Rad2){
+                jest = F;
+                dist = R;
             }
         }
-        if(!jest)    for(var o in this.O)    if(this.O[o].T=='star' || this.O[o].T=='space_mine'){
-            var tiX = this.mouseX - this.O[o].x;
-            var tiY = this.mouseY - this.O[o].y;
-            if(Rad >= Math.sqrt(tiX*tiX- -tiY*tiY)){
-                this.mouseX = this.O[o].x;
-                this.mouseY = this.O[o].y;
-                var wX = this.mouseX - this.O[0].x- -this.Dx/2;
-                var wY = this.mouseY - this.O[0].y- -this.Dy/2;
-                $('#gameboardMarkers').append('<div class="estimationMarkers GluedOne" style="top: '+wY+'px; left: '+wX+'px;"><span style="width: '+(2*Rad)+'px; height: '+(2*Rad)+'px; top: -'+(Rad- -2)+'px; left: -'+(Rad- -2)+'px;"></span></div>');
-                break;
+        if(jest != false){
+            this.mouseX = EsteemedPos[jest].x;
+            this.mouseY = EsteemedPos[jest].y;
+            var wX = this.mouseX - this.O[0].x- -this.Dx/2;
+            var wY = this.mouseY - this.O[0].y- -this.Dy/2;
+
+            $('#gameboardMarkers').append('<div class="estimationMarkers GluedOne" style="top: '+wY+'px; left: '+wX+'px;"><span style="width: '+(2*Rad)+'px; height: '+(2*Rad)+'px; top: -'+(Rad- -2)+'px; left: -'+(Rad- -2)+'px;"></span></div>');
+
+            return true;
+        }
+
+        for(var F in this.O){
+            if(!(this.O[F].T=='star' || this.O[F].T=='space_mine')) continue;
+            if(this.O[F].shieldD > 0) continue;
+            if(this.O[F].undestructible > 0) continue;
+            if(this.O[F].life < 1) continue;
+            X = this.mouseX - this.O[F].x;
+            Y = this.mouseY - this.O[F].y;
+            R = X*X- -Y*Y;
+            if(R < dist && R < Rad2){
+                jest = F;
+                dist = R;
             }
+        }
+        if(jest != false){
+            this.mouseX = this.O[jest].x;
+            this.mouseY = this.O[jest].y;
+            var wX = this.mouseX - this.O[0].x- -this.Dx/2;
+            var wY = this.mouseY - this.O[0].y- -this.Dy/2;
+
+            $('#gameboardMarkers').append('<div class="estimationMarkers GluedOne" style="top: '+wY+'px; left: '+wX+'px;"><span style="width: '+(2*Rad)+'px; height: '+(2*Rad)+'px; top: -'+(Rad- -2)+'px; left: -'+(Rad- -2)+'px;"></span></div>');
         }
     }
     this.shipFunc_teleport = function(Fx,TeleMod){
@@ -4083,9 +4387,9 @@ function GAMEobject(){
             for(var o in this.Enemies)
                 this.showEnemySpotRegion(o);
         } else {
-            // for(var o in this.Enemies){
-            //     $('#O_'+o+' .spotRegion').remove();
-            // }
+            //  for(var o in this.Enemies){
+            //      $('#O_'+o+' .spotRegion').remove();
+            //  }
         }
     }
     this.shipFunc_showHealth = function(){
@@ -4208,7 +4512,7 @@ function GAMEobject(){
             var M = S.Modules[m];
             modHtml='';
 
-            // Modu? konfigurowane przy dezaktywacji:
+            // Modu�y konfigurowane przy dezaktywacji:
             if(M.T=='laserProd' && M.Disabled == 1)
                 M.LaserLoad=0;
 
@@ -4216,7 +4520,7 @@ function GAMEobject(){
                 M.TeleLoad=0;
 
 
-            // Modu? wy?czone:
+            // Modu�y wy��czone:
             if(Sx.Mod[m] != 'disabled'){
                 $('#moduleBox_'+m).html('<div class="energyBox min"><span class="smaller">Disabled</span><div class="infoBox">'+NAMES.ModName[M.T]+'</div></div>');
                 Sx.Mod[m]='disabled';
@@ -4227,7 +4531,7 @@ function GAMEobject(){
                 continue;
 
 
-            // Modu? niepotrzebne:
+            // Modu�y niepotrzebne:
             if(    (M.T=='bulletProd' && S.AmmoStorage > 0 && S.Ammo >=S.AmmoStorage )
              ||    (M.T=='healerProd' && S.lifeM <= O.life)
              || (M.T=='missleProd' && S.MissleStorage > 0 && S.Missles >=S.MissleStorage )
@@ -4298,7 +4602,6 @@ function GAMEobject(){
                 if(M.T=='bombProd')   ++S.Bombs;
                 if(M.T=='healerProd'){
                     this.healObj(0,1);
-                    this.shipFunc_showHealth();
                 }
                 if(M.T=='shieldProd'){
                     if(++O.energyField == 1)
@@ -4509,7 +4812,7 @@ function GAMEobject(){
         var i=0;
         var Ki=[{x:50,y:0},{x:0,y:50},{x:50,y:50},{x:100,y:0},{x:0,y:100},{x:100,y:50},{x:50,y:100},{x:100,y:100}];
         var Ki=[{r:30,q:120},{r:30,q:240},{r:60,q:120},{r:60,q:240},{r:90,q:120},{r:90,q:240},{r:120,q:120},{r:120,q:240}];
-        // var Ki=[{r:30,q:90},{r:30,q:270},{r:60,q:90},{r:60,q:270},{r:90,q:90},{r:90,q:270},{r:120,q:90},{r:120,q:270}];
+        //  var Ki=[{r:30,q:90},{r:30,q:270},{r:60,q:90},{r:60,q:270},{r:90,q:90},{r:90,q:270},{r:120,q:90},{r:120,q:270}];
 
         for(var Si in SQ.Members) if(Si!=SQ.Leader){
             this.O[ Si ].squadX = S0.x- -Ki[i].r * Math.sin( (-parseInt(S0.angle- -Ki[i].q)-180)*(Math.PI/180));
@@ -4566,7 +4869,7 @@ function GAMEobject(){
                         O.spotEnemyFlag = true;
                     }
                 }
-                // Szukamy grup? i pocisk?
+                // Szukamy grupy i pocisku
                 if(!O.awareAboutEnemy){
                     for(var U in this.Odead){
                         var uX = O.x-this.Odead[U].x;
@@ -4598,7 +4901,7 @@ function GAMEobject(){
         O.awareAboutEnemy = false;
         O.lastSeenEnemy = -1;
         */
-        // Sprawdzamy czy flagi mog?przerwa?obecne zadanie
+        // Sprawdzamy czy flagi mog� przerwa� obecne zadanie
         if(O.awareAboutEnemy && O.AlarmLvl < 3){
             O.AlarmLvl = 4;
             O.doingTime = -1;
@@ -4618,7 +4921,7 @@ function GAMEobject(){
             O.doingTime = -1;
 
 
-        // Jak si?sko?zy czas to szukamy kolejnego zadania
+        // Jak si� sko�czy czas to szukamy kolejnego zadania
         if((--O.doingTime) < 0){
 
             for(var toDo in O.toDo){
@@ -4629,7 +4932,7 @@ function GAMEobject(){
                 if(TD.maxAlarm && TD.maxAlarm < O.AlarmLvl) continue;
                 if(TD.gotHitFlag && O.gotHitFlag===false) continue;
                 if(TD.incomingFireFlag && O.incomingFireFlag===false) continue;
-                // Sprawdzamy Czy akcja si?nadaje
+                // Sprawdzamy Czy akcja si� nadaje
                 if(TD.T=='stayInRegion'){
                     var uX = TD.X - O.x;
                     var uY = TD.Y - O.y;
@@ -4638,7 +4941,7 @@ function GAMEobject(){
                 if(TD.T=='lowerAlarmLvl' && ((this.tick - O.lastSeenEnemy) < TD.minEnemyDontSeen)) continue;
 
 
-                // Dodajemy Akcj?
+                // Dodajemy Akcj�
                 if(TD.T=='stayInRegion'){
                     O.Manouver = 'goToXY';
                     O.goToX = TD.X;
@@ -4719,7 +5022,7 @@ function GAMEobject(){
                     O.doingTime = TD.straightMin- -parseInt(Math.random()*TD.straightPlus);
                 }
 
-                // Dodatkowe w??iwo?i akcji
+                // Dodatkowe wywo�ania akcji
                 if(TD.goToAlarmLvl)    O.AlarmLvl = TD.goToAlarmLvl;
                 if(TD.goToSpotLvl)    O.spotLvl = TD.goToSpotLvl;
 
@@ -4727,19 +5030,7 @@ function GAMEobject(){
                 break;
             }
         }
-        /*
 
-
-        this.throwToCenter = function(o){
-            var O = this.O[o];
-            var E = -(this.MapRadius2 -Math.sqrt(O.x*O.x- -O.y*O.y));
-            if( E > 0 ){
-                var V = parseInt(-Math.atan2(O.x,O.y)*180/Math.PI- -360) % 360;
-                O.angle = V;
-            }
-        }
-
-        */
 
         // Wykonujemy zadanie
         switch(O.Manouver){
@@ -4794,6 +5085,15 @@ function GAMEobject(){
             case 'goStraight':{
                 O.lastSpeedT = 0;
             }break;
+            case 'decay':{
+                if(O.doingTime%10 == 0){
+                    if(O.life > 1){
+                        O.life--;
+                        CanvasManager.requestCanvas(o);
+                    } else this.removeObj(o);
+                    return true;
+                }
+            }break;
         }
 
 
@@ -4810,11 +5110,11 @@ function GAMEobject(){
                 if(WP.minAlarm && WP.minAlarm > O.AlarmLvl) continue;
                 if(WP.maxAlarm && WP.maxAlarm < O.AlarmLvl) continue;
                 if(WP.maxSpeed && WP.maxSpeed < O.speedLvl) continue;
-                if(WP.minSpeed && WP.minSpeed > O.speedLvl) continue;    // Czy w og?e kiedy?u?jemy?
+                if(WP.minSpeed && WP.minSpeed > O.speedLvl) continue;    // Czy w og�le kiedy� u�yjemy tego?
                 if(WP.minDistToEnemy && WP.minDistToEnemy < PlayerDist) continue;
                 if(WP.gunSpeed > (this.tick-WP.lastShot)) continue;
 
-                // Wykonujemy strza?
+                // Wykonujemy strza�
                 if(WP.t == 'single'){
                     this.shootBullet(o,PlayerAngle,WP.Speed,WP.Dec,WP.Power);
                     WP.lastShot = this.tick;
@@ -4842,6 +5142,32 @@ function GAMEobject(){
                             O.jump = WP.jumpM;
                         O.jumpT=0;
                     }
+                }
+
+                if(WP.t=='makeShieldBlob'){
+                    for(var i=0; i< O.squadScheme.length; ++i){
+                        if( O.squadScheme[i].Oid == -1){
+                            var iX = O.x- -O.squadScheme[i].radius * Math.sin( (-parseInt(O.squadScheme[i].angle- -O.angle)-180)*(Math.PI/180));
+                            var iY = O.y- -O.squadScheme[i].radius * Math.cos( (-parseInt(O.squadScheme[i].angle- -O.angle)-180)*(Math.PI/180));
+                            var Sid = this.putObj('shieldBlob','moving',O.S,iX,iY);
+                            var oS = this.O[Sid];
+                            oS.angle = O.angle;
+                            this.bindWithSquad(o, i, Sid);
+
+                            oS.life = 1;
+                            oS.lifeM = WP.shieldBlobMaxHp;
+
+                            CanvasManager.requestCanvas( Sid );
+                            break;
+                        }
+                        var sO = this.O[ O.squadScheme[i].Oid ];
+                        if( sO.life < sO.lifeM ){
+                            sO.life -=-1;
+                            CanvasManager.requestCanvas( O.squadScheme[i].Oid );
+                            break;
+                        }
+                    }
+                    WP.lastShot = this.tick;
                 }
 
                 /*
@@ -4960,11 +5286,11 @@ function GAMEobject(){
                 }
             break; case 'edison':
                 if(O.ammo==100)
-                    // $('#O_'+o).append('<div class="edisonField"></div>');
+                  //  $('#O_'+o).append('<div class="edisonField"></div>');
                 if(Dist < 150 && O.ammo > 120){
                     this.makeDMG(0,O.FieldPower);
                     O.ammo=0;
-                    // $('#O_'+o+' .edisonField').addClass('edisonHit hit_'+parseInt(this.tick/100));
+                  //  $('#O_'+o+' .edisonField').addClass('edisonHit hit_'+parseInt(this.tick/100));
                 }
             break; case 'tartaros':
                 if(Dist < 400 && O.ammo > 100){
@@ -5039,11 +5365,11 @@ function GAMEobject(){
                     }
                 }
                 if(O.dec < 0 && O.toDo!='doExplodeX' && Dist < 100){
-                    // $('#O_'+o).addClass('detecting');
+                  //  $('#O_'+o).addClass('detecting');
                     O.toDo='doExplodeX';
                 }
                 else if(O.toDo=='doExplodeX' && Dist >=100){
-                    // $('#O_'+o).removeClass('detecting');
+                  //  $('#O_'+o).removeClass('detecting');
                 }
                 if(O.toDo!='wait' && Dist < 30){
                     this.explodeBomb(o);
@@ -5120,7 +5446,7 @@ function GAMEobject(){
                     var Angle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
                     O.laserAngle = Angle;
                     Angle =(( Angle -O.angle)- -540)%360;
-                    // $('#O_'+o).append('<div class="object laserAiming hit_'+parseInt(this.tick/100)+'" style="height: '+O.Distance+'px; transform: rotate('+Angle+'deg);"></div>');
+                    //  $('#O_'+o).append('<div class="object laserAiming hit_'+parseInt(this.tick/100)+'" style="height: '+O.Distance+'px; transform: rotate('+Angle+'deg);"></div>');
                     O.ammo=0;
                     O.dec = O.LaserAim;
                 }
@@ -5144,15 +5470,15 @@ function GAMEobject(){
                 }
             break; case 'cloacker':
                 if(Dist < 500 && O.ammo > 300 && O.toDo!='follow'){
-                    // $('#gameboard').append('<div class="object hit hit_blue hit_'+parseInt(this.tick/100)+'" style="left: '+O.x+'px; top: '+O.y+'px;"></div>');
-                    // $('#O_'+o).addClass('cloacked');
+                  //  $('#gameboard').append('<div class="object hit hit_blue hit_'+parseInt(this.tick/100)+'" style="left: '+O.x+'px; top: '+O.y+'px;"></div>');
+                  //  $('#O_'+o).addClass('cloacked');
                     if(O.doSquad==-1)
                         O.toDo='follow';
                     O.dec=400;
                     O.speed=12;
                 }
                 if(Dist < 50 && O.toDo=='follow' && O.ammo > 300){
-                    // $('#O_'+o).removeClass('cloacked');
+                  //  $('#O_'+o).removeClass('cloacked');
 
                     var Angle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
                     this.shootBullet(o,Angle,14,50,1);
@@ -5209,9 +5535,9 @@ function GAMEobject(){
                                 O.shieldArr[q].id = OBJid;
                             } else{
                                 var sO = this.O[ O.shieldArr[q].id ];
-                                // $('#O_'+O.shieldArr[q].id).removeClass('life'+((sO.life/sO.lifeM).toFixed(1)*100));
+                              //  $('#O_'+O.shieldArr[q].id).removeClass('life'+((sO.life/sO.lifeM).toFixed(1)*100));
                                 sO.life = O.shieldArr[q].L;
-                                // $('#O_'+O.shieldArr[q].id).addClass('life'+((sO.life/sO.lifeM).toFixed(1)*100));
+                              //  $('#O_'+O.shieldArr[q].id).addClass('life'+((sO.life/sO.lifeM).toFixed(1)*100));
                             }
                             O.ammo = 0;
                             break;
@@ -5233,10 +5559,10 @@ function GAMEobject(){
                         O.speed-=1;
 
                         if(O.life > 0){
-                            // $('#O_'+o).removeClass('life'+((O.life/O.lifeM).toFixed(1)*100));
+                          //  $('#O_'+o).removeClass('life'+((O.life/O.lifeM).toFixed(1)*100));
                             O.life-=1;
                             CanvasManager.requestCanvas( o );
-                            // $('#O_'+o).addClass('life'+((O.life/O.lifeM).toFixed(1)*100));
+                          //  $('#O_'+o).addClass('life'+((O.life/O.lifeM).toFixed(1)*100));
                         }
                         if(O.life<=0)    this.removeObj(o);
                             else        O.dec=10;
@@ -5250,10 +5576,10 @@ function GAMEobject(){
                 if(Dist < 100 && O.toDo=='follow'){
                     O.toDo = 'attack';
                     O.dec = 31;
-                    // if(O.ammo > 120) O.ammo = 120;
+                  //  if(O.ammo > 120) O.ammo = 120;
                 }
                 if(O.toDo=='attack' && (O.dec%3)==0){
-                    // O.ammo -= 11;
+                  //  O.ammo -= 11;
                     var Angle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
 
                     var L = this.putObj('hiacynt_shield','comp',O.S,O.x,O.y);
@@ -5271,10 +5597,10 @@ function GAMEobject(){
                     O.speed-=2;
 
                 if((O.dec==50 || O.dec==30 || O.dec==20 || O.dec==10) && O.life > 0){
-                    // $('#O_'+o).removeClass('life'+((O.life/O.lifeM).toFixed(1)*100));
+                  //  $('#O_'+o).removeClass('life'+((O.life/O.lifeM).toFixed(1)*100));
                     O.life-=1;
                     CanvasManager.requestCanvas( o );
-                    // $('#O_'+o).addClass('life'+((O.life/O.lifeM).toFixed(1)*100));
+                  //  $('#O_'+o).addClass('life'+((O.life/O.lifeM).toFixed(1)*100));
                 }
                 if(O.dec==1)
                     this.removeObj(o);
@@ -5289,7 +5615,7 @@ function GAMEobject(){
 
 
         if(typeof O.shieldD != 'undefined' && --O.shieldD < 1){
-            // $('#O_'+o+' .shield').remove();
+          //  $('#O_'+o+' .shield').remove();
             delete O.shieldD;
         }
 
@@ -5342,8 +5668,8 @@ function GAMEobject(){
         O.dec--;
         if( O.energyField < O.energyFieldMax){
             if(++O.enegryFieldRelief >=    O.enegryFieldRefielTime){
-                // if(++O.energyField == 1)
-                //     $('#O_'+o).prepend('<div class="energyField"></div>');
+              //  if(++O.energyField == 1)
+              //      $('#O_'+o).prepend('<div class="energyField"></div>');
                 O.enegryFieldRelief=0;
             }
         }
@@ -5352,12 +5678,16 @@ function GAMEobject(){
 
 
     this.frame_decide = function(){
+        var MS = (new Date()).getTime();
         $('#gameboardMarkers').html('');
 
         // Check Hits of Player Ship
         this.checkHits(0);
 
         this.decide_ship();
+        this.MSship-=- ((new Date()).getTime() - MS);
+
+        var MS = (new Date()).getTime();
         var o,O,oldX,oldY;
         var P = this.O[0];
 
@@ -5368,6 +5698,7 @@ function GAMEobject(){
         // Bullet Decide
         for(o in this.Obullet){
             O = this.O[o];
+            if(O.speedT) O.angle -=- O.speedT;
 
             if(this.Obullet[o]==1){
                 var X = O.x-P.x;
@@ -5404,18 +5735,42 @@ function GAMEobject(){
         }
 
         ++this.tick;
+
+        this.MSdecide-=-((new Date()).getTime() - MS);
     }
 
     this.frame_move = function(){
+        var MS = (new Date()).getTime();
         var o,O,oldX,oldY;
+        var PIx = Math.PI / 180;
 
         for(o in this.Omoving){
             O = this.O[o];
             if(O.M=='static') continue;
             oldX = O.x;
             oldY = O.y;
-            O.x -=- O.speed * Math.sin( (-parseInt(O.angle)-180)*(Math.PI/180));
-            O.y -=- O.speed * Math.cos( (-parseInt(O.angle)-180)*(Math.PI/180));
+
+            if( O.squadDirectPlace ){
+                var Master = this.O[ O.squadDirectPlace.o ];
+                var MasterS = Master.squadScheme[ O.squadDirectPlace.i ];
+                O.x = Master.x- -MasterS.radius * Math.sin( (-parseInt(MasterS.angle- -Master.angle)-180)*PIx );
+                O.y = Master.y- -MasterS.radius * Math.cos( (-parseInt(MasterS.angle- -Master.angle)-180)*PIx );
+
+                O.angle = Master.angle;
+            }
+            else {
+                O.x -=- O.speed * Math.sin( (-parseInt(O.angle)-180)*PIx);
+                O.y -=- O.speed * Math.cos( (-parseInt(O.angle)-180)*PIx);
+
+                if (O.vector){
+                    for(var i in O.vector){
+                        var V = O.vector[i];
+                        O.x -=- V.speed * Math.sin( (-parseInt(V.angle)-180)*PIx);
+                        O.y -=- V.speed * Math.cos( (-parseInt(V.angle)-180)*PIx);
+                    }
+                    delete(O.vector);
+                }
+            }
 
             if(O.T!='bullet')
                 this.putOnXY(o,oldX,oldY);
@@ -5424,13 +5779,17 @@ function GAMEobject(){
                 this.ShipMoveX = O.x - oldX;
                 this.ShipMoveY = O.x - oldY;
             }
+
         }
 
         $('#countEnemies').html(this.EnemiesC);
-        // $('#gameboard').css({left: (-this.O[0].x- -(this.Dx/2))+'px',top: (-this.O[0].y- -(this.Dy/2))+'px'});
+      //  $('#gameboard').css({left: (-this.O[0].x- -(this.Dx/2))+'px',top: (-this.O[0].y- -(this.Dy/2))+'px'});
+
+        this.MSmove-=-((new Date()).getTime() - MS);
     }
 
     this.frame_draw = function(){
+        var MS = (new Date()).getTime();
         var o,O,oldX,oldY;
         var P = this.O[0];
         var CH = this.CanvasHandle;
@@ -5507,6 +5866,7 @@ function GAMEobject(){
                 CH.save();
                 CH.translate((O.x-Px).toFixed(0), (O.y-Py).toFixed(0));
                 var Canvas = CanvasManager.getCanvas(O);
+                if(O.angle != 0) CH.rotate(Radi*O.angle);
                 CH.drawImage(Canvas.Id, -Canvas.X, -Canvas.Y);
                 CH.restore();
                 continue;
@@ -5524,7 +5884,8 @@ function GAMEobject(){
                 continue;
             }
         }
-
+        ++this.tickD;
+        this.MSdraw-=-((new Date()).getTime() - MS);
     }
 
     this.frame = function(){
@@ -5548,7 +5909,7 @@ function GAMEobject(){
             }
             this.frame_move();
             this.frame_decide();
-            if(GET['FRAMES']==3){
+            if(GET['FRAMES']==3 || GET['FRAMES']==4){
                 PASSED-=FR;
                 this.FRAME_TIME-=-FR;
                 var X = 0;
@@ -5568,14 +5929,39 @@ function GAMEobject(){
         }
 
 
-        if(this.showDebug){
+        if(GET['FPS'] > 0){
             var D = parseInt(new Date().getTime()/1000);
             if(D != this.FPSx){
                 var FPS = this.tick - this.FPSy;
-                $('#FPSpillar').prepend('<div><div style="height: '+FPS*3+'px;"></div></div>');
-                $('#FPSpillar div:nth-child(151)').remove();
-                $('#FPSnum').html(FPS+' fps');
+                var FPSu = this.tickD - this.FPSz;
+                if(GET['FPS'] > 1){
+                    $('#FPSpillar').prepend('<div><div style="height: '+FPS*3+'px;"><div style="height: '+FPSu*3+'px;"></div></div></div>');
+                    $('#FPSpillar div:nth-child(151)').remove();
+                }
+                var html = '';
+                html += parseInt(this.O[0].x)+' '+parseInt(this.O[0].y)+'<br/>';
+                html += FPSu+' / '+FPS+' fps';
+                $('#FPSnum').html(html);
                 this.FPSy=this.tick;
+                this.FPSz=this.tickD;
+
+                if(GET['FPS'] > 2){
+                    var u = 1000 - this.MSship - this.MSdecide - this.MSmove - this.MSdraw;
+                    html = '';
+                    html += '<div class="FPS_MS">'+this.MSship+'<div class="" style="height: '+parseInt(this.MSship/10)+'px;">[s]</div></div>';
+                    html += '<div class="FPS_MS">'+this.MSdecide+'<div class="" style="height: '+parseInt(this.MSdecide/10)+'px;">[d]</div></div>';
+                    html += '<div class="FPS_MS">'+this.MSmove+'<div class="" style="height: '+parseInt(this.MSmove/10)+'px;">[m]</div></div>';
+                    html += '<div class="FPS_MS">'+this.MSdraw+'<div class="" style="height: '+parseInt(this.MSdraw/10)+'px;">[c]</div></div>';
+                    html += '<div class="FPS_MS">'+u+'<div class="" style="height: '+parseInt(u/10)+'px;"></div></div>';
+
+                    $('#FPS_MS').html(html);
+
+                    this.MSdraw = 0;
+                    this.MSdecide = 0;
+                    this.MSship = 0;
+                    this.MSmove = 0;
+                }
+
             }
             this.FPSx=D;
         }
@@ -5584,8 +5970,10 @@ function GAMEobject(){
             this.endGame();
 
         if(!this.pause && !this.doEndGame)
-            // this.intervalIndex = window.requestAnimationFrame(function(){ GAME.frame(); });
-            this.intervalIndex = setTimeout(function(){ GAME.frame(); },3);
+            if(GET['FRAMES'] < 4)
+                this.intervalIndex = window.requestAnimationFrame(function(){ GAME.frame(); });
+            else
+                this.intervalIndex = setTimeout(function(){ GAME.frame(); }, 1);
     }
 
 
@@ -5680,7 +6068,6 @@ body{
 }
 .ShipPresets span{
     display: inline-block;
-
 }
 .ShipPresets .chooseShipPresets{
     display: inline-block;
@@ -6345,6 +6732,18 @@ body{
     background: #ccc;
 }
 
+
+.object.laserAiming{
+    width: 0px;
+    height: 650px;
+    border-left: 1px dashed red;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transform-origin: 0px 0px;
+}
+.object.life-dead .laserAiming{ display: none;}
+
 </style>
 <style type="text/css">    /* Game Divs */
 #CanvasPreviews{ display: none; }
@@ -6477,704 +6876,6 @@ body{
 }
 
 </style>
-<style type="text/css"> /* Game Objects*/
-.object{
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 1px;
-    height: 1px;
-    text-align: center;
-    line-height: 1px;
-}
-.object:after{
-    display: block;
-    position: absolute;
-    top: -50px;
-    left: -50px;
-    width: 100px;
-    height: 100px;
-    line-height: 100px;
-    text-align: center;
-}
-.object:before{
-    display: block;
-    position: absolute;
-    top: -50px;
-    left: -50px;
-    width: 100px;
-    height: 100px;
-    line-height: 100px;
-    text-align: center;
-}
-.object.ship:before{
-    content: 'A';
-    color: red;
-    font-size: 16px;
-}
-
-.object.ship:after{
-    content: 'A';
-    font-size: 0px;
-    color: red;
-    font-weight: bold;
-    line-height: 140px;
- }
-
-.object.ship.life100:after{    font-size: 0px; }
-.object.ship.life90:after{    font-size: 8px; }
-.object.ship.life80:after{    font-size: 10px; }
-.object.ship.life70:after{    font-size: 12px; }
-.object.ship.life60:after{    font-size: 16px; }
-.object.ship.life50:after{    font-size: 20px; }
-.object.ship.life40:after{    font-size: 24px; }
-.object.ship.life30:after{    font-size: 28px; }
-.object.ship.life20:after{    font-size: 32px; }
-.object.ship.life10:after{    font-size: 36px; }
-.object.ship.life0:after{    font-size: 40px; }
-.object.ship.life-dead:after{ font-size: 0px; }
-.object.ship.life-dead:before{ color: #444; }
-
-.object.Gstar:before{
-    content: '*';
-    color: yellow;
-    font-size: 500px;
-    line-height: 325px;
-    width: 500px;
-    left: -250px
-}
-.object.star:before{
-    content: '*';
-    color: white;
-    font-size: 100px;
-    line-height: 145px;
-}
-.object.star.life100:before{ color: #fff; }
-.object.star.life90:before{ color: #ff9; }
-.object.star.life80:before{ color: #ff0; }
-.object.star.life70:before{ color: #e90; }
-.object.star.life60:before{ color: #e50; }
-.object.star.life50:before{ color: #d90; }
-.object.star.life40:before{ color: #d50; }
-.object.star.life30:before{ color: #ca0; }
-.object.star.life20:before{ color: #c50; }
-.object.star.life10:before{ color: #ba0; }
-.object.star.life0:before{ color: #b50; }
-.object.star.life-dead:before{ color: #444; }
-.object.star:after{    content: ''; }
-
-.object.muerto:before{
-    content: 'M';
-    font-size: 40px;
-}
-.object.nemezis:before{
-    content: 'N';
-    font-size: 40px;
-}
-.object.warastein:before{
-    content: 'W';
-    font-size: 40px;
-}
-.object.dandares:before{
-    content: 'D';
-    font-size: 40px;
-    transform: rotate(270deg);
-}
-.object.royale:before{
-    content: 'R';
-    font-size: 40px;
-}
-.object.hiacynt:before{
-    content: 'H';
-    font-size: 20px;
-}
-.object.iskariot:before{
-    content: 'I';
-    font-size: 20px;
-}
-.object.tartaros:before{
-    content: 'T';
-    font-size: 60px;
-}
-.object.edison:before{
-    content: 'E';
-    font-size: 40px;
-}
-.object.belzebub:before{
-    content: 'B';
-    font-size: 40px;
-    transform: rotate(90deg);
-}
-.object.koriaz:before{
-    content: 'K';
-    font-size: 16px;
-    transform: rotate(270deg);
-}
-.object.fariax:before{
-    content: 'F';
-    font-size: 40px;
-}
-.object.dregos:before{
-    content: 'U';
-    font-size: 20px;
-}
-.object.vitotas:before{
-    content: 'V';
-    font-size: 20px;
-}
-.object.carras:before{
-    content: 'A';
-    font-size: 20px;
-}
-.object.cloacker:before{
-    content: 'C';
-    font-size: 20px;
-    transform: rotate(270deg);
-}
-.object.hajaher:before{
-    content: 'S';
-    font-size: 20px;
-}
-.object.orhenes:before{
-    content: 'Q';
-    font-size: 80px;
-}
-.object.juggernaut:before{
-    content: 'J';
-    font-size: 80px;
-}
-.object.gargamon:before{
-    content: 'G';
-    font-size: 80px;
-    transform: rotate(270deg);
-}
-
-.object.muerto:before,
-.object.nemezis:before,
-.object.dandares:before,
-.object.hiacynt:before,
-.object.tartaros:before,
-.object.edison:before,
-.object.belzebub:before,
-.object.koriaz:before,
-.object.fariax:before,
-.object.dregos:before,
-.object.vitotas:before,
-.object.carras:before,
-.object.warastein:before,
-.object.iskariot:before,
-.object.orhenes:before,
-.object.royale:before,
-.object.gargamon:before,
-.object.hajaher:before,
-.object.juggernaut:before,
-.object.cloacker:before{
-    color: gold;
-    font-weight: bold;
-}
-
-
-.object.cloacker.cloacked:before{ color: #111; }
-.object.cloacker.cloacked:after{ color: #200; }
-.object.cloacker.cloacked.life-dead:before{ color: #444; }
-
-
-.object.life100:after{    font-size: 0px; }
-.object.life90:after{    font-size: 8px; }
-.object.life80:after{    font-size: 10px; }
-.object.life70:after{    font-size: 12px; }
-.object.life60:after{    font-size: 16px; }
-.object.life50:after{    font-size: 20px; }
-.object.life40:after{    font-size: 24px; }
-.object.life30:after{    font-size: 28px; }
-.object.life20:after{    font-size: 32px; }
-.object.life10:after{    font-size: 36px; }
-.object.life0:after{    font-size: 40px; }
-.object.life-dead:after{ font-size: 0px; }
-.object.life-dead:before{ color: #444; }
-
-.object.orhenes.life100:after, .object.gargamon.life100:after, .object.juggernaut.life100:after{font-size: 0px; }
-.object.orhenes.life90:after, .object.gargamon.life90:after, .object.juggernaut.life90:after{    font-size: 7px; }
-.object.orhenes.life80:after, .object.gargamon.life80:after, .object.juggernaut.life80:after{    font-size: 14px; }
-.object.orhenes.life70:after, .object.gargamon.life70:after, .object.juggernaut.life70:after{    font-size: 21px; }
-.object.orhenes.life60:after, .object.gargamon.life60:after, .object.juggernaut.life60:after{    font-size: 28px; }
-.object.orhenes.life50:after, .object.gargamon.life50:after, .object.juggernaut.life50:after{    font-size: 35px; }
-.object.orhenes.life40:after, .object.gargamon.life40:after, .object.juggernaut.life40:after{    font-size: 42px; }
-.object.orhenes.life30:after, .object.gargamon.life30:after, .object.juggernaut.life30:after{    font-size: 49px; }
-.object.orhenes.life20:after, .object.gargamon.life20:after, .object.juggernaut.life20:after{    font-size: 56px; }
-.object.orhenes.life10:after, .object.gargamon.life10:after, .object.juggernaut.life10:after{    font-size: 63px; }
-.object.orhenes.life0:after, .object.gargamon.life0:after,     .object.juggernaut.life0:after{        font-size: 70px; }
-.object.orhenes.life-dead:after, .object.gargamon.life-dead:after,     .object.juggernaut.life-dead:after{        font-size: 0px; }
-
-.object:after{
-    content: 'A';
-    font-size: 0px;
-    color: red;
-    font-weight: bold;
-    line-height: 140px;
-}
-
-.object .shield{
-    position: absolute;
-    top: -17px;
-    left: -16px;
-    width: 28px;
-    height: 28px;
-    border: 2px solid #09f;
-    background: rgba(0,153,255,0.2);
-    border-radius: 100%;
-}
-.object .energyField{
-    position: absolute;
-    top: -17px;
-    left: -16px;
-    width: 28px;
-    height: 28px;
-    border: 2px solid #0f0;
-    background: rgba(0,255,0,0.2);
-    border-radius: 100%;
-    animation-duration: 0.8s;
-}
-.object.ship .energyField{
-    border-color: #8ff;
-    background: rgba(153,255,255,0.3);
-
-}
-.object .energyField.life10{animation-name: energyField-hit10; } @keyframes energyField-hit10 {  0% { background: rgba(0,255,0,0); }    40% { background: rgba(255,255,255,1); }    100% {background: rgba(0,255,0,0.2);} }
-.object .energyField.life9{    animation-name: energyField-hit9; } @keyframes energyField-hit9 {    0% { background: rgba(0,255,0,0); }    40% { background: rgba(255,255,255,1); }    100% {background: rgba(0,255,0,0.2);} }
-.object .energyField.life8{    animation-name: energyField-hit8; } @keyframes energyField-hit8 {    0% { background: rgba(0,255,0,0); }    40% { background: rgba(255,255,255,1); }    100% {background: rgba(0,255,0,0.2);} }
-.object .energyField.life7{    animation-name: energyField-hit7; } @keyframes energyField-hit7 {    0% { background: rgba(0,255,0,0); }    40% { background: rgba(255,255,255,1); }    100% {background: rgba(0,255,0,0.2);} }
-.object .energyField.life6{    animation-name: energyField-hit6; } @keyframes energyField-hit6 {    0% { background: rgba(0,255,0,0); }    40% { background: rgba(255,255,255,1); }    100% {background: rgba(0,255,0,0.2);} }
-.object .energyField.life5{    animation-name: energyField-hit5; } @keyframes energyField-hit5 {    0% { background: rgba(0,255,0,0); }    40% { background: rgba(255,255,255,1); }    100% {background: rgba(0,255,0,0.2);} }
-.object .energyField.life4{    animation-name: energyField-hit4; } @keyframes energyField-hit4 {    0% { background: rgba(0,255,0,0); }    40% { background: rgba(255,255,255,1); }    100% {background: rgba(0,255,0,0.2);} }
-.object .energyField.life3{    animation-name: energyField-hit3; } @keyframes energyField-hit3 {    0% { background: rgba(0,255,0,0); }    40% { background: rgba(255,255,255,1); }    100% {background: rgba(0,255,0,0.2);} }
-.object .energyField.life2{    animation-name: energyField-hit2; } @keyframes energyField-hit2 {    0% { background: rgba(0,255,0,0); }    40% { background: rgba(255,255,255,1); }    100% {background: rgba(0,255,0,0.2);} }
-.object .energyField.life1{    animation-name: energyField-hit1; } @keyframes energyField-hit1 {    0% { background: rgba(0,255,0,0); }    40% { background: rgba(255,255,255,1); }    100% {background: rgba(0,255,0,0.2);} }
-.object .energyField.life0{    animation-name: energyField-hit0; } @keyframes energyField-hit0 {    0% { background: rgba(0,255,0,0); }    40% { background: rgba(255,255,255,1); }    100% {background: rgba(0,255,0,0.2);} }
-
-}
-object.life-dead .shield,
-.object.life-dead .energyField{    display: none; }
-.object.muerto .shield,
-.object.nemezis .shield,
-.object.fariax .shield,
-.object.belzebub .shield,
-.object.warastein .shield,
-.object.warastein .energyField,
-.object.royale .shield,
-.object.royale .energyField,
-.object.edison .shield,
-.object.edison .energyField,
-.object.muerto .energyField,
-.object.nemezis .energyField,
-.object.dandares .energyField,
-.object.fariax .energyField,
-.object.belzebub .energyField{ width: 48px; height: 48px; top: -27px; left: -26px;}
-.object.tartaros .shield,
-.object.tartaros .energyField{ width: 56px; height: 56px; top: -32px; left: -30px;}
-.object.gargamon .shield,
-.object.orhenes .shield,
-.object.juggernaut .energyField,
-.object.juggernaut .shield,
-.object.gargamon .energyField,
-.object.orhenes .energyField{ width: 78px; height: 78px; top: -39px; left: -41px;}
-
-
-.object.dandares_shield:before, .object.hiacynt_shield:before{
-    position: absolute;
-    border-radius: 100%;
-    width: 40px;
-    height: 40px;
-    top: -20px;
-    left: -20px;
-    content: ' ';
-}
-.object.dandares_shield:before{
-    background: rgba(0,255,152,0.2);
-}
-.object.hiacynt_shield:before{
-    background: rgba(0,255,152,1);
-}
-.object.dandares_shield:after, .object.hiacynt_shield:after{
-    content: ' ';
-}
-
-
-
-.object.dandares_shield.life100:before, .object.hiacynt_shield.life100:before{    background: rgba(0,255,152,1); }
-.object.dandares_shield.life90:before, .object.hiacynt_shield.life90:before{    background: rgba(0,255,152,0.9); }
-.object.dandares_shield.life80:before, .object.hiacynt_shield.life80:before{    background: rgba(0,255,152,0.8); }
-.object.dandares_shield.life70:before, .object.hiacynt_shield.life70:before{    background: rgba(0,255,152,0.7); }
-.object.dandares_shield.life60:before, .object.hiacynt_shield.life60:before{    background: rgba(0,255,152,0.6); }
-.object.dandares_shield.life50:before, .object.hiacynt_shield.life50:before{    background: rgba(0,255,152,0.5); }
-.object.dandares_shield.life40:before, .object.hiacynt_shield.life40:before{    background: rgba(0,255,152,0.4); }
-.object.dandares_shield.life30:before, .object.hiacynt_shield.life30:before{    background: rgba(0,255,152,0.3); }
-.object.dandares_shield.life20:before, .object.hiacynt_shield.life20:before{    background: rgba(0,255,152,0.2); }
-.object.dandares_shield.life10:before, .object.hiacynt_shield.life10:before{    background: rgba(0,255,152,0.1); }
-.object.dandares_shield.life0:before,     .object.hiacynt_shield.life0:before{    background: rgba(0,255,152,0.1); }
-.object.dandares_shield.life-dead:before, .object.hiacynt_shield.life-dead:before{ background: transparent; }
-
-.object .spotRegion{position: absolute; top: 0px; left: 0px; overflow: visible;}
-.object.life-dead .spotRegion{display: none;}
-
-</style>
-<style type="text/css">    /* Animations */
-
-
-.object.bullet:before{
-    content: 'i';
-    color: yellow;
-    font-size: 10px;
-}
-.object.space_mine:before{
-    content: 'R';
-    color: #fd0;
-    font-size: 10px;
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    top: -30px;
-    left: -30px;
-}
-.object.space_mine.detecting:before{
-    content: 'R';
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    background: red;
-    background: rgba(255,0,0,0.2);
-    padding: 2px;
-    border-radius: 100%;
-}
-.object.missle:before{
-    content: 'Y';
-    color: yellow;
-    font-size: 12px;
-}
-.object.healing_missle:before{
-    content: 'J';
-    color: #0f0;
-    font-size: 12px;
-    transform: rotate(180deg);
-}
-.object.missle.life-dead:before{ color: transparent; }
-.object.hit{
-    background: transparent;
-}
-.object.bullet_bomb:before{
-    content: 'P';
-    color: yellow;
-    font-size: 12px;
-}
-.object.bullet_bomb.life-dead:before{ color: transparent; }
-
-.object.hit{
-    background: transparent;
-}
-.object.hit:before{
-    content: '*';
-    font-size: 10px;
-    color: transparent;
-    font-weight: bold;
-    line-height: 10px;
-    animation-name: object_hit;
-    animation-duration: 1s;
-    width: 120px;
-    text-align: center;
-    left: -60px;
-}
-
-@keyframes object_hit {
-    0% {color: white;     font-size: 10px; line-height: 100px; }
-    40% {color: yellow; font-size: 50px; line-height: 118px; }
-    100% {color: red;     font-size: 110px;line-height: 143px; }
-}
-.object.hit.hit_blue:before{
-    animation-name: object_hit_blue;
-}
-@keyframes object_hit_blue {
-    0% {color: white;         font-size: 10px;  line-height: 100px; }
-    40% {color: lightblue;     font-size: 50px;  line-height: 118px; }
-    100% {color: blue;         font-size: 110px; line-height: 143px; }
-}
-.object.hit.hit_healing:before{
-    animation-name: object_hit_healing;
-    transform: rotate(180deg);
-}
-@keyframes object_hit_healing {
-    0% {color: #8f8; font-size: 10px; }
-    40% {color: #0f0; font-size: 30px;}
-    100% {color: #080; font-size: 50px;}
-}
-.object.hit.hit_energyField:before{
-    animation-name: object_hit_energyField;
-}
-@keyframes object_hit_energyField {
-    0% {color: #0f0;     font-size: 10px; line-height: 100px; }
-    40% {color: #8f8;     font-size: 50px; line-height: 118px; }
-    100% {color: #fff;     font-size: 100px;line-height: 143px; }
-}
-.object.hitBig{
-    background: transparent;
-}
-.object.hitBig:before{
-    content: '*';
-    font-size: 10px;
-    color: transparent;
-    font-weight: bold;
-    line-height: 400px;
-    height: 300px;
-    top: -150px;
-    width: 300px;
-    left: -150px;
-    animation-name: object_hitBig;
-    animation-duration: 0.8s;
-}
-
-@keyframes object_hitBig {
-    0% {color: white; font-size: 40px; }
-    40% {color: yellow; font-size: 240px;}
-    100% {color: red; font-size: 300px;}
-}
-.object.hitBig35, .object.hitBig80,.object.hitBig120, .object.hitBig210, {
-    background: transparent;
-}
-.object.hitBig35:before, .object.hitBig80:before,  .object.hitBig120:before,  .object.hitBig210:before {
-    content: '*';
-    font-size: 100px;
-    position: absolute;
-    color: transparent;
-    font-weight: bold;
-    line-height: 100px;
-    border-radius: 100%;
-    background-color: transparent;
-    display: block;
-    animation-duration: 0.8s;
-}
-.object.hitBig35:before{
-    height: 70px;
-    top: -35px;
-    width: 70px;
-    left: -35px;
-    animation-name: object_hitBig35;
-}
-@keyframes object_hitBig35 {
-    0% {color: white;    font-size: 30px;    background-color: rgba(255,255,255,1);    line-height: 85px; }
-    40% {color: yellow;    font-size: 140px;    background-color: rgba(255,255,0,0.6);    line-height: 124px; }
-    100% {color: red;    font-size: 180px;    background-color: rgba(255,0,0,0.1);    line-height: 142px; }
-}
-.object.hitBig80:before{
-    height: 160px;
-    width: 160px;
-    top: -80px;
-    left: -80px;
-    animation-name: object_hitBig80;
-}
-@keyframes object_hitBig80 {
-    0% {color: white;    font-size: 100px;    background-color: rgba(255,255,255,1);    line-height: 200px; }
-    40% {color: yellow;    font-size: 260px;    background-color: rgba(255,255,0,0.6);    line-height: 270px; }
-    100% {color: red;    font-size: 430px;    background-color: rgba(255,0,0,0.1);    line-height: 340px; }
-}
-.object.hitBig120:before{
-    height: 240px;
-    width: 240px;
-    top: -120px;
-    left: -120px;
-    animation-name: object_hitBig120;
-}
-@keyframes object_hitBig120 {
-    0% {color: white;    font-size: 160px;    background-color: rgba(255,255,255,1);    line-height: 310px; }
-    40% {color: yellow;    font-size: 420px;    background-color: rgba(255,255,0,0.6);    line-height: 420px; }
-    100% {color: red;    font-size: 630px;    background-color: rgba(255,0,0,0.1);    line-height: 500px; }
-}
-.object.hitBig210:before{
-    height: 420px;
-    width: 420px;
-    top: -210px;
-    left: -210px;
-    animation-name: object_hitBig210;
-}
-@keyframes object_hitBig210 {
-    0% {color: white;    font-size: 240px;    background-color: rgba(255,255,255,1);    line-height: 510px; }
-    40% {color: yellow;    font-size: 600px;    background-color: rgba(255,255,0,0.6);    line-height: 670px; }
-    100% {color: red;    font-size: 1110px;    background-color: rgba(255,0,0,0.1);    line-height: 880px; }
-}
-
-.object.hitBig35 span:before,.object.hitBig80 span:before,.object.hitBig120 span:before,.object.hitBig210 span:before {
-    content: '*';
-    color: transparent;
-    font-weight: bold;
-    line-height: 10px;
-    animation-duration: 0.5s;
-    display: block;
-    position: absolute;
-    width: 120px;
-    text-align: center;
-    left: -60px;
-}
-.object.hitBig35 span:before{
-    animation-name: object_hit;
-}
-.object.hitBig35 span:nth-child(1):before{    top: -75px; left: -50px; }
-.object.hitBig35 span:nth-child(2):before{    top: -55px; left: -30px; }
-.object.hitBig35 span:nth-child(3):before{    top: -55px; left: -75px; }
-.object.hitBig35 span:nth-child(4):before{    top: -35px; left: -80px; }
-.object.hitBig35 span:nth-child(5):before{    top: -25px; left: -50px; }
-.object.hitBig35 span:nth-child(6):before{    top: -45px; left: -45px; }
-
-.object.hitBig80 span:before{
-    animation-name: object_hit80;
-    width: 220px;
-    left: -110px;
-}
-.object.hitBig80 span:nth-child(1):before{    top: 25px; left: -150px; }
-.object.hitBig80 span:nth-child(2):before{    top: -35px; left: -170px; }
-.object.hitBig80 span:nth-child(3):before{    top: -55px; left: -115px; }
-.object.hitBig80 span:nth-child(4):before{    top: 45px; left: -90px; }
-.object.hitBig80 span:nth-child(5):before{    top: 25px; left: -60px; }
-.object.hitBig80 span:nth-child(6):before{    top: -25px; left: -65px; }
-@keyframes object_hit80 {
-    0% {color: white;     font-size: 10px; line-height: 100px;}
-    40% {color: yellow; font-size: 160px; line-height: 100px;}
-    100% {color: red;     font-size: 220px;line-height: 100px;}
-}
-.object.hitBig120 span:before{
-    animation-name: object_hit120;
-    width: 220px;
-    left: -110px;
-}
-.object.hitBig120 span:nth-child(1):before{    top: 75px; left: -160px; }
-.object.hitBig120 span:nth-child(2):before{    top: -5px; left: -170px; }
-.object.hitBig120 span:nth-child(3):before{    top: -45px; left: -125px; }
-.object.hitBig120 span:nth-child(4):before{    top: 65px; left: -70px; }
-.object.hitBig120 span:nth-child(5):before{    top: 15px; left: -40px; }
-.object.hitBig120 span:nth-child(6):before{    top: -35px; left: -55px; }
-@keyframes object_hit120 {
-    0% {color: white;     font-size: 40px; line-height: 100px;}
-    40% {color: yellow; font-size: 220px; line-height: 100px;}
-    100% {color: red;     font-size: 300px;line-height: 100px;}
-}
-.object.hitBig210 span:before{
-    animation-name: object_hit210;
-    width: 220px;
-    left: -110px;
-}
-.object.hitBig210 span:nth-child(1):before{    top: 135px; left: -180px; }
-.object.hitBig210 span:nth-child(2):before{    top: 25px; left: -210px; }
-.object.hitBig210 span:nth-child(3):before{    top: -65px; left: -75px; }
-.object.hitBig210 span:nth-child(4):before{    top: 165px; left: -60px; }
-.object.hitBig210 span:nth-child(5):before{    top: 85px; left: 10px; }
-.object.hitBig210 span:nth-child(6):before{    top: -15px; left: -55px; }
-@keyframes object_hit210 {
-    0% {color: white;     font-size: 100px; line-height: 100px;}
-    40% {color: yellow; font-size: 300px; line-height: 100px;}
-    100% {color: red;     font-size: 500px;line-height: 100px;}
-}
-
-.inner_ring{
-    border-radius: 100%;
-    position: absolute;
-    border: 20px double #004;
-}
-.outer_ring{
-    border-radius: 100%;
-    position: absolute;
-    border: 1500px solid #004;
-}
-
-
-.object.laserAiming{
-    width: 0px;
-    height: 650px;
-    border-left: 1px dashed red;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    transform-origin: 0px 0px;
-}
-.object.life-dead .laserAiming{ display: none;}
-.object.laserShoot{
-    width: 0px;
-    height: 650px;
-    border-style: solid;
-    border-width: 0px;
-    position: absolute;
-    top: 0px;
-    left: -10px;
-    transform-origin: 0px 0px;
-    animation-duration: 0.35s;
-    animation-name: object_laserShoot;
-    border-radius: 10px;
-}
-@keyframes object_laserShoot{
-    0%    {    width: 2px;        background: #00f;    border-width: 0px 0px 0px 0px; border-color: rgba(0,0,0,0);}
-    50%    {    width: 8px;     background: #88f;    border-width: 0px 2px 0px 2px; border-color: rgba(255,255,255,0.4);}
-    100%{    width: 4px;     background: #fff;    border-width: 0px 4px 0px 4px; border-color: rgba(255,255,255,0.1);}
-}
-
-.object.TP_road{
-    width: 0px;
-    height: 650px;
-    position: absolute;
-    top: 0px;
-    left: -2px;
-    transform-origin: 0px 0px;
-    animation-duration: 0.65s;
-    animation-name: object_TProad;
-    border-radius: 10px;
-}
-@keyframes object_TProad{
-    0%    {    width: 2px;    background: #00f;    }
-    50%    {    width: 4px;    background: #88f;    }
-    100%{    width: 0px;    background: #fff;    }
-}
-
-.object .edisonField{
-    width: 300px;
-    height: 300px;
-    position: absolute;
-    top: -150px;
-    left: -150px;
-    border-radius: 100%;
-    animation-duration: 0.75s;
-    animation-name: object_edisonField;
-
-    background: rgba(0,0,255,0.4); /* Old browsers */
-    background: radial-gradient(ellipse at center,  transparent 0%, rgba(0,0,255,0.0) 20%, rgba(0,0,255,0.4) 100%);
-}
-@keyframes object_edisonField{
-    0%    {    top: 0px; left: 0px; width: 0px; height: 0px;}
-    100%{    top: -150px; left: -150px; width: 300px; height: 300px; }
-}
-.object .edisonField.edisonHit{
-    animation-duration: 0.75s;
-    animation-name: object_edisonHit;
-    background: transparent;
-}
-@keyframes object_edisonHit{
-    0%    {     background: radial-gradient(ellipse at center,  transparent 0%, rgba(0,255,255,0.4) 20%, rgba(0,255,255,1) 100%);     }
-    20% {     background: rgba(0,255,255,0.9); }
-    100% {    background: rgba(0,255,255,0.0); }
-}
-
-
-.object.life-dead .edisonField.edisonHit{
-    animation-name: object_edisonField_deadx;
-}
-.object.life-dead .edisonField{
-    animation-name: object_edisonField_dead;
-    animation-duration: 0.75s;
-    width: 0px;
-    height: 0px;
-    top: 0px;
-    left: 0px;
-}
-@keyframes object_edisonField_dead{
-    0% {     top: -150px; left: -150px; width: 300px; height: 300px; }
-    100% {     top: 0px; left: 0px; width: 0px; height: 0px; }
-}
-
-</style>
 <style>    /* Debug - FPS */
 #FPS{
     position: fixed;
@@ -7198,8 +6899,14 @@ object.life-dead .shield,
     height: 100px;
     position: relative;
 }
-#FPSpillar div > div{
+#FPSpillar > div > div{
     background: white;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+#FPSpillar > div > div > div{
+    background: orange;
     position: absolute;
     bottom: 0px;
     right: 0px;
@@ -7213,12 +6920,40 @@ object.life-dead .shield,
     z-index: 2;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
+#FPS_MS{
+    position: absolute;
+    bottom: 0px;
+    right: 150px;
+    width: 150px;
+    height: 100px;
+    text-align: center;
+    font-size: 13px;
+    color: white;
+    text-shadow: 1px 0px black, 0px 1px black, 0px -1px black, -1px 0px black;
+}
+.FPS_MS{
+    float: left;
+    width: 30px;
+    height: 100px;
+    position: relative;
+}
+.FPS_MS div{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 30px;
+}
+#FPS_MS .FPS_MS:nth-child(1) div{ background-color: blue; }
+#FPS_MS .FPS_MS:nth-child(2) div{ background-color: green; }
+#FPS_MS .FPS_MS:nth-child(3) div{ background-color: red; }
+#FPS_MS .FPS_MS:nth-child(4) div{ background-color: orange; }
+#FPS_MS .FPS_MS:nth-child(5) div{ background-color: yellow; }
 </style>
 </head>
 <body oncontextmenu="return false;">
     <div id="CanvasPreviews"></div>
     <div id="Menu"></div>
     <div id="Game"></div>
-    <div id="FPS"><div id="FPSpillar"></div><div id="FPSnum"></div></div>
+    <div id="FPS"><div id="FPS_MS"></div><div id="FPSpillar"></div><div id="FPSnum"></div></div>
 
 </body></html>
