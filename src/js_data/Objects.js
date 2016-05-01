@@ -179,7 +179,13 @@ ObjectPutDatas={
 
         spotLvl: 2,
 
-        weapon:[{t:'bomb', Speed: 10, Dec: 50, Power: 4, Radius: 35, gunSpeed: 40, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}],
+        Bombs:[{
+            onHit: {Do:'explode',Power: 4, Dist: 35},
+            onDie: {Do:'explode',Power: 4, Dist: 35},
+            onExpire: {Do:'explode',Power: 4, Dist: 35}
+        }],
+
+        weapon:[{t:'bomb', Speed: 10, Dec: 50, BombType: 0, gunSpeed: 40, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}],
 
         AlarmLvl: 2,
         doingNow: 'changeManouver',
@@ -207,11 +213,12 @@ ObjectPutDatas={
         lifeM: 7,
         radius: 20,
 
-        Res: {'prod': {R:5,M:5,T:0}},
+        prodSquad: 5,
+        Res: {'prodSquad': {M:5,T:0}},
         weapon:[
-            {t:'refilResource', resource: 'prod', gunSpeed: 22, maxSpeed: 2, doNextWeapon: true},
-            {t:'healSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prod', usedResR: 1, maxSpeed: 2, doNextWeapon: true},
-            {t:'produceSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prod', usedResR: 1, maxSpeed: 2, doNextWeapon: true},
+            {t:'refilResource', resource: 'prodSquad', gunSpeed: 22, maxSpeed: 2, doNextWeapon: true},
+            {t:'healSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prodSquad', usedResR: 1, maxSpeed: 2, doNextWeapon: true},
+            {t:'produceSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prodSquad', usedResR: 1, maxSpeed: 2, doNextWeapon: true},
         ],
 
         squadSchemeType: {t:'round', count: 16, radius: 100, placement: 'oddFirst', makeFirst: 8, life: 3, data:{type:'shieldBlob', lifeM:6}},
@@ -270,8 +277,8 @@ ObjectPutDatas={
 
 
         spotLvl: 2,
-
-        Res: {'jump': {R:3,M:3,T:0}},
+        jump: 3,
+        Res: {'jump': {M:3,T:0}},
         weapon:[
             {t:'refilResource', resource: 'jump', gunSpeed: 300, maxSpeed: 2, doNextWeapon: true},
             {t:'double2', Power:1, Dec: 35, Speed: 12, gunSpeed: 20, lastShot: 100, maxSpeed: 2, minAlarm: 5},
@@ -336,7 +343,8 @@ ObjectPutDatas={
 
         spotLvl: 2,
 
-        Res: {'misslePack': {R:6,M:6,T:0}},
+        misslePack: 6,
+        Res: {'misslePack': {M:6,T:0}},
         weapon:[
             {t:'refilResource', resource: 'misslePack', gunSpeed: 90, maxSpeed: 1, doNextWeapon: true},
             {t:'misslesDouble', gunSpeed: 140, lastShot: 100, usedRes: 'misslePack', usedResR: 1, maxSpeed: 2, minAlarm: 5},
@@ -417,6 +425,48 @@ ObjectPutDatas={
         viewHitPattern: 'HullFire_80',
         lifeM: 12,
         radius: 40,
+
+        spotLvl: 2,
+
+        Bombs:[
+            {
+                onHit: {Do:'explode',Power: 4, Dist: 35},
+                onDie: {Do:'explode',Power: 4, Dist: 35},
+                onExpire: {Do:'explode',Power: 4, Dist: 35}
+            },
+            {
+                onHit: {Do:'explode',Power: 7, Dist: 80},
+                onDie: {Do:'explode',Power: 7, Dist: 80},
+                onExpire: {Do:'explode',Power: 7, Dist: 80}
+            },
+            {
+                onHit: {Do:'explode',Power: 11, Dist: 120},
+                onDie: {Do:'explode',Power: 11, Dist: 120},
+                onExpire: {Do:'explode',Power: 11, Dist: 120}
+            },
+            {
+                onHit: {Do:'explode',Power: 18, Dist: 210},
+                onDie: {Do:'explode',Power: 18, Dist: 210},
+                onExpire: {Do:'explode',Power: 18, Dist: 210}
+            }
+        ],
+
+        energyField: 20,
+        Res: {'energyField': {M:20,T:0}},
+        weapon:[
+            {t:'refilResource', resource: 'energyField', gunSpeed: 60, maxSpeed: 2, doNextWeapon: true},
+            {t:'bomb', Speed: 10, Dec: 50, BombRandom: 4, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}
+        ],
+
+        AlarmLvl: 2,
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 15, goToAlarmLvl: 4, goToSpotLvl: 2},
+            {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3, doingTime: 30},
+            {N:15,T:'changeManouver', maxAlarm: 4, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
     },
     gargamon:{
         viewLetter: 'G',
