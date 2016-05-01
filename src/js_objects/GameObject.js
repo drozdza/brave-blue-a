@@ -11,19 +11,19 @@ function GAMEobject(){
     this.doEndGame=false;
 
     this.EnemiesC=0;
-    this.Enemies={};            // Tablica Enemies
+    this.Enemies={};             // Tablica Enemies
 
     this.MapRadius=2700;
     this.MapRadius2=3200;
 
-    this.O={};            // Object's - all of them
+    this.O={};                   // Object's - all of them
     this.Olen=0;
-    this.Omap={};        // map of Maps
+    this.Omap={};                // map of Maps
     // No map for: B-Bullets, BE-BulletsE, T-TeleportsRoutes
     this.Omap['P']={elems:1};    //    Player
     this.Omap['M']={elems:0};    //    Missles
     this.Omap['E']={elems:0};    //    Enemies
-    this.Omap['ME']={elems:0};    //    MisslesE
+    this.Omap['ME']={elems:0};   //    MisslesE
     this.Omap['A']={elems:0};    //    Asteroids - only for Player Ship
     this.Omap['R']={elems:0};    //    Regions
     this.Omap['D']={elems:0};    //     Dead objects (for spotting)
@@ -31,12 +31,12 @@ function GAMEobject(){
 
 
     this.Omoving={};    // moving
-    this.Ocomp={};        // sterowane statki / missle
+    this.Ocomp={};      // sterowane statki / missle
     this.Obullet={};    // tablica kul
-    this.Oanim={};        // animations
+    this.Oanim={};      // animations
     this.Oregion={};    // regions
 
-    this.Squads={};        // moving in Squads
+    this.Squads={};     // moving in Squads
     this.SquadLen=0;
 
     this.keyLeftRight=0;
@@ -611,7 +611,7 @@ function GAMEobject(){
 
 
         if(O.squadSchemeType)
-            this.prepareSquadScheme(O);
+            this.prepareSquadScheme(O,L);
 
         if(O.squadScheme)
             this.checkSquadSchemeMakes(O);
@@ -1331,9 +1331,9 @@ function GAMEobject(){
             if(q) this.removeObj(q);
             return true;
         }
-        if(O.res && O.res['jump'] && O.res['jump'].R > 0){
+        if(O.Res && O.Res['jump'] && O.Res['jump'].R > 0){
             if(this.teleportJump(o,170,Math.random()*360)){
-                --O.res['jump'].R;
+                --O.Res['jump'].R;
                 this.checkHits(o);
                 this.removeObj(q);
             }
@@ -2070,20 +2070,75 @@ function GAMEobject(){
 
     }
 
-    this.prepareSquadScheme = function(O){
+    this.prepareSquadScheme = function(O,o){
         O.squadScheme = [];
         var SST = O.squadSchemeType;
 
-        if(SST.t == 'round'){
-            var u = parseInt(Math.random()*SST.count);
+        var Pos = [];
+        if(SST.t == 'round')
             for(var i= 0; i<SST.count; ++i){
-                O.squadScheme[i] = {
-                    angle: ((360/SST.count)*(i- -u))%360,
-                    radius: SST.radius,
-                    Oid: -1
+                Pos[i] = {
+                    angle: ((360/SST.count)*i)%360,
+                    radius: SST.radius
                 };
             }
+
+        var i = 0;
+        if(SST.placement == 'random'){
+            while(Pos.length){
+                var j = parseInt(Math.random()*Pos.length);
+                O.squadScheme[i++] = {angle: Pos[j].angle, radius: Pos[j].radius};
+                Pos[j] = Pos[ Pos.length-1 ];
+                --Pos.length;
+            }
         }
+        else if(SST.placement == 'randomStart'){
+            var u = parseInt(Math.random()*SST.count);
+            for(ji=0; ji<SST.count; ++ji){
+                var j = (ji- -u)%SST.count;
+                O.squadScheme[i++] = {angle: Pos[j].angle, radius: Pos[j].radius};
+            }
+        }
+        else if(SST.placement == 'oddFirst'){
+            for(j=0; j<SST.count; j-=-2)
+                O.squadScheme[i++] = {angle: Pos[j].angle, radius: Pos[j].radius};
+            for(j=1; j<SST.count; j-=-2)
+                O.squadScheme[i++] = {angle: Pos[j].angle, radius: Pos[j].radius};
+        }
+        else {
+            for(i=0; i<SST.count; ++i)
+                O.squadScheme[i] = {angle: Pos[i].angle, radius: Pos[i].radius};
+        }
+
+
+        for(var i in O.squadScheme){
+            for(var j in SST.data)
+                O.squadScheme[i][j] = SST.data[j];
+
+            if(SST.makeFirst && SST.makeFirst > i){
+                this.setSquadMember(o,i,SST.life);
+            } else {
+                O.squadScheme[i].Oid = -1;
+            }
+        }
+
+    }
+    this.setSquadMember = function(o,i,life){
+        var O = this.O[o];
+        var OSS = O.squadScheme[i];
+        var iX = O.x- -OSS.radius * Math.sin( (-parseInt(OSS.angle- -O.angle)-180)*(Math.PI/180));
+        var iY = O.y- -OSS.radius * Math.cos( (-parseInt(OSS.angle- -O.angle)-180)*(Math.PI/180));
+
+        if(OSS.type == 'shieldBlob'){
+            var Sid = this.putObj('shieldBlob','moving',O.S,iX,iY);
+            var oS = this.O[Sid];
+            oS.angle = O.angle;
+            oS.life = life;
+            oS.lifeM = OSS.lifeM;
+            this.bindWithSquad(o, i, Sid);
+        }
+
+        CanvasManager.requestCanvas( Sid );
     }
     this.bindWithSquad = function(o,i,s){
         var O = this.O[o];
@@ -3126,8 +3181,9 @@ function GAMEobject(){
                 if(WP.minSpeed && WP.minSpeed > O.speedLvl) continue;    // Czy w og�le kiedy� u�yjemy tego?
                 if(WP.minDistToEnemy && WP.minDistToEnemy < PlayerDist) continue;
                 if(WP.gunSpeed > (this.tick-WP.lastShot)) continue;
+                if(WP.usedRes && O.Res[ WP.usedRes ].R < WP.usedResR) continue;
 
-                // Wykonujemy strza�
+
                 if(WP.t == 'single'){
                     this.shootBullet(o,PlayerAngle,WP.Speed,WP.Dec,WP.Power);
                     WP.lastShot = this.tick;
@@ -3150,39 +3206,67 @@ function GAMEobject(){
                 }
 
                 if(WP.t=='refilResource'){
-                    if(++O.res[WP.resource].T >= WP.resA){
-                        if(++O.res[WP.resource].R > O.res[WP.resource].M)
-                            O.res[WP.resource].R = O.res[WP.resource].M;
-                        O.res[WP.resource].T = 0;
+                    if(++O.Res[WP.resource].T >= WP.gunSpeed){
+                        if(++O.Res[WP.resource].R > O.Res[WP.resource].M)
+                            O.Res[WP.resource].R = O.Res[WP.resource].M;
+                        O.Res[WP.resource].T = 0;
                     }
                 }
 
-                // weapon: [{t:'produceSquad', gunSpeed: 2, lastShot: 0, squadType: 'shieldBlob', shieldBlobMaxHp: 6, maxSpeed: 2}],
-
                 if(WP.t=='produceSquad'){
-                    for(var i=0; i< O.squadScheme.length; ++i){
-                        if( O.squadScheme[i].Oid == -1){
-                            var iX = O.x- -O.squadScheme[i].radius * Math.sin( (-parseInt(O.squadScheme[i].angle- -O.angle)-180)*(Math.PI/180));
-                            var iY = O.y- -O.squadScheme[i].radius * Math.cos( (-parseInt(O.squadScheme[i].angle- -O.angle)-180)*(Math.PI/180));
-                            var Sid = this.putObj('shieldBlob','moving',O.S,iX,iY);
-                            var oS = this.O[Sid];
-                            oS.angle = O.angle;
-                            this.bindWithSquad(o, i, Sid);
+                    do{
+                        var weMadeSomething = false;
 
-                            oS.life = 1;
-                            oS.lifeM = WP.shieldBlobMaxHp;
+                        var iUnset = false;
+                        for(var i=0; i < O.squadScheme.length; ++i)
+                            if(O.squadScheme[i].Oid == -1){
+                                iUnset = i;
+                                break;
+                            }
 
-                            CanvasManager.requestCanvas( Sid );
-                            break;
+                        if(iUnset !== false){
+                            this.setSquadMember(o,iUnset,1);
+
+                            O.Res[ WP.usedRes ].R -= WP.usedResR;
+                            WP.lastShot = this.tick;
+                            if(O.Res[ WP.usedRes ].R < WP.usedResR) break;
+                            weMadeSomething = true;
                         }
-                        var sO = this.O[ O.squadScheme[i].Oid ];
-                        if( sO.life < sO.lifeM ){
-                            sO.life -=-1;
-                            CanvasManager.requestCanvas( O.squadScheme[i].Oid );
-                            break;
+
+                    }while(weMadeSomething);
+
+                }
+
+                if(WP.t=='healSquad'){
+                    do{
+                        var weMadeSomething = false;
+
+                        var iLowLife = false, lowLifeMin = 999;
+                        for(var i=0; i < O.squadScheme.length; ++i)
+                            if(O.squadScheme[i].type == 'shieldBlob')
+                                if(O.squadScheme[i].Oid != -1){
+                                    var oS = this.O[ O.squadScheme[i].Oid ];
+                                    console.log(oS.life+' '+oS.lifeM+' '+lowLifeMin);
+                                    if( oS.life < lowLifeMin && oS.life < oS.lifeM){
+                                        lowLifeMin = oS.life;
+                                        iLowLife = i;
+                                    }
+                                }
+
+                        if(iLowLife === false) break;
+                        var OSS = O.squadScheme[iLowLife];
+
+                        if(OSS.type == 'shieldBlob'){
+                            this.O[ OSS.Oid].life -=- 1;
+                            CanvasManager.requestCanvas( OSS.Oid );
+
+                            WP.lastShot = this.tick;
+                            O.Res[ WP.usedRes ].R -= WP.usedResR;
+                            if(O.Res[ WP.usedRes ].R < WP.usedResR) break;
+                            weMadeSomething = true;
                         }
-                    }
-                    WP.lastShot = this.tick;
+
+                    }while(weMadeSomething);
                 }
 
                 /*

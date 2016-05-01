@@ -115,7 +115,7 @@ ObjectPutDatas={
         lastSeenEnemy: -1,
         radius: 15,
 
-        res:{},
+        Res:{},
         toDo:[],
         doingTime: -1,
         Manouver: 'goStraight',
@@ -195,9 +195,14 @@ ObjectPutDatas={
         lifeM: 7,
         radius: 20,
 
-        weapon: [{t:'produceSquad', gunSpeed: 2, lastShot: 0, squadType: 'shieldBlob', shieldBlobMaxHp: 6, maxSpeed: 2}],
+        Res: {'prod': {R:5,M:5,T:0}},
+        weapon:[
+            {t:'refilResource', resource: 'prod', gunSpeed: 22, maxSpeed: 2, doNextWeapon: true},
+            {t:'healSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prod', usedResR: 1, maxSpeed: 2, doNextWeapon: true},
+            {t:'produceSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prod', usedResR: 1, maxSpeed: 2, doNextWeapon: true},
+        ],
 
-        squadSchemeType: {t:'round', count: 16, radius: 100},
+        squadSchemeType: {t:'round', count: 16, radius: 100, placement: 'oddFirst', makeFirst: 8, life: 3, data:{type:'shieldBlob', lifeM:6}},
         squadScheme: [],
 
         AlarmLvl: 2,
@@ -251,12 +256,12 @@ ObjectPutDatas={
         viewHitPattern: 'HullFire_20',
         lifeM: 3,
 
-        res: {'jump': {R:3,M:3,T:0}},
 
         spotLvl: 2,
 
+        Res: {'jump': {R:3,M:3,T:0}},
         weapon:[
-            {t:'refilResource', resource: 'jump', resA: 300, maxSpeed: 2, doNextWeapon: true},
+            {t:'refilResource', resource: 'jump', gunSpeed: 300, maxSpeed: 2, doNextWeapon: true},
             {t:'double2', Power:1, Dec: 35, Speed: 12, gunSpeed: 20, lastShot: 100, maxSpeed: 2, minAlarm: 5},
         ],
 
