@@ -176,6 +176,18 @@ ObjectPutDatas={
         viewHitPattern: 'HullFire_40',
         lifeM: 4,
         radius: 20,
+
+        spotLvl: 2,
+
+        weapon:[{t:'bomb', Speed: 10, Dec: 50, Power: 4, Radius: 35, gunSpeed: 40, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}],
+
+        AlarmLvl: 2,
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
     },
     warastein:{
         viewLetter: 'W',

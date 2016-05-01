@@ -420,10 +420,31 @@ function GAMEobject(){
         ];
         return O;
     }
+    this.putObj_nemezis = function(O){
+        O.speedLvl = 2;
+        O.speed = 3;
+        O.speedT = 2;
+        O.speedArr = [0,
+            {S: O.speed-2, T:O.speedT},
+            {S: O.speed, T:O.speedT},
+            {S: O.speed- -2, T:O.speedT}
+        ];
+
+        var spotRad1 = 80- -parseInt(Math.random()*80);
+        var spotRad2 = 300- -parseInt(Math.random()*200);
+        O.spotTick = 8;
+        O.spotArr=[0,
+            { T: 'single', Ref: 15, Rad: spotRad1},
+            { T: 'double', Ref: 10, Rad: spotRad1, Rad2: spotRad2, Angle2: 30- -parseInt(Math.random()*30)},
+            { T: 'single', Ref: 45, Rad: spotRad2}
+        ];
+
+        return O;
+    }
     this.putObj_iskariot = function(O){
         O.speedLvl = 2;
-        O.speed = 8- -Math.random()*1.5;
-        O.speedT    = 2.5- -Math.random();
+        O.speed = 3;
+        O.speedT  = 2.5- -Math.random();
         O.speedArr = [0,
             {S: O.speed-5, T:O.speedT- -0.6},
             {S: O.speed, T:O.speedT},
@@ -492,6 +513,7 @@ function GAMEobject(){
         if(Type=='dandares') O = this.putObj_dandares(O);
         if(Type=='dregos')   O = this.putObj_dregos(O);
         if(Type=='hajaher')  O = this.putObj_hajaher(O);
+        if(Type=='nemezis')  O = this.putObj_nemezis(O);
 
         if(O.TT=='enemy'){
             Enemy=' enemy';
@@ -550,10 +572,6 @@ function GAMEobject(){
         if(Type=='belzebub'){
             O.speedM    = O.speed    = 5;
             O.speedT    = 3;
-        }
-        if(Type=='nemezis'){
-            O.speedM    = O.speed    = 3;
-            O.speedT    = 2;
         }
         if(Type=='royale'){
             O.speedM    = O.speed    = 3;
@@ -1797,11 +1815,12 @@ function GAMEobject(){
     this.shootBomb = function(o,Angle,Speed,Dec,Power,Radius){
         var O = this.O[o];
         var L = this.putObj('bullet_bomb','comp',O.S,O.x,O.y);
-        this.O[L].speed = Speed;
-        this.O[L].dec = Dec;
+        this.O[L].speed = Speed || 10;
+        this.O[L].doingTime = Dec || 30;
         this.O[L].angle = Angle;
-        this.O[L].Power = Power;
-        this.O[L].Dist = Radius;
+
+        this.O[L].onHit = this.O[L].onDie = this.O[L].onExpire = {Do:'explode',Power: Power, Dist: Radius};
+
     }
     this.explodeBomb = function(o,explodeObj){
         var i,L,O = this.O[o];
@@ -3267,6 +3286,11 @@ function GAMEobject(){
                     WP.lastShot = this.tick;
                 }
 
+                if(WP.t=='bomb'){
+                    this.shootBomb(o,PlayerAngle,WP.Speed,WP.Dec,WP.Power,WP.Radius);
+                    WP.lastShot = this.tick;
+                }
+
                 if(WP.t=='refilResource'){
                     if(++O.Res[WP.resource].T >= WP.gunSpeed){
                         if(++O.Res[WP.resource].R > O.Res[WP.resource].M)
@@ -3357,17 +3381,6 @@ function GAMEobject(){
         var P = this.O[0];
         O.lastSpeedT = 0;
 
-        if(O.T=='missle' && O.dec < 0)
-            this.removeObj(o);
-
-        if(O.T=='dregos' && O.dec < 0 && O.toDo=='follow'){
-            O.toDo='rest';
-            O.dec=500;
-            O.speed=3;
-            O.ammo=0;
-        }
-        if(O.T=='dregos' && O.dec < 0 && O.toDo=='rest')
-            O.speed=8;
         if(O.T=='warastein' && O.dec < 0 && O.toDo=='rest')
             O.speed=7;
 
@@ -3392,13 +3405,7 @@ function GAMEobject(){
 
 
         switch(O.T){
-                case 'nemezis':
-                if(Dist < 400 && O.ammo > 40){
-                    var Angle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
-                    this.shootBomb(o,Angle,10,50,4,35);
-                    O.ammo=0;
-                }
-            break; case 'royale':
+            case 'royale':
                 if(Dist < 400 && O.ammo > 120){
                     var Pe = [80,280,100,260,120,240,140,220];
                     var Angle = parseInt(- (Math.atan2(P.x-O.x,P.y-O.y)*180/Math.PI)- -180)%360;
@@ -3533,19 +3540,6 @@ function GAMEobject(){
                     this.shootLaser(o,O.Distance,O.Damage);
                     if(O.doSquad==-1)
                         O.toDo='follow';
-                }
-
-            break; case 'hajaher':
-                if(Dist < 400 && O.ammo > 15){
-                    if(O.toDo!='follow' && O.doSquad==-1){
-                        O.toDo='follow';
-                        O.dec=400;
-                    }
-                    var WU = this.countFutureShoot(0,O.x,O.y,12,30);
-                    if(WU.r){
-                        this.shootBullet(o,WU.a,12,30,1);
-                        O.ammo=0;
-                    }
                 }
             break; case 'cloacker':
                 if(Dist < 500 && O.ammo > 300 && O.toDo!='follow'){

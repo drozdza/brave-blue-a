@@ -126,11 +126,16 @@ BOARDS={
             {Random:{X: 200, Y: 200, Radius: 200}, What:{Star: 20, M: 15}},
         ],
     },
+    '*N':{
+        BoardMods:['sitOnMap'],
+        Place:[
+            {Random:{X: 200, Y: 200, Radius: 200}, What:{Star: 20, N: 15}},
+        ],
+    },
     'Start':{MapRadius:600,MapRadius2:2400,O:{ K:1, Star: 300}},
     'Q':{MapRadius:1000,MapRadius2:1000,O:{ Q: 3, Star: 10}},
     'T':{MapRadius:1000,MapRadius2:1000,O:{ T: 10, Star: 10}},
     'B':{MapRadius:1000,MapRadius2:1000,O:{ B: 115, Star: 10}},
-    'N':{MapRadius:1000,MapRadius2:1000,O:{ N: 10, Star: 10}},
     'K':{MapRadius:1000,MapRadius2:1000,O:{ K: 5, A:15, Star: 10}},
     'C':{MapRadius:1000,MapRadius2:1000,O:{ C: 10, Star: 10}},
     'F':{MapRadius:1000,MapRadius2:1000,O:{ F: 10, Q:2, A:10, Star: 10}},
