@@ -1,0 +1,515 @@
+#Game{overflow: hidden;}
+#countEnemies{
+    position: absolute;
+    height: 20px;
+    padding: 4px 8px;
+    top: 0px;
+    right: 0px;
+    background: black;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 20px;
+    border-style: solid;
+    border-color: blue;
+    border-width: 0px 0px 2px 2px;
+    border-radius: 0px 0px 0px 20px;
+    z-index: 1;
+}
+#countEnemies:before{
+    content: 'Enemies: ';
+}
+#countHealth{
+    position: absolute;
+    height: 20px;
+    padding: 4px 8px;
+    top: 0px;
+    left: 0px;
+    background: black;
+    color: blue;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 20px;
+    border-style: solid;
+    border-color: blue;
+    border-width: 0px 2px 2px 0px;
+    border-radius: 0px 0px 20px 0px;
+    z-index: 1;
+}
+#countHealth .disabledHealth    {    color: grey; }
+#countHealth .XenergyField{            color: #0ff; }
+#countHealth .XenergyFieldDisabled{    color: grey; }
+
+
+#countSpeed{
+    cursor: crosshair;
+    position: absolute;
+    padding: 8px 0px 0px;
+    bottom: 0px;
+    left: 63px;
+    background: black;
+    color: white;
+    width: 30px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 20px;
+    border-style: solid;
+    border-color: blue;
+    border-width: 2px 2px 0px 2px;
+    border-radius: 8px 8px 0px 0px;
+    z-index: 1;
+}
+#countSpeed .speedBox{
+    position: absolute;
+    bottom: 0px;
+    left: -62px;
+    border-width: 2px 2px 0px 2px;
+    border-style: solid;
+    border-color: blue;
+    border-radius: 6px 6px 0px 0px;
+    padding: 4px 4px 34px;
+    background: black;
+    text-align: center;
+    width: 30px;
+}
+#countSpeed .speedBoxSpeed{
+    font-size: 15px;
+}
+
+#countSpeed .speedBoxEnergy{
+    border: 2px solid blue;
+    border-radius: 8px;
+    bottom: 4px;
+    font-size: 18px;
+    line-height: 24px;
+    left: -5px;
+    position: absolute;
+    text-align: center;
+    background: black;
+    width: 45px;
+}
+#countSpeed .speedOmeter{
+    margin-top: 1px;
+    width: 30px;
+    height: 0px;
+    background: #040;
+}
+#countSpeed .speedOmeter.speed_1{ height: 6px; background: #050; }
+#countSpeed .speedOmeter.speed_2{ height: 10px; background: #0a0; }
+#countSpeed .speedOmeter.speed_3{ height: 12px; background: #0f0;  }
+#countSpeed .speedOmeter.speed_4{ height: 14px; background: #5f0;  }
+#countSpeed .speedOmeter.speed_5{ height: 16px; background: #af0;  }
+#countSpeed .speedOmeter.speed_6{ height: 18px; background: #ff0;  }
+#countSpeed .speedOmeter.speed_7{ height: 20px; background: #fc0;  }
+#countSpeed .speedOmeter.speed_8{ height: 22px; background: #fa0;  }
+#countSpeed .speedOmeter.speed_9{ height: 24px; background: #f80;  }
+#countSpeed .speedOmeter.speed_10{ height: 26px; background: #f40;  }
+#countSpeed .speedOmeter.speed_11{ height: 28px; background: #f00;  }
+#countSpeed .speedOmeter.speed_12{ height: 28px; background: #e00;  }
+#countSpeed .speedOmeter.speed_13{ height: 28px; background: #d00;  }
+#countSpeed .speedOmeter.speed_14{ height: 28px; background: #c00;  }
+#countSpeed .speedOmeter.speed_15{ height: 28px; background: #900;  }
+#countSpeed .speedOmeter.speed_16{ height: 28px; background: #500;  }
+#countSpeed .speedOmeter.speed_17{ height: 28px; background: #500;  }
+#countSpeed .speedOmeter.speed_18{ height: 28px; background: #500;  }
+#countSpeed .speedOmeter.speed_19{ height: 28px; background: #500;  }
+#countSpeed .speedOmeter.speed_20{ height: 28px; background: #500;  }
+
+#countSpeed .speedOmeter span{
+    display: block;
+    background: black;
+    width:30px;
+}
+#countSpeed .speedOmeter span.speedCap_10{ height: 10%; }
+#countSpeed .speedOmeter span.speedCap_20{ height: 20%; }
+#countSpeed .speedOmeter span.speedCap_30{ height: 30%; }
+#countSpeed .speedOmeter span.speedCap_40{ height: 40%; }
+#countSpeed .speedOmeter span.speedCap_50{ height: 50%; }
+#countSpeed .speedOmeter span.speedCap_60{ height: 60%; }
+#countSpeed .speedOmeter span.speedCap_70{ height: 70%; }
+#countSpeed .speedOmeter span.speedCap_80{ height: 80%; }
+#countSpeed .speedOmeter span.speedCap_90{ height: 90%; }
+#countSpeed .speedOmeter span.speedCap_100{ height: 100%; }
+
+#countSpeed .cBox{
+    position: relative;
+    height: 32px;
+}
+#countSpeed .energyBox{
+    text-align:center;
+    border-radius: 8px;
+    border: 2px solid blue;
+    background: #6f0;
+    color: white;
+    font-size: 18px;
+    padding: 2px 4px;
+    position: absolute;
+    top: 0px;
+    left: -14px;
+    width: 45px;
+    cursor: pointer;
+    height: 21px;
+    text-shadow: 0 1px black, 0 -1px black, -1px 0 black, 1px 0 black;
+}
+#countSpeed .energyBox.energyCap_00{ background: #000; }
+#countSpeed .energyBox.energyCap_10{ background: linear-gradient(to bottom, #000 90%,#6f0 90%); }
+#countSpeed .energyBox.energyCap_20{ background: linear-gradient(to bottom, #000 80%,#6f0 80%); }
+#countSpeed .energyBox.energyCap_30{ background: linear-gradient(to bottom, #000 70%,#6f0 70%); }
+#countSpeed .energyBox.energyCap_40{ background: linear-gradient(to bottom, #000 60%,#6f0 60%); }
+#countSpeed .energyBox.energyCap_50{ background: linear-gradient(to bottom, #000 50%,#6f0 50%); }
+#countSpeed .energyBox.energyCap_60{ background: linear-gradient(to bottom, #000 40%,#6f0 40%); }
+#countSpeed .energyBox.energyCap_70{ background: linear-gradient(to bottom, #000 30%,#6f0 30%); }
+#countSpeed .energyBox.energyCap_80{ background: linear-gradient(to bottom, #000 20%,#6f0 20%); }
+#countSpeed .energyBox.energyCap_90{ background: linear-gradient(to bottom, #000 10%,#6f0 10%); }
+#countSpeed .energyBox.energyCap_100{ background: #6f0; }
+
+
+#countSpeed .energyBox.min{
+    color: grey;
+    background: black;
+}
+#countSpeed .energyBox .min{
+    top: -11px;
+    position: absolute;
+    left: 16px;
+    font-size: 10px;
+    color: grey;
+    text-align: left;
+}
+#countSpeed .energyBox.active{
+    color: gold;
+}
+#countSpeed .energyBox .active{
+    top: -11px;
+    position: absolute;
+    left: 11px;
+    font-size: 10px;
+    color: gold;
+    text-align: left;
+}
+#countSpeed .energyBox .smaller{
+    font-size: 10px;
+}
+#countSpeed .energyBox.max{
+    color: gold;
+}
+#countSpeed .energyBox .max{
+    top: -11px;
+    position: absolute;
+    left: 16px;
+    font-size: 10px;
+    color: gold;
+    text-align: left;
+}
+#countSpeed .energyBox .max{
+    line-height:
+}
+#countSpeed .energyBox .infoBox{
+    position: absolute;
+    top: 0px;
+    cursor: crosshair;
+    right: -113px;
+    width: 100px;
+    border-style: solid;
+    border-color: blue;
+    border-width: 1px 1px 1px 0px;
+    border-radius: 6px;
+    padding: 3px 6px;
+    height: 16px;
+    font-size: 16px;
+    line-height: 16px;
+    text-shadow: none!important;
+}
+#countSpeed .letter{
+    color: white;
+    font-size: 10px;
+    font-weight: normal;
+    left: -17px;
+    position: absolute;
+    text-shadow: 0 1px blue, 0 -1px blue, 1px 0 blue, -1px 0 blue;
+    top: 4px;
+    z-index: 2;
+}
+
+#countSpeed .energyBox .infoBox .smaller_title{
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 17px;
+    width: 110px;
+    left: -3px;
+    text-align: center;
+    position: relative;
+}
+#countSpeed .energyBox .infoBox .titleBox{
+    position: absolute;
+    font-size: 13px;
+    top: -10px;
+    left: 10px;
+    width: 110px;
+    text-align: left;
+}
+#countSpeed .energyBox .infoBox .titleBox .smaller_title{
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 17px;
+    top: 13px;
+    left: -7px;
+    position: absolute;
+    width: 110px;
+    text-align: center;
+}
+#countSpeed .energyBox .infoBox .progresBar{
+    height: 12px;
+    margin-top: 2px;
+    width: 100px;
+    background: black;
+    position: relative;
+}
+#countSpeed .energyBox .infoBox .progresBar .progresBarOBar{
+    background: yellow;
+    height: 12px;
+}
+#countSpeed .energyBox .infoBox .progresBar .info{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    line-height: 12px;
+    padding-right: 10px;
+}
+#countSpeed .energyBox .infoBox .progresBar .progresBarOBar.green{
+    background: #0f0;
+}
+#countSpeed .energyBox .laserBoxBox{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+#countSpeed .energyBox .laserBox{
+    color: grey;
+    font-size: 10px;
+    display: inline-block;
+    position: absolute;
+    border-style: solid;
+    border-color: blue;
+    border-width: 1px 1px 1px 0px;
+    border-radius: 6px;
+    padding: 2px 6px;
+    left: -1px;
+}
+#countSpeed .energyBox .laserBox span{
+    color: yellow;
+}
+#countSpeed .energyBox .ammoBoxBox{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    cursor: crosshair;
+}
+#countSpeed .energyBox .ammoBox{
+    color: grey;
+    font-size: 10px;
+    display: inline-block;
+    float: left;
+    border-style: solid;
+    border-color: blue;
+    border-width: 1px 1px 1px 0px;
+    border-radius: 6px;
+    padding: 2px 6px;
+    left: -4px;
+}
+#countSpeed .energyBox .ammoBoxes{
+    width: 900px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+#countSpeed .energyBox .ammoBox span{
+    color: yellow;
+}
+#countSpeed .energyBox .attackBox{
+    color: grey;
+    cursor: pointer;
+    font-size: 10px;
+    display: inline-block;
+    float: left;
+    border-style: solid;
+    border-color: blue;
+    border-width: 1px 1px 1px 0px;
+    border-radius: 6px;
+    padding: 2px 6px;
+    min-width: 20px;
+    height: 20px;
+    position: relative;
+}
+#countSpeed .energyBox .attackBoxNum{
+    position: absolute;
+    color: white;
+    top: -13px;
+    left: 14px;
+}
+#countSpeed .energyBox .attackBox.attackBoxActive{
+    border-color: #04f;
+}
+#countSpeed .energyBox .attackBox  span{ position: absolute; display: block; color: grey; }
+#countSpeed .energyBox .attackBox.attackBoxActive span{ color: yellow; }
+#countSpeed .energyBox .attackBox.attack_single span:nth-child(1){ top: -3px; left: 16px; }
+#countSpeed .energyBox .attackBox.attack_single span:nth-child(1):before{ content: 'i'; }
+#countSpeed .energyBox .attackBox.attack_single span:nth-child(2){ top: 6px; left: 16px; }
+#countSpeed .energyBox .attackBox.attack_single span:nth-child(2):before{ content: 'i'; }
+
+#countSpeed .energyBox .attackBox.attack_double span:nth-child(1){ top: -3px; left: 12px; }
+#countSpeed .energyBox .attackBox.attack_double span:nth-child(1):before{ content: 'i'; }
+#countSpeed .energyBox .attackBox.attack_double span:nth-child(2){ top: 6px; left: 12px; }
+#countSpeed .energyBox .attackBox.attack_double span:nth-child(2):before{ content: 'i'; }
+#countSpeed .energyBox .attackBox.attack_double span:nth-child(3){ top: -3px; left: 19px; }
+#countSpeed .energyBox .attackBox.attack_double span:nth-child(3):before{ content: 'i'; }
+#countSpeed .energyBox .attackBox.attack_double span:nth-child(4){ top: 6px; left: 19px; }
+#countSpeed .energyBox .attackBox.attack_double span:nth-child(4):before{ content: 'i'; }
+
+#countSpeed .energyBox .attackBox.attack_rose span:nth-child(1){ top: 0px; left: 16px; }
+#countSpeed .energyBox .attackBox.attack_rose span:nth-child(1):before{ content: 'i'; }
+#countSpeed .energyBox .attackBox.attack_rose span:nth-child(2){ top: 2px; left: 20px; transform: rotate(25deg);}
+#countSpeed .energyBox .attackBox.attack_rose span:nth-child(2):before{ content: 'i'; }
+#countSpeed .energyBox .attackBox.attack_rose span:nth-child(3){ top: 2px; left: 11px; transform: rotate(-25deg); }
+#countSpeed .energyBox .attackBox.attack_rose span:nth-child(3):before{ content: 'i'; }
+#countSpeed .energyBox .attackBox.attack_rose span:nth-child(4){ top: 6px; left: 23px; transform: rotate(50deg); }
+#countSpeed .energyBox .attackBox.attack_rose span:nth-child(4):before{ content: 'i'; }
+#countSpeed .energyBox .attackBox.attack_rose span:nth-child(5){ top: 6px; left: 7px; transform: rotate(-50deg); }
+#countSpeed .energyBox .attackBox.attack_rose span:nth-child(5):before{ content: 'i'; }
+
+#countSpeed .energyBox .attackBox.attack_missle span:nth-child(1){ top: 2px; left: 12px; }
+#countSpeed .energyBox .attackBox.attack_missle span:nth-child(1):before{ content: 'Y'; font-size: 16px; }
+
+
+#countSpeed .energyBox .attackBox.attack_missleR span{ font-size: 8px; }
+#countSpeed .energyBox .attackBox.attack_missleR span:nth-child(1){ top: 0px; left: 15px; }
+#countSpeed .energyBox .attackBox.attack_missleR span:nth-child(1):before{ content: 'Y'; }
+#countSpeed .energyBox .attackBox.attack_missleR span:nth-child(2){ top: 2px; left: 20px; transform: rotate(45deg);}
+#countSpeed .energyBox .attackBox.attack_missleR span:nth-child(2):before{ content: 'Y'; }
+#countSpeed .energyBox .attackBox.attack_missleR span:nth-child(3){ top: 3px; left: 7px; transform: rotate(-45deg); }
+#countSpeed .energyBox .attackBox.attack_missleR span:nth-child(3):before{ content: 'Y'; }
+
+
+
+
+#countSpeed .energyBox .attackBox.attack_bomb span:nth-child(1){ top: 2px; left: 12px; }
+#countSpeed .energyBox .attackBox.attack_bomb span:nth-child(1):before{ content: 'P'; font-size: 16px; }
+
+#countSpeed .energyBox .attackBox.attack_tele span:nth-child(1){ top: 10px; left: 10px; }
+#countSpeed .energyBox .attackBox.attack_tele span:nth-child(1):before{ content: '*'; font-size: 40px; }
+
+#countSpeed .energyBox .attackBox.attack_laser span:nth-child(1){ top: 0px; left: 14px; width: 6px; background: #888; height: 24px; }
+#countSpeed .energyBox .attackBox.attack_laser span:nth-child(1):before{ content: ' '; position: absolute; top: 0px; left: 2px; width: 2px; height: 24px; background: #555; }
+
+#countSpeed .energyBox .attackBox.attackBoxActive.attack_laser span:nth-child(1){ background: white; }
+#countSpeed .energyBox .attackBox.attackBoxActive.attack_laser span:nth-child(1):before{ background: #08f; }
+
+
+
+.estimationMarkers{
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: red;
+}
+.estimationMarkers.GluedOne span{
+    position: absolute;
+    border: 2px dashed rgba(255,0,0,0.4);
+    border-radius: 100%;
+}
+
+.estimationMarkers.MissleAim{
+    background: transparent;
+}
+.estimationMarkers.MissleAim span{
+    position: absolute;
+    border: 2px dashed rgba(255,255,0,0.4);
+    border-radius: 100%;
+}
+
+.estimationMarkers.LaserAim{
+    background: transparent;
+}
+.estimationMarkers.LaserAim span{
+    position: absolute;
+    border: 2px dashed rgba(255,0,0,0.4);
+    border-radius: 100%;
+}
+
+#countRadar{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    z-index: 1;
+
+}
+#Radar{
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    border: 2px solid blue;
+    border-radius: 160px 0px 0px 0px;
+    background: rgba(0,0,0,0.6);
+    width: 160px;
+    height: 160px;
+
+}
+.radarDial{
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    border: 6px double blue;
+    position: absolute;
+    background: rgba(0,0,0,1);
+    bottom: 5px;
+    right: 5px;
+}
+.radarCenter{
+    position: absolute;
+    bottom: 100px;
+    right: 100px;
+    width: 1px;
+    height: 1px;
+    background: white;
+
+}
+.radarStick{
+    potision: absolute;
+    width: 1px;
+    height: 100px;
+    background: white;
+    transform-origin: 0px 0px;
+}
+
+.radarPoint{
+    width: 2px;
+    height: 2px;
+    background: grey;
+    position: absolute;
+}
+.rP_350, .rP_351, .rP_352, .rP_353, .rP_354, .rP_355, .rP_356, .rP_357, .rP_358, .rP_359,
+.rP_340, .rP_341, .rP_342, .rP_343, .rP_344, .rP_345, .rP_346, .rP_347, .rP_348, .rP_349{
+    background: #ff0;
+}
+.rP_330, .rP_331, .rP_332, .rP_333, .rP_334, .rP_335, .rP_336, .rP_337, .rP_338, .rP_339{
+    background: #fff;
+}
+.rP_320, .rP_321, .rP_322, .rP_323, .rP_324, .rP_325, .rP_326, .rP_327, .rP_328, .rP_329{
+    background: #ccc;
+}
+
+
+.object.laserAiming{
+    width: 0px;
+    height: 650px;
+    border-left: 1px dashed red;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transform-origin: 0px 0px;
+}
+.object.life-dead .laserAiming{ display: none;}

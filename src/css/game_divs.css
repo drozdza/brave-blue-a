@@ -1,0 +1,128 @@
+#CanvasPreviews{ display: none; }
+//#CanvasPreviews{position: fixed; background: #005; top: 0px; left: 0px; z-index: 1000; display: block; }
+
+#Game{
+    position: relative;
+    width: 0px;
+    height: 0px;
+    margin: 0px auto;
+    background: orange;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#gamearea{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: black;
+}
+#gameboard{
+    display: none;
+    position: absolute;
+}
+#gameboard2{
+    position: absolute;
+}
+#gameboardMarkers{
+    position: absolute;
+}
+
+#endGameBoard{
+    border: 5px solid blue;
+    width: 50%;
+    left: 24%;
+    top: 30%;
+    padding: 30px 20px;
+    text-align: center;
+    background: black;
+    background: rgba(0,0,0,0.5);
+    position: relative;
+    font-size: 30px;
+    color: maroon;
+    font-weight: bold;
+}
+#endGameBoard .killed{ color: #444; }
+
+#pause{
+    border-radius: 0px 0px 0px 400px;
+    border-style: double;
+    border-color: blue;
+    border-width: 0px 0px 20px 20px;
+    background: darkblue;
+    background: rgba(0,0,120,0.5);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 360px;
+    height: 360px;
+    display: none;
+    z-index: 1;
+}
+#pause span{
+    font-size: 100px;
+    font-weight: bold;
+    border-radius: 100%;
+    display: block;
+    width: 130px;
+    line-height: 130px;
+    text-align: center;
+    background: darkblue;
+    color: white;
+    position: absolute;
+    top: 60px;
+    right: 60px;
+}
+
+#gameOverlay{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    line-height: 100%;
+    overflow: hidden;
+}
+
+#gameOverlay #bulletRadius{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1px;
+    height: 1px;
+}
+#gameOverlay #bulletRadius #bullRadX{
+    border-radius: 100%;
+    margin: auto;
+    border: 3px solid rgba(0,0,255,0.2);
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: -50px;
+    left: -50px;
+}
+#gameOverlay.cursorCross{ cursor: crosshair; }
+#gameOverlay.cursorCross #bulletRadius #bullRadX{ cursor: crosshair; }
+#gameOverlay.cursorWait{ cursor: not-allowed; }
+#gameOverlay.cursorWait #bulletRadius #bullRadX{ cursor: not-allowed; }
+
+.redMist{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: transparent;
+    animation-name: redMist;
+    animation-duration: 0.8s;
+}
+@keyframes redMist {
+    0% { background: rgba(255,0,0,0.3); }
+    100% {background: transparent;}
+}

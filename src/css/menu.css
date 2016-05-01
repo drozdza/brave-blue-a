@@ -1,0 +1,191 @@
+html{ height: 80%;}
+body{
+    background: darkblue;
+    width: 100%;
+    margin: 0px;
+    min-height: 100%;
+    padding: 0px;
+    font-family: Arial,sans-serif;
+}
+#Menu{
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+.keys{
+    color: white;
+    font-size: 14px;
+}
+.keys:before{
+    content: 'keys: ';
+}
+.keys span{
+    display: inline-block;
+    padding: 5px 12px;
+}
+
+.ShipPresets{
+    font-size: 24px;
+    font-weight: bold;
+    border: 6px double black;
+    border-radius: 12px;
+}
+.ShipPresets span{
+    display: inline-block;
+}
+.ShipPresets .chooseShipPresets{
+    display: inline-block;
+    margin: 5px 0px 5px 10px;
+    border: 5px double black;
+    min-width: 30px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.ShipPresets .chooseShipPresets.choosenPreset{
+    border: 5px solid black;
+    text-shadow: 1px 0px white, 0px 1px white, -1px 0px white, 0px -1px white;
+}
+
+#MenuBoards{
+    width: 70%;
+    left: 12%;
+    top: 20px;
+    min-height: 400px;
+    padding: 20px;
+    background: black;
+    background: rgba(0,0,0,0.2);
+    border: 10px double black;
+    text-align: center;
+    border-radius: 30px;
+    position: absolute;
+
+}
+.MainMenuButton{
+    display: inline-block;
+    font-weight: bold;
+    margin: 10px;
+    padding: 10px 25px;
+    border: 10px solid black;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    border-radius: 100%;
+}
+.MainMenuButton:hover{
+    color: black;
+    background: white;
+}
+#MenuBoards .ToggleMenu{
+    background: black;
+    background: rgba(0,0,0,0.2);
+    border-color: black;
+    border-radius: 0px 30px 30px 0px;
+    border-style: double;
+    border-width: 10px 10px 10px 0px;
+    cursor: pointer;
+    height: 80px;
+    position: absolute;
+    right: -100px;
+    top: 50px;
+    width: 80px;
+}
+
+#MenuShip{
+    width: 70%;
+    left: 12%;
+    top: 20px;
+    min-height: 400px;
+    padding: 20px;
+    background: black;
+    background: rgba(0,0,0,0.2);
+    border: 10px double black;
+    text-align: center;
+    border-radius: 30px;
+    position: absolute;
+}
+#MenuShip .ToggleMenu{
+    background: black;
+    background: rgba(0,0,0,0.2);
+    border-color: black;
+    border-radius: 30px 0px 0px 30px;
+    border-style: double;
+    border-width: 10px 0px 10px 10px;
+    cursor: pointer;
+    height: 80px;
+    position: absolute;
+    left: -100px;
+    top: 50px;
+    width: 80px;
+}
+
+#moneyTable{
+    font-size: 40px;
+    color: gold;
+    text-shadow: 2px 0px white, -2px 0px white, 0px 2px white, 0px -2px white;
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+
+#shipTable{
+    float: left;
+    width: 30%;
+    min-height: 200px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+}
+
+#upgradesTable{
+    float: left;
+    width: 70%;
+    min-height: 200px;
+    position: relative;
+    color: white;
+}
+
+#upgradesTable .upgradesType{
+    width: 100%;
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    z-index: 1;
+}
+#upgradesTable .upgradesType.wybrany{ z-index: 2; }
+
+#upgradesTable .upgradesTitle{
+    border-width: 2px 2px 0px 2px;
+    border-radius: 10px 10px 0px 0px;
+    border-style: solid;
+    border-color: black;
+    display: inline-block;
+    padding: 5px 15px;
+    background: #00006f;
+    position: absolute;
+    top: -30px;
+    left: 0px;
+    cursor: pointer;
+}
+#upgradesTable .upgradesType:nth-child(1) .upgradesTitle{ left: 0px; }
+#upgradesTable .upgradesType:nth-child(2) .upgradesTitle{ left: 90px; }
+#upgradesTable .upgradesType:nth-child(3) .upgradesTitle{ left: 180px; }
+#upgradesTable .upgradesType:nth-child(4) .upgradesTitle{ left: 270px; }
+
+#upgradesTable .upgradesContent{
+    border-top: 2px solid black;
+    padding-top: 10px;
+    height: 100%;
+    min-height: 320px;
+    background: #00006f;
+}
+#upgradesTable .upgradesContent .upgrade{
+    border: 5px double #000;
+    margin: 3px;
+    border-radius: 8px;
+    padding: 5px 10px;
+    display: inline-block;
+}
+#upgradesTable .upgradesContent .upgrade.on_ship{
+    border-color: gold;
+    color: gold;
+}
