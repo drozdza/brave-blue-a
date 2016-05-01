@@ -3,6 +3,10 @@
             {N:74,T:'alarmAboutIncomingFire', gotHitFlag: true, minAlarm: 5, alarmRadius: 220},
             {N:73,T:'avoidIncomingFire', gotHitFlag: true, minAlarm: 2, avoidTime: 12},
             {N:72,T:'avoidIncomingFire', incomingFireFlag: true, minAlarm: 5, avoidTime: 12},
+
+            {N:67,T:'lowerSpeedForResources', minAlarm: 0, wantedRes: 'misslePack', wantedResR: 20, gotoSpeed: 1},
+            {N:66,T:'speedUpIfResources', minAlarm: 0, wantedRes: 'misslePack', wantedResR: 20, gotoSpeed: 2},
+
             {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
             {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, goToAlarmLvl: 4, goToSpotLvl: 2},
             {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3 },

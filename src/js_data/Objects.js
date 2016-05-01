@@ -321,6 +321,29 @@ ObjectPutDatas={
         viewAngle: 0,
         viewHitPattern: 'HullFire_20',
         lifeM: 9,
+
+        spotLvl: 2,
+
+        Res: {'misslePack': {R:6,M:6,T:0}},
+        weapon:[
+            {t:'refilResource', resource: 'misslePack', gunSpeed: 90, maxSpeed: 1, doNextWeapon: true},
+            {t:'misslesDouble', gunSpeed: 140, lastShot: 100, usedRes: 'misslePack', usedResR: 1, maxSpeed: 2, minAlarm: 5},
+        ],
+
+        AlarmLvl: 2,
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:67,T:'lowerSpeedForResources', minAlarm: 0, wantedRes: 'misslePack', wantedResR: 1, gotoSpeed: 1},
+            {N:66,T:'speedUpIfResources', minAlarm: 0, wantedRes: 'misslePack', wantedResR: 6, gotoSpeed: 2},
+            {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
+            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, goToAlarmLvl: 4, goToSpotLvl: 2},
+            {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3, minSpeedLvl: 2},
+            {N:23,T:'stayInRegion', X:0, Y:0, Radius: 1700 },
+            {N:18,T:'changeManouver2', maxAlarm: 4, minAlarm: 3, straightMin: 20, straightPlus: 80, turnMin: 10, turnPlus: 80  },
+            {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
     },
     vitotas:{
         viewLetter: 'V',

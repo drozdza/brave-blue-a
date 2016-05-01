@@ -20,13 +20,13 @@ function GAMEobject(){
     this.Olen=0;
     this.Omap={};                // map of Maps
     // No map for: B-Bullets, BE-BulletsE, T-TeleportsRoutes
-    this.Omap['P']={elems:1};    //    Player
-    this.Omap['M']={elems:0};    //    Missles
-    this.Omap['E']={elems:0};    //    Enemies
-    this.Omap['ME']={elems:0};   //    MisslesE
-    this.Omap['A']={elems:0};    //    Asteroids - only for Player Ship
-    this.Omap['R']={elems:0};    //    Regions
-    this.Omap['D']={elems:0};    //     Dead objects (for spotting)
+    this.Omap['P']={elems:1};    // Player
+    this.Omap['M']={elems:0};    // Missles
+    this.Omap['E']={elems:0};    // Enemies
+    this.Omap['ME']={elems:0};   // MisslesE
+    this.Omap['A']={elems:0};    // Asteroids - only for Player Ship
+    this.Omap['R']={elems:0};    // Regions
+    this.Omap['D']={elems:0};    // Dead objects (for spotting)
     this.Odead={};
 
 
@@ -356,6 +356,26 @@ function GAMEobject(){
         ];
         return O;
     }
+    this.putObj_dregos = function(O){
+        O.speedLvl = 2;
+        O.speed = 7- -Math.random()*1.5;
+        O.speedT    = 2.5- -Math.random();
+        O.speedArr = [0,
+            {S: O.speed-5, T:O.speedT- -2},
+            {S: O.speed, T:O.speedT},
+            {S: O.speed- -3, T:O.speedT}
+        ];
+
+        var spotRad1 = 80- -parseInt(Math.random()*80);
+        var spotRad2 = 300- -parseInt(Math.random()*200);
+        O.spotTick = 8;
+        O.spotArr=[0,
+            { T: 'single', Ref: 15, Rad: spotRad1},
+            { T: 'double', Ref: 10, Rad: spotRad1, Rad2: spotRad2, Angle2: 30- -parseInt(Math.random()*30)},
+            { T: 'single', Ref: 45, Rad: spotRad2}
+        ];
+        return O;
+    }
     this.putObj_muerto = function(O){
         O.speedLvl = 2;
         O.speed = 3;
@@ -382,10 +402,10 @@ function GAMEobject(){
     }
     this.putObj_iskariot = function(O){
         O.speedLvl = 2;
-        O.speed = 8- -Math.random()*0.15;
+        O.speed = 8- -Math.random()*1.5;
         O.speedT    = 2.5- -Math.random();
         O.speedArr = [0,
-            {S: O.speed-4, T:O.speedT- -2},
+            {S: O.speed-5, T:O.speedT- -0.6},
             {S: O.speed, T:O.speedT},
             {S: O.speed- -4, T:O.speedT}
         ];
@@ -450,6 +470,7 @@ function GAMEobject(){
         if(Type=='muerto')   O = this.putObj_muerto(O);
         if(Type=='iskariot') O = this.putObj_iskariot(O);
         if(Type=='dandares') O = this.putObj_dandares(O);
+        if(Type=='dregos')   O = this.putObj_dregos(O);
 
         if(O.TT=='enemy'){
             Enemy=' enemy';
@@ -550,10 +571,6 @@ function GAMEobject(){
             O.speedM    = O.speed    = 5- -4*Math.random();
             O.speedT    = 2- -2*Math.random();
         }
-        if(Type=='dregos'){
-            O.speedM    = O.speed    = 7- -Math.random()*1.5;
-            O.speedT    = 2.5- -Math.random();
-        }
         if(Type=='gargamon'){
             O.speedM    = O.speed = 2;
             O.speedT    = 1.5;
@@ -569,20 +586,20 @@ function GAMEobject(){
         if(Type=='bullet'){
             O.speed    = 12;
             O.angle    = 0;
-            O.radius= 4;
-            O.dec    = 30;
+            O.radius   = 4;
+            O.dec      = 30;
             O.Power    = 1;
         }
         if(Type=='space_mine'){
-            O.life    = 1;
+            O.life     = 1;
             O.speed    = 0;
             O.angle    = 0;
-            O.radius= 6;
-            O.dec    = 0;
-            O.ammo    = 0;
-            O.toDo    = 0;
+            O.radius   = 6;
+            O.dec      = 0;
+            O.ammo     = 0;
+            O.toDo     = 0;
             O.Power    = 4;
-            O.Dist    = 35;
+            O.Dist     = 35;
         }
 
         if(Type=='hiacynt_shield'){
@@ -2912,7 +2929,11 @@ function GAMEobject(){
             }
         }
     }
-
+    this.changeSpeedLvl = function(O,speedLvl){
+        O.speedLvl = speedLvl;
+        O.speed = O.speedArr[ speedLvl ].S;
+        O.speedT = O.speedArr[ speedLvl ].T;
+    }
 
     this.decide = function(o){
         var O = this.O[o];
@@ -2995,12 +3016,25 @@ function GAMEobject(){
             for(var toDo in O.toDo){
                 var TD = O.toDo[toDo];
 
-
+                // Sprawdzamy Czy akcja się nadaje
                 if(TD.minAlarm && TD.minAlarm > O.AlarmLvl) continue;
                 if(TD.maxAlarm && TD.maxAlarm < O.AlarmLvl) continue;
+                if(TD.minSpeedLvl && TD.minSpeedLvl > O.speedLvl) continue;
                 if(TD.gotHitFlag && O.gotHitFlag===false) continue;
                 if(TD.incomingFireFlag && O.incomingFireFlag===false) continue;
-                // Sprawdzamy Czy akcja si� nadaje
+
+
+                if(TD.T=='lowerSpeedForResources'){
+                    if(O.Res[ TD.wantedRes ].R < TD.wantedResR)
+                        this.changeSpeedLvl(O,TD.gotoSpeed);
+                    continue;
+                }
+                if(TD.T=='speedUpIfResources'){
+                    if(O.Res[ TD.wantedRes ].R >= TD.wantedResR)
+                        this.changeSpeedLvl(O,TD.gotoSpeed);
+                    continue;
+                }
+
                 if(TD.T=='stayInRegion'){
                     var uX = TD.X - O.x;
                     var uY = TD.Y - O.y;
@@ -3009,7 +3043,7 @@ function GAMEobject(){
                 if(TD.T=='lowerAlarmLvl' && ((this.tick - O.lastSeenEnemy) < TD.minEnemyDontSeen)) continue;
 
 
-                // Dodajemy Akcj�
+                // Dodajemy Akcję
                 if(TD.T=='stayInRegion'){
                     O.Manouver = 'goToXY';
                     O.goToX = TD.X;
@@ -3098,7 +3132,6 @@ function GAMEobject(){
                 break;
             }
         }
-
 
         // Wykonujemy zadanie
         switch(O.Manouver){
@@ -3199,6 +3232,13 @@ function GAMEobject(){
                     WP.lastShot = this.tick;
                 }
 
+                if(WP.t == 'misslesDouble'){
+                    this.shootMissle(o,PlayerAngle - 20,15,150);
+                    this.shootMissle(o,PlayerAngle- -20,15,150);
+                    O.Res[ WP.usedRes ].R -= WP.usedResR;
+                    WP.lastShot = this.tick;
+                }
+
                 if(WP.t=='rose'){
                     for(var i = -parseInt(WP.AtOnce/2); i<= parseInt(WP.AtOnce/2); ++i)
                         this.shootBullet(o,PlayerAngle-i*WP.RoseAngle,WP.Speed,WP.Dec,WP.Power);
@@ -3216,7 +3256,6 @@ function GAMEobject(){
                 if(WP.t=='produceSquad'){
                     do{
                         var weMadeSomething = false;
-
                         var iUnset = false;
                         for(var i=0; i < O.squadScheme.length; ++i)
                             if(O.squadScheme[i].Oid == -1){
@@ -3232,21 +3271,16 @@ function GAMEobject(){
                             if(O.Res[ WP.usedRes ].R < WP.usedResR) break;
                             weMadeSomething = true;
                         }
-
                     }while(weMadeSomething);
-
                 }
-
                 if(WP.t=='healSquad'){
                     do{
                         var weMadeSomething = false;
-
                         var iLowLife = false, lowLifeMin = 999;
                         for(var i=0; i < O.squadScheme.length; ++i)
                             if(O.squadScheme[i].type == 'shieldBlob')
                                 if(O.squadScheme[i].Oid != -1){
                                     var oS = this.O[ O.squadScheme[i].Oid ];
-                                    console.log(oS.life+' '+oS.lifeM+' '+lowLifeMin);
                                     if( oS.life < lowLifeMin && oS.life < oS.lifeM){
                                         lowLifeMin = oS.life;
                                         iLowLife = i;
@@ -3421,9 +3455,9 @@ function GAMEobject(){
                 }
                 if(O.toDo=='missleShoot' && O.ammo==0)    this.shootMissle(o,O.angle- -30,15,150);
                 if(O.toDo=='missleShoot' && O.ammo==8)    this.shootMissle(o,O.angle- -15,15,150);
-                if(O.toDo=='missleShoot' && O.ammo==16)    this.shootMissle(o,O.angle       ,15,150);
-                if(O.toDo=='missleShoot' && O.ammo==24)    this.shootMissle(o,O.angle    -15,15,150);
-                if(O.toDo=='missleShoot' && O.ammo==32)    this.shootMissle(o,O.angle    -30,15,150);
+                if(O.toDo=='missleShoot' && O.ammo==16)    this.shootMissle(o,O.angle    ,15,150);
+                if(O.toDo=='missleShoot' && O.ammo==24)    this.shootMissle(o,O.angle -15,15,150);
+                if(O.toDo=='missleShoot' && O.ammo==32)    this.shootMissle(o,O.angle -30,15,150);
             break; case 'juggernaut':
                 if(O.toDo!='follow' && Dist < 400 && O.ammo > 50){
                     O.toDo='follow';
