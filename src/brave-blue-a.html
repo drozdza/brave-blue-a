@@ -213,6 +213,7 @@ ObjectPutDatas={
         lastSeenEnemy: -1,
         radius: 15,
 
+        res:{},
         toDo:[],
         doingTime: -1,
         Manouver: 'goStraight',
@@ -348,14 +349,12 @@ ObjectPutDatas={
         viewHitPattern: 'HullFire_20',
         lifeM: 3,
 
-        jump: 3,
-        jumpM: 3,
-        jumpT: 0,
+        res: {'jump': {R:3,M:3,T:0}},
 
         spotLvl: 2,
 
         weapon:[
-            {t:'refilJumps', jumpA: 300, jumpM: 3, maxSpeed: 2, doNextWeapon: true},
+            {t:'refilResource', resource: 'jump', resA: 300, maxSpeed: 2, doNextWeapon: true},
             {t:'double2', Power:1, Dec: 35, Speed: 12, gunSpeed: 20, lastShot: 100, maxSpeed: 2, minAlarm: 5},
         ],
 
@@ -657,6 +656,7 @@ SHIPpresets={
         KeysModules:{69:[0]},
         FireType: 0,
         FireType2: 1,
+        res:{},
         MouseDown1: false,
         MouseDown2: false,
         FireTypes:[
@@ -683,6 +683,7 @@ SHIPpresets={
         KeysModules:{69:[0,1],82:[11],84:[2],81:[4],70:[5]},
         FireType: 0,
         FireType2: 3,
+        res:{},
         MouseDown1: false,
         MouseDown2: false,
         FireTypes:[
@@ -700,8 +701,8 @@ SHIPpresets={
         Weight: 25,
         life: 11,
         lifeM: 11,
-        EnergyFieldMax: 22,
-        EnergyM: 40,
+        EnergyFieldMax: 10,
+        EnergyM: 32,
         SpeedM: 20,
         AmmoStorage: 50,
         Ammo: 0,
@@ -717,6 +718,7 @@ SHIPpresets={
         KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
         FireType: 0,
         FireType2: 8,
+        res:{},
         MouseDown1: false,
         MouseDown2: false,
         FireTypes:[
@@ -731,7 +733,7 @@ SHIPpresets={
             {T:'tele',    gunS:0,GunSpeed: 3, Speed: 400, Dec: 1},
         ],
         Modules:[
-            {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,ProdX:1,E:0,Prod:0,ifProd:2 },
+            {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,ProdX:1,E:0,Prod:0,ifProd:30 },
             {T:'spotRegion',Disabled:1,Emin:4,Emax:4,ProdX:1,E:0,Prod:0,ifProd:1 },
             {T:'teleProd',  Disabled:0,Emin:2,Emax:4,ProdX:4,E:0,Prod:0,ifProd:60, TeleLoad: 0, TeleLoadM: 6 },
             {T:'bulletProd',Disabled:0,Emin:2,Emax:4,ProdX:4,E:0,Prod:0,ifProd:40 },
@@ -3313,9 +3315,9 @@ function GAMEobject(){
             if(q) this.removeObj(q);
             return true;
         }
-        if(O.jump > 0){
+        if(O.res && O.res['jump'] && O.res['jump'].R > 0){
             if(this.teleportJump(o,170,Math.random()*360)){
-                --O.jump;
+                --O.res['jump'].R;
                 this.checkHits(o);
                 this.removeObj(q);
             }
@@ -5131,15 +5133,15 @@ function GAMEobject(){
                     WP.lastShot = this.tick;
                 }
 
-                if(WP.t=='refilJumps'){
-                    if(++O.jumpT >= WP.jumpA){
-                        if(++O.jump > WP.jumpM)
-                            O.jump = WP.jumpM;
-                        O.jumpT=0;
+                if(WP.t=='refilResource'){
+                    if(++O.res[WP.resource].T >= WP.resA){
+                        if(++O.res[WP.resource].R > O.res[WP.resource].M)
+                            O.res[WP.resource].R = O.res[WP.resource].M;
+                        O.res[WP.resource].T = 0;
                     }
                 }
 
-//                      weapon: [{t:'produceSquad', gunSpeed: 2, lastShot: 0, squadType: 'shieldBlob', shieldBlobMaxHp: 6, maxSpeed: 2}],
+                // weapon: [{t:'produceSquad', gunSpeed: 2, lastShot: 0, squadType: 'shieldBlob', shieldBlobMaxHp: 6, maxSpeed: 2}],
 
                 if(WP.t=='produceSquad'){
                     for(var i=0; i< O.squadScheme.length; ++i){
