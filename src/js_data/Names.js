@@ -28,7 +28,7 @@ NAMES.ModName = {
     radar:      'Radar',
     bulletProd: 'Bullets',
     bombProd:   'Bombs',
-    missleProd: 'Missles',
+    missleProd: 'Missiles',
     laserProd:  'Laser',
     teleProd:   'Teleport',
     spotRegion: '<div class="smaller_title">Ships Spot</div>',

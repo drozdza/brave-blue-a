@@ -376,6 +376,26 @@ function GAMEobject(){
         ];
         return O;
     }
+    this.putObj_hajaher = function(O){
+        O.speedLvl = 2;
+        O.speed = 5- -Math.random()*4;
+        O.speedT    = 2- -Math.random()*2;
+        O.speedArr = [0,
+            {S: O.speed-4, T:O.speedT- -1.5},
+            {S: O.speed, T:O.speedT},
+            {S: O.speed- -3, T:O.speedT}
+        ];
+
+        var spotRad1 = 80- -parseInt(Math.random()*80);
+        var spotRad2 = 300- -parseInt(Math.random()*200);
+        O.spotTick = 8;
+        O.spotArr=[0,
+            { T: 'single', Ref: 15, Rad: spotRad1},
+            { T: 'double', Ref: 10, Rad: spotRad1, Rad2: spotRad2, Angle2: 30- -parseInt(Math.random()*30)},
+            { T: 'single', Ref: 45, Rad: spotRad2}
+        ];
+        return O;
+    }
     this.putObj_muerto = function(O){
         O.speedLvl = 2;
         O.speed = 3;
@@ -471,6 +491,7 @@ function GAMEobject(){
         if(Type=='iskariot') O = this.putObj_iskariot(O);
         if(Type=='dandares') O = this.putObj_dandares(O);
         if(Type=='dregos')   O = this.putObj_dregos(O);
+        if(Type=='hajaher')  O = this.putObj_hajaher(O);
 
         if(O.TT=='enemy'){
             Enemy=' enemy';
@@ -566,10 +587,6 @@ function GAMEobject(){
         if(Type=='cloacker'){
             O.speedM    = O.speed    = 6;
             O.speedT    = 4;
-        }
-        if(Type=='hajaher'){
-            O.speedM    = O.speed    = 5- -4*Math.random();
-            O.speedT    = 2- -2*Math.random();
         }
         if(Type=='gargamon'){
             O.speedM    = O.speed = 2;
@@ -3010,7 +3027,7 @@ function GAMEobject(){
             O.doingTime = -1;
 
 
-        // Jak si� sko�czy czas to szukamy kolejnego zadania
+        // Jak się skończy czas to szukamy kolejnego zadania
         if((--O.doingTime) < 0){
 
             for(var toDo in O.toDo){
@@ -3216,11 +3233,16 @@ function GAMEobject(){
                 if(WP.gunSpeed > (this.tick-WP.lastShot)) continue;
                 if(WP.usedRes && O.Res[ WP.usedRes ].R < WP.usedResR) continue;
 
+                if(WP.t == 'getAcurateAngle'){
+                    var WU = this.countFutureShoot(0,O.x,O.y,WP.Speed,WP.Dec);
+                    if(WU.r)  PlayerAngle = WU.a;
+                }
 
                 if(WP.t == 'single'){
                     this.shootBullet(o,PlayerAngle,WP.Speed,WP.Dec,WP.Power);
                     WP.lastShot = this.tick;
                 }
+
                 if(WP.t == 'double'){
                     this.shootBulletOnSide(o,0,WP.Speed,WP.Dec,45,30,WP.Power);
                     this.shootBulletOnSide(o,0,WP.Speed,WP.Dec,-45,30,WP.Power);
@@ -3385,21 +3407,6 @@ function GAMEobject(){
                         this.shootMissle(o, (Angle- -Pe[iki])%360, (12-parseInt(iki/2)*2),(95- -parseInt(iki/2)*20),(6-parseInt(iki/2)));
                     O.ammo=0;
                 }
-            break; case 'iskariot':
-                if(++O.jumpT >= O.jumpA){
-                    O.jumpT = 0;
-                    ++O.jump;
-                    if(O.jump > O.jumpM) O.jump = O.jumpM;
-                }
-                if(Dist < 400 && O.ammo > 20){
-                    if(O.toDo!='follow' && O.doSquad==-1){
-                        O.toDo='follow';
-                        O.dec=300;
-                    }
-                    this.shootBulletOnSide2(o,0,12,35,45,5,1);
-                    this.shootBulletOnSide2(o,0,12,35,-45,5,1);
-                    O.ammo=0;
-                }
             break; case 'warastein':
                 if(Dist < 400 && O.ammo > 140){
                     O.toDo = 'rest';
@@ -3485,56 +3492,6 @@ function GAMEobject(){
                     this.dropSpaceMine(o);
                     O.ammo=0;
                 }
-            break; case 'space_mine':
-                if(O.toDo=='doExplode' && O.dec < 1){
-                    this.explodeBomb(o,O.onHit);
-                    return true;
-                }
-                if(O.toDo=='wait' && O.dec > 0){
-                    O.speed-=1;
-                    if(O.speed < 1){
-                        delete this.Omoving[o];
-                        O.toDo=0;
-                    }
-                }
-                if(O.dec < 0 && O.toDo!='doExplodeX' && Dist < 100){
-                  //  $('#O_'+o).addClass('detecting');
-                    O.toDo='doExplodeX';
-                }
-                else if(O.toDo=='doExplodeX' && Dist >=100){
-                  //  $('#O_'+o).removeClass('detecting');
-                }
-                if(O.toDo!='wait' && Dist < 30){
-                    this.explodeBomb(o);
-                    return true;
-                }
-            break; case 'bullet_bomb':
-                if(O.S == 1){
-                    if((Dist < 15 || O.dec < 0))
-                        this.explodeBomb(o);
-                }else{
-                    if(O.dec < 0)
-                        this.explodeBomb(o);
-                    else{
-                        var bomI,bomJ,bomT,bomt,bomoX,bomoY,bomE;
-                        var bomX = parseInt(O.x/this.MapTileSize)- -1;
-                        var bomY = parseInt(O.y/this.MapTileSize)- -1;
-                        for(bomI=0; bomI<2; ++bomI)
-                            for(bomJ=0; bomJ<2; ++bomJ){
-                                bomE=(bomX-bomI)+'_'+(bomY-bomJ);
-                                if(typeof this.Omap[bomE] != 'undefined'){
-                                    bomT = this.Omap[bomE];
-                                    for(bomt in bomT)if(typeof this.O[bomt] !='undefined'){
-                                        bomoX = this.O[bomt].x-O.x;
-                                        bomoY = this.O[bomt].y-O.y;
-                                        if((this.O[bomt].radius- -O.radius) > Math.sqrt(bomoX*bomoX- -bomoY*bomoY)){
-                                            this.explodeBomb(o);
-                                        }
-                                    }
-                                }
-                            }
-                    }
-                }
             break; case 'orhenes':
                 if(Dist < 400 && O.ammo > 2000){
                     for(var i=0; i<8; ++i){
@@ -3557,17 +3514,6 @@ function GAMEobject(){
                         }
 
                     }
-                }
-            break; case 'dregos':
-                if(O.toDo!='rest' && Dist < 400 && O.ammo > 140){
-                    var Angle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
-                    if(O.toDo!='follow' && O.doSquad==-1){
-                        O.toDo='follow';
-                        O.dec=400;
-                    }
-                    this.shootMissle(o,Angle-20,15,150);
-                    this.shootMissle(o,Angle- -20,15,150);
-                    O.ammo=0;
                 }
             break; case 'vitotas':
                 if(O.toDo!='follow' && O.toDo!='aimLaser' && O.doSquad==-1 && Dist < 400){
@@ -3654,52 +3600,6 @@ function GAMEobject(){
                 if(DistE < this.O[O.target].radius){
                     this.healObj(O.target,1,o);
                 }
-            break;
-            break; case 'dandares':
-                // add Shield
-                if(O.ammo > O.shieldAmmo){
-                    for(var q in O.shieldArr){
-                        if(O.shieldArr[q].L < O.shieldMax){
-                            if(++O.shieldArr[q].L == 1){
-                                var OBJid = this.putObj('dandares_shield','moving',O.S,O.x,O.y);
-                                this.O[ OBJid ].DandaresId = o;
-                                this.O[ OBJid ].lifeM = O.shieldMax;
-                                this.O[ OBJid ].DandaresNum = q;
-                                O.shieldArr[q].id = OBJid;
-                            } else{
-                                var sO = this.O[ O.shieldArr[q].id ];
-                              //  $('#O_'+O.shieldArr[q].id).removeClass('life'+((sO.life/sO.lifeM).toFixed(1)*100));
-                                sO.life = O.shieldArr[q].L;
-                              //  $('#O_'+O.shieldArr[q].id).addClass('life'+((sO.life/sO.lifeM).toFixed(1)*100));
-                            }
-                            O.ammo = 0;
-                            break;
-                        }
-                    }
-                }
-                // move Shields
-                for(var q in O.shieldArr)
-                    if(O.shieldArr[q].id!=-1){
-                        var sO = this.O[ O.shieldArr[q].id ];
-                        sO.x = O.x- -O.shieldArr[q].eR * Math.sin( ((parseInt(-O.angle-O.shieldArr[q].eQ)- -720)%360)*(Math.PI/180));
-                        sO.y = O.y- -O.shieldArr[q].eR * Math.cos( ((parseInt(-O.angle-O.shieldArr[q].eQ)- -720)%360)*(Math.PI/180));
-                        sO.angle = O.angle;
-                        sO.speed = O.speed;
-                    }
-            break; case 'dandares_shield':
-                if(O.toDo=='decay')
-                    if(O.dec==1){
-                        O.speed-=1;
-
-                        if(O.life > 0){
-                          //  $('#O_'+o).removeClass('life'+((O.life/O.lifeM).toFixed(1)*100));
-                            O.life-=1;
-                            CanvasManager.requestCanvas( o );
-                          //  $('#O_'+o).addClass('life'+((O.life/O.lifeM).toFixed(1)*100));
-                        }
-                        if(O.life<=0)    this.removeObj(o);
-                            else        O.dec=10;
-                    }
             break; case 'hiacynt':
                 if(Dist < 500 && O.toDo!='follow' && O.toDo!='rest' && O.toDo!='attack' && O.doSquad==-1){
                     O.toDo = 'follow';
