@@ -485,7 +485,7 @@ function GAMEobject(){
     }
     this.putObj_iskariot = function(O){
         O.speedLvl = 2;
-        O.speed = 3;
+        O.speed =  7 - Math.random()*1.5;
         O.speedT  = 2.5- -Math.random();
         O.speedArr = [0,
             {S: O.speed-5, T:O.speedT- -0.6},

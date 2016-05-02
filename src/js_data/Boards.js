@@ -142,5 +142,8 @@ BOARDS={
     'SuperSecure':{MapRadius:1000,MapRadius2:1000,O:{ F: 10, K:10, Q:1, A:10, Star: 10}},
     'Followers':{MapRadius:2700,MapRadius2:3200,O:{  U:10, A:10, S:10, V:10, Star: 100}},
     'BigOnes':{MapRadius:2700,MapRadius2:3200,O:{  Q:10, F:10, K:10, D:10, G:10, J:10, W:10, Star: 100}},
-    'HardCore':{MapRadius:2700,MapRadius2:3200,O:{ M:10, T:10, B:10, N:20, Q:4, U:10, A:12, K:10, F:10, C:10, G:4, S:10, D:10, J:6, V:10, E:10, H:10, R:10, W:4, I:10, Star: 100}},
+    '*HardCore':{
+        BoardMods:['sitOnMap'],
+        Place:[{Random:{X: 0, Y: 0, Radius: 2800}, What:{Star:120, A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5}}],
+    },
 };

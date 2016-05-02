@@ -338,8 +338,8 @@ ObjectPutDatas={
         viewHitPattern: 'HullFire_20',
         lifeM: 3,
 
-
         spotLvl: 2,
+
         jump: 3,
         Res: {'jump': {M:3,T:0}},
         weapon:[
@@ -410,7 +410,7 @@ ObjectPutDatas={
         Res: {'misslePack': {M:6,T:0}},
         weapon:[
             {t:'refilResource', resource: 'misslePack', gunSpeed: 90, maxSpeed: 1, doNextWeapon: true},
-            {t:'misslesDouble', gunSpeed: 140, lastShot: 100, usedRes: 'misslePack', usedResR: 1, maxSpeed: 2, minAlarm: 5},
+            {t:'misslesDouble', gunSpeed: 140, lastShot: 100, usedRes: 'misslePack', usedResR: 1, minSpeed: 2, minAlarm: 5},
         ],
 
         AlarmLvl: 2,
