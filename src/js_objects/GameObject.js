@@ -524,6 +524,27 @@ function GAMEobject(){
         return O;
 
     }
+    this.putObj_tartaros = function(O){
+        O.speedLvl = 2;
+        O.speed =  5;
+        O.speedT  = 6;
+        O.speedArr = [0,
+            {S: O.speed-3, T:O.speedT-3},
+            {S: O.speed, T:O.speedT},
+            {S: O.speed- -2, T:O.speedT}
+        ];
+
+        var spotRad1 = 80- -parseInt(Math.random()*80);
+        var spotRad2 = 300- -parseInt(Math.random()*200);
+        O.spotTick = 8;
+        O.spotArr=[0,
+            { T: 'single', Ref: 15, Rad: spotRad1},
+            { T: 'double', Ref: 10, Rad: spotRad1, Rad2: spotRad2, Angle2: 30- -parseInt(Math.random()*30)},
+            { T: 'single', Ref: 45, Rad: spotRad2}
+        ];
+        return O;
+    }
+
 
     this.putObj = function(Type,Mode,Side,x,y){
         if(typeof x === "undefined"){
@@ -558,6 +579,7 @@ function GAMEobject(){
         if(Type=='nemezis')    O = this.putObj_nemezis(O);
         if(Type=='juggernaut') O = this.putObj_juggernaut(O);
         if(Type=='warastein')  O = this.putObj_warastein(O);
+        if(Type=='tartaros')   O = this.putObj_tartaros(O);
 
         if(O.TT=='enemy'){
             Enemy=' enemy';
@@ -604,10 +626,6 @@ function GAMEobject(){
         // Map Objs: B-Bullets, BE-BulletsE, P-Player, M-Missles, E-Enemies, ME-MisslesE, R-Regions, D-Dead
 
 
-        if(Type=='tartaros'){
-            O.speedM    = O.speed    = 5;
-            O.speedT    = 6;
-        }
         if(Type=='edison'){
             O.speedM    = O.speed    = 3;
             O.speedT    = 6;
@@ -2999,6 +3017,7 @@ function GAMEobject(){
         O.speedT = O.speedArr[ speedLvl ].T;
     }
     this.makeAction = function(O,Action){
+        if(Action.doingNow) O.doingNow = Action.doingNow;
         if(Action.doingTime) O.doingTime = Action.doingTime;
         if(Action.Manouver)  O.Manouver = Action.Manouver;
         if(Action.gotoSpeed) this.changeSpeedLvl(O, Action.gotoSpeed);
@@ -3289,6 +3308,7 @@ function GAMEobject(){
                 if(WP.minSpeed && WP.minSpeed > O.speedLvl) continue;    // Czy w ogóle kiedyś użyjemy tego?
                 if(WP.minDistToEnemy && WP.minDistToEnemy < PlayerDist) continue;
                 if(WP.gunSpeed > (this.tick-WP.lastShot)) continue;
+                if(WP.doingNow && WP.doingNow != O.doingNow) continue;
                 if(WP.usedRes && O[ WP.usedRes ] < WP.usedResR) continue;
 
 
@@ -3301,7 +3321,6 @@ function GAMEobject(){
                     this.shootBullet(o,PlayerAngle,WP.Speed,WP.Dec,WP.Power);
                     WP.lastShot = this.tick;
                 }
-
                 if(WP.t == 'double'){
                     this.shootBulletOnSide(o,0,WP.Speed,WP.Dec,45,30,WP.Power);
                     this.shootBulletOnSide(o,0,WP.Speed,WP.Dec,-45,30,WP.Power);
@@ -3312,7 +3331,6 @@ function GAMEobject(){
                     this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,-45,5,WP.Power);
                     WP.lastShot = this.tick;
                 }
-
                 if(WP.t == 'rose'){
                     for(var i = -parseInt(WP.AtOnce/2); i<= parseInt(WP.AtOnce/2); ++i)
                         this.shootBullet(o,PlayerAngle-i*WP.RoseAngle,WP.Speed,WP.Dec,WP.Power);
@@ -3341,6 +3359,10 @@ function GAMEobject(){
                             O[WP.resource] = O.Res[WP.resource].M;
                         O.Res[WP.resource].T = 0;
                     }
+                }
+                if(WP.t == 'changeAction'){
+                    this.makeAction(O,WP.makeAction);
+                    WP.lastShot = this.tick;
                 }
 
                 if(WP.t == 'produceSquad'){
@@ -3465,16 +3487,6 @@ function GAMEobject(){
                     this.makeDMG(0,O.FieldPower);
                     O.ammo=0;
                   //  $('#O_'+o+' .edisonField').addClass('edisonHit hit_'+parseInt(this.tick/100));
-                }
-            break; case 'tartaros':
-                if(Dist < 400 && O.ammo > 100){
-                    this.shootBulletOnSide(o,0,12,35,45,30,1);
-                    this.shootBulletOnSide(o,0,12,35,-45,30,1);
-                    O.ammo=0;
-                }
-                if(O.ammo < 10){
-                    this.shootBulletOnSide(o,0,12,35,45,30,1);
-                    this.shootBulletOnSide(o,0,12,35,-45,30,1);
                 }
             break; case 'gargamon':    // how Squad?
                 if(O.toDo!='goFollow' && O.toDo!='missleShoot' && Dist < 400 && O.ammo > 150){

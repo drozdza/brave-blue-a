@@ -368,6 +368,21 @@ ObjectPutDatas={
         viewHitPattern: 'HullFire_40',
         lifeM: 9,
         radius: 27,
+
+        spotLvl: 2,
+
+        weapon:[
+            {t:'double', Speed:12, Dec:30, Power:1, doingNow:'shooting', gunSpeed:1,  maxSpeed:2},
+            {t:'changeAction', makeAction: {Manuover:'goStraight', doingNow:'shooting', doingTime:10}, gunSpeed: 110, lastShot: 100,  minAlarm: 5, minDistToEnemy: 400}],
+
+        AlarmLvl: 2,
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70}
+        ],
+
     },
     belzebub:{
         viewLetter: 'B',

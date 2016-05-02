@@ -1,4 +1,5 @@
 BOARDS={
+    'Start':{MapRadius:600,MapRadius2:2400,O:{ K:1, Star: 300}},
     'u1':{
         MapRadius:60,MapRadius2:2400,
         BoardMods:['sitOnMap','allAvoid'],
@@ -126,7 +127,14 @@ BOARDS={
         BoardMods:['sitOnMap'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, W: 5}}],
     },
-    'Start':{MapRadius:600,MapRadius2:2400,O:{ K:1, Star: 300}},
+    '*T':{
+        BoardMods:['sitOnMap'],
+        Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, T: 10}}],
+    },
+    '*HardCore':{
+        BoardMods:['sitOnMap','allAvoid'],
+        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5,T:10}}],
+    },
     'Q':{MapRadius:1000,MapRadius2:1000,O:{ Q: 3, Star: 10}},
     'T':{MapRadius:1000,MapRadius2:1000,O:{ T: 10, Star: 10}},
     'B':{MapRadius:1000,MapRadius2:1000,O:{ B: 115, Star: 10}},
@@ -142,8 +150,5 @@ BOARDS={
     'SuperSecure':{MapRadius:1000,MapRadius2:1000,O:{ F: 10, K:10, Q:1, A:10, Star: 10}},
     'Followers':{MapRadius:2700,MapRadius2:3200,O:{  U:10, A:10, S:10, V:10, Star: 100}},
     'BigOnes':{MapRadius:2700,MapRadius2:3200,O:{  Q:10, F:10, K:10, D:10, G:10, J:10, W:10, Star: 100}},
-    '*HardCore':{
-        BoardMods:['sitOnMap'],
-        Place:[{Random:{X: 0, Y: 0, Radius: 2800}, What:{Star:120, A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5}}],
-    },
+
 };
