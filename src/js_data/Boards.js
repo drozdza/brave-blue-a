@@ -92,51 +92,39 @@ BOARDS={
     },
     '*A':{
         BoardMods:['sitOnMap','allAvoid'],
-        Place:[
-            {Random:{X: 200, Y: 200, Radius: 200}, What:{Star: 5, A: 25}},
-        ],
+        Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 5, A: 25}}],
     },
     '*U':{
         BoardMods:['sitOnMap','allAvoid'],
-        Place:[
-            {Random:{X: 200, Y: 200, Radius: 200}, What:{Star: 5, U: 6}},
-        ],
+        Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 5, U: 6}}],
     },
     '*S':{
         BoardMods:['sitOnMap','allAvoid'],
-        Place:[
-            {Random:{X: 300, Y: 0, Radius: 200}, What:{Star: 5, S: 8}},
-        ],
+        Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 5, S: 8}}],
     },
     '*I':{
         BoardMods:['sitOnMap','allAvoid'],
-        Place:[
-            {Random:{X: 200, Y: 200, Radius: 200}, What:{Star: 20, I: 20}},
-        ],
+        Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, I: 20}}],
     },
     '*D':{
         BoardMods:['sitOnMap','allAvoid'],
-        Place:[
-            {Random:{X: 200, Y: 200, Radius: 200}, What:{Star: 20, D: 10, M: 5, A: 5}},
-        ],
+        Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, D: 10, M: 5, A: 5}}],
     },
     '*M':{
         BoardMods:['sitOnMap'],
-        Place:[
-            {Random:{X: 200, Y: 200, Radius: 200}, What:{Star: 20, M: 15}},
-        ],
+        Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, M: 15}}],
     },
     '*N':{
         BoardMods:['sitOnMap'],
-        Place:[
-            {Random:{X: 200, Y: 200, Radius: 200}, What:{Star: 20, N: 15}},
-        ],
+        Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, N: 15}}],
     },
     '*J':{
         BoardMods:['sitOnMap'],
-        Place:[
-            {Random:{X: 200, Y: 200, Radius: 200}, What:{Star: 20, J: 5}},
-        ],
+        Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, J: 5}}],
+    },
+    '*W':{
+        BoardMods:['sitOnMap'],
+        Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, W: 5}}],
     },
     'Start':{MapRadius:600,MapRadius2:2400,O:{ K:1, Star: 300}},
     'Q':{MapRadius:1000,MapRadius2:1000,O:{ Q: 3, Star: 10}},
@@ -149,7 +137,6 @@ BOARDS={
     'V':{MapRadius:1100,MapRadius2:1100,O:{ V: 10, Star: 50}},
     'E':{MapRadius:1100,MapRadius2:1100,O:{ E: 10, Star: 10}},
     'H':{MapRadius:1100,MapRadius2:1100,O:{ H: 10, T:10, Star: 10}},
-    'W':{MapRadius:1100,MapRadius2:1100,O:{ W: 10, K:2, Star: 10}},
     'R':{MapRadius:1500,MapRadius2:1800,O:{ R: 10, Star: 10}},
     'ShieldTest':{MapRadius:1500,MapRadius2:1500,GiveEnergyFields:25,O:{ F: 2, U:2, Q:1, T:2, K:1,C:1,B:1,N:1,M:1, A:5, Star: 20}},
     'SuperSecure':{MapRadius:1000,MapRadius2:1000,O:{ F: 10, K:10, Q:1, A:10, Star: 10}},

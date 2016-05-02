@@ -462,6 +462,27 @@ function GAMEobject(){
 
         return O;
     }
+    this.putObj_warastein = function(O){
+        O.speedLvl = 2;
+        O.speed = 7;
+        O.speedT = 3;
+        O.speedArr = [0,
+            {S: 3, T: 4},
+            {S: O.speed, T:O.speedT},
+            {S: O.speed, T:O.speedT}
+        ];
+
+        var spotRad1 = 120- -parseInt(Math.random()*80);
+        var spotRad2 = 300- -parseInt(Math.random()*200);
+        O.spotTick = 8;
+        O.spotArr=[0,
+            { T: 'single', Ref: 15, Rad: spotRad1},
+            { T: 'double', Ref: 10, Rad: spotRad1, Rad2: spotRad2, Angle2: 30- -parseInt(Math.random()*30)},
+            { T: 'single', Ref: 45, Rad: spotRad2}
+        ];
+
+        return O;
+    }
     this.putObj_iskariot = function(O){
         O.speedLvl = 2;
         O.speed = 3;
@@ -536,6 +557,7 @@ function GAMEobject(){
         if(Type=='hajaher')    O = this.putObj_hajaher(O);
         if(Type=='nemezis')    O = this.putObj_nemezis(O);
         if(Type=='juggernaut') O = this.putObj_juggernaut(O);
+        if(Type=='warastein')  O = this.putObj_warastein(O);
 
         if(O.TT=='enemy'){
             Enemy=' enemy';
@@ -598,10 +620,6 @@ function GAMEobject(){
         if(Type=='royale'){
             O.speedM    = O.speed    = 3;
             O.speedT    = 2;
-        }
-        if(Type=='warastein'){
-            O.speedM    = O.speed    = 7;
-            O.speedT    = 4;
         }
         if(Type=='hiacynt'){
             O.speedM    = O.speed    = 5;
@@ -2285,7 +2303,6 @@ function GAMEobject(){
         this.O[L].angle = Angle;
 
         this.O[L].onHit = this.O[L].onDie = this.O[L].onExpire = {Do:'explode',Power: 7, Dist: 80};
-
     }
     this.shipShootLaser = function(Distance,Damage){
         var O = this.O[0];
@@ -2981,6 +2998,12 @@ function GAMEobject(){
         O.speed = O.speedArr[ speedLvl ].S;
         O.speedT = O.speedArr[ speedLvl ].T;
     }
+    this.makeAction = function(O,Action){
+        if(Action.doingTime) O.doingTime = Action.doingTime;
+        if(Action.Manouver)  O.Manouver = Action.Manouver;
+        if(Action.gotoSpeed) this.changeSpeedLvl(O, Action.gotoSpeed);
+    }
+
 
     this.decide = function(o){
         var O = this.O[o];
@@ -3066,6 +3089,7 @@ function GAMEobject(){
                 // Sprawdzamy Czy akcja się nadaje
                 if(TD.minAlarm && TD.minAlarm > O.AlarmLvl) continue;
                 if(TD.maxAlarm && TD.maxAlarm < O.AlarmLvl) continue;
+                if(TD.maxSpeedLvl && TD.maxSpeedLvl < O.speedLvl) continue;
                 if(TD.minSpeedLvl && TD.minSpeedLvl > O.speedLvl) continue;
                 if(TD.gotHitFlag && O.gotHitFlag===false) continue;
                 if(TD.incomingFireFlag && O.incomingFireFlag===false) continue;
@@ -3079,6 +3103,11 @@ function GAMEobject(){
                 if(TD.T=='speedUpIfResources'){
                     if(O[ TD.wantedRes ] >= TD.wantedResR)
                         this.changeSpeedLvl(O,TD.gotoSpeed);
+                    continue;
+                }
+
+                if(TD.T=='speedUp'){
+                    this.changeSpeedLvl(O,TD.gotoSpeed);
                     continue;
                 }
 
@@ -3097,7 +3126,6 @@ function GAMEobject(){
                     O.goToY = TD.Y;
                     O.doingTime = 160;
                 }
-
 
                 if(TD.T=='alarmAboutSpottedEnemy'){
                     this.alarmAround(o,TD.alarmRadius,'spotEnemyFlag');
@@ -3258,10 +3286,11 @@ function GAMEobject(){
                 if(WP.minAlarm && WP.minAlarm > O.AlarmLvl) continue;
                 if(WP.maxAlarm && WP.maxAlarm < O.AlarmLvl) continue;
                 if(WP.maxSpeed && WP.maxSpeed < O.speedLvl) continue;
-                if(WP.minSpeed && WP.minSpeed > O.speedLvl) continue;    // Czy w og�le kiedy� u�yjemy tego?
+                if(WP.minSpeed && WP.minSpeed > O.speedLvl) continue;    // Czy w ogóle kiedyś użyjemy tego?
                 if(WP.minDistToEnemy && WP.minDistToEnemy < PlayerDist) continue;
                 if(WP.gunSpeed > (this.tick-WP.lastShot)) continue;
                 if(WP.usedRes && O[ WP.usedRes ] < WP.usedResR) continue;
+
 
                 if(WP.t == 'getAcurateAngle'){
                     var WU = this.countFutureShoot(0,O.x,O.y,WP.Speed,WP.Dec);
@@ -3303,6 +3332,7 @@ function GAMEobject(){
                     if(WP.BombRandom) bombData = O.Bombs[ parseInt(Math.random()*WP.BombRandom) ];
                     this.shootBomb(o,PlayerAngle,WP.Speed,WP.Dec,bombData);
                     WP.lastShot = this.tick;
+                    if(WP.makeAction) this.makeAction(O,WP.makeAction);
                 }
 
                 if(WP.t == 'refilResource'){
@@ -3426,23 +3456,6 @@ function GAMEobject(){
 
                     for(var iki=0; iki<8; ++iki)
                         this.shootMissle(o, (Angle- -Pe[iki])%360, (12-parseInt(iki/2)*2),(95- -parseInt(iki/2)*20),(6-parseInt(iki/2)));
-                    O.ammo=0;
-                }
-            break; case 'warastein':
-                if(Dist < 400 && O.ammo > 140){
-                    O.toDo = 'rest';
-                    O.dec = 30;
-                    O.speed = 3;
-                    var Angle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
-                    this.shootBomb(o,Angle        ,6,20,4,35);
-                    this.shootBomb(o,Angle- -7    ,8,23,4,35);
-                    this.shootBomb(o,Angle - 7    ,8,23,4,35);
-                    this.shootBomb(o,Angle- -15    ,10,26,4,35);
-                    this.shootBomb(o,Angle - 15    ,10,26,4,35);
-                    this.shootBomb(o,Angle         ,10,26,7,80);
-                    this.shootBomb(o,Angle- -15    ,12,29,7,80);
-                    this.shootBomb(o,Angle - 15    ,12,29,7,80);
-                    this.shootBomb(o,Angle         ,14,29,9,120);
                     O.ammo=0;
                 }
             break; case 'edison':

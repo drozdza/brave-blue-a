@@ -192,7 +192,7 @@ ObjectPutDatas={
         doingTime: -1,
         Manouver: 'goStraight',
         toDo: [
-            {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+            {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70},
         ],
     },
     warastein:{
@@ -203,6 +203,69 @@ ObjectPutDatas={
         viewHitPattern: 'HullFire_40',
         lifeM: 11,
         radius: 23,
+
+        spotLvl: 2,
+
+        Bombs:[{
+            onHit: {Do:'explode',Power: 4, Dist: 35},
+            onDie: {Do:'explode',Power: 4, Dist: 35},
+            onExpire: {Do:'explode',Power: 4, Dist: 35, Shards:[
+                {   Dec: 8, Speed: 7, Angle: -30,
+                    onHit: {Do:'explode',Power: 4, Dist: 35},
+                    onDie: {Do:'explode',Power: 4, Dist: 35},
+                    onExpire: {Do:'explode',Power: 4, Dist: 35, Shards:[
+                        {   Dec: 8, Speed: 7, Angle: -15,
+                            onHit: {Do:'explode',Power: 4, Dist: 35},
+                            onDie: {Do:'explode',Power: 4, Dist: 35},
+                            onExpire: {Do:'explode',Power: 4, Dist: 35, Shards:[
+                                {   Dec: 12, Speed: 5, Angle: 0,
+                                    onHit: {Do:'explode',Power: 4, Dist: 80},
+                                    onDie: {Do:'explode',Power: 4, Dist: 80},
+                                    onExpire: {Do:'explode',Power: 4, Dist: 80},
+                                }]
+                            },
+                        }]
+                    }
+                },{ Dec: 16, Speed: 7, Angle: 0,
+                    onHit: {Do:'explode',Power: 4, Dist: 80},
+                    onDie: {Do:'explode',Power: 4, Dist: 80},
+                    onExpire: {Do:'explode',Power: 4, Dist: 80, Shards:[
+                        {   Dec: 12, Speed: 7, Angle: 0,
+                            onHit: {Do:'explode',Power: 4, Dist: 120},
+                            onDie: {Do:'explode',Power: 4, Dist: 120},
+                            onExpire: {Do:'explode',Power: 4, Dist: 120},
+                        }]
+                    }
+                },{ Dec: 8, Speed: 7, Angle: 30,
+                    onHit: {Do:'explode',Power: 4, Dist: 35},
+                    onDie: {Do:'explode',Power: 4, Dist: 35},
+                    onExpire: {Do:'explode',Power: 4, Dist: 35, Shards:[
+                        {   Dec: 8, Speed: 7, Angle: 15,
+                            onHit: {Do:'explode',Power: 4, Dist: 35},
+                            onDie: {Do:'explode',Power: 4, Dist: 35},
+                            onExpire: {Do:'explode',Power: 4, Dist: 35, Shards:[
+                                {   Dec: 12, Speed: 5, Angle: 0,
+                                    onHit: {Do:'explode',Power: 4, Dist: 80},
+                                    onDie: {Do:'explode',Power: 4, Dist: 80},
+                                    onExpire: {Do:'explode',Power: 4, Dist: 80},
+                                }]
+                            },
+                        }]
+                    }
+                }
+            ]}
+        }],
+
+        weapon:[{t:'bomb', Speed: 10, Dec: 12, BombType: 0, gunSpeed: 140, lastShot: 100, maxSpeed: 2, makeAction: {Manuover: 'goStraight', doingTime:55, gotoSpeed:1}, minAlarm: 5, minDistToEnemy: 400}],
+
+        AlarmLvl: 2,
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:61,T:'speedUp', maxSpeedLvl: 1, gotoSpeed: 2},
+            {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70}
+        ],
     },
     dandares:{
         viewLetter: 'D',

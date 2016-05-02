@@ -6,6 +6,7 @@
 
             {N:67,T:'lowerSpeedForResources', minAlarm: 0, wantedRes: 'misslePack', wantedResR: 20, gotoSpeed: 1},
             {N:66,T:'speedUpIfResources', minAlarm: 0, wantedRes: 'misslePack', wantedResR: 20, gotoSpeed: 2},
+            {N:61,T:'speedUp', maxSpeedLvl: 1, gotoSpeed: 2},
 
             {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
             {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, goToAlarmLvl: 4, goToSpotLvl: 2},
