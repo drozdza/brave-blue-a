@@ -1,0 +1,436 @@
+
+GAMEobject.prototype.alarmAround = function(o,DistAlert,AlarmFlag){
+    var uO,X,Y,Dist,O = this.O[o];
+
+    for(var uo in this.Enemies) if(uo!=o){
+        uO = this.O[uo];
+        X = O.x-uO.x;
+        Y = O.y-uO.y;
+        Dist = Math.sqrt(X*X- -Y*Y);
+        if(Dist < DistAlert){
+            this.O[uo][AlarmFlag] = true;
+        }
+    }
+}
+GAMEobject.prototype.changeSpeedLvl = function(O,speedLvl){
+    O.speedLvl = speedLvl;
+    O.speed = O.speedArr[ speedLvl ].S;
+    O.speedT = O.speedArr[ speedLvl ].T;
+}
+GAMEobject.prototype.makeAction = function(O,Action){
+    if(Action.doingNow) O.doingNow = Action.doingNow;
+    if(Action.doingTime) O.doingTime = Action.doingTime;
+    if(Action.Manouver)  O.Manouver = Action.Manouver;
+    if(Action.gotoSpeed) this.changeSpeedLvl(O, Action.gotoSpeed);
+}
+
+
+GAMEobject.prototype.decide = function(o){
+    var O = this.O[o];
+    var P = this.O[0];
+    O.lastSpeedT = 0;
+
+    var X = O.x-P.x;
+    var Y = O.y-P.y;
+    var PlayerDist = Math.sqrt(X*X- -Y*Y);
+    var PlayerAngle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
+
+    // Spotting
+    if(O.spotLvl){
+        if(this.tick % (O.spotArr[ O.spotLvl ].Ref) == 0){
+            var SP = O.spotArr[ O.spotLvl ];
+            if((SP.T=='single' || SP.T=='double') && PlayerDist < SP.Rad){
+                O.spotEnemyFlag = true;
+            }
+            if(SP.T=='double' && !O.spotEnemyFlag){
+                var A = (PlayerAngle -O.angle- -720- -SP.Angle2)%360;
+                if(PlayerDist < SP.Rad2 && A < SP.Angle2*2){
+                    O.spotEnemyFlag = true;
+                }
+            }
+            // Szukamy grupy i pocisku
+            if(!O.awareAboutEnemy){
+                for(var U in this.Odead){
+                    var uX = O.x-this.Odead[U].x;
+                    var uY = O.y-this.Odead[U].y;
+                    var uDist = Math.sqrt(uX*uX- -uY*uY);
+                    var uAngle = parseInt(- (Math.atan2(uX,uY)*180/Math.PI))%360;
+                    if((SP.T=='single' || SP.T=='double') && uDist < SP.Rad){
+                        O.awareAboutEnemy = true;
+                        break;
+                    }
+                    if(SP.T=='double' && !O.spotEnemyFlag){
+                        var uA = (uAngle -O.angle- -720- -SP.Angle2)%360;
+                        if(uDist < SP.Rad2 && uA < SP.Angle2*2){
+                            O.awareAboutEnemy = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /*
+    O.spotEnemyFlag = false;
+    O.gotHitFlag = false;
+    O.heardExplosionFlag = false;
+    O.newOrderFlag = false;
+    O.incomingFireFlag = false;
+    O.awareAboutEnemy = false;
+    O.lastSeenEnemy = -1;
+    */
+    // Sprawdzamy czy flagi mog� przerwa� obecne zadanie
+    if(O.awareAboutEnemy && O.AlarmLvl < 3){
+        O.AlarmLvl = 4;
+        O.doingTime = -1;
+    }
+    if(O.spotEnemyFlag){
+        if(O.AlarmLvl < 5){
+            O.AlarmLvl = 5;
+            O.doingTime = -1;
+        }
+        O.lastSeenEnemy = this.tick;
+        O.awareAboutEnemy = true;
+    }
+
+    if(O.gotHitFlag==true && O.T!='avoidIncomingFire')
+        O.doingTime = -1;
+    if(O.incomingFireFlag==true && O.T!='avoidIncomingFire')
+        O.doingTime = -1;
+
+
+    // Jak się skończy czas to szukamy kolejnego zadania
+    if((--O.doingTime) < 0){
+
+        for(var toDo in O.toDo){
+            var TD = O.toDo[toDo];
+
+            // Sprawdzamy Czy akcja się nadaje
+            if(TD.minAlarm && TD.minAlarm > O.AlarmLvl) continue;
+            if(TD.maxAlarm && TD.maxAlarm < O.AlarmLvl) continue;
+            if(TD.maxSpeedLvl && TD.maxSpeedLvl < O.speedLvl) continue;
+            if(TD.minSpeedLvl && TD.minSpeedLvl > O.speedLvl) continue;
+            if(TD.gotHitFlag && O.gotHitFlag===false) continue;
+            if(TD.incomingFireFlag && O.incomingFireFlag===false) continue;
+
+
+            if(TD.T=='lowerSpeedForResources'){
+                if(O[ TD.wantedRes ] < TD.wantedResR)
+                    this.changeSpeedLvl(O,TD.gotoSpeed);
+                continue;
+            }
+            if(TD.T=='speedUpIfResources'){
+                if(O[ TD.wantedRes ] >= TD.wantedResR)
+                    this.changeSpeedLvl(O,TD.gotoSpeed);
+                continue;
+            }
+
+            if(TD.T=='speedUp'){
+                this.changeSpeedLvl(O,TD.gotoSpeed);
+                continue;
+            }
+
+            if(TD.T=='stayInRegion'){
+                var uX = TD.X - O.x;
+                var uY = TD.Y - O.y;
+                if(Math.sqrt(uX*uX- -uY*uY) < TD.Radius) continue;
+            }
+            if(TD.T=='lowerAlarmLvl' && ((this.tick - O.lastSeenEnemy) < TD.minEnemyDontSeen)) continue;
+
+
+            // Dodajemy Akcję
+            if(TD.T=='stayInRegion'){
+                O.Manouver = 'goToXY';
+                O.goToX = TD.X;
+                O.goToY = TD.Y;
+                O.doingTime = 160;
+            }
+
+            if(TD.T=='alarmAboutSpottedEnemy'){
+                this.alarmAround(o,TD.alarmRadius,'spotEnemyFlag');
+                continue;
+            }
+            if(TD.T=='alarmAboutIncomingFire'){
+                this.alarmAround(o,TD.alarmRadius,'incomingFireFlag');
+                continue;
+            }
+
+            if(TD.T=='changeManouver'){
+                var maxTurnTime = parseInt(180/O.speedT);
+                switch(parseInt(Math.random()*3)){
+                    case 0: O.Manouver = 'goStraight'; O.doingTime = TD.straightMin- -parseInt(Math.random()*TD.straightPlus); break;
+                    case 1: O.Manouver = 'turnRight';  O.doingTime = TD.turnMin- -parseInt(Math.random()*TD.turnPlus); if(O.doingTime > maxTurnTime) O.doingTime = maxTurnTime; break;
+                    case 2: O.Manouver = 'turnLeft';  O.doingTime = TD.turnMin- -parseInt(Math.random()*TD.turnPlus); if(O.doingTime > maxTurnTime) O.doingTime = maxTurnTime; break;
+                }
+            }
+
+            if(TD.T=='changeManouver2'){
+                if(O.Manouver =='goStraight'){
+                    var maxTurnTime = parseInt(180/O.speedT);
+                    switch(parseInt(Math.random()*2)){
+                        case 0: O.Manouver = 'turnRight';  O.doingTime = TD.turnMin- -parseInt(Math.random()*TD.turnPlus); if(O.doingTime > maxTurnTime) O.doingTime = maxTurnTime; break;
+                        case 1: O.Manouver = 'turnLeft';  O.doingTime = TD.turnMin- -parseInt(Math.random()*TD.turnPlus); if(O.doingTime > maxTurnTime) O.doingTime = maxTurnTime; break;
+                    }
+                }else{
+                    O.Manouver = 'goStraight';
+                    O.doingTime = TD.straightMin- -parseInt(Math.random()*TD.straightPlus);
+                }
+            }
+
+            if(TD.T=='avoidIncomingFire'){
+                switch(parseInt(Math.random()*2)){
+                    case 0: O.Manouver = 'turnRight';  O.doingTime = TD.avoidTime; break;
+                    case 1: O.Manouver = 'turnLeft';  O.doingTime = TD.avoidTime; break;
+                }
+            }
+
+            if(TD.T=='followEnemy'){
+                O.doingTime = TD.doingTime || 50;
+                O.Manouver = 'followEnemy';
+            }
+
+            if(TD.T=='die'){
+                if(O.onDie){
+                    if(O.onDie.Do=='explode'){
+                        this.explodeBomb(o,O.onDie);
+                    }
+                } else
+                    this.removeObj(o);
+                return true;
+            }
+            if(TD.T=='expire'){
+                if(O.onExpire){
+                    if(O.onExpire.Do=='explode'){
+                        this.explodeBomb(o,O.onExpire);
+                    }
+                } else
+                    this.removeObj(o);
+                return true;
+            }
+
+            if(TD.T=='explode'){
+                this.explodeBomb(o,O.onDie);
+                return true;
+            }
+
+            if(TD.T=='goStraight'){
+                O.Manouver = 'goStraight';
+                O.doingTime = TD.straightMin- -parseInt(Math.random()*TD.straightPlus);
+            }
+
+            // Dodatkowe wywo�ania akcji
+            if(TD.goToAlarmLvl)    O.AlarmLvl = TD.goToAlarmLvl;
+            if(TD.goToSpotLvl)    O.spotLvl = TD.goToSpotLvl;
+
+            O.doingNow = TD.T;
+            break;
+        }
+    }
+
+    // Wykonujemy zadanie
+    switch(O.Manouver){
+        case 'followEntity':{
+            if(typeof this.O[O.FollowWho] == 'undefined' || this.O[O.FollowWho].life <= 0){
+                O.Manouver = 'goStraight';
+                O.lastSpeedT = 0;
+            }
+            if(typeof this.O[O.FollowWho] !='undefined'){
+                var wiX = O.x-this.O[O.FollowWho].x;
+                var wiY = O.y-this.O[O.FollowWho].y;
+            }
+            if(typeof wiX!='undefined'){
+                var Angle = parseInt(- (Math.atan2(wiX,wiY)*180/Math.PI)- -360)%360;
+                var Tyk = (O.angle-Angle- -360)%360;
+                var Ei = 180 - Math.abs( Tyk - 180);
+                var speedT = O.speedT;
+                O.Tyk = Tyk;
+                if(Ei < speedT) speedT = Ei;
+                if(Tyk > 180){    O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
+                if(Tyk <= 180){    O.angle = (O.angle-speedT- -360)%360;     O.lastSpeedT = -speedT; }
+            }
+        }break;
+        case 'followEnemy':{
+            var Tyk = (O.angle-PlayerAngle- -360)%360;
+            var Ei = 180 - Math.abs( Tyk - 180);
+            var speedT = O.speedT;
+            O.Tyk = Tyk;
+            if(Ei < speedT) speedT = Ei;
+            if(Tyk > 180){    O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
+            if(Tyk <= 180){    O.angle = (O.angle-speedT- -360)%360;     O.lastSpeedT = -speedT; }
+        }break;
+        case 'goToXY':{
+            var wiX = O.x-O.goToX;
+            var wiY = O.y-O.goToY;
+            var Angle = parseInt(- (Math.atan2(wiX,wiY)*180/Math.PI)- -360)%360;
+            var Tyk = (O.angle-Angle- -360)%360;
+            var Ei = 180 - Math.abs( Tyk - 180);
+            var speedT = O.speedT;
+            if(Ei < speedT) speedT = Ei;
+            if(Tyk > 180){    O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
+            if(Tyk <= 180){    O.angle = (O.angle-speedT- -360)%360;     O.lastSpeedT = -speedT; }
+        }break;
+        case 'turnLeft':{
+            O.angle = (O.angle- -360- -O.speedT) %360;
+            O.lastSpeedT = O.speedT;
+        }break;
+        case 'turnRight':{
+            O.angle = (O.angle- -360-O.speedT) %360;
+            O.lastSpeedT =-O.speedT;
+        }break;
+        case 'goStraight':{
+            O.lastSpeedT = 0;
+        }break;
+        case 'decay':{
+            if(O.doingTime%10 == 0){
+                if(O.life > 1){
+                    O.life--;
+                    CanvasManager.requestCanvas(o);
+                } else this.removeObj(o);
+                return true;
+            }
+        }break;
+    }
+
+
+    /*
+    OBJ.weapon=[{t:'single', Power:1, Dec: 30, Speed: 10, gunSpeed: 15, lastShot: 120}];
+    OBJ.weapon=[{t:'double', Power:1, Dec: 30, Speed: 10, gunSpeed: 15, lastShot: 120}];
+    OBJ.weapon=[{t:'double2', Power:1, Dec: 30, Speed: 10, gunSpeed: 15, lastShot: 120}];
+    OBJ.weapon=[{t:'rose', Power:1, Dec: 50, Speed: 10, gunSpeed: 50, RoseAngle: 4, AtOnce: 9, lastShot: 120}];
+    */
+    // Strzelamy
+    if(O.weapon){
+        for(var wp in O.weapon){
+            var WP = O.weapon[wp];
+            if(WP.minAlarm && WP.minAlarm > O.AlarmLvl) continue;
+            if(WP.maxAlarm && WP.maxAlarm < O.AlarmLvl) continue;
+            if(WP.maxSpeed && WP.maxSpeed < O.speedLvl) continue;
+            if(WP.minSpeed && WP.minSpeed > O.speedLvl) continue;    // Czy w ogóle kiedyś użyjemy tego?
+            if(WP.minDistToEnemy && WP.minDistToEnemy < PlayerDist) continue;
+            if(WP.gunSpeed > (this.tick-WP.lastShot)) continue;
+            if(WP.doingNow && WP.doingNow != O.doingNow) continue;
+            if(WP.usedRes && O[ WP.usedRes ] < WP.usedResR) continue;
+
+
+            if(WP.t == 'getAcurateAngle'){
+                var WU = this.countFutureShoot(0,O.x,O.y,WP.Speed,WP.Dec);
+                if(WU.r)  PlayerAngle = WU.a;
+            }
+
+            if(WP.t == 'single'){
+                this.shootBullet(o,PlayerAngle,WP.Speed,WP.Dec,WP.Power);
+                WP.lastShot = this.tick;
+            }
+            if(WP.t == 'double'){
+                this.shootBulletOnSide(o,0,WP.Speed,WP.Dec,45,30,WP.Power);
+                this.shootBulletOnSide(o,0,WP.Speed,WP.Dec,-45,30,WP.Power);
+                WP.lastShot = this.tick;
+            }
+            if(WP.t == 'double2'){
+                this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,45,5,WP.Power);
+                this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,-45,5,WP.Power);
+                WP.lastShot = this.tick;
+            }
+            if(WP.t == 'rose'){
+                for(var i = -parseInt(WP.AtOnce/2); i<= parseInt(WP.AtOnce/2); ++i)
+                    this.shootBullet(o,PlayerAngle-i*WP.RoseAngle,WP.Speed,WP.Dec,WP.Power);
+                WP.lastShot = this.tick;
+            }
+
+            if(WP.t == 'misslesDouble'){
+                this.shootMissle(o,PlayerAngle - 20,15,150);
+                this.shootMissle(o,PlayerAngle- -20,15,150);
+                O[ WP.usedRes ] -= WP.usedResR;
+                WP.lastShot = this.tick;
+            }
+
+            if(WP.t == 'bomb'){
+                var bombData = false;
+                if(typeof WP.BombType !='undefined') bombData = O.Bombs[ WP.BombType ];
+                if(WP.BombRandom) bombData = O.Bombs[ parseInt(Math.random()*WP.BombRandom) ];
+                this.shootBomb(o,PlayerAngle,WP.Speed,WP.Dec,bombData);
+                WP.lastShot = this.tick;
+                if(WP.makeAction) this.makeAction(O,WP.makeAction);
+            }
+
+            if(WP.t == 'refilResource'){
+                if(++O.Res[WP.resource].T >= WP.gunSpeed){
+                    if(++O[WP.resource] > O.Res[WP.resource].M)
+                        O[WP.resource] = O.Res[WP.resource].M;
+                    O.Res[WP.resource].T = 0;
+                }
+            }
+            if(WP.t == 'changeAction'){
+                this.makeAction(O,WP.makeAction);
+                WP.lastShot = this.tick;
+            }
+
+            if(WP.t == 'produceSquad'){
+                do{
+                    var weMadeSomething = false;
+                    var iUnset = false;
+                    for(var i=0; i < O.squadScheme.length; ++i)
+                        if(O.squadScheme[i].Oid == -1){
+                            iUnset = i;
+                            break;
+                        }
+
+                    if(iUnset !== false){
+                        this.setSquadMember(o,iUnset,1);
+
+                        O[ WP.usedRes ] -= WP.usedResR;
+                        WP.lastShot = this.tick;
+                        if(O[ WP.usedRes ] < WP.usedResR) break;
+                        weMadeSomething = true;
+                    }
+                }while(weMadeSomething);
+            }
+            if(WP.t == 'healSquad'){
+                do{
+                    var weMadeSomething = false;
+                    var iLowLife = false, lowLifeMin = 999;
+                    for(var i=0; i < O.squadScheme.length; ++i)
+                        if(O.squadScheme[i].type == 'shieldBlob')
+                            if(O.squadScheme[i].Oid != -1){
+                                var oS = this.O[ O.squadScheme[i].Oid ];
+                                if( oS.life < lowLifeMin && oS.life < oS.lifeM){
+                                    lowLifeMin = oS.life;
+                                    iLowLife = i;
+                                }
+                            }
+
+                    if(iLowLife === false) break;
+                    var OSS = O.squadScheme[iLowLife];
+
+                    if(OSS.type == 'shieldBlob'){
+                        this.O[ OSS.Oid].life -=- 1;
+                        CanvasManager.requestCanvas( OSS.Oid );
+
+                        WP.lastShot = this.tick;
+                        O[ WP.usedRes ] -= WP.usedResR;
+                        if(O[ WP.usedRes ] < WP.usedResR) break;
+                        weMadeSomething = true;
+                    }
+
+                }while(weMadeSomething);
+            }
+
+            /*
+            if(Fx.T=='missle' && S.Missles >= Fx.MissleUse && this.missleAim!=false){
+                this.shipShootMissle(this.missleAim,O.angle,Fx.Speed,Fx.Dec,Fx.SpeedT,Fx.Power);
+                Fx.gunS=0;
+                S.Missles-=Fx.MissleUse;
+            }
+            */
+
+
+            if(WP.doNextWeapon) continue;
+
+            break;
+        }
+    }
+    O.spotEnemyFlag = false;
+    O.incomingFireFlag = false;
+    O.gotHitFlag = false;
+}

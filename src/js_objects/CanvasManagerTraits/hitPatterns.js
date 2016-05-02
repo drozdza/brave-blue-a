@@ -1,0 +1,32 @@
+
+CanvasManagerObject.prototype.HitPatterns ={
+    HullFire_20:{
+        100:{},
+        99:{letterAdd:'A',colorLetterAdd:[255,40,0,1],SizeLetterAdd:5,YOffsetLetterAdd:10},
+        1:{letterAdd:'A',colorLetterAdd:[255,40,0,1],SizeLetterAdd:25,YOffsetLetterAdd:20},
+        0:{colorFill:[68,68,68,1]},
+    },
+    HullFire_40:{
+        100:{},
+        99:{letterAdd:'A',colorLetterAdd:[255,40,0,1],SizeLetterAdd:5,YOffsetLetterAdd:10},
+        1:{letterAdd:'A',colorLetterAdd:[255,40,0,1],SizeLetterAdd:40,YOffsetLetterAdd:20},
+        0:{colorFill:[68,68,68,1]},
+    },
+    HullFire_80:{
+        100:{},
+        99:{letterAdd:'A',colorLetterAdd:[255,40,0,1],SizeLetterAdd:10,YOffsetLetterAdd:35},
+        1:{letterAdd:'A',colorLetterAdd:[255,40,0,1],SizeLetterAdd:65,YOffsetLetterAdd:35},
+        0:{colorFill:[68,68,68,1]},
+    },
+    StarHit:{
+        100:{colorFill:[255,255,255,1]},
+        60:{colorFill:[255,255,0,1]},
+        1:{colorFill:[255,0,0,1]},
+        0:{colorFill:[68,68,68,1]}
+    },
+    ShieldBlobHit:{
+        100:{colorCircle:[0,200,100,1],colorFill:[0,255,200,1]},
+        1:{colorCircle:[0,200,100,0.2],colorFill:[0,255,200,0.1]},
+        0:{colorCircle:[0,200,100,0.2],colorFill:[0,255,200,0.1]}
+    },
+};
