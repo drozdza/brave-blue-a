@@ -130,7 +130,11 @@ GAMEobject.prototype.makeOneTimeEffect = function(o,q){
         if(O.fieldAnim=='ElectricityField'){
             O.animType='EleFieldEnd';
             O.animTick = 0;
-            O.DieTime = this.tick- -25;
+            O.DieTime = this.tick- -24;
+            if(O.squadDirectPlace){
+                this.unbindWithSquad(O.squadDirectPlace.o, O.squadDirectPlace.i, o);
+            }
+
         }
     }
 }
@@ -177,8 +181,8 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
 
     O.life-=DMG;
     if(O.T=='ship') this.shipFunc_showHealth();
-    CanvasManager.requestCanvas( o );
-    O.gotHitFlag = true;
+    CanvasManager.requestCanvas(o);
+    O.Flags.gotHitFlag = true;
 
     if(O.life <= 0){
         this.dieObj(O,o);
@@ -191,15 +195,14 @@ GAMEobject.prototype.dieObj = function(O,o){
         this.putObj_animation('hitBig', O.x, O.y);
 
     if(O.squadDirectPlace){
-        var U = this.O[ O.squadDirectPlace.o ];
-        U.squadScheme[ O.squadDirectPlace.i ].Oid=-1;
+        this.unbindWithSquad(O.squadDirectPlace.o, O.squadDirectPlace.i, o);
     }
     if(O.squadScheme)
         this.disbandSquad(O);
 
     if(O.T=='space_mine') {
         O.toDo=[{T:'explode'}];
-        O.gotHitFlag = false;
+        O.Flags.gotHitFlag = false;
         O.doingTime = 3;
     }
     else if(O.onDie){

@@ -12,6 +12,7 @@ ObjectPutDatas={
         doingTime: 230,
         toDo: [{T:'die'}],
         Manouver: 'followEntity',
+        Flags:{},
     },
     missle:{
         viewLetter: 'Y',
@@ -26,6 +27,7 @@ ObjectPutDatas={
         doingTime: 200,
         toDo: [{T:'expire'}],
         Manouver: 'followEntity',
+        Flags:{},
     },
     bullet_bomb:{
         viewLetter: 'P',
@@ -40,6 +42,7 @@ ObjectPutDatas={
         doingTime: 35,
         toDo: [{T:'expire'}],
         Manouver: 'goStraight',
+        Flags:{},
     },
     space_mine:{
         viewLetter: 'R',
@@ -58,18 +61,20 @@ ObjectPutDatas={
             0:{ angle: 0, radius: 0, id: -1, make: {What:{RoundField:1},objData:{x:0,y:-1000, angle: 0, radius: 150, colorInactive: false, colorActive: 'rgba(255,0,0,0.4)', OneTimeEffect: 1, OneTimeOffset: 10, OneTimeDetect: 1, dontHit:['B','BE','E','M','ME','A']}}}
         },
 
-        detectMovementField:{ angle: 0, radius: 80, color: "rgba(255,0,0,0.4)"}
+        detectMovementField:{ angle: 0, radius: 80, color: "rgba(255,0,0,0.4)"},
+        Flags:{}
     },
     star:{
-        viewLIBpath:'StarPath', // *
+        viewLIBpath:'StarPath',
         viewPathSize:30,
         viewColor:'white',
         viewAngle:0,
         viewHitPattern:'StarHit',
         lifeM:6,
+        Flags:{},
     },
     Gstar:{
-        viewLIBpath:'StarPath', // *
+        viewLIBpath:'StarPath',
         viewPathSize:170,
         viewColor:'yellow',
         viewAngle:0,
@@ -77,11 +82,13 @@ ObjectPutDatas={
         radius: 90,
         undestructible: 1,
         bounceType: 'straight',
+        Flags:{},
     },
     RoundField:{
         radius: 50,
         circleColor:[255,255,255,0.2],
         undestructible: 1,
+        Flags:{},
     },
     SquareField:{
         radius: 50,
@@ -90,6 +97,7 @@ ObjectPutDatas={
         squareLen: 50,
         squareWidth: 15,
         undestructible: 1,
+        Flags:{},
     },
     ConeField:{
         radius: 50,
@@ -98,6 +106,7 @@ ObjectPutDatas={
         coneRad2: 50,
         angle: 0,
         undestructible: 1,
+        Flags:{},
     },
 
 
@@ -107,13 +116,15 @@ ObjectPutDatas={
         doSquad: -1,//??
         dec: 50,    //??
         ammo: -50,    //??
-        spotEnemyFlag: false,
-        gotHitFlag: false,
-        heardExplosionFlag: false,
-        newOrderFlag: false,
-        awareAboutEnemy: false,
-        lastSeenEnemy: -1,
         radius: 15,
+        Flags:{
+            spotEnemyFlag: false,
+            gotHitFlag: false,
+            heardExplosionFlag: false,
+            newOrderFlag: false,
+            awareAboutEnemy: false,
+            lastSeenEnemy: -1
+        },
 
         Res:{},
         toDo:[],
@@ -321,6 +332,23 @@ ObjectPutDatas={
         viewHitPattern: 'HullFire_40',
         lifeM: 9,
         radius: 20,
+
+        weapon:[
+            {t:'produceSquad', gunSpeed: 100, lastShot: 100, maxSpeed: 2},
+        ],
+
+        squadScheme: [{
+            type: 'RoundField',
+            radius: 0,
+            angle: 0,
+            Oid: -1,
+            objData: {fieldAnim: 'ElectricityField', radius: 130, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDamage: 1, dontHit:['B','BE','E','M','ME','A']}
+        }],
+
+        AlarmLvl: 2,
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
     },
     hiacynt:{
         viewLetter: 'H',

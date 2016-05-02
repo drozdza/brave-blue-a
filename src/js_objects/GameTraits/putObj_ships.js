@@ -1,3 +1,4 @@
+
 GAMEobject.prototype.putObj_iskariot = function(O){
     O.speedLvl = 2;
     O.speed =  7 - Math.random()*1.5;
@@ -18,7 +19,6 @@ GAMEobject.prototype.putObj_iskariot = function(O){
     ];
     return O;
 };
-
 
 GAMEobject.prototype.putObj_carras = function(O){
     O.speedLvl = 2;
@@ -201,6 +201,27 @@ GAMEobject.prototype.putObj_tartaros = function(O){
     O.speedT  = 6;
     O.speedArr = [0,
         {S: O.speed-3, T:O.speedT-3},
+        {S: O.speed, T:O.speedT},
+        {S: O.speed- -2, T:O.speedT}
+    ];
+
+    var spotRad1 = 80- -parseInt(Math.random()*80);
+    var spotRad2 = 300- -parseInt(Math.random()*200);
+    O.spotTick = 8;
+    O.spotArr=[0,
+        { T: 'single', Ref: 15, Rad: spotRad1},
+        { T: 'double', Ref: 10, Rad: spotRad1, Rad2: spotRad2, Angle2: 30- -parseInt(Math.random()*30)},
+        { T: 'single', Ref: 45, Rad: spotRad2}
+    ];
+    return O;
+}
+
+GAMEobject.prototype.putObj_edison = function(O){
+    O.speedLvl = 2;
+    O.speed =  3;
+    O.speedT  = 6;
+    O.speedArr = [0,
+        {S: O.speed-1.5, T:O.speedT-3},
         {S: O.speed, T:O.speedT},
         {S: O.speed- -2, T:O.speedT}
     ];

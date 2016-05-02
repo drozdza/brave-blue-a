@@ -147,11 +147,10 @@ function GAMEobject(){
             mapType: 'P',
             mapCollide: ['A','ME'],
             periodDMG: {},
+            Flags: {},
         };
         this.putOnXY(0);
-
-
-        CanvasManager.requestCanvas( 0 );
+        CanvasManager.requestCanvas(0);
 
         this.Omoving={0:1};
         this.Olen=1;

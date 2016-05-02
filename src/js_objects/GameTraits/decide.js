@@ -8,7 +8,7 @@ GAMEobject.prototype.alarmAround = function(o,DistAlert,AlarmFlag){
         Y = O.y-uO.y;
         Dist = Math.sqrt(X*X- -Y*Y);
         if(Dist < DistAlert){
-            this.O[uo][AlarmFlag] = true;
+            this.O[uo].Flags[AlarmFlag] = true;
         }
     }
 }
@@ -40,29 +40,29 @@ GAMEobject.prototype.decide = function(o){
         if(this.tick % (O.spotArr[ O.spotLvl ].Ref) == 0){
             var SP = O.spotArr[ O.spotLvl ];
             if((SP.T=='single' || SP.T=='double') && PlayerDist < SP.Rad){
-                O.spotEnemyFlag = true;
+                O.Flags.spotEnemyFlag = true;
             }
-            if(SP.T=='double' && !O.spotEnemyFlag){
+            if(SP.T=='double' && !O.Flags.spotEnemyFlag){
                 var A = (PlayerAngle -O.angle- -720- -SP.Angle2)%360;
                 if(PlayerDist < SP.Rad2 && A < SP.Angle2*2){
-                    O.spotEnemyFlag = true;
+                    O.Flags.spotEnemyFlag = true;
                 }
             }
             // Szukamy grupy i pocisku
-            if(!O.awareAboutEnemy){
+            if(!O.Flags.awareAboutEnemy){
                 for(var U in this.Odead){
                     var uX = O.x-this.Odead[U].x;
                     var uY = O.y-this.Odead[U].y;
                     var uDist = Math.sqrt(uX*uX- -uY*uY);
                     var uAngle = parseInt(- (Math.atan2(uX,uY)*180/Math.PI))%360;
                     if((SP.T=='single' || SP.T=='double') && uDist < SP.Rad){
-                        O.awareAboutEnemy = true;
+                        O.Flags.awareAboutEnemy = true;
                         break;
                     }
-                    if(SP.T=='double' && !O.spotEnemyFlag){
+                    if(SP.T=='double' && !O.Flags.spotEnemyFlag){
                         var uA = (uAngle -O.angle- -720- -SP.Angle2)%360;
                         if(uDist < SP.Rad2 && uA < SP.Angle2*2){
-                            O.awareAboutEnemy = true;
+                            O.Flags.awareAboutEnemy = true;
                             break;
                         }
                     }
@@ -72,31 +72,31 @@ GAMEobject.prototype.decide = function(o){
     }
 
     /*
-    O.spotEnemyFlag = false;
-    O.gotHitFlag = false;
-    O.heardExplosionFlag = false;
-    O.newOrderFlag = false;
-    O.incomingFireFlag = false;
-    O.awareAboutEnemy = false;
-    O.lastSeenEnemy = -1;
+    O.Flags.spotEnemyFlag = false;
+    O.Flags.gotHitFlag = false;
+    O.Flags.heardExplosionFlag = false;
+    O.Flags.newOrderFlag = false;
+    O.Flags.incomingFireFlag = false;
+    O.Flags.awareAboutEnemy = false;
+    O.Flags.lastSeenEnemy = -1;
     */
     // Sprawdzamy czy flagi mog� przerwa� obecne zadanie
-    if(O.awareAboutEnemy && O.AlarmLvl < 3){
+    if(O.Flags.awareAboutEnemy && O.AlarmLvl < 3){
         O.AlarmLvl = 4;
         O.doingTime = -1;
     }
-    if(O.spotEnemyFlag){
+    if(O.Flags.spotEnemyFlag){
         if(O.AlarmLvl < 5){
             O.AlarmLvl = 5;
             O.doingTime = -1;
         }
-        O.lastSeenEnemy = this.tick;
-        O.awareAboutEnemy = true;
+        O.Flags.lastSeenEnemy = this.tick;
+        O.Flags.awareAboutEnemy = true;
     }
 
-    if(O.gotHitFlag==true && O.T!='avoidIncomingFire')
+    if(O.Flags.gotHitFlag==true && O.T!='avoidIncomingFire')
         O.doingTime = -1;
-    if(O.incomingFireFlag==true && O.T!='avoidIncomingFire')
+    if(O.Flags.incomingFireFlag==true && O.T!='avoidIncomingFire')
         O.doingTime = -1;
 
 
@@ -111,9 +111,15 @@ GAMEobject.prototype.decide = function(o){
             if(TD.maxAlarm && TD.maxAlarm < O.AlarmLvl) continue;
             if(TD.maxSpeedLvl && TD.maxSpeedLvl < O.speedLvl) continue;
             if(TD.minSpeedLvl && TD.minSpeedLvl > O.speedLvl) continue;
-            if(TD.gotHitFlag && O.gotHitFlag===false) continue;
-            if(TD.incomingFireFlag && O.incomingFireFlag===false) continue;
 
+
+            if(TD.FlagsRequired){
+                var notAllFlags = false;
+                for(var flag in TD.FlagsRequired)
+                    if(O.Flags[ flag ]===false) notAllFlags = true;
+                if(notAllFlags) continue;
+
+            }
 
             if(TD.T=='lowerSpeedForResources'){
                 if(O[ TD.wantedRes ] < TD.wantedResR)
@@ -136,7 +142,7 @@ GAMEobject.prototype.decide = function(o){
                 var uY = TD.Y - O.y;
                 if(Math.sqrt(uX*uX- -uY*uY) < TD.Radius) continue;
             }
-            if(TD.T=='lowerAlarmLvl' && ((this.tick - O.lastSeenEnemy) < TD.minEnemyDontSeen)) continue;
+            if(TD.T=='lowerAlarmLvl' && ((this.tick - O.Flags.lastSeenEnemy) < TD.minEnemyDontSeen)) continue;
 
 
             // Dodajemy Akcję
@@ -430,7 +436,7 @@ GAMEobject.prototype.decide = function(o){
             break;
         }
     }
-    O.spotEnemyFlag = false;
-    O.incomingFireFlag = false;
-    O.gotHitFlag = false;
+    O.Flags.spotEnemyFlag = false;
+    O.Flags.incomingFireFlag = false;
+    O.Flags.gotHitFlag = false;
 }

@@ -131,9 +131,13 @@ BOARDS={
         BoardMods:['sitOnMap'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, T: 10}}],
     },
+    '*E':{
+        BoardMods:['sitOnMap'],
+        Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, E: 10}}],
+    },
     '*HardCore':{
         BoardMods:['sitOnMap','allAvoid'],
-        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5,T:10}}],
+        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5, T:10, E:10}}],
     },
     'Q':{MapRadius:1000,MapRadius2:1000,O:{ Q: 3, Star: 10}},
     'T':{MapRadius:1000,MapRadius2:1000,O:{ T: 10, Star: 10}},

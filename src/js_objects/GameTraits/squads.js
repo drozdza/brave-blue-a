@@ -66,6 +66,13 @@ GAMEobject.prototype.setSquadMember = function(o,i,life){
         oS.lifeM = OSS.lifeM;
         this.bindWithSquad(o, i, Sid);
     }
+    if(OSS.type == 'RoundField'){
+        var Sid = this.putObj('RoundField','region',1,iX,iY);
+        this.Omoving[Sid]=1;
+        this.bindWithSquad(o, i, Sid);
+    }
+    if(typeof OSS.objData !='undefined')
+        this.addBoardMod(Sid,OSS.objData);
 
     CanvasManager.requestCanvas( Sid );
 }
@@ -77,10 +84,21 @@ GAMEobject.prototype.bindWithSquad = function(o,i,s){
     S.speed = 0;
     O.squadScheme[i].Oid = s;
 }
+GAMEobject.prototype.unbindWithSquad = function(o,i,s){
+    var oS = this.O[s];
+
+    if(oS.squadDirectPlace){
+        var O = this.O[o];
+        O.squadScheme[i].Oid=-1;
+    }
+
+
+}
+
 GAMEobject.prototype.disbandSquad = function(O){
     // Maybe we want to change squad chef?
 
-    // If we disband then:
+    // If we disband, then:
     for(var i=0; i<O.squadScheme.length; ++i)
         if(O.squadScheme[i].Oid != -1){
             var sO = this.O[ O.squadScheme[i].Oid ];
@@ -92,7 +110,11 @@ GAMEobject.prototype.disbandSquad = function(O){
                 sO.Manouver = 'decay';
                 sO.doingTime = 500;
             }
-
+            if(sO.fieldAnim=='ElectricityField'){
+                sO.animType='EleFieldEnd';
+                sO.animTick = 0;
+                sO.DieTime = this.tick- -24;
+            }
             delete sO.squadDirectPlace;
         }
 }

@@ -61,6 +61,7 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
     if(Type=='juggernaut') O = this.putObj_juggernaut(O);
     if(Type=='warastein')  O = this.putObj_warastein(O);
     if(Type=='tartaros')   O = this.putObj_tartaros(O);
+    if(Type=='edison')     O = this.putObj_edison(O);
 
     if(O.TT=='enemy'){
         Enemy=' enemy';
@@ -104,14 +105,6 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
 
     O.life = O.lifeM;
 
-    // Map Objs: B-Bullets, BE-BulletsE, P-Player, M-Missles, E-Enemies, ME-MisslesE, R-Regions, D-Dead
-
-
-    if(Type=='edison'){
-        O.speedM    = O.speed    = 3;
-        O.speedT    = 6;
-        O.FieldPower    = 3;
-    }
     if(Type=='belzebub'){
         O.speedM    = O.speed    = 5;
         O.speedT    = 3;
