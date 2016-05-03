@@ -10,16 +10,6 @@
         var Dist = Math.sqrt(X*X- -Y*Y);
 
         switch(O.T){
-            case 'royale':
-                if(Dist < 400 && O.ammo > 120){
-                    var Pe = [80,280,100,260,120,240,140,220];
-                    var Angle = parseInt(- (Math.atan2(P.x-O.x,P.y-O.y)*180/Math.PI)- -180)%360;
-
-                    for(var iki=0; iki<8; ++iki)
-                        this.shootMissle(o, (Angle- -Pe[iki])%360, (12-parseInt(iki/2)*2),(95- -parseInt(iki/2)*20),(6-parseInt(iki/2)));
-                    O.ammo=0;
-                }
-
             break; case 'belzebub':
                 if(Dist < 400 && O.ammo > 120){
                     var Angle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;

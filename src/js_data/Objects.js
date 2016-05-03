@@ -408,6 +408,36 @@ ObjectPutDatas={
         viewHitPattern: 'HullFire_40',
         lifeM: 16,
         radius: 20,
+
+
+        weapon:[
+            {t:'missleCrown', Power:1, Dec: 95, Speed: 12, gunSpeed: 120, lastShot: 0, minDistToEnemy: 400},
+        ],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:1.2, T:2},
+            {S:3, T:2},
+            {S:6, T:2}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 180, RandInt: 80},
+            spotRad2: {Const: 400, RandInt: 200},
+            spotAngle2: {Const: 40, RandInt: 30}
+        },
     },
     edison:{
         viewLetter: 'E',

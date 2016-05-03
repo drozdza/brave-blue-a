@@ -100,10 +100,6 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
         O.speedM    = O.speed    = 5;
         O.speedT    = 3;
     }
-    if(Type=='royale'){
-        O.speedM    = O.speed    = 3;
-        O.speedT    = 2;
-    }
     if(Type=='hiacynt'){
         O.speedM    = O.speed    = 5;
         O.speedT    = 2;

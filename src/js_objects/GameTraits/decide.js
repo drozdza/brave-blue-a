@@ -376,7 +376,14 @@ GAMEobject.prototype.decide = function(o){
                 if(O.doingTime == 8)  this.shootMissle(o,O.angle - 20,15,150);
                 if(O.doingTime == 0)  this.shootMissle(o,O.angle - 40,15,150);
                 WP.lastShot = this.tick;
+            }
+            if(WP.t == 'missleCrown'){
+                var Pe = [80,280,100,260,120,240,140,220];
 
+                for(var iki=0; iki<8; ++iki)
+                    this.shootMissle(o, (PlayerAngle- -Pe[iki])%360, (WP.Speed-parseInt(iki/2)*2),(WP.Dec- -parseInt(iki/2)*20),(6-parseInt(iki/2)));
+
+                WP.lastShot = this.tick;
             }
 
             if(WP.t == 'bomb'){
