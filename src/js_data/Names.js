@@ -8,7 +8,7 @@ NAMES.Ships={
     U:'dregos',
     A:'carras',
     K:'koriaz',
-    C:'cloacker',
+    C:'cloaker',
     F:'fariax',
     G:'gargamon',
     S:'hajaher',

@@ -17,11 +17,15 @@ GAMEobject.prototype.changeSpeedLvl = function(O,speedLvl){
     O.speed = O.speedArr[ speedLvl ].S;
     O.speedT = O.speedArr[ speedLvl ].T;
 }
-GAMEobject.prototype.makeAction = function(O,Action){
+GAMEobject.prototype.makeAction = function(O,o,Action){
     if(Action.doingNow) O.doingNow = Action.doingNow;
     if(Action.doingTime) O.doingTime = Action.doingTime;
     if(Action.Manouver)  O.Manouver = Action.Manouver;
     if(Action.gotoSpeed) this.changeSpeedLvl(O, Action.gotoSpeed);
+    if(Action.unCloak){
+        delete O.viewCloaked;
+        CanvasManager.requestCanvas(o);
+    }
 }
 
 
@@ -113,6 +117,7 @@ GAMEobject.prototype.decide = function(o){
             if(TD.maxAlarm && TD.maxAlarm < O.alarmLvl) continue;
             if(TD.maxSpeedLvl && TD.maxSpeedLvl < O.speedLvl) continue;
             if(TD.minSpeedLvl && TD.minSpeedLvl > O.speedLvl) continue;
+            if(TD.usedRes && O[ TD.usedRes ] < TD.usedResR) continue;
 
             if(TD.FlagsRequired){
                 var notAllFlags = false;
@@ -121,6 +126,7 @@ GAMEobject.prototype.decide = function(o){
                         notAllFlags = true;
                 if(notAllFlags) continue;
             }
+
 
             if(TD.T=='lowerSpeedForResources'){
                 if(O[ TD.wantedRes ] < TD.wantedResR)
@@ -145,8 +151,6 @@ GAMEobject.prototype.decide = function(o){
             }
             if(TD.T=='lowerAlarmLvl' && ((this.tick - O.Flags.lastSeenEnemy) < TD.minEnemyDontSeen)) continue;
 
-
-            // Dodajemy Akcję
             if(TD.T=='stayInRegion'){
                 O.Manouver = 'goToXY';
                 O.goToX = TD.X;
@@ -196,6 +200,18 @@ GAMEobject.prototype.decide = function(o){
                 O.doingTime = TD.doingTime || 50;
                 O.Manouver = 'followEnemy';
             }
+
+            if(TD.T=='followEnemyCloaked'){
+                O.doingTime = TD.doingTime || 400;
+                O.Manouver = 'followEnemy';
+                if(O.speedLvl < 3){
+                    this.putObj_animation('hit_blue', O.x, O.y);
+                    this.changeSpeedLvl(O,3);
+                    O.viewCloaked = true;
+                    CanvasManager.requestCanvas(o);
+                }
+            }
+
 
             if(TD.T=='die'){
                 if(O.onDie){
@@ -359,7 +375,7 @@ GAMEobject.prototype.decide = function(o){
                 if(WP.BombRandom) bombData = O.Bombs[ parseInt(Math.random()*WP.BombRandom) ];
                 this.shootBomb(o,PlayerAngle,WP.Speed,WP.Dec,bombData);
                 WP.lastShot = this.tick;
-                if(WP.makeAction) this.makeAction(O,WP.makeAction);
+                if(WP.makeAction) this.makeAction(O,o,WP.makeAction);
             }
 
             if(WP.t == 'refilResource'){
@@ -370,8 +386,10 @@ GAMEobject.prototype.decide = function(o){
                 }
             }
             if(WP.t == 'changeAction'){
-                this.makeAction(O,WP.makeAction);
+                this.makeAction(O,o,WP.makeAction);
                 WP.lastShot = this.tick;
+                if(WP.usedRes)
+                    O[ WP.usedRes ] -= WP.usedResR;
             }
 
             if(WP.t == 'produceSquad'){

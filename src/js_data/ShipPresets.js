@@ -52,7 +52,7 @@ SHIPpresets={
         ],
         Modules:[
             {T:'bulletProd',Disabled:0,Emin:2,Emax:4,ProdX:4,E:0,Prod:0,ifProd:40 },
-            {T:'bombProd',  Disabled:0,Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:60 },
+            {T:'bombProd',  Disabled:0,Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:10 },
         ],
     },
     17:{

@@ -121,10 +121,6 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
         O.speedM    = O.speed    = 4;
         O.speedT    = 1;
     }
-    if(Type=='cloacker'){
-        O.speedM    = O.speed    = 6;
-        O.speedT    = 4;
-    }
     if(Type=='gargamon'){
         O.speedM    = O.speed = 2;
         O.speedT    = 1.5;
@@ -192,6 +188,38 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
     if(Type=='gargamon') this.addEnergyField(L,10,120);
     return L;
 }
+
+GAMEobject.prototype.putObj_shipVariables = function(O){
+
+    for(var i in {speedArr:1,spotArr:1})
+        for(var j=0; j<4; ++j)
+            for(var k in O[i][j])
+                if(typeof O[i][j][k] == 'object' && typeof O[i][j][k].shipVar != 'undefined')
+                    O[i][j][k] = this.getShipVariable(O, O[i][j][k]);
+
+    delete O.shipVariables;
+    this.changeSpeedLvl(O,O.speedLvl);
+    return O;
+}
+
+GAMEobject.prototype.getShipVariable = function(O,VarRequest){
+    var variable;
+
+    var VarDef = O.shipVariables[ VarRequest.shipVar ];
+    if(VarDef.Rand){
+        VarDef.Const -=- Math.random()*VarDef.Rand;
+        delete VarDef.Rand;
+    }
+    if(VarDef.RandInt){
+        VarDef.Const -=- parseInt(Math.random()*VarDef.RandInt);
+        delete VarDef.RandInt;
+    }
+
+    var V = O.shipVariables[ VarRequest.shipVar ].Const;
+    if(VarRequest.Add) V -=- VarRequest.Add;
+    return V;
+}
+
 
 GAMEobject.prototype.putObj_animation = function(Type,X,Y){
     var O = {};

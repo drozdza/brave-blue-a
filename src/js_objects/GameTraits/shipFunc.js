@@ -248,3 +248,29 @@ GAMEobject.prototype.shipFunc_showHealth = function(){
     }
     $('#countHealth').html(html);
 }
+
+GAMEobject.prototype.showEnemySpotRegion = function(o){
+    var html,O = this.O[o];
+    O.showSpotRegion = true;
+
+    if(typeof O.spotLvl =='undefined') return false;
+    var ST = O.spotArr[ O.spotLvl ];
+    if(ST.T=='double'){
+        var X1 = ST.Rad * Math.sin((180-ST.Angle2)*(Math.PI/180));
+        var Y1 = ST.Rad * Math.cos((180-ST.Angle2)*(Math.PI/180));
+        var X2 = ST.Rad2 * Math.sin((180-ST.Angle2)*(Math.PI/180));
+        var Y2 = ST.Rad2 * Math.cos((180-ST.Angle2)*(Math.PI/180));
+
+        var X3 = ST.Rad * Math.sin((180- -ST.Angle2)*(Math.PI/180));
+        var Y3 = ST.Rad * Math.cos((180- -ST.Angle2)*(Math.PI/180));
+        var X4 = ST.Rad2 * Math.sin((180- -ST.Angle2)*(Math.PI/180));
+        var Y4 = ST.Rad2 * Math.cos((180- -ST.Angle2)*(Math.PI/180));
+
+        var Wump = 0;
+        if(ST.Angle2*2 > 179) Wump=1;
+
+        var d ='M0 '+(ST.Rad)+' A'+ST.Rad+' '+ST.Rad+' 0 0,0 '+X1+' '+Y1+' L'+X2+' '+Y2+' A'+ST.Rad2+' '+ST.Rad2+' 0 '+Wump+',0 '+X4+' '+Y4+' L'+X3+' '+Y3+' A'+ST.Rad+' '+ST.Rad+' 0 0,0 0 '+(ST.Rad)+' ';
+
+        html='<svg class="spotRegion"><path  fill="yellow" fill-opacity="0.1" d="'+d+'"></svg>';
+    }
+}

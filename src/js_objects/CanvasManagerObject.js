@@ -11,17 +11,19 @@ function CanvasManagerObject(){
     this.canvasId = function(O){
         var ID = '';
         ID+=O.T+'_';
-        if(O.viewLetter)         ID+=O.viewLetter+'_';
-        // if(O.viewShape)         ID+=O.viewShape+'_';
-        if(O.viewColor)         ID+=O.viewColor+'_';
-        // if(O.viewXY)             ID+=O.viewXY+'_';
-        if(O.viewLetterSize)    ID+=O.viewLetterSize+'_';
-        if(O.viewGlobalAlpha)    ID+=O.viewGlobalAlpha+'_';
-        if(O.viewAngle)         ID+=O.viewAngle+'_';
+        if(O.viewLetter)      ID+=O.viewLetter+'_';
+        // if(O.viewShape)       ID+=O.viewShape+'_';
+        if(O.viewColor)       ID+=O.viewColor+'_';
+        // if(O.viewXY)          ID+=O.viewXY+'_';
+        if(O.viewLetterSize)  ID+=O.viewLetterSize+'_';
+        if(O.viewGlobalAlpha) ID+=O.viewGlobalAlpha+'_';
+        if(O.viewAngle)       ID+=O.viewAngle+'_';
         if(typeof O.timeTick !='undefined')
-                                ID+='frame_'+O.timeTick+'_';
+                              ID+='frame_'+O.timeTick+'_';
         if(O.viewHitPattern && O.life < O.lifeM)
-                                ID+='life_'+O.life+'_';
+                              ID+='life_'+O.life+'_';
+        if(O.life > 0 && O.viewCloaked)
+                              ID+='cloaked_';
         return ID;
     }
 
@@ -90,6 +92,7 @@ function CanvasManagerObject(){
             CanCon.translate(X,Y);
             if(O.colorFill) CanCon.fillStyle = 'rgba('+O.colorFill[0]+','+O.colorFill[1]+','+O.colorFill[2]+','+O.colorFill[3]+')';
             if(State.colorFill) CanCon.fillStyle = 'rgba('+State.colorFill[0]+','+State.colorFill[1]+','+State.colorFill[2]+','+State.colorFill[3]+')';
+            if(O.life > 0 && O.viewCloaked) CanCon.fillStyle = '#111111';
 
             if(!isNaN(O.viewLetter)){
                 CanCon.fillText(String.fromCharCode(O.viewLetter), 0, 0);
@@ -107,6 +110,7 @@ function CanvasManagerObject(){
             if(O.viewAngle)
                 CanCon.rotate(-O.viewAngle*(Math.PI/180));
             if(State.colorLetterAdd) CanCon.fillStyle = 'rgba('+State.colorLetterAdd[0]+','+State.colorLetterAdd[1]+','+State.colorLetterAdd[2]+','+State.colorLetterAdd[3]+')';
+            if(O.viewCloaked) CanCon.fillStyle = '#111111';
             var Y7 = 0;
             if(State.YOffsetLetterAdd)
                 Y7-=-State.YOffsetLetterAdd;
@@ -127,8 +131,8 @@ function CanvasManagerObject(){
             var XYoffset = parseInt((X2 - O.viewPathSize)/2);
             var PATH = this.LIB[ O.viewLIBpath ];
             for(var s=0; s<PATH.length;++s)
-                if(isNaN(PATH[s]))    svgD+=PATH[s]+' ';
-                        else         svgD+=((PATH[s]*pathSize).toFixed(2))+' ';
+                if(isNaN(PATH[s])) svgD+=PATH[s]+' ';
+                        else       svgD+=((PATH[s]*pathSize).toFixed(2))+' ';
             var svgObj = new Path2D(svgD);
 
             CanCon.translate(XYoffset,XYoffset);

@@ -1,5 +1,7 @@
 BOARDS={
-    'Start':{MapRadius:600,MapRadius2:2400,O:{ K:1, Star: 300}},
+    'Start':{
+        Place:[{Random:{X:0, Y:0, Radius: 600}, What:{Star: 300, K: 1}}],
+    },
     'u1':{
         MapRadius:60,MapRadius2:2400,
         BoardMods:['sitOnMap','allAvoid'],
@@ -135,11 +137,14 @@ BOARDS={
         BoardMods:['sitOnMap'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, E: 10}}],
     },
+    '*C':{
+        BoardMods:['sitOnMap'],
+        Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, C: 10}}],
+    },
     '*HardCore':{
         BoardMods:['sitOnMap','allAvoid'],
-        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5, T:10, E:10}}],
+        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5, T:10, E:10, C:10}}],
     },
-    'C':{MapRadius:1000,MapRadius2:1000,O:{ C: 10, Star: 10}},
     'V':{MapRadius:1100,MapRadius2:1100,O:{ V: 10, Star: 50}},
     'H':{MapRadius:1100,MapRadius2:1100,O:{ H: 10, T:10, Star: 10}},
     'B':{MapRadius:1000,MapRadius2:1000,O:{ B: 115, Star: 10}},
