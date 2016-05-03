@@ -83,13 +83,13 @@ GAMEobject.prototype.decide = function(o){
     O.Flags.squadFull = true;
     */
     // Sprawdzamy czy flagi mogą przerwać obecne zadanie
-    if(O.Flags.awareAboutEnemy && O.AlarmLvl < 3){
-        O.AlarmLvl = 4;
+    if(O.Flags.awareAboutEnemy && O.alarmLvl < 3){
+        O.alarmLvl = 4;
         O.doingTime = -1;
     }
     if(O.Flags.spotEnemyFlag){
-        if(O.AlarmLvl < 5){
-            O.AlarmLvl = 5;
+        if(O.alarmLvl < 5){
+            O.alarmLvl = 5;
             O.doingTime = -1;
         }
         O.Flags.lastSeenEnemy = this.tick;
@@ -109,8 +109,8 @@ GAMEobject.prototype.decide = function(o){
             var TD = O.toDo[toDo];
 
             // Sprawdzamy Czy akcja się nadaje
-            if(TD.minAlarm && TD.minAlarm > O.AlarmLvl) continue;
-            if(TD.maxAlarm && TD.maxAlarm < O.AlarmLvl) continue;
+            if(TD.minAlarm && TD.minAlarm > O.alarmLvl) continue;
+            if(TD.maxAlarm && TD.maxAlarm < O.alarmLvl) continue;
             if(TD.maxSpeedLvl && TD.maxSpeedLvl < O.speedLvl) continue;
             if(TD.minSpeedLvl && TD.minSpeedLvl > O.speedLvl) continue;
 
@@ -226,9 +226,9 @@ GAMEobject.prototype.decide = function(o){
                 O.doingTime = TD.straightMin- -parseInt(Math.random()*TD.straightPlus);
             }
 
-            // Dodatkowe wywo�ania akcji
-            if(TD.goToAlarmLvl)    O.AlarmLvl = TD.goToAlarmLvl;
-            if(TD.goToSpotLvl)    O.spotLvl = TD.goToSpotLvl;
+            // Dodatkowe wywołania akcji
+            if(TD.goToAlarmLvl) O.alarmLvl = TD.goToAlarmLvl;
+            if(TD.goToSpotLvl)  O.spotLvl = TD.goToSpotLvl;
 
             O.doingNow = TD.T;
             break;
@@ -303,8 +303,8 @@ GAMEobject.prototype.decide = function(o){
     if(O.weapon){
         for(var wp in O.weapon){
             var WP = O.weapon[wp];
-            if(WP.minAlarm && WP.minAlarm > O.AlarmLvl) continue;
-            if(WP.maxAlarm && WP.maxAlarm < O.AlarmLvl) continue;
+            if(WP.minAlarm && WP.minAlarm > O.alarmLvl) continue;
+            if(WP.maxAlarm && WP.maxAlarm < O.alarmLvl) continue;
             if(WP.maxSpeed && WP.maxSpeed < O.speedLvl) continue;
             if(WP.minSpeed && WP.minSpeed > O.speedLvl) continue;    // Czy w ogóle kiedyś użyjemy tego?
             if(WP.minDistToEnemy && WP.minDistToEnemy < PlayerDist) continue;

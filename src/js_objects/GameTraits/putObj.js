@@ -51,17 +51,8 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
     if(Type!='bullet')
         O = this.putObj_fromArray(O,Type);
 
-    if(Type=='carras')     O = this.putObj_carras(O);
-    if(Type=='muerto')     O = this.putObj_muerto(O);
-    if(Type=='iskariot')   O = this.putObj_iskariot(O);
-    if(Type=='dandares')   O = this.putObj_dandares(O);
-    if(Type=='dregos')     O = this.putObj_dregos(O);
-    if(Type=='hajaher')    O = this.putObj_hajaher(O);
-    if(Type=='nemezis')    O = this.putObj_nemezis(O);
-    if(Type=='juggernaut') O = this.putObj_juggernaut(O);
-    if(Type=='warastein')  O = this.putObj_warastein(O);
-    if(Type=='tartaros')   O = this.putObj_tartaros(O);
-    if(Type=='edison')     O = this.putObj_edison(O);
+    if(O.shipVariables)
+        this.putObj_shipVariables(O);
 
     if(O.TT=='enemy'){
         Enemy=' enemy';

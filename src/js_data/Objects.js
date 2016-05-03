@@ -130,9 +130,10 @@ ObjectPutDatas={
         toDo:[],
         doingTime: -1,
         Manouver: 'goStraight',
-        AlarmLvl: 2,
 
-
+        alarmLvl: 2,
+        speedLvl: 2,
+        spotLvl: 2,
     },
     carras:{
         viewLetter: 'A',
@@ -142,11 +143,8 @@ ObjectPutDatas={
         viewHitPattern: 'HullFire_20',
         lifeM: 5,
 
-        spotLvl: 2,
-
         weapon:[{t:'single', Power:1, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5}],
 
-        AlarmLvl: 2,
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
@@ -158,6 +156,25 @@ ObjectPutDatas={
             {N:18,T:'changeManouver2', maxAlarm: 4, minAlarm: 3, straightMin: 20, straightPlus: 80, turnMin: 10, turnPlus: 80  },
             {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
         ],
+
+        speedArr:[0,
+            {S: {shipVar:'speed',Add:-2}, T:0.7},
+            {S: {shipVar:'speed'}, T:2.5},
+            {S: {shipVar:'speed',Add:3}, T:2.5}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 20, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 20, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 20, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            speed: {Const: 6.5, Rand: 1},
+            spotRad: {Const: 80, RandInt: 80},
+            spotRad2: {Const: 300, RandInt: 200},
+            spotAngle2: {Const: 30, RandInt: 30}
+        },
     },
     muerto:{
         viewLetter: 'M',
@@ -168,9 +185,10 @@ ObjectPutDatas={
         lifeM: 9,
         radius: 20,
 
-        spotLvl: 2,
+        weapon:[
+            {t:'rose', Power:1, Dec: 50, Speed: 10, gunSpeed: 50, lastShot: 100, AtOnce: 9, RoseAngle: 4, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}
+        ],
 
-        AlarmLvl: 2,
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
@@ -178,6 +196,25 @@ ObjectPutDatas={
             {N:23,T:'stayInRegion', X:-800, Y:0, Radius: 500 },
             {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
         ],
+
+        speedArr:[0,
+            {S:1, T:1},
+            {S:3, T:2},
+            {S:6, T:2}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 80, RandInt: 80},
+            spotRad2: {Const: 300, RandInt: 200},
+            spotAngle2: {Const: 30, RandInt: 30}
+        },
+
     },
     nemezis:{
         viewLetter: 'N',
@@ -188,8 +225,6 @@ ObjectPutDatas={
         lifeM: 4,
         radius: 20,
 
-        spotLvl: 2,
-
         Bombs:[{
             onHit: {Do:'explode',Power: 4, Dist: 35},
             onDie: {Do:'explode',Power: 4, Dist: 35},
@@ -198,13 +233,30 @@ ObjectPutDatas={
 
         weapon:[{t:'bomb', Speed: 10, Dec: 50, BombType: 0, gunSpeed: 40, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}],
 
-        AlarmLvl: 2,
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
         toDo: [
             {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70},
         ],
+
+        speedArr:[0,
+            {S:1, T:1},
+            {S:3, T:2},
+            {S:6, T:2}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 80, RandInt: 80},
+            spotRad2: {Const: 300, RandInt: 200},
+            spotAngle2: {Const: 30, RandInt: 30}
+        },
     },
     warastein:{
         viewLetter: 'W',
@@ -214,8 +266,6 @@ ObjectPutDatas={
         viewHitPattern: 'HullFire_40',
         lifeM: 11,
         radius: 23,
-
-        spotLvl: 2,
 
         Bombs:[{
             onHit: {Do:'explode',Power: 4, Dist: 35},
@@ -269,7 +319,6 @@ ObjectPutDatas={
 
         weapon:[{t:'bomb', Speed: 10, Dec: 12, BombType: 0, gunSpeed: 140, lastShot: 100, maxSpeed: 2, makeAction: {Manuover: 'goStraight', doingTime:55, gotoSpeed:1}, minAlarm: 5, minDistToEnemy: 400}],
 
-        AlarmLvl: 2,
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
@@ -277,6 +326,25 @@ ObjectPutDatas={
             {N:61,T:'speedUp', maxSpeedLvl: 1, gotoSpeed: 2},
             {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70}
         ],
+
+        speedArr:[0,
+            {S:3, T:4},
+            {S:7, T:3},
+            {S:7, T:3}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 120, RandInt: 80},
+            spotRad2: {Const: 300, RandInt: 200},
+            spotAngle2: {Const: 30, RandInt: 30}
+        },
+
     },
     dandares:{
         viewLetter: 'D',
@@ -298,10 +366,27 @@ ObjectPutDatas={
         squadSchemeType: {t:'round', count: 16, radius: 100, placement: 'oddFirst', makeFirst: 8, life: 3, data:{type:'shieldBlob', lifeM:6}},
         squadScheme: [],
 
-        AlarmLvl: 2,
         doingNow: 'changeManouver',
         doingTime: -1,
-        Manouver: 'goStraight'
+        Manouver: 'goStraight',
+
+        speedArr:[0,
+            {S:1, T:0.5},
+            {S:4, T:2},
+            {S:8, T:2}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 80, RandInt: 80},
+            spotRad2: {Const: 300, RandInt: 200},
+            spotAngle2: {Const: 30, RandInt: 30}
+        },
     },
     shieldBlob:{
         viewLetter: '#',
@@ -348,10 +433,27 @@ ObjectPutDatas={
             objData: {fieldAnim: 'ElectricityField', radius: 130, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDamage: 4, dontHit:['B','BE','E','M','ME','A']}
         }],
 
-        AlarmLvl: 2,
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
+
+        speedArr:[0,
+            {S:1.5, T:3},
+            {S:3, T:6},
+            {S:5, T:6}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 80, RandInt: 80},
+            spotRad2: {Const: 300, RandInt: 200},
+            spotAngle2: {Const: 30, RandInt: 30}
+        },
 
     },
     hiacynt:{
@@ -370,8 +472,6 @@ ObjectPutDatas={
         viewHitPattern: 'HullFire_20',
         lifeM: 3,
 
-        spotLvl: 2,
-
         jump: 3,
         Res: {'jump': {M:3,T:0}},
         weapon:[
@@ -379,7 +479,6 @@ ObjectPutDatas={
             {t:'double2', Power:1, Dec: 35, Speed: 12, gunSpeed: 20, lastShot: 100, maxSpeed: 2, minAlarm: 5},
         ],
 
-        AlarmLvl: 2,
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
@@ -391,6 +490,26 @@ ObjectPutDatas={
             {N:18,T:'changeManouver2', maxAlarm: 4, minAlarm: 3, straightMin: 20, straightPlus: 80, turnMin: 10, turnPlus: 80  },
             {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
         ],
+
+        speedArr:[0,
+            {S: {shipVar:'speed',Add:-5}, T:{shipVar:'speedT',Add:-0.6}},
+            {S: {shipVar:'speed'}, T:{shipVar:'speedT'}},
+            {S: {shipVar:'speed',Add:4}, T:{shipVar:'speedT'}}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 20, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 20, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 20, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            speed: {Const: 7, Rand: 1.5},
+            speedT: {Const: 2.5, Rand: 1},
+            spotRad: {Const: 80, RandInt: 80},
+            spotRad2: {Const: 300, RandInt: 200},
+            spotAngle2: {Const: 30, RandInt: 30}
+        },
     },
     tartaros:{
         viewLetter: 'T',
@@ -401,13 +520,10 @@ ObjectPutDatas={
         lifeM: 9,
         radius: 27,
 
-        spotLvl: 2,
-
         weapon:[
             {t:'double', Speed:12, Dec:30, Power:1, doingNow:'shooting', gunSpeed:1,  maxSpeed:2},
             {t:'changeAction', makeAction: {Manuover:'goStraight', doingNow:'shooting', doingTime:10}, gunSpeed: 110, lastShot: 100,  minAlarm: 5, minDistToEnemy: 400}],
 
-        AlarmLvl: 2,
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
@@ -415,6 +531,23 @@ ObjectPutDatas={
             {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70}
         ],
 
+        speedArr:[0,
+            {S:3, T:3},
+            {S:5, T:6},
+            {S:8, T:6}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 80, RandInt: 80},
+            spotRad2: {Const: 300, RandInt: 200},
+            spotAngle2: {Const: 30, RandInt: 30}
+        },
     },
     belzebub:{
         viewLetter: 'B',
@@ -451,7 +584,6 @@ ObjectPutDatas={
         viewHitPattern: 'HullFire_20',
         lifeM: 9,
 
-        spotLvl: 2,
 
         misslePack: 6,
         Res: {'misslePack': {M:6,T:0}},
@@ -460,7 +592,6 @@ ObjectPutDatas={
             {t:'misslesDouble', gunSpeed: 140, lastShot: 100, usedRes: 'misslePack', usedResR: 1, minSpeed: 2, minAlarm: 5},
         ],
 
-        AlarmLvl: 2,
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
@@ -474,6 +605,26 @@ ObjectPutDatas={
             {N:18,T:'changeManouver2', maxAlarm: 4, minAlarm: 3, straightMin: 20, straightPlus: 80, turnMin: 10, turnPlus: 80  },
             {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
         ],
+
+        speedArr:[0,
+            {S: {shipVar:'speed',Add:-5}, T:{shipVar:'speedT',Add:-2}},
+            {S: {shipVar:'speed'}, T:{shipVar:'speedT'}},
+            {S: {shipVar:'speed',Add:3}, T:{shipVar:'speedT'}}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            speed: {Const: 7, Rand: 1.5},
+            speedT: {Const: 2.5, Rand: 1},
+            spotRad: {Const: 80, RandInt: 80},
+            spotRad2: {Const: 300, RandInt: 200},
+            spotAngle2: {Const: 30, RandInt: 30}
+        },
     },
     vitotas:{
         viewLetter: 'V',
@@ -498,14 +649,12 @@ ObjectPutDatas={
         viewAngle: 0,
         viewHitPattern: 'HullFire_20',
         lifeM: 6,
-        spotLvl: 2,
 
         weapon:[
             {t:'getAcurateAngle', Dec: 50, Speed: 10, maxSpeed: 2, minAlarm: 5, doNextWeapon:true},
             {t:'single', Power:1, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5}
         ],
 
-        AlarmLvl: 2,
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
@@ -517,6 +666,26 @@ ObjectPutDatas={
             {N:18,T:'changeManouver2', maxAlarm: 4, minAlarm: 3, straightMin: 20, straightPlus: 80, turnMin: 10, turnPlus: 80  },
             {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
         ],
+
+        speedArr:[0,
+            {S: {shipVar:'speed',Add:-4}, T:{shipVar:'speedT',Add:-1.5}},
+            {S: {shipVar:'speed'}, T:{shipVar:'speedT'}},
+            {S: {shipVar:'speed',Add:3}, T:{shipVar:'speedT'}}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            speed: {Const: 5, Rand: 4},
+            speedT: {Const: 2, Rand: 2},
+            spotRad: {Const: 80, RandInt: 80},
+            spotRad2: {Const: 300, RandInt: 200},
+            spotAngle2: {Const: 30, RandInt: 30}
+        },
     },
     orhenes:{
         viewLetter: 'Q',
@@ -535,8 +704,6 @@ ObjectPutDatas={
         viewHitPattern: 'HullFire_80',
         lifeM: 12,
         radius: 40,
-
-        spotLvl: 2,
 
         Bombs:[
             {
@@ -568,7 +735,6 @@ ObjectPutDatas={
             {t:'bomb', Speed: 10, Dec: 50, BombRandom: 4, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}
         ],
 
-        AlarmLvl: 2,
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
@@ -577,6 +743,25 @@ ObjectPutDatas={
             {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3, doingTime: 30},
             {N:15,T:'changeManouver', maxAlarm: 4, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
         ],
+
+        speedArr:[0,
+            {S:1, T:1},
+            {S:1, T:1},
+            {S:1, T:1}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 180, RandInt: 80},
+            spotRad2: {Const: 400, RandInt: 200},
+            spotAngle2: {Const: 40, RandInt: 20}
+        },
+
     },
     gargamon:{
         viewLetter: 'G',
