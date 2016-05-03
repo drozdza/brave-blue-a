@@ -185,15 +185,12 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
         if(Type!='bullet') this.Ocomp[ L ] = Side;
               else         this.Obullet[ L ] = Side;
 
-
     this.O[ L ]= O;
-
 
     if(O.squadSchemeType)
         this.prepareSquadScheme(O,L);
-
-    if(O.squadScheme)
-        this.checkSquadSchemeMakes(O);
+    if(O.prepareSquadScheme || O.squadScheme)
+        this.setSquadFull(O);
 
 
     if(Type!='shieldBlob')

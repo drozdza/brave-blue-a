@@ -333,8 +333,11 @@ ObjectPutDatas={
         lifeM: 9,
         radius: 20,
 
+        fieldCharges: 10,
+        Res: {'fieldCharges': {M:10,T:0}},
         weapon:[
-            {t:'produceSquad', gunSpeed: 100, lastShot: 100, maxSpeed: 2},
+            {t:'refilResource', resource: 'fieldCharges', gunSpeed: 16, maxSpeed: 2, FlagsRequired:{squadFull:false}, doNextWeapon: true},
+            {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, maxSpeed: 2, FlagsRequired:{squadFull:false }},
         ],
 
         squadScheme: [{
@@ -342,13 +345,14 @@ ObjectPutDatas={
             radius: 0,
             angle: 0,
             Oid: -1,
-            objData: {fieldAnim: 'ElectricityField', radius: 130, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDamage: 1, dontHit:['B','BE','E','M','ME','A']}
+            objData: {fieldAnim: 'ElectricityField', radius: 130, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDamage: 4, dontHit:['B','BE','E','M','ME','A']}
         }],
 
         AlarmLvl: 2,
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
+
     },
     hiacynt:{
         viewLetter: 'H',

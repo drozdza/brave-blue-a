@@ -1,8 +1,8 @@
 
 /*
-            {N:74,T:'alarmAboutIncomingFire', FlagsRequired:{gotHitFlag:1}, minAlarm: 5, alarmRadius: 220},
-            {N:73,T:'avoidIncomingFire', FlagsRequired:{gotHitFlag:1}, minAlarm: 2, avoidTime: 12},
-            {N:72,T:'avoidIncomingFire', FlagsRequired:{incomingFireFlag:1}, minAlarm: 5, avoidTime: 12},
+            {N:74,T:'alarmAboutIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 5, alarmRadius: 220},
+            {N:73,T:'avoidIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 2, avoidTime: 12},
+            {N:72,T:'avoidIncomingFire', FlagsRequired:{incomingFireFlag:true}, minAlarm: 5, avoidTime: 12},
 
             {N:67,T:'lowerSpeedForResources', minAlarm: 0, wantedRes: 'misslePack', wantedResR: 20, gotoSpeed: 1},
             {N:66,T:'speedUpIfResources', minAlarm: 0, wantedRes: 'misslePack', wantedResR: 20, gotoSpeed: 2},
@@ -29,9 +29,9 @@ BoardMODS={
     allAvoid:{
         who:['A','S','C','U','H'],
         toDo:[
-            {N:74,T:'alarmAboutIncomingFire', FlagsRequired:{gotHitFlag:1}, minAlarm: 5, alarmRadius: 150},
-            {N:73,T:'avoidIncomingFire', FlagsRequired:{gotHitFlag:1}, minAlarm: 2, avoidTime: 12},
-            {N:72,T:'avoidIncomingFire', FlagsRequired:{incomingFireFlag:1}, minAlarm: 5, avoidTime: 12},
+            {N:74,T:'alarmAboutIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 5, alarmRadius: 150},
+            {N:73,T:'avoidIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 2, avoidTime: 12},
+            {N:72,T:'avoidIncomingFire', FlagsRequired:{incomingFireFlag:true}, minAlarm: 5, avoidTime: 12},
         ],
     },
 

@@ -79,8 +79,10 @@ GAMEobject.prototype.decide = function(o){
     O.Flags.incomingFireFlag = false;
     O.Flags.awareAboutEnemy = false;
     O.Flags.lastSeenEnemy = -1;
+    O.Flags.squadMemberDied = false;
+    O.Flags.squadFull = true;
     */
-    // Sprawdzamy czy flagi mog� przerwa� obecne zadanie
+    // Sprawdzamy czy flagi mogą przerwać obecne zadanie
     if(O.Flags.awareAboutEnemy && O.AlarmLvl < 3){
         O.AlarmLvl = 4;
         O.doingTime = -1;
@@ -112,13 +114,12 @@ GAMEobject.prototype.decide = function(o){
             if(TD.maxSpeedLvl && TD.maxSpeedLvl < O.speedLvl) continue;
             if(TD.minSpeedLvl && TD.minSpeedLvl > O.speedLvl) continue;
 
-
             if(TD.FlagsRequired){
                 var notAllFlags = false;
                 for(var flag in TD.FlagsRequired)
-                    if(O.Flags[ flag ]===false) notAllFlags = true;
+                    if(O.Flags[ flag ] !== TD.FlagsRequired[ flag ])
+                        notAllFlags = true;
                 if(notAllFlags) continue;
-
             }
 
             if(TD.T=='lowerSpeedForResources'){
@@ -298,13 +299,6 @@ GAMEobject.prototype.decide = function(o){
         }break;
     }
 
-
-    /*
-    OBJ.weapon=[{t:'single', Power:1, Dec: 30, Speed: 10, gunSpeed: 15, lastShot: 120}];
-    OBJ.weapon=[{t:'double', Power:1, Dec: 30, Speed: 10, gunSpeed: 15, lastShot: 120}];
-    OBJ.weapon=[{t:'double2', Power:1, Dec: 30, Speed: 10, gunSpeed: 15, lastShot: 120}];
-    OBJ.weapon=[{t:'rose', Power:1, Dec: 50, Speed: 10, gunSpeed: 50, RoseAngle: 4, AtOnce: 9, lastShot: 120}];
-    */
     // Strzelamy
     if(O.weapon){
         for(var wp in O.weapon){
@@ -317,6 +311,14 @@ GAMEobject.prototype.decide = function(o){
             if(WP.gunSpeed > (this.tick-WP.lastShot)) continue;
             if(WP.doingNow && WP.doingNow != O.doingNow) continue;
             if(WP.usedRes && O[ WP.usedRes ] < WP.usedResR) continue;
+
+            if(WP.FlagsRequired){
+                var notAllFlags = false;
+                for(var flag in WP.FlagsRequired)
+                    if(O.Flags[ flag ] !== WP.FlagsRequired[ flag ])
+                        notAllFlags = true;
+                if(notAllFlags) continue;
+            }
 
 
             if(WP.t == 'getAcurateAngle'){
@@ -439,4 +441,5 @@ GAMEobject.prototype.decide = function(o){
     O.Flags.spotEnemyFlag = false;
     O.Flags.incomingFireFlag = false;
     O.Flags.gotHitFlag = false;
+    O.Flags.squadMemberDied = false;
 }

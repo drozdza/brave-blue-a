@@ -50,7 +50,6 @@ GAMEobject.prototype.prepareSquadScheme = function(O,o){
             O.squadScheme[i].Oid = -1;
         }
     }
-
 }
 GAMEobject.prototype.setSquadMember = function(o,i,life){
     var O = this.O[o];
@@ -71,8 +70,10 @@ GAMEobject.prototype.setSquadMember = function(o,i,life){
         this.Omoving[Sid]=1;
         this.bindWithSquad(o, i, Sid);
     }
+
     if(typeof OSS.objData !='undefined')
         this.addBoardMod(Sid,OSS.objData);
+        this.O[Sid].Flags=[];
 
     CanvasManager.requestCanvas( Sid );
 }
@@ -83,6 +84,7 @@ GAMEobject.prototype.bindWithSquad = function(o,i,s){
     S.squadDirectPlace = {o:o, i:i};
     S.speed = 0;
     O.squadScheme[i].Oid = s;
+    this.setSquadFull(O);
 }
 GAMEobject.prototype.unbindWithSquad = function(o,i,s){
     var oS = this.O[s];
@@ -92,7 +94,8 @@ GAMEobject.prototype.unbindWithSquad = function(o,i,s){
         O.squadScheme[i].Oid=-1;
     }
 
-
+    O.Flags['squadMemberDied']=true;
+    O.Flags['squadFull']=false;
 }
 
 GAMEobject.prototype.disbandSquad = function(O){
@@ -118,14 +121,13 @@ GAMEobject.prototype.disbandSquad = function(O){
             delete sO.squadDirectPlace;
         }
 }
-GAMEobject.prototype.checkSquadSchemeMakes = function(O){
 
-    //  0:{ angle: 0, radius: 0, id: -1, make: {What:{RoundField:1},objData:{x:0,y:-1000, angle: 0, radius: 150, colorInactive: false, colorActive: 'rgba(255,0,0,0.4)', OneTimeEffect: 1, OneTimeOffset: 10, OneTimeDetect: 1, dontHit:['B','BE','E','M','ME','A']}}}
-
+GAMEobject.prototype.setSquadFull = function(O){
+    var full = true;
     for(var i in O.squadScheme)
-        if(typeof O.squadScheme[i].make != 'undefined'){
-
-
-        }
-
+      if(O.squadScheme[i].Oid == -1){
+          full = false;
+          break;
+      }
+    O.Flags['squadFull'] = full;
 }
