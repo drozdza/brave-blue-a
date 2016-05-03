@@ -103,11 +103,6 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
 
     O.life = O.lifeM;
 
-    if(Type=='belzebub'){
-        O.speedM    = O.speed    = 5;
-        O.speedT    = 3;
-    }
-
     if(Type=='koriaz'){
         O.speedM    = O.speed    = 4;
         O.speedT    = 1;

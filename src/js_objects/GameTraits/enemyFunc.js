@@ -52,17 +52,22 @@ GAMEobject.prototype.shootHealingMissle = function(o,Target,Angle){
     this.O[L].angle = Angle;
     this.O[L].target = Target;
 }
-GAMEobject.prototype.dropSpaceMine = function(o,Angle){
+GAMEobject.prototype.dropSpaceMine = function(o,Angle,bombData){
     var O = this.O[o];
     var L = this.putObj('space_mine','comp',O.S,O.x,O.y);
     if(Angle){
         this.O[L].angle=Angle;
         this.O[L].speed=20;
         this.O[L].dec=20;
-        this.O[L].toDo='wait';
+        this.O[L].toDo=[{T:'slowDown', doingTime: 3, slowBy: 4}];
+        this.O[L].doingTime = 3;
     } else {
         delete this.Omoving[L];
     }
+    if(bombData.onHit)    this.O[L].onHit = cloneObj(bombData.onHit);
+    if(bombData.onDie)    this.O[L].onDie = cloneObj(bombData.onDie);
+    if(bombData.onExpire) this.O[L].onExpire = cloneObj(bombData.onExpire);
+
 }
 GAMEobject.prototype.shootBomb = function(o,Angle,Speed,Dec,bombData){
     var O = this.O[o];

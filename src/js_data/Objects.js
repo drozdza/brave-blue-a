@@ -628,6 +628,44 @@ ObjectPutDatas={
         viewHitPattern: 'HullFire_40',
         lifeM: 9,
         radius: 20,
+
+
+        Bombs:[{
+            onHit: {Do:'explode',Power: 4, Dist: 35},
+            onDie: {Do:'explode',Power: 4, Dist: 35},
+            onExpire: {Do:'explode',Power: 4, Dist: 35}
+        }],
+
+        weapon:[
+            {t:'dropSpaceMine', ShotMine: true, BombType: 0, gunSpeed: 120, lastShot: 100,  minAlarm: 5, minDistToEnemy: 260},
+            {t:'dropSpaceMine', gunSpeed: 750, BombType: 0, lastShot: 100,  maxAlarm: 4},
+
+        ],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70}
+        ],
+
+        speedArr:[0,
+            {S:3, T:3},
+            {S:5, T:3},
+            {S:8, T:3}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 80, RandInt: 80},
+            spotRad2: {Const: 300, RandInt: 200},
+            spotAngle2: {Const: 30, RandInt: 30}
+        },
     },
     koriaz:{
         viewLetter: 'K',

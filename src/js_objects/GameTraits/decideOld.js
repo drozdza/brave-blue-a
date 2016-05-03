@@ -10,16 +10,6 @@
         var Dist = Math.sqrt(X*X- -Y*Y);
 
         switch(O.T){
-            break; case 'belzebub':
-                if(Dist < 400 && O.ammo > 120){
-                    var Angle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
-                    this.dropSpaceMine(o,Angle);
-                    O.ammo=0;
-                }
-                if(O.ammo > 1000){
-                    this.dropSpaceMine(o);
-                    O.ammo=0;
-                }
             break; case 'orhenes':
                 if(Dist < 400 && O.ammo > 2000){
                     for(var i=0; i<8; ++i){
@@ -90,44 +80,6 @@
                 if(DistE < this.O[O.target].radius){
                     this.healObj(O.target,1,o);
                 }
-            break; case 'hiacynt':
-                if(Dist < 500 && O.toDo!='follow' && O.toDo!='rest' && O.toDo!='attack' && O.doSquad==-1){
-                    O.toDo = 'follow';
-                    O.speed = 10;
-                    O.dec = 400;
-                }
-                if(Dist < 100 && O.toDo=='follow'){
-                    O.toDo = 'attack';
-                    O.dec = 31;
-                  //  if(O.ammo > 120) O.ammo = 120;
-                }
-                if(O.toDo=='attack' && (O.dec%3)==0){
-                  //  O.ammo -= 11;
-                    var Angle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
-
-                    var L = this.putObj('hiacynt_shield','comp',O.S,O.x,O.y);
-                    this.O[L].angle = Angle - parseInt(Math.random()*40)- -20;
-                    this.O[L].speed = 16;
-                    this.O[L].dec = 70;
-                }
-                if(O.toDo=='attack' && O.dec==1){
-                    O.toDo = 'rest';
-                    O.dec = 200;
-                    O.speed = 5;
-                }
-            break; case 'hiacynt_shield':
-                if(O.dec==66 || O.dec==62 || O.dec==58 || O.dec==54 || O.dec==50 || O.dec==46 || O.dec==42 || O.dec==38)
-                    O.speed-=2;
-
-                if((O.dec==50 || O.dec==30 || O.dec==20 || O.dec==10) && O.life > 0){
-                  //  $('#O_'+o).removeClass('life'+((O.life/O.lifeM).toFixed(1)*100));
-                    O.life-=1;
-                    CanvasManager.requestCanvas( o );
-                  //  $('#O_'+o).addClass('life'+((O.life/O.lifeM).toFixed(1)*100));
-                }
-                if(O.dec==1)
-                    this.removeObj(o);
-            break;
         }
 
 

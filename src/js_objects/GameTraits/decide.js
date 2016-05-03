@@ -229,6 +229,14 @@ GAMEobject.prototype.decide = function(o){
                     }
                 }
             }
+            if(TD.T=='slowDown'){
+                if(O.speed > 0){
+                    O.speed -= TD.slowBy || 2;
+                    O.doingTime = TD.doingTime || 3;
+                } else {
+                    delete this.Omoving[o];
+                }
+            }
 
 
             if(TD.T=='die'){
@@ -488,10 +496,14 @@ GAMEobject.prototype.decide = function(o){
                 this.O[L].life = 3;
                 this.O[L].lifeM = 3;
                 CanvasManager.requestCanvas( L );
-
-
                 WP.lastShot = this.tick;
+            }
 
+            if(WP.t == 'dropSpaceMine'){
+                bombData = O.Bombs[ WP.BombType ];
+                if(WP.ShotMine) this.dropSpaceMine(o,PlayerAngle,bombData);
+                    else        this.dropSpaceMine(o,false,bombData);
+                WP.lastShot = this.tick;
             }
             /*
             if(Fx.T=='missle' && S.Missles >= Fx.MissleUse && this.missleAim!=false){
