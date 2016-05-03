@@ -19,29 +19,6 @@
                         this.shootMissle(o, (Angle- -Pe[iki])%360, (12-parseInt(iki/2)*2),(95- -parseInt(iki/2)*20),(6-parseInt(iki/2)));
                     O.ammo=0;
                 }
-            break; case 'gargamon':    // how Squad?
-                if(O.toDo!='goFollow' && O.toDo!='missleShoot' && Dist < 400 && O.ammo > 150){
-                    O.toDo='goFollow';
-                    O.dec = 31;
-                }
-                if(O.toDo=='goFollow'){
-                    var X = O.x-P.x;
-                    var Y = O.y-P.y;
-                    var Angle = parseInt(- (Math.atan2(X,Y)*180/Math.PI)- -360)%360;
-                    var Tyk = (O.angle-Angle- -360)%360;
-                    if(Tyk > 180)        O.angle = (O.angle- -360- -4) %360;
-                    else if(Tyk < 180)    O.angle = (O.angle- -360-4) %360;
-                }
-                if(O.toDo=='goFollow' && O.dec==1){
-                    O.toDo='missleShoot';
-                    O.dec=40;
-                    O.ammo=0;
-                }
-                if(O.toDo=='missleShoot' && O.ammo==0)  this.shootMissle(o,O.angle- -30,15,150);
-                if(O.toDo=='missleShoot' && O.ammo==8)  this.shootMissle(o,O.angle- -15,15,150);
-                if(O.toDo=='missleShoot' && O.ammo==16) this.shootMissle(o,O.angle     ,15,150);
-                if(O.toDo=='missleShoot' && O.ammo==24) this.shootMissle(o,O.angle - 15,15,150);
-                if(O.toDo=='missleShoot' && O.ammo==32) this.shootMissle(o,O.angle - 30,15,150);
 
             break; case 'belzebub':
                 if(Dist < 400 && O.ammo > 120){

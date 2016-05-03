@@ -109,10 +109,6 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
         O.speedT    = 2;
     }
 
-    if(Type=='orhenes'){
-        O.speedM    = O.speed    = 1;
-        O.speedT    = 1;
-    }
     if(Type=='koriaz'){
         O.speedM    = O.speed    = 4;
         O.speedT    = 1;
@@ -120,10 +116,6 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
     if(Type=='fariax'){
         O.speedM    = O.speed    = 4;
         O.speedT    = 1;
-    }
-    if(Type=='gargamon'){
-        O.speedM    = O.speed = 2;
-        O.speedT    = 1.5;
     }
     if(Type=='vitotas'){
         O.speedM    = O.speed    = 7.5- -Math.random()*1.5;
@@ -185,7 +177,6 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
 
     if(Type!='bullet')
         this.putOnXY( L );
-    if(Type=='gargamon') this.addEnergyField(L,10,120);
     return L;
 }
 
@@ -289,6 +280,7 @@ GAMEobject.prototype.putObj_directAnim = function(Type,Data){
 
     return o;
 }
+
 
 GAMEobject.prototype.removeObj = function(o,saveDiv){
     if(o==0) return false;

@@ -326,6 +326,7 @@ GAMEobject.prototype.decide = function(o){
             if(WP.minDistToEnemy && WP.minDistToEnemy < PlayerDist) continue;
             if(WP.gunSpeed > (this.tick-WP.lastShot)) continue;
             if(WP.doingNow && WP.doingNow != O.doingNow) continue;
+            if(WP.doingTime && WP.doingTime != O.doingTime) continue;
             if(WP.usedRes && O[ WP.usedRes ] < WP.usedResR) continue;
 
             if(WP.FlagsRequired){
@@ -367,6 +368,15 @@ GAMEobject.prototype.decide = function(o){
                 this.shootMissle(o,PlayerAngle- -20,15,150);
                 O[ WP.usedRes ] -= WP.usedResR;
                 WP.lastShot = this.tick;
+            }
+            if(WP.t == 'missleX5'){
+                if(O.doingTime == 32) this.shootMissle(o,O.angle- -40,15,150);
+                if(O.doingTime == 24) this.shootMissle(o,O.angle- -20,15,150);
+                if(O.doingTime == 16) this.shootMissle(o,O.angle     ,15,150);
+                if(O.doingTime == 8)  this.shootMissle(o,O.angle - 20,15,150);
+                if(O.doingTime == 0)  this.shootMissle(o,O.angle - 40,15,150);
+                WP.lastShot = this.tick;
+
             }
 
             if(WP.t == 'bomb'){

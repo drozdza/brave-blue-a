@@ -73,7 +73,7 @@ BOARDS={
             {What:{Gstar:1},objData:{x:140,y:900,bounceType:'diagonal',bounceTeleport:true}},
         ],
     },
-    '*1':{
+    '1':{
         MapRadius:60,MapRadius2:2400,
         BoardMods:['sitOnMap','allAvoid'],
         Place:[
@@ -93,63 +93,66 @@ BOARDS={
             {What:{Star:1},objData:{x:100,y:800}},
         ],
     },
-    '*A':{
+    'A':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 5, A: 25}}],
     },
-    '*U':{
+    'U':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 5, U: 6}}],
     },
-    '*S':{
+    'S':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 5, S: 8}}],
     },
-    '*I':{
+    'I':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, I: 20}}],
     },
-    '*D':{
+    'D':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, D: 10, M: 5, A: 5}}],
     },
-    '*M':{
+    'M':{
         BoardMods:['sitOnMap'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, M: 15}}],
     },
-    '*N':{
+    'N':{
         BoardMods:['sitOnMap'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, N: 15}}],
     },
-    '*J':{
+    'J':{
         BoardMods:['sitOnMap'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, J: 5}}],
     },
-    '*W':{
+    'W':{
         BoardMods:['sitOnMap'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, W: 5}}],
     },
-    '*T':{
+    'T':{
         BoardMods:['sitOnMap'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, T: 10}}],
     },
-    '*E':{
+    'E':{
         BoardMods:['sitOnMap'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, E: 10}}],
     },
-    '*C':{
+    'C':{
         BoardMods:['sitOnMap'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, C: 10}}],
     },
-    '*HardCore':{
+    'G':{
+        BoardMods:['sitOnMap'],
+        Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, G: 10}}],
+    },
+    'HardCore':{
         BoardMods:['sitOnMap','allAvoid'],
-        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5, T:10, E:10, C:10}}],
+        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5, T:10, E:10, C:10, G:10}}],
     },
     'V':{MapRadius:1100,MapRadius2:1100,O:{ V: 10, Star: 50}},
     'H':{MapRadius:1100,MapRadius2:1100,O:{ H: 10, T:10, Star: 10}},
     'B':{MapRadius:1000,MapRadius2:1000,O:{ B: 115, Star: 10}},
     'R':{MapRadius:1500,MapRadius2:1800,O:{ R: 10, Star: 10}},
-    'G':{MapRadius:1000,MapRadius2:1000,O:{ G:6, Star: 10}},
     'K':{MapRadius:1000,MapRadius2:1000,O:{ K: 5, A:15, Star: 10}},
     'F':{MapRadius:1000,MapRadius2:1000,O:{ F: 10, Q:2, A:10, Star: 10}},
     'Q':{MapRadius:1000,MapRadius2:1000,O:{ Q: 3, Star: 10}},
