@@ -199,6 +199,8 @@ GAMEobject.prototype.decide = function(o){
             if(TD.T=='followEnemy'){
                 O.doingTime = TD.doingTime || 50;
                 O.Manouver = 'followEnemy';
+                if(TD.gotoSpeed)
+                    this.changeSpeedLvl(O,TD.gotoSpeed);
             }
 
             if(TD.T=='followEnemyCloaked'){
@@ -209,6 +211,22 @@ GAMEobject.prototype.decide = function(o){
                     this.changeSpeedLvl(O,3);
                     O.viewCloaked = true;
                     CanvasManager.requestCanvas(o);
+                }
+            }
+
+            if(TD.T=='slowDownAndDie'){
+                console.log('slowDownAndDie: '+o);
+                if(O.speed > 0){
+                  O.speed -= 2;
+                  O.doingTime = 3;
+                } else {
+                    --O.life;
+                    if(O.life < 1){
+                        this.removeObj(o);
+                    }else{
+                        O.doingTime=15;
+                        CanvasManager.requestCanvas(o);
+                    }
                 }
             }
 
@@ -459,6 +477,22 @@ GAMEobject.prototype.decide = function(o){
                 }while(weMadeSomething);
             }
 
+            if(WP.t == 'shotShieldBlob'){
+                var L = this.putObj('shieldBlob','comp',O.S,O.x,O.y);
+                this.O[L].angle = PlayerAngle - parseInt(Math.random()*WP.RandAngle*2)- -WP.RandAngle;
+                this.O[L].speed = WP.Speed;
+                this.O[L].dec = WP.Dec;
+                this.O[L].Flags = [];
+                this.O[L].toDo = [{T:'slowDownAndDie'}];
+                this.O[L].doingTime = 3;
+                this.O[L].life = 3;
+                this.O[L].lifeM = 3;
+                CanvasManager.requestCanvas( L );
+
+
+                WP.lastShot = this.tick;
+
+            }
             /*
             if(Fx.T=='missle' && S.Missles >= Fx.MissleUse && this.missleAim!=false){
                 this.shipShootMissle(this.missleAim,O.angle,Fx.Speed,Fx.Dec,Fx.SpeedT,Fx.Power);

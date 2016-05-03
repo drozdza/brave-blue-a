@@ -50,6 +50,13 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
 
     if(Type!='bullet')
         O = this.putObj_fromArray(O,Type);
+    else {
+      O.speed  = 12;
+      O.angle  = 0;
+      O.radius = 4;
+      O.dec    = 30;
+      O.Power  = 1;
+    }
 
     if(O.shipVariables)
         this.putObj_shipVariables(O);
@@ -58,9 +65,9 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
         Enemy=' enemy';
         ++this.EnemiesC;
         this.Enemies[ L ] = 1;
-        O.angle        = parseInt(Math.random()*360);
-        O.mapType = 'E';
-        O.mapCollide = ['M'];
+        O.angle           = parseInt(Math.random()*360);
+        O.mapType         = 'E';
+        O.mapCollide      = ['M'];
     }
 
     if(Type=='healing_missle' || Type=='missle' || Type=='bullet_bomb' || Type=='space_mine' || Type=='shieldBlob'){
@@ -100,10 +107,6 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
         O.speedM    = O.speed    = 5;
         O.speedT    = 3;
     }
-    if(Type=='hiacynt'){
-        O.speedM    = O.speed    = 5;
-        O.speedT    = 2;
-    }
 
     if(Type=='koriaz'){
         O.speedM    = O.speed    = 4;
@@ -119,35 +122,6 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
         O.Distance = 650;
         O.Damage  = 5;
         O.LaserAim = 20;
-    }
-
-    if(Type=='bullet'){
-        O.speed    = 12;
-        O.angle    = 0;
-        O.radius   = 4;
-        O.dec      = 30;
-        O.Power    = 1;
-    }
-    if(Type=='space_mine'){
-        O.life     = 1;
-        O.speed    = 0;
-        O.angle    = 0;
-        O.radius   = 6;
-        O.dec      = 0;
-        O.ammo     = 0;
-        O.toDo     = 0;
-        O.Power    = 4;
-        O.Dist     = 35;
-    }
-
-    if(Type=='hiacynt_shield'){
-        O.life    = O.lifeM = 5;
-        O.speed    = 10;
-        O.angle    = 0;
-        O.radius= 21;
-        O.dec    = 0;
-        O.ammo    = 0;
-        O.toDo    = 0;
     }
 
 
