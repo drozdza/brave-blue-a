@@ -113,6 +113,9 @@ GAMEobject.prototype.getCollidingWithCircle = function(x,y,radius,collisionTab){
     var M = this.MapTileSize;
     var xi = X1;
 
+    // console.log(x,y,radius);
+    // console.log(collisionTab);
+
     var jestCokolwiek = false;
     for(var ColT in collisionTab)
         if(this.Omap[ collisionTab[ColT] ].elems > 0){ jestCokolwiek=true; break; }

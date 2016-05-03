@@ -345,6 +345,7 @@ GAMEobject.prototype.decide = function(o){
     if(O.weapon){
         for(var wp in O.weapon){
             var WP = O.weapon[wp];
+
             if(WP.minAlarm && WP.minAlarm > O.alarmLvl) continue;
             if(WP.maxAlarm && WP.maxAlarm < O.alarmLvl) continue;
             if(WP.maxSpeed && WP.maxSpeed < O.speedLvl) continue;
@@ -419,6 +420,19 @@ GAMEobject.prototype.decide = function(o){
                 this.shootBomb(o,PlayerAngle,WP.Speed,WP.Dec,bombData);
                 WP.lastShot = this.tick;
                 if(WP.makeAction) this.makeAction(O,o,WP.makeAction);
+            }
+
+            if(WP.t == 'laserAim'){
+                O.laserAngle = PlayerAngle;
+                O.Manouver = 'goStraight';
+                O.doingNow = 'laserAim';
+                o.doingTime = 30;
+                WP.lastShot = this.tick;
+
+            }
+            if(WP.t == 'laserShoot'){
+                this.shootLaser(o,WP.Distance,WP.Power);
+                WP.lastShot = this.tick;
             }
 
             if(WP.t == 'refilResource'){

@@ -778,6 +778,38 @@ ObjectPutDatas={
         viewAngle: 0,
         viewHitPattern: 'HullFire_20',
         lifeM: 5,
+
+        weapon:[
+            {t:'laserAim', minDistToEnemy: 400, Distance: 450, lastShot: 100, gunSpeed: 100 },
+            {t:'laserShoot', Power:4, Distance: 450, gunSpeed: 1, lastShot: 0, doingNow: 'laserAim', doingTime: 1, makeAction:{doingNow:'followEnemy', doingTime: 40}},
+        ],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:55,T:'followEnemy', minAlarm: 5},
+            {N:18,T:'changeManouver2', maxAlarm: 4, minAlarm: 3, straightMin: 20, straightPlus: 80, turnMin: 10, turnPlus: 80  },
+            {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:3, T:6},
+            {S:6, T:6},
+            {S:12, T:4}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 80, RandInt: 80},
+            spotRad2: {Const: 300, RandInt: 200},
+            spotAngle2: {Const: 30, RandInt: 30}
+        },
     },
     cloaker:{
         viewLetter: 'C',

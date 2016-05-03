@@ -33,25 +33,6 @@
 
                     }
                 }
-            break; case 'vitotas':
-                if(O.toDo!='follow' && O.toDo!='aimLaser' && O.doSquad==-1 && Dist < 400){
-                    O.toDo='follow';
-                    O.dec=600;
-                }
-                if(Dist < 400 && O.ammo > 220){
-                    O.toDo='aimLaser';
-                    var Angle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
-                    O.laserAngle = Angle;
-                    Angle =(( Angle -O.angle)- -540)%360;
-                    //  $('#O_'+o).append('<div class="object laserAiming hit_'+parseInt(this.tick/100)+'" style="height: '+O.Distance+'px; transform: rotate('+Angle+'deg);"></div>');
-                    O.ammo=0;
-                    O.dec = O.LaserAim;
-                }
-                if(O.toDo=='aimLaser' && O.dec == 1){
-                    this.shootLaser(o,O.Distance,O.Damage);
-                    if(O.doSquad==-1)
-                        O.toDo='follow';
-                }
             break; case 'fariax':
                 if(O.ammo % 10 == 0){
                     var Site='A';
