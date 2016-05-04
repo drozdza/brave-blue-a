@@ -52,13 +52,13 @@ GAMEobject.prototype.start = function(Setting,Ship){
     }
 
     this.O[0]={
-        x:0,
-        y:0,
-        speed:7,
+        x: 0,
+        y: 0,
+        speed: 7,
         speedA: 3,
         speedD: 6,
         speedM: 10,
-        speedT:3.5,
+        speedT: 3.5,
         lastSpeedT: 0,
         angle: 0,
         radius: 7,
@@ -95,10 +95,9 @@ GAMEobject.prototype.start = function(Setting,Ship){
             this.mapPlaceObj(Setting, Setting.Place[i]);
 
 
-
     if(GET.CANVAS==0){
         this.FRAME_TIME = new Date().getTime();
-        this.frame();
+        // this.frame();
         this.intervalIndex = window.requestAnimationFrame(function(){ GAME.frame(); });
     }
 }

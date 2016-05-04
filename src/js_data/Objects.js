@@ -780,9 +780,17 @@ ObjectPutDatas={
         lifeM: 5,
 
         weapon:[
-            {t:'laserAim', minDistToEnemy: 400, Distance: 450, lastShot: 100, gunSpeed: 100 },
-            {t:'laserShoot', Power:4, Distance: 450, gunSpeed: 1, lastShot: 0, doingNow: 'laserAim', doingTime: 1, makeAction:{doingNow:'followEnemy', doingTime: 40}},
+            {t:'laserAim', minDistToEnemy: 400, lastShot: 100, gunSpeed: 100, makeAction:{ doingNow:'laserAim', doingTime:30, Manouver: 'goStraight', doNotInterupt: true}},
+            {t:'laserShoot', Power:4, Distance: 450, gunSpeed: 1, lastShot: 0, doingNow: 'laserAim', doingTime: 1, makeAction:{doingNow:'followEnemy', doingTime: 40, doNotInterupt: true}},
         ],
+
+        squadScheme: [{
+            type: 'SquareField',
+            radius: 0,
+            angle: 0,
+            Oid: -1,
+            objData: {squareAngle: 20, squareLen: 450, squareWidth: 0.5, simpleFilling: 'red', dontHit:['B','BE','E','M','ME','A','R','P']}
+        }],
 
         doingNow: 'changeManouver',
         doingTime: -1,

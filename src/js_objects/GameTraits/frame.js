@@ -78,6 +78,11 @@ GAMEobject.prototype.frame_move = function(){
             O.x = Master.x- -MasterS.radius * Math.sin( (-parseInt(MasterS.angle- -Master.angle)-180)*PIx );
             O.y = Master.y- -MasterS.radius * Math.cos( (-parseInt(MasterS.angle- -Master.angle)-180)*PIx );
 
+            if(O.squadT && O.squadT == 'laserAim')
+                O.squareAngle = Master.laserAngle;
+            if(O.squareCorners)
+                O.squareCorners = this.countSquareCorners(O.x,O.y,O.squareAngle,O.squareLen,O.squareWidth);
+
             O.angle = Master.angle;
         }
         else {

@@ -20,6 +20,7 @@ GAMEobject.prototype.changeSpeedLvl = function(O,speedLvl){
 GAMEobject.prototype.makeAction = function(O,o,Action){
     if(Action.doingNow) O.doingNow = Action.doingNow;
     if(Action.doingTime) O.doingTime = Action.doingTime;
+    if(Action.doNotInterupt) O.doNotInterupt = Action.doNotInterupt;
     if(Action.Manouver)  O.Manouver = Action.Manouver;
     if(Action.gotoSpeed) this.changeSpeedLvl(O, Action.gotoSpeed);
     if(Action.unCloak){
@@ -87,24 +88,25 @@ GAMEobject.prototype.decide = function(o){
     O.Flags.squadFull = true;
     */
     // Sprawdzamy czy flagi mogą przerwać obecne zadanie
-    if(O.Flags.awareAboutEnemy && O.alarmLvl < 3){
-        O.alarmLvl = 4;
-        O.doingTime = -1;
-    }
-    if(O.Flags.spotEnemyFlag){
-        if(O.alarmLvl < 5){
-            O.alarmLvl = 5;
+    if(!O.doNotInterupt){
+        if(O.Flags.awareAboutEnemy && O.alarmLvl < 3){
+            O.alarmLvl = 4;
             O.doingTime = -1;
         }
-        O.Flags.lastSeenEnemy = this.tick;
-        O.Flags.awareAboutEnemy = true;
+        if(O.Flags.spotEnemyFlag){
+            if(O.alarmLvl < 5){
+                O.alarmLvl = 5;
+                O.doingTime = -1;
+            }
+            O.Flags.lastSeenEnemy = this.tick;
+            O.Flags.awareAboutEnemy = true;
+        }
+
+        if(O.Flags.gotHitFlag==true && O.T!='avoidIncomingFire')
+            O.doingTime = -1;
+        if(O.Flags.incomingFireFlag==true && O.T!='avoidIncomingFire')
+            O.doingTime = -1;
     }
-
-    if(O.Flags.gotHitFlag==true && O.T!='avoidIncomingFire')
-        O.doingTime = -1;
-    if(O.Flags.incomingFireFlag==true && O.T!='avoidIncomingFire')
-        O.doingTime = -1;
-
 
     // Jak się skończy czas to szukamy kolejnego zadania
     if((--O.doingTime) < 0){
@@ -215,7 +217,6 @@ GAMEobject.prototype.decide = function(o){
             }
 
             if(TD.T=='slowDownAndDie'){
-                console.log('slowDownAndDie: '+o);
                 if(O.speed > 0){
                   O.speed -= 2;
                   O.doingTime = 3;
@@ -424,13 +425,27 @@ GAMEobject.prototype.decide = function(o){
 
             if(WP.t == 'laserAim'){
                 O.laserAngle = PlayerAngle;
-                O.Manouver = 'goStraight';
-                O.doingNow = 'laserAim';
-                o.doingTime = 30;
+                this.makeAction(O,o,WP.makeAction);
+
+                if(O.squadScheme[0].Oid != -1){
+                    this.removeObj(O.squadScheme[0].Oid);
+                    O.squadScheme[0].Oid = -1;
+                }
+                var Sid = this.setSquadMember(o,0,1);
+                var oS = this.O[Sid];
+                oS.squadT = 'laserAim';
+                oS.squareAngle = O.laserAngle;
+                oS.squareCorners = this.countSquareCorners(oS.x,oS.y,oS.squareAngle,oS.squareLen,oS.squareWidth);
+
                 WP.lastShot = this.tick;
 
             }
             if(WP.t == 'laserShoot'){
+                this.makeAction(O,o,WP.makeAction);
+                if(O.squadScheme[0].Oid != -1){
+                    this.removeObj(O.squadScheme[0].Oid);
+                    O.squadScheme[0].Oid = -1;
+                }
                 this.shootLaser(o,WP.Distance,WP.Power);
                 WP.lastShot = this.tick;
             }

@@ -139,6 +139,7 @@ GAMEobject.prototype.makeOneTimeEffect = function(o,q){
     }
 }
 GAMEobject.prototype.makeDMG = function(o,DMG,q){
+    if(typeof this.O[o] == 'undefined') return 1;
     var O = this.O[o];
     if(O.life < 1) return false;
     if(O.shieldD > 0){

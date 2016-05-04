@@ -1,3 +1,4 @@
+
 GAMEobject.prototype.shootLaser = function(o,Distance,Damage,angle){
     var X,Y,Ox,Oy,Found,D,F,shipShoot=false, O = this.O[o];
 

@@ -70,12 +70,18 @@ GAMEobject.prototype.setSquadMember = function(o,i,life){
         this.Omoving[Sid]=1;
         this.bindWithSquad(o, i, Sid);
     }
+    if(OSS.type == 'SquareField'){
+        var Sid = this.putObj('SquareField','region',1,iX,iY);
+        this.Omoving[Sid]=1;
+        this.bindWithSquad(o, i, Sid);
+    }
 
     if(typeof OSS.objData !='undefined')
         this.addBoardMod(Sid,OSS.objData);
         this.O[Sid].Flags=[];
 
     CanvasManager.requestCanvas( Sid );
+    return Sid;
 }
 GAMEobject.prototype.bindWithSquad = function(o,i,s){
     var O = this.O[o];
@@ -118,6 +124,9 @@ GAMEobject.prototype.disbandSquad = function(O){
                 sO.animTick = 0;
                 sO.DieTime = this.tick- -24;
             }
+            if(sO.squadT && sO.squadT == 'laserAim'){
+                this.removeObj( O.squadScheme[i].Oid );
+            }
             delete sO.squadDirectPlace;
         }
 }
@@ -125,9 +134,9 @@ GAMEobject.prototype.disbandSquad = function(O){
 GAMEobject.prototype.setSquadFull = function(O){
     var full = true;
     for(var i in O.squadScheme)
-      if(O.squadScheme[i].Oid == -1){
-          full = false;
-          break;
-      }
+        if(O.squadScheme[i].Oid == -1){
+            full = false;
+            break;
+        }
     O.Flags['squadFull'] = full;
 }
