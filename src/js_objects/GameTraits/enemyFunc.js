@@ -46,11 +46,11 @@ GAMEobject.prototype.shootMissle = function(o,Angle,Speed,Dec,SpeedT){
     this.O[L].angle = Angle;
     this.O[L].speedT = SpeedT || 3;
 }
-GAMEobject.prototype.shootHealingMissle = function(o,Target,Angle){
+GAMEobject.prototype.shootHealingMissle = function(o,Target){
     var O = this.O[o];
     var L = this.putObj('healing_missle','comp',O.S,O.x,O.y);
-    this.O[L].angle = Angle;
-    this.O[L].target = Target;
+    this.O[L].angle = O.angle;
+    this.O[L].FollowWho = Target;
 }
 GAMEobject.prototype.dropSpaceMine = function(o,Angle,bombData){
     var O = this.O[o];

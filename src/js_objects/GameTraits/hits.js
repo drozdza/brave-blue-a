@@ -17,9 +17,9 @@ GAMEobject.prototype.hit = function(o,q,DMG){
     var Q = this.O[q];
     if(typeof O=='undefined') return 1;
 
-    if(O.T=='star'){            var U=Q; Q=O; O=U; }
-    if(O.T=='Gstar'){            var U=Q; Q=O; O=U; }
-    if(Q.T=='bullet'){            var U=Q; Q=O; O=U; }
+    if(O.T=='star'){   var U=Q; Q=O; O=U; }
+    if(O.T=='Gstar'){  var U=Q; Q=O; O=U; }
+    if(Q.T=='bullet'){ var U=Q; Q=O; O=U; }
 
     if(O.dontHit){ for(var i=0; i<O.dontHit.length; ++i) if(O.dontHit[i]==Q.mapType) return 1; }
     if(Q.dontHit){ for(var i=0; i<Q.dontHit.length; ++i) if(Q.dontHit[i]==O.mapType) return 1; }
@@ -35,6 +35,12 @@ GAMEobject.prototype.hit = function(o,q,DMG){
 
     if(O.teleportOnHit){ this.region_teleportOnHit(O,q); return 1; }
     if(Q.teleportOnHit){ this.region_teleportOnHit(Q,o); return 1; }
+
+    if(O.T=='healing_missle' && O.FollowWho == q){
+        if(!this.healObj(q,1,o))
+            this.removeObj(o);
+        return 1;
+    }
 
     if((Q.T=='star' || Q.T=='shieldBlob') && O.T=='ship')
         if(O.speed > 3) O.speed=3;
@@ -219,7 +225,7 @@ GAMEobject.prototype.healObj = function(q,DMG,o){
     var Q = this.O[q];
     if(Q.life == Q.lifeM) return false;
     if(o){
-        this.putObj_animation('hit_blue', this.O[o].x, this.O[o].y);
+        this.putObj_animation('hit_healing', this.O[o].x, this.O[o].y);
         this.removeObj(o);
     } else{
         this.putObj_animation('hit_healing', Q.x, Q.y);

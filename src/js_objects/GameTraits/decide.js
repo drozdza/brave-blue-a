@@ -537,9 +537,18 @@ GAMEobject.prototype.decide = function(o){
 
             if(WP.t == 'addShield'){
                 var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
-                console.log(inRange);
                 for(var i in inRange)
                     this.addShield(i,WP.shieldTime);
+                WP.lastShot = this.tick;
+            }
+            if(WP.t == 'shootHealingMissle'){
+                  var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
+                  for(var i in inRange)
+                      if(this.O[i].life < this.O[i].lifeM){
+                          this.shootHealingMissle(o,i);
+                          WP.lastShot = this.tick;
+                          break;
+                      }
             }
             /*
             if(Fx.T=='missle' && S.Missles >= Fx.MissleUse && this.missleAim!=false){

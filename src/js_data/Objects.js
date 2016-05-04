@@ -2,7 +2,7 @@ ObjectPutDatas={
     healing_missle:{
         viewLetter: 'J',
         viewLetterSize: 12,
-        viewColor: '0f0',
+        viewColor: '#0f0',
         viewAngle: 180,
 
         lifeM: 1,
@@ -10,6 +10,7 @@ ObjectPutDatas={
         speedT: 20,
         Power: 1,
         doingTime: 230,
+        onHit:{},
         toDo: [{T:'die'}],
         Manouver: 'followEntity',
         Flags:{},
@@ -690,9 +691,9 @@ ObjectPutDatas={
         ],
 
         speedArr:[0,
-            {S:1, T:1},
-            {S:2, T:1.5},
-            {S:7, T:0.2}
+            {S:2, T:1},
+            {S:4, T:1},
+            {S:5, T:1}
         ],
         spotTick: 8,
         spotArr: [0,
@@ -715,6 +716,37 @@ ObjectPutDatas={
         viewHitPattern: 'HullFire_40',
         lifeM: 9,
         radius: 20,
+
+
+        shieldDimmune:true,
+        weapon:[
+            {t:'shootHealingMissle', Radius: 350, gunSpeed: 20, lastShot: 100},
+        ],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:1, T:1},
+            {S:2, T:1.5},
+            {S:7, T:0.2}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 180, RandInt: 80},
+            spotRad2: {Const: 400, RandInt: 200},
+            spotAngle2: {Const: 40, RandInt: 30}
+        },
     },
     dregos:{
         viewLetter: 'U',
@@ -797,9 +829,9 @@ ObjectPutDatas={
         ],
 
         speedArr:[0,
-            {S:3, T:6},
-            {S:6, T:6},
-            {S:12, T:4}
+          {S: {shipVar:'speed',Add:-4}, T:{shipVar:'speedT'}},
+          {S: {shipVar:'speed'}, T:{shipVar:'speedT'}},
+          {S: {shipVar:'speed',Add:3}, T:{shipVar:'speedT'}}
         ],
         spotTick: 8,
         spotArr: [0,
@@ -809,6 +841,8 @@ ObjectPutDatas={
         ],
 
         shipVariables:{
+            speed: {Const: 7.5, Rand: 1.5},
+            speedT: {Const: 2, Rand: 2},
             spotRad: {Const: 80, RandInt: 80},
             spotRad2: {Const: 300, RandInt: 200},
             spotAngle2: {Const: 30, RandInt: 30}

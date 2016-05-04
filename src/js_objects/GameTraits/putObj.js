@@ -101,24 +101,11 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
         O.mapCollide = ['P','E','M','ME','A'];
     }
 
+    if(O.T=='healing_missle'){
+        O.mapCollide = ['E'];
+    }
+
     O.life = O.lifeM;
-
-    if(Type=='koriaz'){
-        O.speedM    = O.speed    = 4;
-        O.speedT    = 1;
-    }
-    if(Type=='fariax'){
-        O.speedM    = O.speed    = 4;
-        O.speedT    = 1;
-    }
-    if(Type=='vitotas'){
-        O.speedM    = O.speed    = 7.5- -Math.random()*1.5;
-        O.speedT    = 2- -Math.random()*2;
-        O.Distance = 650;
-        O.Damage  = 5;
-        O.LaserAim = 20;
-    }
-
 
     if(Mode!='static' && Mode!='region')
         this.Omoving[ L ] = 1;
