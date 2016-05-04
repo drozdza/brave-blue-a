@@ -20,19 +20,6 @@
                     }
                     O.ammo=0;
                 }
-            break; case 'koriaz':
-                if(O.ammo % 13 == 0){
-                    var Site='A';
-                    if(O.S==2) Site='B';
-                    for(var q in this['Osite'+Site]){
-                        var mX = O.x-this.O[q].x;
-                        var mY = O.y-this.O[q].y;
-                        if(Math.sqrt(mX*mX- -mY*mY) < 500){
-                            this.addShield(q,14);
-                        }
-
-                    }
-                }
             break; case 'fariax':
                 if(O.ammo % 10 == 0){
                     var Site='A';

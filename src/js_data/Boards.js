@@ -161,11 +161,14 @@ BOARDS={
         BoardMods:['sitOnMap'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, V:10}}],
     },
+    'K':{
+        BoardMods:['sitOnMap'],
+        Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, K:10, A:10, D:3, J:3, G:3}}],
+    },
     'HardCore':{
         BoardMods:['sitOnMap','allAvoid'],
-        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5, T:10, E:10, C:10, G:10, R:10, H:10, B:10, V:10}}],
+        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5, T:10, E:10, C:10, G:10, R:10, H:10, B:10, V:10, K:10}}],
     },
-    'K':{MapRadius:1000,MapRadius2:1000,O:{ K: 5, A:15, Star: 10}},
     'F':{MapRadius:1000,MapRadius2:1000,O:{ F: 10, Q:2, A:10, Star: 10}},
     'Q':{MapRadius:1000,MapRadius2:1000,O:{ Q: 3, Star: 10}},
     'ShieldTest':{MapRadius:1500,MapRadius2:1500,GiveEnergyFields:25,O:{ F: 2, U:2, Q:1, T:2, K:1,C:1,B:1,N:1,M:1, A:5, Star: 20}},

@@ -265,8 +265,6 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
 }
 GAMEobject.prototype.addShield = function(o,Duration){
     var O = this.O[o];
-    if(O.T=='koriaz' || O.T=='dandares' || O.T=='star' || O.T=='starG' || O.T=='missle') return false;
-    //  if(typeof O.shieldD == 'undefined' || O.shieldD < 0)
-    //      $('#O_'+o).append('<div class="shield"></div>');
+    if(O.shieldDimmune) return false;
     O.shieldD = Duration;
 }

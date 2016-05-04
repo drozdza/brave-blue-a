@@ -361,6 +361,7 @@ ObjectPutDatas={
         lifeM: 7,
         radius: 20,
 
+        shieldDimmune:true,
         prodSquad: 5,
         Res: {'prodSquad': {M:5,T:0}},
         weapon:[
@@ -676,21 +677,15 @@ ObjectPutDatas={
         lifeM: 7,
         radius: 10,
 
-        energyField: 10,
-        misslePack: 0,
-        Res: {'energyField': {M:10,T:0}, 'misslePack': {M:10,T:0}},
+        shieldDimmune:true,
         weapon:[
-            {t:'refilResource', resource: 'energyField', gunSpeed: 120, maxSpeed: 2, doNextWeapon: true},
-            {t:'refilResource', resource: 'misslePack', gunSpeed: 18, maxSpeed: 2, doNextWeapon: true},
-            {t:'changeAction', makeAction: {doingNow:'shooting', doingTime: 33, Manouver:'goStraight'}, doingNow:'followEnemy', doingTime:1, usedRes:'misslePack', usedResR: 10},
-            {t:'missleX5', Power:1, Dec: 25, Speed: 14, gunSpeed: 8, lastShot: 0, doingNow:'shooting', minDistToEnemy: 500},
+            {t:'addShield', Radius: 500, shieldTime: 15, gunSpeed: 15, lastShot: 100},
         ],
 
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
         toDo: [
-            {N:55,T:'followEnemy', minAlarm: 5, doingTime: 40, usedRes:'misslePack', usedResR: 10},
             {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
         ],
 

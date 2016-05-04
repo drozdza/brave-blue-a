@@ -534,6 +534,13 @@ GAMEobject.prototype.decide = function(o){
                     else        this.dropSpaceMine(o,false,bombData);
                 WP.lastShot = this.tick;
             }
+
+            if(WP.t == 'addShield'){
+                var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
+                console.log(inRange);
+                for(var i in inRange)
+                    this.addShield(i,WP.shieldTime);
+            }
             /*
             if(Fx.T=='missle' && S.Missles >= Fx.MissleUse && this.missleAim!=false){
                 this.shipShootMissle(this.missleAim,O.angle,Fx.Speed,Fx.Dec,Fx.SpeedT,Fx.Power);
@@ -552,4 +559,7 @@ GAMEobject.prototype.decide = function(o){
     O.Flags.incomingFireFlag = false;
     O.Flags.gotHitFlag = false;
     O.Flags.squadMemberDied = false;
+
+    if(--O.shieldD < 1)
+        delete O.shieldD;
 }

@@ -166,7 +166,7 @@ GAMEobject.prototype.frame_draw = function(){
                 CH.rotate(Radi*O.angle);
             CH.drawImage(O.canvasId,-O.canvasX,-O.canvasY);
 
-            if(O.energyField && O.energyField > 0){
+            if(O.energyField && O.energyField > 0 && !O.shieldD){
                 CH.beginPath();
                 var Radius = O.radius;
                 var lineWidth = O.energyField;
@@ -183,6 +183,18 @@ GAMEobject.prototype.frame_draw = function(){
                 }
                 CH.arc(0,0,Radius- -parseInt(lineWidth/2),0,Math.PI*2,true);
                 CH.lineWidth = lineWidth;
+                CH.stroke();
+                CH.fill();
+            }
+            if(O.shieldD){
+                CH.beginPath();
+                var Radius = O.radius;
+
+                CH.strokeStyle = 'rgba(100,180,255,0.8)';
+                CH.fillStyle = 'rgba(100,180,255,0.2)';
+
+                CH.arc(0,0,Radius- -1,0,Math.PI*2,true);
+                CH.lineWidth = 2;
                 CH.stroke();
                 CH.fill();
             }
