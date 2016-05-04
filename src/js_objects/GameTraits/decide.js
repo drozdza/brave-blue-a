@@ -544,6 +544,7 @@ GAMEobject.prototype.decide = function(o){
             if(WP.t == 'shootHealingMissle'){
                   var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
                   for(var i in inRange)
+                      if(i != o)
                       if(this.O[i].life < this.O[i].lifeM){
                           this.shootHealingMissle(o,i);
                           WP.lastShot = this.tick;
