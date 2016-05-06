@@ -58,11 +58,8 @@ BBAdata['ObjectDatas']={
         toDo:0,
 
         lifeM: 1,
-        onHit: {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 24, NailsSpeed: 6, NailsSpeedPlus: 0, NailsDec: 45, NailsDecPlus: 0, NailsAngleCenter: 8, NailsAngleBoth: 1, NailsNeutral: true},
-        onDie: {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 24, NailsSpeed: 6, NailsSpeedPlus: 0, NailsDec: 45, NailsDecPlus: 0, NailsAngleCenter: 8, NailsAngleBoth: 1, NailsNeutral: true},
 
-        // onHit: {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 24, NailsSpeed: 4, NailsSpeedPlus: 6, NailsDec: 16, NailsDecPlus: 6, NailsNeutral: true},
-        // onDie: {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 24, NailsSpeed: 4, NailsSpeedPlus: 6, NailsDec: 16, NailsDecPlus: 6, NailsNeutral: true},
+        explosivePreset: 'NailedMine2',
 
         squadScheme: {
             0:{ angle: 0, radius: 0, id: -1, placementT:'directPlaces', make: {What:{RoundField:1},objData:{x:0,y:-1000, angle: 0, radius: 150, colorInactive: false, colorActive: 'rgba(255,0,0,0.4)', OneTimeEffect: 1, OneTimeOffset: 10, OneTimeDetect: 1, dontHit:['B','BE','E','M','ME','A']}}}
@@ -233,9 +230,7 @@ BBAdata['ObjectDatas']={
         radius: 20,
 
         Bombs:[{
-            onHit: {Do:'explode',Power: 4, Dist: 35},
-            onDie: {Do:'explode',Power: 4, Dist: 35},
-            onExpire: {Do:'explode',Power: 4, Dist: 35}
+            onHitDieExpire:    {Do:'explode',Power: 4, Dist: 35},
         }],
 
         weapon:[{t:'bomb', Speed: 10, Dec: 50, BombType: 0, gunSpeed: 40, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}],
@@ -274,55 +269,7 @@ BBAdata['ObjectDatas']={
         lifeM: 11,
         radius: 23,
 
-        Bombs:[{
-            onHit: {Do:'explode',Power: 4, Dist: 35},
-            onDie: {Do:'explode',Power: 4, Dist: 35},
-            onExpire: {Do:'explode',Power: 4, Dist: 35, Shards:[
-                {   Dec: 8, Speed: 7, Angle: -30,
-                    onHit: {Do:'explode',Power: 4, Dist: 35},
-                    onDie: {Do:'explode',Power: 4, Dist: 35},
-                    onExpire: {Do:'explode',Power: 4, Dist: 35, Shards:[
-                        {   Dec: 8, Speed: 7, Angle: -15,
-                            onHit: {Do:'explode',Power: 4, Dist: 35},
-                            onDie: {Do:'explode',Power: 4, Dist: 35},
-                            onExpire: {Do:'explode',Power: 4, Dist: 35, Shards:[
-                                {   Dec: 12, Speed: 5, Angle: 0,
-                                    onHit: {Do:'explode',Power: 4, Dist: 80},
-                                    onDie: {Do:'explode',Power: 4, Dist: 80},
-                                    onExpire: {Do:'explode',Power: 4, Dist: 80},
-                                }]
-                            },
-                        }]
-                    }
-                },{ Dec: 16, Speed: 7, Angle: 0,
-                    onHit: {Do:'explode',Power: 4, Dist: 80},
-                    onDie: {Do:'explode',Power: 4, Dist: 80},
-                    onExpire: {Do:'explode',Power: 4, Dist: 80, Shards:[
-                        {   Dec: 12, Speed: 7, Angle: 0,
-                            onHit: {Do:'explode',Power: 4, Dist: 120},
-                            onDie: {Do:'explode',Power: 4, Dist: 120},
-                            onExpire: {Do:'explode',Power: 4, Dist: 120},
-                        }]
-                    }
-                },{ Dec: 8, Speed: 7, Angle: 30,
-                    onHit: {Do:'explode',Power: 4, Dist: 35},
-                    onDie: {Do:'explode',Power: 4, Dist: 35},
-                    onExpire: {Do:'explode',Power: 4, Dist: 35, Shards:[
-                        {   Dec: 8, Speed: 7, Angle: 15,
-                            onHit: {Do:'explode',Power: 4, Dist: 35},
-                            onDie: {Do:'explode',Power: 4, Dist: 35},
-                            onExpire: {Do:'explode',Power: 4, Dist: 35, Shards:[
-                                {   Dec: 12, Speed: 5, Angle: 0,
-                                    onHit: {Do:'explode',Power: 4, Dist: 80},
-                                    onDie: {Do:'explode',Power: 4, Dist: 80},
-                                    onExpire: {Do:'explode',Power: 4, Dist: 80},
-                                }]
-                            },
-                        }]
-                    }
-                }
-            ]}
-        }],
+        Bombs:[{ explosivePreset:'WarasteinExploCone' }],
 
         weapon:[{t:'bomb', Speed: 10, Dec: 12, BombType: 0, gunSpeed: 140, lastShot: 100, maxSpeed: 2, makeAction: {Manuover: 'goStraight', doingTime:55, gotoSpeed:1}, minAlarm: 5, minDistToEnemy: 400}],
 
@@ -990,26 +937,10 @@ BBAdata['ObjectDatas']={
         radius: 40,
 
         Bombs:[
-            {
-                onHit: {Do:'explode',Power: 4, Dist: 35},
-                onDie: {Do:'explode',Power: 4, Dist: 35},
-                onExpire: {Do:'explode',Power: 4, Dist: 35}
-            },
-            {
-                onHit: {Do:'explode',Power: 7, Dist: 80},
-                onDie: {Do:'explode',Power: 7, Dist: 80},
-                onExpire: {Do:'explode',Power: 7, Dist: 80}
-            },
-            {
-                onHit: {Do:'explode',Power: 11, Dist: 120},
-                onDie: {Do:'explode',Power: 11, Dist: 120},
-                onExpire: {Do:'explode',Power: 11, Dist: 120}
-            },
-            {
-                onHit: {Do:'explode',Power: 18, Dist: 210},
-                onDie: {Do:'explode',Power: 18, Dist: 210},
-                onExpire: {Do:'explode',Power: 18, Dist: 210}
-            }
+            { explosivePreset:'ExplosionSize1' },
+            { explosivePreset:'ExplosionSize2' },
+            { explosivePreset:'ExplosionSize3' },
+            { explosivePreset:'ExplosionSize4' }
         ],
 
         energyField: 20,

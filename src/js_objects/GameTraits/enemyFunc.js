@@ -64,10 +64,8 @@ GAMEobject.prototype.dropSpaceMine = function(o,Angle,bombData){
     } else {
         delete this.Omoving[L];
     }
-    if(bombData.onHit)    this.O[L].onHit = cloneObj(bombData.onHit);
-    if(bombData.onDie)    this.O[L].onDie = cloneObj(bombData.onDie);
-    if(bombData.onExpire) this.O[L].onExpire = cloneObj(bombData.onExpire);
 
+    this.cloneExplosionData(bombData, this.O[L]);
 }
 GAMEobject.prototype.shootBomb = function(o,Angle,Speed,Dec,bombData){
     var O = this.O[o];
@@ -76,9 +74,7 @@ GAMEobject.prototype.shootBomb = function(o,Angle,Speed,Dec,bombData){
     this.O[L].doingTime = Dec || 30;
     this.O[L].angle = Angle;
 
-    if(bombData.onHit)    this.O[L].onHit = cloneObj(bombData.onHit);
-    if(bombData.onDie)    this.O[L].onDie = cloneObj(bombData.onDie);
-    if(bombData.onExpire) this.O[L].onExpire = cloneObj(bombData.onExpire);
+    this.cloneExplosionData(bombData, this.O[L]);
 }
 GAMEobject.prototype.explodeBomb = function(o,explodeObj){
     var i,L,O = this.O[o];
@@ -155,6 +151,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
         this.O[L].undestructible=1;
         this.putObj_animation('explosion_'+explodeObj.Dist, O.x, O.y);
     }
+
     if(explodeObj.Shards)
         if(explodeObj.ShardsNum){
             var iRad = parseInt(Math.random()*360);
@@ -168,9 +165,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
                 if(explodeObj.Shards.DecPlus)
                     this.O[ L ].doingTime-=-parseInt(Math.random()*explodeObj.Shards.DecPlus);
 
-                if(explodeObj.Shards.onHit)        this.O[L].onHit = cloneObj( explodeObj.Shards.onHit );
-                if(explodeObj.Shards.onDie)        this.O[L].onDie = cloneObj( explodeObj.Shards.onDie );
-                if(explodeObj.Shards.onExpire)    this.O[L].onExpire = cloneObj( explodeObj.Shards.onExpire );
+                this.cloneExplosionData(explodeObj.Shards, this.O[L]);
             }
         } else {
             for(i in explodeObj.Shards){
@@ -179,89 +174,28 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
                 this.O[L].speed = explodeObj.Shards[i].Speed;
                 this.O[L].doingTime = explodeObj.Shards[i].Dec;
 
-                this.O[L].onHit = cloneObj( explodeObj.Shards[i].onHit );
-                this.O[L].onExpire = cloneObj( explodeObj.Shards[i].onExpire );
+                this.cloneExplosionData( explodeObj.Shards[i], this.O[L] );
             }
         }
 
     this.removeObj(o);
+}
+GAMEobject.prototype.cloneExplosionData = function(D,O){
+    if(D.onHit)    O.onHit    = cloneObj( D.onHit );
+    if(D.onDie)    O.onDie    = cloneObj( D.onDie );
+    if(D.onExpire) O.onExpire = cloneObj( D.onExpire );
+    if(D.onHitDieExpire){
+        O.onHit    = cloneObj( D.onHitDieExpire );
+        O.onDie    = cloneObj( D.onHitDieExpire );
+        O.onExpire = cloneObj( D.onHitDieExpire );
+    }
 
-    /*
-    this.O[L].onHit = {Do:'explode',Power: 4, Dist: 35};
-    this.O[L].onExpire = {Do:'explode',Power: 4, Dist: 35, ShardsNum: 5, Shards:{
-        onHit: {Do:'explode',Power: 4, Dist: 35},
-        onDie: {Do:'explode',explodeType: 'nails', NailsRad: 12, NailsSpeed: 5, NailsSpeedPlus: 5, NailsDec: 2, NailsDecPlus: 6},
-        Dec: 12,
-        DecPlus: 10,
-        Speed: 3,
-        SpeedPlus: 3,
-    }};
-
-    {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 8, NailsSpeed: 10, NailsSpeedPlus: 0, NailsDec: 36, NailsDecPlus: 10, NailsAngleCenter: 8, NailsAngleBoth: 1};
-
-    this.O[L].onExpire = {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 12, NailsSpeed: 5, NailsSpeedPlus: 5, NailsDec: 6, NailsDecPlus: 6};
-
-    this.O[L].onExpire = {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 8, NailsSpeed: 5, NailsSpeedPlus: 5, NailsDec: 36, NailsDecPlus: 6, NailsAngleCenter: 8};
-
-    this.O[L].onExpire = {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 8, NailsSpeed: 0, NailsSpeedPlus: 10, NailsDec: 36, NailsDecPlus: 6, NailsAngleCenter: 8, NailsAngleBoth: 1};
-
-    this.O[L].onHit = this.O[L].onExpire = this.O[L].onDie = {Do:'explode',explodeType: 'nailsCone', Nails: 40, NailsRad: 220, NailsSpeed: 5, NailsSpeedPlus: 2, NailsDec: 28, NailsDecPlus: 6, NailsAngleCenter: 3};
-
-    Bullet mine:
-    onHit: {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 24, NailsSpeed: 4, NailsSpeedPlus: 6, NailsDec: 16, NailsDecPlus: 6, NailsNeutral: true},
-    onDie: {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 24, NailsSpeed: 4, NailsSpeedPlus: 6, NailsDec: 16, NailsDecPlus: 6, NailsNeutral: true}
-
-
-    this.O[L].onExpire = {Do:'explode',explodeType: 'nailsCone', Nails: 20, NailsRad: 30, NailsSpeed: 5, NailsSpeedPlus: 5, NailsDec: 6, NailsDecPlus: 6};
-
-    this.O[L].onExpire = {Do:'explode',explodeType: 'nailsCone', Nails: 20, NailsRad: 120, NailsSpeed: 5, NailsSpeedPlus: 2, NailsDec: 28, NailsDecPlus: 6, NailsAngleCenter: 3};
-
-    this.O[L].onExpire = {Do:'explode',explodeType: 'roundField', radius:200, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 40, PeriodOffset: 50, dontHit:['B','BE']};
-
-    this.O[L].onHit = {Do:'explode',Power: Power || 4, Dist: Dist || 35};
-    this.O[L].onExpire = {Do:'explode',explodeType: 'roundField', radius:80, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300};
-    this.O[L].onDie = {Do:'explode',explodeType: 'roundField', radius:30, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300};
-
-
-    this.O[L].onExpire = {Do:'explode',Power: 4, Dist: 35, Shards:[
-        {    Dec: 8, Speed: 7, Angle: -30,
-            onHit: {Do:'explode',Power: 4, Dist: 35},
-            onDie: {Do:'explode',Power: 4, Dist: 35, Shards:[
-                {    Dec: 8, Speed: 7, Angle: -15,
-                    onHit: {Do:'explode',Power: 4, Dist: 35},
-                    onDie: {Do:'explode',Power: 4, Dist: 35, Shards:[
-                        {    Dec: 12, Speed: 5, Angle: 0,
-                            onHit: {Do:'explode',Power: 4, Dist: 80},
-                            onDie: {Do:'explode',Power: 4, Dist: 80},
-                        }]
-                    },
-                }]
-            }
-        },{    Dec: 16, Speed: 7, Angle: 0,
-            onHit: {Do:'explode',Power: 4, Dist: 80},
-            onDie: {Do:'explode',Power: 4, Dist: 80, Shards:[
-                {    Dec: 12, Speed: 7, Angle: 0,
-                    onHit: {Do:'explode',Power: 4, Dist: 120},
-                    onDie: {Do:'explode',Power: 4, Dist: 120},
-                }]
-            }
-        },{    Dec: 8, Speed: 7, Angle: 30,
-            onHit: {Do:'explode',Power: 4, Dist: 35},
-            onDie: {Do:'explode',Power: 4, Dist: 35, Shards:[
-                {    Dec: 8, Speed: 7, Angle: 15,
-                    onHit: {Do:'explode',Power: 4, Dist: 35},
-                    onDie: {Do:'explode',Power: 4, Dist: 35, Shards:[
-                        {    Dec: 12, Speed: 5, Angle: 0,
-                            onHit: {Do:'explode',Power: 4, Dist: 80},
-                            onDie: {Do:'explode',Power: 4, Dist: 80},
-                        }]
-                    },
-                }]
-            }
-        }]
-    };
-    */
-
+    if(D.explosivePreset)
+        this.cloneExplosionData(BBAdata['ExplosivesPresets'][ D.explosivePreset ], O);
+    if(D.exploAddTo)
+        for(var onX in D.exploAddTo)
+            for(var addX in D.exploAddTo[onX])
+                O[onX][addX] = cloneObj(D.exploAddTo[onX][addX]);
 }
 GAMEobject.prototype.addShield = function(o,Duration){
     var O = this.O[o];

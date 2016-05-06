@@ -19,7 +19,7 @@ BBAdata['SHIPpresets']={
         MouseDown1: false,
         MouseDown2: false,
         FireTypes:[
-            {T:'single',  gunS:0,GunSpeed: 5, Speed: 17, Dec: 30, Use:{'Ammo':5}, Power: 1},
+            {T:'single',  gunS:0,GunSpeed: 5, Speed: 17, Dec: 30, Use:{'Ammo':1}, Power: 1},
             {T:'rose',    gunS:0,GunSpeed: 4, AtOnce: 9, Use:{'Ammo':5}, RoseAngle: 3, Speed: 15, Dec: 30, Power: 1},
         ],
         Modules:[

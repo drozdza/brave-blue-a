@@ -11,17 +11,20 @@ GAMEobject.prototype.putObj_fromArray = function(O){
     if(isEnemyShip){
         for(var i in BBAdata['ObjectDatas'].enemyShip){
             var X = BBAdata['ObjectDatas'].enemyShip[i];
-            if(typeof X == 'object')    O[i] = cloneObj(X);
-                else                     O[i] = X;
+            if(typeof X == 'object') O[i] = cloneObj(X);
+                else                 O[i] = X;
         }
     }
     if(typeof BBAdata['ObjectDatas'][O.T] != 'undefined'){
         for(var i in BBAdata['ObjectDatas'][O.T]){
             var X = BBAdata['ObjectDatas'][O.T][i];
-            if(typeof X == 'object')    O[i] = cloneObj(X);
-                else                     O[i] = X;
+            if(typeof X == 'object') O[i] = cloneObj(X);
+                else                 O[i] = X;
         }
     }
+
+    if(O.explosivePreset || O.exploAddTo || O.onHitDieExpire)
+        this.cloneExplosionData(O, O);
 
     return O;
 }
