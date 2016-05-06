@@ -114,4 +114,12 @@ BBAdata['ExplosivesPresets']={
         onHitDieExpire: {Do:'explode',explodeType: 'roundField', radius:80, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300},
     },
 
+    DestructionFieldSmall:{
+        onHitDieExpire: {Do:'explode',explodeType: 'roundField', radius:35, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300},
+    },
+
+    MissileDestructionFieldSmall:{
+        onHit:    {Do:'explode',explodeType: 'roundField', radius:50, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300},
+        onExpire: {Do:'explode',explodeType: 'roundField', radius:50, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300},
+    },
 };

@@ -315,7 +315,7 @@ GAMEobject.prototype.decide_ship = function(e){
             shotDone = true;
         }
         if(Fx.T=='missle' && this.missleAim!=false){
-            this.shipShootMissle(this.missleAim,O.angle,Fx.Speed,Fx.Dec,Fx.SpeedT,Fx.Power);
+            this.shipShootMissle(this.missleAim,O.angle,Fx.Speed,Fx.Dec,Fx.SpeedT,Fx);
             shotDone = true;
         }
         if(Fx.T=='missleR' && this.missleAim!=false){
@@ -323,11 +323,11 @@ GAMEobject.prototype.decide_ship = function(e){
             var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -180)%360;
 
             for(var iki=0; iki<Fx.AtOnce; ++iki)
-                this.shipShootMissle(this.missleAim, (Angle- -Pe[iki])%360, (Fx.Speed-parseInt(iki/2)*2),(Fx.Dec- -parseInt(iki/2)*20),(Fx.SpeedT-parseInt(iki/2)),Fx.Power);
+                this.shipShootMissle(this.missleAim, (Angle- -Pe[iki])%360, (Fx.Speed-parseInt(iki/2)*2),(Fx.Dec- -parseInt(iki/2)*20),(Fx.SpeedT-parseInt(iki/2)),Fx);
             shotDone = true;
         }
         if(Fx.T=='bomb'){
-            this.shipShootBomb(Fx.Speed,Fx.Dec,Fx.Power,Fx.Dist);
+            this.shipShootBomb(Fx.Speed,Fx.Dec,Fx);
             shotDone = true;
         }
         if(Fx.T=='laser' && LaserMod!=false){

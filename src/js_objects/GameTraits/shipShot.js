@@ -17,7 +17,7 @@ GAMEobject.prototype.shipShootOnSide = function(SideAngle,SideDist,Speed,Dec,Pow
     this.O[L].angle = Angle;
     this.O[L].Power = Power;
 }
-GAMEobject.prototype.shipShootMissle = function(Enemy,Angle,Speed,Dec,SpeedT,Power){
+GAMEobject.prototype.shipShootMissle = function(Enemy,Angle,Speed,Dec,SpeedT,destrData){
     var O = this.O[0];
     var E = this.O[Enemy];
 
@@ -26,13 +26,14 @@ GAMEobject.prototype.shipShootMissle = function(Enemy,Angle,Speed,Dec,SpeedT,Pow
     this.O[L].speedT = SpeedT || 3;
     this.O[L].doingTime = Dec || 30;
     this.O[L].FollowWho = Enemy;
-    this.O[L].Power = Power;
     this.O[L].angle = Angle;
-    this.O[L].onHit = {Do:'explode',Power: 3,Dist: 35};
-    // this.O[L].onDie = {Do:'explode',Power: 3,Dist: 35};
-    this.O[L].onExpire = {Do:'explode',Power: 3,Dist: 35};
+
+    if(destrData.Power)
+        this.O[L].Power = destrData.Power;
+    if(destrData.explosivePreset)
+        this.cloneExplosionData(destrData, this.O[L]);
 }
-GAMEobject.prototype.shipShootBomb = function(Speed,Dec,Power,Dist){
+GAMEobject.prototype.shipShootBomb = function(Speed,Dec,bombData){
     var O = this.O[0];
     var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -180)%360;
     var L = this.putObj('bullet_bomb','comp',O.S,O.x,O.y);
@@ -40,7 +41,7 @@ GAMEobject.prototype.shipShootBomb = function(Speed,Dec,Power,Dist){
     this.O[L].doingTime = Dec || 30;
     this.O[L].angle = Angle;
 
-    this.O[L].onHit = this.O[L].onDie = this.O[L].onExpire = {Do:'explode',Power: 7, Dist: 80};
+    this.cloneExplosionData(bombData, this.O[L]);
 }
 GAMEobject.prototype.shipShootLaser = function(Distance,Damage){
     var O = this.O[0];

@@ -49,7 +49,8 @@ BBAdata['SHIPpresets']={
             {T:'single',  gunS:0,GunSpeed: 5, Speed: 17, Dec: 30, Use:{'Ammo':1}, Power: 1},
             {T:'double',  gunS:0,GunSpeed: 1, Speed: 15, Dec: 30, Use:{'Ammo':2}, Power: 1},
             {T:'rose',    gunS:0,GunSpeed: 4, AtOnce: 9, Use:{'Ammo':5}, RoseAngle: 3, Speed: 15, Dec: 30, Power: 1},
-            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 30, Power: 4, Dist: 80},
+            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 30, explosivePreset:'ExplosionSize2'},
+            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1,Ammo:5},Speed: 10, Dec:30, explosivePreset:'NailsBigCircle'},
         ],
         Modules:[
             {T:'Prod', subT:'Bullet',Storage:'Ammo', Disabled:0,Emin:2,Emax:4,ProdX:1,E:0,Prod:0,ifProd:3 },
@@ -86,8 +87,8 @@ BBAdata['SHIPpresets']={
             {T:'laser',   gunS:0,GunSpeed: 10, Speed: 650, Dec: 1, Power: 5},
             {T:'rose',    gunS:0,GunSpeed: 7, AtOnce: 37, Use:{'Ammo':10}, RoseAngle: 5, Speed: 17, Dec: 12, Power: 1},
             {T:'missle',  gunS:0,GunSpeed: 2, Use:{'Missile':1}, Speed: 12, SpeedT: 4, Dec: 400, AimRadius: 120, Power: 2},
-            {T:'missleR', gunS:0,GunSpeed: 6, Use:{'Missile':5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, Power: 2},
-            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 30, Power: 4, Dist: 80},
+            {T:'missleR', gunS:0,GunSpeed: 6, Use:{'Missile':5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explosivePreset:'MissileDestructionFieldSmall'},
+            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 30, explosivePreset:'ExplosionRose'},
             {T:'tele',    gunS:0,GunSpeed: 3, Speed: 400, Dec: 1},
         ],
         Modules:[
