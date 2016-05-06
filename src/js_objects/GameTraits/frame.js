@@ -75,6 +75,7 @@ GAMEobject.prototype.frame_move = function(){
         if( O.squadDirectPlace ){
             var Master = this.O[ O.squadDirectPlace.o ];
             var MasterS = Master.squadScheme[ O.squadDirectPlace.i ];
+
             O.x = Master.x- -MasterS.radius * Math.sin( (-parseInt(MasterS.angle- -Master.angle)-180)*PIx );
             O.y = Master.y- -MasterS.radius * Math.cos( (-parseInt(MasterS.angle- -Master.angle)-180)*PIx );
 

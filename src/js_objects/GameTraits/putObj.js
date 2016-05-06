@@ -121,7 +121,7 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
     if(O.squadSchemeType)
         this.prepareSquadScheme(O,L);
     if(O.prepareSquadScheme || O.squadScheme)
-        this.setSquadFull(O);
+        this.setFlagSquadFull(O);
 
 
     if(Type!='shieldBlob')

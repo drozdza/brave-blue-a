@@ -65,7 +65,7 @@ ObjectPutDatas={
         // onDie: {Do:'explode',Power: 4, Dist: 35, explodeType: 'nails', NailsRad: 24, NailsSpeed: 4, NailsSpeedPlus: 6, NailsDec: 16, NailsDecPlus: 6, NailsNeutral: true},
 
         squadScheme: {
-            0:{ angle: 0, radius: 0, id: -1, make: {What:{RoundField:1},objData:{x:0,y:-1000, angle: 0, radius: 150, colorInactive: false, colorActive: 'rgba(255,0,0,0.4)', OneTimeEffect: 1, OneTimeOffset: 10, OneTimeDetect: 1, dontHit:['B','BE','E','M','ME','A']}}}
+            0:{ angle: 0, radius: 0, id: -1, placementT:'directPlaces', make: {What:{RoundField:1},objData:{x:0,y:-1000, angle: 0, radius: 150, colorInactive: false, colorActive: 'rgba(255,0,0,0.4)', OneTimeEffect: 1, OneTimeOffset: 10, OneTimeDetect: 1, dontHit:['B','BE','E','M','ME','A']}}}
         },
 
         detectMovementField:{ angle: 0, radius: 80, color: "rgba(255,0,0,0.4)"},
@@ -371,7 +371,7 @@ ObjectPutDatas={
             {t:'produceSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prodSquad', usedResR: 1, maxSpeed: 2, doNextWeapon: true},
         ],
 
-        squadSchemeType: {t:'round', count: 16, radius: 100, placement: 'oddFirst', makeFirst: 8, life: 3, data:{type:'shieldBlob', lifeM:6}},
+        squadSchemeType: {t:'directPlaces', count: 16, radius: 100, placementT:'round', placement: 'oddFirst', makeFirst: 8, life: 3, data:{type:'shieldBlob', lifeM:6}},
         squadScheme: [],
 
         doingNow: 'changeManouver',
@@ -468,6 +468,7 @@ ObjectPutDatas={
             radius: 0,
             angle: 0,
             Oid: -1,
+            placementT:'directPlaces',
             objData: {fieldAnim: 'ElectricityField', radius: 130, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDamage: 4, dontHit:['B','BE','E','M','ME','A']}
         }],
 
@@ -717,8 +718,6 @@ ObjectPutDatas={
         lifeM: 9,
         radius: 20,
 
-
-        shieldDimmune:true,
         weapon:[
             {t:'shootHealingMissle', Radius: 350, gunSpeed: 20, lastShot: 100},
         ],
@@ -816,6 +815,7 @@ ObjectPutDatas={
             radius: 0,
             angle: 0,
             Oid: -1,
+            placementT:'directPlaces',
             objData: {squareAngle: 20, squareLen: 450, squareWidth: 0.5, simpleFilling: 'red', dontHit:['B','BE','E','M','ME','A','R','P']}
         }],
 
@@ -945,21 +945,20 @@ ObjectPutDatas={
         lifeM: 60,
         radius: 40,
 
-        energyField: 10,
-        misslePack: 0,
-        Res: {'energyField': {M:10,T:0}, 'misslePack': {M:10,T:0}},
+        prodSquad: 40,
+        Res: {'prodSquad': {M:80,T:0}},
         weapon:[
-            {t:'refilResource', resource: 'energyField', gunSpeed: 120, maxSpeed: 2, doNextWeapon: true},
-            {t:'refilResource', resource: 'misslePack', gunSpeed: 18, maxSpeed: 2, doNextWeapon: true},
-            {t:'changeAction', makeAction: {doingNow:'shooting', doingTime: 33, Manouver:'goStraight'}, doingNow:'followEnemy', doingTime:1, usedRes:'misslePack', usedResR: 10},
-            {t:'missleX5', Power:1, Dec: 25, Speed: 14, gunSpeed: 8, lastShot: 0, doingNow:'shooting', minDistToEnemy: 500},
+            {t:'refilResource', resource: 'prodSquad', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
+            {t:'produceSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prodSquad', usedResR: 10, maxSpeed: 2, minDistToEnemy:400, doNextWeapon: true},
         ],
+
+        squadSchemeType: {t:'loose', count: 8, data:{type:'enemyShip', objectType:'carras'}},
+        squadScheme: [],
 
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
         toDo: [
-            {N:55,T:'followEnemy', minAlarm: 5, doingTime: 40, usedRes:'misslePack', usedResR: 10},
             {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
         ],
 
