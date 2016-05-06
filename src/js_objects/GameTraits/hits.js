@@ -137,9 +137,11 @@ GAMEobject.prototype.makeOneTimeEffect = function(o,q){
             O.animType='EleFieldEnd';
             O.animTick = 0;
             O.DieTime = this.tick- -24;
-            if(O.squadDirectPlace){
+            if(O.squadDirectPlace)
                 this.unbindWithSquad(O.squadDirectPlace.o, O.squadDirectPlace.i, o);
-            }
+            if(O.squadMaster)
+                this.unbindWithSquad(O.squadMaster.o, O.squadMaster.i, o);
+
 
         }
     }
@@ -181,8 +183,8 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
     for(var Daga=1; Daga < DMG; ++Daga){
         if(Daga >= O.life) break;
         var U = 20;
-        DagaDagaX = parseInt(Math.random()*U*2-U);
-        DagaDagaY = parseInt(Math.random()*U*2-U);
+        var DagaDagaX = parseInt(Math.random()*U*2-U);
+        var DagaDagaY = parseInt(Math.random()*U*2-U);
         this.putObj_animation('hit', (O.x-DagaDagaX), (O.y-DagaDagaY));
     }
 
@@ -201,9 +203,11 @@ GAMEobject.prototype.dieObj = function(O,o){
     if(O.T!='missle' && O.T!='bullet_bomb' && O.T!='space_mine')
         this.putObj_animation('hitBig', O.x, O.y);
 
-    if(O.squadDirectPlace){
+    if(O.squadDirectPlace)
         this.unbindWithSquad(O.squadDirectPlace.o, O.squadDirectPlace.i, o);
-    }
+    if(O.squadMaster)
+        this.unbindWithSquad(O.squadMaster.o, O.squadMaster.i, o);
+
     if(O.squadScheme)
         this.disbandSquad(O);
 

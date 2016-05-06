@@ -292,12 +292,14 @@ GAMEobject.prototype.decide_ship = function(e){
     if(S.MouseDown1) aktywneDziala[ S.FireType ]=1;
     if(S.FireType2!==false && S.MouseDown2) aktywneDziala[ S.FireType2 ]=1;
     for(var dzi in aktywneDziala) if(S.FireTypes[dzi].gunS > S.FireTypes[dzi].GunSpeed){
-      var enoughToUse = true
-      if(F.Use) for(var useU in F.Use) if(S.Storage[ useU ].R < F.Use[useU]) enoughToUse = false;
-      if(!enoughToUse) continue;
 
         var shotDone = false;
         var Fx = S.FireTypes[dzi];
+
+        var enoughToUse = true
+        if(Fx.Use) for(var useU in Fx.Use) if(S.Storage[ useU ].R < Fx.Use[useU]) enoughToUse = false;
+        if(!enoughToUse) continue;
+
         if(Fx.T=='single'){
             this.shipShoot(0, Fx.Speed, Fx.Dec, Fx.Power);
             shotDone = true;

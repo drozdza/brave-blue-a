@@ -109,6 +109,9 @@ GAMEobject.prototype.bindWithSquad = function(o,i,s){
         S.squadDirectPlace = {o:o, i:i};
         S.speed = 0;
     }
+    if(OSS.placementT=='loose'){
+        S.squadMaster = {o:o, i:i};
+    }
     OSS.Oid = s;
     this.setFlagSquadFull(O);
 }
@@ -116,6 +119,10 @@ GAMEobject.prototype.unbindWithSquad = function(o,i,s){
     var oS = this.O[s];
 
     if(oS.squadDirectPlace){
+        var O = this.O[o];
+        O.squadScheme[i].Oid=-1;
+    }
+    if(oS.squadMaster){
         var O = this.O[o];
         O.squadScheme[i].Oid=-1;
     }
