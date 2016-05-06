@@ -126,8 +126,8 @@ GAMEobject.prototype.frame_draw = function(){
 
     CH.save();
     CH.fillStyle="rgba(0,0,0,0.12)";
-    if(GET['BLUR'] > 1) CH.translate(this.shipMoveX,this.shipMoveY);
-    if(!GET['BLUR'])
+    if(BBAdata['GET']['BLUR'] > 1) CH.translate(this.shipMoveX,this.shipMoveY);
+    if(!BBAdata['GET']['BLUR'])
         CH.fillStyle="black";
     CH.fillRect(0, 0, this.Dx, this.Dy);
     CH.restore();
@@ -135,7 +135,7 @@ GAMEobject.prototype.frame_draw = function(){
 
     for(o in this.O){
         O = this.O[o];
-        if(GET['DEBUG']){
+        if(BBAdata['GET']['DEBUG']){
             CH.save();
             CH.strokeStyle = 'white';
             CH.beginPath();
@@ -228,11 +228,11 @@ GAMEobject.prototype.frame_draw = function(){
 }
 
 GAMEobject.prototype.frame = function(){
-    if(GET['FRAMES']==0){
+    if(BBAdata['GET']['FRAMES']==0){
         this.frame_move();
         this.frame_decide();
         this.frame_draw();
-    }else if(GET['FRAMES'] > 0){
+    }else if(BBAdata['GET']['FRAMES'] > 0){
         var FR = parseInt( 1000/this.Frames )-2;
         var now = new Date().getTime();
         var PASSED = now - this.FRAME_TIME;
@@ -240,15 +240,15 @@ GAMEobject.prototype.frame = function(){
             this.intervalIndex = window.requestAnimationFrame(function(){ GAME.frame(); });
             return true;
         }
-        if(GET['FRAMES']==1){
+        if(BBAdata['GET']['FRAMES']==1){
             this.FRAME_TIME = now;
         }
-        if(GET['FRAMES']==2){
+        if(BBAdata['GET']['FRAMES']==2){
             this.FRAME_TIME-=-FR;
         }
         this.frame_move();
         this.frame_decide();
-        if(GET['FRAMES']==3 || GET['FRAMES']==4){
+        if(BBAdata['GET']['FRAMES']==3 || BBAdata['GET']['FRAMES']==4){
             PASSED-=FR;
             this.FRAME_TIME-=-FR;
             var X = 0;
@@ -268,12 +268,12 @@ GAMEobject.prototype.frame = function(){
     }
 
 
-    if(GET['FPS'] > 0){
+    if(BBAdata['GET']['FPS'] > 0){
         var D = parseInt(new Date().getTime()/1000);
         if(D != this.FPSx){
             var FPS = this.tick - this.FPSy;
             var FPSu = this.tickD - this.FPSz;
-            if(GET['FPS'] > 1){
+            if(BBAdata['GET']['FPS'] > 1){
                 $('#FPSpillar').prepend('<div><div style="height: '+FPS*3+'px;"><div style="height: '+FPSu*3+'px;"></div></div></div>');
                 $('#FPSpillar div:nth-child(151)').remove();
             }
@@ -284,7 +284,7 @@ GAMEobject.prototype.frame = function(){
             this.FPSy=this.tick;
             this.FPSz=this.tickD;
 
-            if(GET['FPS'] > 2){
+            if(BBAdata['GET']['FPS'] > 2){
                 var u = 1000 - this.MSship - this.MSdecide - this.MSmove - this.MSdraw;
                 html = '';
                 html += '<div class="FPS_MS">'+this.MSship+'<div class="" style="height: '+parseInt(this.MSship/10)+'px;">[s]</div></div>';
@@ -309,7 +309,7 @@ GAMEobject.prototype.frame = function(){
         this.endGame();
 
     if(!this.pause && !this.doEndGame)
-        if(GET['FRAMES'] < 4)
+        if(BBAdata['GET']['FRAMES'] < 4)
             this.intervalIndex = window.requestAnimationFrame(function(){ GAME.frame(); });
         else
             this.intervalIndex = setTimeout(function(){ GAME.frame(); }, 1);

@@ -1,4 +1,4 @@
-BOARDS={
+BBAdata['MAPS']={
     'Start':{
         Place:[{Random:{X:0, Y:0, Radius: 600}, What:{Star: 300, K: 1}}],
     },

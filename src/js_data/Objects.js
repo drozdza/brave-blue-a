@@ -1,4 +1,4 @@
-ObjectPutDatas={
+BBAdata['ObjectDatas']={
     healing_missle:{
         viewLetter: 'J',
         viewLetterSize: 12,

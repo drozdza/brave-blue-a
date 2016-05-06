@@ -1,4 +1,4 @@
-GET={
+BBAdata['GET']={
     DEBUG:0,
     BLUR:0,
     FRAMES:0,
@@ -12,11 +12,11 @@ GET={
         for(var gi=0; gi<GETs.length; ++gi){
             var BUM = GETs[gi].split('=');
             switch(BUM[0]){
-                case 'debug':  GET['DEBUG']  = BUM[1]; break;
-                case 'blur':   GET['BLUR']   = BUM[1]; break;
-                case 'frames': GET['FRAMES'] = BUM[1]; break;
-                case 'canvas': GET['CANVAS'] = BUM[1]; break;
-                case 'fps':    GET['FPS']    = BUM[1]; break;
+                case 'debug':  BBAdata['GET']['DEBUG']  = BUM[1]; break;
+                case 'blur':   BBAdata['GET']['BLUR']   = BUM[1]; break;
+                case 'frames': BBAdata['GET']['FRAMES'] = BUM[1]; break;
+                case 'canvas': BBAdata['GET']['CANVAS'] = BUM[1]; break;
+                case 'fps':    BBAdata['GET']['FPS']    = BUM[1]; break;
             }
         }
     }

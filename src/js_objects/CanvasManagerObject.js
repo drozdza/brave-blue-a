@@ -221,7 +221,7 @@ function CanvasManagerObject(){
                 if(R.states[i].Yoffset)
                     Y = parseInt(Y2/2)- R.states[i].Yoffset;
 
-                if(GET['DEBUG']){ CanCon.strokeStyle='white'; CanCon.beginPath();    CanCon.moveTo(0,Y1); CanCon.lineTo(X2,Y1); CanCon.stroke(); CanCon.beginPath();    CanCon.moveTo(X1,0); CanCon.lineTo(X1,Y2); CanCon.stroke(); }
+                if(BBAdata['GET']['DEBUG']){ CanCon.strokeStyle='white'; CanCon.beginPath();    CanCon.moveTo(0,Y1); CanCon.lineTo(X2,Y1); CanCon.stroke(); CanCon.beginPath();    CanCon.moveTo(X1,0); CanCon.lineTo(X1,Y2); CanCon.stroke(); }
 
 
 

@@ -1,5 +1,4 @@
-NAMES={};
-NAMES.Ships={
+BBAdata['ShipNames']={
     M:'muerto',
     T:'tartaros',
     B:'belzebub',
@@ -21,7 +20,7 @@ NAMES.Ships={
     I:'iskariot',
     R:'royale',
 };
-NAMES.ModName = {
+BBAdata['ModuleNames'] = {
     healerProd:  'Heal',
     esteemProd:  '<div class="smaller_title">Moves Estimation</div>',
     shieldProd:  'Shield',

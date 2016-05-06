@@ -1,4 +1,4 @@
-SHIPpresets={
+BBAdata['SHIPpresets']={
     1:{
         Weight: 25,
         lifeM: 6,

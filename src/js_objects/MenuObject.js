@@ -17,11 +17,11 @@ function MENUobject(){
         html+='</div>';
 
         html+='<div class="ShipPresets"><span>Choose: </span>';
-        for(var m in SHIPpresets)
+        for(var m in BBAdata['SHIPpresets'])
             html+='<div class="chooseShipPresets" id="chooseShipPresets_'+m+'">'+m+'</div>';
         html+='</div>';
 
-        for(var m in BOARDS)
+        for(var m in BBAdata['MAPS'])
             html+='<div class="MainMenuButton" id="MainMenuButton_'+m+'">'+m+'</div>';
 
         $('#Menu').append('<div id="MenuBoards">'+html+'</div>');
@@ -46,7 +46,7 @@ function MENUobject(){
         CanvasManager = new CanvasManagerObject();
         CanvasManager.start();
         GAME = new GAMEobject();
-        GAME.start(BOARDS[id],cloneObj(SHIPpresets[this.ShipPresetChoosen]));
+        GAME.start(BBAdata['MAPS'][id],cloneObj(BBAdata['SHIPpresets'][this.ShipPresetChoosen]));
     }
     this.toggleMenu = function(){
         if(this.showMenu=='Ship')    this.hideMenuShip();
@@ -107,8 +107,8 @@ function MENUobject(){
 
     this.showUpgrades = function(){
         var html='',up=['','','',''];
-        for(var u in SHIPupgrades){
-            var U = SHIPupgrades[u];
+        for(var u in BBAdata['SHIPupgrades']){
+            var U = BBAdata['SHIPupgrades'][u];
             up[U.K]+='<div class="upgrade upgradeClick" id="upgradeClick_'+u+'">'+U.T+'</div>';
         }
         for(var i=0; i < up.length; ++i)
@@ -132,7 +132,7 @@ function MENUobject(){
         }
         var totPrice = 0;
         for(var u in this.addedUpgrades){
-            var U = SHIPupgrades[u];
+            var U = BBAdata['SHIPupgrades'][u];
             totPrice -=- U.price;
             for(var a in U.attr){
                 for(var e in U.attr[a]){

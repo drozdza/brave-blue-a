@@ -19,7 +19,7 @@
 
 
 
-BoardMODS={
+BBAdata['MapMODS']={
     sitOnMap:{
         toDo:[
             {N:22,T:'stayInRegion', X:0, Y:0, Radius: 700 },

@@ -1,4 +1,4 @@
-SHIPupgrades=[
+BBAdata['SHIPupgrades']=[
     {K:1,T:'shipHull',price:250,attr:[{lifeM:1,Weight:5}]},
     {K:1,T:'shipHull',price:550,attr:[{lifeM:1,Weight:5}]},
     {K:1,T:'shipHull',price:750,attr:[{lifeM:1,Weight:5}]},

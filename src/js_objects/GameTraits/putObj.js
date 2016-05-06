@@ -1,23 +1,23 @@
 
 GAMEobject.prototype.putObj_fromArray = function(O){
     var isEnemyShip = false;
-    for(var i in NAMES.Ships){
-        if(O.T==NAMES.Ships[i]){
+    for(var i in BBAdata['ShipNames']){
+        if(O.T==BBAdata['ShipNames'][i]){
             isEnemyShip=true;
             break;
         }
     }
 
     if(isEnemyShip){
-        for(var i in ObjectPutDatas.enemyShip){
-            var X = ObjectPutDatas.enemyShip[i];
+        for(var i in BBAdata['ObjectDatas'].enemyShip){
+            var X = BBAdata['ObjectDatas'].enemyShip[i];
             if(typeof X == 'object')    O[i] = cloneObj(X);
                 else                     O[i] = X;
         }
     }
-    if(typeof ObjectPutDatas[O.T] != 'undefined'){
-        for(var i in ObjectPutDatas[O.T]){
-            var X = ObjectPutDatas[O.T][i];
+    if(typeof BBAdata['ObjectDatas'][O.T] != 'undefined'){
+        for(var i in BBAdata['ObjectDatas'][O.T]){
+            var X = BBAdata['ObjectDatas'][O.T][i];
             if(typeof X == 'object')    O[i] = cloneObj(X);
                 else                     O[i] = X;
         }

@@ -25,8 +25,8 @@ GAMEobject.prototype.makeShipControlPanel = function(){
                 if(m == S.KeysModules[pimk][pomk])
                     letter='<div class="letter">'+String.fromCharCode(pimk)+'</div>';
 
-        if(S.Modules[m].subT) modeName = NAMES.ModName[S.Modules[m].T+S.Modules[m].subT];
-                else          modeName = NAMES.ModName[S.Modules[m].T];
+        if(S.Modules[m].subT) modeName = BBAdata['ModuleNames'][S.Modules[m].T+S.Modules[m].subT];
+                else          modeName = BBAdata['ModuleNames'][S.Modules[m].T];
 
         modHtml+='<div class="cBox">'+letter+'<span id="moduleBox_'+m+'"><div class="energyBox min"><span class="smaller">Disabled</span><div class="infoBox">'+modeName+'</div></div></span></div>';
 
@@ -112,8 +112,8 @@ GAMEobject.prototype.decide_ship = function(e){
 
         // Moduły wyłączone:
         if(Sx.Mod[m] != 'disabled'){
-            if(M.subT) modeName = NAMES.ModName[M.T+M.subT];
-                else   modeName = NAMES.ModName[M.T];
+            if(M.subT) modeName = BBAdata['ModuleNames'][M.T+M.subT];
+                else   modeName = BBAdata['ModuleNames'][M.T];
 
             $('#moduleBox_'+m).html('<div class="energyBox min"><span class="smaller">Disabled</span><div class="infoBox">'+modeName+'</div></div>');
             Sx.Mod[m]='disabled';
@@ -130,8 +130,8 @@ GAMEobject.prototype.decide_ship = function(e){
          || (M.T=='esteemProd' && (F.T=='missle' || F.T=='missleR' || F.T=='laser'))
          || (M.T=='shieldProd' && S.EnergyFieldMax <= O.energyField) ){
             if(Sx.Mod[m] != 'done'){
-                if(M.subT) modeName = NAMES.ModName[M.T+M.subT];
-                    else   modeName = NAMES.ModName[M.T];
+                if(M.subT) modeName = BBAdata['ModuleNames'][M.T+M.subT];
+                    else   modeName = BBAdata['ModuleNames'][M.T];
                 $('#moduleBox_'+m).html('<div class="energyBox min">Done<div class="infoBox">'+modeName+'</div></div>');
                 Sx.Mod[m]='done';
             }
@@ -144,8 +144,8 @@ GAMEobject.prototype.decide_ship = function(e){
             if(M.T=='laserProd') M.LaserLoad = 0;
             if(M.T=='teleProd') M.TeleLoad = 0;
             if(Sx.Mod[m] != 0){
-                if(M.subT) modeName = NAMES.ModName[M.T+M.subT];
-                    else   modeName = NAMES.ModName[M.T];
+                if(M.subT) modeName = BBAdata['ModuleNames'][M.T+M.subT];
+                    else   modeName = BBAdata['ModuleNames'][M.T];
                 $('#moduleBox_'+m).html('<div class="energyBox min"><div class="min">min.</div>'+M.Emin.toFixed(2)+'<div class="infoBox">'+modeName+'</div></div>');
                 Sx.Mod[m]=0;
                 if(M.T=='spotRegion') this.shipFunc_showSpotRegions(false);
@@ -186,8 +186,8 @@ GAMEobject.prototype.decide_ship = function(e){
             }
         }
         if(modHtml!=''){
-            if(M.subT) modeName = NAMES.ModName[M.T+M.subT];
-                else   modeName = NAMES.ModName[M.T];
+            if(M.subT) modeName = BBAdata['ModuleNames'][M.T+M.subT];
+                else   modeName = BBAdata['ModuleNames'][M.T];
             modHtml+='<div class="titleBox">'+modeName+'</div>';
         }
         var U = M.ProdX*(M.E/M.Emax);

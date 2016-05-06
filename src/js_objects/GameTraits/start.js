@@ -47,7 +47,7 @@ GAMEobject.prototype.start = function(Setting,Ship){
     this.setBoard();
     this.CanvasHandle = document.getElementById('MainCanvas').getContext('2d');
 
-    if(GET.CANVAS > 0){
+    if(BBAdata['GET'].CANVAS > 0){
         $('#CanvasPreviews').css({display: 'block'});
     }
 
@@ -95,7 +95,7 @@ GAMEobject.prototype.start = function(Setting,Ship){
             this.mapPlaceObj(Setting, Setting.Place[i]);
 
 
-    if(GET.CANVAS==0){
+    if(BBAdata['GET'].CANVAS==0){
         this.FRAME_TIME = new Date().getTime();
         // this.frame();
         this.intervalIndex = window.requestAnimationFrame(function(){ GAME.frame(); });
@@ -144,7 +144,7 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
                 L = -1;
 
             } else {
-                var L = this.putObj(NAMES.Ships[placeWhat],'comp',1,x,y);
+                var L = this.putObj(BBAdata['ShipNames'][placeWhat],'comp',1,x,y);
                 if(typeof Setting.BoardMods !='undefined')
                     for(var k in Setting.BoardMods)
                         this.addBoardMod(L,Setting.BoardMods[k]);
@@ -163,7 +163,7 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
 GAMEobject.prototype.addBoardMod = function(o,MODname){
     var MOD,O = this.O[o];
 
-    if(typeof MODname == 'string') MOD = BoardMODS[MODname];
+    if(typeof MODname == 'string') MOD = BBAdata['MapMODS'][MODname];
             else                   MOD = MODname;
 
     if(typeof MOD.who != 'undefined'){
