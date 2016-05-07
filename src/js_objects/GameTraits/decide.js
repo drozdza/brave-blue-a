@@ -390,6 +390,19 @@ GAMEobject.prototype.decide = function(o){
                     this.shootBullet(o,PlayerAngle-i*WP.RoseAngle,WP.Speed,WP.Dec,WP.Power);
                 WP.lastShot = this.tick;
             }
+            if(WP.t == 'crabBullets'){
+                var B,cU = [{s:0,t:3,a:30},{s:2,t:3.5,a:40},{s:4,t:4,a:50}];
+                for(var cu in cU){
+                    B = this.shootBulletOnSide(o,0,WP.Speed-cU[cu].s,WP.Dec,60,27,WP.Power);
+                    B.speedT =-cU[cu].t;
+                    B.angle -=-cU[cu].a - O.doingTime;
+                    B = this.shootBulletOnSide(o,0,WP.Speed-cU[cu].s,WP.Dec,-60,27,WP.Power);
+                    B.speedT = cU[cu].t;
+                    B.angle -= cU[cu].a- -O.doingTime;
+                }
+
+                WP.lastShot = this.tick;
+            }
 
             if(WP.t == 'misslesDouble'){
                 this.shootMissle(o,PlayerAngle - 20,15,150);

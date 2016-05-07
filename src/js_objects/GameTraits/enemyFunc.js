@@ -6,6 +6,7 @@ GAMEobject.prototype.shootBullet = function(o,Angle,Speed,Dec,Power){
     this.O[L].dec = Dec;
     this.O[L].angle = Angle;
     this.O[L].Power = Power;
+    return this.O[L];
 }
 GAMEobject.prototype.shootBulletOnSide = function(o,Enemy,Speed,Dec,SideAngle,SideDist,Power){
     var O = this.O[o];
@@ -21,6 +22,7 @@ GAMEobject.prototype.shootBulletOnSide = function(o,Enemy,Speed,Dec,SideAngle,Si
     this.O[L].dec = Dec;
     this.O[L].angle = Angle;
     this.O[L].Power = Power;
+    return this.O[L];
 }
 GAMEobject.prototype.shootBulletOnSide2 = function(o,Enemy,Speed,Dec,SideAngle,SideDist,Power){
     var O = this.O[o];
@@ -36,6 +38,7 @@ GAMEobject.prototype.shootBulletOnSide2 = function(o,Enemy,Speed,Dec,SideAngle,S
     this.O[L].dec = Dec;
     this.O[L].angle = Angle;
     this.O[L].Power = Power;
+    return this.O[L];
 }
 GAMEobject.prototype.shootMissle = function(o,Angle,Speed,Dec,SpeedT){
     var O = this.O[o];

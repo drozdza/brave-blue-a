@@ -628,7 +628,7 @@ BBAdata['ObjectDatas']={
 
         shieldDimmune:true,
         weapon:[
-            {t:'addShield', Radius: 500, shieldTime: 15, gunSpeed: 15, lastShot: 100},
+            {t:'addShield', Radius: 500, shieldTime: 15, gunSpeed: 12, lastShot: 100},
         ],
 
         doingNow: 'changeManouver',
@@ -1023,5 +1023,49 @@ BBAdata['ObjectDatas']={
             spotAngle2: {Const: 40, RandInt: 30}
         },
     },
+    xaurus:{
+        viewLetter: 'X',
+        viewLetterSize: 60,
+        viewColor: 'red',
+        viewAngle: 270,
+        viewHitPattern: 'HullFire_40',
+        lifeM: 33,
+        radius: 27,
 
+
+
+        ammoPack: 0,
+        Res: {'ammoPack': {M:10,T:0}},
+        weapon:[
+            {t:'refilResource', resource: 'ammoPack', gunSpeed: 20, maxSpeed: 2, doNextWeapon: true},
+            {t:'changeAction', minDistToEnemy: 70, makeAction: {doingNow:'shooting', gotoSpeed: 2, doingTime: 20, Manouver:'goStraight', doNotInterupt:true}, doingNow:'followEnemy', usedRes:'ammoPack', usedResR: 10 },
+            {t:'crabBullets', Power: 1, Dec: 32, Speed: 12, gunSpeed: 5, lastShot: 0, doingNow:'shooting', minDistToEnemy: 500},
+        ],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:55,T:'followEnemy', minAlarm: 5, gotoSpeed: 3, usedRes:'ammoPack', usedResR: 10},
+            {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:2, T:1},
+            {S:4, T:1.5},
+            {S:8, T:3}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 180, RandInt: 80},
+            spotRad2: {Const: 400, RandInt: 200},
+            spotAngle2: {Const: 40, RandInt: 30}
+        },
+    },
 };

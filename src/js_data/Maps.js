@@ -173,6 +173,10 @@ BBAdata['MAPS']={
         BoardMods:['sitOnMap'],
         Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:6, K:5}}],
     },
+    'X':{
+        BoardMods:['sitOnMap'],
+        Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, X:6, K:2}}],
+    },
     'Followers':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, A:15, U:10, S:10, I:10, C:10, V:10, K:10, F:10}}],
