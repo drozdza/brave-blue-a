@@ -411,7 +411,7 @@ function CanvasManagerObject(){
         var Radi = Math.PI*2/360;
 
         if(O.TT=='regionAnim'){
-            // Kolor koka
+            // Kolor kółka
             var BU = DR;
             if(DR.frames) BU = DR.states[ O.animTick ];
             CanCon.save();
@@ -461,6 +461,8 @@ function CanvasManagerObject(){
                 AD.Next -=- O.animPole/DR.makeParticles;
                 while(AD.Next > 1){
                     var PX = this.regionAnim_findParticlePlace(O);
+                    PX.x-=-O.x;
+                    PX.y-=-O.y;
 
                     if(DR.particleAnim=='randomMove'){
                         var angle = parseInt(Math.random()*360);
@@ -500,6 +502,7 @@ function CanvasManagerObject(){
                     AD.Next-=1;
                 }
             }
+
             for(var p in AD.P){
                 var T = AD.P[p];
                 if(++T.time > T.particleTime){
@@ -511,7 +514,7 @@ function CanvasManagerObject(){
                 T.rotation-=-T.rotate;
 
                 CanCon.save();
-                CanCon.translate((O.x- -Px- -T.x).toFixed(0), (O.y- -Py- -T.y).toFixed(0));
+                CanCon.translate((Px- -T.x).toFixed(0), (Py- -T.y).toFixed(0));
                 CanCon.rotate(Radi*T.rotation);
                 var IMG =document.getElementById('CanvasManager_'+T.particleId+'_frame_'+T.time+'_');
                 CanCon.drawImage(IMG,-T.particleXY,-T.particleXY);
@@ -558,9 +561,9 @@ function CanvasManagerObject(){
         else{
             var R2=0;
             var R1=O.radius;
-            if(DR.particleAnim=='randomMove'){    R1*=0.75; }
-            if(DR.particleAnim=='toCenter'){    R2=R1*0.4; R1*=1.2; }
-            if(DR.particleAnim=='onOrbit'){        R2=R1*0.2; }
+            if(DR.particleAnim=='randomMove'){ R1*=0.75; }
+            if(DR.particleAnim=='toCenter'){   R2=R1*0.4; R1*=1.2; }
+            if(DR.particleAnim=='onOrbit'){    R2=R1*0.2; }
             do{
                 x = parseInt(Math.random()*R1*2-R1);
                 y = parseInt(Math.random()*R1*2-R1);

@@ -11,7 +11,7 @@ BBAdata['ObjectDatas']={
         Power: 1,
         doingTime: 230,
         onHit:{},
-        toDo: [{T:'die'}],
+        toDo: [{T:'expire'}],
         Manouver: 'followEntity',
         Flags:{},
     },
@@ -277,7 +277,7 @@ BBAdata['ObjectDatas']={
         doingTime: -1,
         Manouver: 'goStraight',
         toDo: [
-            {N:61,T:'speedUp', maxSpeedLvl: 1, gotoSpeed: 2},
+            {N:61,T:'changeSpeed', maxSpeedLvl: 1, gotoSpeed: 2},
             {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70}
         ],
 
@@ -1028,7 +1028,7 @@ BBAdata['ObjectDatas']={
         viewLetterSize: 60,
         viewColor: 'red',
         viewAngle: 270,
-        viewHitPattern: 'HullFire_40',
+        viewHitPattern: 'HullFire_60',
         lifeM: 33,
         radius: 27,
 
@@ -1039,7 +1039,7 @@ BBAdata['ObjectDatas']={
         weapon:[
             {t:'refilResource', resource: 'ammoPack', gunSpeed: 20, maxSpeed: 2, doNextWeapon: true},
             {t:'changeAction', minDistToEnemy: 70, makeAction: {doingNow:'shooting', gotoSpeed: 2, doingTime: 20, Manouver:'goStraight', doNotInterupt:true}, doingNow:'followEnemy', usedRes:'ammoPack', usedResR: 10 },
-            {t:'crabBullets', Power: 1, Dec: 32, Speed: 12, gunSpeed: 5, lastShot: 0, doingNow:'shooting', minDistToEnemy: 500},
+            {t:'crabBullets', Power: 1, Dec: 37, Speed: 12, gunSpeed: 5, lastShot: 0, doingNow:'shooting', minDistToEnemy: 500},
         ],
 
         doingNow: 'changeManouver',
@@ -1054,6 +1054,62 @@ BBAdata['ObjectDatas']={
             {S:2, T:1},
             {S:4, T:1.5},
             {S:8, T:3}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 180, RandInt: 80},
+            spotRad2: {Const: 400, RandInt: 200},
+            spotAngle2: {Const: 40, RandInt: 30}
+        },
+    },
+    zarahiash:{
+        viewLetter: 'Z',
+        viewLetterSize: 20,
+        viewColor: 'red',
+        viewAngle: 0,
+        viewHitPattern: 'HullFire_40',
+        lifeM: 33,
+        radius: 15,
+
+
+
+        fieldCharges: 0,
+        Res: {'fieldCharges': {M:10,T:0}},
+        weapon:[
+            {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true},maxSpeed: 2},
+            {t:'refilResource', resource: 'fieldCharges', gunSpeed: 20, maxSpeed: 2, doNextWeapon: true},
+            {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', minDistToEnemy:500, usedResR: 10, doingNow:'followEnemy', makeAction:{doingNow:'followEnemy', doingTime:220, Manouver:'followEnemy',doNotInterupt:true}},
+        ],
+
+        squadScheme: [{
+            type: 'ConeField',
+            radius: 200,
+            angle: 0,
+            angleAddon: 180,
+            Oid: -1,
+            placementT:'directPlaces',
+            objData: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDamage: 1, PeriodTime: 15, PeriodOffset: 10, dontHit:['B','BE','E','M','ME','A']}
+        }],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:55,T:'followEnemy', minAlarm: 5, gotoSpeed: 3, usedRes:'fieldCharges', usedResR: 10},
+            {T:'changeSpeed', minSpeedLvl: 3, gotoSpeed: 2},
+            {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:2, T:1},
+            {S:6, T:1.5},
+            {S:9, T:3}
         ],
         spotTick: 8,
         spotArr: [0,

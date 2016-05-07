@@ -141,7 +141,7 @@ GAMEobject.prototype.decide = function(o){
                 continue;
             }
 
-            if(TD.T=='speedUp'){
+            if(TD.T=='changeSpeed'){
                 this.changeSpeedLvl(O,TD.gotoSpeed);
                 continue;
             }
@@ -238,7 +238,6 @@ GAMEobject.prototype.decide = function(o){
                     delete this.Omoving[o];
                 }
             }
-
 
             if(TD.T=='die'){
                 if(O.onDie){
@@ -391,14 +390,15 @@ GAMEobject.prototype.decide = function(o){
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'crabBullets'){
-                var B,cU = [{s:0,t:3,a:30},{s:2,t:3.5,a:40},{s:4,t:4,a:50}];
+                var B,CU,cU = [{s:0,t:2,d:10,a:30},{s:1.5,t:2.5,d:5,a:40},{s:3,t:3,d:0,a:50}];
                 for(var cu in cU){
-                    B = this.shootBulletOnSide(o,0,WP.Speed-cU[cu].s,WP.Dec,60,27,WP.Power);
-                    B.speedT =-cU[cu].t;
-                    B.angle -=-cU[cu].a - O.doingTime;
-                    B = this.shootBulletOnSide(o,0,WP.Speed-cU[cu].s,WP.Dec,-60,27,WP.Power);
-                    B.speedT = cU[cu].t;
-                    B.angle -= cU[cu].a- -O.doingTime;
+                    CU = cU[cu];
+                    B = this.shootBulletOnSide(o,0,WP.Speed-CU.s,WP.Dec-CU.d,60- -O.doingTime,27,WP.Power);
+                    B.speedT =-CU.t;
+                    B.angle -=-CU.a - O.doingTime;
+                    B = this.shootBulletOnSide(o,0,WP.Speed-CU.s,WP.Dec-CU.d,-60-O.doingTime,27,WP.Power);
+                    B.speedT = CU.t;
+                    B.angle -= CU.a- -O.doingTime;
                 }
 
                 WP.lastShot = this.tick;
@@ -496,6 +496,8 @@ GAMEobject.prototype.decide = function(o){
                         weMadeSomething = true;
                     }
                 }while(weMadeSomething);
+                if(WP.makeAction)
+                    this.makeAction(O,o,WP.makeAction);
             }
             if(WP.t == 'healSquad'){
                 do{
@@ -525,6 +527,24 @@ GAMEobject.prototype.decide = function(o){
                     }
 
                 }while(weMadeSomething);
+            }
+            if(WP.t == 'killSquadMember'){
+                for(var i in O.squadScheme){
+                    if(O.squadScheme[i].Oid != -1){
+                        var s = O.squadScheme[i].Oid;
+                        var S = this.O[s];
+                        if(S.fieldAnim=='DestructionField'){
+                            S.animType = 'DestrFieldEnd';
+                            S.animTick = 0;
+                            S.DieTime = this.tick- -48;
+                        }else{
+                            this.unbindWithSquad(o,i,s);
+                            this.removeObj(s);
+                        }
+                        break;
+                    }
+                }
+                WP.lastShot = this.tick;
             }
 
             if(WP.t == 'shotShieldBlob'){
@@ -564,25 +584,16 @@ GAMEobject.prototype.decide = function(o){
                           break;
                       }
             }
-            /*
-            if(Fx.T=='missle' && S.Missles >= Fx.MissleUse && this.missleAim!=false){
-                this.shipShootMissle(this.missleAim,O.angle,Fx.Speed,Fx.Dec,Fx.SpeedT,Fx.Power);
-                Fx.gunS=0;
-                S.Missles-=Fx.MissleUse;
-            }
-            */
-
 
             if(WP.doNextWeapon) continue;
-
             break;
         }
     }
+
     O.Flags.spotEnemyFlag = false;
     O.Flags.incomingFireFlag = false;
     O.Flags.gotHitFlag = false;
     O.Flags.squadMemberDied = false;
 
-    if(--O.shieldD < 1)
-        delete O.shieldD;
+    if(--O.shieldD < 1) delete O.shieldD;
 }

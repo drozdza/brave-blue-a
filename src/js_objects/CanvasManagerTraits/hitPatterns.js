@@ -12,6 +12,12 @@ CanvasManagerObject.prototype.HitPatterns ={
         1:{letterAdd:'A',colorLetterAdd:[255,40,0,1],SizeLetterAdd:40,YOffsetLetterAdd:20},
         0:{colorFill:[68,68,68,1]},
     },
+    HullFire_60:{
+        100:{},
+        99:{letterAdd:'A',colorLetterAdd:[255,40,0,1],SizeLetterAdd:5,YOffsetLetterAdd:10},
+        1:{letterAdd:'A',colorLetterAdd:[255,40,0,1],SizeLetterAdd:60,YOffsetLetterAdd:20},
+        0:{colorFill:[68,68,68,1]},
+    },
     HullFire_80:{
         100:{},
         99:{letterAdd:'A',colorLetterAdd:[255,40,0,1],SizeLetterAdd:10,YOffsetLetterAdd:35},

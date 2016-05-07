@@ -177,13 +177,17 @@ BBAdata['MAPS']={
         BoardMods:['sitOnMap'],
         Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, X:6, K:2}}],
     },
+    'Z':{
+        BoardMods:['sitOnMap','allAvoid'],
+        Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Z:6, K:2}}],
+    },
     'Followers':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, A:15, U:10, S:10, I:10, C:10, V:10, K:10, F:10}}],
     },
     'BigOnes':{
         BoardMods:['sitOnMap','allAvoid'],
-        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, D:10, M:10, N:10, J:10, W:5, T:10, E:10, G:10, R:10, B:10, K:10, F:10, Q:5}}],
+        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, D:10, M:10, N:10, J:10, W:5, T:10, E:10, G:10, R:10, B:10, K:10, F:10, Q:5,X:5}}],
     },
     'Secure':{
         BoardMods:['sitOnMap','allAvoid'],
@@ -191,7 +195,7 @@ BBAdata['MAPS']={
     },
     'HardCore':{
         BoardMods:['sitOnMap','allAvoid'],
-        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5, T:10, E:10, C:10, G:10, R:10, H:10, B:10, V:10, K:10, F:10, Q:5}}],
+        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5, T:10, E:10, C:10, G:10, R:10, H:10, B:10, V:10, K:10, F:10, Q:5, X:6, Z:5}}],
     },
     '*ShieldTest':{MapRadius:1500,MapRadius2:1500,GiveEnergyFields:25,O:{ F: 2, U:2, Q:1, T:2, K:1,C:1,B:1,N:1,M:1, A:5, Star: 20}},
     '*SuperSecure':{MapRadius:1000,MapRadius2:1000,O:{ F: 10, K:10, Q:1, A:10, Star: 10}},

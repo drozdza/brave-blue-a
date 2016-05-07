@@ -27,7 +27,7 @@ BBAdata['MapMODS']={
         ],
     },
     allAvoid:{
-        who:['A','S','C','U','H'],
+        who:['A','S','C','U','H','Z','V'],
         toDo:[
             {N:74,T:'alarmAboutIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 5, alarmRadius: 150},
             {N:73,T:'avoidIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 2, avoidTime: 12},

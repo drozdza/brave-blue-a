@@ -50,6 +50,8 @@ GAMEobject.prototype.frame_decide = function(){
     for(o in this.Oregion){
         if(this.tick < this.O[o].ActiveTime) continue;
         if(this.tick > this.O[o].DieTime){
+            if(this.O[o].squadDirectPlace)
+                this.unbindWithSquad(this.O[o].squadDirectPlace.o,this.O[o].squadDirectPlace.i,o);
             this.removeObj(o);
             continue;
         }
@@ -85,6 +87,8 @@ GAMEobject.prototype.frame_move = function(){
                 O.squareCorners = this.countSquareCorners(O.x,O.y,O.squareAngle,O.squareLen,O.squareWidth);
 
             O.angle = Master.angle;
+            if(MasterS.angleAddon)
+                O.angle = (O.angle- -MasterS.angleAddon)%360;
         }
         else {
             O.x -=- O.speed * Math.sin( (-parseInt(O.angle)-180)*PIx);

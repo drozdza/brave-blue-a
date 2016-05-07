@@ -1,7 +1,7 @@
 
 CanvasManagerObject.prototype.neededRenders={
     hit:{
-        viewLIBpath: 'StarPath', // *
+        viewLIBpath: 'StarPath',
         frames: 25,
         sizeX: 60,
         sizeY: 60,
@@ -12,7 +12,7 @@ CanvasManagerObject.prototype.neededRenders={
         }
     },
     hit_blue:{
-        viewLIBpath: 'StarPath', // *
+        viewLIBpath: 'StarPath',
         frames: 25,
         sizeX: 60,
         sizeY: 60,
@@ -23,7 +23,7 @@ CanvasManagerObject.prototype.neededRenders={
         }
     },
     hit_energyField:{
-        viewLIBpath: 'StarPath', // *
+        viewLIBpath: 'StarPath',
         frames: 25,
         sizeX: 60,
         sizeY: 60,
@@ -34,7 +34,7 @@ CanvasManagerObject.prototype.neededRenders={
         }
     },
     hitBig:{
-        viewLIBpath: 'StarPath', // *
+        viewLIBpath: 'StarPath',
         frames: 21,
         sizeX: 140,
         sizeY: 140,
@@ -45,7 +45,7 @@ CanvasManagerObject.prototype.neededRenders={
         }
     },
     hit_healing:{
-        viewLIBpath: 'StarPath', // *
+        viewLIBpath: 'StarPath',
         frames: 25,
         sizeX: 30,
         sizeY: 30,
@@ -56,7 +56,7 @@ CanvasManagerObject.prototype.neededRenders={
         }
     },
     explosion_35:{
-        viewLIBpath: 'StarPath', // *
+        viewLIBpath: 'StarPath',
         frames: 25,
         sizeX: 80,
         sizeY: 80,
@@ -70,7 +70,7 @@ CanvasManagerObject.prototype.neededRenders={
         }
     },
     explosion_80:{
-        viewLIBpath: 'StarPath', // *
+        viewLIBpath: 'StarPath',
         frames: 25,
         sizeX: 180,
         sizeY: 180,
@@ -84,7 +84,7 @@ CanvasManagerObject.prototype.neededRenders={
         }
     },
     explosion_120:{
-        viewLIBpath: 'StarPath', // *
+        viewLIBpath: 'StarPath',
         frames: 25,
         sizeX: 260,
         sizeY: 260,
@@ -98,7 +98,7 @@ CanvasManagerObject.prototype.neededRenders={
         }
     },
     explosion_210:{
-        viewLIBpath: 'StarPath', // *
+        viewLIBpath: 'StarPath',
         frames: 25,
         sizeX: 460,
         sizeY: 460,
@@ -112,7 +112,7 @@ CanvasManagerObject.prototype.neededRenders={
         }
     },
     des_field:{
-        viewLIBpath: 'StarPath', // *
+        viewLIBpath: 'StarPath',
         frames: 60,
         sizeX: 70,
         sizeY: 70,
@@ -145,7 +145,7 @@ CanvasManagerObject.prototype.neededRenders={
         }
     },
     ele_field:{
-        viewLetter: 8623,    // pr�d
+        viewLetter: 8623, // energy Ziczac
         frames: 40,
         sizeX: 40,
         sizeY: 40,

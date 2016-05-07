@@ -83,6 +83,13 @@ GAMEobject.prototype.setSquadMember = function(o,i,life){
         this.Omoving[Sid]=1;
         this.bindWithSquad(o, i, Sid);
     }
+    if(OSS.type == 'ConeField'){
+        var acType = 'region';
+        if(OSS.acType) acType = OSS.acType;
+        var Sid = this.putObj('ConeField',acType,1,iX,iY);
+        this.Omoving[Sid]=1;
+        this.bindWithSquad(o, i, Sid);
+    }
     if(OSS.type == 'SquareField'){
         var Sid = this.putObj('SquareField','region',1,iX,iY);
         this.Omoving[Sid]=1;

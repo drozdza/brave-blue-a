@@ -191,11 +191,9 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
     O.life-=DMG;
     if(O.T=='ship') this.shipFunc_showHealth();
     CanvasManager.requestCanvas(o);
-    O.Flags.gotHitFlag = true;
+    if(O.Flags) O.Flags.gotHitFlag = true;
 
-    if(O.life <= 0){
-        this.dieObj(O,o);
-    }
+    if(O.life <= 0) this.dieObj(O,o);
     return true;
 }
 GAMEobject.prototype.dieObj = function(O,o){
@@ -246,9 +244,9 @@ GAMEobject.prototype.hitEnergyField = function(o,q,DMG){
         this.putObj_animation('hit_energyField', this.O[q].x, this.O[q].y);
     else {
         this.putObj_animation('hit_energyField', O.x, O.y);
-        if(DMG >1)     this.putObj_animation('hit_energyField', (O.x-10), (O.y- -5));
-        if(DMG >2)     this.putObj_animation('hit_energyField', (O.x- -5), (O.y- -10));
-        if(DMG >3)     this.putObj_animation('hit_energyField',  (O.x- -10), (O.y-5));
+        if(DMG >1)     this.putObj_animation('hit_energyField', (O.x - 10), (O.y- -5));
+        if(DMG >2)     this.putObj_animation('hit_energyField', (O.x- -5),  (O.y- -10));
+        if(DMG >3)     this.putObj_animation('hit_energyField', (O.x- -10), (O.y - 5));
     }
     O.energyField-=DMG;
     if(O.energyField < 0) O.energyField = 0;
