@@ -158,6 +158,11 @@ GAMEobject.prototype.disbandSquad = function(O){
                 sO.animTick = 0;
                 sO.DieTime = this.tick- -24;
             }
+            if(sO.fieldAnim=='DestructionField'){
+                sO.animType = 'DestrFieldEnd';
+                sO.animTick = 0;
+                sO.DieTime = this.tick- -48;
+            }
             if(sO.squadT && sO.squadT == 'laserAim'){
                 this.removeObj( O.squadScheme[i].Oid );
             }

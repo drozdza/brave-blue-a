@@ -1074,7 +1074,7 @@ BBAdata['ObjectDatas']={
         viewColor: 'red',
         viewAngle: 0,
         viewHitPattern: 'HullFire_40',
-        lifeM: 33,
+        lifeM: 13,
         radius: 15,
 
 
@@ -1094,7 +1094,7 @@ BBAdata['ObjectDatas']={
             angleAddon: 180,
             Oid: -1,
             placementT:'directPlaces',
-            objData: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDamage: 1, PeriodTime: 15, PeriodOffset: 10, dontHit:['B','BE','E','M','ME','A']}
+            objData: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDamage: 1, PeriodTime: 15, PeriodOffset: 10, dontHit:['B','BE','E','M','ME','A'], particlesOnBoard:true}
         }],
 
         doingNow: 'changeManouver',

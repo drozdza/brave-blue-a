@@ -461,8 +461,10 @@ function CanvasManagerObject(){
                 AD.Next -=- O.animPole/DR.makeParticles;
                 while(AD.Next > 1){
                     var PX = this.regionAnim_findParticlePlace(O);
-                    PX.x-=-O.x;
-                    PX.y-=-O.y;
+                    if(O.particlesOnBoard){
+                        PX.x-=-O.x;
+                        PX.y-=-O.y;
+                    }
 
                     if(DR.particleAnim=='randomMove'){
                         var angle = parseInt(Math.random()*360);
@@ -514,7 +516,10 @@ function CanvasManagerObject(){
                 T.rotation-=-T.rotate;
 
                 CanCon.save();
-                CanCon.translate((Px- -T.x).toFixed(0), (Py- -T.y).toFixed(0));
+                if(O.particlesOnBoard)
+                    CanCon.translate((Px- -T.x).toFixed(0), (Py- -T.y).toFixed(0));
+                else
+                    CanCon.translate((O.x- -Px- -T.x).toFixed(0), (O.y- -Py- -T.y).toFixed(0));
                 CanCon.rotate(Radi*T.rotation);
                 var IMG =document.getElementById('CanvasManager_'+T.particleId+'_frame_'+T.time+'_');
                 CanCon.drawImage(IMG,-T.particleXY,-T.particleXY);
