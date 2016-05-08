@@ -48,3 +48,27 @@ GAMEobject.prototype.shipShootLaser = function(Distance,Damage){
     var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -180)%360;
     this.shootLaser(0,Distance,Damage,Angle);
 }
+GAMEobject.prototype.shipTeleportBomb = function(Distance,offTime,bombData){
+    var O = this.O[0];
+
+    var iX = O.x-this.mouseX;
+    var iY = O.y-this.mouseY;
+    var iDist = Math.sqrt(iX*iX- -iY*iY);
+    var iRad = parseInt(- (Math.atan2(iX,iY)*180/Math.PI))%360;
+    if(iDist > Distance)
+        iDist = Distance;
+
+    var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -180)%360;
+    var L = this.putObj('bullet_bomb','comp',O.S,O.x,O.y);
+    this.O[L].speed = 0;
+    this.O[L].doingTime = offTime;
+    this.O[L].angle = iRad;
+    this.cloneExplosionData(bombData, this.O[L]);
+
+    if(bombData.dontCollide){
+        this.O[L].mapCollide = [];
+        this.O[L].mapType = 'A';
+    }
+
+    return this.teleportJump(L,iDist,iRad,'TP_trackDark');
+}

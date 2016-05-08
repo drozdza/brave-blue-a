@@ -367,7 +367,7 @@ function CanvasManagerObject(){
         var Type = O.T;
         var StyleData = this.directRenders[Type];
 
-        if(Type=='TP_track' || Type=='laserShoot'){
+        if(Type=='TP_track' || Type=='TP_trackDark' || Type=='laserShoot'){
             CanCon.save();
             CanCon.lineCap = 'round';
             CanCon.strokeStyle = 'rgba('+StyleData.states[Frame].color[0]+','+StyleData.states[Frame].color[1]+','+StyleData.states[Frame].color[2]+','+StyleData.states[Frame].color[3]+')';

@@ -8,6 +8,14 @@ CanvasManagerObject.prototype.directRenders={
             17:{ width: 2, color: [255,255,255,1]}
         },
     },
+    TP_trackDark:{
+        frames: 18,
+        states:{
+            0:{ width: 1, color: [20,0,0,1]},
+            8:{ width: 4, color: [255,0,0,1]},
+            17:{ width: 2, color: [20,0,0,1]}
+        },
+    },
     laserShoot:{
         frames: 12,
         states:{

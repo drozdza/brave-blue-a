@@ -327,7 +327,12 @@ GAMEobject.prototype.decide_ship = function(e){
             shotDone = true;
         }
         if(Fx.T=='bomb'){
+            var mouseDist = Math.sqrt();
             this.shipShootBomb(Fx.Speed,Fx.Dec,Fx);
+            shotDone = true;
+        }
+        if(Fx.T=='bombT'){
+            this.shipTeleportBomb(Fx.Distance,Fx.offTime,Fx);
             shotDone = true;
         }
         if(Fx.T=='laser' && LaserMod!=false){

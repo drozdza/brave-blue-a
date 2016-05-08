@@ -32,6 +32,17 @@ CanvasManagerObject.prototype.neededRenders={
             24:{pathSize: 30, color: [0,0,255,1]},
         }
     },
+    hit_red:{
+        LIBpath: 'StarPath',
+        frames: 25,
+        sizeX: 60,
+        sizeY: 60,
+        states:{
+            0:{pathSize: 5, color: [200,0,0,1]},
+            10:{pathSize: 15, color: [255,0,0,1]},
+            24:{pathSize: 30, color: [20,0,0,1]},
+        }
+    },
     hit_energyField:{
         LIBpath: 'StarPath',
         frames: 25,

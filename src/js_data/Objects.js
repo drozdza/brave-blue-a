@@ -1135,9 +1135,9 @@ BBAdata['ObjectDatas']={
         ],
 
         speedArr:[0,
-            {S:2, T:1},
-            {S:4, T:1.5},
-            {S:8, T:3}
+            {S:{shipVar:'speed',Add:-2}, T:1},
+            {S:{shipVar:'speed'},        T:{shipVar:'speedT',Add:1}},
+            {S:{shipVar:'speed',Add:4},  T:{shipVar:'speedT'}}
         ],
         spotTick: 8,
         spotArr: [0,
@@ -1147,6 +1147,8 @@ BBAdata['ObjectDatas']={
         ],
 
         shipVariables:{
+            speed: {Const: 3, Rand: 2},
+            speedT: {Const:  1, Rand: 2},
             spotRad: {Const: 180, RandInt: 80},
             spotRad2: {Const: 400, RandInt: 200},
             spotAngle2: {Const: 40, RandInt: 30}
@@ -1192,9 +1194,9 @@ BBAdata['ObjectDatas']={
         ],
 
         speedArr:[0,
-            {S:2, T:1},
-            {S:6, T:1.5},
-            {S:9, T:3}
+            {S:{shipVar:'speed',Add:-2}, T:1},
+            {S:{shipVar:'speed'},        T:{shipVar:'speedT',Add:-1}},
+            {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
         ],
         spotTick: 8,
         spotArr: [0,
@@ -1204,6 +1206,8 @@ BBAdata['ObjectDatas']={
         ],
 
         shipVariables:{
+            speed: {Const: 4, Rand: 3},
+            speedT: {Const: 1.5, Rand: 1.5},
             spotRad: {Const: 180, RandInt: 80},
             spotRad2: {Const: 400, RandInt: 200},
             spotAngle2: {Const: 40, RandInt: 30}

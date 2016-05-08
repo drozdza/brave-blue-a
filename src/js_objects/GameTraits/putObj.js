@@ -184,7 +184,7 @@ GAMEobject.prototype.putObj_animation = function(Type,X,Y){
         O.timeDeath = 25;
         O.radius = 15;
     }
-    if(Type=='hit' || Type=='hit_energyField' || Type=='hit_blue'){
+    if(Type=='hit' || Type=='hit_energyField' || Type=='hit_blue' || Type=='hit_red'){
         O.timeDeath = 25;
         O.radius = 30;
     }

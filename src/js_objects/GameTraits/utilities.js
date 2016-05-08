@@ -37,11 +37,13 @@ GAMEobject.prototype.shootLaser = function(o,Distance,Damage,angle){
         this.makeDMG(d,Damage);
 }
 
-GAMEobject.prototype.teleportJump = function(o,Distance,angle){
+GAMEobject.prototype.teleportJump = function(o,Distance,angle,graphicType){
     var L,Angle,F,Found,oldX,oldY,Ox,Oy,O = this.O[o];
+    var graphic = graphicType || 'TP_track';
 
-    this.putObj_animation('hit_blue', O.x, O.y);
-    L = this.putObj_directAnim('TP_track', {timeDeath: 18});
+    if(graphic == 'TP_track')
+        this.putObj_animation('hit_blue', O.x, O.y);
+    L = this.putObj_directAnim(graphic, {timeDeath: 18});
     oldX = Ox = O.x;
     oldY = Oy = O.y;
     Angle = angle;
@@ -63,7 +65,10 @@ GAMEobject.prototype.teleportJump = function(o,Distance,angle){
     this.O[ L ].pathD=pathD.concat(['L',{x: Ox, y: Oy}]);
     if(O.T!='bullet')
         this.putOnXY(o,oldX,oldY);
-    this.putObj_animation('hit_blue', Ox, Oy);
+    if(graphic == 'TP_track')
+        this.putObj_animation('hit_blue', Ox, Oy);
+    if(graphic == 'TP_trackDark')
+            this.putObj_animation('hit_red', Ox, Oy);
 
     return true;
 }

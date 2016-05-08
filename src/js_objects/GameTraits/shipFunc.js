@@ -126,8 +126,6 @@ GAMEobject.prototype.shipFunc_glueFireToEstimated = function(EsteemedPos){
 GAMEobject.prototype.shipFunc_teleport = function(Fx,TeleMod){
     --this.SHIP.Modules[TeleMod].TeleLoad;
     var O = this.O[0];
-    var oldX = O.x;
-    var oldY = O.y;
     var iX = O.x-this.mouseX;
     var iY = O.y-this.mouseY;
     var iDist = Math.sqrt(iX*iX- -iY*iY);
@@ -210,6 +208,7 @@ GAMEobject.prototype.shipFunc_changeWeapon = function(Fx,weaponId){
         var F = S.FireTypes[ S.FireType ];
         if(S.ShowFireRange){
             var RadX = F.Speed*F.Dec;
+            if(F.T=='bombT') RadX = F.Distance;
             $('#bullRadX').css({width: RadX*2+'px',height: RadX*2+'px',top: (-RadX)+'px',left: (-RadX)+'px'});
         }
     }else{
