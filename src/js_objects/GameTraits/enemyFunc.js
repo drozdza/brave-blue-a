@@ -152,6 +152,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
         this.O[L].dontHurtOwnMissle = true;
         this.O[L].dontHit=['B','BE'];
         this.O[L].undestructible=1;
+        this.O[L].fiewOff=true;
         this.putObj_animation('explosion_'+explodeObj.Dist, O.x, O.y);
     }
 

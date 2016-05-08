@@ -4,6 +4,7 @@ function CanvasManagerObject(){
     this.start = function(){
         $('#CanvasPreviews').html('');
 
+        this.simpleRenderNeeded();
         this.renderNeeded();
         this.prepareDirectRenders();
     }
@@ -11,19 +12,24 @@ function CanvasManagerObject(){
     this.canvasId = function(O){
         var ID = '';
         ID+=O.T+'_';
-        if(O.viewLetter)      ID+=O.viewLetter+'_';
-        // if(O.viewShape)       ID+=O.viewShape+'_';
-        if(O.viewColor)       ID+=O.viewColor+'_';
-        // if(O.viewXY)          ID+=O.viewXY+'_';
-        if(O.viewLetterSize)  ID+=O.viewLetterSize+'_';
-        if(O.viewGlobalAlpha) ID+=O.viewGlobalAlpha+'_';
-        if(O.viewAngle)       ID+=O.viewAngle+'_';
+        var View = O.view;
         if(typeof O.timeTick !='undefined')
-                              ID+='frame_'+O.timeTick+'_';
-        if(O.viewHitPattern && O.life < O.lifeM)
-                              ID+='life_'+O.life+'_';
-        if(O.life > 0 && O.viewCloaked)
-                              ID+='cloaked_';
+                             ID+='frame_'+O.timeTick+'_';
+
+        if(typeof View == 'undefined') return ID;
+
+        if(View.Letter)      ID+=View.Letter+'_';
+        // if(O.viewShape)       ID+=O.viewShape+'_';
+        if(View.Color)       ID+=View.Color+'_';
+        // if(O.viewXY)          ID+=O.viewXY+'_';
+        if(View.LetterSize)  ID+=View.LetterSize+'_';
+        if(View.GlobalAlpha) ID+=View.GlobalAlpha+'_';
+        if(View.Angle)       ID+=View.Angle+'_';
+        if(O.life > 0 && View.Cloaked)
+                             ID+='cloaked_';
+        if(View.HitPattern && O.life < O.lifeM)
+                             ID+='life_'+O.life+'_';
+
         return ID;
     }
 
@@ -34,6 +40,9 @@ function CanvasManagerObject(){
 
     this.requestCanvas = function(o){
         var O = GAME.O[o];
+
+        if(typeof O.view == 'undefined') return false;
+
         var ID = this.canvasId(O);
 
         var Canvas={Id:false,X:0,Y:0};
@@ -51,53 +60,54 @@ function CanvasManagerObject(){
     this.addCanvas = function(ID,O){
         var Canvas={Id:false,X:0,Y:0};
         var X2=100,Y2=100;
+        var View = O.view;
 
-        if(O.viewXY)
-            X2 = Y2 = O.viewXY;
+        if(View.XY)
+            X2 = Y2 = View.XY;
 
         var X = Canvas.X = parseInt(X2/2);
         var Y = Canvas.Y = parseInt(Y2/2);
 
 
-        if(O.viewLetterSizeYoffset)
-            Y -=- O.viewLetterSizeYoffset;
+        if(View.LetterSizeYoffset)
+            Y -=- View.LetterSizeYoffset;
 
         $('#CanvasPreviews').append('<canvas id="CanvasManager_'+ID+'" width="'+X2+'" height="'+Y2+'"></canvas>');
         Canvas.Id = document.getElementById('CanvasManager_'+ID);
         var CanCon = Canvas.Id.getContext('2d');
 
-        if(O.viewGlobalAlpha){
-            CanCon.globalAlpha = O.viewGlobalAlpha / 10;
+        if(View.GlobalAlpha){
+            CanCon.globalAlpha = View.GlobalAlpha / 10;
         }
 
         var State = {};
-        if(O.viewHitPattern && O.life < O.lifeM)
-            State = this.getHitPattern(O.viewHitPattern, parseInt((O.life/O.lifeM)*100));
+        if(View.HitPattern && O.life < O.lifeM)
+            State = this.getHitPattern(View.HitPattern, parseInt((O.life/O.lifeM)*100));
 
-        if(typeof O.backgroundCircle != 'undefined'){
+        if(typeof View.backgroundCircle != 'undefined'){
             CanCon.fillStyle = 'yellow';
-            if(O.colorCircle) CanCon.fillStyle = 'rgba('+O.colorCircle[0]+','+O.colorCircle[1]+','+O.colorCircle[2]+','+O.colorCircle[3]+')';
+            if(View.colorCircle) CanCon.fillStyle = 'rgba('+View.colorCircle[0]+','+View.colorCircle[1]+','+View.colorCircle[2]+','+View.colorCircle[3]+')';
             if(State.colorCircle) CanCon.fillStyle = 'rgba('+State.colorCircle[0]+','+State.colorCircle[1]+','+State.colorCircle[2]+','+State.colorCircle[3]+')';
             CanCon.beginPath();
-            CanCon.arc(X, Y, O.backgroundCircle, 0, Math.PI*2, true);
+            CanCon.arc(X, Y, View.backgroundCircle, 0, Math.PI*2, true);
             CanCon.fill();
 
         }
 
-        if(typeof O.viewLetter != 'undefined'){
-            CanCon.font = "bold "+O.viewLetterSize+"px Arial";
+        if(typeof View.Letter != 'undefined'){
+            CanCon.font = "bold "+View.LetterSize+"px Arial";
             CanCon.textAlign = 'center';
             CanCon.textBaseline = 'middle';
-            CanCon.fillStyle = O.viewColor;
+            CanCon.fillStyle = View.Color;
             CanCon.translate(X,Y);
-            if(O.colorFill) CanCon.fillStyle = 'rgba('+O.colorFill[0]+','+O.colorFill[1]+','+O.colorFill[2]+','+O.colorFill[3]+')';
+            if(View.colorFill) CanCon.fillStyle = 'rgba('+View.colorFill[0]+','+View.colorFill[1]+','+View.colorFill[2]+','+View.colorFill[3]+')';
             if(State.colorFill) CanCon.fillStyle = 'rgba('+State.colorFill[0]+','+State.colorFill[1]+','+State.colorFill[2]+','+State.colorFill[3]+')';
-            if(O.life > 0 && O.viewCloaked) CanCon.fillStyle = '#111111';
+            if(O.life > 0 && View.Cloaked) CanCon.fillStyle = '#111111';
 
-            if(!isNaN(O.viewLetter)){
-                CanCon.fillText(String.fromCharCode(O.viewLetter), 0, 0);
+            if(!isNaN(View.Letter)){
+                CanCon.fillText(String.fromCharCode(View.Letter), 0, 0);
             }else{
-                CanCon.fillText(O.viewLetter, 0, 0);
+                CanCon.fillText(View.Letter, 0, 0);
             }
         }
 
@@ -107,10 +117,10 @@ function CanvasManagerObject(){
             CanCon.font = "bold "+State.SizeLetterAdd+"px Arial";
             CanCon.textAlign = 'center';
             CanCon.textBaseline = 'middle';
-            if(O.viewAngle)
-                CanCon.rotate(-O.viewAngle*(Math.PI/180));
+            if(View.Angle)
+                CanCon.rotate(-View.Angle*(Math.PI/180));
             if(State.colorLetterAdd) CanCon.fillStyle = 'rgba('+State.colorLetterAdd[0]+','+State.colorLetterAdd[1]+','+State.colorLetterAdd[2]+','+State.colorLetterAdd[3]+')';
-            if(O.viewCloaked) CanCon.fillStyle = '#111111';
+            if(View.Cloaked) CanCon.fillStyle = '#111111';
             var Y7 = 0;
             if(State.YOffsetLetterAdd)
                 Y7-=-State.YOffsetLetterAdd;
@@ -122,14 +132,14 @@ function CanvasManagerObject(){
             }
         }
 
-        if(typeof O.viewLIBpath != 'undefined'){
-            CanCon.fillStyle = O.viewColor;
+        if(typeof View.LIBpath != 'undefined'){
+            CanCon.fillStyle = View.Color;
             if(State.colorFill) CanCon.fillStyle = 'rgba('+State.colorFill[0]+','+State.colorFill[1]+','+State.colorFill[2]+','+State.colorFill[3]+')';
 
             var svgD='';
-            var pathSize=O.viewPathSize/1000;
-            var XYoffset = parseInt((X2 - O.viewPathSize)/2);
-            var PATH = this.LIB[ O.viewLIBpath ];
+            var pathSize=View.PathSize/1000;
+            var XYoffset = parseInt((X2 - View.PathSize)/2);
+            var PATH = this.LIB[ View.LIBpath ];
             for(var s=0; s<PATH.length;++s)
                 if(isNaN(PATH[s])) svgD+=PATH[s]+' ';
                         else       svgD+=((PATH[s]*pathSize).toFixed(2))+' ';
@@ -162,6 +172,39 @@ function CanvasManagerObject(){
         return Canvas;
     }
 
+    this.simpleRenderNeeded = function(){
+        var R;
+        for(var nR in this.neededSimpleRenders){
+            R = this.neededSimpleRenders[nR];
+            var X2 = R.sizeX || 100;
+            var Y2 = R.sizeY || 100;
+            var X1 = parseInt(X2/2), Y1 = parseInt(Y2/2);
+            var X = X1, Y = Y1;
+
+            var ID = nR+'_';
+            var Canvas={Id:false,X:X1,Y:Y1};
+            $('#CanvasPreviews').append('<canvas id="CanvasManager_'+ID+'" width="'+X2+'" height="'+Y2+'"></canvas>');
+            Canvas.Id = document.getElementById('CanvasManager_'+ID);
+            var CanCon = Canvas.Id.getContext('2d');
+
+
+            if(typeof R.Letter != 'undefined'){
+                CanCon.save();
+                CanCon.font = "bold "+R.LetterSize+"px Arial";
+                CanCon.textAlign = 'center';
+                CanCon.textBaseline = 'middle';
+                CanCon.fillStyle = R.Color;
+                if(!isNaN(R.Letter)){
+                    CanCon.fillText(String.fromCharCode(R.Letter), X1, Y);
+                }else{
+                    CanCon.fillText(R.Letter, X1, Y);
+                }
+                CanCon.restore();
+            }
+
+            this.C[ID]=Canvas;
+        }
+    }
 
     this.renderNeeded = function(){
         var R;
@@ -221,7 +264,7 @@ function CanvasManagerObject(){
                 if(R.states[i].Yoffset)
                     Y = parseInt(Y2/2)- R.states[i].Yoffset;
 
-                if(BBAdata['GET']['DEBUG']){ CanCon.strokeStyle='white'; CanCon.beginPath();    CanCon.moveTo(0,Y1); CanCon.lineTo(X2,Y1); CanCon.stroke(); CanCon.beginPath();    CanCon.moveTo(X1,0); CanCon.lineTo(X1,Y2); CanCon.stroke(); }
+                if(BBAdata.GET.DEBUG){ CanCon.strokeStyle='white'; CanCon.beginPath();    CanCon.moveTo(0,Y1); CanCon.lineTo(X2,Y1); CanCon.stroke(); CanCon.beginPath();    CanCon.moveTo(X1,0); CanCon.lineTo(X1,Y2); CanCon.stroke(); }
 
 
 
@@ -234,24 +277,24 @@ function CanvasManagerObject(){
                     CanCon.restore();
                 }
 
-                if(typeof R.viewLetter != 'undefined'){
+                if(typeof R.Letter != 'undefined'){
                     CanCon.save();
                     CanCon.font = "bold "+R.states[i].fontSize+"px Arial";
                     CanCon.textAlign = 'center';
                     CanCon.textBaseline = 'middle';
                     CanCon.fillStyle = "rgba("+R.states[i].color[0]+","+R.states[i].color[1]+","+R.states[i].color[2]+","+R.states[i].color[3]+")";
-                    if(!isNaN(R.viewLetter)){
-                        CanCon.fillText(String.fromCharCode(R.viewLetter), X1, Y);
+                    if(!isNaN(R.Letter)){
+                        CanCon.fillText(String.fromCharCode(R.Letter), X1, Y);
                     }else{
-                        CanCon.fillText(R.viewLetter, X1, Y);
+                        CanCon.fillText(R.Letter, X1, Y);
                     }
                     CanCon.restore();
                 }
-                if(typeof R.viewLIBpath != 'undefined'){
+                if(typeof R.LIBpath != 'undefined'){
                     var svgD='';
                     var pathSize=R.states[i].pathSize/1000;
                     var XYoffset = parseInt((X2 - R.states[i].pathSize)/2);
-                    var PATH = this.LIB[ R.viewLIBpath ];
+                    var PATH = this.LIB[ R.LIBpath ];
                     for(var s=0; s<PATH.length;++s)
                         if(isNaN(PATH[s]))    svgD+=PATH[s]+' ';
                                 else         svgD+=((PATH[s]*pathSize).toFixed(2))+' ';

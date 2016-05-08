@@ -139,7 +139,7 @@ GAMEobject.prototype.unbindWithSquad = function(o,i,s){
 }
 
 GAMEobject.prototype.disbandSquad = function(O){
-    // Maybe we want to change squad chef?
+    // Maybe we want to change squad master?
 
     // If we disband, then:
     for(var i=0; i<O.squadScheme.length; ++i)

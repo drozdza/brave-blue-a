@@ -24,7 +24,7 @@ GAMEobject.prototype.makeAction = function(O,o,Action){
     if(Action.Manouver)  O.Manouver = Action.Manouver;
     if(Action.gotoSpeed) this.changeSpeedLvl(O, Action.gotoSpeed);
     if(Action.unCloak){
-        delete O.viewCloaked;
+        delete O.view.Cloaked;
         CanvasManager.requestCanvas(o);
     }
 }
@@ -211,7 +211,7 @@ GAMEobject.prototype.decide = function(o){
                 if(O.speedLvl < 3){
                     this.putObj_animation('hit_blue', O.x, O.y);
                     this.changeSpeedLvl(O,3);
-                    O.viewCloaked = true;
+                    O.view.Cloaked = true;
                     CanvasManager.requestCanvas(o);
                 }
             }

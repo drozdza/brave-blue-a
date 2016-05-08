@@ -127,7 +127,7 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
         this.setFlagSquadFull(O);
 
 
-    if(Type!='shieldBlob')
+    if(Type!='shieldBlob' && Type!='bullet')
         CanvasManager.requestCanvas( L );
 
     if(Type!='bullet')

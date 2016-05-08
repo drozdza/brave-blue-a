@@ -47,7 +47,7 @@ GAMEobject.prototype.start = function(Setting,Ship){
     this.setBoard();
     this.CanvasHandle = document.getElementById('MainCanvas').getContext('2d');
 
-    if(BBAdata['GET'].CANVAS > 0){
+    if(BBAdata.GET.CANVAS > 0){
         $('#CanvasPreviews').css({display: 'block'});
     }
 
@@ -69,11 +69,13 @@ GAMEobject.prototype.start = function(Setting,Ship){
         T: 'ship',
         ammo: 0,
         M: 'moving',
-        viewLetter: 'A',
-        viewLetterSize: 16,
-        viewColor: 'blue',
-        viewAngle: 0,
-        viewHitPattern: 'HullFire_20',
+        view:{
+            Letter: 'A',
+            LetterSize: 16,
+            Color: 'blue',
+            Angle: 0,
+            HitPattern: 'HullFire_20',
+        },
         mapType: 'P',
         mapCollide: ['A','ME'],
         periodDMG: {},
@@ -95,7 +97,7 @@ GAMEobject.prototype.start = function(Setting,Ship){
             this.mapPlaceObj(Setting, Setting.Place[i]);
 
 
-    if(BBAdata['GET'].CANVAS==0){
+    if(BBAdata.GET.CANVAS==0){
         this.FRAME_TIME = new Date().getTime();
         // this.frame();
         this.intervalIndex = window.requestAnimationFrame(function(){ GAME.frame(); });

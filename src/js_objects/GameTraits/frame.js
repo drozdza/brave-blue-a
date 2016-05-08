@@ -127,11 +127,12 @@ GAMEobject.prototype.frame_draw = function(){
     var CH = this.CanvasHandle;
     var Px = P.x-(this.Dx/2);
     var Py = P.y-(this.Dy/2);
+    var Cbull = CanvasManager.C['bullet_'];
 
     CH.save();
     CH.fillStyle="rgba(0,0,0,0.12)";
-    if(BBAdata['GET']['BLUR'] > 1) CH.translate(this.shipMoveX,this.shipMoveY);
-    if(!BBAdata['GET']['BLUR'])
+    if(BBAdata.GET.BLUR > 1) CH.translate(this.shipMoveX,this.shipMoveY);
+    if(!BBAdata.GET.BLUR)
         CH.fillStyle="black";
     CH.fillRect(0, 0, this.Dx, this.Dy);
     CH.restore();
@@ -139,7 +140,8 @@ GAMEobject.prototype.frame_draw = function(){
 
     for(o in this.O){
         O = this.O[o];
-        if(BBAdata['GET']['DEBUG']){
+        if(O.viewOff) continue;
+        if(BBAdata.GET.DEBUG){
             CH.save();
             CH.strokeStyle = 'white';
             CH.beginPath();
@@ -162,11 +164,20 @@ GAMEobject.prototype.frame_draw = function(){
             CH.restore();
         }
 
+        if(O.T=='bullet'){
+          CH.save();
+          CH.translate((O.x-Px).toFixed(0), (O.y-Py).toFixed(0));
+          CH.rotate(Radi*O.angle);
+          CH.drawImage(Cbull.Id,-Cbull.X,-Cbull.Y);
+          CH.restore();
+            continue;
+        }
+
         if(typeof O.canvasId != 'undefined'){
             CH.save();
             CH.translate((O.x-Px).toFixed(0), (O.y-Py).toFixed(0));
-            if(O.viewAngle)
-                CH.rotate(Radi*(O.angle- -O.viewAngle));
+            if(O.view.Angle)
+                CH.rotate(Radi*(O.angle- -O.view.Angle));
             else if(O.angle)
                 CH.rotate(Radi*O.angle);
             CH.drawImage(O.canvasId,-O.canvasX,-O.canvasY);
@@ -232,11 +243,11 @@ GAMEobject.prototype.frame_draw = function(){
 }
 
 GAMEobject.prototype.frame = function(){
-    if(BBAdata['GET']['FRAMES']==0){
+    if(BBAdata.GET.FRAMES==0){
         this.frame_move();
         this.frame_decide();
         this.frame_draw();
-    }else if(BBAdata['GET']['FRAMES'] > 0){
+    }else if(BBAdata.GET.FRAMES > 0){
         var FR = parseInt( 1000/this.Frames )-2;
         var now = new Date().getTime();
         var PASSED = now - this.FRAME_TIME;
@@ -244,15 +255,15 @@ GAMEobject.prototype.frame = function(){
             this.intervalIndex = window.requestAnimationFrame(function(){ GAME.frame(); });
             return true;
         }
-        if(BBAdata['GET']['FRAMES']==1){
+        if(BBAdata.GET.FRAMES==1){
             this.FRAME_TIME = now;
         }
-        if(BBAdata['GET']['FRAMES']==2){
+        if(BBAdata.GET.FRAMES==2){
             this.FRAME_TIME-=-FR;
         }
         this.frame_move();
         this.frame_decide();
-        if(BBAdata['GET']['FRAMES']==3 || BBAdata['GET']['FRAMES']==4){
+        if(BBAdata.GET.FRAMES==3 || BBAdata.GET.FRAMES==4){
             PASSED-=FR;
             this.FRAME_TIME-=-FR;
             var X = 0;
@@ -272,12 +283,12 @@ GAMEobject.prototype.frame = function(){
     }
 
 
-    if(BBAdata['GET']['FPS'] > 0){
+    if(BBAdata.GET.FPS > 0){
         var D = parseInt(new Date().getTime()/1000);
         if(D != this.FPSx){
             var FPS = this.tick - this.FPSy;
             var FPSu = this.tickD - this.FPSz;
-            if(BBAdata['GET']['FPS'] > 1){
+            if(BBAdata.GET.FPS > 1){
                 $('#FPSpillar').prepend('<div><div style="height: '+FPS*3+'px;"><div style="height: '+FPSu*3+'px;"></div></div></div>');
                 $('#FPSpillar div:nth-child(151)').remove();
             }
@@ -288,7 +299,7 @@ GAMEobject.prototype.frame = function(){
             this.FPSy=this.tick;
             this.FPSz=this.tickD;
 
-            if(BBAdata['GET']['FPS'] > 2){
+            if(BBAdata.GET.FPS > 2){
                 var u = 1000 - this.MSship - this.MSdecide - this.MSmove - this.MSdraw;
                 html = '';
                 html += '<div class="FPS_MS">'+this.MSship+'<div class="" style="height: '+parseInt(this.MSship/10)+'px;">[s]</div></div>';
@@ -313,7 +324,7 @@ GAMEobject.prototype.frame = function(){
         this.endGame();
 
     if(!this.pause && !this.doEndGame)
-        if(BBAdata['GET']['FRAMES'] < 4)
+        if(BBAdata.GET.FRAMES < 4)
             this.intervalIndex = window.requestAnimationFrame(function(){ GAME.frame(); });
         else
             this.intervalIndex = setTimeout(function(){ GAME.frame(); }, 1);

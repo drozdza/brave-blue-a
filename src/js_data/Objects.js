@@ -1,9 +1,11 @@
 BBAdata['ObjectDatas']={
     healing_missle:{
-        viewLetter: 'J',
-        viewLetterSize: 12,
-        viewColor: '#0f0',
-        viewAngle: 180,
+        view:{
+            Letter: 'J',
+            LetterSize: 12,
+            Color: '#0f0',
+            Angle: 180,
+        },
 
         lifeM: 1,
         speed: 13,
@@ -16,10 +18,12 @@ BBAdata['ObjectDatas']={
         Flags:{},
     },
     missle:{
-        viewLetter: 'Y',
-        viewLetterSize: 12,
-        viewColor: '#ff0',
-        viewAngle: 0,
+        view:{
+            Letter: 'Y',
+            LetterSize: 12,
+            Color: '#ff0',
+            Angle: 0,
+        },
 
         lifeM: 1,
         speed: 15,
@@ -31,10 +35,12 @@ BBAdata['ObjectDatas']={
         Flags:{},
     },
     bullet_bomb:{
-        viewLetter: 'P',
-        viewLetterSize: 12,
-        viewColor: '#ff0',
-        viewAngle: 0,
+        view:{
+            Letter: 'P',
+            LetterSize: 12,
+            Color: '#ff0',
+            Angle: 0,
+        },
 
         lifeM: 1,
         speed: 15,
@@ -46,10 +52,13 @@ BBAdata['ObjectDatas']={
         Flags:{},
     },
     space_mine:{
-        viewLetter: 'R',
-        viewLetterSize: 10,
-        viewColor: '#ff0',
-        viewAngle: 0,
+        view:{
+            Letter: 'R',
+            LetterSize: 10,
+            Color: '#ff0',
+            Angle: 0,
+        },
+
         speed:0,
         angle:0,
         radius:6,
@@ -69,43 +78,54 @@ BBAdata['ObjectDatas']={
         Flags:{}
     },
     star:{
-        viewLIBpath:'StarPath',
-        viewPathSize:30,
-        viewColor:'white',
-        viewAngle:0,
-        viewHitPattern:'StarHit',
+        view:{
+            LIBpath:'StarPath',
+            PathSize:30,
+            Color:'white',
+            Angle:0,
+            HitPattern:'StarHit',
+        },
+
         lifeM:6,
         Flags:{},
     },
     Gstar:{
-        viewLIBpath:'StarPath',
-        viewPathSize:170,
-        viewColor:'yellow',
-        viewAngle:0,
-        viewXY:180,
+        view:{
+            LIBpath:'StarPath',
+            PathSize:170,
+            Color:'yellow',
+            Angle:0,
+            XY:180,
+        },
+
         radius: 90,
         undestructible: 1,
         bounceType: 'straight',
         Flags:{},
     },
     RoundField:{
+        view:{
+            circleColor:[255,255,255,0.2],
+        },
         radius: 50,
-        circleColor:[255,255,255,0.2],
         undestructible: 1,
-        Flags:{},
     },
     SquareField:{
+        view:{
+            color: 'red',
+        },
         radius: 50,
-        color: 'red',
         squareAngle: 0,
         squareLen: 50,
         squareWidth: 15,
         undestructible: 1,
-        Flags:{},
     },
     ConeField:{
+        view:{
+            color: 'red',
+        },
+
         radius: 50,
-        color: 'red',
         coneAngle: 180,
         coneRad2: 50,
         angle: 0,
@@ -140,11 +160,14 @@ BBAdata['ObjectDatas']={
         spotLvl: 2,
     },
     carras:{
-        viewLetter: 'A',
-        viewLetterSize: 16,
-        viewColor: 'red',
-        viewAngle: 0,
-        viewHitPattern: 'HullFire_20',
+        view:{
+            Letter: 'A',
+            LetterSize: 16,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_20',
+        },
+
         lifeM: 5,
 
         weapon:[{t:'single', Power:1, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5}],
@@ -181,11 +204,14 @@ BBAdata['ObjectDatas']={
         },
     },
     muerto:{
-        viewLetter: 'M',
-        viewLetterSize: 40,
-        viewColor: 'red',
-        viewAngle: 0,
-        viewHitPattern: 'HullFire_40',
+        view:{
+            Letter: 'M',
+            LetterSize: 40,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_40',
+        },
+
         lifeM: 9,
         radius: 20,
 
@@ -221,11 +247,14 @@ BBAdata['ObjectDatas']={
 
     },
     nemezis:{
-        viewLetter: 'N',
-        viewLetterSize: 40,
-        viewColor: 'red',
-        viewAngle: 0,
-        viewHitPattern: 'HullFire_40',
+        view:{
+            Letter: 'N',
+            LetterSize: 40,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_40',
+        },
+
         lifeM: 4,
         radius: 20,
 
@@ -261,11 +290,14 @@ BBAdata['ObjectDatas']={
         },
     },
     warastein:{
-        viewLetter: 'W',
-        viewLetterSize: 40,
-        viewColor: 'red',
-        viewAngle: 0,
-        viewHitPattern: 'HullFire_40',
+        view:{
+            Letter: 'W',
+            LetterSize: 40,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_40',
+        },
+
         lifeM: 11,
         radius: 23,
 
@@ -301,11 +333,14 @@ BBAdata['ObjectDatas']={
 
     },
     dandares:{
-        viewLetter: 'D',
-        viewLetterSize: 40,
-        viewColor: 'red',
-        viewAngle: 270,
-        viewHitPattern: 'HullFire_40',
+        view:{
+            Letter: 'D',
+            LetterSize: 40,
+            Color: 'red',
+            Angle: 270,
+            HitPattern: 'HullFire_40',
+        },
+
         lifeM: 7,
         radius: 20,
 
@@ -344,26 +379,30 @@ BBAdata['ObjectDatas']={
         },
     },
     shieldBlob:{
-        viewLetter: '#',
-        viewLetterSize: 40,
-        colorFill:[0,255,200,1],
-        viewAngle: 0,
+        view:{
+            Letter: '#',
+            LetterSize: 40,
+            colorFill:[0,255,200,1],
+            Angle: 0,
+            HitPattern:'ShieldBlobHit',
+            backgroundCircle: 21,
+            colorCircle:[0,200,100,1],
+        },
+
         lifeM: 3,
         radius: 21,
-        viewHitPattern:'ShieldBlobHit',
-
-        backgroundCircle: 21,
-        colorCircle:[0,200,100,1],
     },
     royale:{
-        viewLetter: 'R',
-        viewLetterSize: 40,
-        viewColor: 'red',
-        viewAngle: 0,
-        viewHitPattern: 'HullFire_40',
+        view:{
+            Letter: 'R',
+            LetterSize: 40,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_40',
+        },
+
         lifeM: 16,
         radius: 20,
-
 
         weapon:[
             {t:'missleCrown', Power:1, Dec: 95, Speed: 12, gunSpeed: 120, lastShot: 0, minDistToEnemy: 400},
@@ -395,11 +434,14 @@ BBAdata['ObjectDatas']={
         },
     },
     edison:{
-        viewLetter: 'E',
-        viewLetterSize: 40,
-        viewColor: 'red',
-        viewAngle: 0,
-        viewHitPattern: 'HullFire_40',
+        view:{
+            Letter: 'E',
+            LetterSize: 40,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_40',
+        },
+
         lifeM: 9,
         radius: 20,
 
@@ -443,11 +485,14 @@ BBAdata['ObjectDatas']={
 
     },
     hiacynt:{
-        viewLetter: 'H',
-        viewLetterSize: 20,
-        viewColor: 'red',
-        viewAngle: 0,
-        viewHitPattern: 'HullFire_20',
+        view:{
+            Letter: 'H',
+            LetterSize: 20,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_20',
+        },
+
         lifeM: 4,
 
         shieldBlobProd: 0,
@@ -486,11 +531,14 @@ BBAdata['ObjectDatas']={
         },
     },
     iskariot:{
-        viewLetter: 'I',
-        viewLetterSize: 20,
-        viewColor: 'red',
-        viewAngle: 0,
-        viewHitPattern: 'HullFire_20',
+        view:{
+            Letter: 'I',
+            LetterSize: 20,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_20',
+        },
+
         lifeM: 3,
 
         jump: 3,
@@ -533,11 +581,14 @@ BBAdata['ObjectDatas']={
         },
     },
     tartaros:{
-        viewLetter: 'T',
-        viewLetterSize: 60,
-        viewColor: 'red',
-        viewAngle: 0,
-        viewHitPattern: 'HullFire_40',
+        view:{
+            Letter: 'T',
+            LetterSize: 60,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_40',
+        },
+
         lifeM: 9,
         radius: 27,
 
@@ -571,11 +622,14 @@ BBAdata['ObjectDatas']={
         },
     },
     belzebub:{
-        viewLetter: 'B',
-        viewLetterSize: 40,
-        viewColor: 'red',
-        viewAngle: 90,
-        viewHitPattern: 'HullFire_40',
+        view:{
+            Letter: 'B',
+            LetterSize: 40,
+            Color: 'red',
+            Angle: 90,
+            HitPattern: 'HullFire_40',
+        },
+
         lifeM: 9,
         radius: 20,
 
@@ -618,11 +672,14 @@ BBAdata['ObjectDatas']={
         },
     },
     koriaz:{
-        viewLetter: 'K',
-        viewLetterSize: 16,
-        viewColor: 'red',
-        viewAngle: 270,
-        viewHitPattern: 'HullFire_20',
+        view:{
+            Letter: 'K',
+            LetterSize: 16,
+            Color: 'red',
+            Angle: 270,
+            HitPattern: 'HullFire_20',
+        },
+
         lifeM: 7,
         radius: 10,
 
@@ -657,11 +714,14 @@ BBAdata['ObjectDatas']={
         },
     },
     fariax:{
-        viewLetter: 'F',
-        viewLetterSize: 40,
-        viewColor: 'red',
-        viewAngle: 0,
-        viewHitPattern: 'HullFire_40',
+        view:{
+            Letter: 'F',
+            LetterSize: 40,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_40',
+        },
+
         lifeM: 9,
         radius: 20,
 
@@ -695,11 +755,14 @@ BBAdata['ObjectDatas']={
         },
     },
     dregos:{
-        viewLetter: 'U',
-        viewLetterSize: 20,
-        viewColor: 'red',
-        viewAngle: 0,
-        viewHitPattern: 'HullFire_20',
+        view:{
+            Letter: 'U',
+            LetterSize: 20,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_20',
+        },
+
         lifeM: 9,
 
 
@@ -745,11 +808,14 @@ BBAdata['ObjectDatas']={
         },
     },
     vitotas:{
-        viewLetter: 'V',
-        viewLetterSize: 20,
-        viewColor: 'red',
-        viewAngle: 0,
-        viewHitPattern: 'HullFire_20',
+        view:{
+            Letter: 'V',
+            LetterSize: 20,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_20',
+        },
+
         lifeM: 5,
 
         weapon:[
@@ -796,11 +862,14 @@ BBAdata['ObjectDatas']={
         },
     },
     cloaker:{
-        viewLetter: 'C',
-        viewLetterSize: 20,
-        viewColor: 'red',
-        viewAngle: 270,
-        viewHitPattern: 'HullFire_20',
+        view:{
+            Letter: 'C',
+            LetterSize: 20,
+            Color: 'red',
+            Angle: 270,
+            HitPattern: 'HullFire_20',
+        },
+
         lifeM: 3,
 
         cloakingProd: 0,
@@ -839,11 +908,14 @@ BBAdata['ObjectDatas']={
         },
     },
     hajaher:{
-        viewLetter: 'S',
-        viewLetterSize: 20,
-        viewColor: 'red',
-        viewAngle: 0,
-        viewHitPattern: 'HullFire_20',
+        view:{
+            Letter: 'S',
+            LetterSize: 20,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_20',
+        },
+
         lifeM: 6,
 
         weapon:[
@@ -884,11 +956,14 @@ BBAdata['ObjectDatas']={
         },
     },
     orhenes:{
-        viewLetter: 'Q',
-        viewLetterSize: 80,
-        viewColor: 'red',
-        viewAngle: 0,
-        viewHitPattern: 'HullFire_80',
+        view:{
+            Letter: 'Q',
+            LetterSize: 80,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_80',
+        },
+
         lifeM: 60,
         radius: 40,
 
@@ -928,11 +1003,14 @@ BBAdata['ObjectDatas']={
         },
     },
     juggernaut:{
-        viewLetter: 'J',
-        viewLetterSize: 80,
-        viewColor: 'red',
-        viewAngle: 0,
-        viewHitPattern: 'HullFire_80',
+        view:{
+            Letter: 'J',
+            LetterSize: 80,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_80',
+        },
+
         lifeM: 12,
         radius: 40,
 
@@ -979,11 +1057,14 @@ BBAdata['ObjectDatas']={
 
     },
     gargamon:{
-        viewLetter: 'G',
-        viewLetterSize: 80,
-        viewColor: 'red',
-        viewAngle: 270,
-        viewHitPattern: 'HullFire_80',
+        view:{
+            Letter: 'G',
+            LetterSize: 80,
+            Color: 'red',
+            Angle: 270,
+            HitPattern: 'HullFire_80',
+        },
+
         lifeM: 22,
         radius: 40,
 
@@ -1024,11 +1105,14 @@ BBAdata['ObjectDatas']={
         },
     },
     xaurus:{
-        viewLetter: 'X',
-        viewLetterSize: 60,
-        viewColor: 'red',
-        viewAngle: 270,
-        viewHitPattern: 'HullFire_60',
+        view:{
+            Letter: 'X',
+            LetterSize: 60,
+            Color: 'red',
+            Angle: 270,
+            HitPattern: 'HullFire_60',
+        },
+
         lifeM: 33,
         radius: 27,
 
@@ -1069,15 +1153,16 @@ BBAdata['ObjectDatas']={
         },
     },
     zarahiash:{
-        viewLetter: 'Z',
-        viewLetterSize: 20,
-        viewColor: 'red',
-        viewAngle: 0,
-        viewHitPattern: 'HullFire_40',
+        view:{
+            Letter: 'Z',
+            LetterSize: 20,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_40',
+        },
+
         lifeM: 13,
         radius: 15,
-
-
 
         fieldCharges: 0,
         Res: {'fieldCharges': {M:10,T:0}},
