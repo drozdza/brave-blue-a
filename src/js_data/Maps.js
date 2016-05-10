@@ -8,6 +8,12 @@ BBAdata['MAPS']={
         Place:[
             {Random:{X: 0, Y: 0, Radius: 200}, What: {K:1}},
 
+            {What:{RoundField:1},objData:{x:-10,y:-450, radius:90, simpleFilling:'transparent',
+                stateIn:{simpleFilling:'rgba(255,0,0,0.5)'},
+                stateOut:{simpleFilling:'transparent'}
+            }},
+
+
             {What:{SquareField:1},objData:{x:59,y:-933, squareAngle: 45, squareLen: 500, squareWidth: 30, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 20, PeriodOffset: 20}},
 
             {What:{SquareField:1},objData:{x:0,y:-1000, squareAngle: 45, squareLen: 500, squareWidth: 30, fieldAnim: 'WindField', bounceType:'wind',bounceForce:5,windAngle:60}},

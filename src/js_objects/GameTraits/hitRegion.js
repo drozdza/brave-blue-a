@@ -267,3 +267,32 @@ GAMEobject.prototype.regionSpeedChange = function(Q,O){
         O.speed = Q.SlowDownTo;
     }
 }
+
+GAMEobject.prototype.regionStateIn = function(q,o){
+    var Q = this.O[q];
+    var SI = Q.stateIn;
+
+    for(var i in SI)
+        if(SI[i] != Q[i]){
+            Q[i] = SI[i];
+            if(i=='fieldAnim') this.setRegionAnimation(q,SI.fieldAnim);
+        }
+    if(Q.stateOut){
+        this.Ocomp[q]=1;
+        Q.doingTime=1;
+        Q.toDo=[{T:'regionStateOut'}];
+        Q.Flags=[];
+    }
+}
+
+GAMEobject.prototype.regionStateOut = function(q){
+    var Q = this.O[q];
+    delete(this.Ocomp[q]);
+
+    var SI = Q.stateOut;
+    for(var i in SI)
+        if(SI[i] != Q[i]){
+            Q[i] = SI[i];
+            if(i=='fieldAnim') this.setRegionAnimation(q,SI.fieldAnim);
+        }
+}

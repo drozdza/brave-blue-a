@@ -229,6 +229,7 @@ GAMEobject.prototype.addToToDoList = function(o,toDo){
 }
 
 GAMEobject.prototype.setRegionAnimation = function(o,animType){
+    if(animType===false) return true;
     var O = this.O[o];
     O.TT = 'regionAnim';
     O.animTick = 0;

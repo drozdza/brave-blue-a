@@ -1,0 +1,234 @@
+- Lets make blinking region at first
+- Mines extended hitbox
+
+- Ships explode on destroyed
+
+- Rozdzielić typy bomb (można strzelać kilkoma typami)
+- Wystrzeliwanie bomb do konkretnego miejsca (skracanie Dec)
+- Pokazywanie zasięgu bomb z oznaczonym miejscem wybuchu
+
+
+- Statki unikają niektórych Regionów, lub próbują skrócić przez nie drogę (jeden rozkaz)
+- Statki nie informują pozostałych o obrażeniach od regionów
+
+- Estymacja obszarów wybuchów
+
+- Wycinanie z pół zniszczenia obszarów spokoju innymi fieldami?
+
+- Różne fields w wersji okrągłej i prostokątnej
+
+- Rozkaz - nie strzelać w czarnej dupie (pole grawitacyjne)
+
+- Moduł do zbierania bonusów (np. trzyma 5 bonusów)
+
+
+==========================================================================================
+
+Do zrobienia:
+	- Dodać budowanie statków
+	- Gwiazdy w tle (?)
+	- Zaawansowane składy
+	- Mapa Gwiazd
+
+Do zdebugowania:
+	- AutoFire should work
+
+
+Nowe ficzery:
+	- Szybkie skręty, natychmiastowe zatrzymywanie się, zartacanie, beczki w bok, przyspieszenie
+	- Baterie które można napełniać a potem zużywać
+	- Różne rodzaje tarcz, niektóre pochłaniają część siły ataku, inne wytrzymują X wybuchów, inne chronią przed polami energetycznymi i laserami.
+	- Tarcze mogą też odbijać pociski wroga
+	- Moduł: Akcelerator prędkości
+	- Moduł: Akcelerator skrętów
+	- Bonusy
+		- Zbieramy je z planszy:
+			- Wypadają z pokonanych jednostek
+			- Unoszą się w powietrzu
+			- Są produkowane przez jakieś specjalne punkty
+		- Można mieć ustawione spalanie automatyczne bonusów
+		- Można aktywować każdy bonus miejsce
+		- Bonus spalany automatycznie od razu próbuje się aktywować.
+		- Bonus może wyłączać moduły (Np. bonus leczący dezaktywuje moduł leczący jeśli zostało 1 życia) "bonus Priority"
+		- Niektóre bonusy mają działanie natychmiastowe, inne działają po czasie
+		- 2 Identyczne bonusy nie mogą działać na raz
+		Przykładowe bonusy:
+			- Leczenie. Aktywuje się, odczekuje pewien czas, a potem odnawia 1 HP
+			- Tarcza tymczasowa. Daje jakiś typ tarczy, a po jakimś czasie znika
+			- Tarcza jednorazowa. Dodaje dodatkową tarczę która jak się zużyje to zużyje.
+			- Dodatkowa energia. Działa jak baterie. Gdy jest potrzebna, wprowadza dodatkową energię do systemu.
+			- Przyspieszenie. Przez pewien czas daje dodatkowe X szybkości.
+			- Szybsze skręty. Przez pewien czas dodaje manewrowości.
+			- Dodatkowa amunicja.
+			- Silniejsze strzały.
+			- Teleport zamiast obrażeń.
+
+
+
+Nowi przeciwnicy:
+	- L,O,P
+	- [Y] - pluje tarczami energetycznymi jak miotaczem ognia
+	- F same się leczą jeśli nie dzieje się nic innego
+	- Przeciwnik przebierający się za gwiazdę (stojąc w miejscu) (po wykonaniu ataku ujawnia się)
+	- Przeciwnicy rosnocy jak pnącza
+		- Składają się z chińskich literek
+		- Mają odpowiednie części:
+			- Serca - które wszystko zasilają
+			- Zwykłe pnącza - które rosną i powiększają strukturę
+			- Różne strzelające odnóża
+			- Nowe nasiona z których wyrastają kolejne rośliny
+	- Statek który otwiera przed sobą pole porzogi i próbuje utrzymać w nim gracza (2 rodzaje, Cone)
+	- Statek ciągnący za sobą dużą ilość torped leczniczych
+	- Statek ciągnący za sobą zwykłe torpedy
+	- Liny pomiędzy gwiazdami po których jeżdżą przeciwnicy.
+	- Roślinne elementy strzelające ukośnie lecącymi Bulletami.
+	- Ochrona stała: np. redukcja obrażeń od wybuchów.
+	- Niebieskie strzały
+
+	Fields:
+		- Immunity Field
+		- Healing Field
+
+
+Nowe Typy Ataków:
+	- Kwas. Omija wszystkie tarcze.
+		- Miotacz Kwasu.
+		- Bomba Kwasowa
+	- Wszystkie ataki wybuchowe zostawiają pole "porzogi" na jedno tyknięcie.
+		- Każdy kto wejdzie na dane pole "porzogi", jest na nie uodporniony przez pewien czas.
+	- Mamy różne pola pożogi które mają dłuższe efekty (ranią co jakiś czas).
+	- Cluster Bomb (wybucha zwykłymi nabojami)
+	- Mina Cluster Bomb
+	- Pocisk rozbryzgowy (po pewnym czasie zamienia się w strzał z shootguna)
+	- Torpedy wybuchające
+	- Duży obszar na którym summonują się bomby różnej wielkości (po chwili)
+	- Pocisk neutralizujący tarczę
+	- Atak neutralizujący tarczę
+	- Błękitne pociski (co robią?)
+	- Pociski tworzące wierzyczki (ostrzeliwujące przez kilka sekund wroga)
+	- Bomba tworząca wir pocisków
+	- Zawijane pociski (na kraba)
+
+
+Nowe elementy planszy:
+	- Podłużne elementy (?)
+	- Duże kawałki terenu
+	- Gwiazdy różnej wielkości
+	- Pola porzogi
+	- Pola odbijające statki na zewnątrz (lub do wewnątrz)
+	- Pola zatrzymujące wszystkie pociski (eksplodujące je)
+	- Pola nie pozwalające się przez nie teleportować
+	- Pola na których "wieje wiatr"
+	- Pola spowalniające pociski (zatrzymujące je)
+	- Pola odchylające pociski
+
+
+
+
+===================================
+
+SQUADY:
+	Squad ma swojego szefa
+	 - Szef nie wykonuje rozkazów squadu
+	Rozkaz squadu:
+		- Formacja
+			- Mamy różne typy formacji, typy statków mają konkretne podstawowe typy formacji.
+				- Zmienianie typów formacji w zależności od sytuacji?
+			- Niektóre formacje mają miejsca przeznaczone dla konkretnych typów statków, np. dla K albo F
+			- Szef formacji wylicza porządane miejsca dla każdego członka formacji
+			- Członkowie formacji próbują dogonić swoje miejsce, albo są na nie  przesuwani
+		- Orbitowanie wokół punktu (?)
+			- wyliczamy sobie jakąś stałą siłę skrętu
+			- próbujemy dolecieć do punktu XY
+			- jeśli wypadniemy poza obszar orbity +20%, wracamy do pola gwałtownie i orbitujemy dalej
+			? A może lepiej wyznaczać jakiś punkt na orbicie do którego lecimy?
+		- Zdążanie do punktu (punktów)
+			- mamy listę punktów
+			- może być jednorazowa lub cykliczna
+			- jeśli dolecimy na X do jakiegoś punktu, wyznaczmay sobie następny
+		- Wracanie do punktu X jeśli jest się rannym (a wróg poza zasięgiem)
+		- Wysyłanie sygnałów o znalezieniu wroga
+		- Oczekiwanie w punkcie
+		- Okrążanie obszaru
+			- każdy ze statków ustawia się wokół jakiegoś obszaru i zwraca się do środka
+		- Rozejście się na boki wszystkich jednostek podczas ostrzału na follow (wysyła jednostka która oberwała)
+
+
+		- Szukanie wroga wokół punktu X na obszarze Y
+			- Patrzymy na ilość statków biorących udział w zadaniu
+			- każdy ze statków leci pod innym kontem w daną stronę.
+
+
+	- Strzelane seriami.
+		Np. mamy kilka M, i strzelają one na przemian po kilka (na 2 salwy, na 3 salwy) a nie chaotycznie.
+
+
+	Squad po stracie szefa może:
+		- rozwiązać się
+		- wybrać nowego szefa
+
+
+	Rozkazy?
+
+
+
+	STATEK MA:
+		- tryby szybkości: zero, wolno, normalnie, szybko
+		- Poziom czujności
+		- Tryb brawurowości
+
+		- Refleks/Wypatrywanie (co ile tyknięć statek wypatruje)
+		- Średnicę koła 100% wypatrywania
+		- Średnicę i rozwartość strefy dalekiego wypatrywania.
+
+
+	BROŃ:
+		- niektóre można używać w trybie ciągłym
+		- inne mają bardziej skomplikowane sposoby użycia.
+
+
+	ZACHOWANIA
+		- zachowania są typowe dla jakiegoś typu statku
+
+		NP:
+			 - [Przy oberwaniu] Sprawdza czy nie jest za mocno uszkodzona i czy nie zawrócić. Do miejsca zbiórki [!].
+			 - [Raz na X tick][To robimy cały czas] Sprawdza czy nie ma wroga w pobliżu (statki moją podwójną strefę kontroli?
+			 - Rajd na wroga, próba dogonienia go i strzelania do niego.
+			 - Skręcanie. Wróg decyduje czy skręcić w prawo czy w lewo i o ile.
+			 - Poruszanie się do najbliższej rannej jednostki która znajduje się z sasięgu.
+			 - Jeśli wróg jest z zasięgu, próbujemy ukryć za jakąś inną jednostką.
+			 - Uciekanie od Gracza.
+			 - Uciekanie od Gracza poprzez skręcanie w losowych momentach.
+			 - Brawurowość podnosi się jeśli statek trafi gracza, lub gdy zobaczy gracza który jest mocno ranny.
+
+			 - Jeśli gracz leci bardzo wolno, orbitujemy wokół niego.
+
+	ROZKAZY
+
+		NP:
+			- [Raz na 20 tick] Sprawdzamy czy nie wylecieliśmy za obszar X.
+			- [Przy oberwaniu] Ostrzeżenie o trafieniu. Trafiona jednostka lecąca na 'follow' wydaje rozkaz okolicznym jednostkom zrobić manewr wymijania pocisków.
+			- Manewr wymijania pocisków. Statki skręcają w stronę przeciwną do follow. [Znika po 20 tyknięciach]
+
+			- Patrol. Wróg przemieszcza się do najbliższego punktu patrolowego, jeśli do niego dotrze, wyznacza sobie następny.
+
+			- Orbitowanie wokół punktu
+
+	BROŃ
+		- Mamy broń Podstawową, ale jeśli z jakichś przyczyn nie możemy jej użyć (nie naładowała się, nie ma po co), to używamy broni dodatkowej.
+		- Basta.
+
+
+	STANY ALARMU:
+		[1]- Wyłączony
+		[2]- Nie poruszający się (refleks wolniejszy)
+		[3]- Nie zaalarmowany
+		[4]- Już widział wroga / dostał od kogoś informacje o wrogu
+
+		- Słyszał wybuchy, widział wraki
+
+
+		- Ścigający wroga
+
+		- Trzymający się na uboczu - brak amunicji lub ładowanie
+		- Uszkodzony - uciekający przed wrogiem

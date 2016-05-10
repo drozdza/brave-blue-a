@@ -258,6 +258,11 @@ GAMEobject.prototype.decide = function(o){
                 return true;
             }
 
+            if(TD.T=='regionStateOut'){
+                this.regionStateOut(o);
+                return true;
+            }
+
             if(TD.T=='explode'){
                 this.explodeBomb(o,O.onDie);
                 return true;
