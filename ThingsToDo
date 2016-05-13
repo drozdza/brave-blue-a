@@ -1,12 +1,10 @@
-- Lets make blinking region at first
 - Mines extended hitbox
-
-- Ships explode on destroyed
 
 - Rozdzielić typy bomb (można strzelać kilkoma typami)
 - Wystrzeliwanie bomb do konkretnego miejsca (skracanie Dec)
 - Pokazywanie zasięgu bomb z oznaczonym miejscem wybuchu
 
+- Gwiazdy na mapie gwiazd
 
 - Statki unikają niektórych Regionów, lub próbują skrócić przez nie drogę (jeden rozkaz)
 - Statki nie informują pozostałych o obrażeniach od regionów
@@ -23,6 +21,12 @@
 
 
 ==========================================================================================
+
+Pomoce dla statku:
+  - obliczanie jak lasery się zaginają o przeszkody
+	- pokazywanie jaki będzie obszar wybuchu
+	- o co zachaczy bomba, gdzie się odbije
+	- automatyczne strzelanie jeśli coś wejdzie w linię strzału
 
 Do zrobienia:
 	- Dodać budowanie statków
@@ -69,6 +73,8 @@ Nowi przeciwnicy:
 	- L,O,P
 	- [Y] - pluje tarczami energetycznymi jak miotaczem ognia
 	- F same się leczą jeśli nie dzieje się nic innego
+  - Ships explode on destroyed
+  - Enemies that link their lives into friend lives (they take hits instead)
 	- Przeciwnik przebierający się za gwiazdę (stojąc w miejscu) (po wykonaniu ataku ujawnia się)
 	- Przeciwnicy rosnocy jak pnącza
 		- Składają się z chińskich literek

@@ -335,6 +335,10 @@ GAMEobject.prototype.decide_ship = function(e){
             this.shipTeleportBomb(Fx.Distance,Fx.offTime,Fx);
             shotDone = true;
         }
+        if(Fx.T=='bombD'){
+            this.shipShootDistanceBomb(Fx.Speed,Fx.Dec,Fx.offTime,Fx);
+            shotDone = true;
+        }
         if(Fx.T=='laser' && LaserMod!=false){
             --S.Modules[LaserMod].LaserLoad;
             this.shipShootLaser(Fx.Speed,Fx.Power);

@@ -72,3 +72,23 @@ GAMEobject.prototype.shipTeleportBomb = function(Distance,offTime,bombData){
 
     return this.teleportJump(L,iDist,iRad,'TP_trackDark');
 }
+GAMEobject.prototype.shipShootDistanceBomb = function(Speed,Dec,offTime,bombData){
+    var O = this.O[0];
+
+    var Distance = Speed*Dec;
+    var iX = O.x-this.mouseX;
+    var iY = O.y-this.mouseY;
+    var iDist = Math.sqrt(iX*iX- -iY*iY);
+    var iRad = parseInt(- (Math.atan2(iX,iY)*180/Math.PI))%360;
+    if(iDist > Distance){
+        iDist = Distance;
+    } else {
+        Dec = parseInt((iDist/Speed)- -0.49);
+        console.log(iDist+' '+Speed+' '+Dec);
+    }
+    if(bombData.minDec && bombData.minDec > Dec)
+        Dec = bombData.minDec;
+
+
+    this.shipShootBomb(Speed,Dec,bombData);
+}
