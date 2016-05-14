@@ -56,7 +56,7 @@ GAMEobject.prototype.teleportJump = function(o,Distance,angle,graphicType){
         Found = this.getCollidingWithCircle(Ox, Oy, O.radius, ['A','R']);
         for(F in Found)
             if(this.O[F].bounceTeleport){
-                pathD=pathD.concat(['L',{x: Ox, y: Oy}]);
+                pathD = pathD.concat(['L',{x: Ox, y: Oy}]);
                 Angle = this.regionAngleChange(this.O[F],{x:Ox,y:Oy,angle:Angle,speed:10}).angle;
             }
     }
@@ -68,7 +68,7 @@ GAMEobject.prototype.teleportJump = function(o,Distance,angle,graphicType){
     if(graphic == 'TP_track')
         this.putObj_animation('hit_blue', Ox, Oy);
     if(graphic == 'TP_trackDark')
-            this.putObj_animation('hit_red', Ox, Oy);
+        this.putObj_animation('hit_red', Ox, Oy);
 
     return true;
 }

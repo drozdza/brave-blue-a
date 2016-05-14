@@ -123,8 +123,7 @@ GAMEobject.prototype.shipFunc_glueFireToEstimated = function(EsteemedPos){
         $('#gameboardMarkers').append('<div class="estimationMarkers GluedOne" style="top: '+wY+'px; left: '+wX+'px;"><span style="width: '+(2*Rad)+'px; height: '+(2*Rad)+'px; top: -'+(Rad- -2)+'px; left: -'+(Rad- -2)+'px;"></span></div>');
     }
 }
-GAMEobject.prototype.shipFunc_teleport = function(Fx,TeleMod){
-    --this.SHIP.Modules[TeleMod].TeleLoad;
+GAMEobject.prototype.shipFunc_teleport = function(Fx){
     var O = this.O[0];
     var iX = O.x-this.mouseX;
     var iY = O.y-this.mouseY;
@@ -133,8 +132,7 @@ GAMEobject.prototype.shipFunc_teleport = function(Fx,TeleMod){
     if(iDist > Fx.Speed)
         iDist = Fx.Speed;
 
-    if(this.teleportJump(0,iDist,iRad))
-        Fx.gunS=0;
+    return this.teleportJump(0,iDist,iRad);
 }
 GAMEobject.prototype.shipFunc_workingRadar = function(U,Prod,Radius){
     var O = this.O[0];

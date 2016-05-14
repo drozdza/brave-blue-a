@@ -42,10 +42,11 @@ function GAMEobject(){
     this.keyLeftRight=0;
     this.keyUpDown=0;
 
-    this.keyLeftLC = 0;
-    this.keyRightLC = 0;
-    this.keyUpLC = 0;
-    this.keyDownLC = 0;
+    this.keyLeftDT = 0;
+    this.keyRightDT = 0;
+    this.keyUpDT = 0;
+    this.keyDownDT = 0;
+    this.DoubleKeyTime = 180;
     this.specialMove = -1;
     this.specialMoveT = -1;
 

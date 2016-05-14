@@ -37,25 +37,26 @@ GAMEobject.prototype.mousemove = function(e){
     this.mouse_y = e.clientY-P.top;
 }
 GAMEobject.prototype.keydown = function(e){
+    var NOW = (new Date()).getTime();
     if(e.keyCode==37 || e.keyCode==65){
-        if(this.keyLeftRight == 0 && this.keyLeftLC- -7 > this.tick)    this.specialMove = 1;
+        if(this.keyLeftRight == 0 && NOW - this.keyLeftDT < this.DoubleKeyTime) this.specialMove = 1;
+        if(this.keyLeftRight == 0) this.keyLeftDT = NOW;
         this.keyLeftRight = 1;
-        if(this.keyLeftLC!=-1) this.keyLeftLC = this.tick;
     }
     if(e.keyCode==39 || e.keyCode==68){
-        if(this.keyLeftRight == 0 && this.keyRightLC- -7 > this.tick)    this.specialMove = 2;
+        if(this.keyLeftRight == 0 && NOW - this.keyRightDT < this.DoubleKeyTime) this.specialMove = 2;
+        if(this.keyLeftRight == 0) this.keyRightDT = NOW;
         this.keyLeftRight = -1;
-        if(this.keyRightLC!=-1) this.keyRightLC = this.tick;
     }
     if(e.keyCode==38 || e.keyCode==87){
-        if(this.keyUpDown == 0 && this.keyDownLC- -7 > this.tick)    this.specialMove = 3;
+        if(this.keyUpDown == 0 && NOW - this.keyDownDT < this.DoubleKeyTime) this.specialMove = 3;
+        if(this.keyUpDown == 0) this.keyDownDT = NOW;
         this.keyUpDown = 1;
-        if(this.keyDownLC!=-1) this.keyDownLC = this.tick;
     }
     if(e.keyCode==40 || e.keyCode==83){
-        if(this.keyUpDown == 0 && this.keyUpLC- -7 > this.tick)    this.specialMove = 4;
+        if(this.keyUpDown == 0 && NOW - this.keyUpDT < this.DoubleKeyTime) this.specialMove = 4;
+        if(this.keyUpDown == 0) this.keyUpDT = NOW;
         this.keyUpDown = -1;
-        if(this.keyUpLC!=-1) this.keyUpLC = this.tick;
     }
 }
 GAMEobject.prototype.keyup = function(e){

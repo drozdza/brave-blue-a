@@ -15,6 +15,16 @@ BBAdata['MAPS']={
             {RingOf:{X: 0, Y:0, Radius: 1000}, What:{Mine:150},objData:{explosivePreset:'NailedMine'}},
         ],
     },
+    'Moves':{
+        Place:[
+            {Random:{X:-400, Y:0, Radius: 50}, What:{Mine: 60, K: 3},objData:{explosivePreset:'ExplosionSize1'}},
+            {LineOf:{X:-210, Y:-200, Angle: 0, Distance: 20}, What:{Mine:20},objData:{explosivePreset:'ExplosionSize1'}},
+            {LineOf:{X: 210, Y:-200, Angle: 0, Distance: 20}, What:{Mine:20},objData:{explosivePreset:'ExplosionSize1'}},
+            {LineOf:{X:-110, Y:-200, Angle: 0, Distance: 20}, What:{Star:20},objData:{explosivePreset:'ExplosionSize1'}},
+            {LineOf:{X: 110, Y:-200, Angle: 0, Distance: 20}, What:{Star:20},objData:{explosivePreset:'ExplosionSize1'}},
+            {CircleOf:{X:-400, Y:-200, Radius: 40, AngleStart: 0, AngleBy: 15}, What:{Mine:32},objData:{explosivePreset:'ExplosionSize1'}},
+        ],
+    },
     'u1':{
         MapRadius:60,MapRadius2:2400,
         BoardMods:['sitOnMap','allAvoid'],

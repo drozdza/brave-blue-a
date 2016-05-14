@@ -45,8 +45,11 @@ GAMEobject.prototype.hit = function(o,q,DMG){
         return 1;
     }
 
-    if((Q.T=='star' || Q.T=='shieldBlob') && O.T=='ship')
+    if((Q.T=='star' || Q.T=='shieldBlob') && O.T=='ship'){
         if(O.speed > 3) O.speed=3;
+        this.specialMoveT=-1;
+        this.specialMove=-1;
+    }
 
     if(O.onHit && O.onHit.Do=='explode' && Q.S!=O.S && Q.M!='region'){    this.explodeBomb(o,O.onHit);    return true; }
 

@@ -63,31 +63,48 @@ GAMEobject.prototype.decide_ship = function(e){
     var F = S.FireTypes[ S.FireType ];
     if(S.FireType2!=false)
         var F2 = S.FireTypes[ S.FireType2 ];
-    var LaserMod = false;
-    var TeleMod = false;
     O.lastSpeedT = 0;
     this.mouseX = this.mouse_x- -(O.x -this.Dx/2);
     this.mouseY = this.mouse_y- -(O.y -this.Dy/2);
     var html='',modeName;
 
-    if(this.specialMoveT==-1 && this.specialMove > 0){
-        // Start special move
-        if(this.specialMove==2) O.angle = (O.angle- -90- -360)%360;
-        if(this.specialMove==1) O.angle = (O.angle - 90- -360)%360;
-        if(this.specialMove==4) O.angle = (O.angle - 180- -360)%360;
-        if(this.specialMove==3) O.speed-=-5;
-        this.specialMoveT=10;
-    }
 
-    if(this.specialMoveT==-1){
+    // Start special move
+    if(this.specialMoveT < 0 && this.specialMove > 0)
+        if(S.SpecialMoves && S.SpecialMoves[ this.specialMove ]){
+            var SpecMove = S.SpecialMoves[ this.specialMove ];
+            var goOn = true;
+            if(SpecMove.ModUse) for(var useU in SpecMove.ModUse) if(S.ModStorage[useU].R < SpecMove.ModUse[useU]) goOn = false;
+            if(goOn){
+                this.specialMoveT = SpecMove.Dec-1;
+                if(SpecMove.ModUse) for(var useU in SpecMove.ModUse) S.ModStorage[useU].R -= SpecMove.ModUse[useU];
+            } else {
+                this.specialMove = -1;  
+            }
+        }
+
+    if(this.specialMoveT < 0){
         if(this.keyLeftRight==1){  O.angle=(O.angle- -360 -O.speedT)%360;    O.lastSpeedT =-O.speedT; }
         if(this.keyLeftRight==-1){ O.angle=(O.angle- -360- -O.speedT)%360;    O.lastSpeedT = O.speedT; }
         if(this.keyUpDown==1)      O.speed-=-O.speedA/this.Frames;
         if(this.keyUpDown==-1)     O.speed-=O.speedD/this.Frames;
-    } else{
-        // Do special move
+    }
+    // Do special move
+    if(this.specialMoveT > -1){
+        var SpecMove = S.SpecialMoves[ this.specialMove ];
+        if(SpecMove.T=='changeSpeed')
+            O.speed-=-SpecMove.changeBy;
+        if(SpecMove.T=='changeAngle')
+            O.angle = (O.angle - -SpecMove.changeBy- -360)%360;
+        if(SpecMove.T=='changePosition'){
+            for(var i=0; i<SpecMove.timesBy; ++i){
+                O.x-=- SpecMove.Dist*Math.sin(parseInt(-O.angle- -SpecMove.Angle)*(Math.PI/180));
+                O.y-=- SpecMove.Dist*Math.cos(parseInt(-O.angle- -SpecMove.Angle)*(Math.PI/180));
+                this.checkHits(0);
+            }
+        }
 
-        if(--this.specialMoveT == -1) this.specialMove = -1;
+        if(--this.specialMoveT < 0) this.specialMove = -1;
     }
 
     if(O.speed != Sx.speed)
@@ -95,20 +112,12 @@ GAMEobject.prototype.decide_ship = function(e){
 
     S.Energy = S.EnergyM - S.Espeed;
 
-    var EsteemedPos=false;
+    var EsteemedPos = false;
 
     var modHtml='';
     for(var m in S.Modules){
         var M = S.Modules[m];
         modHtml='';
-
-        // Moduły konfigurowane przy dezaktywacji:
-        if(M.T=='laserProd' && M.Disabled == 1)
-            M.LaserLoad=0;
-
-        if(M.T=='teleProd' && M.Disabled == 1)
-            M.TeleLoad=0;
-
 
         // Moduły wyłączone:
         if(Sx.Mod[m] != 'disabled'){
@@ -120,9 +129,9 @@ GAMEobject.prototype.decide_ship = function(e){
             if(M.T=='spotRegion') this.shipFunc_showSpotRegions(false);
         }
 
+        if(M.Disable && M.T=='moduleProd') S.ModStorage[ M.ModStorage ].R=0;
         if(M.Disabled == 1)
             continue;
-
 
         // Moduły niepotrzebne:
         if( (M.T=='Prod' && S.Storage[ M.Storage ].R >= S.Storage[ M.Storage ].M)
@@ -141,7 +150,8 @@ GAMEobject.prototype.decide_ship = function(e){
         // Moduły bez energii:
         if(M.Emin > S.Energy){
             M.E=0;
-            if(M.T=='laserProd') M.LaserLoad = 0;
+            if(M.T=='moduleProd')
+                S.ModStorage[M.ModStorage].R = 0;
             if(M.T=='teleProd') M.TeleLoad = 0;
             if(Sx.Mod[m] != 0){
                 if(M.subT) modeName = BBAdata['ModuleNames'][M.T+M.subT];
@@ -152,15 +162,12 @@ GAMEobject.prototype.decide_ship = function(e){
             }
             continue;
         }
+        if(M.T=='moduleProd'){
+            var modR = S.ModStorage[M.ModStorage].R;
+            var modM = S.ModStorage[M.ModStorage].M;
+        }
         // Moduły działające:
-        if(M.T=='laserProd' && M.LaserLoad == M.LaserLoadM){
-            if(Sx.Mod[m] != 'active'){
-                modHtml+='<div class="energyBox active"><div class="active">active</div>'+M.Emin.toFixed(2)+'<div class="infoBox">';
-                Sx.Mod[m] = 'active';
-            }
-            S.Energy-=M.Emin;
-            M.E = M.Emin;
-        } else if(M.T=='teleProd' && M.TeleLoad == M.TeleLoadM){
+        if(M.T=='moduleProd' && modR == modM){
             if(Sx.Mod[m] != 'active'){
                 modHtml+='<div class="energyBox active"><div class="active">active</div>'+M.Emin.toFixed(2)+'<div class="infoBox">';
                 Sx.Mod[m] = 'active';
@@ -194,8 +201,8 @@ GAMEobject.prototype.decide_ship = function(e){
 
         M.Prod-=-U;
         if(M.Prod > M.ifProd){
-            if(M.T=='laserProd' && M.LaserLoad < M.LaserLoadM) ++M.LaserLoad;
-            if(M.T=='teleProd' && M.TeleLoad < M.TeleLoadM) ++M.TeleLoad;
+            if(M.T=='moduleProd' && modR < modM)
+                modR = ++S.ModStorage[M.ModStorage].R;
             if(M.T=='Prod') ++S.Storage [ M.Storage ].R;
             if(M.T=='healerProd'){
                 this.healObj(0,1);
@@ -206,11 +213,11 @@ GAMEobject.prototype.decide_ship = function(e){
                 this.shipFunc_showHealth();
             }
             M.Prod-=M.ifProd;
-            if(M.T=='laserProd' && M.LaserLoad == M.LaserLoadM) M.Prod=0;
-            if(M.T=='teleProd' && M.TeleLoad == M.TeleLoadM) M.Prod=0;
+            if(M.T=='moduleProd' && modR < modM)
+                M.Prod=0;
         }
 
-        if(M.T!='esteemProd' && M.T!='spotRegion' && M.T!='radar' && !(M.T=='laserProd' && M.LaserLoad==M.LaserLoadM ) && !(M.T=='teleProd' && M.TeleLoad==M.TeleLoadM )){
+        if(M.T!='esteemProd' && M.T!='spotRegion' && M.T!='radar' && !(M.T=='moduleProd' && modR == modM)){
             if(30/(M.ifProd/U) > 1){
                 if(modHtml != '') modHtml+=(30/(M.ifProd/U)).toFixed(2)+'/sec';
             }else{
@@ -220,27 +227,22 @@ GAMEobject.prototype.decide_ship = function(e){
         }
         if(M.T=='radar')
             if(modHtml!='') modHtml+=((M.ifProd/U)/30).toFixed(2)+'sec';
-        if(M.T=='laserProd' && M.LaserLoad==M.LaserLoadM)
-            if(modHtml!='') modHtml+='READY';
-        if(M.T=='teleProd' && M.TeleLoad==M.TeleLoadM)
+        if(M.T=='moduleProd' && modR == modM)
             if(modHtml!='') modHtml+='READY';
 
 
-        if(M.T=='laserProd'){
-            modHtml+='<div class="laserBoxBox"><div class="laserBox"><span>';
-            for(var x=0; x<M.LaserLoad; ++x) modHtml+='L';
-            modHtml+='</span>';
-            for(var x=0; x<M.LaserLoadM - M.LaserLoad; ++x) modHtml+='L';
-            modHtml+='</div></div>';
-            if(M.LaserLoad > 0) LaserMod = m;
-        }
-        if(M.T=='teleProd'){
-            modHtml+='<div class="laserBoxBox"><div class="laserBox"><span>';
-            for(var x=0; x<M.TeleLoad; ++x) modHtml+='T';
-            modHtml+='</span>';
-            for(var x=0; x<M.TeleLoadM - M.TeleLoad; ++x) modHtml+='T';
-            modHtml+='</div></div>';
-            if(M.TeleLoad > 0) TeleMod = m;
+        if(M.T=='moduleProd'){
+            var letter = false;
+            if(M.ModStorage == 'Laser') letter = 'L';
+            if(M.ModStorage == 'Moves') letter = 'M';
+            if(M.ModStorage == 'TeleJump') letter = 'T';
+            if(letter){
+                modHtml+='<div class="laserBoxBox"><div class="laserBox"><span>';
+                for(var x=0; x<modR; ++x) modHtml+=letter;
+                modHtml+='</span>';
+                for(var x=0; x<modM - modR; ++x) modHtml+=letter;
+                modHtml+='</div></div>';
+            }
         }
 
         if(M.T=='radar')
@@ -298,6 +300,7 @@ GAMEobject.prototype.decide_ship = function(e){
 
         var enoughToUse = true
         if(Fx.Use) for(var useU in Fx.Use) if(S.Storage[ useU ].R < Fx.Use[useU]) enoughToUse = false;
+        if(Fx.ModUse) for(var useU in Fx.ModUse) if(S.ModStorage[ useU ].R < Fx.ModUse[useU]) enoughToUse = false;
         if(!enoughToUse) continue;
 
         if(Fx.T=='single'){
@@ -339,17 +342,19 @@ GAMEobject.prototype.decide_ship = function(e){
             this.shipShootDistanceBomb(Fx.Speed,Fx.Dec,Fx.offTime,Fx);
             shotDone = true;
         }
-        if(Fx.T=='laser' && LaserMod!=false){
-            --S.Modules[LaserMod].LaserLoad;
+        if(Fx.T=='laser'){
             this.shipShootLaser(Fx.Speed,Fx.Power);
-            Fx.gunS=0;
+            shotDone = true;
         }
-        if(Fx.T=='tele' && TeleMod!=false)
-            this.shipFunc_teleport(Fx,TeleMod);
+        if(Fx.T=='tele'){
+            if(this.shipFunc_teleport(Fx))
+                shotDone = true;
+        }
 
         if(shotDone){
             Fx.gunS=0;
             if(Fx.Use) for(var useU in Fx.Use) S.Storage[ useU ].R-=Fx.Use[ useU ];
+            if(Fx.ModUse) for(var useU in Fx.ModUse) S.ModStorage[ useU ].R-=Fx.ModUse[ useU ];
 
         }
     }
