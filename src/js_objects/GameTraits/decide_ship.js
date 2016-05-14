@@ -94,13 +94,21 @@ GAMEobject.prototype.decide_ship = function(e){
         var SpecMove = S.SpecialMoves[ this.specialMove ];
         if(SpecMove.T=='changeSpeed')
             O.speed-=-SpecMove.changeBy;
-        if(SpecMove.T=='changeAngle')
+        if(SpecMove.T=='changeAngle'){
             O.angle = (O.angle - -SpecMove.changeBy- -360)%360;
+            var angleU = -90;
+            if(SpecMove.changeBy > 0) angleU = 90;
+            var aniX = O.x- -15*Math.sin(parseInt(-O.angle-angleU)*(Math.PI/180));
+            var aniY = O.y- -15*Math.cos(parseInt(-O.angle-angleU)*(Math.PI/180));
+            this.putObj_animation('accelerationFire', aniX, aniY, O.angle- -angleU);
+        }
         if(SpecMove.T=='changePosition'){
+            this.putObj_animation('shipShadow', O.x, O.y, O.angle);
             for(var i=0; i<SpecMove.timesBy; ++i){
                 O.x-=- SpecMove.Dist*Math.sin(parseInt(-O.angle- -SpecMove.Angle)*(Math.PI/180));
                 O.y-=- SpecMove.Dist*Math.cos(parseInt(-O.angle- -SpecMove.Angle)*(Math.PI/180));
                 this.checkShipHits();
+                this.putObj_animation('shipShadow', O.x, O.y, O.angle);
                 if(this.specialMoveT < 0) break;
             }
         }

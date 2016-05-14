@@ -3,7 +3,7 @@ function GAMEobject(){
     this.Dx=1300;
     this.Dy=550;
     this.MapTileSize = 250;
-    this.Frames=30;
+    this.Frames = BBAdata.GET.SETF;
     this.tick=0;
     this.tickD=0;
     this.IntervalIndex=-1;

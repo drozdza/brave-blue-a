@@ -29,6 +29,9 @@ BBAdata['SHIPpresets']={
         SpecialMoves:{
             1:{T:'changePosition', Dec:6, timesBy:2, Dist: 10, Angle: -120},
             2:{T:'changePosition', Dec:6, timesBy:2, Dist: 10, Angle: 120},
+            1:{T:'changeAngle',    Dec:6, changeBy: -15},
+            2:{T:'changeAngle',    Dec:6, changeBy: 15},
+
         },
     },
     'destFields':{
@@ -189,9 +192,10 @@ BBAdata['SHIPpresets']={
         ],
         SpecialMoves:{
             1:{T:'changeAngle',    ModUse:{'Moves':1}, Dec:6, changeBy: -15},
-            2:{T:'changePosition', ModUse:{'Moves':1}, Dec:6, timesBy:1, Dist: 25, Angle: 90},
+            2:{T:'changePosition', ModUse:{'Moves':1}, Dec:6, timesBy:3, Dist: 10, Angle: 90},
+            2:{T:'changeAngle',    ModUse:{'Moves':1}, Dec:6, changeBy: 15},
             3:{T:'changeSpeed',    ModUse:{'Moves':1}, Dec:5, changeBy: 1},
-            4:{T:'changePosition', ModUse:{'Moves':1}, Dec:4, timesBy: 10, Dist: 10, Angle: 180},
+            4:{T:'changePosition', ModUse:{'Moves':1}, Dec:12, timesBy: 3, Dist: 10, Angle: 180},
         },
     },
     'best':{

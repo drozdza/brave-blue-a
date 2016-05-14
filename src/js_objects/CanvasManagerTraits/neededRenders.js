@@ -187,4 +187,26 @@ CanvasManagerObject.prototype.neededRenders={
             40:{fontSize: 10, color: [0,255,0,1]},
         }
     },
+    accelerationFire:{
+        Letter: 'A',
+        frames: 20,
+        sizeX: 50,
+        sizeY: 50,
+        states:{
+            0:{fontSize: 1, color: [255,255,255,1]},
+            10:{fontSize: 10, color: [128,128,255,1]},
+            20:{fontSize: 20, color: [0,0,128,0]},
+        }
+    },
+    shipShadow:{
+        Letter: 'A',
+        frames: 20,
+        sizeX: 50,
+        sizeY: 50,
+        states:{
+            0:{fontSize: 12, color: [255,255,255,1]},
+            10:{fontSize: 12, color: [128,128,255,0.8]},
+            20:{fontSize: 12, color: [0,0,128,0]},
+        }
+    },
 };

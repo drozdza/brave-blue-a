@@ -167,7 +167,7 @@ GAMEobject.prototype.getShipVariable = function(O,VarRequest){
 }
 
 
-GAMEobject.prototype.putObj_animation = function(Type,X,Y){
+GAMEobject.prototype.putObj_animation = function(Type,X,Y,Angle){
     var O = {};
     var o = this.Olen++;
 
@@ -179,6 +179,13 @@ GAMEobject.prototype.putObj_animation = function(Type,X,Y){
     O.radius = 15;
     O.angle = 0;
     O.timeTick = 0;
+
+
+    if(Type=='shipShadow' || Type=='accelerationFire'){
+        O.timeDeath = 20;
+        O.radius = 15;
+        O.angle = Angle;
+    }
 
     if(Type=='hit_healing'){
         O.timeDeath = 25;
