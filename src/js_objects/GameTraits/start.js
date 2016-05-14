@@ -54,7 +54,7 @@ GAMEobject.prototype.start = function(Setting,Ship){
     this.O[0]={
         x: 0,
         y: 0,
-        speed: 7,
+        speed: this.SHIP.speed,
         speedA: 3,
         speedD: 6,
         speedM: 10,
@@ -104,6 +104,8 @@ GAMEobject.prototype.start = function(Setting,Ship){
     }
 }
 GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
+    var Radi = Math.PI*2/360;
+
     if( typeof defX == 'undefined' ){
         defX = 0;
         defY = 0;
@@ -121,6 +123,21 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
                 x-=-SET.Random.X;
                 y-=-SET.Random.Y;
             }
+            if(SET.LineOf){
+                x = SET.LineOf.X- -j*SET.LineOf.Distance*Math.sin((-parseInt(SET.LineOf.Angle)-180)*Radi);
+                y = SET.LineOf.Y- -j*SET.LineOf.Distance*Math.cos((-parseInt(SET.LineOf.Angle)-180)*Radi);
+            }
+            if(SET.CircleOf){
+                x = SET.CircleOf.X- -SET.CircleOf.Radius*Math.sin((-parseInt(SET.CircleOf.AngleStart- -j*SET.CircleOf.AngleBy)-180)*Radi);
+                y = SET.CircleOf.Y- -SET.CircleOf.Radius*Math.cos((-parseInt(SET.CircleOf.AngleStart- -j*SET.CircleOf.AngleBy)-180)*Radi);
+            }
+            if(SET.RingOf){
+                var rAngle = Math.random()*360;
+                var Dist = SET.RingOf.Radius;
+                if(SET.RingOf.RadiusPlus) Dist-=-Math.random()*SET.RingOf.RadiusPlus;
+                x = SET.RingOf.X- -Dist*Math.sin((-parseInt(rAngle)-180)*Radi);
+                y = SET.RingOf.Y- -Dist*Math.cos((-parseInt(rAngle)-180)*Radi);
+            }
 
             if(placeWhat=='Star'){
                 var L = this.putObj('star','static',1,x,y);
@@ -132,19 +149,8 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
                 var L = this.putObj('SquareField','region',1,x,y);
             }else if(placeWhat=='ConeField'){
                 var L = this.putObj('ConeField','region',1,x,y);
-            }else if(placeWhat=='LineOfMines'){
-                var x = SET.objData.x;
-                var y = SET.objData.y;
-                var dist = 0;
-                var Radi = Math.PI/180;
-                while(dist < SET.objData.radius){
-                    this.putObj('space_mine','comp',1,x,y);
-                    x-=-SET.objData.distance*Math.sin( (-parseInt(SET.objData.angle)-180)*Radi);
-                    y-=-SET.objData.distance*Math.cos( (-parseInt(SET.objData.angle)-180)*Radi);
-                    dist-=-SET.objData.distance;
-                }
-                L = -1;
-
+            }else if(placeWhat=='Mine'){
+                var L = this.putObj('space_mine','comp',1,x,y);
             } else {
                 var L = this.putObj(BBAdata['ShipNames'][placeWhat],'comp',1,x,y);
                 if(typeof Setting.BoardMods !='undefined')
@@ -202,6 +208,10 @@ GAMEobject.prototype.addBoardMod = function(o,MODname){
 
     if(typeof MOD.squareAngle != 'undefined'){
         O.squareCorners = this.countSquareCorners(O.x,O.y,O.squareAngle,O.squareLen,O.squareWidth);
+    }
+
+    if(typeof MOD.explosivePreset != 'undefined'){
+        this.cloneExplosionData(O,O);
     }
 
     CanvasManager.requestCanvas( o );

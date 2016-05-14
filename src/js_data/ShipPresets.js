@@ -5,6 +5,7 @@ BBAdata['SHIPpresets']={
         life: 6,
         EnergyM: 20,
         SpeedM: 20,
+        speed: 8,
         Storage:{
             Ammo: {R:0, M:20},
         },
@@ -31,6 +32,7 @@ BBAdata['SHIPpresets']={
         life: 'x',
         lifeM: 'x',
         SpeedM: 20,
+        speed: 8,
         Storage:{
             Ammo: {R:0, M:50},
             Bomb: {R:12, M:12},
@@ -64,6 +66,7 @@ BBAdata['SHIPpresets']={
         EnergyFieldMax: 10,
         EnergyM: 32,
         SpeedM: 20,
+        speed: 8,
         Storage:{
             Ammo: {R:0, M:50},
             Missile: {R:10,M:10},
@@ -114,6 +117,7 @@ BBAdata['SHIPpresets']={
         EnergyFieldMax: 10,
         EnergyM: 32,
         SpeedM: 20,
+        speed: 8,
         Storage:{
             Ammo: {R:0, M:50},
             Missile: {R:10,M:10},
@@ -151,6 +155,7 @@ BBAdata['SHIPpresets']={
         EnergyFieldMax: 10,
         EnergyM: 32,
         SpeedM: 20,
+        speed: 8,
         Storage:{
             Ammo: {R:0, M:50},
             Missile: {R:10,M:10},

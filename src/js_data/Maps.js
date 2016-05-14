@@ -1,6 +1,19 @@
 BBAdata['MAPS']={
     'Start':{
-        Place:[{Random:{X:0, Y:0, Radius: 600}, What:{Star: 300, K: 1}}],
+        Place:[
+            {Random:{X:0, Y:0, Radius: 600}, What:{Star: 300, K: 1}},
+            {LineOf:{X:-110, Y:-600, Angle: 0, Distance: 80}, What:{Mine:20},objData:{explosivePreset:'ExplosionSize1'}},
+            {LineOf:{X: 110, Y:-600, Angle: 0, Distance: 80}, What:{Mine:20},objData:{explosivePreset:'ExplosionSize1'}},
+            {LineOf:{X:-110, Y:-640, Angle: 0, Distance: 80}, What:{Star:20},objData:{explosivePreset:'ExplosionSize1'}},
+            {LineOf:{X: 110, Y:-640, Angle: 0, Distance: 80}, What:{Star:20},objData:{explosivePreset:'ExplosionSize1'}},
+
+            {CircleOf:{X:0, Y:-2500, Radius: 300, AngleStart: 160, AngleBy: -7}, What:{Star:23},objData:{explosivePreset:'ExplosionSize1'}},
+            {CircleOf:{X:0, Y:-2500, Radius: 300, AngleStart: 200, AngleBy: 7}, What:{Star:23},objData:{explosivePreset:'ExplosionSize1'}},
+
+            {RingOf:{X: 0, Y:0, Radius: 650, RadiusPlus: 200}, What:{Mine:150},objData:{explosivePreset:'NailedMine'}},
+
+            {RingOf:{X: 0, Y:0, Radius: 1000}, What:{Mine:150},objData:{explosivePreset:'NailedMine'}},
+        ],
     },
     'u1':{
         MapRadius:60,MapRadius2:2400,
@@ -71,9 +84,10 @@ BBAdata['MAPS']={
             {What:{RoundField:1},objData:{x:-600,y: 1100, radius:60, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 20, OneTimeDamage: 4, dontHit:['B','BE']}},
             {What:{RoundField:1},objData:{x:-600,y: 800, radius:200, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
 
-            {What:{LineOfMines:1},objData:{x:280, y:830, radius:500, angle: 45, distance: 80}},
-            {What:{LineOfMines:1},objData:{x:480, y:830, radius:500, angle: 45, distance: 80}},
-            {What:{LineOfMines:1},objData:{x:680, y:830, radius:500, angle: 45, distance: 80}},
+            {LineOf:{X:225, Y:750, Angle: 45, Distance: 80}, What:{Mine:7},objData:{explosivePreset:'NailedMine2'}},
+            {LineOf:{X:280, Y:1030, Angle: 45, Distance: 80}, What:{Mine:11},objData:{explosivePreset:'NailedMine'}},
+            {LineOf:{X:585, Y:900, Angle: 45, Distance: 80}, What:{Mine:4},objData:{explosivePreset:'ExplosionSize1'}},
+
 
             {What:{Gstar:1},objData:{x:-140,y:900,bounceType:'diagonal',bounceTeleport:true}},
             {What:{Gstar:1},objData:{x:140,y:900,bounceType:'diagonal',bounceTeleport:true}},
