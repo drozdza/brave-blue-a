@@ -79,7 +79,7 @@ GAMEobject.prototype.decide_ship = function(e){
                 this.specialMoveT = SpecMove.Dec-1;
                 if(SpecMove.ModUse) for(var useU in SpecMove.ModUse) S.ModStorage[useU].R -= SpecMove.ModUse[useU];
             } else {
-                this.specialMove = -1;  
+                this.specialMove = -1;
             }
         }
 
@@ -90,7 +90,7 @@ GAMEobject.prototype.decide_ship = function(e){
         if(this.keyUpDown==-1)     O.speed-=O.speedD/this.Frames;
     }
     // Do special move
-    if(this.specialMoveT > -1){
+    if(this.specialMoveT > -1 && S.SpecialMoves[ this.specialMove ]){
         var SpecMove = S.SpecialMoves[ this.specialMove ];
         if(SpecMove.T=='changeSpeed')
             O.speed-=-SpecMove.changeBy;
@@ -100,7 +100,8 @@ GAMEobject.prototype.decide_ship = function(e){
             for(var i=0; i<SpecMove.timesBy; ++i){
                 O.x-=- SpecMove.Dist*Math.sin(parseInt(-O.angle- -SpecMove.Angle)*(Math.PI/180));
                 O.y-=- SpecMove.Dist*Math.cos(parseInt(-O.angle- -SpecMove.Angle)*(Math.PI/180));
-                this.checkHits(0);
+                this.checkShipHits();
+                if(this.specialMoveT < 0) break;
             }
         }
 
@@ -234,7 +235,7 @@ GAMEobject.prototype.decide_ship = function(e){
         if(M.T=='moduleProd'){
             var letter = false;
             if(M.ModStorage == 'Laser') letter = 'L';
-            if(M.ModStorage == 'Moves') letter = 'M';
+            if(M.ModStorage == 'Moves') letter = 'v';
             if(M.ModStorage == 'TeleJump') letter = 'T';
             if(letter){
                 modHtml+='<div class="laserBoxBox"><div class="laserBox"><span>';

@@ -26,6 +26,10 @@ BBAdata['SHIPpresets']={
         Modules:[
             {T:'Prod',subT:'Bullet',Storage:'Ammo',Disabled:0,Emin:2,Emax:4,ProdX:4,E:0,Prod:0,ifProd:40 },
         ],
+        SpecialMoves:{
+            1:{T:'changePosition', Dec:6, timesBy:2, Dist: 10, Angle: -120},
+            2:{T:'changePosition', Dec:6, timesBy:2, Dist: 10, Angle: 120},
+        },
     },
     'destFields':{
         Weight: 25,
@@ -180,14 +184,14 @@ BBAdata['SHIPpresets']={
         Modules:[
             {T:'Prod', subT:'Bullet',Storage:'Ammo', Disabled:0,Emin:2,Emax:4,ProdX:1,E:0,Prod:0,ifProd:3 },
             {T:'Prod', subT:'Bomb',  Storage:'Bomb', Disabled:0,Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:10 },
-            {T:'moduleProd',Disabled:0,Emin:2,Emax:4,ProdX:6,E:0,Prod:0,ifProd:240, subT:'Moves', ModStorage:'Moves'},
+            {T:'moduleProd',Disabled:0,Emin:2,Emax:4,ProdX:1,E:0,Prod:0,ifProd:20, subT:'Moves', ModStorage:'Moves'},
             {T:'healerProd',Disabled:0,Emin:1,Emax:16,ProdX:1,E:0,Prod:0,ifProd:9 },
         ],
         SpecialMoves:{
             1:{T:'changeAngle',    ModUse:{'Moves':1}, Dec:6, changeBy: -15},
-            2:{T:'changePosition', ModUse:{'Moves':3}, Dec:6, timesBy:1, Dist: 25, Angle: 90},
+            2:{T:'changePosition', ModUse:{'Moves':1}, Dec:6, timesBy:1, Dist: 25, Angle: 90},
             3:{T:'changeSpeed',    ModUse:{'Moves':1}, Dec:5, changeBy: 1},
-            4:{T:'changePosition', ModUse:{'Moves':6}, Dec:4, timesBy: 10, Dist: 10, Angle: 180},
+            4:{T:'changePosition', ModUse:{'Moves':1}, Dec:4, timesBy: 10, Dist: 10, Angle: 180},
         },
     },
     'best':{

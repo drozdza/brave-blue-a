@@ -11,6 +11,15 @@ GAMEobject.prototype.checkHits = function(o){
         this.hit(o,F,O.Power);
 }
 
+GAMEobject.prototype.checkShipHits = function(){
+    var F,O = this.O[0];
+    var Found = this.getCollidingWithCircle(O.x,O.y,O.radius,['A','ME','R']);
+    for(F in Found){
+        this.hit(0,F,false);
+        this.hit(F,0,false);
+    }
+}
+
 GAMEobject.prototype.hit = function(o,q,DMG){
     if(o==q) return 1;
     var O = this.O[o];
@@ -45,10 +54,13 @@ GAMEobject.prototype.hit = function(o,q,DMG){
         return 1;
     }
 
-    if((Q.T=='star' || Q.T=='shieldBlob') && O.T=='ship'){
-        if(O.speed > 3) O.speed=3;
-        this.specialMoveT=-1;
-        this.specialMove=-1;
+    if(Q.SlowDown && O.T=='ship'){
+        if(O.speed > Q.SlowDown) O.speed = Q.SlowDown;
+        if(this.specialMove != -1)
+            if(this.SHIP.SpecialMoves[ this.specialMove ].T=='changePosition'){
+                this.specialMoveT = -1;
+                this.specialMove = -1;
+            }
     }
 
     if(O.onHit && O.onHit.Do=='explode' && Q.S!=O.S && Q.M!='region'){    this.explodeBomb(o,O.onHit);    return true; }

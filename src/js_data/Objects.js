@@ -86,6 +86,7 @@ BBAdata['ObjectDatas']={
             HitPattern:'StarHit',
         },
 
+        SlowDown: 3,
         lifeM:6,
         Flags:{},
     },
@@ -389,6 +390,7 @@ BBAdata['ObjectDatas']={
             colorCircle:[0,200,100,1],
         },
 
+        SlowDown: 3,
         lifeM: 3,
         radius: 21,
     },
