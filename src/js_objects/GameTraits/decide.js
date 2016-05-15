@@ -23,10 +23,16 @@ GAMEobject.prototype.makeAction = function(O,o,Action){
     if(Action.doNotInterupt) O.doNotInterupt = Action.doNotInterupt;
     if(Action.Manouver)  O.Manouver = Action.Manouver;
     if(Action.gotoSpeed) this.changeSpeedLvl(O, Action.gotoSpeed);
+    if(Action.gotoAlarm) O.alarmLvl = Action.gotoAlarm;
     if(Action.unCloak){
         delete O.view.Cloaked;
         CanvasManager.requestCanvas(o);
     }
+    if(Action.changeView){
+        O.view = O[ Action.changeView ];
+        CanvasManager.requestCanvas(o);
+    }
+
 }
 
 
@@ -39,6 +45,10 @@ GAMEobject.prototype.decide = function(o){
     var Y = O.y-P.y;
     var PlayerDist = Math.sqrt(X*X- -Y*Y);
     var PlayerAngle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
+
+
+    if(o==19)
+        console.log(O.doNotInterupt);
 
     // Spotting
     if(O.spotLvl){
@@ -110,6 +120,7 @@ GAMEobject.prototype.decide = function(o){
 
     // Jak się skończy czas to szukamy kolejnego zadania
     if((--O.doingTime) < 0){
+        O.doNotInterupt = false;
 
         for(var toDo in O.toDo){
             var TD = O.toDo[toDo];
@@ -205,6 +216,13 @@ GAMEobject.prototype.decide = function(o){
                     this.changeSpeedLvl(O,TD.gotoSpeed);
             }
 
+            if(TD.T=='goAroundEnemy'){
+                O.doingTime = TD.doingTime || 50;
+                O.Manouver = 'goAroundEnemy';
+                if(TD.gotoSpeed)
+                    this.changeSpeedLvl(O,TD.gotoSpeed);
+            }
+
             if(TD.T=='followEnemyCloaked'){
                 O.doingTime = TD.doingTime || 400;
                 O.Manouver = 'followEnemy';
@@ -274,7 +292,7 @@ GAMEobject.prototype.decide = function(o){
             }
 
             // Dodatkowe wywołania akcji
-            if(TD.goToAlarmLvl) O.alarmLvl = TD.goToAlarmLvl;
+            if(TD.gotoAlarm) O.alarmLvl = TD.gotoAlarm;
             if(TD.goToSpotLvl)  O.spotLvl = TD.goToSpotLvl;
 
             O.doingNow = TD.T;
@@ -300,8 +318,8 @@ GAMEobject.prototype.decide = function(o){
                 var speedT = O.speedT;
                 O.Tyk = Tyk;
                 if(Ei < speedT) speedT = Ei;
-                if(Tyk > 180){    O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
-                if(Tyk <= 180){    O.angle = (O.angle-speedT- -360)%360;     O.lastSpeedT = -speedT; }
+                if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
+                if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
             }
         }break;
         case 'followEnemy':{
@@ -310,8 +328,18 @@ GAMEobject.prototype.decide = function(o){
             var speedT = O.speedT;
             O.Tyk = Tyk;
             if(Ei < speedT) speedT = Ei;
-            if(Tyk > 180){    O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
-            if(Tyk <= 180){    O.angle = (O.angle-speedT- -360)%360;     O.lastSpeedT = -speedT; }
+            if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
+            if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
+        }break;
+        case 'goAroundEnemy':{
+            var Tyk = (O.angle-PlayerAngle- -360)%360;
+            var Ei = 180 - Math.abs(Tyk - 180);
+            if(PlayerDist < 150) Tyk = (Tyk- -180)%360;
+            var speedT = O.speedT;
+            O.Tyk = Tyk;
+            if(Ei < speedT) speedT = Ei;
+            if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
+            if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
         }break;
         case 'goToXY':{
             var wiX = O.x-O.goToX;
@@ -321,8 +349,8 @@ GAMEobject.prototype.decide = function(o){
             var Ei = 180 - Math.abs( Tyk - 180);
             var speedT = O.speedT;
             if(Ei < speedT) speedT = Ei;
-            if(Tyk > 180){    O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
-            if(Tyk <= 180){    O.angle = (O.angle-speedT- -360)%360;     O.lastSpeedT = -speedT; }
+            if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
+            if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
         }break;
         case 'turnLeft':{
             O.angle = (O.angle- -360- -O.speedT) %360;
@@ -369,6 +397,7 @@ GAMEobject.prototype.decide = function(o){
                 if(notAllFlags) continue;
             }
 
+            if(WP.makeAction) this.makeAction(O,o,WP.makeAction);
 
             if(WP.t == 'getAcurateAngle'){
                 var WU = this.countFutureShoot(0,O.x,O.y,WP.Speed,WP.Dec);
@@ -438,12 +467,10 @@ GAMEobject.prototype.decide = function(o){
                 if(WP.BombRandom) bombData = O.Bombs[ parseInt(Math.random()*WP.BombRandom) ];
                 this.shootBomb(o,PlayerAngle,WP.Speed,WP.Dec,bombData);
                 WP.lastShot = this.tick;
-                if(WP.makeAction) this.makeAction(O,o,WP.makeAction);
             }
 
             if(WP.t == 'laserAim'){
                 O.laserAngle = PlayerAngle;
-                this.makeAction(O,o,WP.makeAction);
 
                 if(O.squadScheme[0].Oid != -1){
                     this.removeObj(O.squadScheme[0].Oid);
@@ -459,7 +486,6 @@ GAMEobject.prototype.decide = function(o){
 
             }
             if(WP.t == 'laserShoot'){
-                this.makeAction(O,o,WP.makeAction);
                 if(O.squadScheme[0].Oid != -1){
                     this.removeObj(O.squadScheme[0].Oid);
                     O.squadScheme[0].Oid = -1;
@@ -476,10 +502,8 @@ GAMEobject.prototype.decide = function(o){
                 }
             }
             if(WP.t == 'changeAction'){
-                this.makeAction(O,o,WP.makeAction);
                 WP.lastShot = this.tick;
-                if(WP.usedRes)
-                    O[ WP.usedRes ] -= WP.usedResR;
+                if(WP.usedRes) O[ WP.usedRes ] -= WP.usedResR;
             }
 
             if(WP.t == 'produceSquad'){
@@ -501,8 +525,6 @@ GAMEobject.prototype.decide = function(o){
                         weMadeSomething = true;
                     }
                 }while(weMadeSomething);
-                if(WP.makeAction)
-                    this.makeAction(O,o,WP.makeAction);
             }
             if(WP.t == 'healSquad'){
                 do{

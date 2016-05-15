@@ -56,7 +56,7 @@ GAMEobject.prototype.hit = function(o,q,DMG){
 
     if(Q.SlowDown && O.T=='ship'){
         if(O.speed > Q.SlowDown) O.speed = Q.SlowDown;
-        if(this.specialMove != -1)
+        if(this.specialMove != -1 && this.SHIP.SpecialMoves)
             if(this.SHIP.SpecialMoves[ this.specialMove ].T=='changePosition'){
                 this.specialMoveT = -1;
                 this.specialMove = -1;
@@ -261,10 +261,12 @@ GAMEobject.prototype.hitEnergyField = function(o,q,DMG){
     if(q > 0)
         this.putObj_animation('hit_energyField', this.O[q].x, this.O[q].y);
     else {
-        this.putObj_animation('hit_energyField', O.x, O.y);
-        if(DMG >1)     this.putObj_animation('hit_energyField', (O.x - 10), (O.y- -5));
-        if(DMG >2)     this.putObj_animation('hit_energyField', (O.x- -5),  (O.y- -10));
-        if(DMG >3)     this.putObj_animation('hit_energyField', (O.x- -10), (O.y - 5));
+        for(var Daga=0; Daga < DMG; ++Daga){
+            var U = 20;
+            var DagaDagaX = parseInt(Math.random()*U*2-U);
+            var DagaDagaY = parseInt(Math.random()*U*2-U);
+            this.putObj_animation('hit_energyField', (O.x-DagaDagaX), (O.y-DagaDagaY));
+        }
     }
     O.energyField-=DMG;
     if(O.energyField < 0) O.energyField = 0;

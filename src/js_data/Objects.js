@@ -178,7 +178,7 @@ BBAdata['ObjectDatas']={
         Manouver: 'goStraight',
         toDo: [
             {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
-            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, goToAlarmLvl: 4, goToSpotLvl: 2},
+            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, gotoAlarm: 4, goToSpotLvl: 2},
             {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3 },
             {N:23,T:'stayInRegion', X:0, Y:0, Radius: 1700 },
             {N:18,T:'changeManouver2', maxAlarm: 4, minAlarm: 3, straightMin: 20, straightPlus: 80, turnMin: 10, turnPlus: 80  },
@@ -555,7 +555,7 @@ BBAdata['ObjectDatas']={
         Manouver: 'goStraight',
         toDo: [
             {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
-            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, goToAlarmLvl: 4, goToSpotLvl: 2},
+            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, gotoAlarm: 4, goToSpotLvl: 2},
             {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3 },
             {N:23,T:'stayInRegion', X:0, Y:0, Radius: 1700 },
             {N:18,T:'changeManouver2', maxAlarm: 4, minAlarm: 3, straightMin: 20, straightPlus: 80, turnMin: 10, turnPlus: 80  },
@@ -596,7 +596,8 @@ BBAdata['ObjectDatas']={
 
         weapon:[
             {t:'double', Speed:12, Dec:30, Power:1, doingNow:'shooting', gunSpeed:1,  maxSpeed:2},
-            {t:'changeAction', makeAction: {Manuover:'goStraight', doingNow:'shooting', doingTime:10}, gunSpeed: 110, lastShot: 100,  minAlarm: 5, minDistToEnemy: 400}],
+            {t:'changeAction', makeAction: {Manuover:'goStraight', doingNow:'shooting', doingTime:10}, gunSpeed: 110, lastShot: 100,  minAlarm: 5, minDistToEnemy: 400}
+        ],
 
         doingNow: 'changeManouver',
         doingTime: -1,
@@ -782,7 +783,7 @@ BBAdata['ObjectDatas']={
             {N:67,T:'lowerSpeedForResources', minAlarm: 0, wantedRes: 'misslePack', wantedResR: 1, gotoSpeed: 1},
             {N:66,T:'speedUpIfResources', minAlarm: 0, wantedRes: 'misslePack', wantedResR: 6, gotoSpeed: 2},
             {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
-            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, goToAlarmLvl: 4, goToSpotLvl: 2},
+            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, gotoAlarm: 4, goToSpotLvl: 2},
             {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3, minSpeedLvl: 2},
             {N:23,T:'stayInRegion', X:0, Y:0, Radius: 1700 },
             {N:18,T:'changeManouver2', maxAlarm: 4, minAlarm: 3, straightMin: 20, straightPlus: 80, turnMin: 10, turnPlus: 80  },
@@ -930,7 +931,7 @@ BBAdata['ObjectDatas']={
         Manouver: 'goStraight',
         toDo: [
             {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
-            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, goToAlarmLvl: 4, goToSpotLvl: 2},
+            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, gotoAlarm: 4, goToSpotLvl: 2},
             {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3 },
             {N:23,T:'stayInRegion', X:0, Y:0, Radius: 1700 },
             {N:18,T:'changeManouver2', maxAlarm: 4, minAlarm: 3, straightMin: 20, straightPlus: 80, turnMin: 10, turnPlus: 80  },
@@ -1034,7 +1035,7 @@ BBAdata['ObjectDatas']={
         doingTime: -1,
         Manouver: 'goStraight',
         toDo: [
-            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 15, goToAlarmLvl: 4, goToSpotLvl: 2},
+            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 15, gotoAlarm: 4, goToSpotLvl: 2},
             {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3, doingTime: 30},
             {N:15,T:'changeManouver', maxAlarm: 4, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
         ],
@@ -1167,6 +1168,167 @@ BBAdata['ObjectDatas']={
 
         lifeM: 13,
         radius: 15,
+
+        fieldCharges: 0,
+        Res: {'fieldCharges': {M:10,T:0}},
+        weapon:[
+            {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true},maxSpeed: 2},
+            {t:'refilResource', resource: 'fieldCharges', gunSpeed: 20, maxSpeed: 2, doNextWeapon: true},
+            {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', minDistToEnemy:500, usedResR: 10, doingNow:'followEnemy', makeAction:{doingNow:'followEnemy', doingTime:220, Manouver:'followEnemy',doNotInterupt:true}},
+        ],
+
+        squadScheme: [{
+            type: 'ConeField',
+            radius: 200,
+            angle: 0,
+            angleAddon: 180,
+            Oid: -1,
+            placementT:'directPlaces',
+            objData: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDamage: 1, PeriodTime: 15, PeriodOffset: 10, dontHit:['B','BE','E','M','ME','A'], particlesOnBoard:true}
+        }],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:55,T:'followEnemy', minAlarm: 5, gotoSpeed: 3, usedRes:'fieldCharges', usedResR: 10},
+            {T:'changeSpeed', minSpeedLvl: 3, gotoSpeed: 2},
+            {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:{shipVar:'speed',Add:-2}, T:1},
+            {S:{shipVar:'speed'},        T:{shipVar:'speedT',Add:-1}},
+            {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            speed: {Const: 4, Rand: 3},
+            speedT: {Const: 1.5, Rand: 1.5},
+            spotRad: {Const: 180, RandInt: 80},
+            spotRad2: {Const: 400, RandInt: 200},
+            spotAngle2: {Const: 40, RandInt: 30}
+        },
+    },
+
+    durishka:{
+        view:{
+            LIBpath:'StarPath',
+            PathSize:30,
+            Color:'white',
+            Angle:0,
+            HitPattern:'StarHit',
+          },
+        view1:{
+            LIBpath:'StarPath',
+            PathSize:30,
+            Color:'white',
+            Angle:0,
+            HitPattern:'StarHit',
+        },
+        view2:{
+          Letter: 272, // some D
+          LetterSize: 40,
+          Color: 'red',
+          Angle: 90,
+          HitPattern: 'HullFire_40',
+        },
+
+        lifeM: 13,
+        radius: 20,
+        shieldDimmune:true,
+
+        weapon:[
+            {t:'changeAction', makeAction: {doingNow:'standBy', gotoSpeed: 1, gotoAlarm: 4, doingTime: 30, changeView: 'view1', Manouver: 'goStraight', doNotInterupt:true}, doingNow:'lowerAlarmLvl'},
+            {t:'changeAction', makeAction: {doingNow:'shooting', doingTime: 30, changeView: 'view2', gotoAlarm: 7, Manouver: 'followEnemy'}, doingNow:'standBy', minAlarm: 5, maxAlarm: 6},
+            {t:'changeAction', doingNow: 'shooting', doingTime: 1, makeAction: {gotoSpeed: 2, gotoAlarm: 7, doingNow:'changeManouver', doingTime: 30, Manouver:'goStraight'}},
+            {t:'single', Speed:12, Dec:37, Power:1, doingNow: 'shooting', gunSpeed: 3, maxSpeed: 1},
+        ],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:27,T:'lowerAlarmLvl', minEnemyDontSeen: 300, minAlarm: 7},
+            {N:26,T:'standBy', minAlarm: 4},
+            {N:15,T:'changeManouver', minAlarm: 7, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70},
+        ],
+
+        speedLvl: 1,
+        speedArr:[0,
+            {S:0, T:12},
+            {S:2, T:4},
+            {S:4, T:2}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 120, RandInt: 80},
+        },
+    },
+    vuvis:{
+        view:{
+            Letter: 171, // some <<
+            LetterSize: 22,
+            Color: 'red',
+            Angle: 270,
+            HitPattern: 'HullFire_20',
+        },
+        lifeM: 2,
+        radius: 9,
+        Res: {},
+        weapon:[{t:'single', Power:1, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5}],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:57,T:'goAroundEnemy', minAlarm: 5},
+            {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:{shipVar:'speed',Add:-2}, T:1},
+            {S:{shipVar:'speed'},        T:{shipVar:'speedT',Add:-1}},
+            {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            speed: {Const: 8, Rand: 4},
+            speedT: {Const: 6, Rand: 1.5},
+            spotRad: {Const: 180, RandInt: 80},
+            spotRad2: {Const: 400, RandInt: 200},
+            spotAngle2: {Const: 40, RandInt: 30}
+        },
+    },
+    hirieshka:{
+        view:{
+            Letter: 294, // some funny H
+            LetterSize: 50,
+            Color: 'red',
+            Angle: 180,
+            HitPattern: 'HullFire_40',
+        },
+
+        lifeM: 13,
+        radius: 25,
 
         fieldCharges: 0,
         Res: {'fieldCharges': {M:10,T:0}},

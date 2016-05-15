@@ -1,8 +1,13 @@
 - Mines extended hitbox
 
-- Rozdzielić typy bomb (można strzelać kilkoma typami)
-- Wystrzeliwanie bomb do konkretnego miejsca (skracanie Dec)
-- Pokazywanie zasięgu bomb z oznaczonym miejscem wybuchu
+- Nails bomb starts from circle to center
+
+- Layers of Canvas: background map, Map for background
+- Hit screen
+
+- Draw control zones of ships (Other layer)
+
+- GET values manager
 
 - Gwiazdy na mapie gwiazd
 
@@ -27,6 +32,7 @@ Pomoce dla statku:
 	- pokazywanie jaki będzie obszar wybuchu
 	- o co zachaczy bomba, gdzie się odbije
 	- automatyczne strzelanie jeśli coś wejdzie w linię strzału
+  - Pokazywanie zasięgu bomb z oznaczonym miejscem wybuchu
 
 Do zrobienia:
 	- Dodać budowanie statków
@@ -39,12 +45,8 @@ Do zdebugowania:
 
 
 Nowe ficzery:
-	- Szybkie skręty, natychmiastowe zatrzymywanie się, zartacanie, beczki w bok, przyspieszenie
 	- Baterie które można napełniać a potem zużywać
 	- Różne rodzaje tarcz, niektóre pochłaniają część siły ataku, inne wytrzymują X wybuchów, inne chronią przed polami energetycznymi i laserami.
-	- Tarcze mogą też odbijać pociski wroga
-	- Moduł: Akcelerator prędkości
-	- Moduł: Akcelerator skrętów
 	- Bonusy
 		- Zbieramy je z planszy:
 			- Wypadają z pokonanych jednostek
@@ -75,7 +77,6 @@ Nowi przeciwnicy:
 	- F same się leczą jeśli nie dzieje się nic innego
   - Ships explode on destroyed
   - Enemies that link their lives into friend lives (they take hits instead)
-	- Przeciwnik przebierający się za gwiazdę (stojąc w miejscu) (po wykonaniu ataku ujawnia się)
 	- Przeciwnicy rosnocy jak pnącza
 		- Składają się z chińskich literek
 		- Mają odpowiednie części:
@@ -93,40 +94,23 @@ Nowi przeciwnicy:
 
 	Fields:
 		- Immunity Field
-		- Healing Field
 
 
 Nowe Typy Ataków:
 	- Kwas. Omija wszystkie tarcze.
 		- Miotacz Kwasu.
 		- Bomba Kwasowa
-	- Wszystkie ataki wybuchowe zostawiają pole "porzogi" na jedno tyknięcie.
-		- Każdy kto wejdzie na dane pole "porzogi", jest na nie uodporniony przez pewien czas.
-	- Mamy różne pola pożogi które mają dłuższe efekty (ranią co jakiś czas).
-	- Cluster Bomb (wybucha zwykłymi nabojami)
-	- Mina Cluster Bomb
-	- Pocisk rozbryzgowy (po pewnym czasie zamienia się w strzał z shootguna)
-	- Torpedy wybuchające
 	- Duży obszar na którym summonują się bomby różnej wielkości (po chwili)
 	- Pocisk neutralizujący tarczę
 	- Atak neutralizujący tarczę
 	- Błękitne pociski (co robią?)
 	- Pociski tworzące wierzyczki (ostrzeliwujące przez kilka sekund wroga)
-	- Bomba tworząca wir pocisków
-	- Zawijane pociski (na kraba)
-
 
 Nowe elementy planszy:
-	- Podłużne elementy (?)
-	- Duże kawałki terenu
 	- Gwiazdy różnej wielkości
 	- Pola porzogi
 	- Pola odbijające statki na zewnątrz (lub do wewnątrz)
 	- Pola zatrzymujące wszystkie pociski (eksplodujące je)
-	- Pola nie pozwalające się przez nie teleportować
-	- Pola na których "wieje wiatr"
-	- Pola spowalniające pociski (zatrzymujące je)
-	- Pola odchylające pociski
 
 
 
@@ -188,11 +172,6 @@ SQUADY:
 		- Średnicę i rozwartość strefy dalekiego wypatrywania.
 
 
-	BROŃ:
-		- niektóre można używać w trybie ciągłym
-		- inne mają bardziej skomplikowane sposoby użycia.
-
-
 	ZACHOWANIA
 		- zachowania są typowe dla jakiegoś typu statku
 
@@ -212,17 +191,9 @@ SQUADY:
 	ROZKAZY
 
 		NP:
-			- [Raz na 20 tick] Sprawdzamy czy nie wylecieliśmy za obszar X.
-			- [Przy oberwaniu] Ostrzeżenie o trafieniu. Trafiona jednostka lecąca na 'follow' wydaje rozkaz okolicznym jednostkom zrobić manewr wymijania pocisków.
-			- Manewr wymijania pocisków. Statki skręcają w stronę przeciwną do follow. [Znika po 20 tyknięciach]
-
 			- Patrol. Wróg przemieszcza się do najbliższego punktu patrolowego, jeśli do niego dotrze, wyznacza sobie następny.
 
 			- Orbitowanie wokół punktu
-
-	BROŃ
-		- Mamy broń Podstawową, ale jeśli z jakichś przyczyn nie możemy jej użyć (nie naładowała się, nie ma po co), to używamy broni dodatkowej.
-		- Basta.
 
 
 	STANY ALARMU:

@@ -1,0 +1,27 @@
+<!doctype HTML>
+<html>
+<head>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <style>
+      body {font-family: Arial; font-size: 50px; font-weight: bold;}
+      span.big { padding: 0px 20px; display: inline-block;}
+      span.big span { font-size: 10px; background: white; font-weight: normal;}
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+x = 10000;
+html='';
+for(var i=0; i<x;++i){
+    html+='<span class="big">'+String.fromCharCode(i)+'<span>'+i+'</span></span>';
+
+    if(i%100 == 0){
+        $('body').append(html);
+        html='';
+    }
+}
+$('body').append(html);
+</script>
+</body>
+</html>
