@@ -24,6 +24,7 @@ function CanvasManagerObject(){
         // if(O.viewXY)          ID+=O.viewXY+'_';
         if(View.LetterSize)  ID+=View.LetterSize+'_';
         if(View.GlobalAlpha) ID+=View.GlobalAlpha+'_';
+        if(View.PathSize)    ID+=View.PathSize+'_';
         if(View.Angle)       ID+=View.Angle+'_';
         if(O.life > 0 && View.Cloaked)
                              ID+='cloaked_';

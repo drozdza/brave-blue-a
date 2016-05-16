@@ -141,6 +141,9 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
 
             if(placeWhat=='Star'){
                 var L = this.putObj('star','static',1,x,y);
+            }else if(placeWhat=='StarX'){
+                var LI = ['','M','S','L'];
+                var L = this.putObj('star'+LI[ parseInt(Math.random()*4) ],'static',1,x,y);
             }else if(placeWhat=='Gstar'){
                 var L = this.putObj('Gstar','static',1,x,y);
             }else if(placeWhat=='RoundField'){
@@ -171,6 +174,8 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
 GAMEobject.prototype.addBoardMod = function(o,MODname){
     var MOD,O = this.O[o];
 
+    console.log(MODname);
+
     if(typeof MODname == 'string') MOD = BBAdata['MapMODS'][MODname];
             else                   MOD = MODname;
 
@@ -195,6 +200,10 @@ GAMEobject.prototype.addBoardMod = function(o,MODname){
             O.y = MOD.y;
             this.putOnXY(o,oldX,oldY);
         }else if(KI=='y'){
+        }else if(KI=='mergeArrays'){
+            for(var u in MOD[KI]){
+                O[u] = mergeArrays(O[u],MOD[KI][u]);
+            }
         }else{
             O[KI] = MOD[KI];
         }

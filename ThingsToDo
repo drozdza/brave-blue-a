@@ -1,6 +1,8 @@
 - Mines extended hitbox
 
-- Nails bomb starts from circle to center
+- Nails bomb starts from circle to center (PI ships :D)
+
+- >> ships should orbit
 
 - Layers of Canvas: background map, Map for background
 - Hit screen
@@ -40,10 +42,6 @@ Do zrobienia:
 	- Zaawansowane składy
 	- Mapa Gwiazd
 
-Do zdebugowania:
-	- AutoFire should work
-
-
 Nowe ficzery:
 	- Baterie które można napełniać a potem zużywać
 	- Różne rodzaje tarcz, niektóre pochłaniają część siły ataku, inne wytrzymują X wybuchów, inne chronią przed polami energetycznymi i laserami.
@@ -76,6 +74,7 @@ Nowi przeciwnicy:
 	- [Y] - pluje tarczami energetycznymi jak miotaczem ognia
 	- F same się leczą jeśli nie dzieje się nic innego
   - Ships explode on destroyed
+  - Energy Plazma ball
   - Enemies that link their lives into friend lives (they take hits instead)
 	- Przeciwnicy rosnocy jak pnącza
 		- Składają się z chińskich literek
@@ -88,6 +87,7 @@ Nowi przeciwnicy:
 	- Statek ciągnący za sobą dużą ilość torped leczniczych
 	- Statek ciągnący za sobą zwykłe torpedy
 	- Liny pomiędzy gwiazdami po których jeżdżą przeciwnicy.
+  - Enemies that sits on stars
 	- Roślinne elementy strzelające ukośnie lecącymi Bulletami.
 	- Ochrona stała: np. redukcja obrażeń od wybuchów.
 	- Niebieskie strzały

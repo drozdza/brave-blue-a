@@ -9,19 +9,38 @@ GAMEobject.prototype.putObj_fromArray = function(O){
     }
 
     if(isEnemyShip){
-        for(var i in BBAdata['ObjectDatas'].enemyShip){
-            var X = BBAdata['ObjectDatas'].enemyShip[i];
+        for(var i in BBAdata.ObjectDatas.enemyShip){
+            var X = BBAdata.ObjectDatas.enemyShip[i];
             if(typeof X == 'object') O[i] = cloneObj(X);
                 else                 O[i] = X;
         }
     }
-    if(typeof BBAdata['ObjectDatas'][O.T] != 'undefined'){
-        for(var i in BBAdata['ObjectDatas'][O.T]){
-            var X = BBAdata['ObjectDatas'][O.T][i];
+    if(typeof BBAdata.ObjectDatas[O.T].extends != 'undefined'){
+        var U = BBAdata.ObjectDatas[ BBAdata.ObjectDatas[O.T].extends ];
+        for(var i in U){
+            var X = U[i];
+            if(typeof X == 'object') O[i] = cloneObj(X);
+                else                 O[i] = X;
+        }
+        console.log('we Extends');
+    }
+    if(typeof BBAdata.ObjectDatas[O.T] != 'undefined'){
+        for(var i in BBAdata.ObjectDatas[O.T]){
+            var X = BBAdata.ObjectDatas[O.T][i];
             if(typeof X == 'object') O[i] = cloneObj(X);
                 else                 O[i] = X;
         }
     }
+
+    if(typeof O.mergeArrays != 'undefined'){
+        for(var mA in O.mergeArrays)
+            O[mA] = mergeArrays(O[mA],O.mergeArrays[mA]);
+    }
+
+    delete(O.extends);
+    delete(O.mergeArrays);
+
+    console.log(O);
 
     if(O.explosivePreset || O.exploAddTo || O.onHitDieExpire)
         this.cloneExplosionData(O, O);
@@ -53,6 +72,7 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
 
     if(Type!='bullet')
         O = this.putObj_fromArray(O,Type);
+
     else {
       O.speed  = 12;
       O.angle  = 0;
@@ -81,10 +101,6 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
             O.mapType = 'ME';
             O.mapCollide = ['P','M'];
         }
-    }
-    if(Type=='star' || Type=='Gstar'){
-        O.mapType = 'A';
-        // O.mapCollide = ['P','M','ME'];
     }
     if(Type=='bullet'){
         if(Side==3){
@@ -249,7 +265,7 @@ GAMEobject.prototype.removeObj = function(o,saveDiv){
     if(typeof this.O[o] =='undefined') return false;
     // if(!saveDiv) $('#O_'+o).remove();
 
-    if(this.O[o].T!='bullet' && this.O[o].T!='star' && this.O[o].TT!='anim' && this.O[o].TT!='dirAnim'){    // Czyli co?
+    if(this.O[o].T!='bullet' && this.O[o].mapType!='A' && this.O[o].TT!='anim' && this.O[o].TT!='dirAnim'){    // Czyli co?
 
         if(this.O[o].TT=='enemy')    this.removeFromXY(o,true);
                 else                this.removeFromXY(o);

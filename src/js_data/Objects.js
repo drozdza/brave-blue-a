@@ -71,10 +71,10 @@ BBAdata['ObjectDatas']={
         explosivePreset: 'NailedMine2',
 
         squadScheme: {
-            0:{ angle: 0, radius: 0, id: -1, placementT:'directPlaces', make: {What:{RoundField:1},objData:{x:0,y:-1000, angle: 0, radius: 150, colorInactive: false, colorActive: 'rgba(255,0,0,0.4)', OneTimeEffect: 1, OneTimeOffset: 10, OneTimeDetect: 1, dontHit:['B','BE','E','M','ME','A']}}}
+            0:{ angle:0, radius:0, id:-1, placementT:'directPlaces', make: {What:{RoundField:1},objData:{ angle: 0, radius: 150, colorInactive: false, colorActive: 'rgba(255,0,0,0.4)', dontHit:['B','BE','E','M','ME','A']}}},
+            1:{ angle:0, radius:0, id:-1, placementT:'directPlaces', make:{What:{RoundField:1},objData:{angle: 0, radius: 150, colorInactive: false, colorActive:'rgba(255,0,0,0.4)', dontHit:['B','BE','E','M','ME','A']}}}
         },
 
-        detectMovementField:{ angle: 0, radius: 80, color: "rgba(255,0,0,0.4)"},
         Flags:{}
     },
     star:{
@@ -89,6 +89,24 @@ BBAdata['ObjectDatas']={
         SlowDown: 3,
         lifeM:6,
         Flags:{},
+        mapType:'A',
+    },
+    starS:{
+        extends:'star',
+        mergeArrays:{view:{PathSize:18}},
+        radius: 9,
+    },
+    starM:{
+        extends:'star',
+        mergeArrays:{view:{PathSize:60}},
+        radius: 30,
+        lifeM: 10,
+    },
+    starL:{
+        extends:'star',
+        mergeArrays:{view:{PathSize:80}},
+        radius: 40,
+        lifeM: 17,
     },
     Gstar:{
         view:{
@@ -103,6 +121,7 @@ BBAdata['ObjectDatas']={
         undestructible: 1,
         bounceType: 'straight',
         Flags:{},
+        mapType:'A',
     },
     RoundField:{
         view:{
@@ -596,7 +615,7 @@ BBAdata['ObjectDatas']={
 
         weapon:[
             {t:'double', Speed:12, Dec:30, Power:1, doingNow:'shooting', gunSpeed:1,  maxSpeed:2},
-            {t:'changeAction', makeAction: {Manuover:'goStraight', doingNow:'shooting', doingTime:10}, gunSpeed: 110, lastShot: 100,  minAlarm: 5, minDistToEnemy: 400}
+            {t:'changeAction', makeAction: {Manuover:'goStraight', doingNow:'shooting', doingTime:10, doNotInterupt:true}, gunSpeed: 110, lastShot: 100,  minAlarm: 5, minDistToEnemy: 400}
         ],
 
         doingNow: 'changeManouver',
@@ -1216,7 +1235,6 @@ BBAdata['ObjectDatas']={
             spotAngle2: {Const: 40, RandInt: 30}
         },
     },
-
     durishka:{
         view:{
             LIBpath:'StarPath',
@@ -1246,7 +1264,7 @@ BBAdata['ObjectDatas']={
 
         weapon:[
             {t:'changeAction', makeAction: {doingNow:'standBy', gotoSpeed: 1, gotoAlarm: 4, doingTime: 30, changeView: 'view1', Manouver: 'goStraight', doNotInterupt:true}, doingNow:'lowerAlarmLvl'},
-            {t:'changeAction', makeAction: {doingNow:'shooting', doingTime: 30, changeView: 'view2', gotoAlarm: 7, Manouver: 'followEnemy'}, doingNow:'standBy', minAlarm: 5, maxAlarm: 6},
+            {t:'changeAction', makeAction: {doingNow:'shooting', doingTime: 30, changeView: 'view2', gotoAlarm: 7, Manouver: 'followEnemy', doNotInterupt:true}, doingNow:'standBy', minAlarm: 5, maxAlarm: 6},
             {t:'changeAction', doingNow: 'shooting', doingTime: 1, makeAction: {gotoSpeed: 2, gotoAlarm: 7, doingNow:'changeManouver', doingTime: 30, Manouver:'goStraight'}},
             {t:'single', Speed:12, Dec:37, Power:1, doingNow: 'shooting', gunSpeed: 3, maxSpeed: 1},
         ],
@@ -1277,6 +1295,7 @@ BBAdata['ObjectDatas']={
             spotRad: {Const: 120, RandInt: 80},
         },
     },
+
     vuvis:{
         view:{
             Letter: 171, // some <<
@@ -1330,23 +1349,12 @@ BBAdata['ObjectDatas']={
         lifeM: 13,
         radius: 25,
 
-        fieldCharges: 0,
-        Res: {'fieldCharges': {M:10,T:0}},
+        Res: {},
         weapon:[
-            {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true},maxSpeed: 2},
-            {t:'refilResource', resource: 'fieldCharges', gunSpeed: 20, maxSpeed: 2, doNextWeapon: true},
-            {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', minDistToEnemy:500, usedResR: 10, doingNow:'followEnemy', makeAction:{doingNow:'followEnemy', doingTime:220, Manouver:'followEnemy',doNotInterupt:true}},
+            {t:'double2', Speed:15, Dec:30, Power:1, Wide: 15, doingNow:'shooting', gunSpeed: 6},
+            {t:'changeAction', makeAction: {Manuover:'goStraight', doingNow:'shooting', doingTime:30, doNotInterupt:true}, gunSpeed: 110, lastShot: 100,  minAlarm: 5, minDistToEnemy: 400}
         ],
 
-        squadScheme: [{
-            type: 'ConeField',
-            radius: 200,
-            angle: 0,
-            angleAddon: 180,
-            Oid: -1,
-            placementT:'directPlaces',
-            objData: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDamage: 1, PeriodTime: 15, PeriodOffset: 10, dontHit:['B','BE','E','M','ME','A'], particlesOnBoard:true}
-        }],
 
         doingNow: 'changeManouver',
         doingTime: -1,

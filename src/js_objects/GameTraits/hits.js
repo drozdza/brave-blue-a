@@ -80,7 +80,7 @@ GAMEobject.prototype.hit = function(o,q,DMG){
             this.makeDMG(q,DMG,o);
             this.shipFunc_showHealth();
         }
-        if(Q.TT=='enemy' || Q.T=='star' || Q.T=='missle' || Q.T=='bullet_bomb' || Q.T=='shieldBlob')
+        if(Q.TT=='enemy' || Q.mapType=='A' || Q.T=='missle' || Q.T=='bullet_bomb' || Q.T=='shieldBlob')
             this.makeDMG(q,DMG,o);
         if(Q.T=='space_mine'){
             this.explodeBomb(q,Q.onDie);

@@ -38,7 +38,7 @@ BBAdata['MAPS']={
 
             {What:{RoundField:1},objData:{x:-10,y:-450, radius:90, simpleFilling:'transparent',
                 stateIn:{simpleFilling:'rgba(255,0,0,0.5)'},
-                stateOut:{simpleFilling:'transparent'}
+                stateOut:{simpleFilling:'rgba(0,0,255,0.1)'}
             }},
 
 
@@ -230,6 +230,10 @@ BBAdata['MAPS']={
     'v':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, v:20, K:2}}],
+    },
+    'Stars':{
+        BoardMods:['sitOnMap','allAvoid'],
+        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{StarX:120, I:20, C:20}}],      
     },
     'Followers':{
         BoardMods:['sitOnMap','allAvoid'],

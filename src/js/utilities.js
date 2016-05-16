@@ -26,3 +26,16 @@ function betweenAngles(what,angle1,angle2){
     if(angle1 < angle2 && angle1 < what && angle2 > what)    return true;
     return false;
 }
+
+function mergeArrays(arr1,arr2){
+    if(typeof arr1 == 'undefined') arr1={};
+
+    for(var e in arr2){
+        if(typeof arr1[e] == 'undefined' || typeof arr1[e] == 'string' || typeof arr1[e] == 'number'){
+            arr1[e] = arr2[e];
+        }else{
+            arr1[e] = mergeArrays(arr1[e],arr2[e]);
+        }
+    }
+    return arr1;
+}

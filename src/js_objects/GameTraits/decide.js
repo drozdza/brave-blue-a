@@ -414,8 +414,8 @@ GAMEobject.prototype.decide = function(o){
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'double2'){
-                this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,45,5,WP.Power);
-                this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,-45,5,WP.Power);
+                this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,45, WP.Wide || 5,WP.Power);
+                this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,-45,WP.Wide || 5,WP.Power);
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'rose'){

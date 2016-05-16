@@ -14,53 +14,69 @@
 <script type="text/javascript">BBAdata={};</script>
 
 <script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/getGets.js"></script>
-<script type="text/javascript" src="js/utilities.js"></script>
-
-<script type="text/javascript" src="js_data/Names.js"></script>
-<script type="text/javascript" src="js_data/Objects.js"></script>
-<script type="text/javascript" src="js_data/MapMods.js"></script>
-<script type="text/javascript" src="js_data/ShipPresets.js"></script>
-<script type="text/javascript" src="js_data/ExplosivesPresets.js"></script>
-<script type="text/javascript" src="js_data/ShipUpgrades.js"></script>
-<script type="text/javascript" src="js_data/Maps.js"></script>
-
-
-<script type="text/javascript" src="js_objects/MenuObject.js"></script>
-
-
-<script type="text/javascript" src="js_objects/CanvasManagerObject.js"></script>
-
-<script type="text/javascript" src="js_objects/CanvasManagerTraits/pathLIB.js"></script>
-<script type="text/javascript" src="js_objects/CanvasManagerTraits/neededRenders.js"></script>
-<script type="text/javascript" src="js_objects/CanvasManagerTraits/hitPatterns.js"></script>
-<script type="text/javascript" src="js_objects/CanvasManagerTraits/directRenders.js"></script>
-
-
-<script type="text/javascript" src="js_objects/GameObject.js"></script>
-
-<script type="text/javascript" src="js_objects/GameTraits/start.js"></script>
-<script type="text/javascript" src="js_objects/GameTraits/putObj.js"></script>
-<script type="text/javascript" src="js_objects/GameTraits/decide.js"></script>
-<script type="text/javascript" src="js_objects/GameTraits/shipFunc.js"></script>
-<script type="text/javascript" src="js_objects/GameTraits/decide_ship.js"></script>
-<script type="text/javascript" src="js_objects/GameTraits/collisions.js"></script>
-<script type="text/javascript" src="js_objects/GameTraits/controls.js"></script>
-<script type="text/javascript" src="js_objects/GameTraits/hits.js"></script>
-<script type="text/javascript" src="js_objects/GameTraits/hitRegion.js"></script>
-<script type="text/javascript" src="js_objects/GameTraits/utilities.js"></script>
-<script type="text/javascript" src="js_objects/GameTraits/squads.js"></script>
-<script type="text/javascript" src="js_objects/GameTraits/shipShot.js"></script>
-<script type="text/javascript" src="js_objects/GameTraits/enemyFunc.js"></script>
-<script type="text/javascript" src="js_objects/GameTraits/frame.js"></script>
-<script type="text/javascript" src="js_objects/GameTraits/end.js"></script>
-
 <script type="text/javascript">
+(function(){
+    var Scripts = [
+        "js/getGets.js",
+        "js/utilities.js",
 
-$(document).ready(function(){
-    MENU = new MENUobject();
-    MENU.start();
-});
+        "js_data/Names.js",
+        "js_data/Objects.js",
+        "js_data/MapMods.js",
+        "js_data/ShipPresets.js",
+        "js_data/ExplosivesPresets.js",
+        "js_data/ShipUpgrades.js",
+        "js_data/Maps.js",
+
+        // MENUobject
+        "js_objects/MenuObject.js",
+
+        // CanvasManagerObject
+        "js_objects/CanvasManagerObject.js",
+
+        "js_objects/CanvasManagerTraits/pathLIB.js",
+        "js_objects/CanvasManagerTraits/neededRenders.js",
+        "js_objects/CanvasManagerTraits/hitPatterns.js",
+        "js_objects/CanvasManagerTraits/directRenders.js",
+
+        // GAMEobject
+        "js_objects/GameObject.js",
+
+        "js_objects/GameTraits/start.js",
+        "js_objects/GameTraits/putObj.js",
+        "js_objects/GameTraits/decide.js",
+        "js_objects/GameTraits/shipFunc.js",
+        "js_objects/GameTraits/decide_ship.js",
+        "js_objects/GameTraits/collisions.js",
+        "js_objects/GameTraits/controls.js",
+        "js_objects/GameTraits/hits.js",
+        "js_objects/GameTraits/hitRegion.js",
+        "js_objects/GameTraits/utilities.js",
+        "js_objects/GameTraits/squads.js",
+        "js_objects/GameTraits/shipShot.js",
+        "js_objects/GameTraits/enemyFunc.js",
+        "js_objects/GameTraits/frame.js",
+        "js_objects/GameTraits/end.js",
+    ];
+    var Rand = parseInt(Math.random()*9999999);
+    LoadCounter = 0;
+    for(var s = 0; s < Scripts.length; ++s){
+        ++LoadCounter;
+        $.getScript(Scripts[s]+'?'+Rand+'=1',function(){ --LoadCounter; });
+    }
+})();
+</script>
+<script type="text/javascript">
+function ki(){
+    if(LoadCounter == 0){
+        MENU = new MENUobject();
+        MENU.start();
+        delete(LoadCounter);
+        delete(ki);
+    }
+    else setTimeout(ki,33);
+}
+ki();
 </script>
 
 </head>
