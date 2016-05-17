@@ -72,7 +72,7 @@ BBAdata['ObjectDatas']={
 
         squadScheme: {
             0:{ angle:0, radius:0, id:-1, placementT:'directPlaces', make: {What:{RoundField:1},objData:{ angle: 0, radius: 150, colorInactive: false, colorActive: 'rgba(255,0,0,0.4)', dontHit:['B','BE','E','M','ME','A']}}},
-            1:{ angle:0, radius:0, id:-1, placementT:'directPlaces', make:{What:{RoundField:1},objData:{angle: 0, radius: 150, colorInactive: false, colorActive:'rgba(255,0,0,0.4)', dontHit:['B','BE','E','M','ME','A']}}}
+            1:{ angle:0, radius:0, id:-1, placementT:'directPlaces', make:{What:{RoundField:1},objData:{angle: 0, radius: 150, colorInactive: false, colorActive: 'rgba(255,0,0,0.4)', dontHit:['B','BE','E','M','ME','A']}}}
         },
 
         Flags:{}

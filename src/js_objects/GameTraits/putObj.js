@@ -15,16 +15,16 @@ GAMEobject.prototype.putObj_fromArray = function(O){
                 else                 O[i] = X;
         }
     }
-    if(typeof BBAdata.ObjectDatas[O.T].extends != 'undefined'){
-        var U = BBAdata.ObjectDatas[ BBAdata.ObjectDatas[O.T].extends ];
-        for(var i in U){
-            var X = U[i];
-            if(typeof X == 'object') O[i] = cloneObj(X);
-                else                 O[i] = X;
-        }
-        console.log('we Extends');
-    }
     if(typeof BBAdata.ObjectDatas[O.T] != 'undefined'){
+        if(typeof BBAdata.ObjectDatas[O.T].extends != 'undefined'){
+            var U = BBAdata.ObjectDatas[ BBAdata.ObjectDatas[O.T].extends ];
+            for(var i in U){
+                var X = U[i];
+                if(typeof X == 'object') O[i] = cloneObj(X);
+                    else                 O[i] = X;
+            }
+        }
+
         for(var i in BBAdata.ObjectDatas[O.T]){
             var X = BBAdata.ObjectDatas[O.T][i];
             if(typeof X == 'object') O[i] = cloneObj(X);
@@ -39,8 +39,6 @@ GAMEobject.prototype.putObj_fromArray = function(O){
 
     delete(O.extends);
     delete(O.mergeArrays);
-
-    console.log(O);
 
     if(O.explosivePreset || O.exploAddTo || O.onHitDieExpire)
         this.cloneExplosionData(O, O);
@@ -267,8 +265,8 @@ GAMEobject.prototype.removeObj = function(o,saveDiv){
 
     if(this.O[o].T!='bullet' && this.O[o].mapType!='A' && this.O[o].TT!='anim' && this.O[o].TT!='dirAnim'){    // Czyli co?
 
-        if(this.O[o].TT=='enemy')    this.removeFromXY(o,true);
-                else                this.removeFromXY(o);
+        if(this.O[o].TT=='enemy') this.removeFromXY(o,true);
+                else              this.removeFromXY(o);
         delete this.Enemies[o];
 
         if(typeof this.O[o].squadId !='undefined'){
@@ -279,7 +277,7 @@ GAMEobject.prototype.removeObj = function(o,saveDiv){
                 delete S.Members[o];
         }
     }
-    if(this.O[o].T=='star')    this.removeFromXY(o,true);
+    if(this.O[o].mapType=='A') this.removeFromXY(o,true);
 
     if(this.O[o].TT == 'anim' || this.O[o].TT == 'dirAnim')
         delete this.Oanim[o];
@@ -291,6 +289,6 @@ GAMEobject.prototype.removeObj = function(o,saveDiv){
     delete this.Ocomp[o];
     delete this.Obullet[o];
     delete this.Oregion[o];
-    if(this.O[o].TT!='enemy' && this.O[o].T!='star')
+    if(this.O[o].TT!='enemy' && this.O[o].mapType!='A')
         delete this.O[o];
 }

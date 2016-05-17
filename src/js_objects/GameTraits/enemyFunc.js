@@ -206,3 +206,20 @@ GAMEobject.prototype.addShield = function(o,Duration){
     if(O.shieldDimmune) return false;
     O.shieldD = Duration;
 }
+GAMEobject.prototype.trySplitHealth = function(o,Radius){
+    console.log('letsDoit');
+    var Q,O = this.O[o];
+    if(O.beenSplitHealed && O.beenSplitHealed == this.tick) return false;
+    var inRange = this.getCollidingWithCircle(O.x,O.y,Radius,['E']);
+    for(var q in inRange){
+        Q = this.O[q];
+            if(Q.life < Q.lifeM)
+                if(Q.life < O.life-1){
+                    this.healObj(q,1);
+                    Q.beenSplitHealed = this.tick;
+                    this.makeDMG(o,1);
+                    break;
+                }
+    }
+
+}

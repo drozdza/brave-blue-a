@@ -27,12 +27,20 @@ BBAdata['MapMODS']={
         ],
     },
     allAvoid:{
-        who:['A','S','C','U','H','Z','V'],
+        who:['carras','hajaher','cloaker','dregos','hiacynt','zarahiash','vitotas'],
         toDo:[
             {N:74,T:'alarmAboutIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 5, alarmRadius: 150},
             {N:73,T:'avoidIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 2, avoidTime: 12},
             {N:72,T:'avoidIncomingFire', FlagsRequired:{incomingFireFlag:true}, minAlarm: 5, avoidTime: 12},
         ],
     },
-
+    healthSplit:{
+        who:['carras'],
+        weapon:[{t:'healthSplit', gunSpeed: 5, lastShot: 100, minHealth: 1, Radius: 200, doNextWeapon: true}],
+    },
+    carras25health:{
+        who:['carras'],
+        lifeM:25,
+        life:25,
+    },
 };

@@ -174,15 +174,13 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
 GAMEobject.prototype.addBoardMod = function(o,MODname){
     var MOD,O = this.O[o];
 
-    console.log(MODname);
-
     if(typeof MODname == 'string') MOD = BBAdata['MapMODS'][MODname];
             else                   MOD = MODname;
 
     if(typeof MOD.who != 'undefined'){
         var jest=false;
         for(var i=0; i<MOD.who.length; ++i)
-            if(MOD.who[i]==O.viewLetter){
+            if(MOD.who[i]==O.T){
                 jest=true;
                 break;
             }
@@ -193,6 +191,9 @@ GAMEobject.prototype.addBoardMod = function(o,MODname){
         if(KI=='toDo'){
             for(var i in MOD.toDo)
                 this.addToToDoList(o,MOD.toDo[i]);
+        }else if(KI=='weapon'){
+            for(var i in MOD.weapon)
+                this.addToWeapon(o,MOD.weapon[i]);
         }else if(KI=='x'){
             var oldX = O.x;
             var oldY = O.y;
@@ -245,6 +246,9 @@ GAMEobject.prototype.addToToDoList = function(o,toDo){
         NtoDo[ NtoDo.length ] = toDo;
 
     this.O[o].toDo = NtoDo;
+}
+GAMEobject.prototype.addToWeapon = function(o,Weapon){
+    this.O[o].weapon.unshift(cloneObj(Weapon));
 }
 
 GAMEobject.prototype.setRegionAnimation = function(o,animType){

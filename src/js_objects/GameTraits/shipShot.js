@@ -84,7 +84,6 @@ GAMEobject.prototype.shipShootDistanceBomb = function(Speed,Dec,offTime,bombData
         iDist = Distance;
     } else {
         Dec = parseInt((iDist/Speed)- -0.49);
-        console.log(iDist+' '+Speed+' '+Dec);
     }
     if(bombData.minDec && bombData.minDec > Dec)
         Dec = bombData.minDec;

@@ -46,10 +46,6 @@ GAMEobject.prototype.decide = function(o){
     var PlayerDist = Math.sqrt(X*X- -Y*Y);
     var PlayerAngle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
 
-
-    if(o==19)
-        console.log(O.doNotInterupt);
-
     // Spotting
     if(O.spotLvl){
         if(this.tick % (O.spotArr[ O.spotLvl ].Ref) == 0){
@@ -602,14 +598,20 @@ GAMEobject.prototype.decide = function(o){
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'shootHealingMissle'){
-                  var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
-                  for(var i in inRange)
-                      if(i != o)
-                      if(this.O[i].life < this.O[i].lifeM){
-                          this.shootHealingMissle(o,i);
-                          WP.lastShot = this.tick;
-                          break;
-                      }
+                var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
+                for(var i in inRange) if(i != o)
+                    if(this.O[i].life < this.O[i].lifeM){
+                        this.shootHealingMissle(o,i);
+                        WP.lastShot = this.tick;
+                        break;
+                    }
+            }
+
+            if(WP.t == 'healthSplit'){
+                console.log('HealSplit: '+o+' ['+this.tick+']');
+                if(O.life- -1 >= WP.minHealth)
+                    this.trySplitHealth(o,WP.Radius);
+                WP.lastShot = this.tick;
             }
 
             if(WP.doNextWeapon) continue;
