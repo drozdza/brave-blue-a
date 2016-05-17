@@ -231,6 +231,10 @@ BBAdata['MAPS']={
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, v:20, K:2}}],
     },
+    'WP':{
+        BoardMods:['sitOnMap','allAvoid'],
+        Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, PP:5, A:20}}],
+    },
     'HealthSplit':{
         BoardMods:['sitOnMap','allAvoid','healthSplit','carras25health'],
         Place:[{Random:{X: 0, Y: 0, Radius: 1000}, What:{StarX: 25, A: 10}}],

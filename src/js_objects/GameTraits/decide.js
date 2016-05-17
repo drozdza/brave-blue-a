@@ -614,6 +614,19 @@ GAMEobject.prototype.decide = function(o){
                 WP.lastShot = this.tick;
             }
 
+            if(WP.t == 'giveDamangeTransfer'){
+                var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
+                for(var i in inRange)
+                    if(this.giveDamangeTransfer(i,o,WP.immunityTime)) break;
+                WP.lastShot = this.tick;
+            }
+
+            if(WP.t == 'healSelf'){
+                if(O.life < O.lifeM)
+                    this.healObj(o,1);
+                WP.lastShot = this.tick;
+            }
+
             if(WP.doNextWeapon) continue;
             break;
         }
@@ -625,4 +638,8 @@ GAMEobject.prototype.decide = function(o){
     O.Flags.squadMemberDied = false;
 
     if(--O.shieldD < 1) delete O.shieldD;
+    if(--O.damageTransferTime < 1){
+          delete O.damageTransferTime;
+          delete O.damageTransferFrom;
+    }
 }

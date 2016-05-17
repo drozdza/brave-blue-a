@@ -167,6 +167,7 @@ GAMEobject.prototype.makeOneTimeEffect = function(o,q){
 GAMEobject.prototype.makeDMG = function(o,DMG,q){
     if(typeof this.O[o] == 'undefined') return 1;
     var O = this.O[o];
+
     if(O.life < 1) return false;
     if(O.shieldD > 0){
         if(q) this.removeObj(q);
@@ -195,10 +196,17 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
         var Q = this.O[q];
         this.putObj_animation('hit', Q.x, Q.y);
         this.removeObj(q);
-    } else {
-        this.putObj_animation('hit', O.x, O.y);
     }
-    for(var Daga=1; Daga < DMG; ++Daga){
+
+    if(O.damageTransferFrom){
+        this.makeDMG(O.damageTransferFrom,DMG);
+        return false;
+    }
+
+
+    var Daga = 0;
+    if(typeof q !== 'undefined') Daga = 1;
+    for(; Daga < DMG; ++Daga){
         if(Daga >= O.life) break;
         var U = 20;
         var DagaDagaX = parseInt(Math.random()*U*2-U);

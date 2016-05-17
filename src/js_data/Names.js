@@ -23,7 +23,8 @@ BBAdata['ShipNames']={
     Z:'zarahiash',
     iD:'durishka',
     Ht:'hirieshka',
-    v:'vuvis'
+    v:'vuvis',
+    WP:'patiarch',
 };
 BBAdata['ModuleNames'] = {
     healerProd:         'Heal',

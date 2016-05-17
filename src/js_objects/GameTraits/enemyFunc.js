@@ -223,3 +223,9 @@ GAMEobject.prototype.trySplitHealth = function(o,Radius){
     }
 
 }
+GAMEobject.prototype.giveDamangeTransfer = function(o,q,Duration){
+    var O = this.O[o];
+    if(O.DamangeTransferImmune) return false;
+    O.damageTransferTime = Duration;
+    O.damageTransferFrom = q;
+}

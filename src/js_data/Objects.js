@@ -1385,4 +1385,50 @@ BBAdata['ObjectDatas']={
             spotAngle2: {Const: 40, RandInt: 30}
         },
     },
+
+    patiarch:{
+        view:{
+            Letter: 1130, // some funny H
+            LetterSize: 50,
+            Color: 'red',
+            Angle: 180,
+            HitPattern: 'HullFire_80',
+        },
+
+        lifeM: 89,
+        radius: 30,
+
+        Res: {},
+        DamangeTransferImmune: true,
+        weapon:[
+            {t:'giveDamangeTransfer', gunSpeed: 12, lastShot: 100, Radius: 350, immunityTime: 15},
+            {t:'healSelf', gunSpeed: 30, lastShot: 100}
+        ],
+
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:0.2, T:1},
+            {S:0.3, T:1},
+            {S:1,   T:1}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 180, RandInt: 80},
+            spotRad2: {Const: 400, RandInt: 200},
+            spotAngle2: {Const: 40, RandInt: 30}
+        },
+    },
 };
