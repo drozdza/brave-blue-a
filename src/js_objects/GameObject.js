@@ -49,6 +49,7 @@ function GAMEobject(){
     this.DoubleKeyTime = 180;
     this.specialMove = -1;
     this.specialMoveT = -1;
+    this.changeSpeedDelay = 0;
 
     this.showLaserInd = true;
     this.RadarOld = {};    for(var i=0; i<360;++i) this.RadarOld[i]=[];

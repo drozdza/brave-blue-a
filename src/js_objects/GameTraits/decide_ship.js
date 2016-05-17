@@ -86,8 +86,28 @@ GAMEobject.prototype.decide_ship = function(e){
     if(this.specialMoveT < 0){
         if(this.keyLeftRight==1){  O.angle=(O.angle- -360 -O.speedT)%360;    O.lastSpeedT =-O.speedT; }
         if(this.keyLeftRight==-1){ O.angle=(O.angle- -360- -O.speedT)%360;    O.lastSpeedT = O.speedT; }
-        if(this.keyUpDown==1)      O.speed-=-O.speedA/this.Frames;
-        if(this.keyUpDown==-1)     O.speed-=O.speedD/this.Frames;
+        if(this.keyUpDown==1 && --this.changeSpeedDelay < 0){
+            var oldSpeed = O.speed;
+            var newSpeed = O.speed-=-O.speedA/this.Frames;
+            if(S.ChangeSpeedStops && S.ChangeSpeedStops.up)
+                for(var stopX in S.ChangeSpeedStops.up){
+                    if(oldSpeed < stopX && newSpeed >= stopX){
+                        O.speed = stopX*1.0;
+                        this.changeSpeedDelay = S.ChangeSpeedDelay;
+                    }
+                }
+        }
+        if(this.keyUpDown==-1 && --this.changeSpeedDelay < 0){
+            var oldSpeed = O.speed;
+            var newSpeed = O.speed-=O.speedA/this.Frames;
+            if(S.ChangeSpeedStops && S.ChangeSpeedStops.up)
+                for(var stopX in S.ChangeSpeedStops.down){
+                    if(oldSpeed > stopX && newSpeed <= stopX){
+                        O.speed = stopX*1.0;
+                        this.changeSpeedDelay = S.ChangeSpeedDelay;
+                    }
+                }
+        }
     }
     // Do special move
     if(this.specialMoveT > -1 && S.SpecialMoves[ this.specialMove ]){
