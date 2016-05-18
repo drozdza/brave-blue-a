@@ -84,10 +84,16 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
 
     if(explodeObj.explodeType=='nails'){
         for(i=0; i<360; i-=-explodeObj.NailsRad){
+            var x = O.x;
+            var y = O.y;
+            if(explodeObj.ringRadius){
+                x-=-explodeObj.ringRadius*Math.sin((-i)*(Math.PI/180));
+                y-=-explodeObj.ringRadius*Math.cos((-i)*(Math.PI/180));
+            }
             if(explodeObj.NailsNeutral)
-                L = this.putObj('bullet','comp',3,O.x,O.y);
+                L = this.putObj('bullet','comp',3,x,y);
             else
-                L = this.putObj('bullet','comp',O.S,O.x,O.y);
+                L = this.putObj('bullet','comp',O.S,x,y);
             this.O[ L ].speed = explodeObj.NailsSpeed;
             if(explodeObj.NailsSpeedPlus)
                 this.O[ L ].speed-=-Math.random()*explodeObj.NailsSpeedPlus;
@@ -95,6 +101,13 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             if(explodeObj.NailsDecPlus)
                 this.O[ L ].dec-=-parseInt(Math.random()*explodeObj.NailsDecPlus);
             this.O[ L ].angle = i;
+            if(explodeObj.ringRadius)
+                if(explodeObj.NailsAngleBoth==1 && L%2==0)
+                    this.O[ L ].angle-=-90;
+                else
+                    this.O[ L ].angle-= 90;
+
+
             this.O[ L ].Power = 1;
             if(explodeObj.NailsAngleCenter){
                 if(explodeObj.NailsAngleBoth==1 && L%2==0)

@@ -1295,6 +1295,49 @@ BBAdata['ObjectDatas']={
             spotRad: {Const: 120, RandInt: 80},
         },
     },
+    pitagoras:{
+        view:{
+            Letter: 960,
+            LetterSize: 40,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_40',
+        },
+
+        lifeM: 4,
+        radius: 20,
+
+        Bombs:[{
+            explosivePreset: 'NailsCircleToCenter',
+        }],
+
+        weapon:[{t:'bomb', Speed: 10, Dec: 50, BombType: 0, gunSpeed: 40, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70},
+        ],
+
+        speedArr:[0,
+            {S:1, T:1},
+            {S:3, T:2},
+            {S:6, T:2}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 80, RandInt: 80},
+            spotRad2: {Const: 300, RandInt: 200},
+            spotAngle2: {Const: 30, RandInt: 30}
+        },
+    },
 
     vuvis:{
         view:{

@@ -143,6 +143,7 @@ BBAdata['SHIPpresets']={
         MouseDown1: false,
         MouseDown2: false,
         FireTypes:[
+            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, explosivePreset:'NailsCircleToCenter'},
             {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, offTime: 60, explosivePreset:'NailsBigCircle'},
             {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, offTime: 120, explosivePreset:'NailsWirlpool', dontCollide:true},
             {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 500, offTime: 60, explosivePreset:'ExplosionSize1'},
