@@ -13,9 +13,6 @@ function GAMEobject(){
     this.EnemiesC=0;
     this.Enemies={};             // Tablica Enemies
 
-    this.MapRadius=2700;
-    this.MapRadius2=3200;
-
     this.O={};                   // Object's - all of them
     this.Olen=0;
     this.Omap={};                // map of Maps

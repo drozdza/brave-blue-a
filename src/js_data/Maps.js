@@ -31,7 +31,6 @@ BBAdata['MAPS']={
         ],
     },
     'u1':{
-        MapRadius:60,MapRadius2:2400,
         BoardMods:['sitOnMap','allAvoid'],
         Place:[
             {Random:{X: 0, Y: 0, Radius: 200}, What: {K:1}},
@@ -109,7 +108,6 @@ BBAdata['MAPS']={
         ],
     },
     '1':{
-        MapRadius:60,MapRadius2:2400,
         BoardMods:['sitOnMap','allAvoid'],
         Place:[
             {Random:{X: 1000, Y: 1000, Radius: 200}, What:{Star: 20, A: 20}},
@@ -238,6 +236,10 @@ BBAdata['MAPS']={
     'PI':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, PI:20}}],
+    },
+    'Wi':{
+        BoardMods:['sitOnMap','allAvoid'],
+        Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{StarX: 60, Wi:20}}],
     },
     'HealthSplit':{
         BoardMods:['sitOnMap','allAvoid','healthSplit','carras25health'],

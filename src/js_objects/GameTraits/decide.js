@@ -287,6 +287,41 @@ GAMEobject.prototype.decide = function(o){
                 O.doingTime = TD.straightMin- -parseInt(Math.random()*TD.straightPlus);
             }
 
+            if(TD.T=='goToStar'){
+                var miDist = 9999;
+                var miO = -1;
+                for(var mio in this.O)
+                    if(this.O[mio].mapType == 'A' && this.O[mio].life > 0){
+                        var poX = this.O[mio].x-O.x;
+                        var poY = this.O[mio].y-O.y;
+                        var poDist = Math.sqrt(poX*poX- -poY*poY);
+                        if(miDist > poDist){
+                            miDist = poDist;
+                            miO = mio;
+                        }
+                    }
+                if(miO != -1){
+                    O.goingToStar = miO;
+                    O.Manouver = 'goToStar';
+                }
+                this.changeSpeedLvl(O,TD.gotoSpeed);
+            }
+            if(TD.T=='followEnemyAroundStar'){
+                O.Manouver = 'followEnemyAroundStar';
+                this.changeSpeedLvl(O,TD.gotoSpeed);
+            }
+            if(TD.T=='goRandomAroundStar'){
+                O.Manouver = 'goRandomAroundStar';
+                this.changeSpeedLvl(O,TD.gotoSpeed);
+
+                switch(parseInt(Math.random()*3)){
+                    case 0: O.Manouver = 'iddleOnStar'; O.doingTime = TD.straightMin- -parseInt(Math.random()*TD.straightPlus); break;
+                    case 1: O.Manouver = 'turnRightOnStar';  O.doingTime = TD.turnMin- -parseInt(Math.random()*TD.turnPlus); if(O.doingTime > maxTurnTime) O.doingTime = maxTurnTime; break;
+                    case 2: O.Manouver = 'turnLeftOnStar';  O.doingTime = TD.turnMin- -parseInt(Math.random()*TD.turnPlus); if(O.doingTime > maxTurnTime) O.doingTime = maxTurnTime; break;
+                }
+
+            }
+
             // Dodatkowe wywołania akcji
             if(TD.gotoAlarm) O.alarmLvl = TD.gotoAlarm;
             if(TD.goToSpotLvl)  O.spotLvl = TD.goToSpotLvl;
@@ -367,6 +402,96 @@ GAMEobject.prototype.decide = function(o){
                 } else this.removeObj(o);
                 return true;
             }
+        }break;
+        case 'goToStar':{
+            console.log('M:goToStar');
+            var dO = this.O[O.goingToStar];
+            var diX = O.x-dO.x;
+            var diY = O.y-dO.y;
+            if(dO.life < 1){
+                O.doingTime = -1;
+                O.goingToStar = false;
+            }
+            var miDist = Math.sqrt(diX*diX,diY*diY);
+            if(miDist <= dO.radius){
+                O.myStar = O.goingToStar;
+                O.Flags.noStar = false;
+                O.doingTime = -1;
+            }
+
+            O.angle = parseInt(- (Math.atan2(diX,diY)*180/Math.PI))%360;
+        }break;
+        case 'followEnemyAroundStar':{
+            console.log('M:follow ToStar');
+            if(O.myStar === false){
+                O.Flags.noStar = true;
+                O.doingTime = -1;
+            }
+            var dO = this.O[O.myStar];
+            if(dO.life < 1){
+              O.Flags.noStar = true;
+              O.doingTime = -1;
+            }
+
+            var Tyk = (O.angle-PlayerAngle- -360)%360;
+            var Ei = 180 - Math.abs( Tyk - 180);
+            var speedT = O.speedT;
+            O.Tyk = Tyk;
+            if(Ei < speedT) speedT = Ei;
+            if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
+            if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
+
+
+            O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
+            O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
+        }break;
+        case 'turnLeftOnStar':{
+          console.log('M:left ToStar');
+            if(O.myStar === false){
+                O.Flags.noStar = true;
+                O.doingTime = -1;
+            }
+            var dO = this.O[O.myStar];
+            if(dO.life < 1){
+              O.Flags.noStar = true;
+              O.doingTime = -1;
+            }
+
+            O.angle = (O.angle- -360- -O.speedT) %360;
+            O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
+            O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
+        }break;
+        case 'turnRightOnStar':{
+          console.log('M:right ToStar');
+
+            if(O.myStar === false){
+                O.Flags.noStar = true;
+                O.doingTime = -1;
+            }
+            var dO = this.O[O.myStar];
+            if(dO.life < 1){
+              O.Flags.noStar = true;
+              O.doingTime = -1;
+            }
+
+            O.angle = (O.angle- -360-O.speedT) %360;
+            O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
+            O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
+        }break;
+        case 'iddleOnStar':{
+          console.log('M:right ToStar');
+
+            if(O.myStar === false){
+                O.Flags.noStar = true;
+                O.doingTime = -1;
+            }
+            var dO = this.O[O.myStar];
+            if(dO.life < 1){
+              O.Flags.noStar = true;
+              O.doingTime = -1;
+            }
+            O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
+            O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
         }break;
     }
 
