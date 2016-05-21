@@ -61,7 +61,7 @@ GAMEobject.prototype.decide_ship = function(e){
     var S = this.SHIP;
     var Sx = this.SHIPold;
     var F = S.FireTypes[ S.FireType ];
-    if(S.FireType2!=false)
+    if(S.FireType2!==false)
         var F2 = S.FireTypes[ S.FireType2 ];
     O.lastSpeedT = 0;
     this.mouseX = this.mouse_x- -(O.x -this.Dx/2);
