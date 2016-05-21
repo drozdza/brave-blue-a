@@ -1350,6 +1350,8 @@ BBAdata['ObjectDatas']={
         lifeM: 89,
         radius: 30,
 
+        onDie: {Do:'explode', Power: 13, Dist: 210},
+
         Res: {},
         DamangeTransferImmune: true,
         weapon:[
