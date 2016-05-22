@@ -16,6 +16,22 @@ CanvasManagerObject.prototype.directRenders={
             17:{ width: 2, color: [20,0,0,1]}
         },
     },
+    dmgTransfer:{
+        frames: 11,
+        states:{
+            0:{ width: 1, color: [255,0,0,0.3]},
+            3:{ width: 2, color: [255,0,0,1]},
+            11:{ width: 1, color: [255,0,0,0]}
+        },
+    },
+    addShield:{
+        frames: 9,
+        states:{
+            0:{ width: 0, color: [0,255,255,0.3]},
+            2:{ width: 1, color: [0,255,255,1]},
+            8:{ width: 0, color: [0,255,255,0]}
+        },
+    },
     laserShoot:{
         frames: 12,
         states:{

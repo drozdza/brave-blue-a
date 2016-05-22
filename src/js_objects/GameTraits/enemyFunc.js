@@ -214,13 +214,16 @@ GAMEobject.prototype.cloneExplosionData = function(D,O){
             for(var addX in D.exploAddTo[onX])
                 O[onX][addX] = cloneObj(D.exploAddTo[onX][addX]);
 }
-GAMEobject.prototype.addShield = function(o,Duration){
+GAMEobject.prototype.addShield = function(o,Duration,q){
     var O = this.O[o];
     if(O.shieldDimmune) return false;
+
+    L = this.putObj_directAnim('addShield', {timeDeath: 5});
+    this.O[L].pathD = ['M', parseInt(o), 'L', parseInt(q)];
+
     O.shieldD = Duration;
 }
 GAMEobject.prototype.trySplitHealth = function(o,Radius){
-    console.log('letsDoit');
     var Q,O = this.O[o];
     if(O.beenSplitHealed && O.beenSplitHealed == this.tick) return false;
     var inRange = this.getCollidingWithCircle(O.x,O.y,Radius,['E']);
@@ -231,12 +234,14 @@ GAMEobject.prototype.trySplitHealth = function(o,Radius){
                     this.healObj(q,1);
                     Q.beenSplitHealed = this.tick;
                     this.makeDMG(o,1);
+                    L = this.putObj_directAnim('dmgTransfer', {timeDeath: 10});
+                    this.O[L].pathD = ['M', parseInt(o), 'L', parseInt(q)];
                     break;
                 }
     }
 
 }
-GAMEobject.prototype.giveDamangeTransfer = function(o,q,Duration){
+GAMEobject.prototype.giveDamageTransfer = function(o,q,Duration){
     var O = this.O[o];
     if(O.DamangeTransferImmune) return false;
     O.damageTransferTime = Duration;

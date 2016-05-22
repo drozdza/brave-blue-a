@@ -40,7 +40,7 @@ CanvasManagerObject.prototype.neededRenders={
         states:{
             0:{pathSize: 5, color: [200,0,0,1]},
             10:{pathSize: 15, color: [255,0,0,1]},
-            24:{pathSize: 30, color: [20,0,0,1]},
+            24:{pathSize: 30, color: [255,0,0,0]},
         }
     },
     hit_energyField:{

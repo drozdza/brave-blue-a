@@ -733,7 +733,7 @@ GAMEobject.prototype.decide = function(o){
             if(WP.t == 'addShield'){
                 var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
                 for(var i in inRange)
-                    this.addShield(i,WP.shieldTime);
+                    this.addShield(i,WP.shieldTime,o);
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'shootHealingMissle'){
@@ -747,7 +747,6 @@ GAMEobject.prototype.decide = function(o){
             }
 
             if(WP.t == 'healthSplit'){
-                console.log('HealSplit: '+o+' ['+this.tick+']');
                 if(O.life- -1 >= WP.minHealth)
                     this.trySplitHealth(o,WP.Radius);
                 WP.lastShot = this.tick;
@@ -756,7 +755,7 @@ GAMEobject.prototype.decide = function(o){
             if(WP.t == 'giveDamangeTransfer'){
                 var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
                 for(var i in inRange)
-                    if(this.giveDamangeTransfer(i,o,WP.immunityTime)) break;
+                    if(this.giveDamageTransfer(i,o,WP.immunityTime)) break;
                 WP.lastShot = this.tick;
             }
 
