@@ -133,8 +133,8 @@ GAMEobject.prototype.frame_draw = function(){
     CH.fillStyle="rgba(0,0,0,0.12)";
     if(BBAdata.GET.BLUR > 1) CH.translate(this.shipMoveX,this.shipMoveY);
     if(!BBAdata.GET.BLUR)
-        CH.fillStyle="black";
-    CH.fillRect(0, 0, this.Dx, this.Dy);
+        CH.fillStyle="transparent";
+    CH.clearRect(0, 0, this.Dx, this.Dy);
     CH.restore();
     var Radi = Math.PI/180;
 
@@ -238,6 +238,7 @@ GAMEobject.prototype.frame_draw = function(){
             continue;
         }
     }
+    CanvasManager.CBM.drawBackgroundTiles(this.UnderCanvasHandle, this.Dx, this.Dy, Px, Py);
     ++this.tickD;
     this.MSdraw-=-((new Date()).getTime() - MS);
 }

@@ -7,6 +7,9 @@ function CanvasManagerObject(){
         this.simpleRenderNeeded();
         this.renderNeeded();
         this.prepareDirectRenders();
+
+        this.CBM = new CanvasBackgroundManagerObject();
+        this.CBM.start();
     }
 
     this.canvasId = function(O){

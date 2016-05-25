@@ -80,6 +80,10 @@
     right: 60px;
 }
 
+#UnderCanvas,#MainCanvas{
+    position: absolute;
+}
+
 #gameOverlay{
     width: 100%;
     height: 100%;
