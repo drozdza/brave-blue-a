@@ -2,7 +2,7 @@ function CanvasBackgroundManagerObject(){
 
     this.Tiles = {};
 
-    this.TileSize = 20;
+    this.TileSize = 80;
 
     this.start = function(){
 
@@ -21,7 +21,7 @@ function CanvasBackgroundManagerObject(){
 
         for(var x = left; x < right; ++x)
             for(var y = top; y < bottom; ++y){
-                CH.fillStyle = 'rgba('+(255-Math.abs(x)*4)+','+(255-Math.abs(y)*4)+',0,1)';
+                CH.fillStyle = 'rgba('+(255-Math.abs(x)*55)+','+(255-Math.abs(y)*55)+',0,1)';
                 CH.fillRect(
                     x*this.TileSize -posX,
                     y*this.TileSize -posY,
