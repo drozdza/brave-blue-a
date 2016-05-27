@@ -4,4 +4,4 @@ Bugs:
 
   - AutoFire should work
 
-  - Ships that sit on stars and there is no stars...
+  - Ships that sit on stars and there is no stars... they should do something..

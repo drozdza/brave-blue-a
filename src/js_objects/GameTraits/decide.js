@@ -404,30 +404,39 @@ GAMEobject.prototype.decide = function(o){
             }
         }break;
         case 'goToStar':{
-            console.log('M:goToStar');
             var dO = this.O[O.goingToStar];
-            var diX = O.x-dO.x;
-            var diY = O.y-dO.y;
+            if(typeof dO == 'undefined'){
+                O.speed = 0;
+                O.Manouver = 'goStraight';
+                return 1;
+            }
             if(dO.life < 1){
                 O.doingTime = -1;
                 O.goingToStar = false;
             }
-            var miDist = Math.sqrt(diX*diX,diY*diY);
+            var diX = O.x-dO.x;
+            var diY = O.y-dO.y;
+            var miDist = Math.sqrt(diX*diX- -diY*diY);
             if(miDist <= dO.radius){
                 O.myStar = O.goingToStar;
+                O.angle = parseInt(-Math.atan2(diX,diY)*180/Math.PI- -180)%360;
                 O.Flags.noStar = false;
                 O.doingTime = -1;
+            }else{
+                O.angle = parseInt(- (Math.atan2(diX,diY)*180/Math.PI))%360;
             }
-
-            O.angle = parseInt(- (Math.atan2(diX,diY)*180/Math.PI))%360;
         }break;
         case 'followEnemyAroundStar':{
-            console.log('M:follow ToStar');
             if(O.myStar === false){
                 O.Flags.noStar = true;
                 O.doingTime = -1;
             }
             var dO = this.O[O.myStar];
+            if(typeof dO == 'undefined'){
+                O.speed = 0;
+                O.Manouver = 'goStraight';
+                return 1;
+            }
             if(dO.life < 1){
               O.Flags.noStar = true;
               O.doingTime = -1;
@@ -446,12 +455,16 @@ GAMEobject.prototype.decide = function(o){
             O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
         }break;
         case 'turnLeftOnStar':{
-          console.log('M:left ToStar');
             if(O.myStar === false){
                 O.Flags.noStar = true;
                 O.doingTime = -1;
             }
             var dO = this.O[O.myStar];
+            if(typeof dO == 'undefined'){
+                O.speed = 0;
+                O.Manouver = 'goStraight';
+                return 1;
+            }
             if(dO.life < 1){
               O.Flags.noStar = true;
               O.doingTime = -1;
@@ -462,13 +475,16 @@ GAMEobject.prototype.decide = function(o){
             O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
         }break;
         case 'turnRightOnStar':{
-          console.log('M:right ToStar');
-
             if(O.myStar === false){
                 O.Flags.noStar = true;
                 O.doingTime = -1;
             }
             var dO = this.O[O.myStar];
+            if(typeof dO == 'undefined'){
+                O.speed = 0;
+                O.Manouver = 'goStraight';
+                return 1;
+            }
             if(dO.life < 1){
               O.Flags.noStar = true;
               O.doingTime = -1;
@@ -479,8 +495,6 @@ GAMEobject.prototype.decide = function(o){
             O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
         }break;
         case 'iddleOnStar':{
-          console.log('M:right ToStar');
-
             if(O.myStar === false){
                 O.Flags.noStar = true;
                 O.doingTime = -1;
@@ -719,7 +733,7 @@ GAMEobject.prototype.decide = function(o){
             if(WP.t == 'addShield'){
                 var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
                 for(var i in inRange)
-                    this.addShield(i,WP.shieldTime);
+                    this.addShield(i,WP.shieldTime,o);
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'shootHealingMissle'){
@@ -733,7 +747,6 @@ GAMEobject.prototype.decide = function(o){
             }
 
             if(WP.t == 'healthSplit'){
-                console.log('HealSplit: '+o+' ['+this.tick+']');
                 if(O.life- -1 >= WP.minHealth)
                     this.trySplitHealth(o,WP.Radius);
                 WP.lastShot = this.tick;
@@ -742,7 +755,7 @@ GAMEobject.prototype.decide = function(o){
             if(WP.t == 'giveDamangeTransfer'){
                 var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
                 for(var i in inRange)
-                    if(this.giveDamangeTransfer(i,o,WP.immunityTime)) break;
+                    if(this.giveDamageTransfer(i,o,WP.immunityTime)) break;
                 WP.lastShot = this.tick;
             }
 

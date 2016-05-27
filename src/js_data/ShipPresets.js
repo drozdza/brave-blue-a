@@ -237,7 +237,7 @@ BBAdata['SHIPpresets']={
             {T:'rose',    gunS:0,GunSpeed: 4,  Use:{Ammo:5}, AtOnce: 9, RoseAngle: 3, Speed: 15, Dec: 30, Power: 1},
             {T:'laser',   gunS:0,GunSpeed: 10, ModUse:{Laser:1}, Speed: 650, Dec: 1, Power: 5},
             {T:'rose',    gunS:0,GunSpeed: 7,  Use:{Ammo:10}, AtOnce: 37, RoseAngle: 5, Speed: 17, Dec: 12, Power: 1},
-            {T:'missle',  gunS:0,GunSpeed: 2,  Use:{Missile:1}, Speed: 12, SpeedT: 4, Dec: 400, AimRadius: 120, Power: 2},
+            {T:'missle',  gunS:0,GunSpeed: 10,  Use:{Missile:1}, Speed: 12, SpeedT: 4, Dec: 400, AimRadius: 120, Power: 3},
             {T:'missleR', gunS:0,GunSpeed: 6,  Use:{Missile:5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, Power:1},
             {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 10, Dec: 30, explosivePreset:'NailsBigCircle'},
             {T:'tele',    gunS:0,GunSpeed: 3,  ModUse:{TeleJump:1}, Speed: 400, Dec: 1},

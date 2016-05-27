@@ -371,7 +371,7 @@ function CanvasManagerObject(){
         var Type = O.T;
         var StyleData = this.directRenders[Type];
 
-        if(Type=='TP_track' || Type=='TP_trackDark' || Type=='laserShoot'){
+        if(Type=='TP_track' || Type=='TP_trackDark' || Type=='laserShoot' || Type=='dmgTransfer' || Type=='addShield'){
             CanCon.save();
             CanCon.lineCap = 'round';
             CanCon.strokeStyle = 'rgba('+StyleData.states[Frame].color[0]+','+StyleData.states[Frame].color[1]+','+StyleData.states[Frame].color[2]+','+StyleData.states[Frame].color[3]+')';
@@ -413,6 +413,8 @@ function CanvasManagerObject(){
         for(var i=0; i<path.length; ++i){
             if(typeof (path[i])== 'string'){
                 string+=path[i]+' ';
+            } else if(typeof (path[i]) == 'number'){
+                string+=(GAME.O[ path[i] ].x -P.x- -(GAME.Dx/2).toFixed(0))+' '+(GAME.O[ path[i] ].y -P.y- -(GAME.Dy/2).toFixed(0))+' ';
             } else {
                 string+=(path[i].x -P.x- -(GAME.Dx/2).toFixed(0))+' '+(path[i].y -P.y- -(GAME.Dy/2).toFixed(0))+' ';
             }
