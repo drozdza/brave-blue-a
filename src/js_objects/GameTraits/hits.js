@@ -199,10 +199,13 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
     }
 
     if(O.damageTransferFrom){
-        this.makeDMG(O.damageTransferFrom,DMG);
-        var L = this.putObj_directAnim('dmgTransfer', {timeDeath: 10});
-        this.O[L].pathD = ['M', parseInt(o), 'L', parseInt(O.damageTransferFrom)];
-        return false;
+        var DTF = O.damageTransferFrom;
+        if(this.O[DTF].life > 0){
+            this.makeDMG(O.damageTransferFrom,DMG);
+            var L = this.putObj_directAnim('dmgTransfer', {timeDeath: 10});
+            this.O[L].pathD = ['M', parseInt(o), 'L', parseInt(O.damageTransferFrom)];
+            return false;
+        }
     }
 
 
