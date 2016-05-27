@@ -71,7 +71,6 @@ function CanvasBackgroundManagerObject(){
                 if(typeof this.Tiles[x+'_'+y] !='undefined'){
                     var T = this.Tiles[x+'_'+y];
                     CH.drawImage(T.canvasId,x*this.TileSize-posX,y*this.TileSize-posY);
-
                 }
             }
     }
