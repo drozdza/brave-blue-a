@@ -144,6 +144,9 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
     if(Type!='shieldBlob' && Type!='bullet')
         CanvasManager.requestCanvas( L );
 
+    if(O.view && O.view.onBackground)
+        CanvasManager.CBM.addObjectToBackground( L );
+
     if(Type!='bullet')
         this.putOnXY( L );
     return L;
@@ -282,8 +285,12 @@ GAMEobject.prototype.removeObj = function(o,saveDiv){
     if(this.O[o].TT == 'anim' || this.O[o].TT == 'dirAnim')
         delete this.Oanim[o];
 
-    if(this.O[o].TT == 'enemy')
+    if(this.O[o].TT == 'enemy'){
         this.Odead[ o ]={T:this.O[o].T,x:this.O[o].x,y:this.O[o].y};
+        this.O[o].view.onBackground=1;
+        CanvasManager.CBM.addObjectToBackground(o);
+    }
+
 
     delete this.Omoving[o];
     delete this.Ocomp[o];

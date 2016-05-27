@@ -300,8 +300,8 @@ function CanvasManagerObject(){
                     var XYoffset = parseInt((X2 - R.states[i].pathSize)/2);
                     var PATH = this.LIB[ R.LIBpath ];
                     for(var s=0; s<PATH.length;++s)
-                        if(isNaN(PATH[s]))    svgD+=PATH[s]+' ';
-                                else         svgD+=((PATH[s]*pathSize).toFixed(2))+' ';
+                        if(isNaN(PATH[s])) svgD+=PATH[s]+' ';
+                                else       svgD+=((PATH[s]*pathSize).toFixed(2))+' ';
                     var svgObj = new Path2D(svgD);
                     CanCon.save();
                     CanCon.translate(XYoffset,XYoffset);
@@ -317,8 +317,8 @@ function CanvasManagerObject(){
                         var XYoffset = parseInt((X2 - R.states[i].pathSize)/2);
                         var PATH = this.LIB['StarPath'];
                         for(var s=0; s<PATH.length;++s)
-                            if(isNaN(PATH[s]))    svgD+=PATH[s]+' ';
-                                    else         svgD+=((PATH[s]*pathSize).toFixed(2))+' ';
+                            if(isNaN(PATH[s])) svgD+=PATH[s]+' ';
+                                    else       svgD+=((PATH[s]*pathSize).toFixed(2))+' ';
                         CanCon.save();
                         CanCon.translate(((X2 - R.states[i].smallStarSize)/2)- -R.smallStars[mi].x, ((Y2 - R.states[i].smallStarSize)/2)- -R.smallStars[mi].y);
                         var svgObj = new Path2D(svgD);
@@ -363,8 +363,7 @@ function CanvasManagerObject(){
         }
     }
 
-    this.directRender = function(CanCon,O){
-        var P = GAME.O[0];
+    this.directRender = function(CanCon,O,Px,Py){
         var AnimData = O.Data;
         var Frame = O.timeTick;
         if(Frame < 0) return 1;
@@ -377,12 +376,12 @@ function CanvasManagerObject(){
             CanCon.strokeStyle = 'rgba('+StyleData.states[Frame].color[0]+','+StyleData.states[Frame].color[1]+','+StyleData.states[Frame].color[2]+','+StyleData.states[Frame].color[3]+')';
             CanCon.lineWidth = StyleData.states[Frame].width;
             if(O.pathD){
-                var pe = new Path2D( this.build_path2D(O.pathD) );
+                var pe = new Path2D( this.build_path2D(O.pathD,Px,Py) );
                 CanCon.stroke(pe);
             } else{
                 CanCon.beginPath();
-                CanCon.moveTo(AnimData.X1 -P.x- -(GAME.Dx/2).toFixed(0), AnimData.Y1 -P.y- -(GAME.Dy/2).toFixed(0));
-                CanCon.lineTo(AnimData.X2 -P.x- -(GAME.Dx/2).toFixed(0), AnimData.Y2 -P.y- -(GAME.Dy/2).toFixed(0));
+                CanCon.moveTo(AnimData.X1-Px, AnimData.Y1-Py);
+                CanCon.lineTo(AnimData.X2-Px, AnimData.Y2-Py);
                 CanCon.stroke();
             }
             CanCon.restore();
@@ -394,29 +393,28 @@ function CanvasManagerObject(){
             CanCon.strokeStyle = 'rgba('+StyleData.states[Frame].color2[0]+','+StyleData.states[Frame].color2[1]+','+StyleData.states[Frame].color2[2]+','+StyleData.states[Frame].color2[3]+')';
             CanCon.lineWidth = StyleData.states[Frame].width2;
             if(O.pathD){
-                var pe = new Path2D( this.build_path2D(O.pathD) );
+                var pe = new Path2D( this.build_path2D(O.pathD,Px,Py) );
                 CanCon.stroke(pe);
             } else{
                 CanCon.beginPath();
-                CanCon.moveTo(AnimData.X1 -P.x- -(GAME.Dx/2).toFixed(0), AnimData.Y1 -P.y- -(GAME.Dy/2).toFixed(0));
-                CanCon.lineTo(AnimData.X2 -P.x- -(GAME.Dx/2).toFixed(0), AnimData.Y2 -P.y- -(GAME.Dy/2).toFixed(0));
+                CanCon.moveTo(AnimData.X1-Px, AnimData.Y1-Py);
+                CanCon.lineTo(AnimData.X2-Px, AnimData.Y2-Py);
                 CanCon.stroke();
             }
             CanCon.restore();
         }
     }
 
-    this.build_path2D = function(path){
-        var P = GAME.O[0];
+    this.build_path2D = function(path,Px,Py){
         var string = '';
 
         for(var i=0; i<path.length; ++i){
             if(typeof (path[i])== 'string'){
                 string+=path[i]+' ';
             } else if(typeof (path[i]) == 'number'){
-                string+=(GAME.O[ path[i] ].x -P.x- -(GAME.Dx/2).toFixed(0))+' '+(GAME.O[ path[i] ].y -P.y- -(GAME.Dy/2).toFixed(0))+' ';
+                string+=(GAME.O[ path[i] ].x-Px)+' '+(GAME.O[ path[i] ].y-Py)+' ';
             } else {
-                string+=(path[i].x -P.x- -(GAME.Dx/2).toFixed(0))+' '+(path[i].y -P.y- -(GAME.Dy/2).toFixed(0))+' ';
+                string+=(path[i].x-Px)+' '+(path[i].y-Py)+' ';
             }
         }
         return string;
@@ -451,10 +449,8 @@ function CanvasManagerObject(){
         return State;
     }
 
-    this.regionAnim = function(CanCon,O){
+    this.regionAnim = function(CanCon,O,Px,Py){
         var P = GAME.O[0];
-        var Px = (-P.x- -(GAME.Dx/2));
-        var Py = (-P.y- -(GAME.Dy/2));
         var AD = O.animData;
         var DR = this.directRenders[ O.animType ];
         var Radi = Math.PI*2/360;
@@ -465,7 +461,7 @@ function CanvasManagerObject(){
             if(DR.frames) BU = DR.states[ O.animTick ];
             CanCon.save();
             if(DR.gradientStops){
-                var Gradient = CanCon.createRadialGradient(O.x- -Px, O.y- -Py, 0, O.x- -Px, O.y- -Py, O.radius);
+                var Gradient = CanCon.createRadialGradient(O.x-Px, O.y-Py, 0, O.x-Px, O.y-Py, O.radius);
                 for(var i=0; i<DR.gradientStops; ++i)
                     Gradient.addColorStop(BU['stop'+i],'rgba('+BU['color'+i][0]+','+BU['color'+i][1]+','+BU['color'+i][2]+','+BU['color'+i][3]+')');
                 CanCon.fillStyle = Gradient;
@@ -475,19 +471,19 @@ function CanvasManagerObject(){
             CanCon.beginPath();
 
             if(O.squareCorners){
-                CanCon.moveTo( (O.squareCorners.A.x- -Px).toFixed(1), (O.squareCorners.A.y- -Py).toFixed(1) );
-                CanCon.lineTo( (O.squareCorners.B.x- -Px).toFixed(1), (O.squareCorners.B.y- -Py).toFixed(1) );
-                CanCon.lineTo( (O.squareCorners.C.x- -Px).toFixed(1), (O.squareCorners.C.y- -Py).toFixed(1) );
-                CanCon.lineTo( (O.squareCorners.D.x- -Px).toFixed(1), (O.squareCorners.D.y- -Py).toFixed(1) );
-                CanCon.lineTo( (O.squareCorners.A.x- -Px).toFixed(1), (O.squareCorners.A.y- -Py).toFixed(1) );
+                CanCon.moveTo( (O.squareCorners.A.x-Px).toFixed(1), (O.squareCorners.A.y-Py).toFixed(1) );
+                CanCon.lineTo( (O.squareCorners.B.x-Px).toFixed(1), (O.squareCorners.B.y-Py).toFixed(1) );
+                CanCon.lineTo( (O.squareCorners.C.x-Px).toFixed(1), (O.squareCorners.C.y-Py).toFixed(1) );
+                CanCon.lineTo( (O.squareCorners.D.x-Px).toFixed(1), (O.squareCorners.D.y-Py).toFixed(1) );
+                CanCon.lineTo( (O.squareCorners.A.x-Px).toFixed(1), (O.squareCorners.A.y-Py).toFixed(1) );
             }else if(O.coneAngle){
                 var Angle1 = (O.angle- -O.coneAngle-90)*Radi;
                 var Angle2 = (O.angle - O.coneAngle-90)*Radi;
-                CanCon.arc(O.x- -Px,O.y- -Py,O.radius,Angle1,Angle2,true);
-                CanCon.arc(O.x- -Px,O.y- -Py,O.coneRad2,Angle2,Angle1,false);
+                CanCon.arc(O.x-Px,O.y-Py,O.radius,Angle1,Angle2,true);
+                CanCon.arc(O.x-Px,O.y-Py,O.coneRad2,Angle2,Angle1,false);
                 CanCon.closePath();
             }else{
-                CanCon.arc(O.x- -Px, O.y- -Py, O.radius, 0, Math.PI*2, true);
+                CanCon.arc(O.x-Px, O.y-Py, O.radius, 0, Math.PI*2, true);
             }
 
             CanCon.fill();
@@ -566,9 +562,9 @@ function CanvasManagerObject(){
 
                 CanCon.save();
                 if(O.particlesOnBoard)
-                    CanCon.translate((Px- -T.x).toFixed(0), (Py- -T.y).toFixed(0));
+                    CanCon.translate((T.x-Px).toFixed(0), (T.y-Py).toFixed(0));
                 else
-                    CanCon.translate((O.x- -Px- -T.x).toFixed(0), (O.y- -Py- -T.y).toFixed(0));
+                    CanCon.translate((O.x-Px- -T.x).toFixed(0), (O.y-Py- -T.y).toFixed(0));
                 CanCon.rotate(Radi*T.rotation);
                 var IMG =document.getElementById('CanvasManager_'+T.particleId+'_frame_'+T.time+'_');
                 CanCon.drawImage(IMG,-T.particleXY,-T.particleXY);
@@ -632,10 +628,8 @@ function CanvasManagerObject(){
 
         return {x:x,y:y};
     }
-    this.simpleFilling = function(CanCon,O){
+    this.simpleFilling = function(CanCon,O,Px,Py){
         var P = GAME.O[0];
-        var Px = (-P.x- -(GAME.Dx/2));
-        var Py = (-P.y- -(GAME.Dy/2));
         var Radi = Math.PI*2/360;
 
 
@@ -644,19 +638,19 @@ function CanvasManagerObject(){
         CanCon.beginPath();
 
         if(O.squareCorners){
-            CanCon.moveTo( (O.squareCorners.A.x- -Px).toFixed(1), (O.squareCorners.A.y- -Py).toFixed(1) );
-            CanCon.lineTo( (O.squareCorners.B.x- -Px).toFixed(1), (O.squareCorners.B.y- -Py).toFixed(1) );
-            CanCon.lineTo( (O.squareCorners.C.x- -Px).toFixed(1), (O.squareCorners.C.y- -Py).toFixed(1) );
-            CanCon.lineTo( (O.squareCorners.D.x- -Px).toFixed(1), (O.squareCorners.D.y- -Py).toFixed(1) );
-            CanCon.lineTo( (O.squareCorners.A.x- -Px).toFixed(1), (O.squareCorners.A.y- -Py).toFixed(1) );
+            CanCon.moveTo( (O.squareCorners.A.x-Px).toFixed(1), (O.squareCorners.A.y-Py).toFixed(1) );
+            CanCon.lineTo( (O.squareCorners.B.x-Px).toFixed(1), (O.squareCorners.B.y-Py).toFixed(1) );
+            CanCon.lineTo( (O.squareCorners.C.x-Px).toFixed(1), (O.squareCorners.C.y-Py).toFixed(1) );
+            CanCon.lineTo( (O.squareCorners.D.x-Px).toFixed(1), (O.squareCorners.D.y-Py).toFixed(1) );
+            CanCon.lineTo( (O.squareCorners.A.x-Px).toFixed(1), (O.squareCorners.A.y-Py).toFixed(1) );
         }else if(O.coneAngle){
             var Angle1 = (O.angle- -O.coneAngle-90)*Radi;
             var Angle2 = (O.angle - O.coneAngle-90)*Radi;
-            CanCon.arc(O.x- -Px,O.y- -Py,O.radius,Angle1,Angle2,true);
-            CanCon.arc(O.x- -Px,O.y- -Py,O.coneRad2,Angle2,Angle1,false);
+            CanCon.arc(O.x-Px,O.y-Py,O.radius,Angle1,Angle2,true);
+            CanCon.arc(O.x-Px,O.y-Py,O.coneRad2,Angle2,Angle1,false);
             CanCon.closePath();
         }else{
-            CanCon.arc(O.x- -Px, O.y- -Py, O.radius, 0, Math.PI*2, true);
+            CanCon.arc(O.x-Px, O.y-Py, O.radius, 0, Math.PI*2, true);
         }
 
         CanCon.fill();

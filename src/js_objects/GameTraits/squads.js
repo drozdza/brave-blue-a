@@ -100,6 +100,11 @@ GAMEobject.prototype.setSquadMember = function(o,i,life){
         this.bindWithSquad(o, i, Sid);
     }
 
+    if(OSS.placementT == 'directPlaces'){
+        CanvasManager.CBM.deleteObjectFromBackground( Sid );
+        delete this.O[ Sid ].view.onBackground;
+    }
+
     if(typeof OSS.objData !='undefined')
         this.addBoardMod(Sid,OSS.objData);
     this.O[Sid].Flags=[];

@@ -200,7 +200,7 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
 
     if(O.damageTransferFrom){
         this.makeDMG(O.damageTransferFrom,DMG);
-        L = this.putObj_directAnim('dmgTransfer', {timeDeath: 10});
+        var L = this.putObj_directAnim('dmgTransfer', {timeDeath: 10});
         this.O[L].pathD = ['M', parseInt(o), 'L', parseInt(O.damageTransferFrom)];
         return false;
     }
@@ -219,6 +219,8 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
     O.life-=DMG;
     if(O.T=='ship') this.shipFunc_showHealth();
     CanvasManager.requestCanvas(o);
+    if(O.view && O.view.onBackground)
+        CanvasManager.CBM.changeObjectPosition(o);
     if(O.Flags) O.Flags.gotHitFlag = true;
 
     if(O.life <= 0) this.dieObj(O,o);
@@ -265,6 +267,9 @@ GAMEobject.prototype.healObj = function(q,DMG,o){
     if(q == 0)
         this.shipFunc_showHealth();
     CanvasManager.requestCanvas( q );
+    if(Q.view && Q.view.onBackground)
+        CanvasManager.CBM.changeObjectPosition(q);
+
 }
 GAMEobject.prototype.hitEnergyField = function(o,q,DMG){
     var O = this.O[o];

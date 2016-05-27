@@ -1,37 +1,6 @@
 
-GAMEobject.prototype.putOnXY = function(o,ox,oy){    //!!
-    var X1,Y1,X2,Y2,xi,yi,s,oldS={},newS={}, O = this.O[o];
-    var M = this.MapTileSize;
-
-    if(typeof oy!='undefined'){
-
-        if(typeof O.squareCorners !='undefined'){
-            X1 = O.squareCorners.E.x1;
-            Y1 = O.squareCorners.E.y1;
-            X2 = O.squareCorners.E.x2;
-            Y2 = O.squareCorners.E.y2;
-        }else{
-            X1 = ox - O.radius;
-            Y1 = oy - O.radius;
-            X2 = ox- -O.radius;
-            Y2 = oy- -O.radius;
-        }
-        xi=X1;
-        while(true){
-            if(xi>X2) xi=X2;
-            yi=Y1;
-            while(true){
-                if(yi>Y2) yi=Y2;
-                oldS[ parseInt(xi/M)+'_'+parseInt(yi/M) ]=1;
-                if(yi==Y2) break;
-                yi-=-M;
-            }
-            if(xi==X2) break;
-            xi-=-M;
-        }
-    } else {
-        this.Omap[O.mapType].elems++;
-    }
+GAMEobject.prototype.findTabTiles = function(o,ox,oy,M){
+    var X1,Y1,X2,Y2,xi,yi,x,y, X,Y, tabS={}, O = this.O[o];
 
     if(typeof O.squareCorners !='undefined'){
         X1 = O.squareCorners.E.x1;
@@ -39,24 +8,35 @@ GAMEobject.prototype.putOnXY = function(o,ox,oy){    //!!
         X2 = O.squareCorners.E.x2;
         Y2 = O.squareCorners.E.y2;
     }else{
-        X1 = O.x - O.radius;
-        Y1 = O.y - O.radius;
-        X2 = O.x- -O.radius;
-        Y2 = O.y- -O.radius;
+        X1 = ox - O.radius;
+        Y1 = oy - O.radius;
+        X2 = ox- -O.radius;
+        Y2 = oy- -O.radius;
     }
-    xi=X1;
-    while(true){
-        if(xi>X2) xi=X2;
-        yi=Y1;
-        while(true){
-            if(yi>Y2) yi=Y2;
-            newS[ parseInt(xi/M)+'_'+parseInt(yi/M) ]=1;
-            if(yi==Y2) break;
-            yi-=-M;
-        }
-        if(xi==X2) break;
-        xi-=-M;
+
+    xi = parseInt(X1/M); if(X1<0) xi-=1;
+    yi = parseInt(Y1/M); if(Y1<0) yi-=1;
+    X = parseInt(X2/M); if(X2<0) X-=1;
+    Y = parseInt(Y2/M); if(Y2<0) Y-=1;
+
+    for(x=xi; x<=X; ++x){
+        for(y=yi; y<=Y; ++y)
+            tabS[ x+'_'+y ]=1;
     }
+    return tabS;
+}
+
+GAMEobject.prototype.putOnXY = function(o,ox,oy){
+    var O = this.O[o];
+    var s,oldS={},newS={};
+
+    if(typeof oy!='undefined'){
+        oldS = this.findTabTiles(o,ox,oy,this.MapTileSize);
+    } else {
+        this.Omap[O.mapType].elems++;
+    }
+
+    newS = this.findTabTiles(o,O.x,O.y,this.MapTileSize);
 
     for(s in oldS)
         if(newS[s]!=1)
@@ -71,26 +51,11 @@ GAMEobject.prototype.putOnXY = function(o,ox,oy){    //!!
         }
 }
 GAMEobject.prototype.removeFromXY = function(o,addToDead){    //!!
-    var X1,Y1,X2,Y2,xi,yi,s,oldS={}, O = this.O[o];
-    var M = this.MapTileSize;
+    var O = this.O[o];
+    var s,oldS={};
 
-    X1 = O.x - O.radius;
-    Y1 = O.y - O.radius;
-    X2 = O.x- -O.radius;
-    Y2 = O.y- -O.radius;
-    xi=X1;
-    while(true){
-        if(xi>X2) xi=X2;
-        yi=Y1;
-        while(true){
-            if(yi>Y2) yi=Y2;
-            oldS[ parseInt(xi/M)+'_'+parseInt(yi/M) ]=1;
-            if(yi==Y2) break;
-            yi-=-M;
-        }
-        if(xi==X2) break;
-        xi-=-M;
-    }
+    oldS = this.findTabTiles(o,O.x,O.y,this.MapTileSize);
+
     this.Omap[O.mapType].elems--;
 
     for(s in oldS)
@@ -105,7 +70,7 @@ GAMEobject.prototype.removeFromXY = function(o,addToDead){    //!!
         }
 }
 GAMEobject.prototype.getCollidingWithCircle = function(x,y,radius,collisionTab){
-    var yi,oX,oY,oR,F,Map,Found={},FoundR={};
+    var yi,oX,oY,oR,X,Y,F,Map,Found={},FoundR={};
     var X1 = x - radius;
     var Y1 = y - radius;
     var X2 = x- -radius;
@@ -123,12 +88,15 @@ GAMEobject.prototype.getCollidingWithCircle = function(x,y,radius,collisionTab){
         yi=Y1;
         while(true){
             if(yi>Y2) yi=Y2;
-            for(var ColT in collisionTab)
-                if(typeof this.Omap[ collisionTab[ColT] ][ parseInt(xi/M)+'_'+parseInt(yi/M) ] !='undefined'){
-                    Map = this.Omap[ collisionTab[ColT] ][ parseInt(xi/M)+'_'+parseInt(yi/M) ];
+            for(var ColT in collisionTab){
+                X = parseInt(xi/M); if (xi<0) X-=1;
+                Y = parseInt(yi/M); if (yi<0) Y-=1;
+                if(typeof this.Omap[ collisionTab[ColT] ][ X+'_'+Y ] !='undefined'){
+                    Map = this.Omap[ collisionTab[ColT] ][ X+'_'+Y ];
                     for(F in Map)
                         Found[F]=1;
                 }
+            }
             if(yi==Y2) break;
             yi-=-M;
         }
@@ -157,7 +125,7 @@ GAMEobject.prototype.getCollidingWithCircle = function(x,y,radius,collisionTab){
     return FoundR;
 }
 GAMEobject.prototype.getCollidingWithSquare = function(O,collisionTab){
-    var yi,oX,oY,oR,F,Map,Found={},FoundR={};
+    var yi,oX,oY,oR,X,Y,F,Map,Found={},FoundR={};
     var X1 = O.squareCorners.E.x1;
     var Y1 = O.squareCorners.E.y1;
     var X2 = O.squareCorners.E.x2;
@@ -175,12 +143,15 @@ GAMEobject.prototype.getCollidingWithSquare = function(O,collisionTab){
         yi=Y1;
         while(true){
             if(yi>Y2) yi=Y2;
-            for(var ColT in collisionTab)
-                if(typeof this.Omap[ collisionTab[ColT] ][ parseInt(xi/M)+'_'+parseInt(yi/M) ] !='undefined'){
-                    Map = this.Omap[ collisionTab[ColT] ][ parseInt(xi/M)+'_'+parseInt(yi/M) ];
+            for(var ColT in collisionTab){
+                X = parseInt(xi/M); if (xi<0) X-=1;
+                Y = parseInt(yi/M); if (yi<0) Y-=1;
+                if(typeof this.Omap[ collisionTab[ColT] ][ X+'_'+Y ] !='undefined'){
+                    Map = this.Omap[ collisionTab[ColT] ][ X+'_'+Y ];
                     for(F in Map)
                         Found[F]=1;
                 }
+            }
             if(yi==Y2) break;
             yi-=-M;
         }
@@ -196,7 +167,7 @@ GAMEobject.prototype.getCollidingWithSquare = function(O,collisionTab){
     return FoundR;
 }
 GAMEobject.prototype.getCollidingWithCone = function(O,collisionTab){
-    var IDs={},yi,F,Map,Found={},FoundR={};
+    var IDs={},yi,X,Y,F,Map,Found={},FoundR={};
     var X1 = O.x - O.radius;
     var Y1 = O.y - O.radius;
     var X2 = O.x- -O.radius;
@@ -214,7 +185,9 @@ GAMEobject.prototype.getCollidingWithCone = function(O,collisionTab){
         yi=Y1;
         while(true){
             if(yi>Y2) yi=Y2;
-            IDs[ parseInt(xi/M)+'_'+parseInt(yi/M) ]=1;
+            X = parseInt(xi/M); if (xi<0) X-=1;
+            Y = parseInt(yi/M); if (yi<0) Y-=1;
+            IDs[ X+'_'+Y ]=1;
             if(yi==Y2) break;
             yi-=-M;
         }

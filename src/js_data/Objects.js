@@ -84,6 +84,7 @@ BBAdata['ObjectDatas']={
             Color:'white',
             Angle:0,
             HitPattern:'StarHit',
+            onBackground: 1,
         },
 
         SlowDown: 3,
@@ -115,6 +116,7 @@ BBAdata['ObjectDatas']={
             Color:'yellow',
             Angle:0,
             XY:180,
+            onBackground: 1,
         },
 
         radius: 90,
@@ -126,6 +128,7 @@ BBAdata['ObjectDatas']={
     RoundField:{
         view:{
             circleColor:[255,255,255,0.2],
+            onBackground: 1,
         },
         radius: 50,
         undestructible: 1,
@@ -133,6 +136,7 @@ BBAdata['ObjectDatas']={
     SquareField:{
         view:{
             color: 'red',
+            onBackground: 1,
         },
         radius: 50,
         squareAngle: 0,
@@ -143,6 +147,7 @@ BBAdata['ObjectDatas']={
     ConeField:{
         view:{
             color: 'red',
+            onBackground: 1,
         },
 
         radius: 50,

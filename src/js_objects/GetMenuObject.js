@@ -15,7 +15,7 @@ function GetMenuObject(){
         },
         CANVAS:{
             get: 'canvas',
-            values: {Off:false, On:1},
+            values: {Off:false, On:1, BG:2},
         },
         FPS:{
             get: 'fps',

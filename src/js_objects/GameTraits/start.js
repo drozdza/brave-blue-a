@@ -53,9 +53,11 @@ GAMEobject.prototype.start = function(Setting,Ship){
     this.CanvasHandle = document.getElementById('MainCanvas').getContext('2d');
     this.UnderCanvasHandle = document.getElementById('UnderCanvas').getContext('2d');
 
-    if(BBAdata.GET.CANVAS > 0){
+    if(BBAdata.GET.CANVAS == 1)
         $('#CanvasPreviews').css({display: 'block'});
-    }
+
+    if(BBAdata.GET.CANVAS == 2)
+        $('#CanvasBackgrounds').css({display: 'block'});
 
     this.O[0]={
         x: 0,
@@ -103,7 +105,7 @@ GAMEobject.prototype.start = function(Setting,Ship){
             this.mapPlaceObj(Setting, Setting.Place[i]);
 
 
-    if(BBAdata.GET.CANVAS==0){
+    if(BBAdata.GET.CANVAS == 0){
         this.FRAME_TIME = new Date().getTime();
         // this.frame();
         this.intervalIndex = window.requestAnimationFrame(function(){ GAME.frame(); });
@@ -230,6 +232,8 @@ GAMEobject.prototype.addBoardMod = function(o,MODname){
         this.cloneExplosionData(O,O);
     }
 
+    if(O.view && O.view.onBackground)
+        CanvasManager.CBM.changeObjectPosition( o );
     CanvasManager.requestCanvas( o );
     this.putOnXY( o );
 }
@@ -275,6 +279,8 @@ GAMEobject.prototype.setRegionAnimation = function(o,animType){
             O.animPole = parseInt(O.animPole*(O.coneAngle/180));
     }
 
+    CanvasManager.CBM.deleteObjectFromBackground(o);
+    delete O.view.onBackground;
 
     if(animType=='DestructionField') O.animType = 'DestrFieldStart';
     if(animType=='ElectricityField') O.animType = 'EleFieldStart';

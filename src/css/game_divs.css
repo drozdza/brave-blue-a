@@ -1,5 +1,5 @@
 #CanvasPreviews{ display: none; }
-//#CanvasPreviews{position: fixed; background: #005; top: 0px; left: 0px; z-index: 1000; display: block; }
+#CanvasBackgrounds{ display: none; }
 
 #Game{
     position: relative;

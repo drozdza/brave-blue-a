@@ -122,12 +122,13 @@ GAMEobject.prototype.frame_move = function(){
 
 GAMEobject.prototype.frame_draw = function(){
     var MS = (new Date()).getTime();
-    var o,O,oldX,oldY;
+    var o,O;
     var P = this.O[0];
     var CH = this.CanvasHandle;
     var Px = P.x-(this.Dx/2);
     var Py = P.y-(this.Dy/2);
     var Cbull = CanvasManager.C['bullet_'];
+    var Radi = Math.PI/180;
 
     CH.save();
     CH.fillStyle="rgba(0,0,0,0.12)";
@@ -136,107 +137,21 @@ GAMEobject.prototype.frame_draw = function(){
         CH.fillStyle="transparent";
     CH.clearRect(0, 0, this.Dx, this.Dy);
     CH.restore();
-    var Radi = Math.PI/180;
 
     for(o in this.O){
         O = this.O[o];
-        if(O.viewOff) continue;
-        if(BBAdata.GET.DEBUG){
-            CH.save();
-            CH.strokeStyle = 'white';
-            CH.beginPath();
-            if(O.squareCorners){
-                CH.moveTo( (O.squareCorners.A.x-Px).toFixed(1), (O.squareCorners.A.y-Py).toFixed(1) );
-                CH.lineTo( (O.squareCorners.B.x-Px).toFixed(1), (O.squareCorners.B.y-Py).toFixed(1) );
-                CH.lineTo( (O.squareCorners.C.x-Px).toFixed(1), (O.squareCorners.C.y-Py).toFixed(1) );
-                CH.lineTo( (O.squareCorners.D.x-Px).toFixed(1), (O.squareCorners.D.y-Py).toFixed(1) );
-                CH.lineTo( (O.squareCorners.A.x-Px).toFixed(1), (O.squareCorners.A.y-Py).toFixed(1) );
-            }else if(O.coneAngle){
-                var Angle1 = (O.angle- -O.coneAngle-90)*Radi;
-                var Angle2 = (O.angle - O.coneAngle-90)*Radi;
-                CH.arc(O.x-Px,O.y-Py,O.radius,Angle1,Angle2,true);
-                CH.arc(O.x-Px,O.y-Py,O.coneRad2,Angle2,Angle1,false);
-                CH.closePath();
-            }else{
-                CH.arc((O.x-Px).toFixed(0), (O.y-Py).toFixed(0),O.radius,0,Math.PI*2,true);
-            }
-            CH.stroke();
-            CH.restore();
-        }
+        if(O.viewOff || (O.view && O.view.onBackground)) continue;
 
         if(O.T=='bullet'){
-          CH.save();
-          CH.translate((O.x-Px).toFixed(0), (O.y-Py).toFixed(0));
-          CH.rotate(Radi*O.angle);
-          CH.drawImage(Cbull.Id,-Cbull.X,-Cbull.Y);
-          CH.restore();
-            continue;
-        }
-
-        if(typeof O.canvasId != 'undefined'){
             CH.save();
             CH.translate((O.x-Px).toFixed(0), (O.y-Py).toFixed(0));
-            if(O.view.Angle)
-                CH.rotate(Radi*(O.angle- -O.view.Angle));
-            else if(O.angle)
-                CH.rotate(Radi*O.angle);
-            CH.drawImage(O.canvasId,-O.canvasX,-O.canvasY);
-
-            if(O.energyField && O.energyField > 0 && !O.shieldD){
-                CH.beginPath();
-                var Radius = O.radius;
-                var lineWidth = O.energyField;
-                if(lineWidth > 2)
-                    lineWidth = 2- -(lineWidth-2)/2;
-
-                if(o==0){
-                    CH.strokeStyle = 'rgba(154,255,255,0.8)';
-                    CH.fillStyle = 'rgba(154,255,255,0.2)';
-                    Radius-=-7;
-                } else {
-                    CH.strokeStyle = 'rgba(0,255,0,0.8)';
-                    CH.fillStyle = 'rgba(0,255,0,0.2)';
-                }
-                CH.arc(0,0,Radius- -parseInt(lineWidth/2),0,Math.PI*2,true);
-                CH.lineWidth = lineWidth;
-                CH.stroke();
-                CH.fill();
-            }
-            if(O.shieldD){
-                CH.beginPath();
-                var Radius = O.radius;
-
-                CH.strokeStyle = 'rgba(100,180,255,0.8)';
-                CH.fillStyle = 'rgba(100,180,255,0.2)';
-
-                CH.arc(0,0,Radius- -1,0,Math.PI*2,true);
-                CH.lineWidth = 2;
-                CH.stroke();
-                CH.fill();
-            }
-            CH.restore();
-        }
-        if(O.TT=='anim'){
-            CH.save();
-            CH.translate((O.x-Px).toFixed(0), (O.y-Py).toFixed(0));
-            var Canvas = CanvasManager.getCanvas(O);
-            if(O.angle != 0) CH.rotate(Radi*O.angle);
-            CH.drawImage(Canvas.Id, -Canvas.X, -Canvas.Y);
+            CH.rotate(Radi*O.angle);
+            CH.drawImage(Cbull.Id,-Cbull.X,-Cbull.Y);
             CH.restore();
             continue;
         }
-        if(O.TT=='dirAnim'){
-            CanvasManager.directRender(CH,O);
-            continue;
-        }
-        if(O.TT=='regionAnim'){
-            CanvasManager.regionAnim(CH,O);
-            continue;
-        }
-        if(O.TT=='simpleFilling'){
-            CanvasManager.simpleFilling(CH,O);
-            continue;
-        }
+
+        this.drawObject(O,o, CH, Px,Py);
     }
     CanvasManager.CBM.drawBackgroundTiles(this.UnderCanvasHandle, this.Dx, this.Dy, Px, Py);
     ++this.tickD;
