@@ -4,9 +4,12 @@ GAMEobject.prototype.resize = function(){
     this.Dx = $(window).width();
     $('#Game').css({width: this.Dx+'px',height: this.Dy+'px'});
     $('#MainCanvas').css({width: this.Dx+'px',height: this.Dy+'px'}).attr('width',this.Dx).attr('height',this.Dy);
+    $('#UnderCanvas').css({width: this.Dx+'px',height: this.Dy+'px'}).attr('width',this.Dx).attr('height',this.Dy);
 
     if($('#MainCanvas').length)
         this.CanvasHandle = document.getElementById('MainCanvas').getContext('2d');
+    if($('#UnderCanvas').length)
+          this.UnderCanvasHandle = document.getElementById('UnderCanvas').getContext('2d');
 }
 GAMEobject.prototype.setBoard = function(){
     var html='',html2='';
@@ -18,7 +21,9 @@ GAMEobject.prototype.setBoard = function(){
     html2+='<div id="gamearea">';
         html2+='<div id="pause"><span>P</span></div>';
         html2+='<div id="gameboard"></div>';
-        html2+='<canvas id="MainCanvas" style="width:'+this.Dx+'px; height: '+this.Dy+'px;" width="'+this.Dx+'" height="'+this.Dy+'"></div>';
+        html2+='<canvas id="UnderCanvas" style="width:'+this.Dx+'px; height: '+this.Dy+'px;" width="'+this.Dx+'" height="'+this.Dy+'"></canvas>';
+        html2+='<canvas id="MainCanvas" style="width:'+this.Dx+'px; height: '+this.Dy+'px;" width="'+this.Dx+'" height="'+this.Dy+'"></canvas>';
+        // html2+='<canvas id="OverCanvas" style="width:'+this.Dx+'px; height: '+this.Dy+'px;" width="'+this.Dx+'" height="'+this.Dy+'"></canvas>';
         html2+='<div id="gameboard2">'+html+'<div id="gameboardMarkers"></div></div>';
     html2+='</div>';
     html2+='<div id="gameOverlay" class="cursorCross"><div id="bulletRadius"><div id="bullRadX"></div></div></div>';
@@ -46,6 +51,7 @@ GAMEobject.prototype.start = function(Setting,Ship){
     this.resize();
     this.setBoard();
     this.CanvasHandle = document.getElementById('MainCanvas').getContext('2d');
+    this.UnderCanvasHandle = document.getElementById('UnderCanvas').getContext('2d');
 
     if(BBAdata.GET.CANVAS > 0){
         $('#CanvasPreviews').css({display: 'block'});
