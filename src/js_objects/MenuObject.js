@@ -25,14 +25,18 @@ function MENUobject(){
         html+='</div>';
 
 
-        for(var m in BBAdata['MAPS'])
-            html+='<div class="MainMenuButton" id="MainMenuButton_'+m+'">'+m+'</div>';
+        for(var m in BBAdata['MAPS']){
+            var name = m;
+            if(m.substr(0,2)=='Lx')
+                name = '&#'+m.substr(2)+';';
+            html+='<div class="MainMenuButton" id="MainMenuButton_'+m+'">'+name+'</div>';
+        }
 
         $('#Menu').append(this.getMenu.makeHtml()+'<div id="MenuBoards">'+html+'</div>');
 
         $('.chooseShipPresets').unbind().click(function(){  MENU.click_chooseShipPresets( $(this).attr('id').split('_')[1] ); });
         $('#chooseShipPresets_'+this.ShipPresetChoosen).addClass('choosenPreset');
-        
+
         $('.MainMenuButton').unbind().click(function(){  MENU.click_MainMenuButton( $(this).attr('id').split('_')[1] ); });
     }
     this.click_chooseShipPresets = function(id){

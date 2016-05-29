@@ -2,17 +2,29 @@
 - Mines extended hitbox
 
 - Different Endgame Statuses
+- Game saves in cookies
+- Left the hack lever in cookies
 
 - >> ships should orbit
 
-- Layers of Canvas: background map, Map for background
-- Hit screen
+- Layers of Canvas:
+    - overlay layer,
+    - settable backgrounds
+    - small stars on the far background (multilevel?)
+    - His screen
+    - Draw control zones of ships (other layer)
 
-- Draw control zones of ships (Other layer)
+- 4th lvl of debug: numbers of rendered objects
+- 5th lvl of debug: Enemies infos about life, doing action and other stuff
+- 6th lvl of debug: checking ms lag stability
 
-- GET values manager
+- Make BLUR a feature
 
-- Gwiazdy na mapie gwiazd
+- Make "SHIP always point one site" - feature
+
+- Make color definitions for Enemies
+
+- Make SuperSecure board
 
 - Statki unikają niektórych Regionów, lub próbują skrócić przez nie drogę (jeden rozkaz)
 - Statki nie informują pozostałych o obrażeniach od regionów
@@ -28,7 +40,7 @@
 - Moduł do zbierania bonusów (np. trzyma 5 bonusów)
 
 
-==========================================================================================
+================================================================================
 
 Pomoce dla statku:
   - obliczanie jak lasery się zaginają o przeszkody
@@ -69,12 +81,16 @@ Nowe ficzery:
 			- Teleport zamiast obrażeń.
 
 
+================================================================================
 
 Nowi przeciwnicy:
 	- L,O,P
 	- [Y] - pluje tarczami energetycznymi jak miotaczem ognia
 	- F same się leczą jeśli nie dzieje się nic innego
   - Energy Plazma ball
+
+  - Roślinne elementy strzelające ukośnie lecącymi Bulletami.
+    - Rosnocy jak pnącza
 		- Składają się z chińskich literek
 		- Mają odpowiednie części:
 			- Serca - które wszystko zasilają
@@ -82,13 +98,20 @@ Nowi przeciwnicy:
 			- Różne strzelające odnóża
 			- Nowe nasiona z których wyrastają kolejne rośliny
 	- Statek który otwiera przed sobą pole porzogi i próbuje utrzymać w nim gracza (2 rodzaje, Cone)
+  - Statek plujący tarczami teleportującymi
+  - Statek który rozdaje wszystkim dookoła "miękkie tarcze" (do max iluś?)
+  - Statek który zbiera obrażenia od innych, im więcej zbierze tym większy wybuch zrobi. (może rosnąć np.)
+      - Jak zbierze max, to zaczyna gonić gracza jak kamikaze
 	- Statek ciągnący za sobą dużą ilość torped leczniczych
 	- Statek ciągnący za sobą zwykłe torpedy
 	- Liny pomiędzy gwiazdami po których jeżdżą przeciwnicy.
-  - Przeciwnicy rosnocy jak pnącza
-	- Roślinne elementy strzelające ukośnie lecącymi Bulletami.
 	- Ochrona stała: np. redukcja obrażeń od wybuchów.
-	- Niebieskie strzały
+	- Niebieskie strzały np:
+    - przebijają osłony,
+    - lecą przez wszystko (jak laser),
+    - ujmują statkom energii?
+    - redukują osłony
+
 
 	Fields:
 		- Immunity Field
@@ -113,7 +136,7 @@ Nowe elementy planszy:
 
 
 
-===================================
+================================================================================
 
 SQUADY:
 	Squad ma swojego szefa
@@ -207,3 +230,50 @@ SQUADY:
 
 		- Trzymający się na uboczu - brak amunicji lub ładowanie
 		- Uszkodzony - uciekający przed wrogiem
+
+
+================================================================================
+
+Każda misja ma kilka bonusów do zwycięstwa.
+    - Oprócz spełnienia głównego zadania gracz ma pewną ilość dodatkowych achivementów
+    - Za każdy achivement są określone punkty
+        - Gracz może kilkukrotnie ukończyć misję i zdobyć kilka achivementów
+        - Gracz może zdobyć kilka achivementów naraz, dzięki temu zdobywa dodatkowe punkty
+        - Każda misja u gracza ma matrycę zdobytych achivementów
+        - Wiele misji może mieć ukryte achivementy
+
+Możliwości wygranej:
+    - Start z punktu X
+    - Po wygranej powrót do punktu Y
+    - Punkty kontrolne - np. w wyścigach
+
+    - W pewnych momentach rozgrywki mogą aktywować się wskaźniki.
+          - Jeśli ktoś jest za daleko od celu (np 5000px) wtedy wkaźnik skazuje cel
+          - Czasem wskaźnik pokazuje na jakiś punkt kontrolny
+
+    - Możemy mieć wyświetlane stany flag i counterów
+
+    - Elementy planszy aktywowane na rządanie:
+        - Po jakimś czasie
+        - Po wjechaniu na obszar
+        - Po zdarzeniu (np. zniszczeniu statku, byciu zauważonym)
+
+    - Misje:
+        - Zniszcz wszystko
+        - Szpiegowskie
+        - Wyścigowe
+        - Ucieknij z pułapki
+        - Nie pozwól przejść (typ tower defence)
+        - Zniszcz jak najmniej (np. przejmij transport wroga)
+
+    - Różne flagi
+    - Różne countery:
+        - Czas
+        - Ilość zabitych przeciwników (zdefiniowana grupa typów)
+        - Ilość konkretnych przeciwników do wyeliminowania
+        - Prędkość dojścia do konkretnych miejsc
+        - Ilość oberwanych hitów
+        - Ilość uleczonych ran
+        - Celność z konkretnej broni
+        - Ilość wykorzystań zasobu
+        - Średnia / maksymalna prędkość

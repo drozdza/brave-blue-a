@@ -222,30 +222,30 @@ BBAdata['MAPS']={
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Z:6, K:2}}],
     },
-    'iD':{
+    'Lx272':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[
             {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, K:2, A:8}},
             {RingOf:{X: 0, Y: 0, Radius: 500,RadiusPlus:300}, What:{iD:20}},
         ],
     },
-    'Ht':{
+    'Lx294':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Ht:20, K:2, A:8}}],
     },
-    'v':{
+    'Lx171':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, v:20, K:2}}],
     },
-    'WP':{
+    'Lx1130':{
         BoardMods:['sitOnMap','allAvoid'],
-        Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, WP:5, A:20}}],
+        Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, WP:5, A:20, K:1, F:3}}],
     },
-    'PI':{
+    'Lx960':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, PI:20}}],
     },
-    'Wi':{
+    'Lx373':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{StarX: 60, Wi:20}}],
     },
