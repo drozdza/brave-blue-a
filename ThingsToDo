@@ -7,6 +7,12 @@
 
 - >> ships should orbit
 
+
+- After first try, some animation data seem to be corrupted
+- Static Fields as Layers
+- Rework Fields particles - global particle checking if particles of the same cind are not to close to each other (net of particles?)
+- Get back blur effect
+
 - Layers of Canvas:
     - overlay layer,
     - settable backgrounds
@@ -88,6 +94,8 @@ Nowi przeciwnicy:
 	- [Y] - pluje tarczami energetycznymi jak miotaczem ognia
 	- F same się leczą jeśli nie dzieje się nic innego
   - Energy Plazma ball
+
+  - Slime Ship - po zabiciu go rozbija się na mniejsze które próbują się połączyć
 
   - Roślinne elementy strzelające ukośnie lecącymi Bulletami.
     - Rosnocy jak pnącza

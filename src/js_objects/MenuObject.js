@@ -1,7 +1,7 @@
 function MENUobject(){
 
     this.ShipPresetChoosen = 'start';
-     this.start = function(){
+    this.start = function(){
         this.makeMenuBoards();
         this.makeMenuShip();
         this.showMenu='Boards';

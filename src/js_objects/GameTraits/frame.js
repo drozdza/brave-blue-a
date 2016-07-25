@@ -153,6 +153,9 @@ GAMEobject.prototype.frame_draw = function(){
 
         this.drawObject(O,o, CH, Px,Py);
     }
+    CanvasManager.CPM.showParticles(CH,Px,Py);
+
+
     CanvasManager.CBM.drawBackgroundTiles(this.UnderCanvasHandle, this.Dx, this.Dy, Px, Py);
     ++this.tickD;
     this.MSdraw-=-((new Date()).getTime() - MS);
