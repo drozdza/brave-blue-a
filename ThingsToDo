@@ -7,10 +7,11 @@
 
 - >> ships should orbit
 
+- ExplosivePresets "dontCollide" problem
 
 - After first try, some animation data seem to be corrupted
 - Static Fields as Layers
-- Rework Fields particles - global particle checking if particles of the same cind are not to close to each other (net of particles?)
+- Mines as Layers
 - Get back blur effect
 
 - Layers of Canvas:

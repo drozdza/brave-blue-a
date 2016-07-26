@@ -2,7 +2,7 @@ function CanvasBackgroundManagerObject(){
 
     this.Tiles = {};
     this.TileSize = 300;
-    this.TileOffset = 1;
+    this.TileOffset = 0;
 
     this.start = function(){}
 
@@ -66,13 +66,26 @@ function CanvasBackgroundManagerObject(){
         var right = left- -parseInt(screenX/this.TileSize)- -3;
         var bottom = top- -parseInt(screenY/this.TileSize)- -3;
 
+
         for(var x = left; x < right; ++x)
-            for(var y = top; y < bottom; ++y){
+            for(var y = top; y < bottom; ++y)
                 if(typeof this.Tiles[x+'_'+y] !='undefined'){
                     var T = this.Tiles[x+'_'+y];
-                    CH.drawImage(T.canvasId,x*this.TileSize-posX,y*this.TileSize-posY);
+                    var uX = parseInt(x*this.TileSize-posX);
+                    var uY = parseInt(y*this.TileSize-posY);
+                    if(uX < 0) --uX;
+                    if(uY < 0) --uY;
+                    if(uX == 0){
+                        if(posX < 0 && parseInt(posX)%2 != 0) uX=-1;
+                        if(posX > 0 && parseInt(posX)%2 == 0) uX=-1;
+                    }
+                    if(uY == 0){
+                        if(posY < 0 && parseInt(posY)%2 != 0) uY=-1;
+                        if(posY > 0 && parseInt(posY)%2 == 0) uY=-1;
+                    }
+
+                    CH.drawImage(T.canvasId,uX,uY);
                 }
-            }
     }
 
 
