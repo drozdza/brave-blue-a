@@ -75,8 +75,8 @@ CanvasManagerObject.prototype.directRenders={
         frames: 15,
         gradientStops: 4,
         states:{
-            0:{color0:[180,180,255,0],        color1:[180,180,180,0],        color2:[180,180,180,0],        color3:[0,0,0,0],    stop0:0,stop1:0.1,stop2:0.2,stop3:1},
-            15:{color0:[180,180,255,0.2],    color1:[180,180,180,0.1],    color2:[180,180,180,0.1],    color3:[0,0,0,0],    stop0:0.15,stop1:0.85,stop2:1,stop3:1},
+            0:{color0:[180,180,255,0],    color1:[180,180,180,0],   color2:[180,180,180,0],   color3:[0,0,0,0], stop0:0,stop1:0.1,stop2:0.2,stop3:1},
+            15:{color0:[180,180,255,0.2], color1:[180,180,180,0.1], color2:[180,180,180,0.1], color3:[0,0,0,0], stop0:0.15,stop1:0.85,stop2:1,stop3:1},
         },
         onEnd:'GravFieldGoing',
         makeParticles:30,
@@ -87,7 +87,7 @@ CanvasManagerObject.prototype.directRenders={
     },
     GravFieldGoing:{
         gradientStops: 4,
-        color0:[180,180,255,0.2],    color1:[180,180,180,0.1],    color2:[180,180,180,0.1],    color3:[0,0,0,0],    stop0:0.15,stop1:0.85,stop2:1,stop3:1,
+        color0:[180,180,255,0.2], color1:[180,180,180,0.1], color2:[180,180,180,0.1], color3:[0,0,0,0], stop0:0.15,stop1:0.85,stop2:1,stop3:1,
         makeParticles:40,
         particleId:'grav_field',
         particleTime:19,
@@ -100,17 +100,17 @@ CanvasManagerObject.prototype.directRenders={
         frames: 50,
         gradientStops: 4,
         states:{
-            0:{color0:[180,180,255,0.2],    color1:[180,180,180,0.1],    color2:[180,180,180,0.1],    color3:[0,0,0,0],    stop0:0.15,stop1:0.85,stop2:1,stop3:1},
-            40:{color0:[180,180,255,0.2],    color1:[180,180,180,0.1],    color2:[180,180,180,0.1],    color3:[0,0,0,0],    stop0:0.7,stop1:1,stop2:1,stop3:1},
-            50:{color0:[180,180,255,0],        color1:[180,180,180,0],        color2:[180,180,180,0],        color3:[0,0,0,0],    stop0:1,stop1:1,stop2:1,stop3:1},
+            0:{color0:[180,180,255,0.2],  color1:[180,180,180,0.1], color2:[180,180,180,0.1], color3:[0,0,0,0], stop0:0.15,stop1:0.85,stop2:1,stop3:1},
+            40:{color0:[180,180,255,0.2], color1:[180,180,180,0.1], color2:[180,180,180,0.1], color3:[0,0,0,0], stop0:0.7,stop1:1,stop2:1,stop3:1},
+            50:{color0:[180,180,255,0],   color1:[180,180,180,0],   color2:[180,180,180,0],   color3:[0,0,0,0], stop0:1,stop1:1,stop2:1,stop3:1},
         },
     },
     OrbFieldStart:{
         frames: 15,
         gradientStops: 4,
         states:{
-            0:{color0:[180,180,255,0],        color1:[180,180,180,0],        color2:[180,180,180,0],        color3:[0,0,0,0],    stop0:0,stop1:0.1,stop2:0.2,stop3:1},
-            15:{color0:[180,180,255,0.2],    color1:[180,180,180,0.1],    color2:[180,180,180,0.1],    color3:[0,0,0,0],    stop0:0.15,stop1:0.85,stop2:1,stop3:1},
+            0:{color0:[180,180,255,0],    color1:[180,180,180,0],   color2:[180,180,180,0],   color3:[0,0,0,0], stop0:0,stop1:0.1,stop2:0.2,stop3:1},
+            15:{color0:[180,180,255,0.2], color1:[180,180,180,0.1], color2:[180,180,180,0.1], color3:[0,0,0,0], stop0:0.15,stop1:0.85,stop2:1,stop3:1},
         },
         onEnd:'OrbFieldGoing',
         makeParticles:30,
@@ -121,7 +121,7 @@ CanvasManagerObject.prototype.directRenders={
     },
     OrbFieldGoing:{
         gradientStops: 4,
-        color0:[180,180,255,0.2],    color1:[180,180,180,0.1],    color2:[180,180,180,0.1],    color3:[0,0,0,0],    stop0:0.15,stop1:0.85,stop2:1,stop3:1,
+        color0:[180,180,255,0.2], color1:[180,180,180,0.1], color2:[180,180,180,0.1], color3:[0,0,0,0], stop0:0.15,stop1:0.85,stop2:1,stop3:1,
         makeParticles:40,
         particleId:'wind_field',
         particleTime:30,
@@ -134,9 +134,9 @@ CanvasManagerObject.prototype.directRenders={
         frames: 50,
         gradientStops: 4,
         states:{
-            0:{color0:[180,180,255,0.2],    color1:[180,180,180,0.1],    color2:[180,180,180,0.1],    color3:[0,0,0,0],    stop0:0.15,stop1:0.85,stop2:1,stop3:1},
-            40:{color0:[180,180,255,0.2],    color1:[180,180,180,0.1],    color2:[180,180,180,0.1],    color3:[0,0,0,0],    stop0:0.7,stop1:1,stop2:1,stop3:1},
-            50:{color0:[180,180,255,0],        color1:[180,180,180,0],        color2:[180,180,180,0],        color3:[0,0,0,0],    stop0:1,stop1:1,stop2:1,stop3:1},
+            0:{color0:[180,180,255,0.2],  color1:[180,180,180,0.1], color2:[180,180,180,0.1], color3:[0,0,0,0], stop0:0.15,stop1:0.85,stop2:1,stop3:1},
+            40:{color0:[180,180,255,0.2], color1:[180,180,180,0.1], color2:[180,180,180,0.1], color3:[0,0,0,0], stop0:0.7,stop1:1,stop2:1,stop3:1},
+            50:{color0:[180,180,255,0],   color1:[180,180,180,0],   color2:[180,180,180,0],   color3:[0,0,0,0], stop0:1,stop1:1,stop2:1,stop3:1},
         },
     },
     WindFieldStart:{
@@ -173,8 +173,8 @@ CanvasManagerObject.prototype.directRenders={
         frames: 15,
         gradientStops: 3,
         states:{
-            0:{color0:[255,255,0,0],    color1:[255,255,0,0.4],    color2:[255,255,0,0],    stop0:0.1,stop1:0.3,stop2:1},
-            15:{color0:[255,255,0,0.1],    color1:[255,255,0,0.8],    color2:[255,255,0,0.2],    stop0:0.60,stop1:1,stop2:1},
+            0:{color0:[255,255,0,0],    color1:[255,255,0,0.4], color2:[255,255,0,0],   stop0:0.1,stop1:0.3,stop2:1},
+            15:{color0:[255,255,0,0.1], color1:[255,255,0,0.8], color2:[255,255,0,0.2], stop0:0.60,stop1:1,stop2:1},
         },
         onEnd:'ShellFieldGoing',
     },
@@ -188,17 +188,17 @@ CanvasManagerObject.prototype.directRenders={
         frames: 20,
         gradientStops: 3,
         states:{
-            0:{color0:[255,255,0,0.1],    color1:[255,255,0,0.8],    color2:[255,255,0,0.2],    stop0:0.75,stop1:1,stop2:1},
-            40:{color0:[255,255,0,0.2],    color1:[255,255,0,0.1],    color2:[255,255,0,0.1],    stop0:0.7,stop1:1,stop2:1},
-            50:{color0:[255,255,0,0],    color1:[255,255,0,0],    color2:[255,255,0,0],    stop0:1,stop1:1,stop2:1},
+            0:{color0:[255,255,0,0.1],  color1:[255,255,0,0.8], color2:[255,255,0,0.2], stop0:0.75,stop1:1,stop2:1},
+            40:{color0:[255,255,0,0.2], color1:[255,255,0,0.1], color2:[255,255,0,0.1], stop0:0.7,stop1:1,stop2:1},
+            50:{color0:[255,255,0,0],   color1:[255,255,0,0],   color2:[255,255,0,0],   stop0:1,stop1:1,stop2:1},
         },
     },
     EleFieldStart:{
         frames: 15,
         gradientStops: 3,
         states:{
-            0:{color0:[0,120,255,0],    color1:[0,120,255,0.4],    color2:[0,120,255,0],    stop0:0.1,stop1:0.3,stop2:1},
-            15:{color0:[0,120,255,0.1],    color1:[0,120,255,0.6],    color2:[0,120,255,0.2],    stop0:0.3,stop1:1,stop2:1},
+            0:{color0:[0,120,255,0],    color1:[0,120,255,0.4], color2:[0,120,255,0],   stop0:0.1,stop1:0.3,stop2:1},
+            15:{color0:[0,120,255,0.1], color1:[0,120,255,0.6], color2:[0,120,255,0.2], stop0:0.3,stop1:1,stop2:1},
         },
         makeParticles:80,
         particleId:'ele_field',
@@ -224,17 +224,17 @@ CanvasManagerObject.prototype.directRenders={
         frames: 25,
         gradientStops: 4,
         states:{
-            0:{color0:[0,120,255,0.1],    color1:[0,120,255,0.6],    color2:[0,120,255,0.2],    color3:[0,0,0,0], stop0:0.3,stop1:1,stop2:1,stop3:1},
-            12:{color0:[0,120,255,0.2],    color1:[0,120,255,0.1],    color2:[0,120,255,0.1],    color3:[0,0,0,0], stop0:0.2,stop1:0.4,stop2:0.6,stop3:0.6},
-            25:{color0:[0,120,255,0],    color1:[0,120,255,0],    color2:[0,120,255,0],    color3:[0,0,0,0], stop0:0.1,stop1:0.1,stop2:0.2,stop3:0.2},
+            0:{color0:[0,120,255,0.1],  color1:[0,120,255,0.6], color2:[0,120,255,0.2], color3:[0,0,0,0], stop0:0.3,stop1:1,stop2:1,stop3:1},
+            12:{color0:[0,120,255,0.2], color1:[0,120,255,0.1], color2:[0,120,255,0.1], color3:[0,0,0,0], stop0:0.2,stop1:0.4,stop2:0.6,stop3:0.6},
+            25:{color0:[0,120,255,0],   color1:[0,120,255,0],   color2:[0,120,255,0],   color3:[0,0,0,0], stop0:0.1,stop1:0.1,stop2:0.2,stop3:0.2},
         },
     },
     HealFieldStart:{
         frames: 15,
         gradientStops: 3,
         states:{
-            0:{color0:[0,255,0,0],    color1:[0,0,0,0], color2:[0,0,0,0],    stop0:0.1,stop1:0.1,stop2:0.2},
-            15:{color0:[100,255,100,0.4], color1:[100,255,100,0.1], color2:[0,0,0,0], stop0: 0, stop1: 0.8, stop2: 1},
+            0:{color0:[0,255,0,0],        color1:[0,0,0,0],         color2:[0,0,0,0], stop0:0.1,stop1:0.1,stop2:0.2},
+            15:{color0:[100,255,100,0.4], color1:[100,255,100,0.1], color2:[0,0,0,0], stop0: 0, stop1:0.8,stop2: 1},
         },
         makeParticles:80,
         particleId:'heal_field',
@@ -260,8 +260,8 @@ CanvasManagerObject.prototype.directRenders={
         frames: 25,
         gradientStops: 3,
         states:{
-            0:{color0:[100,255,100,0.4], color1:[100,255,100,0.1], color2:[0,0,0,0], stop0: 0, stop1: 0.8, stop2: 1},
-            25:{color0:[0,255,0,0],    color1:[0,0,0,0], color2:[0,0,0,0],    stop0:0.1,stop1:0.1,stop2:0.2},
+            0:{color0:[100,255,100,0.4], color1:[100,255,100,0.1], color2:[0,0,0,0], stop0: 0, stop1:0.8,stop2: 1},
+            25:{color0:[0,255,0,0],      color1:[0,0,0,0],         color2:[0,0,0,0], stop0:0.1,stop1:0.1,stop2:0.2},
         },
     },
 };

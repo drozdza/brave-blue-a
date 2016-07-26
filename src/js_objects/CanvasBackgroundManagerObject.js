@@ -8,6 +8,7 @@ function CanvasBackgroundManagerObject(){
 
     this.addObjectToBackground = function(o){
         var O = GAME.O[o];
+        O.view.onBackground = 1;
         var tab = GAME.findTabTiles(o,O.x,O.y,this.TileSize);
 
         for(var TU in tab){
@@ -23,6 +24,8 @@ function CanvasBackgroundManagerObject(){
     this.deleteObjectFromBackground = function(o,tabX){
         var O = GAME.O[o];
         var tab = tabX || {};
+
+        delete(O.view.onBackground);
 
         for(var TU in this.Tiles){
             if(typeof this.Tiles[TU].O[o] != 'undefined' && typeof tab[TU] == 'undefined'){

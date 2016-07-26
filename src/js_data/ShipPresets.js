@@ -58,14 +58,15 @@ BBAdata['SHIPpresets']={
         GlueFireToLaser: 70,
         ShowRadar: true,
         KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
-        FireType: 1,
-        FireType2: 2,
+        FireType: 2,
+        FireType2: 3,
         res:{},
         MouseDown1: false,
         MouseDown2: false,
         FireTypes:[
             {T:'missle',  gunS:0,GunSpeed: 10, Use:{'Missile':1}, Speed: 12, SpeedT: 6, Dec: 130, AimRadius: 60, explosivePreset:'MissileDestructionFieldGiant'},
             {T:'missleR', gunS:0,GunSpeed: 6, Use:{'Missile':5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explosivePreset:'MissileDestructionFieldSmall'},
+            {T:'bombT',   gunS:0,GunSpeed: 5,  Distance: 500, offTime: 0, explosivePreset:'DestructionFieldMedium'},
             {T:'tele',    gunS:0,GunSpeed: 3, ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
         ],
         Modules:[

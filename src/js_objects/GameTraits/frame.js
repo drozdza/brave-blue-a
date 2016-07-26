@@ -140,6 +140,14 @@ GAMEobject.prototype.frame_draw = function(){
 
     for(o in this.O){
         O = this.O[o];
+
+        if(O.TT=='regionAnim'){
+            var DR = CanvasManager.directRenders[ O.animType ];
+            if(DR.makeParticles){
+                CanvasManager.CPM.addParticles(O, O.animData);
+            }
+        }
+
         if(O.viewOff || (O.view && O.view.onBackground)) continue;
 
         if(O.T=='bullet'){
@@ -153,8 +161,14 @@ GAMEobject.prototype.frame_draw = function(){
 
         this.drawObject(O,o, CH, Px,Py);
     }
-    CanvasManager.CPM.showParticles(CH,Px,Py);
 
+    for(o in this.O){
+        O = this.O[o];
+        if(O.TT=='regionAnim')
+            CanvasManager.age_regionAnim(O,o);
+    }
+
+    CanvasManager.CPM.showParticles(CH,Px,Py);
 
     CanvasManager.CBM.drawBackgroundTiles(this.UnderCanvasHandle, this.Dx, this.Dy, Px, Py);
     ++this.tickD;

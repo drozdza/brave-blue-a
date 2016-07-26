@@ -287,7 +287,6 @@ GAMEobject.prototype.removeObj = function(o,saveDiv){
 
     if(this.O[o].TT == 'enemy'){
         this.Odead[ o ]={T:this.O[o].T,x:this.O[o].x,y:this.O[o].y};
-        this.O[o].view.onBackground=1;
         CanvasManager.CBM.addObjectToBackground(o);
     }
 
