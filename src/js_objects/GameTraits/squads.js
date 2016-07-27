@@ -159,12 +159,12 @@ GAMEobject.prototype.disbandSquad = function(O){
                 sO.doingTime = 500;
             }
             if(sO.fieldAnim=='ElectricityField'){
-                sO.animType='EleFieldEnd';
+                sO.animType = 'EleFieldEnd';  // !!!!
                 sO.animTick = 0;
                 sO.DieTime = this.tick- -24;
             }
             if(sO.fieldAnim=='DestructionField'){
-                sO.animType = 'DestrFieldEnd';
+                sO.animType = 'DestrFieldEnd'; // !!!!
                 sO.animTick = 0;
                 sO.DieTime = this.tick- -48;
             }

@@ -366,9 +366,7 @@ function CanvasManagerObject(){
         }
     }
 
-    this.directRender = function(CanCon,O){
-        var Px = GAME.PlayerShipPositionX;
-        var Px = GAME.PlayerShipPositionY;
+    this.directRender = function(CanCon,O, Px,Py){
         var AnimData = O.Data;
         var Frame = O.timeTick;
         if(Frame < 0) return 1;
@@ -381,7 +379,7 @@ function CanvasManagerObject(){
             CanCon.strokeStyle = 'rgba('+StyleData.states[Frame].color[0]+','+StyleData.states[Frame].color[1]+','+StyleData.states[Frame].color[2]+','+StyleData.states[Frame].color[3]+')';
             CanCon.lineWidth = StyleData.states[Frame].width;
             if(O.pathD){
-                var pe = new Path2D( this.build_path2D(O.pathD) );
+                var pe = new Path2D( this.build_path2D(O.pathD, Px,Py) );
                 CanCon.stroke(pe);
             } else{
                 CanCon.beginPath();
@@ -398,7 +396,7 @@ function CanvasManagerObject(){
             CanCon.strokeStyle = 'rgba('+StyleData.states[Frame].color2[0]+','+StyleData.states[Frame].color2[1]+','+StyleData.states[Frame].color2[2]+','+StyleData.states[Frame].color2[3]+')';
             CanCon.lineWidth = StyleData.states[Frame].width2;
             if(O.pathD){
-                var pe = new Path2D( this.build_path2D(O.pathD) );
+                var pe = new Path2D( this.build_path2D(O.pathD, Px,Py) );
                 CanCon.stroke(pe);
             } else{
                 CanCon.beginPath();
@@ -410,9 +408,7 @@ function CanvasManagerObject(){
         }
     }
 
-    this.build_path2D = function(path){
-        var Px = GAME.PlayerShipPositionX;
-        var Px = GAME.PlayerShipPositionY;
+    this.build_path2D = function(path, Px,Py){
         var string = '';
 
         for(var i=0; i<path.length; ++i){
@@ -456,10 +452,8 @@ function CanvasManagerObject(){
         return State;
     }
 
-    this.regionAnim = function(CanCon,O){
-        var Px = GAME.PlayerShipPositionX;
-        var Px = GAME.PlayerShipPositionY;
-        if(O.TT!='regionAnim') return 0;
+    this.regionAnim = function(CanCon,O, Px,Py){
+        if(!O || !O.TT || O.TT!='regionAnim') return 0;
         var P = GAME.O[0];
         var DR = this.directRenders[ O.animType ];
         var Radi = Math.PI*2/360;
@@ -514,22 +508,30 @@ function CanvasManagerObject(){
         }
         if(AD.state=='norm' && DR.toExpire- -GAME.tick >= O.DieTime){
             AD.state='end';
+            this.change_regionAnim(O,o, DR.onExpire);
             O.animType = DR.onExpire;
             AD.Next=0;
             O.animTick=0;
+        }
+    }
+    this.change_regionAnim = function(O,o, animType, animTime){
+        O.animType = animType;
+        O.animTick = 0;
+        O.DieTime = this.tick- -animTime;
 
-            if(typeof this.directRenders[ O.animType ].states != 'undefined')
-                this.CBM.deleteObjectFromBackground(o);
-                this.regionAnim(O);
+        var DR = this.directRenders[ O.animType ];
+
+        if(typeof this.directRenders[ O.animType ].states == 'undefined'){
+            this.CBM.addObjectToBackground(o);
+        } else {
+            this.CBM.deleteObjectFromBackground(o);
+            this.regionAnim(O,o);
         }
     }
 
-    this.simpleFilling = function(CanCon,O){
-        var Px = GAME.PlayerShipPositionX;
-        var Px = GAME.PlayerShipPositionY;
+    this.simpleFilling = function(CanCon,O, Px,Py){
         var P = GAME.O[0];
         var Radi = Math.PI*2/360;
-
 
         CanCon.save();
         CanCon.fillStyle = O.simpleFilling;

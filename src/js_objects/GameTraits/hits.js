@@ -152,7 +152,7 @@ GAMEobject.prototype.makeOneTimeEffect = function(o,q){
         }
         delete(O.OneTimeEffect);
         if(O.fieldAnim=='ElectricityField'){
-            O.animType='EleFieldEnd';
+            O.animType='EleFieldEnd'; // !!!!
             O.animTick = 0;
             O.DieTime = this.tick- -24;
             if(O.squadDirectPlace)

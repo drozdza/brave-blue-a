@@ -125,8 +125,8 @@ GAMEobject.prototype.frame_draw = function(){
     var o,O;
     var P = this.O[0];
     var CH = this.CanvasHandle;
-    var Px = this.PlayerShipPositionX = P.x-(this.Dx/2);
-    var Py = this.PlayerShipPositionY = P.y-(this.Dy/2);
+    var Px = P.x-(this.Dx/2);
+    var Py = P.y-(this.Dy/2);
     var Cbull = CanvasManager.C['bullet_'];
     var Radi = Math.PI/180;
 
@@ -141,7 +141,7 @@ GAMEobject.prototype.frame_draw = function(){
     for(o in this.O){
         O = this.O[o];
 
-        if(O.TT=='regionAnim'){
+        if(O && O.TT=='regionAnim'){
             var DR = CanvasManager.directRenders[ O.animType ];
             if(DR.makeParticles){
                 CanvasManager.CPM.addParticles(O, O.animData);
