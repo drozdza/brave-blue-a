@@ -10,7 +10,7 @@
 - ExplosivePresets "dontCollide" problem
 
 - After first try, some animation data seem to be corrupted
-- Static Fields as Layers
+- Static Fields [that are moving] not as layers
 - Mines as Layers
 - Get back blur effect
 

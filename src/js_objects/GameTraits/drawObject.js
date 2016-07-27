@@ -1,4 +1,6 @@
-GAMEobject.prototype.drawObject = function(O,o,CH, Px,Py){
+GAMEobject.prototype.drawObject = function(O,o,CH){
+    var Px = GAME.PlayerShipPositionX;
+    var Px = GAME.PlayerShipPositionY;
     var Radi = Math.PI/180;
 
     if(!O){ console.log('I:'+o); return false;}
@@ -79,15 +81,15 @@ GAMEobject.prototype.drawObject = function(O,o,CH, Px,Py){
         return true;
     }
     if(O.TT=='dirAnim'){
-        CanvasManager.directRender(CH,O,Px,Py);
+        CanvasManager.directRender(CH,O);
         return true;
     }
     if(O.TT=='regionAnim'){
-        CanvasManager.regionAnim(CH,O,Px,Py);
+        CanvasManager.regionAnim(CH,O);
         return true;
     }
     if(O.TT=='simpleFilling'){
-        CanvasManager.simpleFilling(CH,O,Px,Py);
+        CanvasManager.simpleFilling(CH,O);
         return true;
     }
 

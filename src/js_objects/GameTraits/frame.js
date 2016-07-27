@@ -125,8 +125,8 @@ GAMEobject.prototype.frame_draw = function(){
     var o,O;
     var P = this.O[0];
     var CH = this.CanvasHandle;
-    var Px = P.x-(this.Dx/2);
-    var Py = P.y-(this.Dy/2);
+    var Px = this.PlayerShipPositionX = P.x-(this.Dx/2);
+    var Py = this.PlayerShipPositionY = P.y-(this.Dy/2);
     var Cbull = CanvasManager.C['bullet_'];
     var Radi = Math.PI/180;
 
