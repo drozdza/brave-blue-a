@@ -462,6 +462,7 @@ function CanvasManagerObject(){
         // Kolor kółka
         var BU = DR;
         if(DR.frames) BU = DR.states[ O.animTick ];
+
         CanCon.save();
         if(DR.gradientStops){
             var Gradient = CanCon.createRadialGradient(O.x-Px, O.y-Py, 0, O.x-Px, O.y-Py, O.radius);
@@ -499,33 +500,33 @@ function CanvasManagerObject(){
 
         ++O.animTick;
         if(AD.state=='start' && O.animTick >= DR.frames){
-            AD.state='norm';
-            O.animType = DR.onEnd;
+            console.log('goTo: norm');
             AD.Next = 0;
-
-            if(typeof this.directRenders[ O.animType ].states == 'undefined')
-                this.CBM.addObjectToBackground(o);
+            this.change_regionAnim(O,o, DR.onEnd, 'norm');
         }
         if(AD.state=='norm' && DR.toExpire- -GAME.tick >= O.DieTime){
-            AD.state='end';
-            this.change_regionAnim(O,o, DR.onExpire);
-            O.animType = DR.onExpire;
-            AD.Next=0;
-            O.animTick=0;
+            console.log('goTo: end');
+            AD.Next = 0;
+            this.change_regionAnim(O,o, DR.onExpire, 'end');
         }
     }
-    this.change_regionAnim = function(O,o, animType, animTime){
+    this.change_regionAnim = function(O,o, animType, animState, animTime){
+        O.animData.state = animState;
         O.animType = animType;
         O.animTick = 0;
-        O.DieTime = this.tick- -animTime;
-
         var DR = this.directRenders[ O.animType ];
+        var time = animTime || (DR.frames-1);
 
+        if(time)
+            O.DieTime = GAME.tick- -time;
+
+        if(O.fieldAnimMoving) return 1;
         if(typeof this.directRenders[ O.animType ].states == 'undefined'){
             this.CBM.addObjectToBackground(o);
         } else {
             this.CBM.deleteObjectFromBackground(o);
-            this.regionAnim(O,o);
+
+            // this.regionAnim(GAME.mainCanvas.CH, O, GAME.mainCanvas.Px,GAME.mainCanvas.Py);
         }
     }
 

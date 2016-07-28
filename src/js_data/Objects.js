@@ -484,7 +484,7 @@ BBAdata['ObjectDatas']={
             angle: 0,
             Oid: -1,
             placementT:'directPlaces',
-            objData: {fieldAnim: 'ElectricityField', radius: 130, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDamage: 4, dontHit:['B','BE','E','M','ME','A']}
+            objData: {fieldAnim: 'ElectricityField', radius: 130, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDamage: 4, dontHit:['B','BE','E','M','ME','A'], fieldAnimMoving:true}
         }],
 
         doingNow: 'changeManouver',
@@ -1208,7 +1208,7 @@ BBAdata['ObjectDatas']={
             angleAddon: 180,
             Oid: -1,
             placementT:'directPlaces',
-            objData: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDamage: 1, PeriodTime: 15, PeriodOffset: 10, dontHit:['B','BE','E','M','ME','A'], particlesOnBoard:true}
+            objData: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDamage: 1, PeriodTime: 15, PeriodOffset: 10, dontHit:['B','BE','E','M','ME','A'], particlesOnBoard:true, fieldAnimMoving:true}
         }],
 
         doingNow: 'changeManouver',

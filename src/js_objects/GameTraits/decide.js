@@ -696,7 +696,7 @@ GAMEobject.prototype.decide = function(o){
                         var s = O.squadScheme[i].Oid;
                         var S = this.O[s];
                         if(S.fieldAnim=='DestructionField'){
-                            CanvasManager.changeAnimType('DestrFieldEnd',48);
+                            CanvasManager.change_regionAnim(S,s, 'DestrFieldEnd', 'end');
                         }else{
                             this.unbindWithSquad(o,i,s);
                             this.removeObj(s);

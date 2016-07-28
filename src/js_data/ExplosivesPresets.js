@@ -117,7 +117,7 @@ BBAdata['ExplosivesPresets']={
     },
 
     DestructionFieldMedium:{
-        onHitDieExpire: {Do:'explode',explodeType: 'roundField', radius:80, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
+        onHitDieExpire: {Do:'explode',explodeType: 'roundField', radius:160, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
     },
 
     DestructionFieldSmall:{

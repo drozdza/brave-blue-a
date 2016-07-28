@@ -8,7 +8,7 @@ function CanvasParticleManagerObject(){
     this.addParticles = function(O,AD){
         var DR = CanvasManager.directRenders[ O.animType ];
 
-        AD.Next -=- O.animPole/DR.makeParticles;
+        AD.Next -=- O.animPole/DR.Particles.density;
         // while(AD.Next > 1){
         for(var uuu=0; uuu<AD.Next; ++uuu){
             var PX = this.findParticlePlace(O);
@@ -26,7 +26,7 @@ function CanvasParticleManagerObject(){
         if(O.squareCorners){
             var Width = O.squareWidth;
             var xA = Math.random()*O.squareLen;
-            if(DR.particleAnim=='randomMove'){
+            if(DR.Particles.anim=='randomMove'){
                 var xA = Width*0.2- -Math.random()*(O.squareLen - Width*0.4);
                 Width*=0.8;
             }
@@ -43,7 +43,7 @@ function CanvasParticleManagerObject(){
             var R1=O.radius-R2;
             var udaloSie=true;
 
-            if(DR.particleAnim=='randomMove'){    R2-=-R1*0.20; R1*=0.6; }
+            if(DR.Particles.anim=='randomMove'){    R2-=-R1*0.20; R1*=0.6; }
             var rad = R2- -(Math.random()*R1);
             var angle = O.angle- -(Math.random()*O.coneAngle*2 - O.coneAngle)-180;
 
@@ -53,9 +53,9 @@ function CanvasParticleManagerObject(){
         else{
             var R2=0;
             var R1=O.radius;
-            if(DR.particleAnim=='randomMove'){ R1*=0.75; }
-            if(DR.particleAnim=='toCenter'){   R2=R1*0.4; R1*=1.2; }
-            if(DR.particleAnim=='onOrbit'){    R2=R1*0.2; }
+            if(DR.Particles.anim=='randomMove'){ R1*=0.75; }
+            if(DR.Particles.anim=='toCenter'){   R2=R1*0.4; R1*=1.2; }
+            if(DR.Particles.anim=='onOrbit'){    R2=R1*0.2; }
             do{
                 x = parseInt(Math.random()*R1*2-R1);
                 y = parseInt(Math.random()*R1*2-R1);
@@ -63,7 +63,7 @@ function CanvasParticleManagerObject(){
             }while(!(dist > R2 && dist < R1));
         }
 
-        if(DR.particleAnim=='withWind'){
+        if(DR.Particles.anim=='withWind'){
             x-=-30*Math.sin((O.windAngle-90)*Radi);
             y-=-30*Math.cos((O.windAngle-90)*Radi);
         }
@@ -84,26 +84,26 @@ function CanvasParticleManagerObject(){
             PX.y-=-O.y;
         }
 
-        if(DR.particleAnim=='randomMove'){
+        if(DR.Particles.anim=='randomMove'){
             var angle = parseInt(Math.random()*360);
             var rotation = parseInt(Math.random()*360);
             var rotate = -1;
             if(angle > 180) rotate=1;
-            if(DR.particleAnimAngle && DR.particleAnimAngle=='withDirection'){
+            if(DR.Particles.animAngle && DR.Particles.animAngle=='withDirection'){
                 rotation = angle -180;
                 rotate = 0;
             }
-            if(DR.particleAnimAngle && DR.particleAnimAngle=='noRotation'){
+            if(DR.Particles.animAngle && DR.Particles.animAngle=='noRotation'){
                 rotation = 0;
                 rotate = 0;
             }
-            this.particleTab[uU] = {time:0,O:O,x:PX.x,y:PX.y,angle: angle, rotation: rotation, rotate:rotate, speed: 1, particleId: DR.particleId, particleTime: DR.particleTime, particleXY: DR.particleXY};
+            this.particleTab[uU] = {time:0,O:O,x:PX.x,y:PX.y,angle: angle, rotation: rotation, rotate:rotate, speed: 1, particleId: DR.Particles.id, particleTime: DR.Particles.time, particleXY: DR.Particles.XY};
         }
-        if(DR.particleAnim=='toCenter'){
+        if(DR.Particles.anim=='toCenter'){
             var angle =  parseInt(- (Math.atan2(PX.x,PX.y)*180/Math.PI))%360;
-            this.particleTab[uU] = {time:0,O:O,x:PX.x,y:PX.y,angle: angle, rotation: angle, rotate:0, speed: 6, particleId: DR.particleId, particleTime: DR.particleTime, particleXY: DR.particleXY};
+            this.particleTab[uU] = {time:0,O:O,x:PX.x,y:PX.y,angle: angle, rotation: angle, rotate:0, speed: 6, particleId: DR.Particles.id, particleTime: DR.Particles.time, particleXY: DR.Particles.XY};
         }
-        if(DR.particleAnim=='onOrbit'){
+        if(DR.Particles.anim=='onOrbit'){
             var angle =  parseInt(- (Math.atan2(PX.x,PX.y)*180/Math.PI))%360;
             var obwod = Math.sqrt(PX.x*PX.x- -PX.y*PX.y)*2*Math.PI;
             var angleChange = 360/(obwod/3);
@@ -113,11 +113,11 @@ function CanvasParticleManagerObject(){
                 angle-=-90;
                 angleChange=-angleChange;
             }
-            this.particleTab[uU] = {time:0,O:O,x:PX.x,y:PX.y,angle: angle, angleChange: angleChange, rotation: angle, rotate: angleChange, speed: 3, particleId: DR.particleId, particleTime: DR.particleTime, particleXY: DR.particleXY};
+            this.particleTab[uU] = {time:0,O:O,x:PX.x,y:PX.y,angle: angle, angleChange: angleChange, rotation: angle, rotate: angleChange, speed: 3, particleId: DR.Particles.id, particleTime: DR.Particles.time, particleXY: DR.Particles.XY};
         }
-        if(DR.particleAnim=='withWind'){
+        if(DR.Particles.anim=='withWind'){
             var angle =  O.windAngle;
-            this.particleTab[uU] = {time:0,O:O,x:PX.x,y:PX.y,angle: angle, rotation: angle- -270, rotate:0, speed: 2, particleId: DR.particleId, particleTime: DR.particleTime, particleXY: DR.particleXY};
+            this.particleTab[uU] = {time:0,O:O,x:PX.x,y:PX.y,angle: angle, rotation: angle- -270, rotate:0, speed: 2, particleId: DR.Particles.id, particleTime: DR.Particles.time, particleXY: DR.Particles.XY};
         }
         AD.Next-=1;
 

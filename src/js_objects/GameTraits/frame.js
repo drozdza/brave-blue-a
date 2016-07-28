@@ -130,6 +130,8 @@ GAMEobject.prototype.frame_draw = function(){
     var Cbull = CanvasManager.C['bullet_'];
     var Radi = Math.PI/180;
 
+    this.mainCanvas = {CH:CH,Px,Py};
+
     CH.save();
     CH.fillStyle="rgba(0,0,0,0.12)";
     if(BBAdata.GET.BLUR > 1) CH.translate(this.shipMoveX,this.shipMoveY);
@@ -140,10 +142,16 @@ GAMEobject.prototype.frame_draw = function(){
 
     for(o in this.O){
         O = this.O[o];
+        if(O.TT=='regionAnim')
+        CanvasManager.age_regionAnim(O,o);
+    }
+
+    for(o in this.O){
+        O = this.O[o];
 
         if(O && O.TT=='regionAnim'){
             var DR = CanvasManager.directRenders[ O.animType ];
-            if(DR.makeParticles){
+            if(DR.Particles){
                 CanvasManager.CPM.addParticles(O, O.animData);
             }
         }
@@ -162,11 +170,6 @@ GAMEobject.prototype.frame_draw = function(){
         this.drawObject(O,o, CH, Px,Py);
     }
 
-    for(o in this.O){
-        O = this.O[o];
-        if(O.TT=='regionAnim')
-            CanvasManager.age_regionAnim(O,o);
-    }
 
     CanvasManager.CPM.showParticles(CH,Px,Py);
 

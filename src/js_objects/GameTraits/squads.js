@@ -159,14 +159,10 @@ GAMEobject.prototype.disbandSquad = function(O){
                 sO.doingTime = 500;
             }
             if(sO.fieldAnim=='ElectricityField'){
-                sO.animType = 'EleFieldEnd';  // !!!!
-                sO.animTick = 0;
-                sO.DieTime = this.tick- -24;
+                CanvasManager.change_regionAnim(sO,O.squadScheme[i].Oid, 'EleFieldEnd', 'end', 24);
             }
             if(sO.fieldAnim=='DestructionField'){
-                sO.animType = 'DestrFieldEnd'; // !!!!
-                sO.animTick = 0;
-                sO.DieTime = this.tick- -48;
+                CanvasManager.change_regionAnim(sO,O.squadScheme[i].Oid, 'DestrFieldEnd', 'end', 48);
             }
             if(sO.squadT && sO.squadT == 'laserAim'){
                 this.removeObj( O.squadScheme[i].Oid );
