@@ -5,14 +5,19 @@
 - Game saves in cookies
 - Left the hack lever in cookies
 
+- enemy missles and bombs looks like missing (when you fast travel to new location)
+- 
+
 - >> ships should orbit
 
 - ExplosivePresets "dontCollide" problem
 
 - After first try, some animation data seem to be corrupted
-- Static Fields [that are moving] not as layers
 - Mines as Layers
-- Get back blur effect
+
+- better way to control particle density of objects.
+
+- X attack as curved nailbombs
 
 - Layers of Canvas:
     - overlay layer,
@@ -26,6 +31,13 @@
 - 6th lvl of debug: checking ms lag stability
 
 - Make BLUR a feature
+
+- System kar dla statku
+    - zmniejszenie produkcji prądu
+    - niemożność teleportacji
+    - zwolnienie przyspieszenia/skręcania
+    - mniejsza maksymalna prędkość
+    - zmniejszenie capacity tarcz/życia/amunicji
 
 - Make "SHIP always point one site" - feature
 
@@ -90,11 +102,16 @@ Nowe ficzery:
 
 ================================================================================
 
+MotherShip
+    - Settings for players MotherShip that can be placed on some types of boards
+
 Nowi przeciwnicy:
 	- L,O,P
 	- [Y] - pluje tarczami energetycznymi jak miotaczem ognia
 	- F same się leczą jeśli nie dzieje się nic innego
   - Energy Plazma ball
+
+  - Ship cleaning Destruction Fields
 
   - Slime Ship - po zabiciu go rozbija się na mniejsze które próbują się połączyć
   - Ship with healing Bombs

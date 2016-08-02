@@ -215,7 +215,7 @@ GAMEobject.prototype.cloneExplosionData = function(D,O){
                 O[onX][addX] = cloneObj(D.exploAddTo[onX][addX]);
 }
 GAMEobject.prototype.addShield = function(o,Duration,q){
-    var O = this.O[o];
+    var L,O = this.O[o];
     if(O.shieldDimmune) return false;
 
     L = this.putObj_directAnim('addShield', {timeDeath: 5});

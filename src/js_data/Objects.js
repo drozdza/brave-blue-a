@@ -694,7 +694,7 @@ BBAdata['ObjectDatas']={
 
         shipVariables:{
             spotRad: {Const: 80, RandInt: 80},
-            spotRad2: {Const: 300, RandInt: 200},
+            spotRad2: {Const: 400, RandInt: 200},
             spotAngle2: {Const: 30, RandInt: 30}
         },
     },
@@ -1526,6 +1526,124 @@ BBAdata['ObjectDatas']={
             spotAngle2: {Const: 40, RandInt: 30}
         },
     },
+    nientes:{
+        view:{
+            Letter: 948,
+            LetterSize: 25,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_20',
+        },
+
+        lifeM: 5,
+        radius: 15,
+
+        fieldCharges: 10,
+        Res: {'fieldCharges': {M:10,T:0}},
+        weapon:[
+            {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, maxSpeed: 2, FlagsRequired:{squadFull:false }},
+            {t:'refilResource', resource: 'fieldCharges', gunSpeed: 16, maxSpeed: 2, FlagsRequired:{squadFull:false}, doNextWeapon: true},
+        ],
+
+        squadScheme: [{
+            type: 'RoundField',
+            radius: 50,
+            angle: 0,
+            Oid: -1,
+            placementT:'directPlaces',
+            objData: {fieldAnim: 'ElectricityField', radius: 40, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDamage: 3, dontHit:['B','BE','E','M','ME','A'], fieldAnimMoving:true}
+        }],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:55,T:'followEnemy', minAlarm: 5, gotoSpeed: 3, FlagsRequired:{squadFull:true}},
+            {T:'changeSpeed', minSpeedLvl: 3, gotoSpeed: 2},
+            {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S: {shipVar:'speed',Add:-2}, T:{shipVar:'speedT',Add:-0.6}},
+            {S: {shipVar:'speed'}, T:{shipVar:'speedT'}},
+            {S: {shipVar:'speed',Add:6}, T:{shipVar:'speedT'}}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 20, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 20, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 20, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            speed: {Const: 3, Rand: 3},
+            speedT: {Const: 2.5, Rand: 1},
+            spotRad: {Const: 80, RandInt: 80},
+            spotRad2: {Const: 300, RandInt: 200},
+            spotAngle2: {Const: 30, RandInt: 30}
+        },
 
 
+
+    },
+    shieldoorz:{
+        view:{
+            Letter: 1002,
+            LetterSize: 50,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_60',
+        },
+
+        lifeM: 13,
+        radius: 25,
+
+        fieldCharges: 0,
+        Res: {'fieldCharges': {M:10,T:0}},
+        weapon:[
+            {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true}, minSpeed: 2},
+            {t:'refilResource', resource: 'fieldCharges', gunSpeed: 20, minSpeed: 2, doNextWeapon: true},
+
+            {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, doingNow:'followEnemy', makeAction:{doingNow:'wait', doingTime:150, Manouver:'followEnemy',doNotInterupt:true}},
+            {t:'double2', Speed:8, Dec:50, Power:1, Wide: 30, doingNow:'shooting', gunSpeed: 6, maxSpeed:1},
+//            {t:'changeAction', makeAction: {Manuover:'turnRight', doingNow:'shooting', doingTime:30, doNotInterupt:true}, gunSpeed: 110, lastShot: 100,  minAlarm: 5, minDistToEnemy: 400},
+        ],
+
+        squadScheme: [{
+            type: 'ConeField',
+            radius: 0,
+            angle: 0,
+            angleAddon: 0,
+            Oid: -1,
+            placementT:'directPlaces',
+            objData: {fieldAnim: 'ShellField', radius: 65, angle: 180, coneAngle: 90, coneRad2: 30, bounceType:'diagonal', fieldAnimMoving:true, dontHit:['P','BE','E','ME']}
+        }],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:55,T:'followEnemy', minAlarm: 5, gotoSpeed: 1, usedRes:'fieldCharges', usedResR: 10},
+            {T:'changeSpeed', maxSpeedLvl: 1, gotoSpeed: 2},
+            {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:0.4, T:6},
+            {S:{shipVar:'speed'},        T:{shipVar:'speedT',Add:-1}},
+            {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'single',Ref: 10, Rad: {shipVar:'spotRad'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad'}}
+        ],
+
+        shipVariables:{
+            speed: {Const: 4, Rand: 3},
+            speedT: {Const: 1.5, Rand: 1.5},
+            spotRad: {Const: 350, RandInt: 150},
+        },
+    },
 };

@@ -111,13 +111,15 @@ GAMEobject.prototype.decide_ship = function(e){
     }
     // Do special move
     if(this.specialMoveT > -1 && S.SpecialMoves[ this.specialMove ]){
+        var oldX = O.x;
+        var oldY = O.y;
         var SpecMove = S.SpecialMoves[ this.specialMove ];
         if(SpecMove.T=='changeSpeed')
-            O.speed-=-SpecMove.changeBy;
+            O.speed-=-SpecMove.speedBy;
         if(SpecMove.T=='changeAngle'){
-            O.angle = (O.angle - -SpecMove.changeBy- -360)%360;
+            O.angle = (O.angle - -SpecMove.angleBy- -360)%360;
             var angleU = -90;
-            if(SpecMove.changeBy > 0) angleU = 90;
+            if(SpecMove.angleBy > 0) angleU = 90;
             var aniX = O.x- -15*Math.sin(parseInt(-O.angle-angleU)*(Math.PI/180));
             var aniY = O.y- -15*Math.cos(parseInt(-O.angle-angleU)*(Math.PI/180));
             this.putObj_animation('accelerationFire', aniX, aniY, O.angle- -angleU);
@@ -132,8 +134,33 @@ GAMEobject.prototype.decide_ship = function(e){
                 if(this.specialMoveT < 0) break;
             }
         }
+        if(SpecMove.T=='changeAll'){
+            if(SpecMove.changeBy)
+                O.speed-=-SpecMove.speedBy;
+
+            if(SpecMove.angleBy)
+                O.angle = (O.angle - -SpecMove.angleBy- -360)%360;
+
+            if(SpecMove.timesBy){
+                this.putObj_animation('shipShadow', O.x, O.y, O.angle);
+                for(var i=0; i<SpecMove.timesBy; ++i){
+                    O.x-=- SpecMove.Dist*Math.sin(parseInt(-O.angle- -SpecMove.Angle)*(Math.PI/180));
+                    O.y-=- SpecMove.Dist*Math.cos(parseInt(-O.angle- -SpecMove.Angle)*(Math.PI/180));
+                    this.checkShipHits();
+                    this.putObj_animation('shipShadow', O.x, O.y, O.angle);
+                    if(this.specialMoveT < 0) break;
+                }
+            }
+        }
+        if(SpecMove.T=='teleportTo'){
+            var Angle = (O.angle - -SpecMove.Angle- -360)%360;
+            if(SpecMove.AngleRand)
+                Angle -=- parseInt(Math.random()*SpecMove.AngleRand);
+            this.teleportJump(0,SpecMove.Dist,Angle);
+        }
 
         if(--this.specialMoveT < 0) this.specialMove = -1;
+        this.putOnXY(0, oldX, oldY);
     }
 
     if(O.speed != Sx.speed)

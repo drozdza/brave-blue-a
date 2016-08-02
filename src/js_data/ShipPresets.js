@@ -29,8 +29,8 @@ BBAdata['SHIPpresets']={
         SpecialMoves:{
             1:{T:'changePosition', Dec:6, timesBy:2, Dist: 10, Angle: -120},
             2:{T:'changePosition', Dec:6, timesBy:2, Dist: 10, Angle: 120},
-            1:{T:'changeAngle',    Dec:6, changeBy: -15},
-            2:{T:'changeAngle',    Dec:6, changeBy: 15},
+            1:{T:'changeAngle',    Dec:6, angleBy: -15},
+            2:{T:'changeAngle',    Dec:6, angleBy: 15},
         },
         ChangeSpeedStops:{
             up: {5:1, 8:1},
@@ -199,10 +199,9 @@ BBAdata['SHIPpresets']={
             {T:'healerProd',Disabled:0,Emin:1,Emax:16,ProdX:1,E:0,Prod:0,ifProd:9 },
         ],
         SpecialMoves:{
-            1:{T:'changeAngle',    ModUse:{'Moves':1}, Dec:6, changeBy: -15},
-            2:{T:'changePosition', ModUse:{'Moves':1}, Dec:6, timesBy:3, Dist: 10, Angle: 90},
-            2:{T:'changeAngle',    ModUse:{'Moves':1}, Dec:6, changeBy: 15},
-            3:{T:'changeSpeed',    ModUse:{'Moves':1}, Dec:5, changeBy: 1},
+            1:{T:'changeAngle',    ModUse:{'Moves':1}, Dec:6, angleBy: -15},
+            2:{T:'changeAngle',    ModUse:{'Moves':1}, Dec:6, angleBy: 15},
+            3:{T:'changeSpeed',    ModUse:{'Moves':1}, Dec:5, speedBy: 1},
             4:{T:'changePosition', ModUse:{'Moves':1}, Dec:12, timesBy: 3, Dist: 10, Angle: 180},
         },
     },
@@ -259,6 +258,13 @@ BBAdata['SHIPpresets']={
             {T:'Prod',      Disabled:0,subT:'Bullet',Storage:'Ammo',Emin:6,Emax:12,ProdX:4,E:0,Prod:0,ifProd:5 },
             {T:'radar',     Disabled:1,Emin:1,Emax:30,ProdX:20,E:0,Prod:0,ifProd:360,Radius:2500},
         ],
+        SpecialMoves:{
+            1:{T:'changeAll', Dec: 16, angleBy: -7, timesBy:3, Dist: 10, Angle: 180},
+            2:{T:'changeAll', Dec: 16, angleBy: 7 , timesBy:3, Dist: 10, Angle: 180},
+            3:{T:'teleportTo', Dec: 10, Dist: 70, Angle: -90, AngleRand: 190},
+            4:{T:'changePosition', Dec:12, timesBy: 5, Dist: 10, Angle: 180},
+        },
+
     },
     'ethernal':{
         Weight: 25,
@@ -291,5 +297,12 @@ BBAdata['SHIPpresets']={
             {T:'Prod', subT:'Bullet',Storage:'Ammo', Disabled:0,Emin:2,Emax:4,ProdX:1,E:0,Prod:0,ifProd:3 },
             {T:'Prod', subT:'Bomb',  Storage:'Bomb', Disabled:0,Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:10 },
         ],
+        SpecialMoves:{
+            1:{T:'changePosition', Dec:12, timesBy:3, Dist: 10, Angle: -50},
+            2:{T:'changePosition', Dec:12, timesBy:3, Dist: 10, Angle: 50},
+            3:{T:'teleportTo', Dec: 1, Dist: 600, Angle: -10, AngleRand: 20},
+            4:{T:'changeAngle', Dec:9, angleBy: 20},
+        },
+
     },
 };
