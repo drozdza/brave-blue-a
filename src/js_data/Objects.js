@@ -1601,12 +1601,13 @@ BBAdata['ObjectDatas']={
         fieldCharges: 0,
         Res: {'fieldCharges': {M:10,T:0}},
         weapon:[
-            {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true}, minSpeed: 2},
-            {t:'refilResource', resource: 'fieldCharges', gunSpeed: 20, minSpeed: 2, doNextWeapon: true},
+            // {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true}, minSpeed: 2},
+            {t:'refilResource', resource: 'fieldCharges', gunSpeed: 30, minSpeed: 2, doNextWeapon: true},
 
-            {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, doingNow:'followEnemy', makeAction:{doingNow:'wait', doingTime:150, Manouver:'followEnemy',doNotInterupt:true}},
-            {t:'double2', Speed:8, Dec:50, Power:1, Wide: 30, doingNow:'shooting', gunSpeed: 6, maxSpeed:1},
-//            {t:'changeAction', makeAction: {Manuover:'turnRight', doingNow:'shooting', doingTime:30, doNotInterupt:true}, gunSpeed: 110, lastShot: 100,  minAlarm: 5, minDistToEnemy: 400},
+            {t:'double2', Speed:8, Dec:50, Power:1, Wide: 30, gunSpeed: 6, doingNow:'followEnemy', maxSpeed:1, minSpeed:1},
+
+            {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, maxSpeed: 0, doingNow:'followEnemy', makeAction: {Manuover:'followEnemy', doingNow:'followEnemy', doingTime: 120, doNotInterupt:true}},
+            // {t:'changeAction', makeAction: {Manuover:'turnRight', doingNow:'shooting', doingTime:30, doNotInterupt:true}, gunSpeed: 110, lastShot: 100,  minAlarm: 5, minDistToEnemy: 400},
         ],
 
         squadScheme: [{
@@ -1623,13 +1624,14 @@ BBAdata['ObjectDatas']={
         doingTime: -1,
         Manouver: 'goStraight',
         toDo: [
-            {N:55,T:'followEnemy', minAlarm: 5, gotoSpeed: 1, usedRes:'fieldCharges', usedResR: 10},
-            {T:'changeSpeed', maxSpeedLvl: 1, gotoSpeed: 2},
-            {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+            {N:55,T:'followEnemy', minAlarm: 5, gotoSpeed: 0, usedRes:'fieldCharges', usedResR: 10, doingTime:150},
+            {T:'changeSpeed', maxSpeedLvl: 0, gotoSpeed: 1, usedRes:'fieldCharges', usedResR: 10},
+            {T:'changeSpeed', maxSpeedLvl: 1, minSpeedLvl: 1,  gotoSpeed: 2},
+            {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, minSpeedLvl: 2, straightPlus: 100, turnMin: 30, turnPlus: 70  },
         ],
 
-        speedArr:[0,
-            {S:0.4, T:6},
+        speedArr:[{S:0, T:6},
+            {S:1, T:{shipVar:'speedT',Add:2}},
             {S:{shipVar:'speed'},        T:{shipVar:'speedT',Add:-1}},
             {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
         ],

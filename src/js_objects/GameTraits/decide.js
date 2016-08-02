@@ -177,6 +177,7 @@ GAMEobject.prototype.decide = function(o){
             }
 
             if(TD.T=='changeManouver'){
+                console.log('Manouver: changeManouver');
                 var maxTurnTime = parseInt(180/O.speedT);
                 switch(parseInt(Math.random()*3)){
                     case 0: O.Manouver = 'goStraight'; O.doingTime = TD.straightMin- -parseInt(Math.random()*TD.straightPlus); break;
@@ -206,16 +207,17 @@ GAMEobject.prototype.decide = function(o){
             }
 
             if(TD.T=='followEnemy'){
+                console.log('Manouver: followEnemy');
                 O.doingTime = TD.doingTime || 50;
                 O.Manouver = 'followEnemy';
-                if(TD.gotoSpeed)
+                if(!isNaN(TD.gotoSpeed))
                     this.changeSpeedLvl(O,TD.gotoSpeed);
             }
 
             if(TD.T=='goAroundEnemy'){
                 O.doingTime = TD.doingTime || 50;
                 O.Manouver = 'goAroundEnemy';
-                if(TD.gotoSpeed)
+                if(!isNaN(TD.gotoSpeed))
                     this.changeSpeedLvl(O,TD.gotoSpeed);
             }
 
@@ -283,6 +285,7 @@ GAMEobject.prototype.decide = function(o){
             }
 
             if(TD.T=='goStraight'){
+                console.log('Manouver: goStraight');
                 O.Manouver = 'goStraight';
                 O.doingTime = TD.straightMin- -parseInt(Math.random()*TD.straightPlus);
             }
