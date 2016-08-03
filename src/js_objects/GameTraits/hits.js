@@ -54,6 +54,12 @@ GAMEobject.prototype.hit = function(o,q,DMG){
         return 1;
     }
 
+    if(O.T=='energy_field_missle' && O.FollowWho == q){
+        if(!this.giveEnergyField(q,1,o,O.MaxEnergyField))
+            this.removeObj(o);
+        return 1;
+    }
+
     if(Q.SlowDown && O.T=='ship'){
         if(O.speed > Q.SlowDown) O.speed = Q.SlowDown;
         if(this.specialMove != -1 && this.SHIP.SpecialMoves)
@@ -86,7 +92,7 @@ GAMEobject.prototype.hit = function(o,q,DMG){
             this.explodeBomb(q,Q.onDie);
             this.removeObj(o);
         }
-        if(Q.T=='healing_missle')
+        if(Q.T=='healing_missle' || Q.T=='energy_field_missle')
             this.removeObj(q);
     }
 }
@@ -291,4 +297,17 @@ GAMEobject.prototype.hitEnergyField = function(o,q,DMG){
     if(O.energyField < 0) O.energyField = 0;
     if(O.T=='ship') this.shipFunc_showHealth();
 
+}
+GAMEobject.prototype.giveEnergyField = function(q,DMG,o,max){
+    var Q = this.O[q];
+    if(typeof Q.energyField == 'undefined')
+        Q.energyField = 0;
+    if(Q.energyField >= max) return false;
+    if(o){
+        this.putObj_animation('hit_healing', this.O[o].x, this.O[o].y);
+        this.removeObj(o);
+    } else{
+        this.putObj_animation('hit_healing', Q.x, Q.y);
+    }
+    Q.energyField-=-DMG;
 }

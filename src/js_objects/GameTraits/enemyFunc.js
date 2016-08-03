@@ -55,6 +55,13 @@ GAMEobject.prototype.shootHealingMissle = function(o,Target){
     this.O[L].angle = O.angle;
     this.O[L].FollowWho = Target;
 }
+GAMEobject.prototype.shootEnergyFieldMissle = function(o,Target){
+    var O = this.O[o];
+    var L = this.putObj('energy_field_missle','comp',O.S,O.x,O.y);
+    this.O[L].angle = O.angle;
+    this.O[L].FollowWho = Target;
+    this.O[L].MaxEnergyField = parseInt(this.O[Target].lifeM/2);
+}
 GAMEobject.prototype.dropSpaceMine = function(o,Angle,bombData){
     var O = this.O[o];
     var L = this.putObj('space_mine','comp',O.S,O.x,O.y);

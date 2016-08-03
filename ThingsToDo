@@ -104,7 +104,7 @@ MotherShip
     - Settings for players MotherShip that can be placed on some types of boards
 
 Nowi przeciwnicy:
-	- L,O,P
+	- O,P
 	- [Y] - pluje tarczami energetycznymi jak miotaczem ognia
 	- F same się leczą jeśli nie dzieje się nic innego
   - Energy Plazma ball
@@ -126,7 +126,6 @@ Nowi przeciwnicy:
 			- Nowe nasiona z których wyrastają kolejne rośliny
 	- Statek który otwiera przed sobą pole porzogi i próbuje utrzymać w nim gracza (2 rodzaje, Cone)
   - Statek plujący tarczami teleportującymi
-  - Statek który rozdaje wszystkim dookoła "miękkie tarcze" (do max iluś?)
   - Statek który zbiera obrażenia od innych, im więcej zbierze tym większy wybuch zrobi. (może rosnąć np.)
       - Jak zbierze max, to zaczyna gonić gracza jak kamikaze
 	- Statek ciągnący za sobą dużą ilość torped leczniczych
@@ -134,10 +133,10 @@ Nowi przeciwnicy:
 	- Liny pomiędzy gwiazdami po których jeżdżą przeciwnicy.
 	- Ochrona stała: np. redukcja obrażeń od wybuchów.
 	- Niebieskie strzały np:
-    - przebijają osłony,
-    - lecą przez wszystko (jak laser),
-    - ujmują statkom energii?
-    - redukują osłony
+        - przebijają osłony,
+        - lecą przez wszystko (jak laser),
+        - ujmują statkom energii?
+        - redukują osłony
 
 
 	Fields:

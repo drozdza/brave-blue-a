@@ -268,6 +268,10 @@ BBAdata['MAPS']={
             {Random:{X: 0, Y: 0, Radius: 800}, What:{SH:20}}
         ],
     },
+    'L':{
+        BoardMods:['sitOnMap','allAvoid'],
+        Place:[{Random:{X: 0, Y: 0, Radius: 1000}, What:{StarX: 60, L:10, F:5, M:10, T:10, K:3}}],
+    },
     'HealthSplit':{
         BoardMods:['sitOnMap','allAvoid','healthSplit','carras25health'],
         Place:[{Random:{X: 0, Y: 0, Radius: 1000}, What:{StarX: 25, A: 10}}],
@@ -295,7 +299,7 @@ BBAdata['MAPS']={
     'HardCore':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[
-            {Random:{X: 0, Y: 0, Radius: 2200}, What:{A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5, T:10, E:10, C:10, G:10, R:10, H:10, B:10, V:10, K:10, F:10, Q:5, X:6, Z:5, PI:10, WP:5,Ni:10,SH:10}},
+            {Random:{X: 0, Y: 0, Radius: 2200}, What:{A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5, T:10, E:10, C:10, G:10, R:10, H:10, B:10, V:10, K:10, F:10, Q:5, X:6, Z:5, PI:10, WP:5,Ni:10,SH:10,L:5}},
             {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarX:150,iD:10,Wi:10}}
         ]
     },

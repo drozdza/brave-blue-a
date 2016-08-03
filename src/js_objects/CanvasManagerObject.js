@@ -500,12 +500,10 @@ function CanvasManagerObject(){
 
         ++O.animTick;
         if(AD.state=='start' && O.animTick >= DR.frames){
-            console.log('goTo: norm');
             AD.Next = 0;
             this.change_regionAnim(O,o, DR.onEnd, 'norm');
         }
         if(AD.state=='norm' && DR.toExpire- -GAME.tick >= O.DieTime){
-            console.log('goTo: end');
             AD.Next = 0;
             this.change_regionAnim(O,o, DR.onExpire, 'end');
         }

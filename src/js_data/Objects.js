@@ -17,6 +17,24 @@ BBAdata['ObjectDatas']={
         Manouver: 'followEntity',
         Flags:{},
     },
+    energy_field_missle:{
+        view:{
+            Letter: 'E',
+            LetterSize: 12,
+            Color: '#0f0',
+            Angle: 180,
+        },
+
+        lifeM: 1,
+        speed: 13,
+        speedT: 20,
+        Power: 1,
+        doingTime: 230,
+        onHit:{},
+        toDo: [{T:'expire'}],
+        Manouver: 'followEntity',
+        Flags:{},
+    },
     missle:{
         view:{
             Letter: 'Y',
@@ -1645,6 +1663,49 @@ BBAdata['ObjectDatas']={
             speed: {Const: 4, Rand: 3},
             speedT: {Const: 1.5, Rand: 1.5},
             spotRad: {Const: 350, RandInt: 150},
+        },
+    },
+    loliax:{
+        view:{
+            Letter: 'L',
+            LetterSize: 40,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_40',
+        },
+
+        lifeM: 9,
+        radius: 20,
+
+        energyFieldImmune: true,
+
+        weapon:[
+            {t:'shootEnergyFieldMissle', Radius: 350, gunSpeed: 20, lastShot: 100},
+        ],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:1, T:1},
+            {S:2, T:1.5},
+            {S:7, T:0.2}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 180, RandInt: 80},
+            spotRad2: {Const: 400, RandInt: 200},
+            spotAngle2: {Const: 40, RandInt: 30}
         },
     },
 };
