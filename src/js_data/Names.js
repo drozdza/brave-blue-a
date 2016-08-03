@@ -30,6 +30,11 @@ BBAdata['ShipNames']={
     Ni:'nientes',
     SH:'shieldoorz',
     L:'loliax',
+    SL:'slimesen',
+    SL1:'slimesen1',
+    SL2:'slimesen2',
+    SL3:'slimesen3',
+    SL4:'slimesen4',
 };
 BBAdata['ModuleNames'] = {
     healerProd:         'Heal',

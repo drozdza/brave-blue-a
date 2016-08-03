@@ -162,6 +162,12 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
         this.O[L].DieTime = this.tick- -explodeObj.ExpireTime;
         this.setRegionAnimation(L,explodeObj.fieldAnim);
     }
+    else if(explodeObj.explodeType=='putObjs'){
+        var objNumb = explodeObj.objMin;
+        if(explodeObj.objRand) objNumb-=-parseInt(Math.random()*(explodeObj.objRand- -1));
+        for(var i=0; i<objNumb; ++i)
+            L = this.putObj(explodeObj.objName,explodeObj.objType,O.S,O.x,O.y);
+    }
     else {
         L = this.putObj('destruction_field','region',O.S,O.x,O.y);
         this.O[L].radius = explodeObj.Dist;
