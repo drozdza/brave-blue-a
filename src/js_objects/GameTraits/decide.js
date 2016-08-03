@@ -124,9 +124,10 @@ GAMEobject.prototype.decide = function(o){
             // Sprawdzamy Czy akcja się nadaje
             if(TD.minAlarm && TD.minAlarm > O.alarmLvl) continue;
             if(TD.maxAlarm && TD.maxAlarm < O.alarmLvl) continue;
-            if(TD.maxSpeedLvl && TD.maxSpeedLvl < O.speedLvl) continue;
+            if(!isNaN(TD.maxSpeedLvl) && TD.maxSpeedLvl < O.speedLvl) continue;
             if(TD.minSpeedLvl && TD.minSpeedLvl > O.speedLvl) continue;
             if(TD.usedRes && O[ TD.usedRes ] < TD.usedResR) continue;
+            if(TD.minDistToEnemy && TD.minDistToEnemy < PlayerDist) continue;
 
             if(TD.FlagsRequired){
                 var notAllFlags = false;
@@ -150,6 +151,10 @@ GAMEobject.prototype.decide = function(o){
 
             if(TD.T=='changeSpeed'){
                 this.changeSpeedLvl(O,TD.gotoSpeed);
+                if(TD.doingTime){
+                    O.doingTime = TD.doingTime;
+                    break;
+                }
                 continue;
             }
 
@@ -177,7 +182,6 @@ GAMEobject.prototype.decide = function(o){
             }
 
             if(TD.T=='changeManouver'){
-                console.log('Manouver: changeManouver');
                 var maxTurnTime = parseInt(180/O.speedT);
                 switch(parseInt(Math.random()*3)){
                     case 0: O.Manouver = 'goStraight'; O.doingTime = TD.straightMin- -parseInt(Math.random()*TD.straightPlus); break;
@@ -207,7 +211,6 @@ GAMEobject.prototype.decide = function(o){
             }
 
             if(TD.T=='followEnemy'){
-                console.log('Manouver: followEnemy');
                 O.doingTime = TD.doingTime || 50;
                 O.Manouver = 'followEnemy';
                 if(!isNaN(TD.gotoSpeed))
@@ -285,7 +288,6 @@ GAMEobject.prototype.decide = function(o){
             }
 
             if(TD.T=='goStraight'){
-                console.log('Manouver: goStraight');
                 O.Manouver = 'goStraight';
                 O.doingTime = TD.straightMin- -parseInt(Math.random()*TD.straightPlus);
             }
@@ -333,6 +335,7 @@ GAMEobject.prototype.decide = function(o){
             break;
         }
     }
+
 
     // Wykonujemy zadanie
     switch(O.Manouver){

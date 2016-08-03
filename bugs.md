@@ -10,4 +10,5 @@ Bugs:
 
   - WP ships get way to much hits from taken Explosions
 
- 
+  - Killing D ships sometimes gve undefined .T fatal error
+  - star sitters W sometimes don't die 

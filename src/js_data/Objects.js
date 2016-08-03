@@ -1601,11 +1601,9 @@ BBAdata['ObjectDatas']={
         fieldCharges: 0,
         Res: {'fieldCharges': {M:10,T:0}},
         weapon:[
-            // {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true}, minSpeed: 2},
+            {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true}, minSpeed: 2},
             {t:'refilResource', resource: 'fieldCharges', gunSpeed: 30, minSpeed: 2, doNextWeapon: true},
-
-            {t:'double2', Speed:8, Dec:50, Power:1, Wide: 30, gunSpeed: 6, doingNow:'followEnemy', maxSpeed:1, minSpeed:1},
-
+            {t:'double2', Speed:10, Dec:50, Power:1, Wide: 15, gunSpeed: 3, maxSpeed:1, minSpeed:1},
             {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, maxSpeed: 0, doingNow:'followEnemy', makeAction: {Manuover:'followEnemy', doingNow:'followEnemy', doingTime: 120, doNotInterupt:true}},
             // {t:'changeAction', makeAction: {Manuover:'turnRight', doingNow:'shooting', doingTime:30, doNotInterupt:true}, gunSpeed: 110, lastShot: 100,  minAlarm: 5, minDistToEnemy: 400},
         ],
@@ -1617,16 +1615,17 @@ BBAdata['ObjectDatas']={
             angleAddon: 0,
             Oid: -1,
             placementT:'directPlaces',
-            objData: {fieldAnim: 'ShellField', radius: 65, angle: 180, coneAngle: 90, coneRad2: 30, bounceType:'diagonal', fieldAnimMoving:true, dontHit:['P','BE','E','ME']}
+            objData: {fieldAnim: 'ShellField', radius: 65, angle: 180, coneAngle: 90, coneRad2: 0, bounceType:'diagonal', fieldAnimMoving:true, dontHit:['P','BE','E','ME']}
         }],
 
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
         toDo: [
-            {N:55,T:'followEnemy', minAlarm: 5, gotoSpeed: 0, usedRes:'fieldCharges', usedResR: 10, doingTime:150},
-            {T:'changeSpeed', maxSpeedLvl: 0, gotoSpeed: 1, usedRes:'fieldCharges', usedResR: 10},
-            {T:'changeSpeed', maxSpeedLvl: 1, minSpeedLvl: 1,  gotoSpeed: 2},
+            {N:77,T:'changeSpeed', maxSpeedLvl: 0, gotoSpeed: 1, doingTime: 20},
+            {N:76,T:'changeSpeed', maxSpeedLvl: 1, minSpeedLvl: 1,  gotoSpeed: 2},
+            {N:56,T:'followEnemy', minAlarm: 5, minSpeedLvl: 2, gotoSpeed: 0, usedRes:'fieldCharges', usedResR: 10, doingTime:150, minDistToEnemy: 450},
+            {N:55,T:'followEnemy', minAlarm: 5, maxSpeedLvl: 0, doingTime:150},
             {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, minSpeedLvl: 2, straightPlus: 100, turnMin: 30, turnPlus: 70  },
         ],
 

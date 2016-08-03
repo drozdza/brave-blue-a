@@ -164,6 +164,9 @@ GAMEobject.prototype.disbandSquad = function(O){
             if(sO.fieldAnim=='DestructionField'){
                 CanvasManager.change_regionAnim(sO,O.squadScheme[i].Oid, 'DestrFieldEnd', 'end', 48);
             }
+            if(sO.fieldAnim=='ShellField'){
+                CanvasManager.change_regionAnim(sO,O.squadScheme[i].Oid, 'ShellFieldEnd', 'end', 48);
+            }
             if(sO.squadT && sO.squadT == 'laserAim'){
                 this.removeObj( O.squadScheme[i].Oid );
             }
