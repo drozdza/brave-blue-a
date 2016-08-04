@@ -285,7 +285,7 @@ GAMEobject.prototype.removeObj = function(o,saveDiv){
     if(this.O[o].TT == 'anim' || this.O[o].TT == 'dirAnim')
         delete this.Oanim[o];
 
-    if(this.O[o].TT == 'enemy'){
+    if(this.O[o].TT == 'enemy' && !this.O[o].onDieDelete){
         this.Odead[ o ]={T:this.O[o].T,x:this.O[o].x,y:this.O[o].y};
         CanvasManager.CBM.addObjectToBackground(o);
     }
@@ -295,6 +295,9 @@ GAMEobject.prototype.removeObj = function(o,saveDiv){
     delete this.Ocomp[o];
     delete this.Obullet[o];
     delete this.Oregion[o];
-    if(this.O[o].TT!='enemy' && this.O[o].mapType!='A')
+    if(this.O[o].TT!='enemy' && this.O[o].mapType!='A'){
         delete this.O[o];
+    }else if(this.O[o].onDieDelete){
+        delete this.O[o];
+    }
 }

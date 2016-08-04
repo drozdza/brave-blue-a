@@ -1708,7 +1708,7 @@ BBAdata['ObjectDatas']={
             spotAngle2: {Const: 40, RandInt: 30}
         },
     },
-    slimesen:{
+    slimensen:{
         view:{
             Letter: 1414,
             LetterSize: 80,
@@ -1720,10 +1720,10 @@ BBAdata['ObjectDatas']={
         lifeM: 34,
         radius: 40,
 
-        onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimesen1', objType:'comp', objMin:2, objRand:2},
+        onDieDelete: true,
+        onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen1', objType:'comp', objMin:2, objRand:2},
 
-
-        fieldCharges: 0,
+        mergeAbility: 0,
         Res: {'mergeAbility': {M:20,T:0}},
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
@@ -1772,8 +1772,8 @@ BBAdata['ObjectDatas']={
             spotAngle2: {Const: 40, RandInt: 30}
         },
     },
-    slimesen1:{
-        extends: 'slimesen',
+    slimensen1:{
+        extends: 'slimensen',
         view:{
             Letter: 1414,
             LetterSize: 60,
@@ -1785,10 +1785,11 @@ BBAdata['ObjectDatas']={
         lifeM: 18,
         radius: 30,
 
-        onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimesen2', objType:'comp', objMin:2, objRand:2},
+        onDieDelete: true,
+        onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen2', objType:'comp', objMin:2, objRand:2},
     },
-    slimesen2:{
-        extends: 'slimesen',
+    slimensen2:{
+        extends: 'slimensen',
         view:{
             Letter: 1414,
             LetterSize: 45,
@@ -1800,10 +1801,11 @@ BBAdata['ObjectDatas']={
         lifeM: 12,
         radius: 23,
 
-        onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimesen3', objType:'comp', objMin:2, objRand:2},
+        onDieDelete: true,
+        onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen3', objType:'comp', objMin:2, objRand:2},
     },
-    slimesen3:{
-        extends: 'slimesen',
+    slimensen3:{
+        extends: 'slimensen',
         view:{
             Letter: 1414,
             LetterSize: 30,
@@ -1815,10 +1817,11 @@ BBAdata['ObjectDatas']={
         lifeM: 7,
         radius: 15,
 
-        onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimesen4', objType:'comp', objMin:2, objRand:2},
+        onDieDelete: true,
+        onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen4', objType:'comp', objMin:2, objRand:2},
     },
-    slimesen4:{
-        extends: 'slimesen',
+    slimensen4:{
+        extends: 'slimensen',
         view:{
             Letter: 1414,
             LetterSize: 20,
