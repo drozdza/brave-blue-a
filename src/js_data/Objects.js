@@ -1721,6 +1721,7 @@ BBAdata['ObjectDatas']={
         radius: 40,
 
         onDieDelete: true,
+        onDieHideExplosion: true,
         onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen1', objType:'comp', objMin:2, objRand:2},
 
         mergeAbility: 0,
@@ -1786,6 +1787,7 @@ BBAdata['ObjectDatas']={
         radius: 30,
 
         onDieDelete: true,
+        onDieHideExplosion: true,
         onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen2', objType:'comp', objMin:2, objRand:2},
     },
     slimensen2:{
@@ -1802,6 +1804,7 @@ BBAdata['ObjectDatas']={
         radius: 23,
 
         onDieDelete: true,
+        onDieHideExplosion: true,
         onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen3', objType:'comp', objMin:2, objRand:2},
     },
     slimensen3:{
@@ -1818,6 +1821,7 @@ BBAdata['ObjectDatas']={
         radius: 15,
 
         onDieDelete: true,
+        onDieHideExplosion: true,
         onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen4', objType:'comp', objMin:2, objRand:2},
     },
     slimensen4:{
@@ -1833,6 +1837,8 @@ BBAdata['ObjectDatas']={
         lifeM: 4,
         radius: 10,
 
+        onDieDelete: false,
+        onDieHideExplosion: false,
         onDie: false,
     },
 

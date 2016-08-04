@@ -238,7 +238,7 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q,transforms){
 }
 GAMEobject.prototype.dieObj = function(O,o){
     if(O.TT=='enemy') --this.EnemiesC;
-    if(O.T!='missle' && O.T!='bullet_bomb' && O.T!='space_mine')
+    if(O.T!='missle' && O.T!='bullet_bomb' && O.T!='space_mine' && !O.onDieHideExplosion)
         this.putObj_animation('hitBig', O.x, O.y);
 
     if(O.squadDirectPlace)
