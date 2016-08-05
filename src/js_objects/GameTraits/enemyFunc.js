@@ -260,3 +260,32 @@ GAMEobject.prototype.giveDamageTransfer = function(o,q,Duration){
     O.damageTransferTime = Duration;
     O.damageTransferFrom = q;
 }
+GAMEobject.prototype.mergeShips = function(o,q){
+    var O = this.O[o];
+    var Q = this.O[q];
+
+    var what = 'slimensen3';
+    if(O.T=='slimensen3') what = 'slimensen2';
+    if(O.T=='slimensen2') what = 'slimensen1';
+    if(O.T=='slimensen1') what = 'slimensen';
+
+    console.log('MERGE!!!: '+what);
+
+    var x = parseInt(O.x- -(O.x-Q.x)/2);
+    var y = parseInt(O.y- -(O.y-Q.y)/2);
+
+    var L = this.putObj(what,'comp',O.S,x,y);
+    this.O[L].angle = O.angle;
+
+    O.onDie = false;
+    O.onDieDelete = true;
+    O.onDieHideExplosion = true;
+
+    Q.onDie = false;
+    Q.onDieDelete = true;
+    Q.onDieHideExplosion = true;
+
+    this.dieObj(O,o);
+    this.dieObj(Q,q);
+
+}

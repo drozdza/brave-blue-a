@@ -1,6 +1,7 @@
 
 CanvasManagerObject.prototype.directRenders={
     TP_track:{
+        pointPoint:true,
         frames: 18,
         states:{
             0:{ width: 1, color: [0,0,255,1]},
@@ -9,6 +10,7 @@ CanvasManagerObject.prototype.directRenders={
         },
     },
     TP_trackDark:{
+        pointPoint:true,
         frames: 18,
         states:{
             0:{ width: 1, color: [20,0,0,1]},
@@ -17,6 +19,7 @@ CanvasManagerObject.prototype.directRenders={
         },
     },
     dmgTransfer:{
+        pointPoint:true,
         frames: 11,
         states:{
             0:{ width: 1, color: [255,0,0,0.3]},
@@ -25,6 +28,7 @@ CanvasManagerObject.prototype.directRenders={
         },
     },
     addShield:{
+        pointPoint:true,
         frames: 9,
         states:{
             0:{ width: 0, color: [0,255,255,0.3]},
@@ -32,7 +36,17 @@ CanvasManagerObject.prototype.directRenders={
             8:{ width: 0, color: [0,255,255,0]}
         },
     },
+    megreBeam:{
+        pointPoint:true,
+        frames: 100,
+        states:{
+            0:{ width: 0, color: [0,200,0,0.3]},
+            30:{ width: 8, color: [0,200,0,1]},
+            100:{ width: 8, color: [0,200,0,1]}
+        },
+    },
     laserShoot:{
+        pointPoint:true,
         frames: 12,
         states:{
             0:{ width2: 2, color2: [0,0,255,1], color: [0,0,0,0], width: 4},

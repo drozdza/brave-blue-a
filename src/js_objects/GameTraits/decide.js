@@ -150,7 +150,7 @@ GAMEobject.prototype.decide = function(o){
             }
 
             if(TD.T=='changeSpeed'){
-                this.changeSpeedLvl(O,TD.gotoSpeed);
+                    this.changeSpeedLvl(O,TD.gotoSpeed);
                 if(TD.doingTime){
                     O.doingTime = TD.doingTime;
                     break;
@@ -324,7 +324,37 @@ GAMEobject.prototype.decide = function(o){
                     case 1: O.Manouver = 'turnRightOnStar';  O.doingTime = TD.turnMin- -parseInt(Math.random()*TD.turnPlus); if(O.doingTime > maxTurnTime) O.doingTime = maxTurnTime; break;
                     case 2: O.Manouver = 'turnLeftOnStar';  O.doingTime = TD.turnMin- -parseInt(Math.random()*TD.turnPlus); if(O.doingTime > maxTurnTime) O.doingTime = maxTurnTime; break;
                 }
+            }
 
+            if(TD.T=='mergeSearch'){
+                var inRange = this.getCollidingWithCircle(O.x,O.y,TD.mergeDist,['E']);
+                console.log(inRange);
+                var mergeI = false;
+                for(var i in inRange)
+                    if(i != o && this.O[i].T==TD.mergeWith && this.O[i].doingNow != 'mergeWith'){
+                        mergeI = i;
+                        break;
+                    }
+                
+                if(mergeI){
+                    var Q = this.O[ mergeI ];
+
+                    O.doingNow = 'mergeWith';
+                    O.doingTime = 100;
+                    O.mergeWith = mergeI;
+
+                    Q.doingNow = 'mergeWith';
+                    Q.doingTime = 100;
+                    Q.mergeWith = o;
+
+                    L = this.putObj_directAnim('megreBeam', {timeDeath: 100});
+                    this.O[L].pathD = ['M', parseInt(o), 'L', parseInt(mergeI)];
+
+                    O.onDieRemove=[L];
+                    Q.onDieRemove=[L];
+                    break;
+                }
+                continue;
             }
 
             // Dodatkowe wywołania akcji
@@ -778,6 +808,22 @@ GAMEobject.prototype.decide = function(o){
                 if(O.life < O.lifeM)
                     this.healObj(o,1);
                 WP.lastShot = this.tick;
+            }
+
+            if(WP.t == 'mergeWith'){
+                var Q = this.O[O.mergeWith];
+                if(typeof Q != 'undefined'){
+                    var X = O.x-Q.x;
+                    var Y = O.y-Q.y;
+                    if(Math.sqrt(X*X+Y*Y) < 20){
+                        this.mergeShips(o,O.mergeWith);
+                        return 1;
+                    } else {
+                        var Angle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
+                        O.x -=- 5*Math.sin((-Angle- -180)*Math.PI/180);
+                        O.y -=- 5*Math.cos((-Angle- -180)*Math.PI/180);
+                    }
+                }
             }
 
             if(WP.doNextWeapon) continue;

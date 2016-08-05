@@ -249,6 +249,14 @@ GAMEobject.prototype.dieObj = function(O,o){
     if(O.squadScheme)
         this.disbandSquad(O);
 
+
+    if(O.onDieRemove){
+        for(var i in O.onDieRemove){
+            if(typeof this.O[ O.onDieRemove[i] ] != 'undefined')
+            this.dieObj(this.O[ O.onDieRemove[i] ], O.onDieRemove[i]);
+        }
+    }
+
     if(O.T=='space_mine') {
         O.toDo=[{T:'explode'}];
         O.Flags.gotHitFlag = false;

@@ -274,7 +274,17 @@ BBAdata['MAPS']={
     },
     'Lx1414':{
         BoardMods:['sitOnMap','allAvoid'],
-        Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{StarX: 60, SL:20}}],
+        Place:[
+            {RingOf:{X: 0, Y: 0, Radius: 800, RadiusPlus:200}, What:{StarX: 60}},
+            {Random:{X: 0, Y: 0, Radius: 800}, What:{SL:2}}
+        ],
+    },
+    'Lx1415':{
+        BoardMods:['sitOnMap','allAvoid'],
+        Place:[
+            {RingOf:{X: 0, Y: 0, Radius: 800, RadiusPlus:200}, What:{StarX: 60}},
+            {Random:{X: 0, Y: 0, Radius: 800}, What:{SL1:12}}
+        ],
     },
     'HealthSplit':{
         BoardMods:['sitOnMap','allAvoid','healthSplit','carras25health'],
