@@ -1710,15 +1710,15 @@ BBAdata['ObjectDatas']={
     },
     slimensen:{
         view:{
-            Letter: 1414,
-            LetterSize: 80,
+            Letter: 3168,
+            LetterSize: 50,
             Color: 'red',
-            Angle: 0,
+            Angle: 90,
             HitPattern: 'HullFire_80',
         },
 
         lifeM: 34,
-        radius: 40,
+        radius: 26,
 
         onDieDelete: true,
         onDieHideExplosion: true,
@@ -1776,15 +1776,15 @@ BBAdata['ObjectDatas']={
     slimensen1:{
         extends: 'slimensen',
         view:{
-            Letter: 1414,
-            LetterSize: 60,
+            Letter: 3083,
+            LetterSize: 45,
             Color: 'red',
-            Angle: 0,
+            Angle: 90,
             HitPattern: 'HullFire_60',
         },
 
         lifeM: 18,
-        radius: 30,
+        radius: 23,
 
         onDieDelete: true,
         onDieHideExplosion: true,
@@ -1810,15 +1810,15 @@ BBAdata['ObjectDatas']={
     slimensen2:{
         extends: 'slimensen',
         view:{
-            Letter: 1414,
-            LetterSize: 45,
+            Letter: 3096,
+            LetterSize: 35,
             Color: 'red',
-            Angle: 0,
+            Angle: 90,
             HitPattern: 'HullFire_40',
         },
 
         lifeM: 12,
-        radius: 23,
+        radius: 20,
 
         onDieDelete: true,
         onDieHideExplosion: true,
@@ -1845,10 +1845,10 @@ BBAdata['ObjectDatas']={
     slimensen3:{
         extends: 'slimensen',
         view:{
-            Letter: 1414,
+            Letter: 3098,
             LetterSize: 30,
             Color: 'red',
-            Angle: 0,
+            Angle: 90,
             HitPattern: 'HullFire_20',
         },
 
@@ -1879,15 +1879,15 @@ BBAdata['ObjectDatas']={
     slimensen4:{
         extends: 'slimensen',
         view:{
-            Letter: 1414,
-            LetterSize: 20,
+            Letter: 3112,
+            LetterSize: 25,
             Color: 'red',
-            Angle: 0,
+            Angle: 90,
             HitPattern: 'HullFire_20',
         },
 
         lifeM: 4,
-        radius: 10,
+        radius: 15,
 
         onDieDelete: false,
         onDieHideExplosion: false,
