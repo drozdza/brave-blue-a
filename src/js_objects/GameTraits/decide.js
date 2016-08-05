@@ -342,10 +342,12 @@ GAMEobject.prototype.decide = function(o){
                     O.doingNow = 'mergeWith';
                     O.doingTime = 100;
                     O.mergeWith = mergeI;
+                    O.doNotInterupt = true;
 
                     Q.doingNow = 'mergeWith';
                     Q.doingTime = 100;
                     Q.mergeWith = o;
+                    Q.doNotInterupt = true;
 
                     L = this.putObj_directAnim('megreBeam', {timeDeath: 100});
                     this.O[L].pathD = ['M', parseInt(o), 'L', parseInt(mergeI)];

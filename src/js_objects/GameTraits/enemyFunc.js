@@ -165,8 +165,10 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
     else if(explodeObj.explodeType=='putObjs'){
         var objNumb = explodeObj.objMin;
         if(explodeObj.objRand) objNumb-=-parseInt(Math.random()*(explodeObj.objRand- -1));
-        for(var i=0; i<objNumb; ++i)
+        for(var i=0; i<objNumb; ++i){
             L = this.putObj(explodeObj.objName,explodeObj.objType,O.S,O.x,O.y);
+            this.addBoardMods(L);
+        }
     }
     else {
         L = this.putObj('destruction_field','region',O.S,O.x,O.y);
@@ -276,6 +278,7 @@ GAMEobject.prototype.mergeShips = function(o,q){
 
     var L = this.putObj(what,'comp',O.S,x,y);
     this.O[L].angle = O.angle;
+    this.addBoardMods(L);
 
     O.onDie = false;
     O.onDieDelete = true;

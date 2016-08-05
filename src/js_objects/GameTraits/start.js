@@ -45,6 +45,7 @@ GAMEobject.prototype.setBoard = function(){
       //  document.addEventListener('mousemove',function(e){     GAME.mousemove(e); },false);
 }
 GAMEobject.prototype.start = function(Setting,Ship){
+    this.MapSetting = Setting;
     this.MapRadius=Setting.MapRadius;
     this.MapRadius2=Setting.MapRadius2;
     this.SHIP = Ship;
@@ -164,9 +165,7 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
                 var L = this.putObj('space_mine','comp',1,x,y);
             } else {
                 var L = this.putObj(BBAdata['ShipNames'][placeWhat],'comp',1,x,y);
-                if(typeof Setting.BoardMods !='undefined')
-                    for(var k in Setting.BoardMods)
-                        this.addBoardMod(L,Setting.BoardMods[k]);
+                this.addBoardMods(L);
                 if(typeof SET.BoardMods !='undefined')
                     for(var k in SET.BoardMods)
                         this.addBoardMod(L,SET.BoardMods[k]);
@@ -177,6 +176,14 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
         }
     }
 
+}
+
+GAMEobject.prototype.addBoardMods = function(o){
+    var Setting = this.MapSetting;
+
+    if(typeof Setting.BoardMods !='undefined')
+        for(var k in Setting.BoardMods)
+            this.addBoardMod(o,Setting.BoardMods[k]);
 }
 
 GAMEobject.prototype.addBoardMod = function(o,MODname){
