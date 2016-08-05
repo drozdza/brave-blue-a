@@ -328,14 +328,14 @@ GAMEobject.prototype.decide = function(o){
 
             if(TD.T=='mergeSearch'){
                 var inRange = this.getCollidingWithCircle(O.x,O.y,TD.mergeDist,['E']);
-                console.log(inRange);
+                if(O.doingNow == 'mergeWith') continue;
                 var mergeI = false;
                 for(var i in inRange)
                     if(i != o && this.O[i].T==TD.mergeWith && this.O[i].doingNow != 'mergeWith'){
                         mergeI = i;
                         break;
                     }
-                
+
                 if(mergeI){
                     var Q = this.O[ mergeI ];
 

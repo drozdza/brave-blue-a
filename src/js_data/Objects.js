@@ -1727,7 +1727,7 @@ BBAdata['ObjectDatas']={
         mergeAbility: 0,
         Res: {'mergeAbility': {M:20,T:0}},
         weapon:[
-            {t:'refilResource', resource: 'mergeAbility', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
+            {t:'refilResource', resource: 'mergeAbility', gunSpeed: 120, maxSpeed: 2, doNextWeapon: true},
             {t:'single', Power:1, Dec: 50, Speed: 10, gunSpeed: 30, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
         ],
 
@@ -1791,13 +1791,13 @@ BBAdata['ObjectDatas']={
         onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen2', objType:'comp', objMin:2, objRand:2},
 
         weapon:[
-            {t:'refilResource', resource: 'mergeAbility', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
+            {t:'refilResource', resource: 'mergeAbility', gunSpeed: 60, maxSpeed: 2, doNextWeapon: true},
             {t:'mergeWith', doingNow: 'mergeWith', doNextWeapon: true},
             {t:'single', Power:1, Dec: 50, Speed: 10, gunSpeed: 30, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
         ],
 
         toDo: [
-            {N:88,T:'mergeSearch',  usedRes:'mergeAbility', usedResR: 2, mergeWith: 'slimensen1', mergeDist: 750},
+            {N:88,T:'mergeSearch',  usedRes:'mergeAbility', usedResR: 20, mergeWith: 'slimensen1', mergeDist: 750},
             {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
             {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, gotoAlarm: 4, goToSpotLvl: 2},
             {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3 },
@@ -1831,7 +1831,7 @@ BBAdata['ObjectDatas']={
         ],
 
         toDo: [
-            {N:88,T:'mergeSearch',  usedRes:'mergeAbility', usedResR: 2, mergeWith: 'slimensen2', mergeDist: 750},
+            {N:88,T:'mergeSearch',  usedRes:'mergeAbility', usedResR: 20, mergeWith: 'slimensen2', mergeDist: 750},
             {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
             {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, gotoAlarm: 4, goToSpotLvl: 2},
             {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3 },
@@ -1860,13 +1860,13 @@ BBAdata['ObjectDatas']={
         onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen4', objType:'comp', objMin:2, objRand:2},
 
         weapon:[
-            {t:'refilResource', resource: 'mergeAbility', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
+            {t:'refilResource', resource: 'mergeAbility', gunSpeed: 15, maxSpeed: 2, doNextWeapon: true},
             {t:'mergeWith', doingNow: 'mergeWith', doNextWeapon: true},
             {t:'single', Power:1, Dec: 50, Speed: 10, gunSpeed: 30, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
         ],
 
         toDo: [
-            {N:88,T:'mergeSearch',  usedRes:'mergeAbility', usedResR: 2, mergeWith: 'slimensen3', mergeDist: 750},
+            {N:88,T:'mergeSearch',  usedRes:'mergeAbility', usedResR: 20, mergeWith: 'slimensen3', mergeDist: 750},
             {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
             {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, gotoAlarm: 4, goToSpotLvl: 2},
             {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3 },
@@ -1900,7 +1900,7 @@ BBAdata['ObjectDatas']={
         ],
 
         toDo: [
-            {N:88,T:'mergeSearch',  usedRes:'mergeAbility', usedResR: 2, mergeWith: 'slimensen4', mergeDist: 750},
+            {N:88,T:'mergeSearch',  usedRes:'mergeAbility', usedResR: 20, mergeWith: 'slimensen4', mergeDist: 750},
             {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
             {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, gotoAlarm: 4, goToSpotLvl: 2},
             {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3 },

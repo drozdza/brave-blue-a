@@ -27,7 +27,7 @@ BBAdata['MapMODS']={
         ],
     },
     allAvoid:{
-        who:['carras','hajaher','cloaker','dregos','hiacynt','zarahiash','vitotas'],
+        who:['carras','hajaher','cloaker','dregos','hiacynt','zarahiash','vitotas','slimensen','slimensen1','slimensen2','slimensen3','slimensen4'],
         toDo:[
             {N:74,T:'alarmAboutIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 5, alarmRadius: 150},
             {N:73,T:'avoidIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 2, avoidTime: 12},
