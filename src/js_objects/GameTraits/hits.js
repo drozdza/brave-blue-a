@@ -249,7 +249,6 @@ GAMEobject.prototype.dieObj = function(O,o){
     if(O.squadScheme)
         this.disbandSquad(O);
 
-    console.log('dieObj: '+o);
     if(O.onDieRemove){
         for(var i in O.onDieRemove){
             if(typeof this.O[ O.onDieRemove[i] ] != 'undefined')

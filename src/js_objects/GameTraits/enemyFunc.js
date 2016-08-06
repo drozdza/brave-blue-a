@@ -271,8 +271,6 @@ GAMEobject.prototype.mergeShips = function(o,q){
     if(O.T=='slimensen2') what = 'slimensen1';
     if(O.T=='slimensen1') what = 'slimensen';
 
-    console.log('MERGE!!!: '+what);
-
     var x = parseInt(O.x- -(O.x-Q.x)/2);
     var y = parseInt(O.y- -(O.y-Q.y)/2);
 

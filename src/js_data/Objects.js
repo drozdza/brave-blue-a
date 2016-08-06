@@ -1410,7 +1410,7 @@ BBAdata['ObjectDatas']={
     },
     wariankiel:{
         view:{
-            Letter: 373, // some funny W
+            Letter: 373, // W with ^
             LetterSize: 20,
             Color: 'red',
             Angle: 0,
@@ -1422,8 +1422,7 @@ BBAdata['ObjectDatas']={
 
         Res: {},
         weapon:[
-            {t:'changeAction', minDistToEnemy: 250, makeAction: {doingNow:'shooting', doingTime: 6, doNotInterupt:true}, gunSpeed: 55, lastShot: 200, FlagRequired:{noStar:false}},
-            {t:'single', Power:1, Dec: 25, Speed: 10, gunSpeed: 2, lastShot: 0, doingNow:'shooting'},
+            {t:'single', Power:1, Dec: 25, Speed: 10, gunSpeed: 2, lastShot: 0, gunWork: 6, gunReload: 60, minDistToEnemy: 250, FlagsRequired:{noStar: false}},
         ],
 
 
@@ -1621,7 +1620,7 @@ BBAdata['ObjectDatas']={
         weapon:[
             {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true}, minSpeed: 2},
             {t:'refilResource', resource: 'fieldCharges', gunSpeed: 30, minSpeed: 2, doNextWeapon: true},
-            {t:'double2', Speed:10, Dec:50, Power:1, Wide: 15, gunSpeed: 3, maxSpeed:1, minSpeed:1},
+            {t:'double2', Speed:10, Dec:50, Power:1, Wide: 15, gunSpeed: 1, gunWork: 11, gunReload: 50, gunSiteChange: 3, maxSpeed:1, minSpeed:1},
             {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, maxSpeed: 0, doingNow:'followEnemy', makeAction: {Manuover:'followEnemy', doingNow:'followEnemy', doingTime: 120, doNotInterupt:true}},
             // {t:'changeAction', makeAction: {Manuover:'turnRight', doingNow:'shooting', doingTime:30, doNotInterupt:true}, gunSpeed: 110, lastShot: 100,  minAlarm: 5, minDistToEnemy: 400},
         ],
@@ -1640,7 +1639,7 @@ BBAdata['ObjectDatas']={
         doingTime: -1,
         Manouver: 'goStraight',
         toDo: [
-            {N:77,T:'changeSpeed', maxSpeedLvl: 0, gotoSpeed: 1, doingTime: 20},
+            {N:77,T:'changeSpeed', maxSpeedLvl: 0, gotoSpeed: 1, doingTime: 200},
             {N:76,T:'changeSpeed', maxSpeedLvl: 1, minSpeedLvl: 1,  gotoSpeed: 2},
             {N:56,T:'followEnemy', minAlarm: 5, minSpeedLvl: 2, gotoSpeed: 0, usedRes:'fieldCharges', usedResR: 10, doingTime:150, minDistToEnemy: 450},
             {N:55,T:'followEnemy', minAlarm: 5, maxSpeedLvl: 0, doingTime:150},
@@ -1648,7 +1647,7 @@ BBAdata['ObjectDatas']={
         ],
 
         speedArr:[{S:0, T:6},
-            {S:1, T:{shipVar:'speedT',Add:2}},
+            {S:0.5, T:{shipVar:'speedT',Add:2}},
             {S:{shipVar:'speed'},        T:{shipVar:'speedT',Add:-1}},
             {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
         ],
@@ -1728,7 +1727,8 @@ BBAdata['ObjectDatas']={
         Res: {'mergeAbility': {M:20,T:0}},
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 120, maxSpeed: 2, doNextWeapon: true},
-            {t:'single', Power:1, Dec: 50, Speed: 10, gunSpeed: 30, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
+            {t:'rose', Power:1, Dec: 50, Speed: 7, gunSpeed: 20, lastShot: 100, AtOnce: 60, RoseAngle: 6, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
+
         ],
 
         squadScheme: [{
@@ -1766,8 +1766,8 @@ BBAdata['ObjectDatas']={
         ],
 
         shipVariables:{
-            speed: {Const: 4, Rand: 3},
-            speedT: {Const: 2.5, Rand: 1.5},
+            speed: {Const: 2, Rand: 2},
+            speedT: {Const: 2.5, Rand: 2.5},
             spotRad: {Const: 180, RandInt: 80},
             spotRad2: {Const: 400, RandInt: 200},
             spotAngle2: {Const: 40, RandInt: 30}
@@ -1793,7 +1793,7 @@ BBAdata['ObjectDatas']={
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 60, maxSpeed: 2, doNextWeapon: true},
             {t:'mergeWith', doingNow: 'mergeWith', doNextWeapon: true},
-            {t:'single', Power:1, Dec: 50, Speed: 10, gunSpeed: 30, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
+            {t:'rose', Power:1, Dec: 50, Speed: 13, gunSpeed: 30, lastShot: 100, AtOnce: 11, RoseAngle: 4, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
         ],
 
         toDo: [
@@ -1806,6 +1806,25 @@ BBAdata['ObjectDatas']={
             {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
         ],
 
+        speedArr:[0,
+            {S:{shipVar:'speed',Add:-2}, T:1},
+            {S:{shipVar:'speed'},        T:{shipVar:'speedT'}},
+            {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            speed: {Const: 5, Rand: 3},
+            speedT: {Const: 2.5, Rand: 1.5},
+            spotRad: {Const: 180, RandInt: 80},
+            spotRad2: {Const: 400, RandInt: 200},
+            spotAngle2: {Const: 40, RandInt: 30}
+        },
     },
     slimensen2:{
         extends: 'slimensen',
@@ -1827,7 +1846,7 @@ BBAdata['ObjectDatas']={
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
             {t:'mergeWith', doingNow: 'mergeWith', doNextWeapon: true},
-            {t:'single', Power:1, Dec: 50, Speed: 10, gunSpeed: 30, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
+            {t:'double2', Power:1, Dec: 50, Speed: 13, gunSpeed: 5, gunWork: 20, gunReload: 90, Wide:10, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
         ],
 
         toDo: [
@@ -1840,7 +1859,25 @@ BBAdata['ObjectDatas']={
             {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
         ],
 
+        speedArr:[0,
+            {S:{shipVar:'speed',Add:-2}, T:1},
+            {S:{shipVar:'speed'},        T:{shipVar:'speedT'}},
+            {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
 
+        shipVariables:{
+            speed: {Const: 7, Rand: 2},
+            speedT: {Const: 2, Rand: 1.5},
+            spotRad: {Const: 180, RandInt: 80},
+            spotRad2: {Const: 400, RandInt: 200},
+            spotAngle2: {Const: 40, RandInt: 30}
+        },
     },
     slimensen3:{
         extends: 'slimensen',
@@ -1862,7 +1899,7 @@ BBAdata['ObjectDatas']={
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 15, maxSpeed: 2, doNextWeapon: true},
             {t:'mergeWith', doingNow: 'mergeWith', doNextWeapon: true},
-            {t:'single', Power:1, Dec: 50, Speed: 10, gunSpeed: 30, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
+            {t:'single', Power:1, Dec: 50, Speed: 13, gunSpeed: 5, gunWork: 20, gunReload: 90, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
         ],
 
         toDo: [
@@ -1875,6 +1912,25 @@ BBAdata['ObjectDatas']={
             {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
         ],
 
+        speedArr:[0,
+            {S:{shipVar:'speed',Add:-2}, T:1},
+            {S:{shipVar:'speed'},        T:{shipVar:'speedT'}},
+            {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            speed: {Const: 8, Rand: 2},
+            speedT: {Const: 1, Rand: 1},
+            spotRad: {Const: 180, RandInt: 80},
+            spotRad2: {Const: 400, RandInt: 200},
+            spotAngle2: {Const: 40, RandInt: 30}
+        },
     },
     slimensen4:{
         extends: 'slimensen',
@@ -1896,7 +1952,7 @@ BBAdata['ObjectDatas']={
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
             {t:'mergeWith', doingNow: 'mergeWith', doNextWeapon: true},
-            {t:'single', Power:1, Dec: 50, Speed: 10, gunSpeed: 30, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
+            {t:'single', Power:1, Dec: 50, Speed: 13, gunSpeed: 30, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
         ],
 
         toDo: [
@@ -1908,8 +1964,87 @@ BBAdata['ObjectDatas']={
             {N:18,T:'changeManouver2', maxAlarm: 4, minAlarm: 3, straightMin: 20, straightPlus: 80, turnMin: 10, turnPlus: 80  },
             {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
         ],
+
+        speedArr:[0,
+            {S:{shipVar:'speed',Add:-2}, T:1},
+            {S:{shipVar:'speed'},        T:{shipVar:'speedT'}},
+            {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            speed: {Const: 10, Rand: 2},
+            speedT: {Const: 1, Rand: 0.5},
+            spotRad: {Const: 180, RandInt: 80},
+            spotRad2: {Const: 400, RandInt: 200},
+            spotAngle2: {Const: 40, RandInt: 30}
+        },
     },
 
+    doomderos:{
+        view:{
+            Letter: 992,
+            LetterSize: 60,
+            Color: 'red',
+            Angle: 180,
+            HitPattern: 'HullFire_80',
+        },
+
+        lifeM: 12,
+        radius: 40,
+
+        fieldCharges: 0,
+        Res: {'fieldCharges': {M:10,T:0}},
+        weapon:[
+            {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true},maxSpeed: 2},
+            {t:'refilResource', resource: 'fieldCharges', gunSpeed: 20, maxSpeed: 2, doNextWeapon: true},
+            {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', minDistToEnemy:500, usedResR: 10, doingNow:'followEnemy', makeAction:{doingNow:'followEnemy', doingTime:220, Manouver:'followEnemy',doNotInterupt:true}},
+        ],
+
+        squadScheme: [{
+            type: 'ConeField',
+            radius: 200,
+            angle: 0,
+            angleAddon: 180,
+            Oid: -1,
+            placementT:'directPlaces',
+            objData: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDamage: 1, PeriodTime: 15, PeriodOffset: 10, dontHit:['B','BE','E','M','ME','A'], particlesOnBoard:true, fieldAnimMoving:true}
+        }],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:55,T:'followEnemy', minAlarm: 5, gotoSpeed: 3, usedRes:'fieldCharges', usedResR: 10},
+            {T:'changeSpeed', minSpeedLvl: 3, gotoSpeed: 2},
+            {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:{shipVar:'speed',Add:-2}, T:1},
+            {S:{shipVar:'speed'},        T:{shipVar:'speedT',Add:-1}},
+            {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            speed: {Const: 4, Rand: 3},
+            speedT: {Const: 1.5, Rand: 1.5},
+            spotRad: {Const: 180, RandInt: 80},
+            spotRad2: {Const: 400, RandInt: 200},
+            spotAngle2: {Const: 40, RandInt: 30}
+        },
+    },
 
 
 };

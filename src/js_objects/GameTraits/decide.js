@@ -570,6 +570,15 @@ GAMEobject.prototype.decide = function(o){
                 if(notAllFlags) continue;
             }
 
+            if(WP.gunReload){
+                if(typeof WP.lastGunReload == 'undefined')
+                    WP.lastGunReload = this.tick;
+                if(WP.lastGunReload- -WP.gunReload <= this.tick)
+                    WP.lastGunReload = this.tick;
+                if(WP.lastGunReload- -WP.gunWork <= this.tick)
+                    continue;
+            }
+
             if(WP.makeAction) this.makeAction(O,o,WP.makeAction);
 
             if(WP.t == 'getAcurateAngle'){
@@ -582,13 +591,27 @@ GAMEobject.prototype.decide = function(o){
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'double'){
-                this.shootBulletOnSide(o,0,WP.Speed,WP.Dec,45,30,WP.Power);
-                this.shootBulletOnSide(o,0,WP.Speed,WP.Dec,-45,30,WP.Power);
+                if(WP.gunSiteChange){
+                    var Kuk = -45;
+                    if(parseInt((this.tick-WP.lastGunReload)/WP.gunSiteChange)%2 == 0)
+                        Kuk = 45;
+                    this.shootBulletOnSide(o,0,WP.Speed,WP.Dec,Kuk,WP.Wide || 30,WP.Power);
+                }else{
+                    this.shootBulletOnSide(o,0,WP.Speed,WP.Dec,45, WP.Wide || 30,WP.Power);
+                    this.shootBulletOnSide(o,0,WP.Speed,WP.Dec,-45,WP.Wide || 30,WP.Power);
+                }
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'double2'){
-                this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,45, WP.Wide || 5,WP.Power);
-                this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,-45,WP.Wide || 5,WP.Power);
+                if(WP.gunSiteChange){
+                    var Kuk = -45;
+                    if(parseInt((this.tick-WP.lastGunReload)/WP.gunSiteChange)%2 == 0)
+                        Kuk = 45;
+                    this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,Kuk,WP.Wide || 5,WP.Power);
+                }else{
+                    this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,45, WP.Wide || 5,WP.Power);
+                    this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,-45,WP.Wide || 5,WP.Power);
+                }
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'rose'){

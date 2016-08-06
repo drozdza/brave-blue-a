@@ -415,7 +415,6 @@ function CanvasManagerObject(){
             if(typeof (path[i])== 'string'){
                 string+=path[i]+' ';
             } else if(typeof (path[i]) == 'number'){
-                console.log('Path: '+path[i]);
                 string+=(GAME.O[ path[i] ].x-Px)+' '+(GAME.O[ path[i] ].y-Py)+' ';
             } else {
                 string+=(path[i].x-Px)+' '+(path[i].y-Py)+' ';
