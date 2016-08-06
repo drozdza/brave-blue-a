@@ -19,10 +19,12 @@ GAMEobject.prototype.changeSpeedLvl = function(O,speedLvl){
 }
 GAMEobject.prototype.makeAction = function(O,o,Action){
     if(Action.doingNow) O.doingNow = Action.doingNow;
-    if(Action.doingTime) O.doingTime = Action.doingTime;
+    if(Action.doingTime) O.doingTime = Action.doingTime- -this.tick;
     if(Action.doNotInterupt) O.doNotInterupt = Action.doNotInterupt;
     if(Action.Manouver)  O.Manouver = Action.Manouver;
-    if(Action.gotoSpeed) this.changeSpeedLvl(O, Action.gotoSpeed);
+    if(Action.gotoSpeed !== false) this.changeSpeedLvl(O, Action.gotoSpeed);
+
+    console.log('Action.gotoSpeed: '+Action.gotoSpeed);
     if(Action.gotoAlarm) O.alarmLvl = Action.gotoAlarm;
     if(Action.unCloak){
         delete O.view.Cloaked;
@@ -33,6 +35,7 @@ GAMEobject.prototype.makeAction = function(O,o,Action){
         CanvasManager.requestCanvas(o);
     }
 
+    console.log('makeAction: '+O.doingNow);
 }
 
 

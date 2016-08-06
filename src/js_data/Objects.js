@@ -2049,7 +2049,7 @@ BBAdata['ObjectDatas']={
         Res: {'fieldCharges': {M:10,T:0}},
         weapon:[
             {t:'shootSquadMember', Speed: 7, MemberAge: 120, DieTime: 100},
-            {t:'produceSquad', gunSpeed: 1, gotoSpeed:0, doingNow: 'followEnemy', gotoSpeed: 0, makeAction: {doingNow:'followEnemy', doingTime: 120, Manouver:'followEnemyt', doNotInterupt:true}, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, maxSpeed: 2, FlagsRequired:{squadFull:false}, minDistToEnemy:450},
+            {t:'produceSquad', gunSpeed: 1, makeAction: {doingNow:'followEnemy', gotoSpeed: 0, doingTime: 120, Manouver:'followEnemy', doNotInterupt:true}, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, maxSpeed: 2, FlagsRequired:{squadFull:false}, minDistToEnemy:450},
             {t:'refilResource', resource: 'fieldCharges', gunSpeed: 10, maxSpeed: 2, FlagsRequired:{squadFull:false}},
         ],
 
@@ -2066,7 +2066,6 @@ BBAdata['ObjectDatas']={
         doingTime: -1,
         Manouver: 'goStraight',
         toDo: [
-            {N:55,T:'followEnemy', minAlarm: 5, usedRes:'fieldCharges', usedResR: 10, doingTime:120},
             {N:35,T:'changeSpeed', maxSpeedLvl: 0, gotoSpeed: 2},
             {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 10, turnPlus: 30  },
         ],

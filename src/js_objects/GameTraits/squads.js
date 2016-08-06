@@ -170,6 +170,17 @@ GAMEobject.prototype.disbandSquad = function(O){
             if(sO.fieldAnim=='ShellField'){
                 CanvasManager.change_regionAnim(sO,O.squadScheme[i].Oid, 'ShellFieldEnd', 'end', 48);
             }
+            if(sO.fieldAnim=='PlasmaField'){
+                CanvasManager.change_regionAnim(sO,O.squadScheme[i].Oid, 'ShellFieldEnd', 'end', 48);
+                var kuTime = this.tick - this.O[ O.squadScheme[i].Oid ].bornTime;
+                this.O[ O.squadScheme[i].Oid ].S = 1;
+                switch(parseInt(kuTime/30)){
+                    case 0:  this.explodeBomb( O.squadScheme[i].Oid, {Dist: 35, Power: 4} ); break;
+                    case 1:  this.explodeBomb( O.squadScheme[i].Oid, {Dist: 80, Power: 7} ); break;
+                    case 2:  this.explodeBomb( O.squadScheme[i].Oid, {Dist: 120, Power: 11} ); break;
+                    default: this.explodeBomb( O.squadScheme[i].Oid, {Dist: 210, Power: 18} ); break;
+                }
+            }
             if(sO.squadT && sO.squadT == 'laserAim'){
                 this.removeObj( O.squadScheme[i].Oid );
             }

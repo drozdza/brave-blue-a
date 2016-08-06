@@ -61,7 +61,6 @@ function CanvasParticleManagerObject(){
                 x = parseInt(Math.random()*R1*2-R1);
                 y = parseInt(Math.random()*R1*2-R1);
                 dist = Math.sqrt(x*x- -y*y);
-                console.log(R1+' '+R2+' '+dist);
             }while(!(dist > R2 && dist < R1));
         }
 
