@@ -77,12 +77,14 @@ GAMEobject.prototype.dropSpaceMine = function(o,Angle,bombData){
 
     this.cloneExplosionData(bombData, this.O[L]);
 }
-GAMEobject.prototype.shootBomb = function(o,Angle,Speed,Dec,bombData){
+GAMEobject.prototype.shootBomb = function(o,Angle,Speed,Dec,bombData,teleportData){
     var O = this.O[o];
     var L = this.putObj('bullet_bomb','comp',O.S,O.x,O.y);
     this.O[L].speed = Speed || 10;
     this.O[L].doingTime = Dec || 30;
     this.O[L].angle = Angle;
+    if(teleportData)
+        this.O[L].TeleportMovement = teleportData;
 
     this.cloneExplosionData(bombData, this.O[L]);
 }

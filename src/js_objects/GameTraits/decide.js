@@ -46,6 +46,16 @@ GAMEobject.prototype.decide = function(o){
     var PlayerDist = Math.sqrt(X*X- -Y*Y);
     var PlayerAngle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
 
+
+    if(O.TeleportMovement){
+        var TELE = O.TeleportMovement;
+        var Angle = (O.angle - -TELE.Angle- -360)%360;
+        if(TELE.AngleRand)
+            Angle -=- parseInt(Math.random()*TELE.AngleRand);
+        this.teleportJump(o,TELE.Dist,Angle,'TP_trackDark');
+
+    }
+
     // Spotting
     if(O.spotLvl){
         if(this.tick % (O.spotArr[ O.spotLvl ].Ref) == 0){
@@ -661,7 +671,9 @@ GAMEobject.prototype.decide = function(o){
                 var bombData = false;
                 if(typeof WP.BombType !='undefined') bombData = O.Bombs[ WP.BombType ];
                 if(WP.BombRandom) bombData = O.Bombs[ parseInt(Math.random()*WP.BombRandom) ];
-                this.shootBomb(o,PlayerAngle,WP.Speed,WP.Dec,bombData);
+                var teleportData = false;
+                if(typeof WP.Teleport !='undefined') teleportData = WP.Teleport;
+                this.shootBomb(o,PlayerAngle,WP.Speed,WP.Dec,bombData,teleportData);
                 WP.lastShot = this.tick;
             }
 

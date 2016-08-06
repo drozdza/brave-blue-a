@@ -1985,6 +1985,56 @@ BBAdata['ObjectDatas']={
             spotAngle2: {Const: 40, RandInt: 30}
         },
     },
+    thunderton:{
+        view:{
+            Letter: 1006,
+            LetterSize: 80,
+            Color: 'red',
+            Angle:  0,
+            HitPattern: 'HullFire_80',
+        },
+
+        lifeM: 45,
+        radius: 40,
+
+
+
+        Bombs:[{
+            onHitDieExpire:    {Do:'explode',Power: 7, Dist: 80},
+        }],
+
+        energyField: 10,
+        Res: {'energyField': {M:10,T:0}},
+        weapon:[
+            {t:'refilResource', resource: 'energyField', gunSpeed: 120, maxSpeed: 2, doNextWeapon: true},
+            {t:'bomb', Speed: 0.1, Teleport:{ Dist: 35, Angle: 270, AngleRand: 180}, Dec: 10, BombType: 0, gunSpeed: 10, lastShot: 100, maxSpeed: 2, minAlarm: 5, gunWork:80, gunReload:900, minDistToEnemy:500},
+        ],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:1, T:1},
+            {S:1, T:1.5},
+            {S:3, T:0.2}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 180, RandInt: 80},
+            spotRad2: {Const: 400, RandInt: 200},
+            spotAngle2: {Const: 40, RandInt: 30}
+        },
+    },
 
     doomderos:{
         view:{
@@ -2045,6 +2095,7 @@ BBAdata['ObjectDatas']={
             spotAngle2: {Const: 40, RandInt: 30}
         },
     },
+
 
 
 };

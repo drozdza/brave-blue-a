@@ -279,6 +279,13 @@ BBAdata['MAPS']={
             {Random:{X: 0, Y: 0, Radius: 800}, What:{SL2:12,SL3:12,SL4:12}}
         ],
     },
+    'Lx1006':{
+        BoardMods:['sitOnMap','allAvoid'],
+        Place:[
+            {RingOf:{X: 0, Y: 0, Radius: 800, RadiusPlus:200}, What:{StarX: 60}},
+            {RingOf:{X: 0, Y: 0, Radius: 1200}, What:{TT:6}}
+        ],
+    },
     'Lx992':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[
@@ -300,7 +307,7 @@ BBAdata['MAPS']={
     },
     'BigOnes':{
         BoardMods:['sitOnMap','allAvoid'],
-        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, D:10, M:10, N:10, J:10, W:5, T:10, E:10, G:10, R:10, B:10, K:10, F:10, Q:5,X:5}}],
+        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, D:10, M:10, N:10, J:10, W:5, T:10, E:10, G:10, R:10, B:10, K:10, F:10, Q:5,X:5,TT:10}}],
     },
     'Secure':{
         BoardMods:['sitOnMap','allAvoid'],
@@ -313,7 +320,7 @@ BBAdata['MAPS']={
     'HardCore':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[
-            {Random:{X: 0, Y: 0, Radius: 2200}, What:{A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5, T:10, E:10, C:10, G:10, R:10, H:10, B:10, V:10, K:10, F:10, Q:5, X:6, Z:5, PI:10, WP:5,Ni:10,SH:10,L:5}},
+            {Random:{X: 0, Y: 0, Radius: 2200}, What:{A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5, T:10, E:10, C:10, G:10, R:10, H:10, B:10, V:10, K:10, F:10, Q:5, X:6, Z:5, PI:10, WP:5,Ni:10,SH:10,L:5,TT:10}},
             {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarX:150,iD:10,Wi:10}}
         ]
     },
