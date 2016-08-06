@@ -291,6 +291,7 @@ GAMEobject.prototype.setRegionAnimation = function(o,animType){
 
     if(animType=='DestructionField') O.animType = 'DestrFieldStart';
     if(animType=='ElectricityField') O.animType = 'EleFieldStart';
+    if(animType=='PlasmaField')      O.animType = 'PlasmaFieldStart';
     if(animType=='HealingField')     O.animType = 'HealFieldStart';
     if(animType=='GravityField')     O.animType = 'GravFieldStart';
     if(animType=='OrbitalField')     O.animType = 'OrbFieldStart';

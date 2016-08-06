@@ -176,6 +176,17 @@ CanvasManagerObject.prototype.neededRenders={
             40:{fontSize: 5, color: [0,120,255,0,0.2]},
         }
     },
+    plasma_field:{
+        Letter: 1244, // another energy Zigzac
+        frames: 40,
+        sizeX: 40,
+        sizeY: 40,
+        states:{
+            0:{fontSize: 5, color: [255,0,0,0.2]},
+            20:{fontSize: 25, color: [255,255,0,1]},
+            40:{fontSize: 10, color: [255,0,0,1]},
+        }
+    },
     heal_field:{
         Letter: '+',
         frames: 40,

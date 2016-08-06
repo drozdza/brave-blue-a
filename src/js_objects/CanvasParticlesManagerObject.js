@@ -55,11 +55,13 @@ function CanvasParticleManagerObject(){
             var R1=O.radius;
             if(DR.Particles.anim=='randomMove'){ R1*=0.75; }
             if(DR.Particles.anim=='toCenter'){   R2=R1*0.4; R1*=1.2; }
+            if(DR.Particles.anim=='toCenterOutside'){ R2=120; R1=200; }
             if(DR.Particles.anim=='onOrbit'){    R2=R1*0.2; }
             do{
                 x = parseInt(Math.random()*R1*2-R1);
                 y = parseInt(Math.random()*R1*2-R1);
                 dist = Math.sqrt(x*x- -y*y);
+                console.log(R1+' '+R2+' '+dist);
             }while(!(dist > R2 && dist < R1));
         }
 
@@ -99,7 +101,7 @@ function CanvasParticleManagerObject(){
             }
             this.particleTab[uU] = {time:0,O:O,x:PX.x,y:PX.y,angle: angle, rotation: rotation, rotate:rotate, speed: 1, particleId: DR.Particles.id, particleTime: DR.Particles.time, particleXY: DR.Particles.XY};
         }
-        if(DR.Particles.anim=='toCenter'){
+        if(DR.Particles.anim=='toCenter' || DR.Particles.anim=='toCenterOutside'){
             var angle =  parseInt(- (Math.atan2(PX.x,PX.y)*180/Math.PI))%360;
             this.particleTab[uU] = {time:0,O:O,x:PX.x,y:PX.y,angle: angle, rotation: angle, rotate:0, speed: 6, particleId: DR.Particles.id, particleTime: DR.Particles.time, particleXY: DR.Particles.XY};
         }

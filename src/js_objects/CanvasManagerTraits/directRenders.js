@@ -263,6 +263,48 @@ CanvasManagerObject.prototype.directRenders={
             25:{color0:[0,120,255,0],   color1:[0,120,255,0],   color2:[0,120,255,0],   color3:[0,0,0,0], stop0:0.1,stop1:0.1,stop2:0.2,stop3:0.2},
         },
     },
+    PlasmaFieldStart:{
+        frames: 121,
+        gradientStops: 4,
+        states:{
+            0:  {color0:[255,0,0,0], color1:[255,0,0,0.0], color2:[255,0,0,0], color3:[255,0,0,0],   stop0:1,stop1:1,stop2:1, stop3:1},
+            30: {color0:[255,0,0,0.2], color1:[255,0,0,0.2], color2:[255,0,0,0.2], color3:[255,0,0,0.2],   stop0:1,stop1:1,stop2:1, stop3:1},
+            90: {color0:[255,0,0,0.5], color1:[255,255,0,0.8], color2:[255,0,0,0.2], color3:[255,0,0,0.2],   stop0:0.2,stop1:0.4,stop2:1, stop3:1},
+            121:{color0:[255,255,120,1], color1:[255,120,0,0.6], color2:[255,0,0,0.2], color3:[255,0,0,0.2],   stop0:0.1,stop1:0.3,stop2:1, stop3:1},
+        },
+        onEnd:'PlasmaFieldGoing',
+        Particles:{
+            density: 10,
+            id:'plasma_field',
+            time:20,
+            XY: 20,
+            anim:'toCenterOutside',
+            animAngle: 'withDirection'
+        },
+    },
+    PlasmaFieldGoing:{
+        gradientStops: 4,
+        color0:[255,255,120,1], color1:[255,120,0,0.6], color2:[255,0,0,0.2], color3:[255,0,0,0],   stop0:0.1,stop1:0.3,stop2:1, stop3:1,
+        onExpire:'PlasmaFieldEnd',
+        toExpire:20,
+        Particles:{
+            density: 10,
+            id:'plasma_field',
+            time:30,
+            XY: 20,
+            anim:'randomMove',
+            animAngle: 'withDirection'
+        },
+    },
+    PlasmaFieldEnd:{
+        frames: 25,
+        gradientStops: 4,
+        states:{
+            0: {color0:[255,255,120,1], color1:[255,120,0,0.6], color2:[255,0,0,0.2], color3:[255,0,0,0],   stop0:0.1,stop1:0.3,stop2:1, stop3:1 },
+            15:{color0:[255,255,120,1], color1:[255,120,0,0.6], color2:[255,0,0,0.2], color3:[255,0,0,0],   stop0:0.1,stop1:0.3,stop2:0.3, stop3:0.3 },
+            25:{color0:[255,255,120,1], color1:[255,120,0,0.6], color2:[255,0,0,0.2], color3:[255,0,0,0],   stop0:0.1,stop1:0.3,stop2:0.3, stop3:0.3 },
+        },
+    },
     HealFieldStart:{
         frames: 15,
         gradientStops: 3,

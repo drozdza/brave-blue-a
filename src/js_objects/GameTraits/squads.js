@@ -139,6 +139,9 @@ GAMEobject.prototype.unbindWithSquad = function(o,i,s){
         O.squadScheme[i].Oid=-1;
     }
 
+    delete oS.squadDirectPlace;
+    delete oS.squadMaster;
+
     O.Flags['squadMemberDied']=true;
     O.Flags['squadFull']=false;
 }

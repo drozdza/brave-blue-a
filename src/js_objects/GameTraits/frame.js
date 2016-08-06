@@ -52,7 +52,12 @@ GAMEobject.prototype.frame_decide = function(){
         if(this.tick > this.O[o].DieTime){
             if(this.O[o].squadDirectPlace)
                 this.unbindWithSquad(this.O[o].squadDirectPlace.o,this.O[o].squadDirectPlace.i,o);
-            this.removeObj(o);
+
+            if(this.O[o].onDie){
+                if(this.O[o].onDie.Do=='explode')
+                    this.explodeBomb(o,this.O[o].onDie);
+            } else
+                this.removeObj(o);
             continue;
         }
         this.checkHits(o);

@@ -100,6 +100,10 @@ GAMEobject.prototype.makePeriodEffect = function(o,q){
     var O = this.O[o];
     var Q = this.O[q];
 
+    if(O.PeriodDelay)
+        if(O.PeriodDelay- -O.bornTime > this.tick) return 1;
+
+
     if(Q.T=='bullet_bomb' && (typeof O.dontHurtOwnMissle != 'undefined' && O.dontHurtOwnMissle==true) && O.S==Q.S) return 1;
 
     var makeAction = false;
@@ -163,8 +167,6 @@ GAMEobject.prototype.makeOneTimeEffect = function(o,q){
                 this.unbindWithSquad(O.squadDirectPlace.o, O.squadDirectPlace.i, o);
             if(O.squadMaster)
                 this.unbindWithSquad(O.squadMaster.o, O.squadMaster.i, o);
-
-
         }
     }
 }

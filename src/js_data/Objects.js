@@ -1599,9 +1599,6 @@ BBAdata['ObjectDatas']={
             spotRad2: {Const: 300, RandInt: 200},
             spotAngle2: {Const: 30, RandInt: 30}
         },
-
-
-
     },
     shieldoorz:{
         view:{
@@ -2045,54 +2042,53 @@ BBAdata['ObjectDatas']={
             HitPattern: 'HullFire_80',
         },
 
-        lifeM: 12,
-        radius: 40,
+        lifeM: 18,
+        radius: 30,
 
         fieldCharges: 0,
         Res: {'fieldCharges': {M:10,T:0}},
         weapon:[
-            {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true},maxSpeed: 2},
-            {t:'refilResource', resource: 'fieldCharges', gunSpeed: 20, maxSpeed: 2, doNextWeapon: true},
-            {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', minDistToEnemy:500, usedResR: 10, doingNow:'followEnemy', makeAction:{doingNow:'followEnemy', doingTime:220, Manouver:'followEnemy',doNotInterupt:true}},
+            {t:'shootSquadMember', Speed: 7, MemberAge: 120, DieTime: 100},
+            {t:'produceSquad', gunSpeed: 1, gotoSpeed:0, doingNow: 'followEnemy', gotoSpeed: 0, makeAction: {doingNow:'followEnemy', doingTime: 120, Manouver:'followEnemyt', doNotInterupt:true}, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, maxSpeed: 2, FlagsRequired:{squadFull:false}, minDistToEnemy:450},
+            {t:'refilResource', resource: 'fieldCharges', gunSpeed: 10, maxSpeed: 2, FlagsRequired:{squadFull:false}},
         ],
 
         squadScheme: [{
-            type: 'ConeField',
-            radius: 200,
+            type: 'RoundField',
+            radius: 50,
             angle: 0,
-            angleAddon: 180,
             Oid: -1,
             placementT:'directPlaces',
-            objData: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDamage: 1, PeriodTime: 15, PeriodOffset: 10, dontHit:['B','BE','E','M','ME','A'], particlesOnBoard:true, fieldAnimMoving:true}
+            objData: {fieldAnim: 'PlasmaField', radius: 40, PeriodDamage: 3, PeriodTime: 5, PeriodOffset: 5, PeriodDelay: 130, dontHit:['B','BE'], fieldAnimMoving:true, onDie:{Do:'explode', Power: 13, Dist: 210}}
         }],
 
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
         toDo: [
-            {N:55,T:'followEnemy', minAlarm: 5, gotoSpeed: 3, usedRes:'fieldCharges', usedResR: 10},
-            {T:'changeSpeed', minSpeedLvl: 3, gotoSpeed: 2},
-            {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+            {N:55,T:'followEnemy', minAlarm: 5, usedRes:'fieldCharges', usedResR: 10, doingTime:120},
+            {N:35,T:'changeSpeed', maxSpeedLvl: 0, gotoSpeed: 2},
+            {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 10, turnPlus: 30  },
         ],
 
-        speedArr:[0,
-            {S:{shipVar:'speed',Add:-2}, T:1},
-            {S:{shipVar:'speed'},        T:{shipVar:'speedT',Add:-1}},
-            {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        speedArr:[{S: 0, T:3},
+            {S: {shipVar:'speed',Add:-2}, T:{shipVar:'speedT',Add:-0.6}},
+            {S: {shipVar:'speed'}, T:{shipVar:'speedT'}},
+            {S: {shipVar:'speed',Add:6}, T:{shipVar:'speedT'}}
         ],
         spotTick: 8,
         spotArr: [0,
-            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+            {T:'single',Ref: 20, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 20, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 20, Rad: {shipVar:'spotRad2'}}
         ],
 
         shipVariables:{
-            speed: {Const: 4, Rand: 3},
-            speedT: {Const: 1.5, Rand: 1.5},
-            spotRad: {Const: 180, RandInt: 80},
-            spotRad2: {Const: 400, RandInt: 200},
-            spotAngle2: {Const: 40, RandInt: 30}
+            speed: {Const: 3, Rand: 3},
+            speedT: {Const: 2.5, Rand: 1},
+            spotRad: {Const: 80, RandInt: 80},
+            spotRad2: {Const: 300, RandInt: 200},
+            spotAngle2: {Const: 30, RandInt: 30}
         },
     },
 

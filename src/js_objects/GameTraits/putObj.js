@@ -64,6 +64,7 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
     O.S = Side;
     O.T = Type;
     O.M = Mode;
+    O.bornTime = this.tick;
     O.periodDMG={};
     O.radius = 15;
     O.TT = 'dust';

@@ -863,6 +863,25 @@ GAMEobject.prototype.decide = function(o){
                 }
             }
 
+
+            if(WP.t == 'shootSquadMember'){
+                var iMember = false;
+                for(var i=0; i < O.squadScheme.length; ++i)
+                    if(O.squadScheme[i].Oid != -1){
+                        iMember = i;
+                        break;
+                    }
+                if(iMember === false) continue;
+                var M = this.O[ O.squadScheme[iMember].Oid ];
+                if(M.bornTime- -WP.MemberAge > this.tick) continue;
+
+                this.unbindWithSquad(o, iMember, O.squadScheme[iMember].Oid );
+
+                M.speed = WP.Speed || 5;
+                M.DieTime = this.tick- -100;
+                M.fieldAnimMoving = true;
+            }
+
             if(WP.doNextWeapon) continue;
             break;
         }
