@@ -1,4 +1,8 @@
+- damageCatchers take to mush damage from Explosions
+- directRenders (like PlasmaBalls) animate slower on frame drops
+
 - Adding squads to maps
+
 - Mines extended hitbox
 
 - Different Endgame Statuses

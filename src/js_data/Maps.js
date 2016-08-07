@@ -290,7 +290,7 @@ BBAdata['MAPS']={
         BoardMods:['sitOnMap','allAvoid'],
         Place:[
             {RingOf:{X: 0, Y: 0, Radius: 800, RadiusPlus:200}, What:{StarX: 60}},
-            {Random:{X: 0, Y: 0, Radius: 800}, What:{CD:1}}
+            {Random:{X: 0, Y: 0, Radius: 800}, What:{CD:8}}
         ],
     },
     'HealthSplit':{
