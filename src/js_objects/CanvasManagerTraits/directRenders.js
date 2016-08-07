@@ -297,12 +297,12 @@ CanvasManagerObject.prototype.directRenders={
         },
     },
     PlasmaFieldEnd:{
-        frames: 25,
+        frames: 35,
         gradientStops: 4,
         states:{
             0: {color0:[255,255,120,1], color1:[255,120,0,0.6], color2:[255,0,0,0.2], color3:[255,0,0,0],   stop0:0.1,stop1:0.3,stop2:1, stop3:1 },
-            15:{color0:[255,255,120,1], color1:[255,120,0,0.6], color2:[255,0,0,0.2], color3:[255,0,0,0],   stop0:0.1,stop1:0.3,stop2:0.3, stop3:0.3 },
-            25:{color0:[255,255,120,1], color1:[255,120,0,0.6], color2:[255,0,0,0.2], color3:[255,0,0,0],   stop0:0.1,stop1:0.3,stop2:0.3, stop3:0.3 },
+            20:{color0:[255,255,120,1], color1:[255,120,0,0.6], color2:[255,0,0,0.2], color3:[255,0,0,0],   stop0:0.1,stop1:0.3,stop2:0.3, stop3:0.3 },
+            35:{color0:[255,255,120,1], color1:[255,120,0,0.6], color2:[255,0,0,0.2], color3:[255,0,0,0],   stop0:0.1,stop1:0.3,stop2:0.3, stop3:0.3 },
         },
     },
     HealFieldStart:{

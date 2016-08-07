@@ -2032,7 +2032,6 @@ BBAdata['ObjectDatas']={
             spotAngle2: {Const: 40, RandInt: 30}
         },
     },
-
     doomderos:{
         view:{
             Letter: 992,
@@ -2048,8 +2047,8 @@ BBAdata['ObjectDatas']={
         fieldCharges: 0,
         Res: {'fieldCharges': {M:10,T:0}},
         weapon:[
-            {t:'shootSquadMember', Speed: 7, MemberAge: 120, DieTime: 100},
-            {t:'produceSquad', gunSpeed: 1, makeAction: {doingNow:'followEnemy', gotoSpeed: 0, doingTime: 120, Manouver:'followEnemy', doNotInterupt:true}, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, maxSpeed: 2, FlagsRequired:{squadFull:false}, minDistToEnemy:450},
+            {t:'shootSquadMember', Speed: 7, MemberAge: 130, DieTime: 100},
+            {t:'produceSquad', gunSpeed: 1, makeAction: {doingNow:'followEnemyX', gotoSpeed: 0, doingTime: 130, Manouver:'followEnemy', doNotInterupt:true}, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, maxSpeed: 2, FlagsRequired:{squadFull:false}, minDistToEnemy:450},
             {t:'refilResource', resource: 'fieldCharges', gunSpeed: 10, maxSpeed: 2, FlagsRequired:{squadFull:false}},
         ],
 

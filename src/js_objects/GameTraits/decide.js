@@ -13,16 +13,17 @@ GAMEobject.prototype.alarmAround = function(o,DistAlert,AlarmFlag){
     }
 }
 GAMEobject.prototype.changeSpeedLvl = function(O,speedLvl){
+    console.log(speedLvl);
     O.speedLvl = speedLvl;
     O.speed = O.speedArr[ speedLvl ].S;
     O.speedT = O.speedArr[ speedLvl ].T;
 }
 GAMEobject.prototype.makeAction = function(O,o,Action){
     if(Action.doingNow) O.doingNow = Action.doingNow;
-    if(Action.doingTime) O.doingTime = Action.doingTime- -this.tick;
+    if(Action.doingTime) O.doingTime = Action.doingTime;
     if(Action.doNotInterupt) O.doNotInterupt = Action.doNotInterupt;
     if(Action.Manouver)  O.Manouver = Action.Manouver;
-    if(Action.gotoSpeed !== false) this.changeSpeedLvl(O, Action.gotoSpeed);
+    if(!isNaN(Action.gotoSpeed)) this.changeSpeedLvl(O, Action.gotoSpeed);
 
     console.log('Action.gotoSpeed: '+Action.gotoSpeed);
     if(Action.gotoAlarm) O.alarmLvl = Action.gotoAlarm;
@@ -127,6 +128,7 @@ GAMEobject.prototype.decide = function(o){
             O.doingTime = -1;
     }
 
+    console.log(O.doingTime);
     // Jak się skończy czas to szukamy kolejnego zadania
     if((--O.doingTime) < 0){
         O.doNotInterupt = false;
