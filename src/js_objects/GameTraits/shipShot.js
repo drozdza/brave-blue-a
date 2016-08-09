@@ -33,13 +33,16 @@ GAMEobject.prototype.shipShootMissle = function(Enemy,Angle,Speed,Dec,SpeedT,des
     if(destrData.explosivePreset)
         this.cloneExplosionData(destrData, this.O[L]);
 }
-GAMEobject.prototype.shipShootBomb = function(Speed,Dec,bombData){
+GAMEobject.prototype.shipShootBomb = function(Speed,Dec,bombData,teleportData){
     var O = this.O[0];
     var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -180)%360;
     var L = this.putObj('bullet_bomb','comp',O.S,O.x,O.y);
     this.O[L].speed = Speed || 10;
     this.O[L].doingTime = Dec || 30;
     this.O[L].angle = Angle;
+
+    if(teleportData)
+        this.O[L].TeleportMovement = teleportData;
 
     this.cloneExplosionData(bombData, this.O[L]);
 }

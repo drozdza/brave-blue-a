@@ -387,7 +387,10 @@ GAMEobject.prototype.decide_ship = function(e){
         }
         if(Fx.T=='bomb'){
             var mouseDist = Math.sqrt();
-            this.shipShootBomb(Fx.Speed,Fx.Dec,Fx);
+            var teleportData = false;
+            if(typeof Fx.Teleport !='undefined') teleportData = Fx.Teleport;
+
+            this.shipShootBomb(Fx.Speed,Fx.Dec,Fx,teleportData);
             shotDone = true;
         }
         if(Fx.T=='bombT'){
