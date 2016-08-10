@@ -6,7 +6,9 @@ GAMEobject.prototype.frame_decide = function(){
     // Check Hits of Player Ship
     this.checkHits(0);
 
-    this.decide_ship();
+    if(this.C.playerDead===0)
+        this.decide_ship();
+
     this.MSship-=- ((new Date()).getTime() - MS);
 
     var MS = (new Date()).getTime();
@@ -63,7 +65,12 @@ GAMEobject.prototype.frame_decide = function(){
         this.checkHits(o);
     }
 
+    if(this.O[0].life < 1)
+        this.killPlayer();
+
+
     ++this.tick;
+    if(this.tick%30==0) this.showCounts();
 
     this.MSdecide-=-((new Date()).getTime() - MS);
 }
@@ -118,9 +125,6 @@ GAMEobject.prototype.frame_move = function(){
         }
 
     }
-
-    $('#countEnemies').html(this.EnemiesC);
-    // $('#gameboard').css({left: (-this.O[0].x- -(this.Dx/2))+'px',top: (-this.O[0].y- -(this.Dy/2))+'px'});
 
     this.MSmove-=-((new Date()).getTime() - MS);
 }
@@ -261,8 +265,7 @@ GAMEobject.prototype.frame = function(){
         this.FPSx=D;
     }
 
-    if(this.EnemiesC < 1 || this.O[0].life < 1)
-        this.endGame();
+//    this.endGame();
 
     if(!this.pause && !this.doEndGame)
         if(BBAdata.GET.FRAMES < 4)

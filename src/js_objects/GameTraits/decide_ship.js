@@ -261,9 +261,11 @@ GAMEobject.prototype.decide_ship = function(e){
                 modR = ++S.ModStorage[M.ModStorage].R;
             if(M.T=='Prod') ++S.Storage [ M.Storage ].R;
             if(M.T=='healerProd'){
+                ++this.C.S_lifeHealed;
                 this.healObj(0,1);
             }
             if(M.T=='shieldProd'){
+                ++this.C.S_shieldProd;
                 if(++O.energyField == 1)
                     $('#O_0').prepend('<div class="energyField"></div>');
                 this.shipFunc_showHealth();

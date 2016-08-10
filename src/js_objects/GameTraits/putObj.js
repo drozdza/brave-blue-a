@@ -85,7 +85,6 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
 
     if(O.TT=='enemy'){
         Enemy=' enemy';
-        ++this.EnemiesC;
         this.Enemies[ L ] = 1;
         O.angle           = parseInt(Math.random()*360);
         O.mapType         = 'E';

@@ -1,23 +1,20 @@
 #Game{overflow: hidden;}
 #countEnemies{
     position: absolute;
-    height: 20px;
     padding: 4px 8px;
     top: 0px;
     right: 0px;
     background: black;
     color: white;
     font-weight: bold;
-    font-size: 20px;
-    line-height: 20px;
+    font-size: 14px;
+    line-height: 12px;
+    text-align: right;
     border-style: solid;
     border-color: blue;
     border-width: 0px 0px 2px 2px;
     border-radius: 0px 0px 0px 20px;
     z-index: 1;
-}
-#countEnemies:before{
-    content: 'Enemies: ';
 }
 #countHealth{
     position: absolute;

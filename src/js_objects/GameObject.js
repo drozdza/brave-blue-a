@@ -10,7 +10,8 @@ function GAMEobject(){
     this.pause=false;
     this.doEndGame=false;
 
-    this.EnemiesC=0;
+    this.C={};                   // Counts all the statistics 
+
     this.Enemies={};             // Tablica Enemies
 
     this.O={};                   // Object's - all of them

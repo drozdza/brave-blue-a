@@ -46,6 +46,7 @@ GAMEobject.prototype.setBoard = function(){
 }
 GAMEobject.prototype.start = function(Setting,Ship){
     this.MapSetting = Setting;
+    this.prepareCounts();
     this.MapRadius=Setting.MapRadius;
     this.MapRadius2=Setting.MapRadius2;
     this.SHIP = Ship;
@@ -53,6 +54,7 @@ GAMEobject.prototype.start = function(Setting,Ship){
     this.setBoard();
     this.CanvasHandle = document.getElementById('MainCanvas').getContext('2d');
     this.UnderCanvasHandle = document.getElementById('UnderCanvas').getContext('2d');
+
 
     if(BBAdata.GET.CANVAS == 1)
         $('#CanvasPreviews').css({display: 'block'});
