@@ -24,6 +24,8 @@ function MENUobject(){
             html+='<div class="chooseShipPresets" id="chooseShipPresets_'+m+'">'+m+'</div>';
         html+='</div>';
 
+        this.loadMaps();
+
 
         for(var m in BBAdata['MAPS']){
             var name = m;
@@ -38,6 +40,11 @@ function MENUobject(){
         $('#chooseShipPresets_'+this.ShipPresetChoosen).addClass('choosenPreset');
 
         $('.MainMenuButton').unbind().click(function(){  MENU.click_MainMenuButton( $(this).attr('id').split('_')[1] ); });
+    }
+    this.loadMaps = function(){
+         for(var id in BBAdata['MAPS'])
+            if(BBAdata['MAPS'][id] == 'load')
+                jQuery.getScript('../js_data/Maps/'+id+'.js');
     }
     this.click_chooseShipPresets = function(id){
         $('.chooseShipPresets').removeClass('choosenPreset');
