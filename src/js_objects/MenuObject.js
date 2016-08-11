@@ -44,7 +44,7 @@ function MENUobject(){
     this.loadMaps = function(){
          for(var id in BBAdata['MAPS'])
             if(BBAdata['MAPS'][id] == 'load')
-                jQuery.getScript('../js_data/Maps/'+id+'.js');
+                jQuery.getScript('js_data/Maps/'+id+'.js');
     }
     this.click_chooseShipPresets = function(id){
         $('.chooseShipPresets').removeClass('choosenPreset');
