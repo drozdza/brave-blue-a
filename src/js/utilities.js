@@ -22,8 +22,8 @@ function betweenAngles(what,angle1,angle2){
     angle1 = (angle1- -720)%360;
     angle2 = (angle2- -720)%360;
 
-    if(angle1 > angle2 && (angle1 < what || angle2 > what))    return true;
-    if(angle1 < angle2 && angle1 < what && angle2 > what)    return true;
+    if(angle1 > angle2 && (angle1 < what || angle2 > what)) return true;
+    if(angle1 < angle2 && angle1 < what && angle2 > what)   return true;
     return false;
 }
 
@@ -38,4 +38,12 @@ function mergeArrays(arr1,arr2){
         }
     }
     return arr1;
+}
+
+function showAsSeconds(i){
+    var min = parseInt(i/60);
+    var sec = i - min*60;
+    var html = '';
+    if(min>0) html += min+' min ';
+    return html+sec+' sec';
 }

@@ -24,8 +24,7 @@ function MENUobject(){
             html+='<div class="chooseShipPresets" id="chooseShipPresets_'+m+'">'+m+'</div>';
         html+='</div>';
 
-        this.loadMaps();
-
+        // this.loadMaps();
 
         for(var m in BBAdata['MAPS']){
             var name = m;

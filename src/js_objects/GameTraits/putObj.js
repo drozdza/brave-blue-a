@@ -48,11 +48,12 @@ GAMEobject.prototype.putObj_fromArray = function(O){
 
 
 GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
+    var MapRadius = 1000;
     if(typeof x === "undefined"){
         do{
-            x = Math.random()*this.MapRadius*2-this.MapRadius;
-            y = Math.random()*this.MapRadius*2-this.MapRadius;
-        }while( Math.sqrt(x*x- -y*y) > this.MapRadius );
+            x = Math.random()*MapRadius*2-MapRadius;
+            y = Math.random()*MapRadius*2-MapRadius;
+        }while( Math.sqrt(x*x- -y*y) > MapRadius );
     }
     var L = this.Olen++;
     var Enemy='';

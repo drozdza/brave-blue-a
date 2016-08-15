@@ -240,7 +240,7 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q,transforms){
 }
 GAMEobject.prototype.dieObj = function(O,o){
     if(O.TT=='enemy'){
-        this.C.enemiesDead++;
+        this.C['D:enemies']++;
         var umo = 'D:'+O.T;
         if(typeof this.C[umo] == 'undefined')
             this.C[umo]=0;

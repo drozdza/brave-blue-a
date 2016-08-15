@@ -1,4 +1,4 @@
-BBAdata['MAPS']['M1']:{
+BBAdata['MAPS']['M1'] = {
     Place:[
         {Random:{X:-400, Y:0, Radius: 50}, What:{Mine: 60},objData:{explosivePreset:'ExplosionSize1'}},
         {Random:{X:-400, Y:0, Radius: 50}, What:{K: 3},objData:{explosivePreset:'ExplosionSize3'}},

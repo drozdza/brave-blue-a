@@ -46,9 +46,10 @@ GAMEobject.prototype.setBoard = function(){
 }
 GAMEobject.prototype.start = function(Setting,Ship){
     this.MapSetting = Setting;
+
     this.prepareCounts();
-    this.MapRadius=Setting.MapRadius;
-    this.MapRadius2=Setting.MapRadius2;
+    this.prepareWinningConds();
+
     this.SHIP = Ship;
     this.resize();
     this.setBoard();
@@ -62,6 +63,25 @@ GAMEobject.prototype.start = function(Setting,Ship){
     if(BBAdata.GET.CANVAS == 2)
         $('#CanvasBackgrounds').css({display: 'block'});
 
+    this.setPlayerShip();
+
+    this.makeShipControlPanel();
+    this.shipFunc_showHealth();
+
+    this.putObj('Gstar','static',0,0,0);
+
+    if(typeof Setting.Place != 'undefined')
+        for(var i=0; i<Setting.Place.length; ++i)
+            this.mapPlaceObj(Setting, Setting.Place[i]);
+
+
+    if(BBAdata.GET.CANVAS == 0){
+        this.FRAME_TIME = new Date().getTime();
+        // this.frame();
+        this.intervalIndex = window.requestAnimationFrame(function(){ GAME.frame(); });
+    }
+}
+GAMEobject.prototype.setPlayerShip = function(){
     this.O[0]={
         x: 0,
         y: 0,
@@ -92,27 +112,12 @@ GAMEobject.prototype.start = function(Setting,Ship){
         periodDMG: {},
         Flags: {},
     };
+
     this.putOnXY(0);
     CanvasManager.requestCanvas(0);
 
     this.Omoving={0:1};
     this.Olen=1;
-
-    this.makeShipControlPanel();
-    this.shipFunc_showHealth();
-
-    this.putObj('Gstar','static',0,0,0);
-
-    if(typeof Setting.Place != 'undefined')
-        for(var i=0; i<Setting.Place.length; ++i)
-            this.mapPlaceObj(Setting, Setting.Place[i]);
-
-
-    if(BBAdata.GET.CANVAS == 0){
-        this.FRAME_TIME = new Date().getTime();
-        // this.frame();
-        this.intervalIndex = window.requestAnimationFrame(function(){ GAME.frame(); });
-    }
 }
 GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
     var Radi = Math.PI*2/360;

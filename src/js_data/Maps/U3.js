@@ -1,4 +1,4 @@
-BBAdata['MAPS']['u3'] = {
+BBAdata['MAPS']['U3'] = {
     BoardMods:['sitOnMap','allAvoid'],
     Place:[
         {Random:{X: 0, Y: 0, Radius: 200}, What: {K:1}},
