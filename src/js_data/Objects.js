@@ -175,6 +175,18 @@ BBAdata['ObjectDatas']={
         undestructible: 1,
         Flags:{},
     },
+    EndPortal:{
+        view:{
+            onBackground: 1,
+        },
+        TT: 'regionAnim',
+        animTick: 0,
+        animType: 'EndPortalStart',
+        radius: 50,
+        undestructible: 1,
+        stateIn:{changeCount:{gameEnded:1}},
+        dontHit:['B','E','BE','M','ME','A','R']
+    },
 
 
     enemyShip:{

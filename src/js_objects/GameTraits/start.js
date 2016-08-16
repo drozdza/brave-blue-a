@@ -68,7 +68,6 @@ GAMEobject.prototype.start = function(Setting,Ship){
     this.makeShipControlPanel();
     this.shipFunc_showHealth();
 
-    this.putObj('Gstar','static',0,0,0);
 
     if(typeof Setting.Place != 'undefined')
         for(var i=0; i<Setting.Place.length; ++i)
@@ -82,16 +81,24 @@ GAMEobject.prototype.start = function(Setting,Ship){
     }
 }
 GAMEobject.prototype.setPlayerShip = function(){
+    var startX = 0, startY = 0, startA = 0;
+
+    if(typeof this.MapSetting.Ship !== 'undefined' && typeof this.MapSetting.Ship.Start !== 'undefined'){
+        if(this.MapSetting.Ship.Start.X) startX = this.MapSetting.Ship.Start.X;
+        if(this.MapSetting.Ship.Start.Y) startY = this.MapSetting.Ship.Start.Y;
+        if(this.MapSetting.Ship.Start.A) startA = this.MapSetting.Ship.Start.A;
+    }
+
     this.O[0]={
-        x: 0,
-        y: 0,
+        x: startX,
+        y: startY,
         speed: this.SHIP.speed,
         speedA: 3,
         speedD: 6,
         speedM: 10,
         speedT: 3.5,
         lastSpeedT: 0,
-        angle: 0,
+        angle: startA,
         radius: 7,
         S: 2,
         life: this.SHIP.life,
@@ -112,6 +119,7 @@ GAMEobject.prototype.setPlayerShip = function(){
         periodDMG: {},
         Flags: {},
     };
+
 
     this.putOnXY(0);
     CanvasManager.requestCanvas(0);
@@ -304,4 +312,5 @@ GAMEobject.prototype.setRegionAnimation = function(o,animType){
     if(animType=='OrbitalField')     O.animType = 'OrbFieldStart';
     if(animType=='ShellField')       O.animType = 'ShellFieldStart';
     if(animType=='WindField')        O.animType = 'WindFieldStart';
+    if(animType=='EndPortal')        O.animType = 'EndPortalStart';
 }

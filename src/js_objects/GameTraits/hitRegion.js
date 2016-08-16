@@ -272,9 +272,15 @@ GAMEobject.prototype.regionStateIn = function(q,o){
     var Q = this.O[q];
     var SI = Q.stateIn;
 
+    console.log('regionStateIn!');
+
     for(var i in SI)
         if(SI[i] != Q[i]){
-            Q[i] = SI[i];
+            if(i=='changeCount'){
+                this.changeCount(SI[i]);
+            } else {
+                Q[i] = SI[i];
+            }
             if(i=='fieldAnim') this.setRegionAnimation(q,SI.fieldAnim);
         }
     if(Q.stateOut){

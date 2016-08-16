@@ -344,4 +344,27 @@ CanvasManagerObject.prototype.directRenders={
             25:{color0:[0,255,0,0],      color1:[0,0,0,0],         color2:[0,0,0,0], stop0:0.1,stop1:0.1,stop2:0.2},
         },
     },
+    EndPortalStart:{
+        frames: 60,
+        gradientStops: 3,
+        states:{
+            0:{color0:[100,100,255,0],    color1:[0,0,0,0],       color2:[0,0,0,0], stop0:0, stop1:0.1, stop2:0.1},
+            60:{color0:[100,100,255,0.8], color1:[100,100,255,0], color2:[0,0,0,0], stop0:0, stop1:1,   stop2:1},
+        },
+        onEnd:'EndPortalGoing',
+    },
+    EndPortalGoing:{
+        gradientStops: 2,
+        color0:[100,100,255,0.8], color1:[100,100,255,0], stop0: 0, stop1: 1,
+        onExpire:'EndPortalEnd',
+        toExpire:20,
+    },
+    EndPortalEnd:{
+        frames: 25,
+        gradientStops: 3,
+        states:{
+            0:{color0:[100,255,100,0.4], color1:[100,255,100,0.1], color2:[0,0,0,0], stop0: 0, stop1:0.8,stop2: 1},
+            25:{color0:[0,255,0,0],      color1:[0,0,0,0],         color2:[0,0,0,0], stop0:0.1,stop1:0.1,stop2:0.2},
+        },
+    },
 };

@@ -3,6 +3,7 @@ BBAdata['MAPS']={
     'U1':'load',
     'U2':'load',
     'U3':'load',
+    'U4':'load',
     'M1':'load',
     '001':'load',
     'A':{
@@ -44,6 +45,9 @@ BBAdata['MAPS']={
     'T':{
         BoardMods:['sitOnMap'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, T:10}}],
+        WinningConds:[
+            {T:'Main',C:{'E:enemies':{max:0,D:'killAll'}}, Revard:{Conquer:1}, EndPortal:{X:100,Y:200}},
+        ]
     },
     'E':{
         BoardMods:['sitOnMap'],
@@ -175,9 +179,12 @@ BBAdata['MAPS']={
     },
     'HardCore':{
         BoardMods:['sitOnMap','allAvoid'],
+        EndPortal:{X:300,Y:0},
+        Ship:{Start:{X: 2400, Y: 0, A:90}},
         Place:[
             {Random:{X: 0, Y: 0, Radius: 2200}, What:{A:15, U:10, S:10, I:10, D:10, M:10, N:10, J:10, W:5, T:10, E:10, C:10, G:10, R:10, H:10, B:10, V:10, K:10, F:10, Q:5, X:6, Z:5, PI:10, WP:5,Ni:10,SH:10,L:5,TT:10,CD:5}},
-            {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarX:150,iD:10,Wi:10}}
+            {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarX:150,iD:10,Wi:10}},
+            {What:{Gstar:1},objData:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}}
         ]
     },
 };

@@ -34,7 +34,14 @@ GAMEobject.prototype.showCounts = function(){
     for(var i in this.C) html+=i+': '+this.C[i]+'<br>';
     for(var i in this.CE) html+=i+': '+this.CE[i]+'<br>';
     $('#countEnemies').append(html);
-
+}
+GAMEobject.prototype.changeCount = function(TabC){
+    for(var c in TabC){
+        this.C[c] = TabC[c];
+        if(c == 'gameEnded'){
+            this.endGame();
+        }
+    }
 }
 
 GAMEobject.prototype.prepareWinningConds = function(){
@@ -101,19 +108,18 @@ GAMEobject.prototype.countWinningConds = function(){
                 if(CC.State != 'done') Done = false;
                 if(CC.State == 'fail') Fail = true;
             }
-            console.log(Done);
-            console.log(Fail);
-            if(Done || Fail) console.log(CC);
             if(Done) WC.State = 'Done';
             if(Fail) WC.State = 'Fail';
-            console.log(WC.State);
 
+            if(WC.State == 'Done' && WC.T=='Main'){
+                this.C['gameWon'] = 1;
+                this.openEndPortal(i);
+            }
         }
-        else console.log(this.CWinning[i].State);
     }
 }
 GAMEobject.prototype.showWinningCond = function(i){
-    var html='',t,B,CC,WC = this.CWinning[i];
+    var html='',B,c,CC,WC = this.CWinning[i];
 
     if(WC.State=='Pending' && WC.hideOnPending) return '';
     if(WC.State=='Fail' && WC.hideOnFail) return ''; // ?????
@@ -160,4 +166,20 @@ GAMEobject.prototype.showWinningConds = function(){
         html += this.showWinningCond(i);
 
     $('#countEnemies').html(html);
+}
+GAMEobject.prototype.openEndPortal = function(i){
+    var WC = this.CWinning[i];
+    var MM = this.MapSetting;
+    var portalX = 0, portalY = 0;
+    if(typeof MM.EndPortal !== 'undefined'){
+        if(MM.EndPortal.X) portalX = MM.EndPortal.X;
+        if(MM.EndPortal.Y) portalY = MM.EndPortal.Y;
+    }
+    if(typeof WC.EndPortal !== 'undefined'){
+        if(WC.EndPortal.X) portalX = WC.EndPortal.X;
+        if(WC.EndPortal.Y) portalY = WC.EndPortal.Y;
+    }
+
+    var E = this.putObj('EndPortal','static',1,portalX,portalY);
+    this.setRegionAnimation(E,'EndPortal');
 }

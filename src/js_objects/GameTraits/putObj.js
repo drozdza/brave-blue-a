@@ -119,6 +119,11 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
         O.mapCollide = ['P','E','M','ME','A'];
     }
 
+    if(Type=='EndPortal'){
+        O.mapType = 'A';
+        O.mapCollide = ['P'];
+    }
+
     if(O.T=='healing_missle' || O.T=='energy_field_missle'){
         O.mapCollide = ['E'];
     }
