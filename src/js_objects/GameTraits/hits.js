@@ -188,6 +188,8 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q,transforms){
     }
     if(O.energyField > 0){
         if(!q) q=-1;
+        if(O.T=='ship') this.C['S_shieldLost']++;
+
         this.hitEnergyField(o,q,DMG);
         if(q) this.removeObj(q);
         return true;
@@ -229,6 +231,9 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q,transforms){
     }
 
     O.life-=DMG;
+
+    if(O.T=='ship') this.C['S_lifeLost']++;
+
     if(O.T=='ship') this.shipFunc_showHealth();
     CanvasManager.requestCanvas(o);
     if(O.view && O.view.onBackground)

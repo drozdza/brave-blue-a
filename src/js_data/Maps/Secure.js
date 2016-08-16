@@ -1,14 +1,15 @@
 BBAdata['MAPS']['Secure'] = {
     BoardMods:['sitOnMap','allAvoid'],
     WinningConds:[
-        {T:'Main',maxC:{'E:enemies':0}, Revard:{Conquer:1}},
-        {T:'Main',minC:{'D:orhenes':6,'E:koriaz':10}, Revard:{}},
-        {T:'Main',maxC:{'E:orhenes':0,'D:koriaz':0}, Revard:{}},
-        {T:'Add',maxC:{seconds:140}, hideOnFial:true, Revard:{}},
-        {T:'Add',maxC:{S_lifeHealed:0}, Revard:{}},
-        {T:'Add',maxC:{'D:carras':0}, Revard:{}},
-        {T:'Add',minC:{'D:carras':20}, hideOnPending: true, Revard:{}},
-        {T:'Add',minC:{'D:carras':100}, maxC:{S_lifeLost:0,S_shieldLost:0}, Revard:{}},
+        {T:'Main',C:{'E:enemies':{max:0,D:'killAll'}}, Revard:{Conquer:1}},
+        {T:'Main',C:{'D:orhenes':{min:6,D:'killMin'},'D:koriaz':{max:0}}, Revard:{}},
+        {T:'Add',C:{seconds:{max:140,D:'timeTo'},gameEnded:{min:1,D:'hidden'}}, hideOnFial:true, Revard:{}},
+        {T:'Add',C:{seconds:{max:60,D:'timeTo'},'E:koriaz':{max:0,D:'killMax'}}, hideOnFial:true, Revard:{}},
+        {T:'Add',C:{seconds:{max:60,D:'timeTo'},'E:fariax':{max:0,D:'killMax'}}, hideOnFial:true, Revard:{}},
+        {T:'Add',C:{S_lifeHealed:{max:0},gameEnded:{min:1,D:'hidden'}}, Revard:{}},
+        {T:'Add',C:{'D:carras':{max:0}}, Revard:{}},
+        {T:'Add',C:{'D:carras':{min:20}}, hideOnPending: true, Revard:{}},
+        {T:'Add',C:{'D:carras':{min:100},S_lifeLost:{max:0},S_shieldLost:{max:0}}, Revard:{}},
     ],
     Place:[
         {Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, Q:6, F:10, K: 10}},

@@ -1,12 +1,9 @@
-GAMEobject.prototype.toWin = function(){
-
-
-}
-
 GAMEobject.prototype.prepareCounts = function(){
     this.C = {
         'D:enemies':0,
         seconds:0,
+        gameWon:0,
+        gameEnded:0,
         playerDead:0,
         S_lifeHealed:0,
         S_shieldProd:0,
@@ -43,7 +40,7 @@ GAMEobject.prototype.showCounts = function(){
 GAMEobject.prototype.prepareWinningConds = function(){
     var WC;
     if(typeof this.MapSetting.WinningConds == 'undefined'){
-        WC = [{T:'Main',maxC:{enemies:0}, Revard:{Conquer:1}}];
+        WC = [{T:'Main',C:{'E:enemies':{max:0,D:'killAll'}}, Revard:{Conquer:1}}];
     } else {
         WC = cloneObj(this.MapSetting.WinningConds);
     }
@@ -64,116 +61,103 @@ GAMEobject.prototype.getCount = function(t){
     }
 }
 GAMEobject.prototype.countWinningConds = function(){
-    var WC,i,t,A;
+    var WC,i,c,CC,Done,Fail;
     for(i in this.CWinning){
-        WC = this.CWinning[i];
-        if(WC.State == 'Pending'){
-            WC.S = {minC:{},maxC:{}};   // States
-            WC.M = {minC:{},maxC:{}};
+        if(this.CWinning[i].State == 'Pending'){
+            WC = this.CWinning[i];
 
-            if(WC.minC)
-                for(t in WC.minC){
-                    A = this.getCount(t);
+            for(c in WC.C){
+                CC = WC.C[c];
+                CC.C = this.getCount(c);
 
-                    if(A >= WC.minC[t]) WC.S.minC[t] = 'true';
-                            else        WC.S.minC[t] = 'false';
+                CC.State = 'done';
 
-                    if(t.charAt(0)+t.charAt(1)=='D:' && WC.S.minC[t] == 'false')
-                        WC.S.minC[t]='pending';
+                if(typeof(CC.max)!=='undefined' && CC.max < CC.C)
+                    CC.State = 'fail';
+                if(typeof(CC.min)!=='undefined' && CC.min > CC.C)
+                    CC.State = 'fail';
+
+                if(typeof(CC.max)!=='undefined'){
+                    if(c.charAt(0)+c.charAt(1)=='E:' && CC.State == 'fail')
+                        CC.State = 'pending';
 
                 }
+                if(typeof(CC.min)!=='undefined'){
+                     if((c=='gameWon' || c=='gameEnded') && CC.State == 'fail')
+                         CC.State = 'pending';
 
-            if(WC.maxC)
-                for(t in WC.maxC){
-                    A = this.getCount(t);
 
-                    if(A <= WC.maxC[t]) WC.S.maxC[t] = 'true';
-                            else        WC.S.maxC[t] = 'false';
-
-                    if(t=='seconds' && WC.S.maxC[t] == 'true')
-                        WC.S.maxC[t]='pending';
-
-                    if(t.charAt(0)+t.charAt(1)=='E:' && WC.S.maxC[t] == 'false')
-                        WC.S.maxC[t]='pending';
+                    if(c.charAt(0)+c.charAt(1)=='D:' && CC.State == 'fail'){
+                        CC.State = 'pending';
+                    }
                 }
+            }
 
             // here we count if State its Pending, Done or Failed
+            Done = true;
+            Fail = false;
+            for(c in WC.C){
+                CC = WC.C[c];
+                if(CC.State != 'done') Done = false;
+                if(CC.State == 'fail') Fail = true;
+            }
+            console.log(Done);
+            console.log(Fail);
+            if(Done || Fail) console.log(CC);
+            if(Done) WC.State = 'Done';
+            if(Fail) WC.State = 'Fail';
+            console.log(WC.State);
 
-            // here we save onDone state or onFail state to display it
         }
+        else console.log(this.CWinning[i].State);
     }
 }
 GAMEobject.prototype.showWinningCond = function(i){
-    var html='',t,A,WC = this.CWinning[i];
+    var html='',t,B,CC,WC = this.CWinning[i];
 
-    if(WC.State=='Pending' && WC.hideOnPending) return false;
-    if(WC.State=='Fail' && WC.hideOnFail) return false;
+    if(WC.State=='Pending' && WC.hideOnPending) return '';
+    if(WC.State=='Fail' && WC.hideOnFail) return ''; // ?????
 
-    if(WC.minC)
-        for(t in WC.minC){
-            A = this.getCount(t);
+    var mums = '';
+    if(WC.State=='Done') mums = 'color: yellow;';
+    if(WC.State=='Fail') mums = 'color: grey;';
 
-            if(WC.S.minC[t]=='true') html += '<span style="color: green;">';
-            if(WC.S.minC[t]=='pending') html += '<span>';
-            if(WC.S.minC[t]=='false') html += '<span style="color: red;">';
+    for(c in WC.C){
+        CC = WC.C[c];
 
-            if(t=='seconds')
-                html += showAsSeconds(A-WC.minC[t]);
-            else if(t.charAt(0)+t.charAt(1)=='D:'){
-                B = this.getCount(t.replace('D:','E:'));
-                html += 'kill: '+t.replace('D:','')+' '+A+'/'+(B- -A);
-            }
-            else if(t.charAt(0)+t.charAt(1)=='E:'){
-                B = this.getCount(t.replace('E:','D:'));
-                html += 'save: '+t.replace('E:','')+' '+A+'/'+(B- -A);
-            }
-            else
-                html += t+' {'+A+'/'+WC.minC[t]+'}';
-            html +='</span><br/>';
+        if(CC.State == 'done')    html += '<span style="color: green;'+mums+'">';
+        if(CC.State == 'pending') html += '<span style="'+mums+'">';
+        if(CC.State == 'fail')    html += '<span style="color: red;'+mums+'">';
+
+        if(CC.D == 'timeTo'){
+            html += showAsSeconds(CC.max-CC.C);
+        }else if(CC.D == 'killAll'){
+            B = this.getCount(c.replace('E:','D:'));
+            html += 'kill '+c.replace('E:','')+': '+B+'/'+(B- -CC.C);
+        }else if(CC.D == 'killMin'){
+            B = this.getCount(c.replace('D:','E:'));
+            html += 'kill: '+c.replace('D:','')+' '+CC.C+'/'+(B- -CC.C);
+        }else if(CC.D == 'killMax'){
+            B = this.getCount(c.replace('E:','D:'));
+            html += 'kill: '+c.replace('E:','')+' '+B+'/'+(B- -CC.C);
+        }else if(CC.D == 'hidden'){
+            html;
+        }else{
+            html += c+' '+CC.C;
         }
 
-    if(WC.maxC)
-        for(t in WC.maxC){
-            A = this.getCount(t);
-
-            if(WC.S.maxC[t]=='true') html += '<span style="color: green;">';
-            if(WC.S.maxC[t]=='pending') html += '<span>';
-            if(WC.S.maxC[t]=='false') html += '<span style="color: red;">';
-
-            if(t=='seconds')
-                html += showAsSeconds(WC.maxC[t]-A);
-            else if(t.charAt(0)+t.charAt(1)=='E:'){
-                B = this.getCount(t.replace('E:','D:'));
-                html += 'kill: '+t.replace('E:','')+' '+B+'/'+(B- -A);
-            }
-            else if(t.charAt(0)+t.charAt(1)=='D:'){
-                B = this.getCount(t.replace('D:','E:'));
-                html += 'save: '+t.replace('D:','')+' '+B+'/'+(B- -A);
-            }
-            else
-                html += t+' ['+A+'/'+WC.maxC[t]+']';
-            html +='</span><br/>';
-        }
+        html +='</span><br/>';
+    }
 
     return html+'<br/>';
 }
 GAMEobject.prototype.showWinningConds = function(){
-    this.countWinningConds();
-
     var html = '';
+
+    this.countWinningConds();
 
     for(var i in this.CWinning)
         html += this.showWinningCond(i);
 
     $('#countEnemies').html(html);
 }
-/*
-WinningConds:[
-    {T:'Main',maxC:{enemy:0}, Revard:{Conquer:1}},
-    {T:'Main',minC:{'D:orhenes':6,'E:koriaz':10}, Revard:{}},
-    {T:'Add',maxC:{seconds:360}, Revard:{}},
-    {T:'Add',maxC:{S_lifeHealed:0}, Revard:{}},
-    {T:'Add',maxC:{'D:carras':0}, Revard:{}},
-    {T:'Add',minC:{'D:carras':100}, maxC:{S_lifeLost:0,S_shieldLost:0}, Revard:{}},
-],
-*/
