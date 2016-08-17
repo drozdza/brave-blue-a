@@ -6,7 +6,7 @@ GAMEobject.prototype.frame_decide = function(){
     // Check Hits of Player Ship
     this.checkHits(0);
 
-    if(this.C.playerDead===0)
+    if(this.C.playerDead===0 || this.endGameShown===false)
         this.decide_ship();
 
     this.MSship-=- ((new Date()).getTime() - MS);
@@ -67,6 +67,12 @@ GAMEobject.prototype.frame_decide = function(){
 
     if(this.O[0].life < 1)
         this.killPlayer();
+
+    for(o in this.O){
+        O = this.O[o];
+        if(O.TT=='regionAnim')
+        CanvasManager.age_regionAnim(O,o);
+    }
 
 
     ++this.tick;
@@ -148,12 +154,6 @@ GAMEobject.prototype.frame_draw = function(){
         CH.fillStyle="transparent";
     CH.clearRect(0, 0, this.Dx, this.Dy);
     CH.restore();
-
-    for(o in this.O){
-        O = this.O[o];
-        if(O.TT=='regionAnim')
-        CanvasManager.age_regionAnim(O,o);
-    }
 
     for(o in this.O){
         O = this.O[o];

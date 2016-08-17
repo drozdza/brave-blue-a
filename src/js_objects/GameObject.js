@@ -9,8 +9,9 @@ function GAMEobject(){
     this.IntervalIndex=-1;
     this.pause=false;
     this.doEndGame=false;
+    this.endGameShown=false;
 
-    this.C={};                   // Counts all the statistics 
+    this.C={};                   // Counts all the statistics
 
     this.Enemies={};             // Tablica Enemies
 
