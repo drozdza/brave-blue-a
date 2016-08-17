@@ -278,6 +278,10 @@ GAMEobject.prototype.regionStateIn = function(q,o){
         if(SI[i] != Q[i]){
             if(i=='changeCount'){
                 this.changeCount(SI[i]);
+            } else if('changeAnim') {
+                var U = SI[i];
+                CanvasManager.change_regionAnim(Q,q, U.name, U.type, U.time);
+
             } else {
                 Q[i] = SI[i];
             }

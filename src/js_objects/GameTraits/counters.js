@@ -152,7 +152,7 @@ GAMEobject.prototype.showWinningCond = function(i){
             html += c+' '+CC.C;
         }
 
-        html +='</span><br/>';
+        html += '</span><br/>';
     }
 
     return html+'<br/>';

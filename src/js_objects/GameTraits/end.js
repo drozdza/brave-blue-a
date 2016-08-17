@@ -25,7 +25,9 @@ GAMEobject.prototype.teleportShipOut = function(){
 
     L = this.putObj_directAnim('TP_track', {timeDeath: 18});
 
-    var pathD =['M',{x: O.x, y: O.y}];
+    var pathD = ['M',{x: O.x, y: O.y}];
+
+    
 
     Ox = O.x- -1700 * Math.sin( (-parseInt(O.angle)-180)*(Math.PI/180));
     Oy = O.y- -1700 * Math.cos( (-parseInt(O.angle)-180)*(Math.PI/180));

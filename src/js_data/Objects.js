@@ -184,7 +184,10 @@ BBAdata['ObjectDatas']={
         animType: 'EndPortalStart',
         radius: 50,
         undestructible: 1,
-        stateIn:{changeCount:{gameEnded:1}},
+        stateIn:{
+            changeCount:{gameEnded:1},
+            changeAnim:{name:'EndPortalEnd',type:'end',time:45},
+        },
         dontHit:['B','E','BE','M','ME','A','R']
     },
 

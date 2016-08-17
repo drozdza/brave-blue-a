@@ -1,4 +1,3 @@
-
 GAMEobject.prototype.mouse_down = function(e){
     var P = $('#Game').offset();
     this.mouse_x = e.clientX-P.left;
@@ -60,10 +59,10 @@ GAMEobject.prototype.keydown = function(e){
     }
 }
 GAMEobject.prototype.keyup = function(e){
-    if(e.keyCode==37 || e.keyCode==65)    this.keyLeftRight=0;
-    if(e.keyCode==39 || e.keyCode==68)    this.keyLeftRight=0;
-    if(e.keyCode==38 || e.keyCode==87)    this.keyUpDown=0;
-    if(e.keyCode==40 || e.keyCode==83)    this.keyUpDown=0;
+    if(e.keyCode==37 || e.keyCode==65) this.keyLeftRight=0;
+    if(e.keyCode==39 || e.keyCode==68) this.keyLeftRight=0;
+    if(e.keyCode==38 || e.keyCode==87) this.keyUpDown=0;
+    if(e.keyCode==40 || e.keyCode==83) this.keyUpDown=0;
 
 
     if(e.keyCode > 48 && e.keyCode < 58){    // Numeric 1-9
@@ -74,14 +73,14 @@ GAMEobject.prototype.keyup = function(e){
     if(typeof this.SHIP.KeysModules[ e.keyCode ] !='undefined'){
         var M = this.SHIP.KeysModules[ e.keyCode ];
         for(var m=0; m < M.length; ++m){
-            if(this.SHIP.Modules[ M[m] ].Disabled == 1)    this.SHIP.Modules[ M[m] ].Disabled = 0;
+            if(this.SHIP.Modules[ M[m] ].Disabled == 1) this.SHIP.Modules[ M[m] ].Disabled = 0;
                             else                        this.SHIP.Modules[ M[m] ].Disabled = 1;
         }
     }
 
     if(e.keyCode==69){        // E - estimateMoves
-        if(this.estimateMoves)    this.estimateMoves=false;
-                else            this.estimateMoves=true;
+        if(this.estimateMoves) this.estimateMoves=false;
+                else           this.estimateMoves=true;
     }
     if(e.keyCode==80 && this.doEndGame==false){    // P - pause
         if(this.pause==false){
