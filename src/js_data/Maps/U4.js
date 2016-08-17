@@ -1,7 +1,7 @@
 BBAdata['MAPS']['U4'] = {
     BoardMods:['sitOnMap','allAvoid'],
     WinningConds:[
-        {T:'Main',C:{'D:gargamon':{min:1,D:'killMin'}}, Revard:{Conquer:1}},
+        {T:'Main',C:{'D:gargamon':{min:1,D:'killMin'}}, Reward:{Conquer:1}},
     ],
 
     Ship:{Start:{X: 300, Y: 0, A:180}},

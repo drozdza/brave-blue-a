@@ -27,7 +27,7 @@ GAMEobject.prototype.teleportShipOut = function(){
 
     var pathD = ['M',{x: O.x, y: O.y}];
 
-    
+    // All Enemies loose theyr intereset
 
     Ox = O.x- -1700 * Math.sin( (-parseInt(O.angle)-180)*(Math.PI/180));
     Oy = O.y- -1700 * Math.cos( (-parseInt(O.angle)-180)*(Math.PI/180));
@@ -36,7 +36,9 @@ GAMEobject.prototype.teleportShipOut = function(){
 }
 GAMEobject.prototype.showScoringScreen = function(){
     var html = '';
-    html = '<span style="font-size: 70px;">Game End!</span><br/>';
+    html += '<span style="font-size: 70px;">Game End!</span><br/>';
+
+    html += this.showEndGameCount();
 
     $('#Game').append('<div id="endGameBoard">'+html+'</div>');
 }

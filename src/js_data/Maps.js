@@ -46,7 +46,7 @@ BBAdata['MAPS']={
         BoardMods:['sitOnMap'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, T:10}}],
         WinningConds:[
-            {T:'Main',C:{'E:enemies':{max:0,D:'killAll'}}, Revard:{Conquer:1}, EndPortal:{X:100,Y:200}},
+            {T:'Main',C:{'E:enemies':{max:0,D:'killAll'}}, Reward:{Conquer:1}, EndPortal:{X:100,Y:200}},
         ]
     },
     'E':{

@@ -47,7 +47,7 @@ GAMEobject.prototype.changeCount = function(TabC){
 GAMEobject.prototype.prepareWinningConds = function(){
     var WC;
     if(typeof this.MapSetting.WinningConds == 'undefined'){
-        WC = [{T:'Main',C:{'E:enemies':{max:0,D:'killAll'}}, Revard:{Conquer:1}}];
+        WC = [{T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, Reward:{Conquer:1}}];
     } else {
         WC = cloneObj(this.MapSetting.WinningConds);
     }
@@ -135,14 +135,32 @@ GAMEobject.prototype.showWinningCond = function(i){
         if(CC.State == 'pending') html += '<span style="'+mums+'">';
         if(CC.State == 'fail')    html += '<span style="color: red;'+mums+'">';
 
+
+        /**
+         *  - timeTo
+         *  - killLeft
+         *  - DsaveMax
+         *  - killAll
+         *  - killMin
+         *  - killMax
+         */
+
         if(CC.D == 'timeTo'){
             html += showAsSeconds(CC.max-CC.C);
+        }else if(CC.D == 'killLeft'){
+            B = this.getCount(c.replace('E:','D:'));
+            html += 'kill '+CC.C+' '+c.replace('E:','')+' (of '+(B- -CC.C)+')';
+        }else if(CC.D == 'killLeft'){
+            B = this.getCount(c.replace('E:','D:'));
+            html += 'kill '+CC.C+' '+c.replace('E:','')+' (of '+(B- -CC.C)+')';
+        }else if(CC.D == 'DsaveMax'){
+            B = this.getCount(c.replace('D:','E:'));
+            html += 'save '+c.replace('E:','')+': '+(CC.C- -B-CC.max)+' of '+(CC.C- -B)+'';
         }else if(CC.D == 'killAll'){
             B = this.getCount(c.replace('E:','D:'));
             html += 'kill '+c.replace('E:','')+': '+B+'/'+(B- -CC.C);
         }else if(CC.D == 'killMin'){
-            B = this.getCount(c.replace('D:','E:'));
-            html += 'kill: '+c.replace('D:','')+' '+CC.C+'/'+(B- -CC.C);
+            html += 'kill: '+c.replace('D:','')+' '+CC.C+'/'+CC.min;
         }else if(CC.D == 'killMax'){
             B = this.getCount(c.replace('E:','D:'));
             html += 'kill: '+c.replace('E:','')+' '+B+'/'+(B- -CC.C);
@@ -182,4 +200,44 @@ GAMEobject.prototype.openEndPortal = function(i){
 
     var E = this.putObj('EndPortal','static',1,portalX,portalY);
     this.setRegionAnimation(E,'EndPortal');
+}
+GAMEobject.prototype.showEndGameCount = function(){
+    var html='';
+
+    this.countWinningConds();
+    this.countWinningRewards();
+
+    html += 'Wyniki:<br/>';
+
+    for(var i in this.CWinning)
+        html += this.showWinningCond(i);
+
+    return html;
+}
+GAMEobject.prototype.countWinningStatus = function(){
+    var WC,i,r;
+    var WinTab = {};
+    var DoneI = 0;
+    var Rewards = {Cash: 0};
+
+    for(i in this.CWinning){
+        if(this.CWinning[i].State == 'Done'){
+            WC = this.CWinning[i];
+            WinTab[i] = 1;
+            ++DoneI;
+            if(typeof WC.Reward !='undefined'){
+                for(var r in WC.Reward){
+                    if(typeof Rewards[r] == 'undefined')
+                        Rewards[r]=0;
+                    Rewards[r]-=-WC.Reward[r];
+                }
+            }
+        }
+    }
+
+
+    if(DoneI > 1)
+        Rewards.Cash-=-(DoneI-1)*50;
+
+    WinTab;
 }
