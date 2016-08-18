@@ -214,7 +214,7 @@ GAMEobject.prototype.showEndGameCount = function(){
 
     return html;
 }
-GAMEobject.prototype.countWinningStatus = function(){
+GAMEobject.prototype.countWinningRewards = function(){
     var WC,i,r;
     var WinTab = {};
     var DoneI = 0;
