@@ -363,8 +363,8 @@ CanvasManagerObject.prototype.directRenders={
         frames: 25,
         gradientStops: 3,
         states:{
-            0:{color0:[100,255,100,0.4], color1:[100,255,100,0.1], color2:[0,0,0,0], stop0: 0, stop1:0.8,stop2: 1},
-            25:{color0:[0,255,0,0],      color1:[0,0,0,0],         color2:[0,0,0,0], stop0:0.1,stop1:0.1,stop2:0.2},
+            0:{color0:[100,100,255,0.8], color1:[100,100,255,0], color2:[0,0,0,0], stop0:0, stop1:1,   stop2: 1},
+            25:{color0:[100,100,255,0],  color1:[100,100,255,0], color2:[0,0,0,0], stop0:0, stop1:0.1, stop2:0.1},
         },
     },
 };

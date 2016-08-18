@@ -68,6 +68,9 @@ GAMEobject.prototype.start = function(Setting,Ship){
     this.makeShipControlPanel();
     this.shipFunc_showHealth();
 
+    if(typeof Setting.Backgrounds != 'undefined')
+        for(var b in Setting.Backgrounds)
+            CanvasManager.CBM.setBackgroundScale(b,Setting.Backgrounds[b]);
 
     if(typeof Setting.Place != 'undefined')
         for(var i=0; i<Setting.Place.length; ++i)
@@ -184,6 +187,11 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
                 if(typeof SET.BoardMods !='undefined')
                     for(var k in SET.BoardMods)
                         this.addBoardMod(L,SET.BoardMods[k]);
+            }
+
+            if(typeof SET.Background != 'undefined'){
+                CanvasManager.CBM.deleteObjectFromBackground(L,false,1);
+                CanvasManager.CBM.addObjectToBackground(L,SET.Background);
             }
 
             if(typeof SET.objData !='undefined' && L!=-1)

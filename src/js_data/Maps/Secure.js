@@ -20,5 +20,5 @@ BBAdata['MAPS']['Secure'] = {
         {RingOf:{X: 0, Y:0, Radius: 2200}, What:{Star:80}},
         {Random:{X: 0, Y: 0, Radius: 2200}, What: {K:10,F:10,Q:6}},
         {What:{RoundField:1},objData:{x:0,y: -3000, radius:20, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
-    ]
+    ],
 };
