@@ -79,19 +79,21 @@ function CanvasBackgroundManagerObject(){
         CH.fillStyle="rgba(0,0,0,1)";
         CH.fillRect(0, 0, screenX, screenY);
 
-        var left = parseInt((posX)/this.TileSize)-1;
-        var top = parseInt((posY)/this.TileSize)-1;
-
-        var right = left- -parseInt(screenX/this.TileSize)- -3;
-        var bottom = top- -parseInt(screenY/this.TileSize)- -3;
-
-        var BGN = 1;
+        var s2X = screenX/2;
+        var s2Y = screenY/2;
 
         for(var ti=0; ti < this.BGqueue.length; ++ti){
             BGN = this.BGqueue[ti];
 
-            var PX = posX*this.BGscale[BGN];
-            var PY = posY*this.BGscale[BGN];
+            var PX = (posX- -s2X)*this.BGscale[BGN]-s2X;
+            var PY = (posY- -s2Y)*this.BGscale[BGN]-s2Y;
+
+
+            var left = parseInt((PX)/this.TileSize)-1;
+            var top = parseInt((PY)/this.TileSize)-1;
+
+            var right = left- -parseInt(screenX/this.TileSize)- -3;
+            var bottom = top- -parseInt(screenY/this.TileSize)- -3;
 
             for(var x = left; x < right; ++x)
                 for(var y = top; y < bottom; ++y)
