@@ -28,6 +28,7 @@ GAMEobject.prototype.findTabTiles = function(o,ox,oy,M){
 
 GAMEobject.prototype.putOnXY = function(o,ox,oy){
     var O = this.O[o];
+    if(!O.mapType) return false;
     var s,oldS={},newS={};
 
     if(typeof oy!='undefined'){
@@ -52,6 +53,7 @@ GAMEobject.prototype.putOnXY = function(o,ox,oy){
 }
 GAMEobject.prototype.removeFromXY = function(o,addToDead){    //!!
     var O = this.O[o];
+    if (!O.mapType) return true;
     var s,oldS={};
 
     oldS = this.findTabTiles(o,O.x,O.y,this.MapTileSize);

@@ -192,6 +192,8 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
             if(typeof SET.Background != 'undefined'){
                 CanvasManager.CBM.deleteObjectFromBackground(L,false,1);
                 CanvasManager.CBM.addObjectToBackground(L,SET.Background);
+                this.removeFromXY(L);
+                this.O[L].mapType = false;
             }
 
             if(typeof SET.objData !='undefined' && L!=-1)

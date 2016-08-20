@@ -6,7 +6,7 @@ GAMEobject.prototype.frame_decide = function(){
     // Check Hits of Player Ship
     this.checkHits(0);
 
-    if(this.C.playerDead===0 || this.endGameShown===false)
+    if(this.C.playerDead===0 && this.playerEndGame===false)
         this.decide_ship();
 
     this.MSship-=- ((new Date()).getTime() - MS);
@@ -265,7 +265,7 @@ GAMEobject.prototype.frame = function(){
         this.FPSx=D;
     }
 
-//    this.endGame();
+    // this.endGame();
 
     if(!this.pause && !this.doEndGame)
         if(BBAdata.GET.FRAMES < 4)

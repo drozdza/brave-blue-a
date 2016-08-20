@@ -25,6 +25,10 @@ function GetMenuObject(){
             get: 'setFrames',
             values: {'5':5, '10':10, '20':20, '30':false, '45':45},
         },
+        GAMESTATS:{
+            get: 'gameStats',
+            values: {Off:false, On:1},
+        },
     };
 
     this.makeHtml = function(){

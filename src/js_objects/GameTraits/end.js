@@ -8,14 +8,13 @@ GAMEobject.prototype.endGame = function(){
     if(this.endGameShown) return true;
     this.endGameShown = true;
 
-    this.teleportShipOut();
-
     this.showScoringScreen();
 
     setTimeout("GAME.stopAnimations();",3500);
     setTimeout("$('#Game').unbind('click').click(function(){ GAME.goToMenu(); });",700);
 }
 GAMEobject.prototype.teleportShipOut = function(){
+    this.playerEndGame = true;
     var Ox,Oy,L, O = this.O[0];
     O.viewOff = true;
     O.undestructible = 1;
@@ -33,6 +32,8 @@ GAMEobject.prototype.teleportShipOut = function(){
     Oy = O.y- -1700 * Math.cos( (-parseInt(O.angle)-180)*(Math.PI/180));
 
     this.O[ L ].pathD=pathD.concat(['L',{x: Ox, y: Oy}]);
+
+    setTimeout("GAME.endGame();",800);
 }
 GAMEobject.prototype.showScoringScreen = function(){
     var html = '';

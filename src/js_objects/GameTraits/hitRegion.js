@@ -272,8 +272,6 @@ GAMEobject.prototype.regionStateIn = function(q,o){
     var Q = this.O[q];
     var SI = Q.stateIn;
 
-    console.log('regionStateIn!');
-
     for(var i in SI)
         if(SI[i] != Q[i]){
             if(i=='changeCount'){
@@ -294,7 +292,6 @@ GAMEobject.prototype.regionStateIn = function(q,o){
         Q.Flags=[];
     }
 }
-
 GAMEobject.prototype.regionStateOut = function(q){
     var Q = this.O[q];
     delete(this.Ocomp[q]);

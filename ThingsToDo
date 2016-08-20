@@ -107,12 +107,29 @@ Nowe ficzery:
 MotherShip
     - Settings for players MotherShip that can be placed on some types of boards
 
-Nowi przeciwnicy:
+
+
+New Player Weapons:
+    - Plasma ball
+    - Bomb'o'bombs
+    - Slow fields
+    - Chewing gum fields
+    - Teleport Fields
+    - Wind barrier
+
+New Enemies:
     - O,P
     - [Y] - pluje tarczami energetycznymi jak miotaczem ognia
     - F same się leczą jeśli nie dzieje się nic innego
 
     - Ship cleaning Destruction Fields
+    - Spike Ship, resping one-site-blowing mines on his armor
+
+    - Ship with "mine prison" bomb (resping mines around player)
+
+    - Slow fields
+    - Chewing Gum fields (put an achnor near ship, must be destroyed or wear of)
+
 
     - Ship with healing Bombs
     - Ship with shieldBlob Bombs

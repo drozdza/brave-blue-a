@@ -30,16 +30,18 @@ GAMEobject.prototype.showCounts = function(){
 
     this.showWinningConds();
 
-    var html = '<br/>--------------------<br/>';
-    for(var i in this.C) html+=i+': '+this.C[i]+'<br>';
-    for(var i in this.CE) html+=i+': '+this.CE[i]+'<br>';
-    $('#countEnemies').append(html);
+    if(BBAdata.GET.GAMESTATS==1){
+        var html = '<br/>--------------------<br/>';
+        for(var i in this.C) html+=i+': '+this.C[i]+'<br>';
+        for(var i in this.CE) html+=i+': '+this.CE[i]+'<br>';
+        $('#countEnemies').append(html);
+    }
 }
 GAMEobject.prototype.changeCount = function(TabC){
     for(var c in TabC){
         this.C[c] = TabC[c];
-        if(c == 'gameEnded'){
-            this.endGame();
+        if(c == 'gameEnded' && this.playerEndGame===false){
+            this.teleportShipOut();
         }
     }
 }

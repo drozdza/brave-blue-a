@@ -10,6 +10,7 @@ function GAMEobject(){
     this.pause=false;
     this.doEndGame=false;
     this.endGameShown=false;
+    this.playerEndGame=false;
 
     this.C={};                   // Counts all the statistics
 

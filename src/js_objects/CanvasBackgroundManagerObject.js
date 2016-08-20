@@ -83,7 +83,7 @@ function CanvasBackgroundManagerObject(){
         var s2Y = screenY/2;
 
         for(var ti=0; ti < this.BGqueue.length; ++ti){
-            BGN = this.BGqueue[ti];
+            var BGN = this.BGqueue[ti];
 
             var PX = (posX- -s2X)*this.BGscale[BGN]-s2X;
             var PY = (posY- -s2Y)*this.BGscale[BGN]-s2Y;
@@ -116,6 +116,4 @@ function CanvasBackgroundManagerObject(){
                     }
         }
     }
-
-
 };
