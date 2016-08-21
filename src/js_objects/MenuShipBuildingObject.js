@@ -50,23 +50,47 @@ function MenuShipBuildingObject(){
 
     this.SHIP={};
     this.addedUpgrades={};
+    this.UPHtml={};
 
     this.showUpgrades = function(){
-        var html='',up=[];
-        for(var u in BBAdata['SHIPupgrades']){
-            var U = BBAdata['SHIPupgrades'][u];
-            if(typeof up[U.K] == 'undefined') up[U.K]='';
-            up[U.K]+='<div class="upgrade upgradeClick" id="upgradeClick_'+u+'">'+U.T+'</div>';
-        }
+        this.prepareUpgradesHtml();
+        var html='';
 
-        for(var i in up)
-            if(up[i]!='')
-                html+='<div class="upgradesType" id="upgradesType_'+i+'"><div class="upgradesTitle">'+BBAdata['SHIPupgradesK'][i]+'</div><div class="upgradesContent">'+up[i]+'</div></div>';
+        for(var i in this.UPHtml)
+            html+='<div class="upgradesType" id="upgradesType_'+i+'"><div class="upgradesTitle">'+BBAdata['SHIPupgradesK'][i]+'</div><div class="upgradesContent">'+this.UPHtml[i].join('')+'</div></div>';
 
-        $('#upgradesTable').html(html);
-        $('.upgradesType').click(function(){ MENU.SB.clickUpgradeTitle( $(this).attr('id').split('_')[1] );    });
-        $('.upgradeClick').click(function(){ MENU.SB.clickUpgrade( $(this).attr('id').split('_')[1] ); });
+        $('#upgradesTable')
+            .html(html)
+            .on('click','.upgradesType',function(){ MENU.SB.clickUpgradeTitle( $(this).attr('id').split('_')[1] );    })
+            .on('click','.upgradeClickAdd',function(){ MENU.SB.clickUpgradeAdd( $(this).attr('id').split('_')[1] ); })
+            .on('click','.upgradeClickDel',function(){ MENU.SB.clickUpgradeDel( $(this).attr('id').split('_')[1] ); });
     }
+    this.prepareUpgradesHtml = function(){
+        this.UPHtml={};
+        for(var u in BBAdata['SHIPupgrades'])
+            this.showUpgrade(u,true);
+    }
+    this.showUpgrade = function(u,dontPutNewHtmlOnPlace){
+        var U = BBAdata['SHIPupgrades'][u];
+        var html = '';
+
+        html += '<div class="upgrade">';
+
+        html += U.T;
+
+        html += '<div class="upgradeClickAdd" id="upgradeClickAdd_'+u+'">+</div>';
+        html += '<div class="upgradeClickDel" id="upgradeClickDel_'+u+'">-</div>';
+
+
+        html += '</div>';
+
+        if(typeof this.UPHtml[U.K] == 'undefined') this.UPHtml[U.K]=[];
+        this.UPHtml[U.K][U.P] = html;
+
+        if(!dontPutNewHtmlOnPlace)
+            $('#upgradesType_'+U.K).html('<div class="upgradesTitle">'+BBAdata['SHIPupgradesK'][U.K]+'</div><div class="upgradesContent">'+this.UPHtml[U.K].join('')+'</div>');
+    }
+
     this.clickUpgradeTitle = function(id){
         $('.upgradesType').removeClass('wybrany');
         $('#upgradesType_'+id).addClass('wybrany');
@@ -100,17 +124,21 @@ function MenuShipBuildingObject(){
         $('#moneyTable').html(this.money-totPrice);
         $('#shipTable').html(html);
     }
-    this.clickUpgrade = function(id){
-        if(typeof this.addedUpgrades[id] == 'undefined')  this.addUpgrade(id);
-                        else                              this.removeUpgrade(id);
+    this.clickUpgradeAdd = function(id){
+        if(!this.ableToAddUpgrade(id))
+            return false;
+        if(typeof this.addedUpgrades[id] == 'undefined')
+            this.addedUpgrades[id] = 0;
+        ++this.addedUpgrades[id];
+
+        this.showUpgrade(id);
         this.showShipTable();
     }
-    this.addUpgrade = function(id){
-        this.addedUpgrades[id] = 1;
-        $('#upgradeClick_'+id).addClass('on_ship');
-    }
-    this.removeUpgrade = function(id){
-        delete this.addedUpgrades[id];
-        $('#upgradeClick_'+id).removeClass('on_ship');
+    this.clickUpgradeDel = function(id){
+        --this.addedUpgrades[id];
+        if(this.addedUpgrades[id]==0)
+            delete this.addedUpgrades[id];
+        this.showUpgrade(id);
+        this.showShipTable();
     }
 }

@@ -180,7 +180,7 @@ BBAdata['MAPS']={
     },
     'HardCore':{
         BoardMods:['sitOnMap','allAvoid'],
-        EndPortal:{X:0,Y:0},
+        EndPortal:{X:0,Y:-120},
         WinningConds:[
             {T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, Reward:{Cash:150,Conquer:1}, EndPortal:{X:0,Y:0}},
             {T:'Add',C:{'E:koriaz':{max:0,D:'killMax'}}},
