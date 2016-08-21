@@ -276,10 +276,11 @@ GAMEobject.prototype.regionStateIn = function(q,o){
         if(SI[i] != Q[i]){
             if(i=='changeCount'){
                 this.changeCount(SI[i]);
-            } else if('changeAnim') {
+            } else if(i=='changeAnim') {
                 var U = SI[i];
                 CanvasManager.change_regionAnim(Q,q, U.name, U.type, U.time);
-
+            } else if(i=='explodeMaster' || i=='informMaster'){
+                this.squad_AlarmMaster(q,i,SI[i]);
             } else {
                 Q[i] = SI[i];
             }
@@ -299,7 +300,11 @@ GAMEobject.prototype.regionStateOut = function(q){
     var SI = Q.stateOut;
     for(var i in SI)
         if(SI[i] != Q[i]){
-            Q[i] = SI[i];
+            if(i=='explodeMaster' || i=='informMaster'){
+                this.squad_AlarmMaster(q,i,SI[i]);
+            } else {
+                Q[i] = SI[i];
+            }
             if(i=='fieldAnim') this.setRegionAnimation(q,SI.fieldAnim);
         }
 }

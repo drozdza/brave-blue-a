@@ -263,7 +263,9 @@ GAMEobject.prototype.decide = function(o){
                     O.speed -= TD.slowBy || 2;
                     O.doingTime = TD.doingTime || 3;
                 } else {
+                    O.toDo = [cloneObj(TD.doAtStop)];
                     delete this.Omoving[o];
+                    break;
                 }
             }
 
@@ -366,6 +368,25 @@ GAMEobject.prototype.decide = function(o){
                     break;
                 }
                 continue;
+            }
+
+            if(TD.T=='produceSquad'){
+                do{
+                    var weMadeSomething = false;
+                    var iUnset = false;
+                    for(var i=0; i < O.squadScheme.length; ++i)
+                        if(O.squadScheme[i].Oid == -1){
+                            iUnset = i;
+                            break;
+                        }
+
+                    if(iUnset !== false){
+                        this.setSquadMember(o,iUnset,1);
+                        weMadeSomething = true;
+                    }
+                }while(weMadeSomething);
+
+                O.doingTime = 500;
             }
 
             // Dodatkowe wywołania akcji

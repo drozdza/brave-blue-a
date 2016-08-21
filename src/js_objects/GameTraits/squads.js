@@ -184,6 +184,9 @@ GAMEobject.prototype.disbandSquad = function(O){
             if(sO.squadT && sO.squadT == 'laserAim'){
                 this.removeObj( O.squadScheme[i].Oid );
             }
+            if(O.squadScheme[i].onDisbandRemove){
+                this.removeObj( O.squadScheme[i].Oid );
+            }
             delete sO.squadDirectPlace;
         }
 }
@@ -196,4 +199,29 @@ GAMEobject.prototype.setFlagSquadFull = function(O){
             break;
         }
     O.Flags['squadFull'] = full;
+}
+
+GAMEobject.prototype.squad_AlarmMaster = function(o,type,action){
+    var O = this.O[o];
+    var Mi = O.squadDirectPlace.o;
+    var M = this.O[ Mi ];
+
+    if(type=='informMaster'){
+        if(!isset(M.squadActions)) return false;
+
+        var Action = M.squadActions[action];
+
+        var Oid = M.squadScheme[ Action.squadMember ].Oid;
+
+        if(Oid==-1) return false;
+
+        for(var k in Action.change)
+            this.O[Oid][k] = Action.change[k];
+
+    } else if(type=='explodeMaster'){
+        this.explodeBomb(Mi,M.onDie);
+        this.removeObj(o);
+
+    }
+
 }

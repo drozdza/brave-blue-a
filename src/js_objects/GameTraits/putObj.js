@@ -267,10 +267,9 @@ GAMEobject.prototype.putObj_directAnim = function(Type,Data){
 }
 
 
-GAMEobject.prototype.removeObj = function(o,saveDiv){
+GAMEobject.prototype.removeObj = function(o){
     if(o==0) return false;
     if(typeof this.O[o] =='undefined') return false;
-    // if(!saveDiv) $('#O_'+o).remove();
 
     if(this.O[o].T!='bullet' && this.O[o].mapType!='A' && this.O[o].TT!='anim' && this.O[o].TT!='dirAnim'){    // Czyli co?
 

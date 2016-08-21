@@ -173,6 +173,7 @@ BBAdata['MAPS']={
         Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, A:15, U:10, S:10, I:10, C:10, V:10, K:10, F:10}}],
     },
     'Backgrounds':'load',
+    'Mines':'load',
     'Secure':'load',
     'BigOnes':{
         BoardMods:['sitOnMap','allAvoid'],

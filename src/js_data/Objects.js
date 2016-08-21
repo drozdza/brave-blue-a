@@ -82,16 +82,45 @@ BBAdata['ObjectDatas']={
         radius:6,
         dec:0,
         ammo:0,
-        toDo:0,
+        toDo:[{T:'produceSquad'}],
+        doingTime:-1,
 
         lifeM: 1,
 
         explosivePreset: 'NailedMine2',
 
-        squadScheme: {
-            0:{ angle:0, radius:0, id:-1, placementT:'directPlaces', make: {What:{RoundField:1},objData:{ angle: 0, radius: 150, colorInactive: false, colorActive: 'rgba(255,0,0,0.4)', dontHit:['B','BE','E','M','ME','A']}}},
-            1:{ angle:0, radius:0, id:-1, placementT:'directPlaces', make:{What:{RoundField:1},objData:{angle: 0, radius: 150, colorInactive: false, colorActive: 'rgba(255,0,0,0.4)', dontHit:['B','BE','E','M','ME','A']}}}
+        squadActions:{
+            enemyClose: {squadMember:0, change:{simpleFilling: 'rgba(255,0,0,0.2)'}},
+            enemyFar:   {squadMember:0, change:{simpleFilling: 'transparent'}},
         },
+        squadScheme: [{
+            type: 'RoundField',
+            radius: 0,
+            angle: 0,
+            Oid: -1,
+            placementT:'directPlaces',
+            onDisbandRemove:1,
+            objData: {
+                simpleFilling: 'transparent',
+                radius: 80,
+                stateIn: {explodeMaster:1},
+                dontHit:['B','BE','E','M','ME','A'],
+            },
+        },{
+            type: 'RoundField',
+            radius: 0,
+            angle: 0,
+            Oid: -1,
+            placementT:'directPlaces',
+            onDisbandRemove:1,
+            objData: {
+                viewOff: true,
+                radius: 200,
+                stateIn: {informMaster:'enemyClose'},
+                stateOut: {informMaster:'enemyFar'},
+                dontHit:['B','BE','E','M','ME','A'],
+            },
+        }],
 
         Flags:{}
     },

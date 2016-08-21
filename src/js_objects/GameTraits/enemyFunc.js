@@ -69,7 +69,7 @@ GAMEobject.prototype.dropSpaceMine = function(o,Angle,bombData){
         this.O[L].angle=Angle;
         this.O[L].speed=20;
         this.O[L].dec=20;
-        this.O[L].toDo=[{T:'slowDown', doingTime: 3, slowBy: 4}];
+        this.O[L].toDo=[{T:'slowDown', doingTime: 3, slowBy: 4, doAtStop:{T:'produceSquad'}}];
         this.O[L].doingTime = 3;
     } else {
         delete this.Omoving[L];
@@ -212,6 +212,8 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             }
         }
 
+    if(O.squadScheme)
+        this.disbandSquad(O);
     this.removeObj(o);
 }
 GAMEobject.prototype.cloneExplosionData = function(D,O){
