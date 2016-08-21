@@ -24,9 +24,8 @@ GAMEobject.prototype.hit = function(o,q,DMG){
     if(o==q) return 1;
     var O = this.O[o];
     var Q = this.O[q];
-    if(!isset(O)) return 1;
-    if(!isset(Q)) return 1;
-    if(typeof O=='undefined') return 1;
+    if(typeof Q == 'undefined') return 1;
+    if(typeof O == 'undefined') return 1;
 
     if(O.T=='star'){   var U=Q; Q=O; O=U; }
     if(O.T=='Gstar'){  var U=Q; Q=O; O=U; }

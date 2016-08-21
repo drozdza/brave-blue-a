@@ -207,7 +207,7 @@ GAMEobject.prototype.squad_AlarmMaster = function(o,type,action){
     var M = this.O[ Mi ];
 
     if(type=='informMaster'){
-        if(!isset(M.squadActions)) return false;
+        if(typeof M.squadActions == 'undefined') return false;
 
         var Action = M.squadActions[action];
 

@@ -47,7 +47,3 @@ function showAsSeconds(i){
     if(min>0) html += min+' min ';
     return html+sec+' sec';
 }
-function isset(e){
-    if(typeof e !=='undefined') return true;
-    return false;
-}
