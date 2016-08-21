@@ -1,17 +1,14 @@
-BBAdata['SHIPupgrades']=[
-    {K:1,T:'shipHull',price:250,attr:[{lifeM:1,Weight:5}]},
-    {K:1,T:'shipHull',price:550,attr:[{lifeM:1,Weight:5}]},
-    {K:1,T:'shipHull',price:750,attr:[{lifeM:1,Weight:5}]},
-    {K:1,T:'shipHull',price:1000,attr:[{lifeM:1,Weight:5}]},
-    {K:1,T:'energyGen',price:600,attr:[{EnergyM:2,Weight:5}]},
-    {K:1,T:'energyGen',price:1200,attr:[{EnergyM:2,Weight:5}]},
-    {K:1,T:'energyGen',price:1800,attr:[{EnergyM:2,Weight:5}]},
-    {K:1,T:'energyGen',price:2400,attr:[{EnergyM:2,Weight:5}]},
-    {K:1,T:'engine',price:2000,attr:[{EnergyEng:6,SpeedProduced:6,Weight:5}]},
-    {K:1,T:'engine',price:4000,attr:[{EnergyEng:8,SpeedProduced:10,Weight:5}]},
-    {K:1,T:'engine',price:6000,attr:[{EnergyEng:10,SpeedProduced:12,Weight:5}]},
-
-    {K:2,T:'ammoStorage',price:500,attr:[{AmmoStorage:10,Weight:5}]},
-    {K:2,T:'ammoStorage',price:800,attr:[{AmmoStorage:10,Weight:5}]},
-    {K:2,T:'ammoStorage',price:1200,attr:[{AmmoStorage:10,Weight:5}]},
-];
+BBAdata['SHIPupgrades']={
+    sh1:{K:1,T:'shipHull',     attr:[{lifeM:1,life:1,Weight:5}],
+        prices:[250,550,750,1200]},
+    eg1:{K:1,T:'energyGen',    attr:[{EnergyM:2,Weight:5}],
+        prices:[600,1200,1800,2400]},
+    en1:{K:1,T:'engine',       attr:[{engineMultiply:0.1,Weight:5}],
+        prices:[2000,4000,6000]},
+    as1:{K:2,T:'ammoStorage',  attr:[{Storage:{Ammo:{M:10}},Weight:5}],
+        prices:[500,800,1200,2500,5000]},
+};
+BBAdata['SHIPupgradesK']={
+    1:'Hull',
+    2:'Weapons'
+};

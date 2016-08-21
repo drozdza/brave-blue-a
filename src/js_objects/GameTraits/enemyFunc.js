@@ -226,10 +226,16 @@ GAMEobject.prototype.cloneExplosionData = function(D,O){
 
     if(D.explosivePreset)
         this.cloneExplosionData(BBAdata['ExplosivesPresets'][ D.explosivePreset ], O);
+
     if(D.exploAddTo)
-        for(var onX in D.exploAddTo)
-            for(var addX in D.exploAddTo[onX])
-                O[onX][addX] = cloneObj(D.exploAddTo[onX][addX]);
+        for(var onX in D.exploAddTo){
+            var onY = {}; onY[onX]=1;
+            if(onX == 'onHitDieExpire')
+                onY = {onHit:1,onDie:1,onExpire:1};
+            for(var onU in onY)
+                for(var addX in D.exploAddTo[onX])
+                    O[onU][addX] = cloneObj(D.exploAddTo[onX][addX]);
+        }
 }
 GAMEobject.prototype.addShield = function(o,Duration,q){
     var L,O = this.O[o];

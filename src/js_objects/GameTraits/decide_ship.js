@@ -4,7 +4,7 @@ GAMEobject.prototype.makeShipControlPanel = function(){
     var S = this.SHIP;
     var Sx = this.SHIPold;
     var html='',modeName;
-    S.speedM = (Math.sqrt(S.EnergyM))/(S.Weight/50);
+    S.speedM = (Math.sqrt(S.EnergyM*S.engineMultiply))/(S.Weight/50);
 
     Sx.speed = -17;
     html+='<div class="speedBox" id="speedOmeterBox"></div>';

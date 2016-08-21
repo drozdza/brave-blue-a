@@ -209,7 +209,7 @@ GAMEobject.prototype.showEndGameCount = function(){
     this.countWinningConds();
     this.countWinningRewards();
 
-    html += 'Wyniki:<br/>';
+    html += 'Results:<br/>';
 
     for(var i in this.CWinning)
         html += this.showWinningCond(i);

@@ -5,6 +5,7 @@ BBAdata['SHIPpresets']={
         life: 6,
         EnergyM: 20,
         SpeedM: 20,
+        engineMultiply: 1,
         speed: 8,
         Storage:{
             Ammo: {R:0, M:20},
@@ -45,6 +46,7 @@ BBAdata['SHIPpresets']={
         EnergyFieldMax: 10,
         EnergyM: 32,
         SpeedM: 20,
+        engineMultiply: 1,
         speed: 8,
         Storage:{
             Missile: {R:10,M:10},
@@ -85,6 +87,7 @@ BBAdata['SHIPpresets']={
         EnergyFieldMax: 10,
         EnergyM: 32,
         SpeedM: 20,
+        engineMultiply: 1,
         speed: 8,
         Storage:{
             Bomb: {R:12, M:12},
@@ -126,6 +129,7 @@ BBAdata['SHIPpresets']={
         EnergyFieldMax: 10,
         EnergyM: 32,
         SpeedM: 20,
+        engineMultiply: 1,
         speed: 8,
         Storage:{
             Bomb: {R:12, M:12},
@@ -168,6 +172,7 @@ BBAdata['SHIPpresets']={
         lifeM: 11,
         EnergyM: 27,
         SpeedM: 20,
+        engineMultiply: 1,
         speed: 8,
         Storage:{
             Ammo: {R:0, M:50},
@@ -212,6 +217,7 @@ BBAdata['SHIPpresets']={
         EnergyFieldMax: 10,
         EnergyM: 32,
         SpeedM: 20,
+        engineMultiply: 1,
         speed: 8,
         Storage:{
             Ammo: {R:0, M:50},
@@ -273,11 +279,10 @@ BBAdata['SHIPpresets']={
         EnergyFieldMax: 10,
         EnergyM: 32,
         SpeedM: 20,
+        engineMultiply: 1,
         speed: 8,
         Storage:{
-            Ammo: {R:0, M:50},
-            Missile: {R:10,M:10},
-            Bomb: {R:12, M:12},
+            Bomb: {R:42, M:42},
         },
         ModStorage:{
             TeleJump: {R:0,M:6},
@@ -290,18 +295,15 @@ BBAdata['SHIPpresets']={
         ShowRadar: true,
         KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
         FireType: 0,
-        FireType2: 7,
+        FireType2: 4,
         res:{},
         MouseDown1: false,
         MouseDown2: false,
         FireTypes:[
-            {T:'single',  gunS:0,GunSpeed: 5,  Use:{Ammo:1}, Speed: 17, Dec: 30, Power: 1},
-            {T:'double',  gunS:0,GunSpeed: 1,  Use:{Ammo:2}, Speed: 15, Dec: 30, Power: 1},
-            {T:'rose',    gunS:0,GunSpeed: 4,  Use:{Ammo:5}, AtOnce: 9, RoseAngle: 3, Speed: 15, Dec: 30, Power: 1},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explosivePreset:'NailsConePalm'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explosivePreset:'HugeNailsConePalm'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 8, Dec: 70, explosivePreset:'HugeExplosionRose'},
             {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 0.1, Teleport:{ Dist: 55, Angle: 270, AngleRand: 180}, Dec: 60, onHitDieExpire:    {Do:'explode',Power: 11, Dist: 120}},
-            {T:'missle',  gunS:0,GunSpeed: 10, Use:{Missile:1}, Speed: 12, SpeedT: 4, Dec: 400, AimRadius: 120, Power: 3},
-            {T:'missleR', gunS:0,GunSpeed: 6,  Use:{Missile:5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, Power:1},
-            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 10, Dec: 30, explosivePreset:'NailsBigCircle'},
             {T:'tele',    gunS:0,GunSpeed: 3,  ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
         ],
         Modules:[
@@ -311,8 +313,6 @@ BBAdata['SHIPpresets']={
             {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:20 },
             {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:20 },
             {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:20 },
-            {T:'Prod',      Disabled:0,subT:'Missile',Storage:'Missile',Emin:1,Emax:6,ProdX:4,E:0,Prod:0,ifProd:4 },
-            {T:'Prod',      Disabled:0,subT:'Bullet',Storage:'Ammo',Emin:6,Emax:12,ProdX:4,E:0,Prod:0,ifProd:5 },
             {T:'radar',     Disabled:1,Emin:1,Emax:30,ProdX:20,E:0,Prod:0,ifProd:360,Radius:2500},
         ],
         SpecialMoves:{
@@ -328,6 +328,7 @@ BBAdata['SHIPpresets']={
         life: 'x',
         lifeM: 'x',
         SpeedM: 20,
+        engineMultiply: 1,
         speed: 8,
         Storage:{
             Ammo: {R:0, M:50},
