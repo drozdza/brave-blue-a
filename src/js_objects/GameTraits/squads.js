@@ -5,13 +5,21 @@ GAMEobject.prototype.prepareSquadScheme = function(O,o){
 
     if(SST.t == 'directPlaces'){
         var Pos = [];
-        if(SST.placementT == 'round')
+        if(SST.placementT == 'round'){
             for(var i= 0; i<SST.count; ++i){
                 Pos[i] = {
                     angle: ((360/SST.count)*i)%360,
                     radius: SST.radius
                 };
             }
+        } else if(SST.placementT == 'conePart'){
+            for(var i= 0; i<SST.count; ++i){
+                Pos[i] = {
+                    angle: (SST.coneStart- -(SST.conePart/SST.count)*i)%360,
+                    radius: SST.radius
+                };
+            }
+        }
 
         var i = 0;
         if(SST.placement == 'random'){
@@ -153,6 +161,7 @@ GAMEobject.prototype.disbandSquad = function(O){
     for(var i=0; i<O.squadScheme.length; ++i)
         if(O.squadScheme[i].Oid != -1){
             var sO = this.O[ O.squadScheme[i].Oid ];
+            if(typeof sO == 'undefined') continue;
             if(sO.T=='shieldBlob'){
                 sO.speed = 8;
                 sO.angle = O.angle- -O.squadScheme[i].angle;
@@ -183,6 +192,10 @@ GAMEobject.prototype.disbandSquad = function(O){
             }
             if(sO.squadT && sO.squadT == 'laserAim'){
                 this.removeObj( O.squadScheme[i].Oid );
+            }
+            if(sO.T == 'space_mine'){
+                this.explodeBomb( O.squadScheme[i].Oid, sO.onDie );
+                this.removeObj(O.squadScheme[i].Oid);
             }
             if(O.squadScheme[i].onDisbandRemove){
                 this.removeObj( O.squadScheme[i].Oid );

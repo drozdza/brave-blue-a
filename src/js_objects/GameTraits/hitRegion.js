@@ -239,10 +239,6 @@ GAMEobject.prototype.regionVectorChange = function(Q,O){
 GAMEobject.prototype.region_teleportOnHit = function(TP,o){
     var Angle=0,Dist=100,O = this.O[o];
 
-    //  {What:{RoundField:1},objData:{x:-700,y:-67, radius:10, simpleFilling: 'rgba(155,155,255,0.8)', teleportOnHit: 'random', teleportOnHitDist: 500}},
-    //  {What:{RoundField:1},objData:{x:-600,y:0, radius:10, simpleFilling: 'rgba(155,155,255,0.8)', teleportOnHit: 120,  teleportOnHitDist: 300, teleportOnHitDistPlus: 300}},
-    //  {What:{RoundField:1},objData:{x:-700,y:67, radius:10, simpleFilling: 'rgba(155,155,255,0.8)', teleportOnHit: 'aligned', teleportOnHitDist: 1000}},
-
     if(!isNaN(TP.teleportOnHit)){
         Angle = TP.teleportOnHit;
     } else if(TP.teleportOnHit=='random'){

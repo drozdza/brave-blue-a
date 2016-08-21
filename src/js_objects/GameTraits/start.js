@@ -116,6 +116,7 @@ GAMEobject.prototype.setPlayerShip = function(){
             Color: 'blue',
             Angle: 0,
             HitPattern: 'HullFire_20',
+            shieldsRadius: 14,
         },
         mapType: 'P',
         mapCollide: ['A','ME'],
@@ -214,8 +215,8 @@ GAMEobject.prototype.addBoardMods = function(o){
 GAMEobject.prototype.addBoardMod = function(o,MODname){
     var MOD,O = this.O[o];
 
-    if(typeof MODname == 'string') MOD = BBAdata['MapMODS'][MODname];
-            else                   MOD = MODname;
+    if(typeof MODname == 'string') MOD = cloneObj(BBAdata['MapMODS'][MODname]);
+            else                   MOD = cloneObj(MODname);
 
     if(typeof MOD.who != 'undefined'){
         var jest=false;
@@ -228,7 +229,10 @@ GAMEobject.prototype.addBoardMod = function(o,MODname){
     }
 
     for(var KI in MOD){
-        if(KI=='toDo'){
+        if(KI=='overWriteObjects'){
+            for(var i in MOD[KI])
+                this.addBoardMod(o,BBAdata['ObjectDatas'][ MOD[KI][i] ]);
+        }else if(KI=='toDo'){
             for(var i in MOD.toDo)
                 this.addToToDoList(o,MOD.toDo[i]);
         }else if(KI=='weapon'){

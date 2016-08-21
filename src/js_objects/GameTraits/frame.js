@@ -104,9 +104,16 @@ GAMEobject.prototype.frame_move = function(){
             if(O.squareCorners)
                 O.squareCorners = this.countSquareCorners(O.x,O.y,O.squareAngle,O.squareLen,O.squareWidth);
 
-            O.angle = Master.angle;
-            if(MasterS.angleAddon)
-                O.angle = (O.angle- -MasterS.angleAddon)%360;
+
+
+
+            if(typeof MasterS.squadAngleType != 'undefined' && MasterS.squadAngleType == 'alongDirection'){
+                 O.angle = Master.angle- -MasterS.angle;
+            } else {
+                O.angle = Master.angle;
+                if(MasterS.anglePlus)
+                    O.angle = (O.angle- -MasterS.anglePlus)%360;
+            }
         }
         else {
             O.x -=- O.speed * Math.sin( (-parseInt(O.angle)-180)*PIx);

@@ -214,6 +214,10 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
 
     if(O.squadScheme)
         this.disbandSquad(O);
+    if(O.squadDirectPlace)
+        this.unbindWithSquad(O.squadDirectPlace.o,O.squadDirectPlace.i,o);
+
+
     this.removeObj(o);
 }
 GAMEobject.prototype.cloneExplosionData = function(D,O){

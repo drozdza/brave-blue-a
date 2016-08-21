@@ -38,6 +38,8 @@ GAMEobject.prototype.drawObject = function(O,o,CH, Px,Py){
         if(O.energyField && O.energyField > 0 && !O.shieldD){
             CH.beginPath();
             var Radius = O.radius;
+            if(O.view.shieldsRadius)
+                Radius = O.view.shieldsRadius;
             var lineWidth = O.energyField;
             if(lineWidth > 2)
                 lineWidth = 2- -(lineWidth-2)/2;
@@ -45,7 +47,6 @@ GAMEobject.prototype.drawObject = function(O,o,CH, Px,Py){
             if(o==0){
                 CH.strokeStyle = 'rgba(154,255,255,0.8)';
                 CH.fillStyle = 'rgba(154,255,255,0.2)';
-                Radius-=-7;
             } else {
                 CH.strokeStyle = 'rgba(0,255,0,0.8)';
                 CH.fillStyle = 'rgba(0,255,0,0.2)';

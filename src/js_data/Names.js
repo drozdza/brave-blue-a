@@ -37,6 +37,7 @@ BBAdata['ShipNames']={
     SL4:'slimensen4',
     CD:'doomderos',
     TT:'thunderton',
+    HH:'hedgehog',
 };
 BBAdata['ModuleNames'] = {
     healerProd:         'Heal',

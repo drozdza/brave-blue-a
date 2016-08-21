@@ -124,6 +124,109 @@ BBAdata['ObjectDatas']={
 
         Flags:{}
     },
+    MineMod_mediumCircle:{
+        squadScheme: [{
+            type: 'RoundField',
+            radius: 0,
+            angle: 0,
+            Oid: -1,
+            placementT:'directPlaces',
+            onDisbandRemove:1,
+            objData: {
+                simpleFilling: 'transparent',
+                radius: 50,
+                stateIn: {explodeMaster:1},
+                dontHit:['B','BE','E','M','ME','A'],
+            },
+        },{
+            type: 'RoundField',
+            radius: 0,
+            angle: 0,
+            Oid: -1,
+            placementT:'directPlaces',
+            onDisbandRemove:1,
+            objData: {
+                viewOff: true,
+                radius: 150,
+                stateIn: {informMaster:'enemyClose'},
+                stateOut: {informMaster:'enemyFar'},
+                dontHit:['B','BE','E','M','ME','A'],
+            },
+        }],
+    },
+    MineMod_smallCircle:{
+        squadScheme: [{
+            type: 'RoundField',
+            radius: 0,
+            angle: 0,
+            Oid: -1,
+            placementT:'directPlaces',
+            onDisbandRemove:1,
+            objData: {
+                simpleFilling: 'transparent',
+                radius: 35,
+                stateIn: {explodeMaster:1},
+                dontHit:['B','BE','E','M','ME','A'],
+            },
+        },{
+            type: 'RoundField',
+            radius: 0,
+            angle: 0,
+            Oid: -1,
+            placementT:'directPlaces',
+            onDisbandRemove:1,
+            objData: {
+                viewOff: true,
+                radius: 130,
+                stateIn: {informMaster:'enemyClose'},
+                stateOut: {informMaster:'enemyFar'},
+                dontHit:['B','BE','E','M','ME','A'],
+            },
+        }],
+    },
+    MineMod_Cone:{
+        squadScheme: [{
+            type: 'ConeField',
+            radius: 0,
+            angle: 0,
+            Oid: -1,
+            placementT:'directPlaces',
+            onDisbandRemove:1,
+            objData: {
+                simpleFilling: 'transparent',
+                radius: 210,
+                coneRad2: 0,
+                coneAngle: 20,
+                stateIn: {explodeMaster:1},
+                dontHit:['B','BE','E','M','ME','A'],
+            },
+        },{
+            type: 'ConeField',
+            radius: -100,
+            angle: 0,
+            Oid: -1,
+            placementT:'directPlaces',
+            onDisbandRemove:1,
+            objData: {
+                viewOff: true,
+                radius: 380,
+                coneRad2: 60,
+                coneAngle: 20,
+                stateIn: {informMaster:'enemyClose'},
+                stateOut: {informMaster:'enemyFar'},
+                dontHit:['B','BE','E','M','ME','A'],
+            },
+        }],
+    },
+    MineMod_hedgehog:{
+        view:{
+            Letter: 'A',
+            LetterSize: 10,
+            Color: '#f00',
+            Angle: 0,
+        },
+    },
+
     star:{
         view:{
             LIBpath:'StarPath',
@@ -1267,7 +1370,7 @@ BBAdata['ObjectDatas']={
             type: 'ConeField',
             radius: 200,
             angle: 0,
-            angleAddon: 180,
+            anglePlus: 180,
             Oid: -1,
             placementT:'directPlaces',
             objData: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDamage: 1, PeriodTime: 15, PeriodOffset: 10, dontHit:['B','BE','E','M','ME','A'], particlesOnBoard:true, fieldAnimMoving:true}
@@ -1670,7 +1773,7 @@ BBAdata['ObjectDatas']={
             type: 'ConeField',
             radius: 0,
             angle: 0,
-            angleAddon: 0,
+            anglePlus: 0,
             Oid: -1,
             placementT:'directPlaces',
             objData: {fieldAnim: 'ShellField', radius: 65, angle: 180, coneAngle: 90, coneRad2: 0, bounceType:'diagonal', fieldAnimMoving:true, dontHit:['P','BE','E','ME']}
@@ -1776,7 +1879,7 @@ BBAdata['ObjectDatas']={
             type: 'ConeField',
             radius: 200,
             angle: 0,
-            angleAddon: 180,
+            anglePlus: 180,
             Oid: -1,
             placementT:'directPlaces',
             objData: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDamage: 1, PeriodTime: 15, PeriodOffset: 10, dontHit:['B','BE','E','M','ME','A'], particlesOnBoard:true, fieldAnimMoving:true}
@@ -2133,7 +2236,67 @@ BBAdata['ObjectDatas']={
             spotAngle2: {Const: 30, RandInt: 30}
         },
     },
+    hedgehog:{
+        view:{
+            Letter: 937,
+            LetterSize: 60,
+            Color: 'red',
+            Angle: 0,
+            shieldsRadius: 30,
+            HitPattern: 'HullFire_40',
+        },
 
+        lifeM: 7,
+        radius: 25,
+
+        shieldDimmune:true,
+        prodSquad: 5,
+        Res: {'prodSquad': {M:5,T:0}},
+        weapon:[
+            {t:'refilResource', resource: 'prodSquad', gunSpeed: 60, maxSpeed: 2, doNextWeapon: true},
+            {t:'produceSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prodSquad', usedResR: 5, maxSpeed: 2, doNextWeapon: true},
+        ],
+
+        squadSchemeType: {
+            t:'directPlaces',
+            count: 9,
+            radius: 25,
+            placementT:'conePart',
+            coneStart: 230,
+            conePart: 290,
+            makeFirst: 8,
+            life: 1,
+            data:{
+                type:'enemyShip',
+                objectType:'space_mine',
+                objData:{explosivePreset:'MineNailsConePalm',overWriteObjects:['MineMod_Cone','MineMod_hedgehog']},
+                squadAngleType:'alongDirection',
+                lifeM:1
+        }},
+        squadScheme: [],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+
+        speedArr:[0,
+            {S:1, T:0.5},
+            {S:2, T:2},
+            {S:4, T:2}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 80, RandInt: 80},
+            spotRad2: {Const: 300, RandInt: 200},
+            spotAngle2: {Const: 30, RandInt: 30}
+        },
+    },
 
 
 };

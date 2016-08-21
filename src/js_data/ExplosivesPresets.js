@@ -91,7 +91,19 @@ BBAdata['ExplosivesPresets']={
         }}
     },
 
-
+    MineExplosionRose:{
+        explosivePreset: 'ExplosionSize2',
+        exploAddTo:{ onHitDieExpire: {
+            ShardsNum: 5,
+            Shards:{
+                explosivePreset: 'ExplosionSize1',
+                Dec: 12,
+                DecPlus: 8,
+                Speed: 5,
+                SpeedPlus: 3,
+            }
+        }}
+    },
 
     NailsBigCircle:{
         onHitDieExpire: {Do:'explode', explodeType: 'nails', NailsRad: 8, NailsSpeed: 10, NailsSpeedPlus: 0, NailsDec: 36, NailsDecPlus: 10, NailsAngleCenter: 8, NailsAngleBoth: 1},
@@ -119,6 +131,9 @@ BBAdata['ExplosivesPresets']={
     },
     HugeNailsConePalm: {
         onHitDieExpire: {Do:'explode',explodeType: 'nailsCone', Nails: 40, NailsRad: 160, NailsSpeed: 7, NailsSpeedPlus: 4, NailsDec: 28, NailsDecPlus: 26, NailsAngleCenter: 3},
+    },
+    MineNailsConePalm: {
+        onHitDieExpire: {Do:'explode',explodeType: 'nailsCone', Nails: 26, NailsRad: 120, NailsSpeed: 8, NailsSpeedPlus: 4, NailsDec: 32, NailsDecPlus: 6, NailsAngleCenter: 3},
     },
 
     NailsConeMicro:{
