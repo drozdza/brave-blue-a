@@ -1,11 +1,7 @@
 
 GAMEobject.prototype.shootBullet = function(o,Angle,Speed,Dec,Power){
     var O = this.O[o];
-    var L = this.putObj('bullet','comp',O.S,O.x,O.y);
-    this.O[L].speed = Speed;
-    this.O[L].dec = Dec;
-    this.O[L].angle = Angle;
-    this.O[L].Power = Power;
+    var L = this.putBullet(O.S,O.x,O.y,Speed,Dec,Angle,Power);
     return this.O[L];
 }
 GAMEobject.prototype.shootBulletOnSide = function(o,Enemy,Speed,Dec,SideAngle,SideDist,Power){
@@ -17,11 +13,7 @@ GAMEobject.prototype.shootBulletOnSide = function(o,Enemy,Speed,Dec,SideAngle,Si
     var Y = Yp-this.O[Enemy].y;
     var Angle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
 
-    var L = this.putObj('bullet','comp',O.S,Xp,Yp);
-    this.O[L].speed = Speed;
-    this.O[L].dec = Dec;
-    this.O[L].angle = Angle;
-    this.O[L].Power = Power;
+    var L = this.putBullet(O.S,Xp,Yp,Speed,Dec,Angle,Power);
     return this.O[L];
 }
 GAMEobject.prototype.shootBulletOnSide2 = function(o,Enemy,Speed,Dec,SideAngle,SideDist,Power){
@@ -33,11 +25,7 @@ GAMEobject.prototype.shootBulletOnSide2 = function(o,Enemy,Speed,Dec,SideAngle,S
     var Xp = O.x- -SideDist * Math.sin((-parseInt(O.angle- -SideAngle)-180)*(Math.PI/180));
     var Yp = O.y- -SideDist * Math.cos((-parseInt(O.angle- -SideAngle)-180)*(Math.PI/180));
 
-    var L = this.putObj('bullet','comp',O.S,Xp,Yp);
-    this.O[L].speed = Speed;
-    this.O[L].dec = Dec;
-    this.O[L].angle = Angle;
-    this.O[L].Power = Power;
+    var L = this.putBullet(O.S,Xp,Yp,Speed,Dec,Angle,Power);
     return this.O[L];
 }
 GAMEobject.prototype.shootMissle = function(o,Angle,Speed,Dec,SpeedT){
@@ -100,9 +88,9 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
                 y-=-explodeObj.ringRadius*Math.cos((-i)*(Math.PI/180));
             }
             if(explodeObj.NailsNeutral)
-                L = this.putObj('bullet','comp',3,x,y);
+                L = this.putBullet(3,x,y);
             else
-                L = this.putObj('bullet','comp',O.S,x,y);
+                L = this.putBullet(O.S,x,y);
             this.O[ L ].speed = explodeObj.NailsSpeed;
             if(explodeObj.NailsSpeedPlus)
                 this.O[ L ].speed-=-Math.random()*explodeObj.NailsSpeedPlus;
@@ -129,9 +117,9 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
     else if(explodeObj.explodeType=='nailsCone'){
         for(i=0; i<explodeObj.Nails; ++i){
             if(explodeObj.NailsNeutral)
-                L = this.putObj('bullet','comp',3,O.x,O.y);
+                L = this.putBullet(3,O.x,O.y);
             else
-                L = this.putObj('bullet','comp',O.S,O.x,O.y);
+                L = this.putBullet(O.S,O.x,O.y);
             this.O[ L ].angle = O.angle - explodeObj.NailsRad/2- -i*(explodeObj.NailsRad/explodeObj.Nails);
             this.O[ L ].speed = explodeObj.NailsSpeed;
             if(explodeObj.NailsSpeedPlus)

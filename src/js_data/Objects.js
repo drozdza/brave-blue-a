@@ -98,6 +98,7 @@ BBAdata['ObjectDatas']={
             radius: 0,
             angle: 0,
             Oid: -1,
+            mapType: 'A',
             placementT:'directPlaces',
             onDisbandRemove:1,
             objData: {
@@ -111,6 +112,7 @@ BBAdata['ObjectDatas']={
             radius: 0,
             angle: 0,
             Oid: -1,
+            mapType: 'A',
             placementT:'directPlaces',
             onDisbandRemove:1,
             objData: {
@@ -130,6 +132,7 @@ BBAdata['ObjectDatas']={
             radius: 0,
             angle: 0,
             Oid: -1,
+            mapType: 'A',
             placementT:'directPlaces',
             onDisbandRemove:1,
             objData: {
@@ -143,6 +146,7 @@ BBAdata['ObjectDatas']={
             radius: 0,
             angle: 0,
             Oid: -1,
+            mapType: 'A',
             placementT:'directPlaces',
             onDisbandRemove:1,
             objData: {
@@ -160,6 +164,7 @@ BBAdata['ObjectDatas']={
             radius: 0,
             angle: 0,
             Oid: -1,
+            mapType: 'A',
             placementT:'directPlaces',
             onDisbandRemove:1,
             objData: {
@@ -173,6 +178,7 @@ BBAdata['ObjectDatas']={
             radius: 0,
             angle: 0,
             Oid: -1,
+            mapType: 'A',
             placementT:'directPlaces',
             onDisbandRemove:1,
             objData: {
@@ -190,6 +196,7 @@ BBAdata['ObjectDatas']={
             radius: 0,
             angle: 0,
             Oid: -1,
+            mapType: 'A',
             placementT:'directPlaces',
             onDisbandRemove:1,
             objData: {
@@ -205,6 +212,7 @@ BBAdata['ObjectDatas']={
             radius: -100,
             angle: 0,
             Oid: -1,
+            mapType: 'A',
             placementT:'directPlaces',
             onDisbandRemove:1,
             objData: {

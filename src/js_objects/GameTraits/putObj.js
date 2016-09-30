@@ -70,16 +70,7 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
     O.radius = 15;
     O.TT = 'dust';
 
-    if(Type!='bullet')
-        O = this.putObj_fromArray(O,Type);
-
-    else {
-      O.speed  = 12;
-      O.angle  = 0;
-      O.radius = 4;
-      O.dec    = 30;
-      O.Power  = 1;
-    }
+    O = this.putObj_fromArray(O,Type);
 
     if(O.shipVariables)
         this.putObj_shipVariables(O);
@@ -99,18 +90,6 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
         } else{
             O.mapType = 'ME';
             O.mapCollide = ['P','M'];
-        }
-    }
-    if(Type=='bullet'){
-        if(Side==3){
-            O.mapType = 'B';
-            O.mapCollide = ['P','M','E','ME','A','R'];
-        }else if(Side==2){
-            O.mapType = 'B';
-            O.mapCollide = ['E','ME','A','R'];
-        }else{
-            O.mapType = 'BE';
-            O.mapCollide = ['P','M','R'];
         }
     }
 
@@ -136,8 +115,7 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
         this.Oregion[ L ] = 1;
 
     if(Mode=='comp')
-        if(Type!='bullet') this.Ocomp[ L ] = Side;
-              else         this.Obullet[ L ] = Side;
+        this.Ocomp[ L ] = Side;
 
     this.O[ L ]= O;
 
@@ -146,15 +124,49 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
     if(O.prepareSquadScheme || O.squadScheme)
         this.setFlagSquadFull(O);
 
-
-    if(Type!='shieldBlob' && Type!='bullet')
+    if(Type!='shieldBlob')
         CanvasManager.requestCanvas( L );
 
     if(O.view && O.view.onBackground)
         CanvasManager.CBM.addObjectToBackground( L );
 
-    if(Type!='bullet')
-        this.putOnXY( L );
+    this.putOnXY( L );
+    return L;
+}
+GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,Power){
+
+    var O={};
+    O.x = x;
+    O.y = y;
+    O.S = Side;
+    O.T = 'bullet';
+    O.M = 'comp';
+    O.bornTime = this.tick;
+    O.periodDMG={};
+    O.TT = 'dust';
+
+    O.speed  = Speed || 12;
+    O.angle  = Angle  || 0;
+    O.radius = 4;
+    O.dec    = Dec || 30;
+    O.Power  = Power || 1;
+
+    if(Side==3){
+        O.mapType = 'B';
+        O.mapCollide = ['P','M','E','ME','A','R'];
+    }else if(Side==2){
+        O.mapType = 'B';
+        O.mapCollide = ['E','ME','A','R'];
+    }else{
+        O.mapType = 'BE';
+        O.mapCollide = ['P','M','R'];
+    }
+
+    var L = this.Olen++;
+    this.Obullet[ L ] = Side;
+    this.Omoving[ L ] = 1;
+    this.O[ L ]= O;
+
     return L;
 }
 

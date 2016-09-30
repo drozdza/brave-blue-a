@@ -11,11 +11,7 @@ GAMEobject.prototype.shipShootOnSide = function(SideAngle,SideDist,Speed,Dec,Pow
     var Yp = O.y- -SideDist * Math.cos((-parseInt(O.angle- -SideAngle)-180)*(Math.PI/180));
 
     var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -180)%360;
-    var L = this.putObj('bullet','comp',O.S,Xp,Yp);
-    this.O[L].speed = Speed || 15;
-    this.O[L].dec = Dec || 30;
-    this.O[L].angle = Angle;
-    this.O[L].Power = Power;
+    var L = this.putBullet(O.S,Xp,Yp, Speed || 15, Dec || 30, Angle, Power);
 }
 GAMEobject.prototype.shipShootMissle = function(Enemy,Angle,Speed,Dec,SpeedT,destrData){
     var O = this.O[0];
