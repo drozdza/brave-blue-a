@@ -216,7 +216,7 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q,transforms){
             this.makeDMG(O.damageTransferFrom,DMG,false,'transforms');
             var L = this.putObj_directAnim('dmgTransfer', {timeDeath: 10});
             this.O[L].pathD = ['M', parseInt(o), 'L', parseInt(O.damageTransferFrom)];
-            return false;
+            return true;
         }
     }
 
