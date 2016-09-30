@@ -130,8 +130,6 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             this.O[ L ].Power = 1;
             if(explodeObj.NailsAngleCenter)
                 this.O[ L ].speedT = -((i- -0.5)/(explodeObj.Nails/2)- 1) * explodeObj.NailsAngleCenter;
-
-
         }
     }
     else if(explodeObj.explodeType=='roundField'){
@@ -151,6 +149,12 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
         }
         this.O[L].DieTime = this.tick- -explodeObj.ExpireTime;
         this.setRegionAnimation(L,explodeObj.fieldAnim);
+        if(explodeObj.moveAlong){
+            this.O[ L ].angle = O.angle;
+            this.O[ L ].speed = explodeObj.moveAlong;
+            this.O[ L ].fieldAnimMoving = true;
+            this.Omoving[ L ]=1;
+        }
     }
     else if(explodeObj.explodeType=='putObjs'){
         var objNumb = explodeObj.objMin;

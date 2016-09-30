@@ -165,4 +165,7 @@ BBAdata['ExplosivesPresets']={
         onHit:    {Do:'explode',explodeType: 'roundField', radius:230, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
         onExpire: {Do:'explode',explodeType: 'roundField', radius:230, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
     },
+    BubbleMissle:{
+        onHitDieExpire: {Do:'explode',explodeType:'roundField', radius:50, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDamage: 3, ExpireTime:60, moveAlong: 5},
+    },
 };
