@@ -192,6 +192,7 @@ BBAdata['MAPS']={
         WinningConds:[
             {T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, Reward:{Cash:150,Conquer:1}, EndPortal:{X:0,Y:0}},
             {T:'Add',C:{'E:koriaz':{max:0,D:'killMax'}}},
+            {T:'Add',C:{'E:hedgehog':{max:0,D:'killMax'}}},
         ],
         Ship:{Start:{X: 2400, Y: 0, A:90}},
         Place:[
