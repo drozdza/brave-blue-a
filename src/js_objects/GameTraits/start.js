@@ -46,6 +46,7 @@ GAMEobject.prototype.setBoard = function(){
 }
 GAMEobject.prototype.start = function(Setting,Ship){
     this.MapSetting = Setting;
+    this.gameHash = makeRandomHash();
 
     this.prepareCounts();
     this.prepareWinningConds();

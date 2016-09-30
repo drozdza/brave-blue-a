@@ -47,3 +47,12 @@ function showAsSeconds(i){
     if(min>0) html += min+' min ';
     return html+sec+' sec';
 }
+
+function makeRandomHash(Length){
+    var L = Length || 10;
+    var Hash='';
+    var Chars = '0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm';
+    for(var i=0; i<L; ++i)
+        Hash+=Chars.charAt(Math.random()*62);
+    return Hash;
+}

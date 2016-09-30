@@ -272,9 +272,7 @@ GAMEobject.prototype.frame = function(){
         this.FPSx=D;
     }
 
-    // this.endGame();
-
-    if(!this.pause && !this.doEndGame)
+    if(!this.pause && !this.doEndGame && GAME)
         if(BBAdata.GET.FRAMES < 4)
             this.intervalIndex = window.requestAnimationFrame(function(){ GAME.frame(); });
         else

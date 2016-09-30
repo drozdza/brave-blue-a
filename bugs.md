@@ -8,7 +8,4 @@ Bugs:
 
     - Blur don't work
 
-    - WP ships get way to much hits from taken Explosions
-
     - Killing D ships sometimes give undefined .T fatal error
- 

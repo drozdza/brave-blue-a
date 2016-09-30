@@ -95,6 +95,6 @@ GAMEobject.prototype.keyup = function(e){
         }
     }
     if(e.keyCode==27){    // ESC - escape
-        this.endGame();
+        this.endGame(this.gameHash);
     }
 }

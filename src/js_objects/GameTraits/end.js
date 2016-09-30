@@ -2,15 +2,16 @@ GAMEobject.prototype.killPlayer = function(){
     this.C.playerDead = 1;
     this.O[0].speed = 0;
 
-    setTimeout("GAME.endGame();",3500);
+    setTimeout("GAME.endGame('"+this.gameHash+"');",3500);
 }
-GAMEobject.prototype.endGame = function(){
+GAMEobject.prototype.endGame = function(gameHash){
+    if(gameHash != this.gameHash) return false;
     if(this.endGameShown) return true;
     this.endGameShown = true;
 
     this.showScoringScreen();
 
-    setTimeout("GAME.stopAnimations();",3500);
+    setTimeout("GAME.stopAnimations('"+this.gameHash+"');",3500);
     setTimeout("$('#Game').unbind('click').click(function(){ GAME.goToMenu(); });",700);
 }
 GAMEobject.prototype.teleportShipOut = function(){
@@ -33,7 +34,7 @@ GAMEobject.prototype.teleportShipOut = function(){
 
     this.O[ L ].pathD=pathD.concat(['L',{x: Ox, y: Oy}]);
 
-    setTimeout("GAME.endGame();",800);
+    setTimeout("GAME.endGame('"+this.gameHash+"');",800);
 }
 GAMEobject.prototype.showScoringScreen = function(){
     var html = '';
@@ -43,13 +44,14 @@ GAMEobject.prototype.showScoringScreen = function(){
 
     $('#Game').append('<div id="endGameBoard">'+html+'</div>');
 }
-GAMEobject.prototype.stopAnimations = function(){
+GAMEobject.prototype.stopAnimations = function(gameHash){
+    if(gameHash != this.gameHash) return false;
     window.cancelAnimationFrame(this.intervalIndex);
     this.doEndGame=true;
 }
 GAMEobject.prototype.goToMenu = function(){
     $(window).unbind();
-    this.stopAnimations();
+    this.stopAnimations(this.gameHash);
     delete GAME;
     $('#Game').unbind('click').html('').hide();
     $('#Menu').show();

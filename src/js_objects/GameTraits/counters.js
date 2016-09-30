@@ -13,7 +13,6 @@ GAMEobject.prototype.prepareCounts = function(){
     this.CE = {};
 }
 GAMEobject.prototype.countCounts = function(){
-
     this.CE = {'E:enemies':0};
     for(var i in this.Enemies){
         ++this.CE['E:enemies'];
