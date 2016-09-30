@@ -458,7 +458,6 @@ function CanvasManagerObject(){
         var DR = this.directRenders[ O.animType ];
         var Radi = Math.PI*2/360;
 
-
         // Kolor kółka
         var BU = DR;
         if(DR.frames) BU = DR.states[ O.animTick ];

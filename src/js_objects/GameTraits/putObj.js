@@ -281,9 +281,9 @@ GAMEobject.prototype.putObj_directAnim = function(Type,Data){
 
 GAMEobject.prototype.removeObj = function(o){
     if(o==0) return false;
-    if(typeof this.O[o] =='undefined') return false;
+    if(typeof this.O[o] == 'undefined') return false;
 
-    if(this.O[o].T!='bullet' && this.O[o].mapType!='A' && this.O[o].TT!='anim' && this.O[o].TT!='dirAnim'){    // Czyli co?
+    if(this.O[o].T!='bullet' && this.O[o].TT!='bgStars' && this.O[o].TT!='anim' && this.O[o].TT!='dirAnim'){    // Czyli co?
 
         if(this.O[o].TT=='enemy') this.removeFromXY(o,true);
                 else              this.removeFromXY(o);
@@ -297,7 +297,7 @@ GAMEobject.prototype.removeObj = function(o){
                 delete S.Members[o];
         }
     }
-    if(this.O[o].mapType=='A') this.removeFromXY(o,true);
+    if(this.O[o].TT == 'bgStars') this.removeFromXY(o,true);
 
     if(this.O[o].TT == 'anim' || this.O[o].TT == 'dirAnim')
         delete this.Oanim[o];
@@ -312,7 +312,7 @@ GAMEobject.prototype.removeObj = function(o){
     delete this.Ocomp[o];
     delete this.Obullet[o];
     delete this.Oregion[o];
-    if(this.O[o].TT!='enemy' && this.O[o].mapType!='A'){
+    if(this.O[o].TT!='enemy' && this.O[o].TT!='bgStars'){
         delete this.O[o];
     }else if(this.O[o].onDieDelete){
         delete this.O[o];

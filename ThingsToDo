@@ -10,8 +10,7 @@
 
 - ExplosivePresets "dontCollide" problem
 
-- After first try, some animation data seem to be corrupted
-- Mines as Layers
+- Mines as Layers [??]
 
 - better way to control particle density of objects.
 
@@ -122,7 +121,6 @@ New Enemies:
     - F same się leczą jeśli nie dzieje się nic innego
 
     - Ship cleaning Destruction Fields
-    - Spike Ship, resping one-site-blowing mines on his armor
 
     - Ship with "mine prison" bomb (resping mines around player)
 
@@ -144,7 +142,6 @@ New Enemies:
             - Zwykłe pnącza - które rosną i powiększają strukturę
             - Różne strzelające odnóża
             - Nowe nasiona z których wyrastają kolejne rośliny
-    - Statek który otwiera przed sobą pole porzogi i próbuje utrzymać w nim gracza (2 rodzaje, Cone)
     - Statek plujący tarczami teleportującymi
     - Statek który zbiera obrażenia od innych, im więcej zbierze tym większy wybuch zrobi. (może rosnąć np.)
         - Jak zbierze max, to zaczyna gonić gracza jak kamikaze
