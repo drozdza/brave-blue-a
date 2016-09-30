@@ -247,7 +247,7 @@ function CanvasManagerObject(){
                 }
             }
 
-            if(typeof R.smallStars !='undefined'){
+            if(typeof R.smallStars !='undefined' && !isNaN(R.smallStars)){
                 var SS=[];
                 for(var i=0; i<R.smallStars; ++i){
                     var Radi = Math.random()*(R.sizeX/5)- -(R.sizeX/8);
