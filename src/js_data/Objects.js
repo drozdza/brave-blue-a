@@ -2375,7 +2375,8 @@ BBAdata['ObjectDatas']={
         radius: 40,
 
         Bombs:[
-            { explosivePreset:'BubbleMissle' },
+            {explosivePreset:'ExplosionWorm2'},
+            {explosivePreset:'BubbleMissle'},
         ],
 
         weapon:[

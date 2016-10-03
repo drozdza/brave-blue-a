@@ -1,4 +1,3 @@
-
 GAMEobject.prototype.shootBullet = function(o,Angle,Speed,Dec,Power){
     var O = this.O[o];
     var L = this.putBullet(O.S,O.x,O.y,Speed,Dec,Angle,Power);
@@ -140,6 +139,12 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             this.O[ L ].PeriodTime = explodeObj.PeriodTime;
             this.O[ L ].PeriodOffset = explodeObj.PeriodOffset;
         }
+        if(explodeObj.OneTimeEffect){
+            this.O[ L ].OneTimeEffect = explodeObj.OneTimeEffect;
+            this.O[ L ].OneTimeOffset = explodeObj.OneTimeOffset;
+            this.O[ L ].OneTimeDamage = explodeObj.OneTimeDamage;
+            this.O[ L ].OnDamageExpire = explodeObj.OnDamageExpire;
+        }
         if(explodeObj.dontHit){
             this.O[ L ].dontHit = cloneObj(explodeObj.dontHit);
         }
@@ -147,7 +152,8 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             this.O[ L ].bounceForce = explodeObj.BounceForce;
             this.O[ L ].bounceType = explodeObj.BounceAngle;
         }
-        this.O[L].DieTime = this.tick- -explodeObj.ExpireTime;
+        this.O[ L ].DieTime = this.tick- -explodeObj.ExpireTime;
+        this.O[ L ].fieldAnim = explodeObj.fieldAnim;
         this.setRegionAnimation(L,explodeObj.fieldAnim);
         if(explodeObj.moveAlong){
             this.O[ L ].angle = O.angle;
@@ -199,8 +205,14 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
                 this.O[L].angle = (O.angle- -explodeObj.Shards[i].Angle- -360)%360;
                 this.O[L].speed = explodeObj.Shards[i].Speed;
                 this.O[L].doingTime = explodeObj.Shards[i].Dec;
+                if(explodeObj.Shards[i].SpeedPlus)
+                    this.O[ L ].speed-=-Math.random()*explodeObj.Shards[i].SpeedPlus;
+                if(explodeObj.Shards[i].DecPlus)
+                    this.O[ L ].doingTime-=-parseInt(Math.random()*explodeObj.Shards[i].DecPlus);
+                if(explodeObj.Shards[i].AnglePlus)
+                    this.O[ L ].angle-=-parseInt(Math.random()*explodeObj.Shards[i].AnglePlus);
 
-                this.cloneExplosionData( explodeObj.Shards[i], this.O[L] );
+                this.cloneExplosionData(explodeObj.Shards[i], this.O[L]);
             }
         }
 
@@ -230,9 +242,18 @@ GAMEobject.prototype.cloneExplosionData = function(D,O){
             var onY = {}; onY[onX]=1;
             if(onX == 'onHitDieExpire')
                 onY = {onHit:1,onDie:1,onExpire:1};
-            for(var onU in onY)
+            for(var onU in onY){
                 for(var addX in D.exploAddTo[onX])
                     O[onU][addX] = cloneObj(D.exploAddTo[onX][addX]);
+
+                if(O[onU].Shards)
+                    for(var i in O[onU].Shards)
+                        if(O[onU].Shards[i].CopyShardTimes > 0){
+                            O[onU].Shards[i].exploAddTo = {};
+                            O[onU].Shards[i].exploAddTo[ onX ] = cloneObj( D.exploAddTo[ onX ] );
+                            O[onU].Shards[i].exploAddTo[ onX ].Shards[0].CopyShardTimes--;
+                        }
+            }
         }
 }
 GAMEobject.prototype.addShield = function(o,Duration,q){

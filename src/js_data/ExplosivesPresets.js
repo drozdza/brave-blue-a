@@ -165,7 +165,23 @@ BBAdata['ExplosivesPresets']={
         onHit:    {Do:'explode',explodeType: 'roundField', radius:230, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
         onExpire: {Do:'explode',explodeType: 'roundField', radius:230, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
     },
+
     BubbleMissle:{
-        onHitDieExpire: {Do:'explode',explodeType:'roundField', radius:50, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDamage: 3, ExpireTime:60, moveAlong: 5},
+        onHitDieExpire: {Do:'explode',explodeType:'roundField', radius:20, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDamage: 3, OnDamageExpire:1, ExpireTime:60, moveAlong: 5},
+    },
+    ExplosionWorm2:{
+        explosivePreset: 'ExplosionSize1',
+        exploAddToShard:4,
+        exploAddTo:{ onExpire: {
+            Shards:[{
+                explosivePreset: 'ExplosionSize2',
+                Dec: 20,
+                Speed: 5,
+                Angle: -20,
+                AnglePlus: 40,
+                CopyShardIn:'onExpire',
+                CopyShardTimes:5,
+            }]
+        }}
     },
 };
