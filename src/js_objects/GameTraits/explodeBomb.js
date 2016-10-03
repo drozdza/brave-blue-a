@@ -93,6 +93,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             this.addBoardMods(L);
         }
     }
+    else if(explodeObj.explodeType=='none'){}
     else {
         L = this.putObj('destruction_field','region',O.S,O.x,O.y);
         this.O[L].radius = explodeObj.Dist;
@@ -108,34 +109,28 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
     }
 
     if(explodeObj.Shards)
-        if(explodeObj.ShardsNum){
-            var iRad = parseInt(Math.random()*360);
-            for(i=0; i < explodeObj.ShardsNum; ++i){
-                L = this.putObj('bullet_bomb','comp',O.S,O.x,O.y);
-                this.O[L].angle = parseInt(iRad- -i*(360/explodeObj.ShardsNum)- -360)%360;
-                this.O[L].speed = explodeObj.Shards.Speed;
-                this.O[L].doingTime = explodeObj.Shards.Dec;
-                if(explodeObj.Shards.SpeedPlus)
-                    this.O[ L ].speed-=-Math.random()*explodeObj.Shards.SpeedPlus;
-                if(explodeObj.Shards.DecPlus)
-                    this.O[ L ].doingTime-=-parseInt(Math.random()*explodeObj.Shards.DecPlus);
+        for(var s in explodeObj.Shards){
+            var Sh = explodeObj.Shards[s];
+            var ShardsNum = 1;
+            if(Sh.ShardsNum) ShardsNum = Sh.ShardsNum;
 
-                this.cloneExplosionData(explodeObj.Shards, this.O[L]);
-            }
-        } else {
-            for(i in explodeObj.Shards){
-                L = this.putObj('bullet_bomb','comp',O.S,O.x,O.y);
-                this.O[L].angle = (O.angle- -explodeObj.Shards[i].Angle- -360)%360;
-                this.O[L].speed = explodeObj.Shards[i].Speed;
-                this.O[L].doingTime = explodeObj.Shards[i].Dec;
-                if(explodeObj.Shards[i].SpeedPlus)
-                    this.O[ L ].speed-=-Math.random()*explodeObj.Shards[i].SpeedPlus;
-                if(explodeObj.Shards[i].DecPlus)
-                    this.O[ L ].doingTime-=-parseInt(Math.random()*explodeObj.Shards[i].DecPlus);
-                if(explodeObj.Shards[i].AnglePlus)
-                    this.O[ L ].angle-=-parseInt(Math.random()*explodeObj.Shards[i].AnglePlus);
+            var iAngle = (O.angle- -Sh.Angle- -360)%360;
+            if(Sh.AnglePlus) iAngle-=-parseInt(Math.random()*Sh.AnglePlus);
 
-                this.cloneExplosionData(explodeObj.Shards[i], this.O[L]);
+            for(var i=0; i<ShardsNum; ++i){
+                L = this.putObj('bullet_bomb','comp',O.S,O.x,O.y);
+
+                if(Sh.AngleNext == 'undefined'){
+                    if(Sh.AnglePlus) iAngle-=-parseInt(Math.random()*Sh.AnglePlus);
+                }else iAngle -=- Sh.AngleNext;
+
+                this.O[L].angle = iAngle;
+                this.O[L].speed = Sh.Speed;
+                this.O[L].doingTime = Sh.Dec;
+
+                if(Sh.SpeedPlus) this.O[ L ].speed-=-Math.random()*Sh.SpeedPlus;
+                if(Sh.DecPlus)   this.O[ L ].doingTime-=-parseInt(Math.random()*Sh.DecPlus);
+                this.cloneExplosionData(Sh, this.O[L]);
             }
         }
 
@@ -168,6 +163,8 @@ GAMEobject.prototype.cloneExplosionData = function(D,O){
             for(var onU in onY){
                 for(var addX in D.exploAddTo[onX])
                     O[onU][addX] = cloneObj(D.exploAddTo[onX][addX]);
+
+                if(O[onU].radiusPlus) O[onU].radius -=- parseInt(Math.random()*O[onU].radiusPlus);
 
                 if(O[onU].Shards)
                     for(var i in O[onU].Shards)

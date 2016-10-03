@@ -66,42 +66,51 @@ BBAdata['ExplosivesPresets']={
     ExplosionRose:{
         explosivePreset: 'ExplosionSize2',
         exploAddTo:{ onExpire: {
-            ShardsNum: 5,
-            Shards:{
+            Shards:[{
+                ShardsNum: 5,
                 explosivePreset: 'ExplosionSize1',
+                Angle: 0,
+                AnglePlus: 72,
+                AngleNext: 72,
                 Dec: 12,
                 DecPlus: 8,
                 Speed: 5,
                 SpeedPlus: 3,
-            }
+            }]
         }}
     },
 
     HugeExplosionRose:{
         explosivePreset: 'ExplosionSize3',
         exploAddTo:{ onExpire: {
-            ShardsNum: 5,
-            Shards:{
+            Shards:[{
+                ShardsNum: 5,
                 explosivePreset: 'ExplosionRose',
+                Angle: 0,
+                AnglePlus: 72,
+                AngleNext: 72,
                 Dec: 12,
                 DecPlus: 8,
                 Speed: 10,
                 SpeedPlus: 3,
-            }
+            }]
         }}
     },
 
     MineExplosionRose:{
         explosivePreset: 'ExplosionSize2',
         exploAddTo:{ onHitDieExpire: {
-            ShardsNum: 5,
-            Shards:{
+            Shards:[{
+                ShardsNum: 5,
                 explosivePreset: 'ExplosionSize1',
+                Angle: 0,
+                AnglePlus: 72,
+                AngleNext: 72,
                 Dec: 12,
                 DecPlus: 8,
                 Speed: 5,
                 SpeedPlus: 3,
-            }
+            }]
         }}
     },
 
@@ -167,26 +176,27 @@ BBAdata['ExplosivesPresets']={
     },
 
     BubbleMissle:{
-        onHitDieExpire: {Do:'explode',explodeType:'roundField', radius:20, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDamage: 3, OnDamageExpire:1, ExpireTime:60, moveAlong: 5},
+        onHitDieExpire: {Do:'explode',explodeType:'roundField', fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDamage: 3, OnDamageExpire:1, ExpireTime:60, moveAlong: 5, dontHit:['ME']},
     },
     BubbleStorm:{
         Dec: 30,
         Speed: 8,
         onExpire: {
             Do:'explode',
-            explododeType: 'none',
+            explodeType: 'none',
             Shards:[{
+                ShardsNum: 12,
                 explosivePreset: 'BubbleMissle',
-                Dec: 10,
-                radius: 10,
-                Speed: 8,
-                Angle: -20,
-            },{
-                explosivePreset: 'BubbleMissle',
-                Dec: 10,
-                radius: 30,
-                Speed: 8,
-                Angle: 20,
+                exploAddTo:{onHitDieExpire:{
+                    radius: 10,
+                    radiusPlus: 30,
+                }},
+                Dec: 5,
+                DecPlus: 20,
+                Speed: 4,
+                SpeedPlus: 7,
+                Angle: -30,
+                AngleNext: 5,
             }]
         }
     },
