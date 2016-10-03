@@ -183,7 +183,12 @@ BBAdata['MAPS']={
     },
     'Lx5084':{
         Place:[
-            {RingOf:{X: 0, Y: 0, Radius: 300}, What:{Tu:3}}
+            {RingOf:{X: 0, Y: 0, Radius: 300}, What:{Tu:8,Q:6}}
+        ],
+    },
+    'Lx5084 2':{
+        Place:[
+            {RingOf:{X: 0, Y: 0, Radius: 300}, What:{Tu:8}}
         ],
     },
     'HealthSplit':{
@@ -203,7 +208,7 @@ BBAdata['MAPS']={
     'Secure':'load',
     'BigOnes':{
         BoardMods:['sitOnMap','allAvoid'],
-        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, D:10, M:10, N:10, J:10, W:5, T:10, E:10, G:10, R:10, B:10, K:10, F:10, Q:5,X:5,TT:10}}],
+        Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, D:10, M:10, N:10, J:10, W:5, T:10, E:10, G:10, R:10, B:10, K:10, F:10, Q:5,X:5,TT:10,Tu:5}}],
     },
     'HardCore':{
         BoardMods:['sitOnMap','allAvoid'],
@@ -215,7 +220,7 @@ BBAdata['MAPS']={
         ],
         Ship:{Start:{X: 2400, Y: 0, A:90}},
         Place:[
-            {Random:{X: 0, Y: 0, Radius: 2200}, What:{A:5, U:5, S:5, I:10, D:10, M:5, N:5, J:5, W:5, T:5, E:10, C:5, G:5, R:5, H:5, B:5, V:5, K:10, F:10, Q:5, X:6, Z:5, PI:5, WP:5,Ni:10,SH:10,L:5,TT:10,CD:5,HH:5,UU:5}},
+            {Random:{X: 0, Y: 0, Radius: 2200}, What:{A:5, U:5, S:5, I:10, D:10, M:5, N:5, J:5, W:5, T:5, E:10, C:5, G:5, R:5, H:5, B:5, V:5, K:10, F:10, Q:5, X:6, Z:5, PI:5, WP:5,Ni:10,SH:10,L:5,TT:10,CD:5,HH:5,UU:5,Tu:8}},
             {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarX:150,iD:10,Wi:10}},
             {What:{Gstar:1},objData:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}}
         ]
