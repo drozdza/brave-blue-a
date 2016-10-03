@@ -66,9 +66,9 @@ BBAdata['SHIPpresets']={
         MouseDown1: false,
         MouseDown2: false,
         FireTypes:[
-            {T:'missle',  gunS:0,GunSpeed: 10, Use:{'Missile':1}, Speed: 12, SpeedT: 6, Dec: 130, AimRadius: 60, explosivePreset:'MissileDestructionFieldGiant'},
-            {T:'missleR', gunS:0,GunSpeed: 6, Use:{'Missile':5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explosivePreset:'MissileDestructionFieldSmall'},
-            {T:'bombT',   gunS:0,GunSpeed: 5,  Distance: 500, offTime: 0, explosivePreset:'DestructionFieldMedium'},
+            {T:'missle',  gunS:0,GunSpeed: 10, Use:{'Missile':1}, Speed: 12, SpeedT: 6, Dec: 130, AimRadius: 60, explodePreset:'MissileDestructionFieldGiant'},
+            {T:'missleR', gunS:0,GunSpeed: 6, Use:{'Missile':5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'MissileDestructionFieldSmall'},
+            {T:'bombT',   gunS:0,GunSpeed: 5,  Distance: 500, offTime: 0, explodePreset:'DestructionFieldMedium'},
             {T:'tele',    gunS:0,GunSpeed: 3, ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
         ],
         Modules:[
@@ -107,10 +107,10 @@ BBAdata['SHIPpresets']={
         MouseDown1: false,
         MouseDown2: false,
         FireTypes:[
-            {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 50, explosivePreset:'NailsBigCircle'},
-            {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 60, explosivePreset:'NailsWirlpool'},
-            {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 50, explosivePreset:'ExplosionSize1',minDec:6},
-            {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 40, explosivePreset:'ExplosionSize3',minDec:13},
+            {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 50, explodePreset:'NailsBigCircle'},
+            {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 60, explodePreset:'NailsWirlpool'},
+            {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 50, explodePreset:'ExplosionSize1',minDec:6},
+            {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 40, explodePreset:'ExplosionSize3',minDec:13},
             {T:'tele',    gunS:0,GunSpeed: 3, ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
         ],
         Modules:[
@@ -149,12 +149,12 @@ BBAdata['SHIPpresets']={
         MouseDown1: false,
         MouseDown2: false,
         FireTypes:[
-            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, explosivePreset:'NailsCircleToCenter'},
-            {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, offTime: 60, explosivePreset:'NailsBigCircle'},
-            {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, offTime: 60, explosivePreset:'NailsBigLongCircle'},
-            {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, offTime: 120, explosivePreset:'NailsWirlpool', dontCollide:true},
-            {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 500, offTime: 60, explosivePreset:'ExplosionSize1'},
-            {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 500, offTime: 0, explosivePreset:'ExplosionSize3'},
+            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, explodePreset:'NailsCircleToCenter'},
+            {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, offTime: 60, explodePreset:'NailsBigCircle'},
+            {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, offTime: 60, explodePreset:'NailsBigLongCircle'},
+            {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, offTime: 120, explodePreset:'NailsWirlpool', dontCollide:true},
+            {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 500, offTime: 60, explodePreset:'ExplosionSize1'},
+            {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 500, offTime: 0, explodePreset:'ExplosionSize3'},
             {T:'tele',    gunS:0,GunSpeed: 3, ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
         ],
         Modules:[
@@ -195,7 +195,7 @@ BBAdata['SHIPpresets']={
             {T:'single',  gunS:0,GunSpeed: 5, Speed: 17, Dec: 30, Use:{'Ammo':1}, Power: 1},
             {T:'double',  gunS:0,GunSpeed: 1, Speed: 15, Dec: 30, Use:{'Ammo':2}, Power: 1},
             {T:'rose',    gunS:0,GunSpeed: 4, AtOnce: 9, Use:{'Ammo':5}, RoseAngle: 3, Speed: 15, Dec: 30, Power: 1},
-            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 30, explosivePreset:'ExplosionSize2'},
+            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 30, explodePreset:'ExplosionSize2'},
         ],
         Modules:[
             {T:'Prod', subT:'Bullet',Storage:'Ammo', Disabled:0,Emin:2,Emax:4,ProdX:1,E:0,Prod:0,ifProd:3 },
@@ -247,7 +247,7 @@ BBAdata['SHIPpresets']={
             {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Ammo:3}, Speed: 0.1, Teleport:{ Dist: 35, Angle: 270, AngleRand: 180}, Dec: 10, onHitDieExpire:    {Do:'explode',Power: 7, Dist: 80}},
             {T:'missle',  gunS:0,GunSpeed: 10, Use:{Missile:1}, Speed: 12, SpeedT: 4, Dec: 400, AimRadius: 120, Power: 3},
             {T:'missleR', gunS:0,GunSpeed: 6,  Use:{Missile:5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, Power:1},
-            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 10, Dec: 30, explosivePreset:'NailsBigCircle'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 10, Dec: 30, explodePreset:'NailsBigCircle'},
             {T:'tele',    gunS:0,GunSpeed: 3,  ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
         ],
         Modules:[
@@ -300,9 +300,9 @@ BBAdata['SHIPpresets']={
         MouseDown1: false,
         MouseDown2: false,
         FireTypes:[
-            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explosivePreset:'NailsConePalm'},
-            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explosivePreset:'HugeNailsConePalm'},
-            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 8, Dec: 70, explosivePreset:'HugeExplosionRose'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explodePreset:'NailsConePalm'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explodePreset:'HugeNailsConePalm'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 8, Dec: 70, explodePreset:'HugeExplosionRose'},
             {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 0.1, Teleport:{ Dist: 55, Angle: 270, AngleRand: 180}, Dec: 60, onHitDieExpire:    {Do:'explode',Power: 11, Dist: 120}},
             {T:'tele',    gunS:0,GunSpeed: 3,  ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
         ],
@@ -348,8 +348,8 @@ BBAdata['SHIPpresets']={
             {T:'single',  gunS:0,GunSpeed: 5, Speed: 17, Dec: 30, Use:{'Ammo':1}, Power: 1},
             {T:'double',  gunS:0,GunSpeed: 1, Speed: 15, Dec: 30, Use:{'Ammo':2}, Power: 1},
             {T:'rose',    gunS:0,GunSpeed: 4, AtOnce: 9, Use:{'Ammo':5}, RoseAngle: 3, Speed: 15, Dec: 30, Power: 1},
-            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 30, explosivePreset:'ExplosionSize2'},
-            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1,Ammo:5}, Speed: 10, Dec:30, explosivePreset:'NailsBigCircle'},
+            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 30, explodePreset:'ExplosionSize2'},
+            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1,Ammo:5}, Speed: 10, Dec:30, explodePreset:'NailsBigCircle'},
         ],
         Modules:[
             {T:'Prod', subT:'Bullet',Storage:'Ammo', Disabled:0,Emin:2,Emax:4,ProdX:1,E:0,Prod:0,ifProd:3 },

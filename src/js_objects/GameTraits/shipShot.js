@@ -26,7 +26,7 @@ GAMEobject.prototype.shipShootMissle = function(Enemy,Angle,Speed,Dec,SpeedT,des
 
     if(destrData.Power)
         this.O[L].Power = destrData.Power;
-    if(destrData.explosivePreset)
+    if(destrData.explodePreset)
         this.cloneExplosionData(destrData, this.O[L]);
 }
 GAMEobject.prototype.shipShootBomb = function(Speed,Dec,bombData,teleportData){

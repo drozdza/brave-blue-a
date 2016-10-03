@@ -66,9 +66,9 @@ BBAdata['MAPS']['U1'] = {
         {What:{RoundField:1},objData:{x:-600,y: 1100, radius:60, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 20, OneTimeDamage: 4, dontHit:['B','BE']}},
         {What:{RoundField:1},objData:{x:-600,y: 800, radius:200, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
 
-        {LineOf:{X:225, Y:750, Angle: 45, Distance: 80}, What:{Mine:7},objData:{explosivePreset:'NailedMine2'}},
-        {LineOf:{X:280, Y:1030, Angle: 45, Distance: 80}, What:{Mine:11},objData:{explosivePreset:'NailedMine'}},
-        {LineOf:{X:585, Y:900, Angle: 45, Distance: 80}, What:{Mine:4},objData:{explosivePreset:'ExplosionSize1'}},
+        {LineOf:{X:225, Y:750, Angle: 45, Distance: 80}, What:{Mine:7},objData:{explodePreset:'NailedMine2'}},
+        {LineOf:{X:280, Y:1030, Angle: 45, Distance: 80}, What:{Mine:11},objData:{explodePreset:'NailedMine'}},
+        {LineOf:{X:585, Y:900, Angle: 45, Distance: 80}, What:{Mine:4},objData:{explodePreset:'ExplosionSize1'}},
 
 
         {What:{Gstar:1},objData:{x:-140,y:900,bounceType:'diagonal',bounceTeleport:true}},

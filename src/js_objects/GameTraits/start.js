@@ -265,7 +265,7 @@ GAMEobject.prototype.addBoardMod = function(o,MODname){
         O.squareCorners = this.countSquareCorners(O.x,O.y,O.squareAngle,O.squareLen,O.squareWidth);
     }
 
-    if(typeof MOD.explosivePreset != 'undefined'){
+    if(typeof MOD.explodePreset != 'undefined'){
         this.cloneExplosionData(O,O);
     }
 

@@ -245,6 +245,8 @@ GAMEobject.prototype.region_teleportOnHit = function(TP,o){
         Angle = parseInt(Math.random()*360);
     } else if(TP.teleportOnHit=='aligned'){
         Angle = O.angle;
+    } else if(TP.teleportOnHit=='withAngle'){
+        Angle = TP.angle;
     }
     Dist = TP.teleportOnHitDist;
     if(TP.teleportOnHitDistPlus) Dist-=- parseInt(Math.random()*TP.teleportOnHitDistPlus);

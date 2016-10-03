@@ -3,7 +3,7 @@ BBAdata['MAPS']['Backgrounds'] = {
     Place:[
         // {RingOf:{X:0, Y:0, Radius: 200, RadiusPlus: 400}, What:{K: 1}},
         //
-        // {CircleOf:{X: 0, Y:0, Radius: 1000, AngleStart: 0, AngleBy: 4}, What:{Mine:90},objData:{explosivePreset:'NailedMine'}},
+        // {CircleOf:{X: 0, Y:0, Radius: 1000, AngleStart: 0, AngleBy: 4}, What:{Mine:90},objData:{explodePreset:'NailedMine'}},
 
         {RingOf:{X:0, Y:0, Angle: 0, Radius: 450, RadiusPlus: 1000},    Background:1, What:{RoundField:100}, objData:{radius:30, simpleFilling:'rgba(255,255,0,0.7)'}},
         {CircleOf:{X:0, Y:0, Radius: 400, AngleStart: 0, AngleBy: 15},  Background:1, What:{RoundField:24},  objData:{radius:30, simpleFilling:'rgba(255,255,0,0.7)'}},

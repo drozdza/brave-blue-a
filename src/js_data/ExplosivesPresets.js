@@ -16,35 +16,35 @@ BBAdata['ExplosivesPresets']={
 
 
     WarasteinExploCone:{
-        explosivePreset: 'ExplosionSize1',
+        explodePreset: 'ExplosionSize1',
         exploAddTo:{ onExpire: { Shards:[
             {   Dec: 8, Speed: 7, Angle: -30,
-                explosivePreset: 'ExplosionSize1',
+                explodePreset: 'ExplosionSize1',
                 exploAddTo:{ onExpire: { Shards:[
                     {   Dec: 8, Speed: 7, Angle: -15,
-                        explosivePreset: 'ExplosionSize1',
+                        explodePreset: 'ExplosionSize1',
                         exploAddTo:{ onExpire: { Shards:[
                             {   Dec: 12, Speed: 5, Angle: 0,
-                                explosivePreset: 'ExplosionSize2',
+                                explodePreset: 'ExplosionSize2',
                             }]
                         }}
                     }]
                 }}
             },{ Dec: 16, Speed: 7, Angle: 0,
-                explosivePreset: 'ExplosionSize2',
+                explodePreset: 'ExplosionSize2',
                 exploAddTo:{ onExpire: { Shards:[
                     {   Dec: 12, Speed: 7, Angle: 0,
-                        explosivePreset: 'ExplosionSize3',
+                        explodePreset: 'ExplosionSize3',
                     }]
                 }}
             },{ Dec: 8, Speed: 7, Angle: 30,
-                explosivePreset: 'ExplosionSize1',
+                explodePreset: 'ExplosionSize1',
                 exploAddTo:{ onExpire: { Shards:[
                     {   Dec: 8, Speed: 7, Angle: 15,
-                        explosivePreset: 'ExplosionSize1',
+                        explodePreset: 'ExplosionSize1',
                         exploAddTo:{ onExpire: { Shards:[
                             {   Dec: 12, Speed: 5, Angle: 0,
-                                explosivePreset: 'ExplosionSize2',
+                                explodePreset: 'ExplosionSize2',
                             }]
                         }}
                     }]
@@ -64,11 +64,11 @@ BBAdata['ExplosivesPresets']={
     },
 
     ExplosionRose:{
-        explosivePreset: 'ExplosionSize2',
+        explodePreset: 'ExplosionSize2',
         exploAddTo:{ onExpire: {
             Shards:[{
                 ShardsNum: 5,
-                explosivePreset: 'ExplosionSize1',
+                explodePreset: 'ExplosionSize1',
                 Angle: 0,
                 AnglePlus: 72,
                 AngleNext: 72,
@@ -81,11 +81,11 @@ BBAdata['ExplosivesPresets']={
     },
 
     HugeExplosionRose:{
-        explosivePreset: 'ExplosionSize3',
+        explodePreset: 'ExplosionSize3',
         exploAddTo:{ onExpire: {
             Shards:[{
                 ShardsNum: 5,
-                explosivePreset: 'ExplosionRose',
+                explodePreset: 'ExplosionRose',
                 Angle: 0,
                 AnglePlus: 72,
                 AngleNext: 72,
@@ -98,11 +98,11 @@ BBAdata['ExplosivesPresets']={
     },
 
     MineExplosionRose:{
-        explosivePreset: 'ExplosionSize2',
+        explodePreset: 'ExplosionSize2',
         exploAddTo:{ onHitDieExpire: {
             Shards:[{
                 ShardsNum: 5,
-                explosivePreset: 'ExplosionSize1',
+                explodePreset: 'ExplosionSize1',
                 Angle: 0,
                 AnglePlus: 72,
                 AngleNext: 72,
@@ -186,7 +186,7 @@ BBAdata['ExplosivesPresets']={
             explodeType: 'none',
             Shards:[{
                 ShardsNum: 12,
-                explosivePreset: 'BubbleMissle',
+                explodePreset: 'BubbleMissle',
                 exploAddTo:{onHitDieExpire:{
                     radius: 10,
                     radiusPlus: 30,
@@ -200,11 +200,12 @@ BBAdata['ExplosivesPresets']={
             }]
         }
     },
+
     ExplosionWorm2:{
-        explosivePreset: 'ExplosionSize1',
+        explodePreset: 'ExplosionSize1',
         exploAddTo:{ onExpire: {
             Shards:[{
-                explosivePreset: 'ExplosionSize2',
+                explodePreset: 'ExplosionSize2',
                 Dec: 10,
                 Speed: 8,
                 Angle: -20,
@@ -213,4 +214,55 @@ BBAdata['ExplosivesPresets']={
             }]
         }}
     },
+
+    ElectroBubble:{
+        onHitDieExpire: {Do:'explode', explodeType:'roundField', fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDamage: 3, OnDamageExpire:1, ExpireTime:240, angle: 0, dontHit:['ME','E','BE','A','B'], radius: 30, radiusPlus: 30},
+    },
+    BubbleShield:{
+        Dec: 30,
+        Speed: 8,
+        explodePreset: 'ElectroBubble',
+        exploAddTo:{ onExpire: {
+            Shards:[{
+                explodePreset: 'ElectroBubble',
+                Dec: 5,
+                DecPlus: 5,
+                Speed: 8,
+                Angle: -90,
+                exploAddTo:{ onExpire:{
+                    Shards:[{
+                        CopyShardTimes: 3,
+                        explodePreset: 'ElectroBubble',
+                        Dec: 5,
+                        DecPlus: 5,
+                        Speed: 8,
+                        Angle: -30,
+                        AnglePlus: 40,
+                    }]
+                }}
+            },{
+                explodePreset: 'ElectroBubble',
+                Dec: 5,
+                DecPlus: 5,
+                Speed: 8,
+                Angle: 90,
+                exploAddTo:{ onExpire:{
+                    Shards:[{
+                        CopyShardTimes: 3,
+                        explodePreset: 'ElectroBubble',
+                        Dec: 5,
+                        DecPlus: 5,
+                        Speed: 8,
+                        Angle: 30,
+                        AnglePlus: -40,
+                    }]
+                }}
+            }]
+        }}
+    },
+
+    TeleField:{
+        onHitDieExpire: {Do:'explode', explodeType:'roundField', simpleFilling: 'rgba(155,155,255,0.8)', teleportOnHit: 'withAngle',  teleportOnHitDist: 520, teleportOnHitDistPlus: 200, ExpireTime:120, moveAlong: 5, dontHit:['ME','E','BE','A','B'], radius: 30},
+    }
+
 };

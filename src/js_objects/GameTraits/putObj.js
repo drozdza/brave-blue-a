@@ -40,7 +40,7 @@ GAMEobject.prototype.putObj_fromArray = function(O){
     delete(O.extends);
     delete(O.mergeArrays);
 
-    if(O.explosivePreset || O.exploAddTo || O.onHitDieExpire)
+    if(O.explodePreset || O.exploAddTo || O.onHitDieExpire)
         this.cloneExplosionData(O, O);
 
     return O;
