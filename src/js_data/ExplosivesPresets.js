@@ -262,7 +262,7 @@ BBAdata['ExplosivesPresets']={
     },
 
     TeleField:{
-        onHitDieExpire: {Do:'explode', explodeType:'roundField', simpleFilling: 'rgba(155,155,255,0.8)', teleportOnHit: 'withAngle',  teleportOnHitDist: 520, teleportOnHitDistPlus: 200, ExpireTime:120, moveAlong: 5, dontHit:['ME','E','BE','A','B'], radius: 30},
+        onHitDieExpire: {Do:'explode', explodeType:'roundField', simpleFilling: 'rgba(0,0,255,0.2)', teleportOnHit: 'withAngle',  teleportOnHitDist: 520, teleportOnHitDistPlus: 200, ExpireTime:120, moveAlong: 5, dontHit:['ME','E','BE','A','B'], radius: 30},
     },
 
     // some to Y ship

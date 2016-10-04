@@ -528,7 +528,6 @@ function CanvasManagerObject(){
     }
 
     this.simpleFilling = function(CanCon,O, Px,Py){
-        var P = GAME.O[0];
         var Radi = Math.PI*2/360;
 
         CanCon.save();

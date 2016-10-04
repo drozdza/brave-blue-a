@@ -57,43 +57,30 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
     else if(explodeObj.explodeType=='roundField'){
 
         L = this.putObj('RoundField','region',O.S,O.x,O.y);
-        this.O[ L ].radius = explodeObj.radius;
-        if(explodeObj.PeriodDamage){
-            this.O[ L ].PeriodDamage = explodeObj.PeriodDamage;
-            this.O[ L ].PeriodTime = explodeObj.PeriodTime;
-            this.O[ L ].PeriodOffset = explodeObj.PeriodOffset;
-        }
-        if(explodeObj.OneTimeEffect){
-            this.O[ L ].OneTimeEffect = explodeObj.OneTimeEffect;
-            this.O[ L ].OneTimeOffset = explodeObj.OneTimeOffset;
-            this.O[ L ].OneTimeDamage = explodeObj.OneTimeDamage;
-            this.O[ L ].OnDamageExpire = explodeObj.OnDamageExpire;
-        }
-        if(explodeObj.dontHit){
-            this.O[ L ].dontHit = cloneObj(explodeObj.dontHit);
-        }
-        if(explodeObj.BounceForce){
-            this.O[ L ].bounceForce = explodeObj.BounceForce;
-            this.O[ L ].bounceType = explodeObj.BounceAngle;
-        }
-        if(explodeObj.teleportOnHit){
-            this.O[ L ].teleportOnHit = explodeObj.teleportOnHit;
-            this.O[ L ].teleportOnHitDist = explodeObj.teleportOnHitDist;
-            this.O[ L ].teleportOnHitDistPlus = explodeObj.teleportOnHitDistPlus;
-        }
 
-        if(explodeObj.simpleFilling)
-            this.O[ L ].simpleFilling = cloneObj(explodeObj.simpleFilling);
+        this.cloneDataToObj(L,explodeObj,['radius',
+            'PeriodDamage', 'PeriodTime', 'PeriodOffset',
+            'OneTimeEffect', 'OneTimeOffset', 'OneTimeDamage', 'OnDamageExpire',
+            'bounceForce', 'bounceType',
+            'teleportOnHit', 'teleportOnHitDist', 'teleportOnHitDistPlus',
+            'simpleFilling', 'fieldAnim',
+            ],['dontHit']);
 
         this.O[ L ].DieTime = this.tick- -explodeObj.ExpireTime;
-        if(explodeObj.fieldAnim){
-            this.O[ L ].fieldAnim = explodeObj.fieldAnim;
-            this.setRegionAnimation(L,explodeObj.fieldAnim);
+
+        if(explodeObj.fieldAnim)
+            this.setRegionAnimation(L, explodeObj.fieldAnim);
+
+        if(explodeObj.simpleFilling){
+            this.O[ L ].TT='simpleFilling';
+            CanvasManager.CBM.deleteObjectFromBackground(L);
         }
+
         if(explodeObj.moveAlong){
             this.O[ L ].angle = O.angle;
             this.O[ L ].speed = explodeObj.moveAlong;
             this.O[ L ].fieldAnimMoving = true;
+            delete( this.O[ L ].view.onBackground );
             this.Omoving[ L ]=1;
         }
     }
@@ -190,4 +177,14 @@ GAMEobject.prototype.cloneExplosionData = function(D,O){
                         }
             }
         }
+}
+GAMEobject.prototype.cloneDataToObj = function(o,OBJ,simple,clone){
+    for(var i in simple)
+        if(typeof OBJ[ simple[i] ] != 'undefined')
+            this.O[o][ simple[i] ] = OBJ[ simple[i] ];
+
+    for(var i in clone)
+        if(typeof OBJ[ clone[i] ] != 'undefined')
+            this.O[o][ clone[i] ] = cloneObj( OBJ[ clone[i] ] );
+
 }
