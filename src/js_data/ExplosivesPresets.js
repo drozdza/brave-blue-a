@@ -218,7 +218,7 @@ BBAdata['ExplosivesPresets']={
     ElectroBubble:{
         onHitDieExpire: {Do:'explode', explodeType:'roundField', fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDamage: 3, OnDamageExpire:1, ExpireTime:240, angle: 0, dontHit:['ME','E','BE','A','B'], radius: 30, radiusPlus: 30},
     },
-    BubbleShield:{
+    ElectroBubbleShield:{
         Dec: 30,
         Speed: 8,
         explodePreset: 'ElectroBubble',
@@ -263,6 +263,22 @@ BBAdata['ExplosivesPresets']={
 
     TeleField:{
         onHitDieExpire: {Do:'explode', explodeType:'roundField', simpleFilling: 'rgba(155,155,255,0.8)', teleportOnHit: 'withAngle',  teleportOnHitDist: 520, teleportOnHitDistPlus: 200, ExpireTime:120, moveAlong: 5, dontHit:['ME','E','BE','A','B'], radius: 30},
-    }
+    },
+
+    // some to Y ship
+
+    EnergyBubbleShield:{},
+    MinePrison:{},
+    ShieldsBlobWall:{},
+    ShieldsBlobBomb:{},
+
+    WindBalls:{},
+    WindField:{},
+    BulletsCatchConeField:{},
+    SlowDownConeFields:{},
+    TeleportConeField:{},
+
+
+
 
 };

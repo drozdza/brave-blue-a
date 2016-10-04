@@ -3,7 +3,7 @@
 
 - Different Endgame Statuses
 - Game saves in cookies
-- Left the hack lever in cookies
+    - Left the hack lever in cookies
 
 
 - >> ships should orbit
@@ -14,13 +14,11 @@
 
 - better way to control particle density of objects.
 
-- X attack as curved nailbombs
+- X attack as curved NailBombs
 
 - Layers of Canvas:
     - overlay layer,
-    - settable backgrounds
-    - small stars on the far background (multilevel?)
-    - His screen
+    - Hit screen
     - Draw control zones of ships (other layer)
 
 - 4th lvl of debug: numbers of rendered objects
@@ -28,13 +26,6 @@
 - 6th lvl of debug: checking ms lag stability
 
 - Make BLUR a feature
-
-- System kar dla statku
-    - zmniejszenie produkcji prądu
-    - niemożność teleportacji
-    - zwolnienie przyspieszenia/skręcania
-    - mniejsza maksymalna prędkość
-    - zmniejszenie capacity tarcz/życia/amunicji
 
 - Make "Player SHIP always point/go one site" - feature
 
@@ -95,7 +86,44 @@ Nowe ficzery:
 			- Dodatkowa amunicja.
 			- Silniejsze strzały.
 			- Teleport zamiast obrażeń.
+            - Włączenie tarczy zamiast obrażeń.
+    - PlayerShip damage system
+        - energy production lowered
+        - not possible teleportation
+        - slow down the ecceleration/turning speed
+        - lower max speed
+        - lower amunition/shields/life capacity
 
+
+
+========== NEW DAMAGE system ============================================
+
+Types of damage:
+    - [bullet] normal (bullets?) (ramming?)
+    - [energy] energy fields / lasers
+    - [explosion] explosions / destruction fields
+    - [adic] acid?
+    -
+
+Shields:
+    - can have number of charges
+    - can be time limited
+    - can be activated in case of damage
+
+Shield types:
+    - gives all type immunity
+    - catch 1 explosion beam
+    - catch 1 acid damage
+    - catch 1 energy damage
+    - catch damages 1 by one (from all sources - or bullet/energy/explo/acid types)
+    - shield can redirect bullets, lasers and others
+    - reduction shields? -3 to explosions?
+
+Blue bullets:
+    - can go thrue enemies
+    - can ignore shields
+    - can recude shields
+    - can damage ships speed/resources/abilities
 
 ================================================================================
 
@@ -105,15 +133,16 @@ MotherShip
 
 
 New Player Weapons:
-    - Plasma ball
-    - Bomb'o'bombs
+    + Plasma ball
+    + Bomb'o'bombs
     - Slow fields
     - Chewing gum fields
     - Teleport Fields
     - Wind barrier
     - Lighting
-    - ExplosionWorm
+    + ExplosionWorm
     - Small Ships that attack what you point at
+    - Big TP bomb that teleports every enemy out
 
 New Enemies:
     - O,P
@@ -147,13 +176,6 @@ New Enemies:
     - Statek ciągnący za sobą dużą ilość torped leczniczych
     - Statek ciągnący za sobą zwykłe torpedy
     - Liny pomiędzy gwiazdami po których jeżdżą przeciwnicy.
-    - Ochrona stała: np. redukcja obrażeń od wybuchów.
-    - Niebieskie strzały np:
-        - przebijają osłony,
-        - lecą przez wszystko (jak laser),
-        - ujmują statkom energii?
-        - redukują osłony
-
 
 	Fields:
 		- Immunity Field
