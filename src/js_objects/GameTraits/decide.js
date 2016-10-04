@@ -247,6 +247,7 @@ GAMEobject.prototype.decide = function(o){
             if(TD.T=='slowDownAndDie'){
                 if(O.speed > 0){
                   O.speed -= 2;
+                  if(O.speed < 0) O.speed = 0;
                   O.doingTime = 3;
                 } else {
                     --O.life;

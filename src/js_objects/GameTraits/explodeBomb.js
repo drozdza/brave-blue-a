@@ -54,27 +54,35 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
                 this.O[ L ].speedT = -((i- -0.5)/(explodeObj.Nails/2)- 1) * explodeObj.NailsAngleCenter;
         }
     }
-    else if(explodeObj.explodeType=='roundField'){
+    else if(explodeObj.explodeType=='RoundField' || explodeObj.explodeType=='ConeField'){
 
-        L = this.putObj('RoundField','region',O.S,O.x,O.y);
+        L = this.putObj(explodeObj.explodeType,'region',O.S,O.x,O.y);
 
-        this.cloneDataToObj(L,explodeObj,['radius',
+        this.cloneDataToObj(L,explodeObj,['radius', 'coneAngle', 'coneRad2',
             'PeriodDamage', 'PeriodTime', 'PeriodOffset',
             'OneTimeEffect', 'OneTimeOffset', 'OneTimeDamage', 'OnDamageExpire',
             'bounceForce', 'bounceType',
             'teleportOnHit', 'teleportOnHitDist', 'teleportOnHitDistPlus',
             'simpleFilling', 'fieldAnim',
-            ],['dontHit']);
+            'vectorType', 'vectorForce',
+            'SlowDownTo', 'SlowDownBy',
+            ],['dontHit','TeleportMovement']);
 
         this.O[ L ].DieTime = this.tick- -explodeObj.ExpireTime;
 
-        if(explodeObj.fieldAnim)
-            this.setRegionAnimation(L, explodeObj.fieldAnim);
+        if(explodeObj.explodeType=='ConeField')
+            this.O[ L ].angle = O.angle;
 
         if(explodeObj.simpleFilling){
             this.O[ L ].TT='simpleFilling';
             CanvasManager.CBM.deleteObjectFromBackground(L);
         }
+
+        if(explodeObj.vectorForce)
+            this.O[ L ].windAngle = O.angle;
+
+        if(explodeObj.fieldAnim)
+            this.setRegionAnimation(L, explodeObj.fieldAnim);
 
         if(explodeObj.moveAlong){
             this.O[ L ].angle = O.angle;
@@ -89,6 +97,18 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
         if(explodeObj.objRand) objNumb-=-parseInt(Math.random()*(explodeObj.objRand- -1));
         for(var i=0; i<objNumb; ++i){
             L = this.putObj(explodeObj.objName,explodeObj.objType,O.S,O.x,O.y);
+
+            this.O[ L ].angle = O.angle;
+            this.O[ L ].speed = 0;
+            this.cloneDataToObj(L,explodeObj,['life','lifeM','dec','doingTime'],['toDo','Flags']);
+
+            if(explodeObj.objName=='shieldBlob')
+                CanvasManager.requestCanvas( L );
+
+            if(explodeObj.moveAlong){
+                this.O[ L ].speed = explodeObj.moveAlong;
+            }
+
             this.addBoardMods(L);
         }
     }
@@ -157,14 +177,21 @@ GAMEobject.prototype.cloneExplosionData = function(D,O){
     if(D.explodePreset)
         this.cloneExplosionData(BBAdata['ExplosivesPresets'][ D.explodePreset ], O);
 
+    if(D.TeleportMovement)
+        O.TeleportMovement = cloneObj(D.TeleportMovement);
+
+
     if(D.exploAddTo)
         for(var onX in D.exploAddTo){
             var onY = {}; onY[onX]=1;
             if(onX == 'onHitDieExpire')
                 onY = {onHit:1,onDie:1,onExpire:1};
             for(var onU in onY){
-                for(var addX in D.exploAddTo[onX])
+                for(var addX in D.exploAddTo[onX]){
+                    if(typeof O[onU] == 'undefined') O[onU] = {};
                     O[onU][addX] = cloneObj(D.exploAddTo[onX][addX]);
+                    console.log(D.exploAddTo[onX][addX]);
+                }
 
                 if(O[onU].radiusPlus) O[onU].radius -=- parseInt(Math.random()*O[onU].radiusPlus);
 
@@ -173,6 +200,7 @@ GAMEobject.prototype.cloneExplosionData = function(D,O){
                         if(O[onU].Shards[i].CopyShardTimes > 0){
                             O[onU].Shards[i].exploAddTo = {};
                             O[onU].Shards[i].exploAddTo[ onX ] = cloneObj( D.exploAddTo[ onX ] );
+                            console.log(D.explodeAddTo[ onX ])
                             O[onU].Shards[i].exploAddTo[ onX ].Shards[i].CopyShardTimes--;
                         }
             }

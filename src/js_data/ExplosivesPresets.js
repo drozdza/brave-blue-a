@@ -155,28 +155,28 @@ BBAdata['ExplosivesPresets']={
     },
 
     DestructionFieldGiant:{
-        onHitDieExpire: {Do:'explode',explodeType: 'roundField', radius:200, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 40, PeriodOffset: 50, ExpireTime: 300, dontHit:['B','BE']},
+        onHitDieExpire: {Do:'explode',explodeType: 'RoundField', radius:200, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 40, PeriodOffset: 50, ExpireTime: 300, dontHit:['B','BE']},
     },
 
     DestructionFieldMedium:{
-        onHitDieExpire: {Do:'explode',explodeType: 'roundField', radius:160, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
+        onHitDieExpire: {Do:'explode',explodeType: 'RoundField', radius:160, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
     },
 
     DestructionFieldSmall:{
-        onHitDieExpire: {Do:'explode',explodeType: 'roundField', radius:35, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
+        onHitDieExpire: {Do:'explode',explodeType: 'RoundField', radius:35, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
     },
 
     MissileDestructionFieldSmall:{
-        onHit:    {Do:'explode',explodeType: 'roundField', radius:50, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
-        onExpire: {Do:'explode',explodeType: 'roundField', radius:50, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
+        onHit:    {Do:'explode',explodeType: 'RoundField', radius:50, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
+        onExpire: {Do:'explode',explodeType: 'RoundField', radius:50, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
     },
     MissileDestructionFieldGiant:{
-        onHit:    {Do:'explode',explodeType: 'roundField', radius:230, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
-        onExpire: {Do:'explode',explodeType: 'roundField', radius:230, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
+        onHit:    {Do:'explode',explodeType: 'RoundField', radius:230, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
+        onExpire: {Do:'explode',explodeType: 'RoundField', radius:230, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
     },
 
     BubbleMissle:{
-        onHitDieExpire: {Do:'explode',explodeType:'roundField', fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDamage: 3, OnDamageExpire:1, ExpireTime:60, moveAlong: 5, dontHit:['ME']},
+        onHitDieExpire: {Do:'explode',explodeType:'RoundField', fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDamage: 3, OnDamageExpire:1, ExpireTime:60, moveAlong: 5, dontHit:['ME']},
     },
     BubbleStorm:{
         Dec: 30,
@@ -216,7 +216,7 @@ BBAdata['ExplosivesPresets']={
     },
 
     ElectroBubble:{
-        onHitDieExpire: {Do:'explode', explodeType:'roundField', fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDamage: 3, OnDamageExpire:1, ExpireTime:240, angle: 0, dontHit:['ME','E','BE','A','B'], radius: 30, radiusPlus: 30},
+        onHitDieExpire: {Do:'explode', explodeType:'RoundField', fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDamage: 3, OnDamageExpire:1, ExpireTime:240, angle: 0, dontHit:['ME','E','BE','A','B'], radius: 30, radiusPlus: 30},
     },
     ElectroBubbleShield:{
         Dec: 30,
@@ -262,23 +262,178 @@ BBAdata['ExplosivesPresets']={
     },
 
     TeleField:{
-        onHitDieExpire: {Do:'explode', explodeType:'roundField', simpleFilling: 'rgba(0,0,255,0.2)', teleportOnHit: 'withAngle',  teleportOnHitDist: 520, teleportOnHitDistPlus: 200, ExpireTime:120, moveAlong: 5, dontHit:['ME','E','BE','A','B'], radius: 30},
+        onHitDieExpire: {Do:'explode', explodeType:'RoundField', simpleFilling: 'rgba(0,0,255,0.2)', teleportOnHit: 'withAngle',  teleportOnHitDist: 520, teleportOnHitDistPlus: 200, ExpireTime:90, moveAlong:4, dontHit:['ME','E','BE','A','B'], radius: 30},
+    },
+
+    TeleWall:{
+        onExpire: {
+            Do:'explode',
+            explodeType: 'none',
+            Shards:[{
+                ShardsNum: 5,
+                explodePreset: 'TeleField',
+                Dec: 1,
+                Speed: 8,
+                Angle: -50,
+                AngleNext: 25
+            }]
+        }
     },
 
     // some to Y ship
 
-    EnergyBubbleShield:{},
+    EnergyBubble:{
+        onHitDieExpire: {Do:'explode', explodeType:'RoundField', fieldAnim:'ShellField', bounceType:'diagonal', ExpireTime:240, angle: 0, dontHit:['ME','E','BE','A'], radius: 45},
+    },
+    EnergyBubbleShield:{
+        Dec: 30,
+        Speed: 8,
+        explodePreset: 'EnergyBubble',
+        exploAddTo:{ onExpire: {
+            Shards:[{
+                explodePreset: 'EnergyBubble',
+                Dec: 7,
+                Speed: 8,
+                Angle: -100,
+                exploAddTo:{ onExpire:{
+                    Shards:[{
+                        CopyShardTimes: 3,
+                        explodePreset: 'EnergyBubble',
+                        Dec: 7,
+                        Speed: 8,
+                        Angle: -20,
+                    }]
+                }}
+            },{
+                explodePreset: 'EnergyBubble',
+                Dec: 7,
+                Speed: 8,
+                Angle: 100,
+                exploAddTo:{ onExpire:{
+                    Shards:[{
+                        CopyShardTimes: 3,
+                        explodePreset: 'EnergyBubble',
+                        Dec: 7,
+                        Speed: 8,
+                        Angle: 20,
+                    }]
+                }}
+            }]
+        }}
+    },
+
+
     MinePrison:{},
-    ShieldsBlobWall:{},
-    ShieldsBlobBomb:{},
 
-    WindBalls:{},
-    WindField:{},
-    BulletsCatchConeField:{},
-    SlowDownConeFields:{},
-    TeleportConeField:{},
+    ShieldBlob:{ onHitDieExpire:{Do:'explode', explodeType:'putObjs', objMin:1, objName:'shieldBlob', objType:'comp', life:6,lifeM:6, toDo:[{T:'slowDownAndDie'}], doingTime: 480, Flags:[]}},
+    ShieldsBlobWall:{
+        Dec: 30,
+        Speed: 8,
+        explodePreset: 'ShieldBlob',
+        exploAddTo:{ onExpire: {
+            Shards:[{
+                explodePreset: 'ShieldBlob',
+                Dec: 4,
+                Speed: 8,
+                Angle: -93,
+                exploAddTo:{ onExpire:{
+                    Shards:[{
+                        CopyShardTimes: 4,
+                        explodePreset: 'ShieldBlob',
+                        Dec: 4,
+                        Speed: 8,
+                        Angle: -6,
+                    }]
+                }}
+            },{
+                explodePreset: 'ShieldBlob',
+                Dec: 4,
+                Speed: 8,
+                Angle: 93,
+                exploAddTo:{ onExpire:{
+                    Shards:[{
+                        CopyShardTimes: 4,
+                        explodePreset: 'ShieldBlob',
+                        Dec: 4,
+                        Speed: 8,
+                        Angle: 6,
+                    }]
+                }}
+            }]
+        }}
+    },
+    ShieldsBlobBomb:{
+        exploAddTo:{
+            onExpire: {
+                Do:'explode',
+                explodeType: 'none',
+                Shards:[{
+                ShardsNum: 12,
+                explodePreset: 'ShieldBlob',
+                exploAddTo:{onHitDieExpire:{ doingTime:20, moveAlong:6, life:3, lifeM:3 }},
+                Dec: 1,
+                Angle: 0,
+                AngleNext: 30,
+                Speed: 2,
+            }]
+        }}
+    },
 
+    WindBall:{
+        onHitDieExpire: {Do:'explode', explodeType:'RoundField', fieldAnim:'WindField', ExpireTime:90, dontHit:['ME','E','BE','A'], radius: 55, vectorType:'wind', vectorForce:5}},
+    WindBalls:{
+        onExpire: {
+            Do:'explode',
+            explodeType: 'none',
+            Shards:[{
+                ShardsNum: 3,
+                explodePreset: 'WindBall',
+                exploAddTo:{onHitDieExpire:{ moveAlong:5 }},
+                Dec: 1,
+                Speed: 8,
+                Angle: -30,
+                AngleNext: 30
+            }]
+        }
+    },
 
+    WindField:{onHitDieExpire:{ Do:'explode', explodeType:'ConeField', fieldAnim:'WindField', ExpireTime:240, dontHit:['ME','E','BE','A'], vectorType:'wind', vectorForce:5, windAngle:60, radius: 350, coneAngle: 50, coneRad2: 0}},
 
+    EyeOfEvil:{
+        onExpire: {
+            Do:'explode',
+            explodeType: 'none',
+            Shards:[{
+                ShardsNum: 12,
+                explodePreset: 'ExplosionSize1',
+                Dec: 30,
+                Speed: 1,
+                Angle: 0,
+                AngleNext: 30,
+                TeleportMovement:{ Dist: 30, Angle: 270, AngleRand: 180},
+            }]
+        }
+    },
+
+    SlowDownConeFields:{onHitDieExpire:{ Do:'explode', explodeType:'ConeField', fieldAnim: 'ShellField', PeriodDamage: 1, PeriodTime: 20, PeriodOffset: 20, SlowDownTo: 2, SlowDownBy: 3, dontHit:['E','ME','BE'], ExpireTime:240, radius: 160, coneAngle: 80, coneRad2: 110}},
+
+    TeleportConeField:{onHitDieExpire:{ Do:'explode', explodeType:'ConeField', simpleFilling: 'rgba(0,0,255,0.2)', ExpireTime:240, dontHit:['ME','E','BE','A'], teleportOnHit: 'withAngle', teleportOnHitDist: 520, teleportOnHitDistPlus: 200, radius: 160, coneAngle: 80, coneRad2: 110}},
+
+    SetMine1:{onExpire:{ Do:'explode', explodeType:'setMine'}},
+    BulletsCatchConeField:{
+        onExpire: {
+            Do:'explode',
+            explodeType: 'none',
+            Shards:[{
+                ShardsNum: 12,
+                explodePreset: 'SetMine1',
+                Dec: 3,
+                Speed: 1,
+                Angle: 0,
+                AngleNext: 30,
+                TeleportMovement:{ Dist: 30, Angle: 330, AngleRand: 60},
+            }]
+        }
+    },
 
 };
