@@ -101,8 +101,8 @@ Nowe ficzery:
 Types of damage:
     - [bullet] normal (bullets?) (ramming?)
     - [energy] energy fields / lasers
-    - [explosion] explosions / destruction fields
-    - [adic] acid?
+    - [explosion] explosions / destruction fields[???]
+    - [acid] acid?
     -
 
 Shields:
@@ -124,6 +124,22 @@ Blue bullets:
     - can ignore shields
     - can recude shields
     - can damage ships speed/resources/abilities
+
+
+    dmg:{
+        dmg: 7,
+        dmgT: 'bullet / energy / explosion / acid / super',
+    }
+
+    shield:{
+        dmgT: ['bullet', 'energy', 'acid'],
+        dmgSuck: 1 / 17 / 'infinite',
+        usesSuck: 'infinite' / 3,
+        ExpireTime: -1 / 2939,
+        HitActionObj: 'die' / 'redirect' / 'ignore',
+    }
+
+
 
 ================================================================================
 
