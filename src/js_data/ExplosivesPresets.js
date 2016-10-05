@@ -407,13 +407,30 @@ BBAdata['ExplosivesPresets']={
                 ShardsNum: 12,
                 explodePreset: 'ExplosionSize1',
                 Dec: 30,
-                Speed: 1,
+                Speed: 0.1,
                 Angle: 0,
                 AngleNext: 30,
                 TeleportMovement:{ Dist: 30, Angle: 270, AngleRand: 180},
             }]
         }
     },
+
+    StrikeOfEvil:{
+        onExpire: {
+            Do:'explode',
+            explodeType: 'none',
+            Shards:[{
+                ShardsNum: 16,
+                explodePreset: 'ExplosionSize1',
+                Dec: 20,
+                DecPlus: 30,
+                Speed: 0.1,
+                Angle: 0,
+                TeleportMovement:{Dist: 30, Angle: 270, AngleRand: 180},
+            }]
+        }
+    },
+
 
     SlowDownConeFields:{onHitDieExpire:{ Do:'explode', explodeType:'ConeField', fieldAnim: 'ShellField', PeriodDamage: 1, PeriodTime: 20, PeriodOffset: 20, SlowDownTo: 2, SlowDownBy: 3, dontHit:['E','ME','BE'], ExpireTime:240, radius: 160, coneAngle: 80, coneRad2: 110}},
 
