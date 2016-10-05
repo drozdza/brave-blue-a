@@ -188,12 +188,11 @@ BBAdata['MAPS']={
     },
     'Lx5084 2':{
         Place:[
-            {RingOf:{X: 0, Y: 0, Radius: 300}, What:{Tu:8}}
-        ],
-    },
-    'Lx5084 3':{
-        Place:[
-            {RingOf:{X: 0, Y: 0, Radius: 0}, What:{Tu:1}}
+            {RingOf:{X: 0, Y: 0, Radius: 50}, What:{Tu:4}},
+            {RingOf:{X: 1000, Y: 0, Radius: 50}, What:{Tu:4}},
+            {RingOf:{X: 0, Y: 1000, Radius: 50}, What:{Tu:4}},
+            {RingOf:{X: 0, Y: -1000, Radius: 50}, What:{Tu:4}},
+            {RingOf:{X: -1000, Y: 0, Radius: 50}, What:{Tu:4}},
         ],
     },
     'HealthSplit':{

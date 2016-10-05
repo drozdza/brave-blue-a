@@ -2375,8 +2375,7 @@ BBAdata['ObjectDatas']={
         radius: 40,
 
         Bombs:[
-            {explodePreset:'StrikeOfMines2'},
-            {exolodePreset:'MineZen'},
+            {explodePreset:'MineZen'},
             {explodePreset:'StrikeOfMines'},
             {explodePreset:'EyeOfMines'},
             {explodePreset:'StrikeOfEvil'},
@@ -2386,7 +2385,6 @@ BBAdata['ObjectDatas']={
             {explodePreset:'WindField'},
             {explodePreset:'ShieldsBlobWall'},
             {explodePreset:'ShieldsBlobBomb'},
-            {explodePreset:'ShieldBlob'},
             {explodePreset:'EnergyBubbleShield'},
             {explodePreset:'TeleWall'},
             {explodePreset:'TeleField'},
@@ -2396,7 +2394,7 @@ BBAdata['ObjectDatas']={
         ],
 
         weapon:[
-            {t:'bomb', Speed: 10, Dec: 10, BombRandom: 1, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
+            {t:'bomb', Speed: 10, Dec: 10, BombRandom: 16, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
         ],
 
         doingNow: 'changeManouver',

@@ -262,7 +262,7 @@ BBAdata['ExplosivesPresets']={
     },
 
     TeleField:{
-        onHitDieExpire: {Do:'explode', explodeType:'RoundField', simpleFilling: 'rgba(0,0,255,0.2)', teleportOnHit: 'withAngle',  teleportOnHitDist: 520, teleportOnHitDistPlus: 200, ExpireTime:90, moveAlong:4, dontHit:['ME','E','BE','A','B'], radius: 30},
+        onHitDieExpire: {Do:'explode', explodeType:'RoundField', simpleFilling: 'rgba(0,0,255,0.2)', teleportOnHit: 'withAngle',  teleportOnHitDist: 520, teleportOnHitDistPlus: 200, ExpireTime:90, moveAlong:6, dontHit:['ME','E','BE','A','B'], radius: 30},
     },
 
     TeleWall:{
@@ -468,7 +468,7 @@ BBAdata['ExplosivesPresets']={
         }
     },
 
-    StrikeOfMines2:{
+    MineZen:{
         onExpire: {
             Do:'explode',
             explodeType: 'none',
