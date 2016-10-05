@@ -49,9 +49,8 @@ GAMEobject.prototype.shootEnergyFieldMissle = function(o,Target){
     this.O[L].FollowWho = Target;
     this.O[L].MaxEnergyField = parseInt(this.O[Target].lifeM/2);
 }
-GAMEobject.prototype.dropSpaceMine = function(o,Angle,bombData){
-    var O = this.O[o];
-    var L = this.putObj('space_mine','comp',O.S,O.x,O.y);
+GAMEobject.prototype.dropSpaceMine = function(S,x,y,Angle,bombData){
+    var L = this.putObj('space_mine','comp',S,x,y);
     if(Angle){
         this.O[L].angle=Angle;
         this.O[L].speed=20;

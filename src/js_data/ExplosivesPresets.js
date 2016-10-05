@@ -422,11 +422,11 @@ BBAdata['ExplosivesPresets']={
             Shards:[{
                 ShardsNum: 16,
                 explodePreset: 'ExplosionSize1',
-                Dec: 20,
-                DecPlus: 30,
+                Dec: 15,
+                DecPlus: 20,
                 Speed: 0.1,
                 Angle: 0,
-                TeleportMovement:{Dist: 30, Angle: 270, AngleRand: 180},
+                TeleportMovement:{Dist: 20, Angle: 270, AngleRand: 180},
             }]
         }
     },
@@ -436,8 +436,8 @@ BBAdata['ExplosivesPresets']={
 
     TeleportConeField:{onHitDieExpire:{ Do:'explode', explodeType:'ConeField', simpleFilling: 'rgba(0,0,255,0.2)', ExpireTime:240, dontHit:['ME','E','BE','A'], teleportOnHit: 'withAngle', teleportOnHitDist: 520, teleportOnHitDistPlus: 200, radius: 160, coneAngle: 80, coneRad2: 110}},
 
-    SetMine1:{onExpire:{ Do:'explode', explodeType:'setMine'}},
-    BulletsCatchConeField:{
+    SetMine1:{onExpire:{ Do:'explode', explodeType:'setMine', mineExplodePreset:{explodePreset:'NailedMine'},overWriteObjects:['MineMod_mediumCircle']}},
+    EyeOfMines:{
         onExpire: {
             Do:'explode',
             explodeType: 'none',
@@ -449,6 +449,61 @@ BBAdata['ExplosivesPresets']={
                 Angle: 0,
                 AngleNext: 30,
                 TeleportMovement:{ Dist: 30, Angle: 330, AngleRand: 60},
+            }]
+        }
+    },
+    StrikeOfMines:{
+        onExpire: {
+            Do:'explode',
+            explodeType: 'none',
+            Shards:[{
+                ShardsNum: 7,
+                explodePreset: 'SetMine1',
+                Dec: 10,
+                DecPlus: 15,
+                Speed: 0.1,
+                Angle: 0,
+                TeleportMovement:{ Dist: 20, Angle: 270, AngleRand: 180},
+            }]
+        }
+    },
+
+    StrikeOfMines2:{
+        onExpire: {
+            Do:'explode',
+            explodeType: 'none',
+            Shards:[{
+                explodePreset: 'SetMine1',
+                Dec: 7,
+                Speed: 0.1,
+                Angle: 180,
+                TeleportMovement:{ Dist: 21, Angle: -90},
+                exploAddTo:{ onExpire:{
+                    Shards:[{
+                        CopyShardTimes: 11,
+                        explodePreset: 'SetMine1',
+                        Dec: 1,
+                        Speed: 0.1,
+                        Angle: 15,
+                        TeleportMovement:{ Dist: 22, Angle: -15},
+                    }]
+                }}
+            },{
+                explodePreset: 'SetMine1',
+                Dec: 7,
+                Speed: 0.1,
+                Angle: 0,
+                TeleportMovement:{ Dist: 21, Angle: -90},
+                exploAddTo:{ onExpire:{
+                    Shards:[{
+                        CopyShardTimes: 11,
+                        explodePreset: 'SetMine1',
+                        Dec: 1,
+                        Speed: 0.1,
+                        Angle: 15,
+                        TeleportMovement:{ Dist: 22, Angle: -15},
+                    }]
+                }}
             }]
         }
     },

@@ -112,6 +112,11 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             this.addBoardMods(L);
         }
     }
+    else if(explodeObj.explodeType=='setMine'){
+
+        L = this.dropSpaceMine(O.S,O.x,O.y,false,{explodePreset:O.mineExplodePreset});
+        // explodeType:'setMine', explodePreset:'NailedMine',overWriteObjects:['MineMod_mediumCircle']
+    }
     else if(explodeObj.explodeType=='none'){}
     else {
         L = this.putObj('destruction_field','region',O.S,O.x,O.y);
@@ -190,7 +195,6 @@ GAMEobject.prototype.cloneExplosionData = function(D,O){
                 for(var addX in D.exploAddTo[onX]){
                     if(typeof O[onU] == 'undefined') O[onU] = {};
                     O[onU][addX] = cloneObj(D.exploAddTo[onX][addX]);
-                    console.log(D.exploAddTo[onX][addX]);
                 }
 
                 if(O[onU].radiusPlus) O[onU].radius -=- parseInt(Math.random()*O[onU].radiusPlus);
@@ -200,7 +204,6 @@ GAMEobject.prototype.cloneExplosionData = function(D,O){
                         if(O[onU].Shards[i].CopyShardTimes > 0){
                             O[onU].Shards[i].exploAddTo = {};
                             O[onU].Shards[i].exploAddTo[ onX ] = cloneObj( D.exploAddTo[ onX ] );
-                            console.log(D.explodeAddTo[ onX ])
                             O[onU].Shards[i].exploAddTo[ onX ].Shards[i].CopyShardTimes--;
                         }
             }

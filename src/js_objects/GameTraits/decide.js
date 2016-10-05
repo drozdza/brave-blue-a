@@ -817,8 +817,8 @@ GAMEobject.prototype.decide = function(o){
 
             if(WP.t == 'dropSpaceMine'){
                 bombData = O.Bombs[ WP.BombType ];
-                if(WP.ShotMine) this.dropSpaceMine(o,PlayerAngle,bombData);
-                    else        this.dropSpaceMine(o,false,bombData);
+                if(WP.ShotMine) this.dropSpaceMine(O.S,O.x,O.y,PlayerAngle,bombData);
+                    else        this.dropSpaceMine(O.S,O.x,O.y,false,bombData);
                 WP.lastShot = this.tick;
             }
 

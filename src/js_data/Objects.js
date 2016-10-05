@@ -2375,9 +2375,11 @@ BBAdata['ObjectDatas']={
         radius: 40,
 
         Bombs:[
+            {explodePreset:'StrikeOfMines2'},
+            {exolodePreset:'MineZen'},
+            {explodePreset:'StrikeOfMines'},
+            {explodePreset:'EyeOfMines'},
             {explodePreset:'StrikeOfEvil'},
-            {explodePreset:'BulletsCatchConeField'},
-
             {explodePreset:'EyeOfEvil'},
             {explodePreset:'SlowDownConeFields'},
             {explodePreset:'TeleportConeField'},

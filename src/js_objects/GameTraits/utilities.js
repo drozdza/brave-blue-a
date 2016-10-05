@@ -49,16 +49,23 @@ GAMEobject.prototype.teleportJump = function(o,Distance,angle,graphicType){
     Angle = angle;
 
     var pathD =['M',{x: Ox, y: Oy}];
-    for(var D=0; D<=Distance; D+=10){
-        Ox = Ox- - 10 * Math.sin( (-parseInt(Angle)-180)*(Math.PI/180));
-        Oy = Oy- - 10 * Math.cos( (-parseInt(Angle)-180)*(Math.PI/180));
+    var K =10;
+    for(var D=0; D<=Distance;){
+        Ox = Ox- - K * Math.sin( (-parseInt(Angle)-180)*(Math.PI/180));
+        Oy = Oy- - K * Math.cos( (-parseInt(Angle)-180)*(Math.PI/180));
 
         Found = this.getCollidingWithCircle(Ox, Oy, O.radius, ['A','R']);
         for(F in Found)
             if(this.O[F].bounceTeleport){
                 pathD = pathD.concat(['L',{x: Ox, y: Oy}]);
-                Angle = this.regionAngleChange(this.O[F],{x:Ox,y:Oy,angle:Angle,speed:10}).angle;
+                Angle = this.regionAngleChange(this.O[F],{x:Ox,y:Oy,angle:Angle,speed:K}).angle;
             }
+        if(D==Distance) break;
+        D+=10;
+        if(D>Distance){
+            K = Distance-D- -10;
+            D = Distance;
+        }
     }
     O.x = Ox;
     O.y = Oy;
