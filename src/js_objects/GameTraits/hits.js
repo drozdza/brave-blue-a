@@ -175,18 +175,54 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q,transforms){
     if(typeof this.O[o] == 'undefined') return 1;
     var O = this.O[o];
 
-    var TR = false;
-    if(transforms && transforms=='transforms') TR = true;
+    var DMGtype = DMG.T;
+    var DMGval = DMG.Dmg;
+    var ShieldHits = 0;
 
-    if(O.life < 1) return false;
-    if(O.shieldD > 0 && !TR){
-        if(q) this.removeObj(q);
-        return false;
-    }
     if(O.undestructible){
         if(q) this.removeObj(q);
         return false;
     }
+
+    if(O.Shields)for(var sh in O.Shields){
+        var SH = O.Shields[sh];
+        if(SH.CatchDmgT[DMGtype]){
+            if(SH.DmgReduction == 'infinite'){
+                ShieldHits = DMGval;
+                DMGval = 0;
+            }else{
+                var DMGmin = Math.min(DMGval,SH.DmgReduction);
+                DMGval -= DMGmin;
+                O.Shields[sh].DmgReduction -= DMGmin;
+                ShieldHits = DMGmin;
+            }
+            if(SH.ReductionUses != 'infinite'){
+                --O.Shields[sh].ReductionUses;
+            }
+            // DmgTransfer: true,
+            // ExpireTime: -1 / 2939,
+            // HitActionObj: 'die' / 'redirect' / 'ignore',
+
+            if(SH.DmgReduction==0 || SH.ReductionUses==0){}
+        }
+        if(DMGval < 1) break;
+    }
+
+    var TR = false;
+    if(transforms && transforms=='transforms') TR = true;
+
+    // ITsDead!
+    if(O.life < 1){
+        console.log(O.T+' ['+o+'] is dead but got hit!');
+        return false;
+    }
+
+    // SHIELD - undestructible
+    if(O.shieldD > 0 && !TR){
+        if(q) this.removeObj(q);
+        return false;
+    }
+    // SHIELD - energyField
     if(O.energyField > 0){
         if(!q) q=-1;
         if(O.T=='ship') this.C['S_shieldLost']++;
@@ -195,6 +231,7 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q,transforms){
         if(q) this.removeObj(q);
         return true;
     }
+    // ON HIT JUMP
     if(O.jump && O.jump > 0){
         if(this.teleportJump(o,170,Math.random()*360)){
             --O.jump;
@@ -204,12 +241,15 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q,transforms){
         return false;
     }
 
+
+    // HIT animation
     if(q){
         var Q = this.O[q];
         this.putObj_animation('hit', Q.x, Q.y);
         this.removeObj(q);
     }
 
+    // SHIELD - damage transform
     if(O.damageTransferFrom){
         var DTF = O.damageTransferFrom;
         if(this.O[DTF].life > 0){
@@ -223,7 +263,7 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q,transforms){
 
     var Daga = 0;
     if(typeof q !== 'undefined') Daga = 1;
-    for(; Daga < DMG; ++Daga){
+    for(; Daga < DMGval; ++Daga){
         if(Daga >= O.life) break;
         var U = 20;
         var DagaDagaX = parseInt(Math.random()*U*2-U);
@@ -231,7 +271,7 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q,transforms){
         this.putObj_animation('hit', (O.x-DagaDagaX), (O.y-DagaDagaY));
     }
 
-    O.life-=DMG;
+    O.life-=DMGval;
 
     if(O.T=='ship') this.C['S_lifeLost']++;
 

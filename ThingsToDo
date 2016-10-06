@@ -132,14 +132,19 @@ Blue bullets:
     }
 
     shield:{
-        dmgT: ['bullet', 'energy', 'acid'],
-        dmgSuck: 1 / 17 / 'infinite',
-        usesSuck: 'infinite' / 3,
+        CatchDmgT: ['bullet', 'energy', 'acid'],
+        DmgReduction: 1 / 17 / 'infinite',
+        ReductionUses: 'infinite' / 3,
+        DmgTransfer: true,
         ExpireTime: -1 / 2939,
         HitActionObj: 'die' / 'redirect' / 'ignore',
     }
 
+[[ HOW TO SORT THE SHIELDS? ]]
 
+Power
+OneTimeDamage
+PeriodDamage
 
 ================================================================================
 
