@@ -9,13 +9,13 @@ BBAdata['MAPS']['U1'] = {
         }},
 
 
-        {What:{SquareField:1},objData:{x:59,y:-933, squareAngle: 45, squareLen: 500, squareWidth: 30, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 20, PeriodOffset: 20}},
+        {What:{SquareField:1},objData:{x:59,y:-933, squareAngle: 45, squareLen: 500, squareWidth: 30, fieldAnim: 'DestructionField', PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 20, PeriodOffset: 20}},
 
         {What:{SquareField:1},objData:{x:0,y:-1000, squareAngle: 45, squareLen: 500, squareWidth: 30, fieldAnim: 'WindField', bounceType:'wind',bounceForce:5,windAngle:60}},
 
         {What:{SquareField:1},objData:{x:800,y:-730, squareAngle: 45, squareLen: 500, squareWidth: 70, fieldAnim: 'WindField', vectorType:'wind', vectorForce:5, windAngle:60}},
 
-        {What:{ConeField:1},objData:{x:400,y:-1000, radius: 220, angle: 110, coneAngle: 40, coneRad2: 40, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 20, PeriodOffset: 20}},
+        {What:{ConeField:1},objData:{x:400,y:-1000, radius: 220, angle: 110, coneAngle: 40, coneRad2: 40, fieldAnim: 'DestructionField', PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 20, PeriodOffset: 20}},
         {What:{ConeField:1},objData:{x:-200,y:-1000, radius: 220, angle: 270, coneAngle: 110, coneRad2: 0, fieldAnim:'WindField', bounceType:'wind',bounceForce:1,windAngle:60}},
 
         {What:{RoundField:1},objData:{x:-1500,y:100, radius:160, fieldAnim: 'WindField', bounceType:'wind',bounceForce:1,windAngle:60}},
@@ -57,13 +57,13 @@ BBAdata['MAPS']['U1'] = {
         {What:{RoundField:1},objData:{x:-700,y:67, radius:10, simpleFilling: 'rgba(155,155,255,0.8)', teleportOnHit: 'aligned', teleportOnHitDist: 1000}},
 
 
-        {What:{RoundField:1},objData:{x:-600,y:-1200, radius:200, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 6, PeriodOffset: 20, dontHit:['B','BE']}},
-        {What:{RoundField:1},objData:{x:-975,y:-905, radius:200, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 20, OneTimeDamage: 4, dontHit:['B','BE']}},
-        {What:{RoundField:1},objData:{x:-600,y:-600, radius:200, fieldAnim: 'ShellField', PeriodDamage: 1, PeriodTime: 20, PeriodOffset: 20, SlowDownTo: 2, SlowDownBy: 3, dontHit:['E','P']}},
+        {What:{RoundField:1},objData:{x:-600,y:-1200, radius:200, fieldAnim: 'DestructionField', PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 6, PeriodOffset: 20, dontHit:['B','BE']}},
+        {What:{RoundField:1},objData:{x:-975,y:-905, radius:200, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 20, OneTimeDMG:{Dmg:4,T:'energy'}, dontHit:['B','BE']}},
+        {What:{RoundField:1},objData:{x:-600,y:-600, radius:200, fieldAnim: 'ShellField', PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 20, PeriodOffset: 20, SlowDownTo: 2, SlowDownBy: 3, dontHit:['E','P']}},
 
-        {What:{RoundField:1},objData:{x:-910,y: 850, radius:60, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 20, OneTimeDamage: 4, dontHit:['B','BE']}},
-        {What:{RoundField:1},objData:{x:-800,y: 1020, radius:60, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeDamage: 4, dontHit:['B','BE']}},
-        {What:{RoundField:1},objData:{x:-600,y: 1100, radius:60, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 20, OneTimeDamage: 4, dontHit:['B','BE']}},
+        {What:{RoundField:1},objData:{x:-910,y: 850, radius:60, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 20, OneTimeDMG:{Dmg:4,T:'energy'}, dontHit:['B','BE']}},
+        {What:{RoundField:1},objData:{x:-800,y: 1020, radius:60, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeDMG:{Dmg:4,T:'energy'}, dontHit:['B','BE']}},
+        {What:{RoundField:1},objData:{x:-600,y: 1100, radius:60, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 20, OneTimeDMG:{Dmg:4,T:'energy'}, dontHit:['B','BE']}},
         {What:{RoundField:1},objData:{x:-600,y: 800, radius:200, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
 
         {LineOf:{X:225, Y:750, Angle: 45, Distance: 80}, What:{Mine:7},objData:{explodePreset:'NailedMine2'}},

@@ -362,17 +362,17 @@ GAMEobject.prototype.decide_ship = function(e){
         if(!enoughToUse) continue;
 
         if(Fx.T=='single'){
-            this.shipShoot(0, Fx.Speed, Fx.Dec, Fx.Power);
+            this.shipShoot(0, Fx.Speed, Fx.Dec, Fx.DMG);
             shotDone = true;
         }
         if(Fx.T=='double'){
-            this.shipShootOnSide(-90, 5, Fx.Speed, Fx.Dec, Fx.Power);
-            this.shipShootOnSide(90, 5, Fx.Speed, Fx.Dec, Fx.Power);
+            this.shipShootOnSide(-90, 5, Fx.Speed, Fx.Dec, Fx.DMG);
+            this.shipShootOnSide(90, 5, Fx.Speed, Fx.Dec, Fx.DMG);
             shotDone = true;
         }
         if(Fx.T=='rose'){
             for(var i = -parseInt(Fx.AtOnce/2); i<= parseInt(Fx.AtOnce/2); ++i)
-                this.shipShoot(i*Fx.RoseAngle, Fx.Speed, Fx.Dec, Fx.Power);
+                this.shipShoot(i*Fx.RoseAngle, Fx.Speed, Fx.Dec, Fx.DMG);
             shotDone = true;
         }
         if(Fx.T=='missle' && this.missleAim!=false){
@@ -404,7 +404,7 @@ GAMEobject.prototype.decide_ship = function(e){
             shotDone = true;
         }
         if(Fx.T=='laser'){
-            this.shipShootLaser(Fx.Speed,Fx.Power);
+            this.shipShootLaser(Fx.Speed,Fx.DMG);
             shotDone = true;
         }
         if(Fx.T=='tele'){

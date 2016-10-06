@@ -10,7 +10,7 @@ BBAdata['ObjectDatas']={
         lifeM: 1,
         speed: 13,
         speedT: 20,
-        Power: 1,
+        Heal: 1,
         doingTime: 230,
         onHit:{},
         toDo: [{T:'expire'}],
@@ -28,7 +28,6 @@ BBAdata['ObjectDatas']={
         lifeM: 1,
         speed: 13,
         speedT: 20,
-        Power: 1,
         doingTime: 230,
         onHit:{},
         toDo: [{T:'expire'}],
@@ -46,7 +45,7 @@ BBAdata['ObjectDatas']={
         lifeM: 1,
         speed: 15,
         speedT: 3,
-        Power: 1,
+        DMG:{Dmg:1,T:'explo'},
         doingTime: 200,
         toDo: [{T:'expire'}],
         Manouver: 'followEntity',
@@ -63,7 +62,6 @@ BBAdata['ObjectDatas']={
         lifeM: 1,
         speed: 15,
         speedT: 2,
-        Power: 1,
         doingTime: 35,
         toDo: [{T:'expire'}],
         Manouver: 'goStraight',
@@ -369,7 +367,7 @@ BBAdata['ObjectDatas']={
 
         lifeM: 5,
 
-        weapon:[{t:'single', Power:1, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5}],
+        weapon:[{t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5}],
 
         doingNow: 'changeManouver',
         doingTime: -1,
@@ -415,7 +413,7 @@ BBAdata['ObjectDatas']={
         radius: 20,
 
         weapon:[
-            {t:'rose', Power:1, Dec: 50, Speed: 10, gunSpeed: 50, lastShot: 100, AtOnce: 9, RoseAngle: 4, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}
+            {t:'rose', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 50, lastShot: 100, AtOnce: 9, RoseAngle: 4, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}
         ],
 
         doingNow: 'changeManouver',
@@ -458,7 +456,7 @@ BBAdata['ObjectDatas']={
         radius: 20,
 
         Bombs:[{
-            onHitDieExpire:    {Do:'explode',Power: 4, Dist: 35},
+            onHitDieExpire:    {Do:'explode', DMG:{Dmg:4,T:'explo'}, Dist: 35},
         }],
 
         weapon:[{t:'bomb', Speed: 10, Dec: 50, BombType: 0, gunSpeed: 40, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}],
@@ -605,7 +603,7 @@ BBAdata['ObjectDatas']={
         radius: 20,
 
         weapon:[
-            {t:'missleCrown', Power:1, Dec: 95, Speed: 12, gunSpeed: 120, lastShot: 0, minDistToEnemy: 400},
+            {t:'missleCrown', DMG:{Dmg:1,T:'explo'}, Dec: 95, Speed: 12, gunSpeed: 120, lastShot: 0, minDistToEnemy: 400},
         ],
 
         doingNow: 'changeManouver',
@@ -658,7 +656,7 @@ BBAdata['ObjectDatas']={
             angle: 0,
             Oid: -1,
             placementT:'directPlaces',
-            objData: {fieldAnim: 'ElectricityField', radius: 130, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDamage: 4, dontHit:['B','BE','E','M','ME','A'], fieldAnimMoving:true}
+            objData: {fieldAnim: 'ElectricityField', radius: 130, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDMG:{Dmg:4,T:'energy'}, dontHit:['B','BE','E','M','ME','A'], fieldAnimMoving:true}
         }],
 
         doingNow: 'changeManouver',
@@ -745,7 +743,7 @@ BBAdata['ObjectDatas']={
         Res: {'jump': {M:3,T:0}},
         weapon:[
             {t:'refilResource', resource: 'jump', gunSpeed: 300, maxSpeed: 2, doNextWeapon: true},
-            {t:'double2', Power:1, Dec: 35, Speed: 12, gunSpeed: 20, lastShot: 100, maxSpeed: 2, minAlarm: 5},
+            {t:'double2', DMG:{Dmg:1,T:'normal'}, Dec: 35, Speed: 12, gunSpeed: 20, lastShot: 100, maxSpeed: 2, minAlarm: 5},
         ],
 
         doingNow: 'changeManouver',
@@ -793,7 +791,7 @@ BBAdata['ObjectDatas']={
         radius: 27,
 
         weapon:[
-            {t:'double', Speed:12, Dec:30, Power:1, doingNow:'shooting', gunSpeed:1,  maxSpeed:2},
+            {t:'double', Speed:12, Dec:30, DMG:{Dmg:1,T:'normal'}, doingNow:'shooting', gunSpeed:1,  maxSpeed:2},
             {t:'changeAction', makeAction: {Manuover:'goStraight', doingNow:'shooting', doingTime:10, doNotInterupt:true}, gunSpeed: 110, lastShot: 100,  minAlarm: 5, minDistToEnemy: 400}
         ],
 
@@ -836,9 +834,9 @@ BBAdata['ObjectDatas']={
 
 
         Bombs:[{
-            onHit: {Do:'explode',Power: 4, Dist: 35},
-            onDie: {Do:'explode',Power: 4, Dist: 35},
-            onExpire: {Do:'explode',Power: 4, Dist: 35}
+            onHit: {Do:'explode', DMG:{Dmg:4,T:'explo'}, Dist: 35},
+            onDie: {Do:'explode', DMG:{Dmg:4,T:'explo'}, Dist: 35},
+            onExpire: {Do:'explode', DMG:{Dmg:4,T:'explo'}, Dist: 35}
         }],
 
         weapon:[
@@ -1021,7 +1019,7 @@ BBAdata['ObjectDatas']={
 
         weapon:[
             {t:'laserAim', minDistToEnemy: 400, lastShot: 100, gunSpeed: 100, makeAction:{ doingNow:'laserAim', doingTime:30, Manouver: 'goStraight', doNotInterupt: true}},
-            {t:'laserShoot', Power:4, Distance: 450, gunSpeed: 1, lastShot: 0, doingNow: 'laserAim', doingTime: 1, makeAction:{doingNow:'followEnemy', doingTime: 40, doNotInterupt: true}},
+            {t:'laserShoot', DMG:{Dmg:4,T:'energy'}, Distance: 450, gunSpeed: 1, lastShot: 0, doingNow: 'laserAim', doingTime: 1, makeAction:{doingNow:'followEnemy', doingTime: 40, doNotInterupt: true}},
         ],
 
         squadScheme: [{
@@ -1078,7 +1076,7 @@ BBAdata['ObjectDatas']={
         weapon:[
             {t:'refilResource', resource: 'cloakingProd', gunSpeed: 22, maxSpeed: 2, doNextWeapon: true},
             {t:'changeAction', minSpeed: 3, minDistToEnemy: 50, makeAction: {doingNow:'shooting', gotoSpeed:2, doingTime:8, Manouver:'goStraight', unCloak:true}, doingNow:'followEnemyCloaked', usedRes:'cloakingProd', usedResR: 10},
-            {t:'single', Power:1, Dec: 25, Speed: 14, gunSpeed: 2, lastShot: 0, doingNow:'shooting'},
+            {t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 25, Speed: 14, gunSpeed: 2, lastShot: 0, doingNow:'shooting'},
         ],
 
         doingNow: 'changeManouver',
@@ -1121,7 +1119,7 @@ BBAdata['ObjectDatas']={
 
         weapon:[
             {t:'getAcurateAngle', Dec: 50, Speed: 10, maxSpeed: 2, minAlarm: 5, doNextWeapon:true},
-            {t:'single', Power:1, Dec: 50, Speed: 10, gunSpeed: 25, lastShot: 100, maxSpeed: 2, minAlarm: 5}
+            {t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 25, lastShot: 100, maxSpeed: 2, minAlarm: 5}
         ],
 
         doingNow: 'changeManouver',
@@ -1276,7 +1274,7 @@ BBAdata['ObjectDatas']={
             {t:'refilResource', resource: 'energyField', gunSpeed: 120, maxSpeed: 2, doNextWeapon: true},
             {t:'refilResource', resource: 'misslePack', gunSpeed: 18, maxSpeed: 2, doNextWeapon: true},
             {t:'changeAction', makeAction: {doingNow:'shooting', doingTime: 33, Manouver:'goStraight'}, doingNow:'followEnemy', doingTime:1, usedRes:'misslePack', usedResR: 10},
-            {t:'missleX5', Power:1, Dec: 25, Speed: 14, gunSpeed: 8, lastShot: 0, doingNow:'shooting', minDistToEnemy: 500},
+            {t:'missleX5', DMG:{Dmg:1,T:'explo'}, Dec: 25, Speed: 14, gunSpeed: 8, lastShot: 0, doingNow:'shooting', minDistToEnemy: 500},
         ],
 
         doingNow: 'changeManouver',
@@ -1324,7 +1322,7 @@ BBAdata['ObjectDatas']={
         weapon:[
             {t:'refilResource', resource: 'ammoPack', gunSpeed: 20, maxSpeed: 2, doNextWeapon: true},
             {t:'changeAction', minDistToEnemy: 70, makeAction: {doingNow:'shooting', gotoSpeed: 2, doingTime: 20, Manouver:'goStraight', doNotInterupt:true}, doingNow:'followEnemy', usedRes:'ammoPack', usedResR: 10 },
-            {t:'crabBullets', Power: 1, Dec: 37, Speed: 12, gunSpeed: 5, lastShot: 0, doingNow:'shooting', minDistToEnemy: 500},
+            {t:'crabBullets', DMG:{Dmg:1,T:'normal'}, Dec: 37, Speed: 12, gunSpeed: 5, lastShot: 0, doingNow:'shooting', minDistToEnemy: 500},
         ],
 
         doingNow: 'changeManouver',
@@ -1382,7 +1380,7 @@ BBAdata['ObjectDatas']={
             anglePlus: 180,
             Oid: -1,
             placementT:'directPlaces',
-            objData: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDamage: 1, PeriodTime: 15, PeriodOffset: 10, dontHit:['B','BE','E','M','ME','A'], particlesOnBoard:true, fieldAnimMoving:true}
+            objData: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 15, PeriodOffset: 10, dontHit:['B','BE','E','M','ME','A'], particlesOnBoard:true, fieldAnimMoving:true}
         }],
 
         doingNow: 'changeManouver',
@@ -1445,7 +1443,7 @@ BBAdata['ObjectDatas']={
             {t:'changeAction', makeAction: {doingNow:'standBy', gotoSpeed: 1, gotoAlarm: 4, doingTime: 30, changeView: 'view1', Manouver: 'goStraight', doNotInterupt:true}, doingNow:'lowerAlarmLvl'},
             {t:'changeAction', makeAction: {doingNow:'shooting', doingTime: 30, changeView: 'view2', gotoAlarm: 7, Manouver: 'followEnemy', doNotInterupt:true}, doingNow:'standBy', minAlarm: 5, maxAlarm: 6},
             {t:'changeAction', doingNow: 'shooting', doingTime: 1, makeAction: {gotoSpeed: 2, gotoAlarm: 7, doingNow:'changeManouver', doingTime: 30, Manouver:'goStraight'}},
-            {t:'single', Speed:12, Dec:37, Power:1, doingNow: 'shooting', gunSpeed: 3, maxSpeed: 1},
+            {t:'single', Speed:12, Dec:37, DMG:{Dmg:1,T:'normal'}, doingNow: 'shooting', gunSpeed: 3, maxSpeed: 1},
         ],
 
         doingNow: 'changeManouver',
@@ -1529,7 +1527,7 @@ BBAdata['ObjectDatas']={
         lifeM: 89,
         radius: 30,
 
-        onDie: {Do:'explode', Power: 13, Dist: 210},
+        onDie: {Do:'explode', DMG:{Dmg:13,T:'explo'}, Dist: 210},
 
         Res: {},
         DamangeTransferImmune: true,
@@ -1578,7 +1576,7 @@ BBAdata['ObjectDatas']={
 
         Res: {},
         weapon:[
-            {t:'single', Power:1, Dec: 25, Speed: 10, gunSpeed: 2, lastShot: 0, gunWork: 6, gunReload: 60, minDistToEnemy: 250, FlagsRequired:{noStar: false}},
+            {t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 25, Speed: 10, gunSpeed: 2, lastShot: 0, gunWork: 6, gunReload: 60, minDistToEnemy: 250, FlagsRequired:{noStar: false}},
         ],
 
 
@@ -1621,7 +1619,7 @@ BBAdata['ObjectDatas']={
         lifeM: 2,
         radius: 9,
         Res: {},
-        weapon:[{t:'single', Power:1, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5}],
+        weapon:[{t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5}],
 
         doingNow: 'changeManouver',
         doingTime: -1,
@@ -1665,7 +1663,7 @@ BBAdata['ObjectDatas']={
 
         Res: {},
         weapon:[
-            {t:'double2', Speed:15, Dec:30, Power:1, Wide: 15, doingNow:'shooting', gunSpeed: 6},
+            {t:'double2', Speed:15, Dec:30, DMG:{Dmg:1,T:'normal'}, Wide: 15, doingNow:'shooting', gunSpeed: 6},
             {t:'changeAction', makeAction: {Manuover:'goStraight', doingNow:'shooting', doingTime:30, doNotInterupt:true}, gunSpeed: 110, lastShot: 100,  minAlarm: 5, minDistToEnemy: 400}
         ],
 
@@ -1724,7 +1722,7 @@ BBAdata['ObjectDatas']={
             angle: 0,
             Oid: -1,
             placementT:'directPlaces',
-            objData: {fieldAnim: 'ElectricityField', radius: 40, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDamage: 3, dontHit:['B','BE','E','M','ME','A'], fieldAnimMoving:true}
+            objData: {fieldAnim: 'ElectricityField', radius: 40, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDMG:{Dmg:3,T:'energy'}, dontHit:['B','BE','E','M','ME','A'], fieldAnimMoving:true}
         }],
 
         doingNow: 'changeManouver',
@@ -1773,7 +1771,7 @@ BBAdata['ObjectDatas']={
         weapon:[
             {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true}, minSpeed: 2},
             {t:'refilResource', resource: 'fieldCharges', gunSpeed: 30, minSpeed: 2, doNextWeapon: true},
-            {t:'double2', Speed:10, Dec:50, Power:1, Wide: 15, gunSpeed: 1, gunWork: 11, gunReload: 50, gunSiteChange: 3, maxSpeed:1, minSpeed:1},
+            {t:'double2', Speed:10, Dec:50, DMG:{Dmg:1,T:'normal'}, Wide: 15, gunSpeed: 1, gunWork: 11, gunReload: 50, gunSiteChange: 3, maxSpeed:1, minSpeed:1},
             {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, maxSpeed: 0, doingNow:'followEnemy', makeAction: {Manuover:'followEnemy', doingNow:'followEnemy', doingTime: 120, doNotInterupt:true}},
             // {t:'changeAction', makeAction: {Manuover:'turnRight', doingNow:'shooting', doingTime:30, doNotInterupt:true}, gunSpeed: 110, lastShot: 100,  minAlarm: 5, minDistToEnemy: 400},
         ],
@@ -1880,7 +1878,7 @@ BBAdata['ObjectDatas']={
         Res: {'mergeAbility': {M:20,T:0}},
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 120, maxSpeed: 2, doNextWeapon: true},
-            {t:'rose', Power:1, Dec: 50, Speed: 7, gunSpeed: 20, lastShot: 100, AtOnce: 60, RoseAngle: 6, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
+            {t:'rose', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 7, gunSpeed: 20, lastShot: 100, AtOnce: 60, RoseAngle: 6, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
 
         ],
 
@@ -1891,7 +1889,7 @@ BBAdata['ObjectDatas']={
             anglePlus: 180,
             Oid: -1,
             placementT:'directPlaces',
-            objData: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDamage: 1, PeriodTime: 15, PeriodOffset: 10, dontHit:['B','BE','E','M','ME','A'], particlesOnBoard:true, fieldAnimMoving:true}
+            objData: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 15, PeriodOffset: 10, dontHit:['B','BE','E','M','ME','A'], particlesOnBoard:true, fieldAnimMoving:true}
         }],
 
         doingNow: 'changeManouver',
@@ -1946,7 +1944,7 @@ BBAdata['ObjectDatas']={
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 60, maxSpeed: 2, doNextWeapon: true},
             {t:'mergeWith', doingNow: 'mergeWith', doNextWeapon: true},
-            {t:'rose', Power:1, Dec: 50, Speed: 13, gunSpeed: 30, lastShot: 100, AtOnce: 11, RoseAngle: 4, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
+            {t:'rose', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 13, gunSpeed: 30, lastShot: 100, AtOnce: 11, RoseAngle: 4, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
         ],
 
         toDo: [
@@ -1999,7 +1997,7 @@ BBAdata['ObjectDatas']={
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
             {t:'mergeWith', doingNow: 'mergeWith', doNextWeapon: true},
-            {t:'double2', Power:1, Dec: 50, Speed: 13, gunSpeed: 5, gunWork: 20, gunReload: 90, Wide:10, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
+            {t:'double2', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 13, gunSpeed: 5, gunWork: 20, gunReload: 90, Wide:10, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
         ],
 
         toDo: [
@@ -2052,7 +2050,7 @@ BBAdata['ObjectDatas']={
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 15, maxSpeed: 2, doNextWeapon: true},
             {t:'mergeWith', doingNow: 'mergeWith', doNextWeapon: true},
-            {t:'single', Power:1, Dec: 50, Speed: 13, gunSpeed: 5, gunWork: 20, gunReload: 90, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
+            {t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 13, gunSpeed: 5, gunWork: 20, gunReload: 90, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
         ],
 
         toDo: [
@@ -2105,7 +2103,7 @@ BBAdata['ObjectDatas']={
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
             {t:'mergeWith', doingNow: 'mergeWith', doNextWeapon: true},
-            {t:'single', Power:1, Dec: 50, Speed: 13, gunSpeed: 30, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
+            {t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 13, gunSpeed: 30, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
         ],
 
         toDo: [
@@ -2153,7 +2151,7 @@ BBAdata['ObjectDatas']={
 
 
         Bombs:[{
-            onHitDieExpire:    {Do:'explode',Power: 7, Dist: 80},
+            onHitDieExpire:    {Do:'explode', DMG:{Dmg:7,T:'explo'}, Dist: 80},
         }],
 
         energyField: 10,
@@ -2214,7 +2212,7 @@ BBAdata['ObjectDatas']={
             angle: 0,
             Oid: -1,
             placementT:'directPlaces',
-            objData: {fieldAnim: 'PlasmaField', radius: 40, PeriodDamage: 3, PeriodTime: 5, PeriodOffset: 5, PeriodDelay: 130, dontHit:['B','BE'], fieldAnimMoving:true, onDie:{Do:'explode', Power: 13, Dist: 210}}
+            objData: {fieldAnim: 'PlasmaField', radius: 40, PeriodDMG:{Dmg:5,T:'normal'}, PeriodTime: 5, PeriodOffset: 5, PeriodDelay: 130, dontHit:['B','BE'], fieldAnimMoving:true, onDie:{Do:'explode', DMG:{Dmg:13,T:'explo'}, Dist: 210}}
         }],
 
         doingNow: 'changeManouver',
@@ -2332,7 +2330,7 @@ BBAdata['ObjectDatas']={
             angle: 0,
             Oid: -1,
             placementT:'directPlaces',
-            objData: {fieldAnim: 'DestructionField', radius: 180, angle: 0, coneAngle: 50, coneRad2: 24, PeriodDamage: 1, PeriodTime: 15, PeriodOffset: 10, particlesOnBoard:true, fieldAnimMoving:true, dontHit:['B'], mapType:'A', mapCollide:['P'], TT:'dust'}
+            objData: {fieldAnim: 'DestructionField', radius: 180, angle: 0, coneAngle: 50, coneRad2: 24, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 15, PeriodOffset: 10, particlesOnBoard:true, fieldAnimMoving:true, dontHit:['B'], mapType:'A', mapCollide:['P'], TT:'dust'}
         }],
 
         doingNow: 'changeManouver',

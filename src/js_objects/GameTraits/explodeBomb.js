@@ -27,7 +27,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
                     this.O[ L ].angle-= 90;
 
 
-            this.O[ L ].Power = 1;
+            this.O[ L ].DMG={Dmg:1,T:'normal'};
             if(explodeObj.NailsAngleCenter){
                 if(explodeObj.NailsAngleBoth==1 && L%2==0)
                     this.O[ L ].speedT = - explodeObj.NailsAngleCenter;
@@ -49,7 +49,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             this.O[ L ].dec = explodeObj.NailsDec;
             if(explodeObj.NailsDecPlus)
                 this.O[ L ].dec-=-parseInt(Math.random()*explodeObj.NailsDecPlus);
-            this.O[ L ].Power = 1;
+            this.O[ L ].DMG={Dmg:1,T:'normal'};
             if(explodeObj.NailsAngleCenter)
                 this.O[ L ].speedT = -((i- -0.5)/(explodeObj.Nails/2)- 1) * explodeObj.NailsAngleCenter;
         }
@@ -59,14 +59,14 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
         L = this.putObj(explodeObj.explodeType,'region',O.S,O.x,O.y);
 
         this.cloneDataToObj(L,explodeObj,['radius', 'coneAngle', 'coneRad2',
-            'PeriodDamage', 'PeriodTime', 'PeriodOffset',
-            'OneTimeEffect', 'OneTimeOffset', 'OneTimeDamage', 'OnDamageExpire',
+            'PeriodTime', 'PeriodOffset',
+            'OneTimeEffect', 'OneTimeOffset', 'OnDamageExpire',
             'bounceForce', 'bounceType',
             'teleportOnHit', 'teleportOnHitDist', 'teleportOnHitDistPlus',
             'simpleFilling', 'fieldAnim',
             'vectorType', 'vectorForce',
             'SlowDownTo', 'SlowDownBy',
-            ],['dontHit','TeleportMovement']);
+        ],['OneTimeDMG','PeriodDMG','dontHit','TeleportMovement']);
 
         this.O[ L ].DieTime = this.tick- -explodeObj.ExpireTime;
 
@@ -123,7 +123,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
         this.O[L].radius = explodeObj.Dist;
         this.O[L].ActiveTime = this.tick- -2;
         this.O[L].DieTime = this.tick- -6;
-        this.O[L].PeriodDamage = explodeObj.Power;
+        this.O[L].PeriodDMG = cloneObj(explodeObj.DMG);
         this.O[L].PeriodTime = 10;
         this.O[L].dontHurtOwnMissle = true;
         this.O[L].dontHit=['B','BE'];

@@ -2,16 +2,16 @@ BBAdata['ExplosivesPresets']={
 
 
     ExplosionSize1:{
-        onHitDieExpire: {Do:'explode', Power: 4, Dist: 35}
+        onHitDieExpire: {Do:'explode', DMG:{Dmg:4,T:'explo'}, Dist: 35}
     },
     ExplosionSize2:{
-        onHitDieExpire: {Do:'explode', Power: 7, Dist: 80}
+        onHitDieExpire: {Do:'explode', DMG:{Dmg:7,T:'explo'}, Dist: 80}
     },
     ExplosionSize3:{
-        onHitDieExpire: {Do:'explode', Power: 11, Dist: 120}
+        onHitDieExpire: {Do:'explode', DMG:{Dmg:11,T:'explo'}, Dist: 120}
     },
     ExplosionSize4:{
-        onHitDieExpire: {Do:'explode', Power: 18, Dist: 210}
+        onHitDieExpire: {Do:'explode', DMG:{Dmg:18,T:'explo'}, Dist: 210}
     },
 
 
@@ -155,28 +155,28 @@ BBAdata['ExplosivesPresets']={
     },
 
     DestructionFieldGiant:{
-        onHitDieExpire: {Do:'explode',explodeType: 'RoundField', radius:200, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 40, PeriodOffset: 50, ExpireTime: 300, dontHit:['B','BE']},
+        onHitDieExpire: {Do:'explode',explodeType: 'RoundField', radius:200, fieldAnim: 'DestructionField', PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 40, PeriodOffset: 50, ExpireTime: 300, dontHit:['B','BE']},
     },
 
     DestructionFieldMedium:{
-        onHitDieExpire: {Do:'explode',explodeType: 'RoundField', radius:160, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
+        onHitDieExpire: {Do:'explode',explodeType: 'RoundField', radius:160, fieldAnim: 'DestructionField', PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
     },
 
     DestructionFieldSmall:{
-        onHitDieExpire: {Do:'explode',explodeType: 'RoundField', radius:35, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
+        onHitDieExpire: {Do:'explode',explodeType: 'RoundField', radius:35, fieldAnim: 'DestructionField', PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
     },
 
     MissileDestructionFieldSmall:{
-        onHit:    {Do:'explode',explodeType: 'RoundField', radius:50, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
-        onExpire: {Do:'explode',explodeType: 'RoundField', radius:50, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
+        onHit:    {Do:'explode',explodeType: 'RoundField', radius:50, fieldAnim: 'DestructionField', PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
+        onExpire: {Do:'explode',explodeType: 'RoundField', radius:50, fieldAnim: 'DestructionField', PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
     },
     MissileDestructionFieldGiant:{
-        onHit:    {Do:'explode',explodeType: 'RoundField', radius:230, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
-        onExpire: {Do:'explode',explodeType: 'RoundField', radius:230, fieldAnim: 'DestructionField', PeriodDamage: 1, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
+        onHit:    {Do:'explode',explodeType: 'RoundField', radius:230, fieldAnim: 'DestructionField', PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
+        onExpire: {Do:'explode',explodeType: 'RoundField', radius:230, fieldAnim: 'DestructionField', PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
     },
 
     BubbleMissle:{
-        onHitDieExpire: {Do:'explode',explodeType:'RoundField', fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDamage: 3, OnDamageExpire:1, ExpireTime:60, moveAlong: 5, dontHit:['ME']},
+        onHitDieExpire: {Do:'explode',explodeType:'RoundField', fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDMG:{Dmg:3,T:'energy'}, OnDamageExpire:1, ExpireTime:60, moveAlong: 5, dontHit:['ME']},
     },
     BubbleStorm:{
         Dec: 30,
@@ -216,7 +216,7 @@ BBAdata['ExplosivesPresets']={
     },
 
     ElectroBubble:{
-        onHitDieExpire: {Do:'explode', explodeType:'RoundField', fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDamage: 3, OnDamageExpire:1, ExpireTime:240, angle: 0, dontHit:['ME','E','BE','A','B'], radius: 30, radiusPlus: 30},
+        onHitDieExpire: {Do:'explode', explodeType:'RoundField', fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDMG:{Dmg:3,T:'energy'}, OnDamageExpire:1, ExpireTime:240, angle: 0, dontHit:['ME','E','BE','A','B'], radius: 30, radiusPlus: 30},
     },
     ElectroBubbleShield:{
         Dec: 30,
@@ -432,7 +432,7 @@ BBAdata['ExplosivesPresets']={
     },
 
 
-    SlowDownConeFields:{onHitDieExpire:{ Do:'explode', explodeType:'ConeField', fieldAnim: 'ShellField', PeriodDamage: 1, PeriodTime: 20, PeriodOffset: 20, SlowDownTo: 2, SlowDownBy: 3, dontHit:['E','ME','BE'], ExpireTime:240, radius: 160, coneAngle: 80, coneRad2: 110}},
+    SlowDownConeFields:{onHitDieExpire:{ Do:'explode', explodeType:'ConeField', fieldAnim: 'ShellField', PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 20, PeriodOffset: 20, SlowDownTo: 2, SlowDownBy: 3, dontHit:['E','ME','BE'], ExpireTime:240, radius: 160, coneAngle: 80, coneRad2: 110}},
 
     TeleportConeField:{onHitDieExpire:{ Do:'explode', explodeType:'ConeField', simpleFilling: 'rgba(0,0,255,0.2)', ExpireTime:240, dontHit:['ME','E','BE','A'], teleportOnHit: 'withAngle', teleportOnHitDist: 520, teleportOnHitDistPlus: 200, radius: 160, coneAngle: 80, coneRad2: 110}},
 

@@ -184,10 +184,10 @@ GAMEobject.prototype.disbandSquad = function(O){
                 var kuTime = this.tick - this.O[ O.squadScheme[i].Oid ].bornTime;
                 this.O[ O.squadScheme[i].Oid ].S = 1;
                 switch(parseInt(kuTime/30)){
-                    case 0:  this.explodeBomb( O.squadScheme[i].Oid, {Dist: 35, Power: 4} ); break;
-                    case 1:  this.explodeBomb( O.squadScheme[i].Oid, {Dist: 80, Power: 7} ); break;
-                    case 2:  this.explodeBomb( O.squadScheme[i].Oid, {Dist: 120, Power: 11} ); break;
-                    default: this.explodeBomb( O.squadScheme[i].Oid, {Dist: 210, Power: 18} ); break;
+                    case 0:  this.explodeBomb( O.squadScheme[i].Oid, {Dist: 35, DMG:{Dmg:4,T:'explo'}} ); break;
+                    case 1:  this.explodeBomb( O.squadScheme[i].Oid, {Dist: 80, DMG:{Dmg:7,T:'explo'}} ); break;
+                    case 2:  this.explodeBomb( O.squadScheme[i].Oid, {Dist: 120, DMG:{Dmg:11,T:'explo'}} ); break;
+                    default: this.explodeBomb( O.squadScheme[i].Oid, {Dist: 210, DMG:{Dmg:18,T:'explo'}} ); break;
                 }
             }
             if(sO.squadT && sO.squadT == 'laserAim'){

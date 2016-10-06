@@ -28,7 +28,7 @@ GAMEobject.prototype.frame_decide = function(){
             var X = O.x-P.x;
             var Y = O.y-P.y;
             var Dist = Math.sqrt(X*X- -Y*Y);
-            if(Dist < 2- -P.radius)    this.hit(o,0,O.Power);
+            if(Dist < 2- -P.radius)    this.hit(o,0);
                       else             this.checkHits(o);
         } else
             this.checkHits(o);

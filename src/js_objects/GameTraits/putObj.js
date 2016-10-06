@@ -133,7 +133,7 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
     this.putOnXY( L );
     return L;
 }
-GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,Power){
+GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,DMG){
 
     var O={};
     O.x = x;
@@ -149,7 +149,7 @@ GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,Power){
     O.angle  = Angle  || 0;
     O.radius = 4;
     O.dec    = Dec || 30;
-    O.Power  = Power || 1;
+    O.DMG  = DMG || {Dmg:1,T:'normal'};
 
     if(Side==3){
         O.mapType = 'B';

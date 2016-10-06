@@ -8,19 +8,19 @@ GAMEobject.prototype.checkHits = function(o){
     }else
         var Found = this.getCollidingWithCircle(O.x,O.y,O.radius,O.mapCollide);
     for(F in Found)
-        this.hit(o,F,O.Power);
+        this.hit(o,F);
 }
 
 GAMEobject.prototype.checkShipHits = function(){
     var F,O = this.O[0];
     var Found = this.getCollidingWithCircle(O.x,O.y,O.radius,['A','ME','R']);
     for(F in Found){
-        this.hit(0,F,false);
-        this.hit(F,0,false);
+        this.hit(0,F);
+        this.hit(F,0);
     }
 }
 
-GAMEobject.prototype.hit = function(o,q,DMG){
+GAMEobject.prototype.hit = function(o,q){
     if(o==q) return 1;
     var O = this.O[o];
     var Q = this.O[q];
@@ -78,17 +78,15 @@ GAMEobject.prototype.hit = function(o,q,DMG){
     if(O.OneTimeEffect)    this.makeOneTimeEffect(o,q);
     if(Q.OneTimeEffect)    this.makeOneTimeEffect(q,o);
 
-    DMG=O.Power;
-
     if(O.T=='missle' || O.T=='bullet'){
         if(O.S==Q.S) return 1;
 
         if(Q.T=='ship'){
-            this.makeDMG(q,DMG,o);
+            this.makeDMG(q,O.DMG,o);
             this.shipFunc_showHealth();
         }
         if(Q.TT=='enemy' || Q.mapType=='A' || Q.T=='missle' || Q.T=='bullet_bomb' || Q.T=='shieldBlob')
-            this.makeDMG(q,DMG,o);
+            this.makeDMG(q,O.DMG,o);
         if(Q.T=='space_mine'){
             this.explodeBomb(q,Q.onDie);
             this.removeObj(o);
@@ -124,8 +122,8 @@ GAMEobject.prototype.makePeriodEffect = function(o,q){
     }
 
     if(makeAction){
-        if(O.PeriodDamage){
-            if(this.makeDMG(q,O.PeriodDamage))
+        if(O.PeriodDMG){
+            if(this.makeDMG(q,O.PeriodDMG))
                 Q.periodDMG[o] = this.tick- -O.PeriodTime;
         }
         if(O.PeriodHeal){
@@ -157,9 +155,9 @@ GAMEobject.prototype.makeOneTimeEffect = function(o,q){
     }
 
     if(makeAction){
-        if(O.OneTimeDamage){
-            this.makeDMG(q,O.OneTimeDamage);
-            delete(O.OneTimeDamage);
+        if(O.OneTimeDMG){
+            this.makeDMG(q,O.OneTimeDMG);
+            delete(O.OneTimeDMG);
         }
         delete(O.OneTimeEffect);
         if(O.fieldAnim=='ElectricityField'){

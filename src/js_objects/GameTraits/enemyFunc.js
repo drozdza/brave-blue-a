@@ -1,9 +1,9 @@
-GAMEobject.prototype.shootBullet = function(o,Angle,Speed,Dec,Power){
+GAMEobject.prototype.shootBullet = function(o,Angle,Speed,Dec,DMG){ // !!!! do zaorania
     var O = this.O[o];
-    var L = this.putBullet(O.S,O.x,O.y,Speed,Dec,Angle,Power);
+    var L = this.putBullet(O.S,O.x,O.y,Speed,Dec,Angle,DMG);
     return this.O[L];
 }
-GAMEobject.prototype.shootBulletOnSide = function(o,Enemy,Speed,Dec,SideAngle,SideDist,Power){
+GAMEobject.prototype.shootBulletOnSide = function(o,Enemy,Speed,Dec,SideAngle,SideDist,DMG){
     var O = this.O[o];
     var Xp = O.x- -SideDist * Math.sin((-parseInt(O.angle- -SideAngle)-180)*(Math.PI/180));
     var Yp = O.y- -SideDist * Math.cos((-parseInt(O.angle- -SideAngle)-180)*(Math.PI/180));
@@ -12,10 +12,10 @@ GAMEobject.prototype.shootBulletOnSide = function(o,Enemy,Speed,Dec,SideAngle,Si
     var Y = Yp-this.O[Enemy].y;
     var Angle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
 
-    var L = this.putBullet(O.S,Xp,Yp,Speed,Dec,Angle,Power);
+    var L = this.putBullet(O.S,Xp,Yp,Speed,Dec,Angle,DMG);
     return this.O[L];
 }
-GAMEobject.prototype.shootBulletOnSide2 = function(o,Enemy,Speed,Dec,SideAngle,SideDist,Power){
+GAMEobject.prototype.shootBulletOnSide2 = function(o,Enemy,Speed,Dec,SideAngle,SideDist,DMG){
     var O = this.O[o];
 
     var X = O.x-this.O[Enemy].x;
@@ -24,7 +24,7 @@ GAMEobject.prototype.shootBulletOnSide2 = function(o,Enemy,Speed,Dec,SideAngle,S
     var Xp = O.x- -SideDist * Math.sin((-parseInt(O.angle- -SideAngle)-180)*(Math.PI/180));
     var Yp = O.y- -SideDist * Math.cos((-parseInt(O.angle- -SideAngle)-180)*(Math.PI/180));
 
-    var L = this.putBullet(O.S,Xp,Yp,Speed,Dec,Angle,Power);
+    var L = this.putBullet(O.S,Xp,Yp,Speed,Dec,Angle,DMG);
     return this.O[L];
 }
 GAMEobject.prototype.shootMissle = function(o,Angle,Speed,Dec,SpeedT){

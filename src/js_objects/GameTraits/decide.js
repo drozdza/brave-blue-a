@@ -618,7 +618,7 @@ GAMEobject.prototype.decide = function(o){
             }
 
             if(WP.t == 'single'){
-                this.shootBullet(o,PlayerAngle,WP.Speed,WP.Dec,WP.Power);
+                this.shootBullet(o,PlayerAngle,WP.Speed,WP.Dec,WP.DMG);
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'double'){
@@ -626,10 +626,10 @@ GAMEobject.prototype.decide = function(o){
                     var Kuk = -45;
                     if(parseInt((this.tick-WP.lastGunReload)/WP.gunSiteChange)%2 == 0)
                         Kuk = 45;
-                    this.shootBulletOnSide(o,0,WP.Speed,WP.Dec,Kuk,WP.Wide || 30,WP.Power);
+                    this.shootBulletOnSide(o,0,WP.Speed,WP.Dec,Kuk,WP.Wide || 30,WP.DMG);
                 }else{
-                    this.shootBulletOnSide(o,0,WP.Speed,WP.Dec,45, WP.Wide || 30,WP.Power);
-                    this.shootBulletOnSide(o,0,WP.Speed,WP.Dec,-45,WP.Wide || 30,WP.Power);
+                    this.shootBulletOnSide(o,0,WP.Speed,WP.Dec,45, WP.Wide || 30,WP.DMG);
+                    this.shootBulletOnSide(o,0,WP.Speed,WP.Dec,-45,WP.Wide || 30,WP.DMG);
                 }
                 WP.lastShot = this.tick;
             }
@@ -638,26 +638,26 @@ GAMEobject.prototype.decide = function(o){
                     var Kuk = -45;
                     if(parseInt((this.tick-WP.lastGunReload)/WP.gunSiteChange)%2 == 0)
                         Kuk = 45;
-                    this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,Kuk,WP.Wide || 5,WP.Power);
+                    this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,Kuk,WP.Wide || 5,WP.DMG);
                 }else{
-                    this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,45, WP.Wide || 5,WP.Power);
-                    this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,-45,WP.Wide || 5,WP.Power);
+                    this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,45, WP.Wide || 5,WP.DMG);
+                    this.shootBulletOnSide2(o,0,WP.Speed,WP.Dec,-45,WP.Wide || 5,WP.DMG);
                 }
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'rose'){
                 for(var i = -parseInt(WP.AtOnce/2); i<= parseInt(WP.AtOnce/2); ++i)
-                    this.shootBullet(o,PlayerAngle-i*WP.RoseAngle,WP.Speed,WP.Dec,WP.Power);
+                    this.shootBullet(o,PlayerAngle-i*WP.RoseAngle,WP.Speed,WP.Dec,WP.DMG);
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'crabBullets'){
                 var B,CU,cU = [{s:0,t:2,d:10,a:30},{s:1.5,t:2.5,d:5,a:40},{s:3,t:3,d:0,a:50}];
                 for(var cu in cU){
                     CU = cU[cu];
-                    B = this.shootBulletOnSide(o,0,WP.Speed-CU.s,WP.Dec-CU.d,60- -O.doingTime,27,WP.Power);
+                    B = this.shootBulletOnSide(o,0,WP.Speed-CU.s,WP.Dec-CU.d,60- -O.doingTime,27,WP.DMG);
                     B.speedT =-CU.t;
                     B.angle -=-CU.a - O.doingTime;
-                    B = this.shootBulletOnSide(o,0,WP.Speed-CU.s,WP.Dec-CU.d,-60-O.doingTime,27,WP.Power);
+                    B = this.shootBulletOnSide(o,0,WP.Speed-CU.s,WP.Dec-CU.d,-60-O.doingTime,27,WP.DMG);
                     B.speedT = CU.t;
                     B.angle -= CU.a- -O.doingTime;
                 }
@@ -719,7 +719,7 @@ GAMEobject.prototype.decide = function(o){
                     this.removeObj(O.squadScheme[0].Oid);
                     O.squadScheme[0].Oid = -1;
                 }
-                this.shootLaser(o,WP.Distance,WP.Power);
+                this.shootLaser(o,WP.Distance,WP.DMG);
                 WP.lastShot = this.tick;
             }
 
