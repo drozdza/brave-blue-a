@@ -173,38 +173,17 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q,transforms){
     if(typeof this.O[o] == 'undefined') return 1;
     var O = this.O[o];
 
-    var DMGtype = DMG.T;
     var DMGval = DMG.Dmg;
-    var ShieldHits = 0;
 
     if(O.undestructible){
         if(q) this.removeObj(q);
         return false;
     }
 
-    if(O.Shields)for(var sh in O.Shields){
-        var SH = O.Shields[sh];
-        if(SH.CatchDmgT[DMGtype]){
-            if(SH.DmgReduction == 'infinite'){
-                ShieldHits = DMGval;
-                DMGval = 0;
-            }else{
-                var DMGmin = Math.min(DMGval,SH.DmgReduction);
-                DMGval -= DMGmin;
-                O.Shields[sh].DmgReduction -= DMGmin;
-                ShieldHits = DMGmin;
-            }
-            if(SH.ReductionUses != 'infinite'){
-                --O.Shields[sh].ReductionUses;
-            }
-            // DmgTransfer: true,
-            // ExpireTime: -1 / 2939,
-            // HitActionObj: 'die' / 'redirect' / 'ignore',
-
-            if(SH.DmgReduction==0 || SH.ReductionUses==0){}
-        }
-        if(DMGval < 1) break;
+    if(O.Shields){
+        DMGval = this.testShields(O,o,DMG);
     }
+
 
     var TR = false;
     if(transforms && transforms=='transforms') TR = true;
