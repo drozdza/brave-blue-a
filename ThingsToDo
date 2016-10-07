@@ -128,11 +128,11 @@ Blue bullets:
 
     dmg:{
         dmg: 7,
-        dmgT: 'bullet / energy / explosion / acid / super',
+        dmgT: 'bullet / energy / explo / acid / super',
     }
 
     shield:{
-        CatchDmgT: ['bullet', 'energy', 'acid'],
+        CatchDmgT: {bullet:1, energy:1, acid:1},
         DmgReduction: 1 / 17 / 'infinite',
         ReductionUses: 'infinite' / 3,
         DmgTransfer: true,
