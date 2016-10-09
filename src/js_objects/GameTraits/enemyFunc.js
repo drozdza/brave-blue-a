@@ -74,14 +74,19 @@ GAMEobject.prototype.shootBomb = function(o,Angle,Speed,Dec,bombData,teleportDat
 
     this.cloneExplosionData(bombData, this.O[L]);
 }
-GAMEobject.prototype.addShield = function(o,Duration,q){
+GAMEobject.prototype.addKoriazShield = function(o,Duration,q){
     var L,O = this.O[o];
-    if(O.shieldDimmune) return false;
 
-    L = this.putObj_directAnim('addShield', {timeDeath: 5});
-    this.O[L].pathD = ['M', parseInt(o), 'L', parseInt(q)];
-
-    O.shieldD = Duration;
+    if(this.addShield(O,o, {
+        name:'koriazMax',
+        CatchDmgT:{normal:1,energy:1,acid:1,explo:1},
+        DmgReduction: 'infinite',
+        ReductionUses: 'infinite',
+        ExpireTime: Duration,
+    })){
+        L = this.putObj_directAnim('addShield', {timeDeath: 5});
+        this.O[L].pathD = ['M', parseInt(o), 'L', parseInt(q)];
+    }
 }
 GAMEobject.prototype.trySplitHealth = function(o,Radius){
     var Q,O = this.O[o];
@@ -101,11 +106,16 @@ GAMEobject.prototype.trySplitHealth = function(o,Radius){
     }
 
 }
-GAMEobject.prototype.giveDamageTransfer = function(o,q,Duration){
-    var O = this.O[o];
-    if(O.DamangeTransferImmune) return false;
-    O.damageTransferTime = Duration;
-    O.damageTransferFrom = q;
+GAMEobject.prototype.addDamageTransfer = function(o,q,Duration){
+    if(this.addShield(this.O[o],o, {
+        name: 'dmgTransfer',
+        CatchDmgT:{normal:1,energy:1,acid:1,explo:1,super:1},
+        DmgReduction: 'infinite',
+        ReductionUses: 'infinite',
+        DmgTransfer: q,
+        ExpireTime: Duration,
+    })) return true;
+    return false;
 }
 GAMEobject.prototype.mergeShips = function(o,q){
     var O = this.O[o];

@@ -169,7 +169,7 @@ GAMEobject.prototype.makeOneTimeEffect = function(o,q){
         }
     }
 }
-GAMEobject.prototype.makeDMG = function(o,DMG,q,transforms){
+GAMEobject.prototype.makeDMG = function(o,DMG,q){
     if(typeof this.O[o] == 'undefined') return 1;
     var O = this.O[o];
 
@@ -184,9 +184,10 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q,transforms){
         DMGval = this.testShields(O,o,DMG);
     }
 
-
-    var TR = false;
-    if(transforms && transforms=='transforms') TR = true;
+    if(DMGval < 1){
+        if(q) this.removeObj(q);
+        return false;
+    }
 
     // ITsDead!
     if(O.life < 1){
@@ -194,11 +195,6 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q,transforms){
         return false;
     }
 
-    // SHIELD - undestructible
-    if(O.shieldD > 0 && !TR){
-        if(q) this.removeObj(q);
-        return false;
-    }
     // SHIELD - energyField
     if(O.energyField > 0){
         if(!q) q=-1;
@@ -226,16 +222,6 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q,transforms){
         this.removeObj(q);
     }
 
-    // SHIELD - damage transform
-    if(O.damageTransferFrom){
-        var DTF = O.damageTransferFrom;
-        if(this.O[DTF].life > 0){
-            this.makeDMG(O.damageTransferFrom,DMG,false,'transforms');
-            var L = this.putObj_directAnim('dmgTransfer', {timeDeath: 10});
-            this.O[L].pathD = ['M', parseInt(o), 'L', parseInt(O.damageTransferFrom)];
-            return true;
-        }
-    }
 
 
     var Daga = 0;

@@ -35,39 +35,9 @@ GAMEobject.prototype.drawObject = function(O,o,CH, Px,Py){
             CH.rotate(Radi*O.angle);
         CH.drawImage(O.canvasId,-O.canvasX,-O.canvasY);
 
-        if(O.energyField && O.energyField > 0 && !O.shieldD){
-            CH.beginPath();
-            var Radius = O.radius;
-            if(O.view.shieldsRadius)
-                Radius = O.view.shieldsRadius;
-            var lineWidth = O.energyField;
-            if(lineWidth > 2)
-                lineWidth = 2- -(lineWidth-2)/2;
+        if(O.Shields && !O.view.DontShowShields)
+            this.drawShields(O,o,CH);
 
-            if(o==0){
-                CH.strokeStyle = 'rgba(154,255,255,0.8)';
-                CH.fillStyle = 'rgba(154,255,255,0.2)';
-            } else {
-                CH.strokeStyle = 'rgba(0,255,0,0.8)';
-                CH.fillStyle = 'rgba(0,255,0,0.2)';
-            }
-            CH.arc(0,0,Radius- -parseInt(lineWidth/2),0,Math.PI*2,true);
-            CH.lineWidth = lineWidth;
-            CH.stroke();
-            CH.fill();
-        }
-        if(O.shieldD){
-            CH.beginPath();
-            var Radius = O.radius;
-
-            CH.strokeStyle = 'rgba(100,180,255,0.8)';
-            CH.fillStyle = 'rgba(100,180,255,0.2)';
-
-            CH.arc(0,0,Radius- -1,0,Math.PI*2,true);
-            CH.lineWidth = 2;
-            CH.stroke();
-            CH.fill();
-        }
         CH.restore();
     }
     if(O.TT=='anim'){

@@ -541,7 +541,8 @@ BBAdata['ObjectDatas']={
         lifeM: 7,
         radius: 20,
 
-        shieldDimmune:true,
+        ShieldsRejection:{koriazMax:1},
+
         prodSquad: 5,
         Res: {'prodSquad': {M:5,T:0}},
         weapon:[
@@ -882,9 +883,9 @@ BBAdata['ObjectDatas']={
         lifeM: 7,
         radius: 10,
 
-        shieldDimmune:true,
+        ShieldsRejection:{koriazMax:1},
         weapon:[
-            {t:'addShield', Radius: 500, shieldTime: 15, gunSpeed: 12, lastShot: 100},
+            {t:'addKoriazShield', Radius: 500, shieldTime: 15, gunSpeed: 12, lastShot: 100},
         ],
 
         doingNow: 'changeManouver',
@@ -1419,6 +1420,7 @@ BBAdata['ObjectDatas']={
             Color:'white',
             Angle:0,
             HitPattern:'StarHit',
+            DontShowShields:true,
           },
         view1:{
             LIBpath:'StarPath',
@@ -1426,6 +1428,7 @@ BBAdata['ObjectDatas']={
             Color:'white',
             Angle:0,
             HitPattern:'StarHit',
+            DontShowShields:true,
         },
         view2:{
           Letter: 272, // some D
@@ -1437,8 +1440,8 @@ BBAdata['ObjectDatas']={
 
         lifeM: 13,
         radius: 20,
-        shieldDimmune:true,
 
+        ShieldsRejection:{koriazMax:1},
         weapon:[
             {t:'changeAction', makeAction: {doingNow:'standBy', gotoSpeed: 1, gotoAlarm: 4, doingTime: 30, changeView: 'view1', Manouver: 'goStraight', doNotInterupt:true}, doingNow:'lowerAlarmLvl'},
             {t:'changeAction', makeAction: {doingNow:'shooting', doingTime: 30, changeView: 'view2', gotoAlarm: 7, Manouver: 'followEnemy', doNotInterupt:true}, doingNow:'standBy', minAlarm: 5, maxAlarm: 6},
@@ -1530,7 +1533,7 @@ BBAdata['ObjectDatas']={
         onDie: {Do:'explode', DMG:{Dmg:13,T:'explo'}, Dist: 210},
 
         Res: {},
-        DamangeTransferImmune: true,
+        ShieldsRejection:{dmgTransfer:1},
         weapon:[
             {t:'giveDamangeTransfer', gunSpeed: 12, lastShot: 100, Radius: 350, immunityTime: 15},
             {t:'healSelf', gunSpeed: 30, lastShot: 100}
@@ -2256,7 +2259,7 @@ BBAdata['ObjectDatas']={
         lifeM: 7,
         radius: 25,
 
-        shieldDimmune:true,
+        ShieldsRejection:{koriazMax:1},
         prodSquad: 5,
         Res: {'prodSquad': {M:5,T:0}},
         weapon:[

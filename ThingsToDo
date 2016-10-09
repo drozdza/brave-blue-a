@@ -16,6 +16,8 @@
 
 - X attack as curved NailBombs
 
+- showing last killed enemies (and how?)
+
 - Layers of Canvas:
     - overlay layer,
     - Hit screen
@@ -128,7 +130,7 @@ Blue bullets:
 
     dmg:{
         dmg: 7,
-        dmgT: 'bullet / energy / explo / acid / super',
+        dmgT: 'normal / energy / explo / acid / super',
     }
 
     shield:{
@@ -139,9 +141,6 @@ Blue bullets:
         ExpireTime: -1 / 2939,
         HitActionObj: 'die' / 'redirect' / 'ignore',
     }
-
-[[ HOW TO SORT THE SHIELDS? ]]
-
 
 ================================================================================
 
