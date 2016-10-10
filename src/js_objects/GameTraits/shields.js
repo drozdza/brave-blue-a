@@ -158,7 +158,7 @@ GAMEobject.prototype.viewShields={
         fillStyle:'rgba(100,180,255,0.2)',
     },
     dmgTransfer:{ viewOff: true },
-    absorbingShield:{
+    absorbtionShield:{
         strokeStyle: 'rgba(0,255,0,0.8)',
         fillStyle: 'rgba(0,255,0,0.2)',
     },
@@ -171,7 +171,7 @@ GAMEobject.prototype.drawShields = function(O,o,CH){
             ToDraw = [{n:'koriazMax',w:2}];
             break;
         }
-        if(SH.name == 'dmgTransfer' || SH.name == 'absorbingShield'){
+        if(SH.name == 'dmgTransfer' || SH.name == 'absorbtionShield'){
             if(this.viewShields[ SH.name ].viewOff) continue;
             var lineWidth = SH.DmgReduction;
             if(lineWidth == 'infinite') lineWidth = 2;
