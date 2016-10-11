@@ -173,37 +173,41 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
     if(typeof this.O[o] == 'undefined') return 1;
     var O = this.O[o];
 
-    var DMGval = DMG.Dmg;
+    var AnimHits, DMGval = DMG.Dmg;
 
     if(O.undestructible){
         if(q) this.removeObj(q);
-        return false;
+        return true;
     }
 
     if(O.Shields){
-        DMGval = this.testShields(O,o,DMG);
+        ShieldObj = this.testShields(O,o,DMG);
+        AnimHits = DMGval = ShieldObj.DMGval;
+
+        if(DMGval < 1 && ShieldObj.Action == 'die'){
+            if(q){
+                --AnimHits;
+                this.removeObj(q);
+            }
+        }
+        if(ShieldObj.Action == 'bounce'){
+            if(q){
+                Q = this.O[q];
+                var kat = (-Math.atan2(O.x-Q.x,O.y-Q.y)*(180/Math.PI)- -360)%360;
+                var kat2 = (Q.angle - kat - -720)%360;
+                if(kat2 > 90 && kat2 < 270)
+                    Q.angle = (kat- -180 - kat2)%360;
+            }
+        }
     }
 
-    if(DMGval < 1){
-        if(q) this.removeObj(q);
-        return false;
-    }
+    if(DMGval < 1) return true;
 
-    // ITsDead!
     if(O.life < 1){
         console.log(O.T+' ['+o+'] is dead but got hit!');
-        return false;
-    }
-
-    // SHIELD - energyField
-    if(O.energyField > 0){
-        if(!q) q=-1;
-        if(O.T=='ship') this.C['S_shieldLost']++;
-
-        this.hitEnergyField(o,q,DMG);
-        if(q) this.removeObj(q);
         return true;
     }
+
     // ON HIT JUMP
     if(O.jump && O.jump > 0){
         if(this.teleportJump(o,170,Math.random()*360)){
@@ -211,30 +215,21 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
             this.checkHits(o);
             this.removeObj(q);
         }
-        return false;
+        return true;
     }
 
 
     // HIT animation
     if(q){
         var Q = this.O[q];
+        --AnimHits;
         this.putObj_animation('hit', Q.x, Q.y);
         this.removeObj(q);
     }
-
-
-
-    var Daga = 0;
-    if(typeof q !== 'undefined') Daga = 1;
-    for(; Daga < DMGval; ++Daga){
-        if(Daga >= O.life) break;
-        var U = 20;
-        var DagaDagaX = parseInt(Math.random()*U*2-U);
-        var DagaDagaY = parseInt(Math.random()*U*2-U);
-        this.putObj_animation('hit', (O.x-DagaDagaX), (O.y-DagaDagaY));
-    }
+    this.showHits(O.x,O.y, Math.min(AnimHits,O.life),'hit');
 
     O.life-=DMGval;
+    if(O.life < 0) O.life = 0;
 
     if(O.T=='ship') this.C['S_lifeLost']++;
 
@@ -247,6 +242,15 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
     if(O.life <= 0) this.dieObj(O,o);
     return true;
 }
+GAMEobject.prototype.showHits = function(x,y,number,type){
+    var U = 20;
+    for(var Daga = 0; Daga < number; ++Daga){
+        var DagaDagaX = parseInt(Math.random()*U*2-U);
+        var DagaDagaY = parseInt(Math.random()*U*2-U);
+        this.putObj_animation(type, (x-DagaDagaX), (y-DagaDagaY));
+    }
+}
+
 GAMEobject.prototype.dieObj = function(O,o){
     if(O.TT=='enemy'){
         this.C['D:enemies']++;
@@ -327,10 +331,16 @@ GAMEobject.prototype.giveEnergyField = function(q,DMG,o,max){
     if(typeof Q.energyField == 'undefined')
         Q.energyField = 0;
     if(Q.energyField >= max) return false;
+    this.addShield(Q,q,{
+        name: 'absorbtionShield',
+        CatchDmgT: {normal:1, energy:1, explo:1},
+        DmgReduction: 'energyField',
+        ReductionUses: 'infinite',
+    });
     if(o){
         this.putObj_animation('hit_healing', this.O[o].x, this.O[o].y);
         this.removeObj(o);
-    } else{
+    }else{
         this.putObj_animation('hit_healing', Q.x, Q.y);
     }
     Q.energyField-=-DMG;

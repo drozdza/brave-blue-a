@@ -841,7 +841,7 @@ GAMEobject.prototype.decide = function(o){
                 var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
                 for(var i in inRange) if(i != o){
                     var eO = this.O[i];
-                    if((typeof eO.energyField == 'undefined' || eO.energyField < parseInt(eO.lifeM/2)) && !eO.energyFieldImmune){
+                    if((typeof eO.energyField == 'undefined' || eO.energyField < parseInt(eO.lifeM/2)) && (!eO.ShieldsRejection || eO.ShieldsRejection.absorbtionShield)){
                         this.shootShieldAddMissle(o,i);
                         WP.lastShot = this.tick;
                         break;

@@ -34,14 +34,8 @@ GAMEobject.prototype.addShield = function(O,o,Shield){
     }
 
     var SH = O.Shields[isThere];
-    if(Shield.ExpireTime != 'infinite')
+    if(Shield.ExpireTime && Shield.ExpireTime != 'infinite')
         O.Shields[isThere].ExpireTime = Shield.ExpireTime- -this.tick;
-
-    if(Shield.ReductionUses != 'infinite')
-        O.Shields[isThere].ReductionUses -=- Shield.ReductionUses;
-
-    if(Shield.DmgReduction != 'infinite')
-        O.Shields[isThere].DmgReduction -=- Shield.DmgReduction;
 
     if(Shield.DmgTransfer)
         O.Shields[isThere].DmgTransfer = Shield.DmgTransfer;
@@ -50,8 +44,10 @@ GAMEobject.prototype.addShield = function(O,o,Shield){
 }
 GAMEobject.prototype.ShieldValues={
     koriazMax: 15,
-    dmgTransfer: 10,
-    absorbtionShield: 7,
+    bulletShield: 11,
+    explosionShield: 10,
+    absorbtionShield: 9,
+    dmgTransfer: 3,
 };
 GAMEobject.prototype.checkShields = function(O,o){
     var sh,SH;
@@ -66,6 +62,8 @@ GAMEobject.prototype.checkShields = function(O,o){
 }
 GAMEobject.prototype.removeShield = function(O,o,sh){
     var si,se=0,S2=[];
+    if(O.Shields[sh].Own) return false;
+    // console.log(O.Shields[sh].name+' '+O.T+' shield removed!');
     for(si in O.Shields){
         if(si!=sh){
             S2[se++]=O.Shields[si];
@@ -77,27 +75,33 @@ GAMEobject.prototype.removeShield = function(O,o,sh){
 
     if(O.Shields.length == 0)
         delete(O.Shields);
+
 }
 
 GAMEobject.prototype.testShields = function(O,o,DMG){
     var DMGtype = DMG.T;
     var DMGval = DMG.Dmg;
     var ShieldHits = 0;
+    var Action = 'die';
 
     var sh,SH,DMGmin,DMGMaxReduce,DMGreduce,DMGReduceMax,DMGpercent,P;
 
+    var ToDelete=[];
+
     for(var sh in O.Shields){
         var SH = O.Shields[sh];
+
         if(SH.CatchDmgT[DMGtype]){
 
             if(SH.ShieldProbability)
-                if(Math.random()*100 < SH.ShieldProbability)
+                if(Math.random()*100 > SH.ShieldProbability)
                     continue;
 
+            if(SH.ReductionUses != 'infinite' && O[SH.ReductionUses] < 1)
+                continue;
 
-            if(SH.DmgReduction){
+            if(SH.DmgReduction && (SH.DmgReduction=='infinite' || O[SH.DmgReduction] > 0)){
                 DMGreduce = 99999;
-                // Partial Reduction
                 if(SH.PartialReduction){
                     P = SH.PartialReduction;
                     if(DMGval > P.MinLeft){
@@ -116,17 +120,16 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
                     ShieldHits-=-DMGreduce;
                     DMGval -= DMGreduce;
                 }else{
-                    DMGreduce = Math.min(DMGval, SH.DmgReduction, DMGreduce);
+                    DMGreduce = Math.min(DMGval, O[SH.DmgReduction], DMGreduce);
 
                     ShieldHits-=-DMGreduce;
                     DMGval -= DMGreduce;
-                    O.Shields[sh].DmgReduction -= DMGreduce;
+                    O[SH.DmgReduction] -= DMGreduce;
                 }
             }
 
-            if(SH.ReductionUses != 'infinite'){
-                --O.Shields[sh].ReductionUses;
-            }
+            if(DMGreduce > 0 && SH.ReductionUses!='infinite')
+                --O[SH.ReductionUses];
 
             if(SH.DmgTransfer){
                 var DTF = SH.DmgTransfer;
@@ -139,24 +142,41 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
 
             // {
             //     name: 'koriazMax' / ,
-            //     CatchDmgT: {bullet:1, energy:1, acid:1},
+            //     CatchDmgT: {normal:1, energy:1, acid:1, explo:1},
             //     ShieldProbability: 70,
             //     PartialReduction: {MinLeft: 1, Reduce: 4, MaxPercent: 30},
-            //     DmgReduction: 'infinite' / 12,
-            //     ReductionUses: 'infinite' / 1,
+            //     DmgReduction: 'infinite' / O[resource_name],
+            //     ReductionUses: 'infinite' / O[resource_name],
             //     DmgTransfer: 'O[id]',
             //     ExpireTime: 'infinite' / , expireTick,
+            //     Own: true,
+            //     HitActionObj: 'bounce',
+            //     HitDieAnimation: 'hit_energyField',
             // }
 
+            if(SH.HitActionObj)
+                Action = SH.HitActionObj;
 
-            if(SH.DmgReduction==0 || SH.ReductionUses==0){
-                this.removeShield(O,o,sh);
+            if((O[SH.DmgReduction]==0 || O[SH.ReductionUses]==0) && !SH.Own)
+                ToDelete[ ToDelete.length ] = sh;
+
+            console.log(DMGreduce);
+            if(DMGreduce > 0 && Action =='die'){
+                if(SH.HitDieAnimation){
+                    if(SH.HitDieAnimation!='dontShow')
+                        this.showHits(O.x, O.y, DMGreduce, SH.HitDieAnimation);
+                }else
+                    this.showHits(O.x, O.y, DMGreduce, 'hit_energyField');
             }
         }
         // All damage reduced
         if(DMGval < 1) break;
     }
-    return DMGval;
+
+    for(var i in ToDelete)
+        this.removeShield(O,o,ToDelete[i]);
+
+    return {DMGval:DMGval,Action:Action};
 }
 
 
@@ -170,23 +190,54 @@ GAMEobject.prototype.viewShields={
         strokeStyle: 'rgba(0,255,0,0.8)',
         fillStyle: 'rgba(0,255,0,0.2)',
     },
+    bulletShield:{
+        strokeStyle: 'rgba(255,255,0,0.8)',
+        fillStyle: 'rgba(255,255,0,0.2)',
+    },
+    explosionShield:{
+        circlePerPoint:true,
+        strokeStyle: 'rgba(255,0,0,0.8)',
+        fillStyle: 'rgba(255,0,0,0.1)',
+    },
 };
 GAMEobject.prototype.drawShields = function(O,o,CH){
-    var ToDraw = [];
+    if(O.life < 1) return false;
+    var lineWidth,ToDraw = [];
     for(var s in O.Shields){
         var SH = O.Shields[s];
         if(SH.name == 'koriazMax'){
             ToDraw = [{n:'koriazMax',w:2}];
             break;
         }
-        if(SH.name == 'dmgTransfer' || SH.name == 'absorbtionShield'){
+        if(SH.name == 'dmgTransfer'
+          || SH.name == 'absorbtionShield'
+          || SH.name =='bulletShield'){
             if(this.viewShields[ SH.name ].viewOff) continue;
-            var lineWidth = SH.DmgReduction;
-            if(lineWidth == 'infinite') lineWidth = 2;
+
+            if(SH.DmgReduction == 'infinite'){
+                lineWidth = 2;
+            } else {
+                lineWidth = O[SH.DmgReduction];
+                if(lineWidth == 0) continue;
+            }
             if(lineWidth > 2) lineWidth = 2- -(lineWidth-2)/2;
-            ToDraw[ ToDraw ] = {n:SH.name,w:lineWidth};
+            ToDraw[ ToDraw.length ] = {n:SH.name,w:lineWidth};
+        }
+        if(SH.name == 'explosionShield'){
+            var lineWidth = O[SH.ReductionUses];
+            if(lineWidth == 0) continue;
+            lineWidth *= 3;
+            ToDraw[ ToDraw.length ] = {n:SH.name,w:lineWidth};
         }
     }
+
+    var RadiusSum = 0;
+    for(var s in ToDraw)
+        RadiusSum -=- ToDraw[s].w;
+
+    var Radius = O.radius;
+    if(O.view.shieldsRadius)
+        Radius = O.view.shieldsRadius;
 
     for(var s in ToDraw){
         var view = this.viewShields[ ToDraw[s].n ];
@@ -194,14 +245,20 @@ GAMEobject.prototype.drawShields = function(O,o,CH){
             view = O.view.Shields[ ToDraw[s].n ];
 
         CH.beginPath();
-        var Radius = O.radius;
-
         CH.strokeStyle = view.strokeStyle;
         CH.fillStyle   = view.fillStyle;
-
-        CH.arc(0,0,Radius- -parseInt(ToDraw[s].w/2),0,Math.PI*2,true);
-        CH.lineWidth = ToDraw[s].w;
+        if(view.circlePerPoint){
+            for(var i=0; i<ToDraw[s].w/3; ++i){
+                CH.arc(0,0,(Radius- -i*3),0,Math.PI*2,true);
+                CH.lineWidth = 1.5;
+            }
+        }else{
+            CH.arc(0,0,Radius- -parseInt(ToDraw[s].w/2),0,Math.PI*2,true);
+            CH.lineWidth = ToDraw[s].w;
+        }
         CH.stroke();
         CH.fill();
+
+        Radius -=- ToDraw[s].w;
     }
 }

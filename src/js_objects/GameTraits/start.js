@@ -118,6 +118,12 @@ GAMEobject.prototype.setPlayerShip = function(){
             Angle: 0,
             HitPattern: 'HullFire_20',
             shieldsRadius: 14,
+            Shields:{
+                absorbtionShield:{
+                    strokeStyle: 'rgba(154,255,255,0.8)',
+                    fillStyle: 'rgba(154,255,255,0.2)',
+                },
+            },
         },
         mapType: 'P',
         mapCollide: ['A','ME'],
@@ -125,6 +131,8 @@ GAMEobject.prototype.setPlayerShip = function(){
         Flags: {},
     };
 
+    if(this.SHIP.Shields)
+        this.O[0].Shields = cloneObj(this.SHIP.Shields);
 
     this.putOnXY(0);
     CanvasManager.requestCanvas(0);

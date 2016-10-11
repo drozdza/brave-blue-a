@@ -1221,10 +1221,26 @@ BBAdata['ObjectDatas']={
             { explodePreset:'ExplosionSize4' }
         ],
 
+        Shields:[{
+            name: 'explosionShield',
+            CatchDmgT: {explo:1},
+            DmgReduction: 'infinite',
+            ReductionUses: 'exploShield',
+            HitDieAnimation: 'dontShow',
+            Own: true,
+        },{
+            name: 'absorbtionShield',
+            CatchDmgT: {normal:1, energy:1, explo:1},
+            DmgReduction: 'energyField',
+            ReductionUses: 'infinite',
+            Own: true,
+        }],
         energyField: 20,
-        Res: {'energyField': {M:20,T:0}},
+        exploShield: 2,
+        Res: {energyField: {M:20,T:0}, exploShield: {M:2,T:0}},
         weapon:[
             {t:'refilResource', resource: 'energyField', gunSpeed: 60, maxSpeed: 2, doNextWeapon: true},
+            {t:'refilResource', resource: 'exploShield', gunSpeed: 240, maxSpeed: 2, doNextWeapon: true},
             {t:'bomb', Speed: 10, Dec: 50, BombRandom: 4, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}
         ],
 
@@ -1268,11 +1284,18 @@ BBAdata['ObjectDatas']={
         lifeM: 22,
         radius: 40,
 
-        energyField: 10,
+        Shields:[{
+            name: 'bulletShield',
+            CatchDmgT: {normal:1},
+            DmgReduction: 'infinite',
+            ReductionUses: 'infinite',
+            ShieldProbability: 65,
+            Own: true,
+            HitActionObj: 'bounce',
+        }],
         misslePack: 0,
-        Res: {'energyField': {M:10,T:0}, 'misslePack': {M:10,T:0}},
+        Res: {'misslePack': {M:10,T:0}},
         weapon:[
-            {t:'refilResource', resource: 'energyField', gunSpeed: 120, maxSpeed: 2, doNextWeapon: true},
             {t:'refilResource', resource: 'misslePack', gunSpeed: 18, maxSpeed: 2, doNextWeapon: true},
             {t:'changeAction', makeAction: {doingNow:'shooting', doingTime: 33, Manouver:'goStraight'}, doingNow:'followEnemy', doingTime:1, usedRes:'misslePack', usedResR: 10},
             {t:'missleX5', DMG:{Dmg:1,T:'explo'}, Dec: 25, Speed: 14, gunSpeed: 8, lastShot: 0, doingNow:'shooting', minDistToEnemy: 500},
@@ -1533,6 +1556,15 @@ BBAdata['ObjectDatas']={
         onDie: {Do:'explode', DMG:{Dmg:13,T:'explo'}, Dist: 210},
 
         Res: {},
+        Shields:[{
+            name: 'bulletShield',
+            CatchDmgT: {normal:1},
+            DmgReduction: 'infinite',
+            ReductionUses: 'infinite',
+            ShieldProbability: 85,
+            Own: true,
+            HitActionObj: 'bounce',
+        }],
         ShieldsRejection:{dmgTransfer:1},
         weapon:[
             {t:'giveDamangeTransfer', gunSpeed: 12, lastShot: 100, Radius: 350, immunityTime: 15},
@@ -1830,8 +1862,7 @@ BBAdata['ObjectDatas']={
         lifeM: 9,
         radius: 20,
 
-        energyFieldImmune: true,
-        ShieldsRejection:{absorbtionShield:1},
+            ShieldsRejection:{absorbtionShield:1},
 
         weapon:[
             {t:'shootShieldAddMissle', Radius: 350, gunSpeed: 20, lastShot: 100},
@@ -2157,11 +2188,18 @@ BBAdata['ObjectDatas']={
         Bombs:[{
             onHitDieExpire:    {Do:'explode', DMG:{Dmg:7,T:'explo'}, Dist: 80},
         }],
-
-        energyField: 10,
-        Res: {'energyField': {M:10,T:0}},
+        Shields:[{
+            name: 'explosionShield',
+            CatchDmgT: {explo:1},
+            DmgReduction: 'infinite',
+            ReductionUses: 'exploShield',
+            HitDieAnimation: 'dontShow',
+            Own: true,
+        }],
+        exploShield: 4,
+        Res: {'exploShield': {M:4,T:0}},
         weapon:[
-            {t:'refilResource', resource: 'energyField', gunSpeed: 120, maxSpeed: 2, doNextWeapon: true},
+            {t:'refilResource', resource: 'exploShield', gunSpeed: 240, maxSpeed: 2, doNextWeapon: true},
             {t:'bomb', Speed: 0.1, Teleport:{ Dist: 35, Angle: 270, AngleRand: 180}, Dec: 10, BombType: 0, gunSpeed: 10, lastShot: 100, maxSpeed: 2, minAlarm: 5, gunWork:80, gunReload:900, minDistToEnemy:500},
         ],
 
