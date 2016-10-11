@@ -837,12 +837,12 @@ GAMEobject.prototype.decide = function(o){
                         break;
                     }
             }
-            if(WP.t == 'shootEnergyFieldMissle'){
+            if(WP.t == 'shootShieldAddMissle'){ //!!!!!! Jak te missle powinny teraz szukać do kogo lecieć?
                 var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
                 for(var i in inRange) if(i != o){
                     var eO = this.O[i];
                     if((typeof eO.energyField == 'undefined' || eO.energyField < parseInt(eO.lifeM/2)) && !eO.energyFieldImmune){
-                        this.shootEnergyFieldMissle(o,i);
+                        this.shootShieldAddMissle(o,i);
                         WP.lastShot = this.tick;
                         break;
                     }

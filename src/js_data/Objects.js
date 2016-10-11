@@ -1831,9 +1831,10 @@ BBAdata['ObjectDatas']={
         radius: 20,
 
         energyFieldImmune: true,
+        ShieldsRejection:{absorbtionShield:1},
 
         weapon:[
-            {t:'shootEnergyFieldMissle', Radius: 350, gunSpeed: 20, lastShot: 100},
+            {t:'shootShieldAddMissle', Radius: 350, gunSpeed: 20, lastShot: 100},
         ],
 
         doingNow: 'changeManouver',

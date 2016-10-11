@@ -51,6 +51,7 @@ GAMEobject.prototype.addShield = function(O,o,Shield){
 GAMEobject.prototype.ShieldValues={
     koriazMax: 15,
     dmgTransfer: 10,
+    absorbtionShield: 7,
 };
 GAMEobject.prototype.checkShields = function(O,o){
     var sh,SH;
@@ -88,6 +89,12 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
     for(var sh in O.Shields){
         var SH = O.Shields[sh];
         if(SH.CatchDmgT[DMGtype]){
+
+            if(SH.ShieldProbability)
+                if(Math.random()*100 < SH.ShieldProbability)
+                    continue;
+
+
             if(SH.DmgReduction){
                 DMGreduce = 99999;
                 // Partial Reduction
@@ -133,6 +140,7 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
             // {
             //     name: 'koriazMax' / ,
             //     CatchDmgT: {bullet:1, energy:1, acid:1},
+            //     ShieldProbability: 70,
             //     PartialReduction: {MinLeft: 1, Reduce: 4, MaxPercent: 30},
             //     DmgReduction: 'infinite' / 12,
             //     ReductionUses: 'infinite' / 1,

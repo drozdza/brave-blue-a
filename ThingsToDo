@@ -135,12 +135,17 @@ Blue bullets:
 
     shield:{
         CatchDmgT: {bullet:1, energy:1, acid:1},
+        ShieldProbability: 70,
         DmgReduction: 1 / 17 / 'infinite',
         ReductionUses: 'infinite' / 3,
         DmgTransfer: true,
         ExpireTime: -1 / 2939,
         HitActionObj: 'die' / 'redirect' / 'ignore',
     }
+
+    DmgReduction, ReductionUses - wskaźniki do zasobów statku [???]
+
+
 
 ================================================================================
 

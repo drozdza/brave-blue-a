@@ -42,7 +42,7 @@ GAMEobject.prototype.shootHealingMissle = function(o,Target){
     this.O[L].angle = O.angle;
     this.O[L].FollowWho = Target;
 }
-GAMEobject.prototype.shootEnergyFieldMissle = function(o,Target){
+GAMEobject.prototype.shootShieldAddMissle = function(o,Target){
     var O = this.O[o];
     var L = this.putObj('energy_field_missle','comp',O.S,O.x,O.y);
     this.O[L].angle = O.angle;
