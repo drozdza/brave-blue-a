@@ -1862,7 +1862,7 @@ BBAdata['ObjectDatas']={
         lifeM: 9,
         radius: 20,
 
-            ShieldsRejection:{absorbtionShield:1},
+        ShieldsRejection:{absorbtionShield:1},
 
         weapon:[
             {t:'shootShieldAddMissle', Radius: 350, gunSpeed: 20, lastShot: 100},

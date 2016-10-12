@@ -1,8 +1,3 @@
-GAMEobject.prototype.shootBullet = function(o,Angle,Speed,Dec,DMG){ // !!!! do zaorania
-    var O = this.O[o];
-    var L = this.putBullet(O.S,O.x,O.y,Speed,Dec,Angle,DMG);
-    return this.O[L];
-}
 GAMEobject.prototype.shootBulletOnSide = function(o,Enemy,Speed,Dec,SideAngle,SideDist,DMG){
     var O = this.O[o];
     var Xp = O.x- -SideDist * Math.sin((-parseInt(O.angle- -SideAngle)-180)*(Math.PI/180));

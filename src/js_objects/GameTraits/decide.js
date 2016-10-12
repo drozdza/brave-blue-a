@@ -618,7 +618,7 @@ GAMEobject.prototype.decide = function(o){
             }
 
             if(WP.t == 'single'){
-                this.shootBullet(o,PlayerAngle,WP.Speed,WP.Dec,WP.DMG);
+                this.putBullet(O.S,O.x,O.y,WP.Speed,WP.Dec,PlayerAngle,WP.DMG);
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'double'){
@@ -647,7 +647,8 @@ GAMEobject.prototype.decide = function(o){
             }
             if(WP.t == 'rose'){
                 for(var i = -parseInt(WP.AtOnce/2); i<= parseInt(WP.AtOnce/2); ++i)
-                    this.shootBullet(o,PlayerAngle-i*WP.RoseAngle,WP.Speed,WP.Dec,WP.DMG);
+                    this.putBullet(O.S,O.x,O.y,WP.Speed,WP.Dec,PlayerAngle-i*WP.RoseAngle,WP.DMG);
+
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'crabBullets'){
@@ -837,7 +838,7 @@ GAMEobject.prototype.decide = function(o){
                         break;
                     }
             }
-            if(WP.t == 'shootShieldAddMissle'){ //!!!!!! Jak te missle powinny teraz szukać do kogo lecieć?
+            if(WP.t == 'shootShieldAddMissle'){
                 var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
                 for(var i in inRange) if(i != o){
                     var eO = this.O[i];
