@@ -740,10 +740,10 @@ BBAdata['ObjectDatas']={
 
         lifeM: 3,
 
-        jump: 3,
-        Res: {'jump': {M:3,T:0}},
+        onHitJump: 3,
+        Res: {'onHitJump': {M:3,T:0}},
         weapon:[
-            {t:'refilResource', resource: 'jump', gunSpeed: 300, maxSpeed: 2, doNextWeapon: true},
+            {t:'refilResource', resource: 'onHitJump', gunSpeed: 300, maxSpeed: 2, doNextWeapon: true},
             {t:'double2', DMG:{Dmg:1,T:'normal'}, Dec: 35, Speed: 12, gunSpeed: 20, lastShot: 100, maxSpeed: 2, minAlarm: 5},
         ],
 
@@ -2462,6 +2462,57 @@ BBAdata['ObjectDatas']={
             spotRad: {Const: 180, RandInt: 80},
             spotRad2: {Const: 400, RandInt: 200},
             spotAngle2: {Const: 40, RandInt: 20}
+        },
+    },
+    iskarianz:{
+        view:{
+            Letter: 238,
+            LetterSize: 30,
+            Color: 'red',
+            Angle: 180,
+            HitPattern: 'HullFire_20',
+            shieldsRadius: 14,
+        },
+
+        lifeM: 3,
+
+        onHitKoriazShield: 2,
+        Res: {onHitKoriazShield: {M:2,T:0}},
+        weapon:[
+            {t:'refilResource', resource: 'onHitKoriazShield', gunSpeed: 450, maxSpeed: 2, doNextWeapon: true},
+            {t:'double2', DMG:{Dmg:1,T:'normal'}, Dec: 35, Speed: 12, gunSpeed: 5, gunWork: 20, gunReload: 90, lastShot: 100, maxSpeed: 2, minAlarm: 5},
+        ],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
+            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, gotoAlarm: 4, goToSpotLvl: 2},
+            {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3 },
+            {N:23,T:'stayInRegion', X:0, Y:0, Radius: 1700 },
+            {N:18,T:'changeManouver2', maxAlarm: 4, minAlarm: 3, straightMin: 20, straightPlus: 80, turnMin: 10, turnPlus: 80  },
+            {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S: {shipVar:'speed',Add:-5}, T:{shipVar:'speedT',Add:-0.6}},
+            {S: {shipVar:'speed'}, T:{shipVar:'speedT'}},
+            {S: {shipVar:'speed',Add:4}, T:{shipVar:'speedT'}}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 20, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 20, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 20, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            speed: {Const: 7, Rand: 1.5},
+            speedT: {Const: 2.5, Rand: 1},
+            spotRad: {Const: 80, RandInt: 80},
+            spotRad2: {Const: 300, RandInt: 200},
+            spotAngle2: {Const: 30, RandInt: 30}
         },
     },
 };

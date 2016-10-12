@@ -78,6 +78,7 @@ GAMEobject.prototype.addKoriazShield = function(o,Duration,q){
         DmgReduction: 'infinite',
         ReductionUses: 'infinite',
         ExpireTime: Duration,
+        HitActionObj: 'remove',
     })){
         L = this.putObj_directAnim('addShield', {timeDeath: 5});
         this.O[L].pathD = ['M', parseInt(o), 'L', parseInt(q)];

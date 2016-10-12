@@ -3,8 +3,7 @@ GAMEobject.prototype.shipShoot = function(AngleMod,Speed,Dec,DMG){
     var O = this.O[0];
     var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -180)%360;
     if(AngleMod) Angle-=-AngleMod;
-    this.putBullet(O.S,O.x,O.y,WP.(Speed || 15),(Dec || 30),Angle,DMG);
-
+    this.putBullet(O.S,O.x,O.y,(Speed || 15),(Dec || 30),Angle,DMG);
 }
 GAMEobject.prototype.shipShootOnSide = function(SideAngle,SideDist,Speed,Dec,DMG){
     var O = this.O[0];

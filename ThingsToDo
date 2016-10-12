@@ -97,19 +97,13 @@ Nowe ficzery:
         - lower amunition/shields/life capacity
 
 
+    - Blue bullets:
+        - can go thrue enemies
+        - can ignore shields
+        - can recude shields
+        - can damage ships speed/resources/abilities
 
-========== NEW DAMAGE system ============================================
 
-Shields:
-    - can be activated in case of damage
-
-Blue bullets:
-    - can go thrue enemies
-    - can ignore shields
-    - can recude shields
-    - can damage ships speed/resources/abilities
-
-================================================================================
 
 MotherShip
     - Settings for players MotherShip that can be placed on some types of boards

@@ -184,20 +184,19 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
         ShieldObj = this.testShields(O,o,DMG);
         AnimHits = DMGval = ShieldObj.DMGval;
 
-        if(DMGval < 1 && ShieldObj.Action == 'die'){
-            if(q){
-                --AnimHits;
-                this.removeObj(q);
-            }
+        if(DMGval < 1 && ShieldObj.Action == 'die' && q){
+            --AnimHits;
+            this.removeObj(q);
         }
-        if(ShieldObj.Action == 'bounce'){
-            if(q){
-                Q = this.O[q];
-                var kat = (-Math.atan2(O.x-Q.x,O.y-Q.y)*(180/Math.PI)- -360)%360;
-                var kat2 = (Q.angle - kat - -720)%360;
-                if(kat2 > 90 && kat2 < 270)
-                    Q.angle = (kat- -180 - kat2)%360;
-            }
+        if(DMGval < 1 && ShieldObj.Action == 'remove' && q)
+            this.removeObj(q);
+
+        if(ShieldObj.Action == 'bounce' && q){
+            Q = this.O[q];
+            var kat = (-Math.atan2(O.x-Q.x,O.y-Q.y)*(180/Math.PI)- -360)%360;
+            var kat2 = (Q.angle - kat - -720)%360;
+            if(kat2 > 90 && kat2 < 270)
+                Q.angle = (kat- -180 - kat2)%360;
         }
     }
 
@@ -208,15 +207,32 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
         return true;
     }
 
+    // ON HIT SHIELD
+    if(O.onHitKoriazShield && O.onHitKoriazShield > 0){
+        if(this.addShield(O,o,{
+            name:'koriazMax',
+            CatchDmgT:{normal:1,energy:1,acid:1,explo:1},
+            DmgReduction: 'infinite',
+            ReductionUses: 'infinite',
+            ExpireTime: 45,
+            HitActionObj: 'remove',
+        })){
+            --O.onHitKoriazShield;
+            this.removeObj(q);
+            return true;
+        }
+    }
+
     // ON HIT JUMP
-    if(O.jump && O.jump > 0){
+    if(O.onHitJump && O.onHitJump > 0){
         if(this.teleportJump(o,170,Math.random()*360)){
-            --O.jump;
+            --O.onHitJump;
             this.checkHits(o);
             this.removeObj(q);
         }
         return true;
     }
+
 
 
     // HIT animation

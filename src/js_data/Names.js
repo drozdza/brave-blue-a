@@ -40,6 +40,7 @@ BBAdata['ShipNames']={
     HH:'hedgehog',
     UU:'urser',
     Tu:'talrax',
+    Ii:'iskarianz',
 };
 BBAdata['ModuleNames'] = {
     healerProd:         'Heal',
