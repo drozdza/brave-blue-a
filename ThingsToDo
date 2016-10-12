@@ -16,6 +16,8 @@
 
 - X attack as curved NailBombs
 
+- showing last killed enemies (and how?)
+
 - Layers of Canvas:
     - overlay layer,
     - Hit screen
@@ -98,50 +100,14 @@ Nowe ficzery:
 
 ========== NEW DAMAGE system ============================================
 
-Types of damage:
-    - [bullet] normal (bullets?) (ramming?)
-    - [energy] energy fields / lasers
-    - [explosion] explosions / destruction fields[???]
-    - [acid] acid?
-    -
-
 Shields:
-    - can have number of charges
-    - can be time limited
     - can be activated in case of damage
-
-Shield types:
-    - gives all type immunity
-    - catch 1 explosion beam
-    - catch 1 acid damage
-    - catch 1 energy damage
-    - catch damages 1 by one (from all sources - or bullet/energy/explo/acid types)
-    - shield can redirect bullets, lasers and others
-    - reduction shields? -3 to explosions?
 
 Blue bullets:
     - can go thrue enemies
     - can ignore shields
     - can recude shields
     - can damage ships speed/resources/abilities
-
-
-    dmg:{
-        dmg: 7,
-        dmgT: 'bullet / energy / explosion / acid / super',
-    }
-
-    shield:{
-        CatchDmgT: ['bullet', 'energy', 'acid'],
-        DmgReduction: 1 / 17 / 'infinite',
-        ReductionUses: 'infinite' / 3,
-        DmgTransfer: true,
-        ExpireTime: -1 / 2939,
-        HitActionObj: 'die' / 'redirect' / 'ignore',
-    }
-
-[[ HOW TO SORT THE SHIELDS? ]]
-
 
 ================================================================================
 

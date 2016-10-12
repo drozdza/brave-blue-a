@@ -6,7 +6,6 @@ GAMEobject.prototype.shipFunc_glueFireToLaser = function(){
     var laserAim = false;
     var dist = 1000000;
     for(F in Found){
-        if(this.O[F].shieldD > 0) continue;
         if(this.O[F].undestructible > 0) continue;
         X = this.mouseX - this.O[F].x;
         Y = this.mouseY - this.O[F].y;
@@ -32,7 +31,6 @@ GAMEobject.prototype.shipFunc_glueFireToMissle = function(aimRadius){
     var missleAim = false;
     var dist = 1000000;
     for(F in Found){
-        if(this.O[F].shieldD > 0) continue;
         if(this.O[F].undestructible > 0) continue;
         X = this.mouseX - this.O[F].x;
         Y = this.mouseY - this.O[F].y;
@@ -59,7 +57,6 @@ GAMEobject.prototype.shipFunc_esteemedPositions = function(O,F){
     var WU;
     var Found = this.getCollidingWithCircle(this.O[0].x,this.O[0].y,800,['E']);
     for(var Fo in Found){
-        if(this.O[Fo].shieldD > 0) continue;
         if(this.O[Fo].undestructible > 0) continue;
         if(this.O[Fo].life < 1) continue;
         WU = this.countFutureShoot(Fo,O.x,O.y,F.Speed,F.Dec);
@@ -79,7 +76,6 @@ GAMEobject.prototype.shipFunc_glueFireToEstimated = function(EsteemedPos){
     var Rad2 = Rad*Rad;
     var dist = 1000000;
     for(F in EsteemedPos){
-        if(this.O[F].shieldD > 0) continue;
         if(this.O[F].undestructible > 0) continue;
         if(this.O[F].life < 1) continue;
         X = this.mouseX - EsteemedPos[F].x;
@@ -103,7 +99,6 @@ GAMEobject.prototype.shipFunc_glueFireToEstimated = function(EsteemedPos){
 
     for(var F in this.O){
         if(!(this.O[F].T=='star' || this.O[F].T=='space_mine')) continue;
-        if(this.O[F].shieldD > 0) continue;
         if(this.O[F].undestructible > 0) continue;
         if(this.O[F].life < 1) continue;
         X = this.mouseX - this.O[F].x;

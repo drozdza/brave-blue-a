@@ -822,10 +822,10 @@ GAMEobject.prototype.decide = function(o){
                 WP.lastShot = this.tick;
             }
 
-            if(WP.t == 'addShield'){
+            if(WP.t == 'addKoriazShield'){
                 var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
                 for(var i in inRange)
-                    this.addShield(i,WP.shieldTime,o);
+                    this.addKoriazShield(i,WP.shieldTime,o);
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'shootHealingMissle'){
@@ -837,12 +837,12 @@ GAMEobject.prototype.decide = function(o){
                         break;
                     }
             }
-            if(WP.t == 'shootEnergyFieldMissle'){
+            if(WP.t == 'shootShieldAddMissle'){ //!!!!!! Jak te missle powinny teraz szukać do kogo lecieć?
                 var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
                 for(var i in inRange) if(i != o){
                     var eO = this.O[i];
-                    if((typeof eO.energyField == 'undefined' || eO.energyField < parseInt(eO.lifeM/2)) && !eO.energyFieldImmune){
-                        this.shootEnergyFieldMissle(o,i);
+                    if((typeof eO.energyField == 'undefined' || eO.energyField < parseInt(eO.lifeM/2)) && (!eO.ShieldsRejection || eO.ShieldsRejection.absorbtionShield)){
+                        this.shootShieldAddMissle(o,i);
                         WP.lastShot = this.tick;
                         break;
                     }
@@ -858,7 +858,7 @@ GAMEobject.prototype.decide = function(o){
             if(WP.t == 'giveDamangeTransfer'){
                 var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
                 for(var i in inRange)
-                    if(this.giveDamageTransfer(i,o,WP.immunityTime)) break;
+                    this.addDamageTransfer(i,o,WP.immunityTime);
                 WP.lastShot = this.tick;
             }
 
@@ -913,9 +913,7 @@ GAMEobject.prototype.decide = function(o){
     O.Flags.gotHitFlag = false;
     O.Flags.squadMemberDied = false;
 
-    if(--O.shieldD < 1) delete O.shieldD;
-    if(--O.damageTransferTime < 1){
-          delete O.damageTransferTime;
-          delete O.damageTransferFrom;
+    if(O.Shields){
+        this.checkShields(O,o);
     }
 }
