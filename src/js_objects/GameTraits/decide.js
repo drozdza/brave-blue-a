@@ -668,22 +668,22 @@ GAMEobject.prototype.decide = function(o){
 
 
             if(WP.t == 'missle'){
-                this.shootMissle(o,O.angle,15,150,WP.DMG,WP.explodePreset);
+                this.shootMissle(o,PlayerAngle,15,150,3,WP.DMG,WP.explodePreset);
                 O[ WP.usedRes ] -= WP.usedResR;
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'misslesDouble'){
-                this.shootMissle(o,PlayerAngle - 20,15,150,WP.DMG,WP.explodePreset);
-                this.shootMissle(o,PlayerAngle- -20,15,150,WP.DMG,WP.explodePreset);
+                this.shootMissle(o,PlayerAngle - 20,15,150,3,WP.DMG,WP.explodePreset);
+                this.shootMissle(o,PlayerAngle- -20,15,150,3,WP.DMG,WP.explodePreset);
                 O[ WP.usedRes ] -= WP.usedResR;
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'missleX5'){
-                if(O.doingTime == 32) this.shootMissle(o,O.angle- -40,15,150,WP.DMG,WP.explodePreset);
-                if(O.doingTime == 24) this.shootMissle(o,O.angle- -20,15,150,WP.DMG,WP.explodePreset);
-                if(O.doingTime == 16) this.shootMissle(o,O.angle     ,15,150,WP.DMG,WP.explodePreset);
-                if(O.doingTime == 8)  this.shootMissle(o,O.angle - 20,15,150,WP.DMG,WP.explodePreset);
-                if(O.doingTime == 0)  this.shootMissle(o,O.angle - 40,15,150,WP.DMG,WP.explodePreset);
+                if(O.doingTime == 32) this.shootMissle(o,O.angle- -40,15,150,3,WP.DMG,WP.explodePreset);
+                if(O.doingTime == 24) this.shootMissle(o,O.angle- -20,15,150,3,WP.DMG,WP.explodePreset);
+                if(O.doingTime == 16) this.shootMissle(o,O.angle     ,15,150,3,WP.DMG,WP.explodePreset);
+                if(O.doingTime == 8)  this.shootMissle(o,O.angle - 20,15,150,3,WP.DMG,WP.explodePreset);
+                if(O.doingTime == 0)  this.shootMissle(o,O.angle - 40,15,150,3,WP.DMG,WP.explodePreset);
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'missleCrown'){

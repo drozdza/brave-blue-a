@@ -438,7 +438,7 @@ BBAdata['ExplosivesPresets']={
 
     SetMine1:{onExpire:{ Do:'explode', explodeType:'setMine', mineExplodePreset:{explodePreset:'NailedMine'},overWriteObjects:['MineMod_mediumCircle']}},
     EyeOfMines:{
-        onExpire: {
+        onHit: {
             Do:'explode',
             explodeType: 'none',
             Shards:[{

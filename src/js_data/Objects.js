@@ -2508,17 +2508,16 @@ BBAdata['ObjectDatas']={
             Letter: 338,
             LetterSize: 60,
             Color: 'red',
-            Angle: 180,
+            Angle: 90,
             HitPattern: 'HullFire_60',
         },
 
-        lifeM: 12,
+        lifeM: 22,
         radius: 30,
 
         Bombs:[
             {explodePreset:'MineZen'},
             {explodePreset:'StrikeOfMines'},
-//            {explodePreset:'EyeOfMines'},
         ],
 
         weapon:[
@@ -2552,7 +2551,7 @@ BBAdata['ObjectDatas']={
             spotRad2: {Const: 400, RandInt: 200},
             spotAngle2: {Const: 40, RandInt: 20}
         },
-    }
+    },
     yehes:{
         view:{
             Letter: 'Y',
@@ -2562,7 +2561,7 @@ BBAdata['ObjectDatas']={
             HitPattern: 'HullFire_80',
         },
 
-        lifeM: 12,
+        lifeM: 32,
         radius: 40,
 
         Bombs:[
@@ -2587,13 +2586,13 @@ BBAdata['ObjectDatas']={
         speedArr:[0,
             {S:0.1, T:1},
             {S:0.4, T:0.5},
-            {S:1, T:0.2}
+            {S:1,   T:0.2}
         ],
         spotTick: 8,
         spotArr: [0,
-            {T:'single',Ref: 30, Rad: 500},
-            {T:'single',Ref: 30, Rad: 500},
-            {T:'single',Ref: 30, Rad: 500}
+            {T:'single', Ref: 30, Rad: 500},
+            {T:'single', Ref: 30, Rad: 500},
+            {T:'single', Ref: 30, Rad: 500}
         ],
     },
     yehestis:{
@@ -2605,7 +2604,7 @@ BBAdata['ObjectDatas']={
             HitPattern: 'HullFire_80',
         },
 
-        lifeM: 12,
+        lifeM: 32,
         radius: 40,
 
         Bombs:[
@@ -2648,7 +2647,7 @@ BBAdata['ObjectDatas']={
             HitPattern: 'HullFire_80',
         },
 
-        lifeM: 12,
+        lifeM: 32,
         radius: 40,
 
         Bombs:[

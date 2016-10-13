@@ -31,7 +31,8 @@ GAMEobject.prototype.shootMissle = function(o,Angle,Speed,Dec,SpeedT,DMG,explode
     this.O[L].angle = Angle;
     this.O[L].speedT = SpeedT || 3;
     if(DMG) this.O[L].DMG = cloneObj(DMG);
-    if(explodePreset) this.O[L].explodePreset = cloneObj(explodePreset);
+    if(explodePreset)
+        this.cloneExplosionData({Do:'explode', explodePreset: explodePreset}, this.O[L]);
 }
 GAMEobject.prototype.shootHealingMissle = function(o,Target){
     var O = this.O[o];
