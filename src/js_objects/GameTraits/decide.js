@@ -666,25 +666,31 @@ GAMEobject.prototype.decide = function(o){
                 WP.lastShot = this.tick;
             }
 
+
+            if(WP.t == 'missle'){
+                this.shootMissle(o,O.angle,15,150,WP.DMG,WP.explodePreset);
+                O[ WP.usedRes ] -= WP.usedResR;
+                WP.lastShot = this.tick;
+            }
             if(WP.t == 'misslesDouble'){
-                this.shootMissle(o,PlayerAngle - 20,15,150);
-                this.shootMissle(o,PlayerAngle- -20,15,150);
+                this.shootMissle(o,PlayerAngle - 20,15,150,WP.DMG,WP.explodePreset);
+                this.shootMissle(o,PlayerAngle- -20,15,150,WP.DMG,WP.explodePreset);
                 O[ WP.usedRes ] -= WP.usedResR;
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'missleX5'){
-                if(O.doingTime == 32) this.shootMissle(o,O.angle- -40,15,150);
-                if(O.doingTime == 24) this.shootMissle(o,O.angle- -20,15,150);
-                if(O.doingTime == 16) this.shootMissle(o,O.angle     ,15,150);
-                if(O.doingTime == 8)  this.shootMissle(o,O.angle - 20,15,150);
-                if(O.doingTime == 0)  this.shootMissle(o,O.angle - 40,15,150);
+                if(O.doingTime == 32) this.shootMissle(o,O.angle- -40,15,150,WP.DMG,WP.explodePreset);
+                if(O.doingTime == 24) this.shootMissle(o,O.angle- -20,15,150,WP.DMG,WP.explodePreset);
+                if(O.doingTime == 16) this.shootMissle(o,O.angle     ,15,150,WP.DMG,WP.explodePreset);
+                if(O.doingTime == 8)  this.shootMissle(o,O.angle - 20,15,150,WP.DMG,WP.explodePreset);
+                if(O.doingTime == 0)  this.shootMissle(o,O.angle - 40,15,150,WP.DMG,WP.explodePreset);
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'missleCrown'){
                 var Pe = [80,280,100,260,120,240,140,220];
 
                 for(var iki=0; iki<8; ++iki)
-                    this.shootMissle(o, (PlayerAngle- -Pe[iki])%360, (WP.Speed-parseInt(iki/2)*2),(WP.Dec- -parseInt(iki/2)*20),(6-parseInt(iki/2)));
+                    this.shootMissle(o, (PlayerAngle- -Pe[iki])%360, (WP.Speed-parseInt(iki/2)*2),(WP.Dec- -parseInt(iki/2)*20),(6-parseInt(iki/2)),WP.DMG,WP.explodePreset);
 
                 WP.lastShot = this.tick;
             }

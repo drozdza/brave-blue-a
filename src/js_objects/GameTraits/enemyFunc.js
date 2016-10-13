@@ -22,7 +22,7 @@ GAMEobject.prototype.shootBulletOnSide2 = function(o,Enemy,Speed,Dec,SideAngle,S
     var L = this.putBullet(O.S,Xp,Yp,Speed,Dec,Angle,DMG);
     return this.O[L];
 }
-GAMEobject.prototype.shootMissle = function(o,Angle,Speed,Dec,SpeedT){
+GAMEobject.prototype.shootMissle = function(o,Angle,Speed,Dec,SpeedT,DMG,explodePreset){
     var O = this.O[o];
     var L = this.putObj('missle','comp',O.S,O.x,O.y);
     this.O[L].speed = Speed;
@@ -30,6 +30,8 @@ GAMEobject.prototype.shootMissle = function(o,Angle,Speed,Dec,SpeedT){
     this.O[L].Manouver = 'followEnemy';
     this.O[L].angle = Angle;
     this.O[L].speedT = SpeedT || 3;
+    if(DMG) this.O[L].DMG = cloneObj(DMG);
+    if(explodePreset) this.O[L].explodePreset = cloneObj(explodePreset);
 }
 GAMEobject.prototype.shootHealingMissle = function(o,Target){
     var O = this.O[o];

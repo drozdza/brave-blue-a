@@ -2415,26 +2415,14 @@ BBAdata['ObjectDatas']={
         radius: 40,
 
         Bombs:[
-            {explodePreset:'MineZen'},
-            {explodePreset:'StrikeOfMines'},
-            {explodePreset:'EyeOfMines'},
             {explodePreset:'StrikeOfEvil'},
             {explodePreset:'EyeOfEvil'},
-            {explodePreset:'SlowDownConeFields'},
-            {explodePreset:'TeleportConeField'},
-            {explodePreset:'WindField'},
-            {explodePreset:'ShieldsBlobWall'},
-            {explodePreset:'ShieldsBlobBomb'},
-            {explodePreset:'EnergyBubbleShield'},
-            {explodePreset:'TeleWall'},
-            {explodePreset:'TeleField'},
-            {explodePreset:'ElectroBubbleShield'},
             {explodePreset:'BubbleStorm'},
             {explodePreset:'ExplosionWorm2'},
         ],
 
         weapon:[
-            {t:'bomb', Speed: 10, Dec: 10, BombRandom: 16, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
+            {t:'bomb', Speed: 10, Dec: 10, BombRandom: 4, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
         ],
 
         doingNow: 'changeManouver',
@@ -2515,4 +2503,184 @@ BBAdata['ObjectDatas']={
             spotAngle2: {Const: 30, RandInt: 30}
         },
     },
+    prisander:{
+        view:{
+            Letter: 338,
+            LetterSize: 60,
+            Color: 'red',
+            Angle: 180,
+            HitPattern: 'HullFire_60',
+        },
+
+        lifeM: 12,
+        radius: 30,
+
+        Bombs:[
+            {explodePreset:'MineZen'},
+            {explodePreset:'StrikeOfMines'},
+//            {explodePreset:'EyeOfMines'},
+        ],
+
+        weapon:[
+            {t:'bomb', Speed: 10, Dec: 10, BombRandom: 2, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600},
+            {t:'missle', DMG:{Dmg:0,T:'normal'}, explodePreset:'EyeOfMines', Dec: 95, Speed: 12, gunSpeed: 120, lastShot: 0, minDistToEnemy: 400},
+        ],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 15, gotoAlarm: 4, goToSpotLvl: 2},
+            {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3, doingTime: 30},
+            {N:15,T:'changeManouver', maxAlarm: 4, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:1, T:3},
+            {S:2, T:6},
+            {S:3, T:2}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            spotRad: {Const: 180, RandInt: 80},
+            spotRad2: {Const: 400, RandInt: 200},
+            spotAngle2: {Const: 40, RandInt: 20}
+        },
+    }
+    yehes:{
+        view:{
+            Letter: 'Y',
+            LetterSize: 80,
+            Color: 'red',
+            Angle: 180,
+            HitPattern: 'HullFire_80',
+        },
+
+        lifeM: 12,
+        radius: 40,
+
+        Bombs:[
+            {explodePreset:'TeleportConeField'},
+            {explodePreset:'TeleField'},
+            {explodePreset:'ElectroBubbleShield'},
+        ],
+
+        weapon:[
+            {t:'bomb', Speed: 10, Dec: 10, BombRandom: 3, gunSpeed: 80, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
+        ],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 15, gotoAlarm: 4, goToSpotLvl: 2},
+            {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3, doingTime: 30},
+            {N:15,T:'changeManouver', maxAlarm: 4, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:0.1, T:1},
+            {S:0.4, T:0.5},
+            {S:1, T:0.2}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 30, Rad: 500},
+            {T:'single',Ref: 30, Rad: 500},
+            {T:'single',Ref: 30, Rad: 500}
+        ],
+    },
+    yehestis:{
+        view:{
+            Letter: 376,
+            LetterSize: 80,
+            Color: 'red',
+            Angle: 180,
+            HitPattern: 'HullFire_80',
+        },
+
+        lifeM: 12,
+        radius: 40,
+
+        Bombs:[
+            {explodePreset:'WindField'},
+            {explodePreset:'ShieldsBlobWall'},
+            {explodePreset:'ShieldsBlobBomb'},
+        ],
+
+        weapon:[
+            {t:'bomb', Speed: 10, Dec: 10, BombRandom: 3, gunSpeed: 80, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
+        ],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 15, gotoAlarm: 4, goToSpotLvl: 2},
+            {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3, doingTime: 30},
+            {N:15,T:'changeManouver', maxAlarm: 4, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:0.1, T:1},
+            {S:0.4, T:0.5},
+            {S:1, T:0.2}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 30, Rad: 500},
+            {T:'single',Ref: 30, Rad: 500},
+            {T:'single',Ref: 30, Rad: 500}
+        ],
+    },
+    yeheslar:{
+        view:{
+            Letter: 590,
+            LetterSize: 80,
+            Color: 'red',
+            Angle: 180,
+            HitPattern: 'HullFire_80',
+        },
+
+        lifeM: 12,
+        radius: 40,
+
+        Bombs:[
+            {explodePreset:'EnergyBubbleShield'},
+            {explodePreset:'SlowDownConeFields'},
+            {explodePreset:'TeleWall'},
+        ],
+
+        weapon:[
+            {t:'bomb', Speed: 10, Dec: 10, BombRandom: 3, gunSpeed: 80, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
+        ],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 15, gotoAlarm: 4, goToSpotLvl: 2},
+            {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3, doingTime: 30},
+            {N:15,T:'changeManouver', maxAlarm: 4, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:0.1, T:1},
+            {S:0.4, T:0.5},
+            {S:1, T:0.2}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 30, Rad: 500},
+            {T:'single',Ref: 30, Rad: 500},
+            {T:'single',Ref: 30, Rad: 500}
+        ],
+    },
+
 };
