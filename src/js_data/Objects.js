@@ -2557,7 +2557,7 @@ BBAdata['ObjectDatas']={
             Letter: 'Y',
             LetterSize: 80,
             Color: 'red',
-            Angle: 180,
+            Angle: 0,
             HitPattern: 'HullFire_80',
         },
 
@@ -2571,7 +2571,7 @@ BBAdata['ObjectDatas']={
         ],
 
         weapon:[
-            {t:'bomb', Speed: 10, Dec: 10, BombRandom: 3, gunSpeed: 80, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
+            {t:'bomb', Speed: 10, Dec: 10, BombRandom: 3, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
         ],
 
         doingNow: 'changeManouver',
@@ -2594,13 +2594,14 @@ BBAdata['ObjectDatas']={
             {T:'single', Ref: 30, Rad: 500},
             {T:'single', Ref: 30, Rad: 500}
         ],
+        shipVariables:{},
     },
     yehestis:{
         view:{
             Letter: 376,
             LetterSize: 80,
             Color: 'red',
-            Angle: 180,
+            Angle: 0,
             HitPattern: 'HullFire_80',
         },
 
@@ -2637,13 +2638,14 @@ BBAdata['ObjectDatas']={
             {T:'single',Ref: 30, Rad: 500},
             {T:'single',Ref: 30, Rad: 500}
         ],
+        shipVariables:{},
     },
     yeheslar:{
         view:{
             Letter: 590,
             LetterSize: 80,
             Color: 'red',
-            Angle: 180,
+            Angle: 0,
             HitPattern: 'HullFire_80',
         },
 
@@ -2680,6 +2682,7 @@ BBAdata['ObjectDatas']={
             {T:'single',Ref: 30, Rad: 500},
             {T:'single',Ref: 30, Rad: 500}
         ],
+        shipVariables:{},
     },
 
 };
