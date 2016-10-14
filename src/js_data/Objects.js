@@ -2684,5 +2684,44 @@ BBAdata['ObjectDatas']={
         ],
         shipVariables:{},
     },
+    hesiolumbus:{
+        view:{
+            Letter: 482,
+            LetterSize: 80,
+            Color: 'red',
+            Angle: 180,
+            HitPattern: 'HullFire_80',
+        },
 
+        lifeM: 32,
+        radius: 40,
+
+        Bombs:[
+            {explodePreset:'HealingField'},
+        ],
+
+        weapon:[
+            {t:'shootHealingBomb', BombType: 0, Speed: 6, Dec: 60, gunSpeed: 600, lastShot: 100, Radius: 360, minimalDmg: 8}
+        ],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:15,T:'changeManouver', maxAlarm: 4, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:0.1, T:1},
+            {S:0.4, T:0.5},
+            {S:1,   T:0.2}
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single', Ref: 30, Rad: 500},
+            {T:'single', Ref: 30, Rad: 500},
+            {T:'single', Ref: 30, Rad: 500}
+        ],
+        shipVariables:{},
+    },
 };

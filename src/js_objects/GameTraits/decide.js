@@ -844,6 +844,27 @@ GAMEobject.prototype.decide = function(o){
                         break;
                     }
             }
+            if(WP.t == 'shootHealingBomb'){
+                var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
+                for(var i in inRange) if(i != o)
+                    if(this.O[i].lifeM - this.O[i].life >= WP.minimalDmg){
+                        var X = O.x-this.O[i].x;
+                        var Y = O.y-this.O[i].y;
+                        var Dist = Math.sqrt(X*X- -Y*Y);
+                        var Angle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
+                        var Dec = Math.min(parseInt(Dist / WP.Speed), WP.Dec);
+
+                        var bombData = false;
+                        if(typeof WP.BombType !='undefined') bombData = O.Bombs[ WP.BombType ];
+                        if(WP.BombRandom) bombData = O.Bombs[ parseInt(Math.random()*WP.BombRandom) ];
+                        var teleportData = false;
+                        if(typeof WP.Teleport !='undefined') teleportData = WP.Teleport;
+                        this.shootBomb(o,Angle,WP.Speed,Dec,bombData,teleportData);
+                        WP.lastShot = this.tick;
+
+                        break;
+                    }
+            }
             if(WP.t == 'shootShieldAddMissle'){
                 var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
                 for(var i in inRange) if(i != o){

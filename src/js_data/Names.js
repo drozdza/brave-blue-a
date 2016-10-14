@@ -45,6 +45,7 @@ BBAdata['ShipNames']={
     Y:'yehes',
     Yi:'yehestis',
     Yl:'yeheslar',
+    HS:'hesiolumbus',
 };
 BBAdata['ModuleNames'] = {
     healerProd:         'Heal',

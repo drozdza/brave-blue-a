@@ -511,4 +511,9 @@ BBAdata['ExplosivesPresets']={
         }
     },
 
+    HealingField:{
+        onHitDieExpire: {Do:'explode', explodeType:'RoundField', fieldAnim: 'HealingField', ExpireTime: 360, PeriodTime: 30, PeriodOffset: 5, PeriodHeal: 1, dontHit:['P','M','B','A'], radius: 160},
+    },
+
+
 };
