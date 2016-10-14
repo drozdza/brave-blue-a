@@ -2566,7 +2566,7 @@ BBAdata['ObjectDatas']={
 
         Bombs:[
             {explodePreset:'TeleportConeField'},
-            {explodePreset:'TeleField'},
+            {explodePreset:'TeleFastField'},
             {explodePreset:'ElectroBubbleShield'},
         ],
 
