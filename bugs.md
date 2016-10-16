@@ -9,3 +9,5 @@ Bugs:
     - Blur don't work
 
     - Killing D ships sometimes give undefined .T fatal error
+
+    - Bigger objects regidter wrong around 0,0
