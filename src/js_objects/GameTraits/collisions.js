@@ -256,11 +256,8 @@ GAMEobject.prototype.checkConeAndCircle = function(O,Qx,Qy,Qradius){
         var oA = parseInt(-Math.atan2(oX,oY)*(180/Math.PI)- -360)%360;
         var qA1 = (O.angle - O.coneAngle- -360)%360;
         var qA2 = (O.angle- -O.coneAngle- -360)%360;
-        if(qA1 > qA2){
-            if(!(oA > qA1 || oA < qA2)) return false;
-        }else{
-            if(!(oA > qA1 && oA < qA2)) return false;
-        }
+        if(!betweenAngles(oA,qA1,qA2))
+            return false;
     }
     return true;
 }

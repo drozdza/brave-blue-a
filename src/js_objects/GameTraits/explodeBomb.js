@@ -1,12 +1,6 @@
 GAMEobject.prototype.explodeBomb = function(o,explodeObj){
     var i,L,O = this.O[o];
 
-    console.log(explodeObj);
-
-
-    // if(explodeObj.explodePreset)
-
-
     if(explodeObj.explodeType=='nails'){
         for(i=0; i<360; i-=-explodeObj.NailsRad){
             var x = O.x;

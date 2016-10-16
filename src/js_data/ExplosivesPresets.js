@@ -435,7 +435,7 @@ BBAdata['ExplosivesPresets']={
     },
 
 
-    SlowDownConeFields:{onHitDieExpire:{ Do:'explode', explodeType:'ConeField', fieldAnim: 'ShellField', PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 20, PeriodOffset: 20, SlowDownTo: 2, SlowDownBy: 3, dontHit:['E','ME','BE'], ExpireTime:240, radius: 160, coneAngle: 80, coneRad2: 110}},
+    SlowDownConeFields:{onHitDieExpire:{ Do:'explode', explodeType:'ConeField', fieldAnim: 'ShellField', SlowDownTo: 2.5, SlowDownBy: 11, dontHit:['E','ME','BE'], ExpireTime: 240, radius: 160, coneAngle: 80, coneRad2: 110}},
 
     TeleportConeField:{onHitDieExpire:{ Do:'explode', explodeType:'ConeField', simpleFilling: 'rgba(0,0,255,0.2)', ExpireTime:240, dontHit:['ME','E','BE','A'], teleportOnHit: 'withAngle', teleportOnHitDist: 520, teleportOnHitDistPlus: 200, radius: 160, coneAngle: 80, coneRad2: 110}},
 

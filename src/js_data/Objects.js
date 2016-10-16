@@ -2372,7 +2372,7 @@ BBAdata['ObjectDatas']={
             angle: 0,
             Oid: -1,
             placementT:'directPlaces',
-            objData: {fieldAnim: 'DestructionField', radius: 180, angle: 0, coneAngle: 50, coneRad2: 24, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 15, PeriodOffset: 10, particlesOnBoard:true, fieldAnimMoving:true, dontHit:['B'], mapType:'A', mapCollide:['P'], TT:'dust'}
+            objData: {fieldAnim: 'DestructionField', radius: 180, angle: 0, coneAngle: 50, coneRad2: 24, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 15, PeriodOffset: 10, particlesOnBoard:true, fieldAnimMoving:true, dontHit:['B','BE','E','M','ME','A'], mapType:'A', mapCollide:['P'], TT:'dust'}
         }],
 
         doingNow: 'changeManouver',

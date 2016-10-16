@@ -63,7 +63,6 @@ GAMEobject.prototype.checkShields = function(O,o){
 GAMEobject.prototype.removeShield = function(O,o,sh){
     var si,se=0,S2=[];
     if(O.Shields[sh].Own) return false;
-    // console.log(O.Shields[sh].name+' '+O.T+' shield removed!');
     for(si in O.Shields){
         if(si!=sh){
             S2[se++]=O.Shields[si];
@@ -160,7 +159,6 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
             if((O[SH.DmgReduction]==0 || O[SH.ReductionUses]==0) && !SH.Own)
                 ToDelete[ ToDelete.length ] = sh;
 
-            console.log(DMGreduce);
             if(DMGreduce > 0 && Action =='die'){
                 if(SH.HitDieAnimation){
                     if(SH.HitDieAnimation!='dontShow')
