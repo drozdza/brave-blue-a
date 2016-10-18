@@ -215,11 +215,6 @@ BBAdata['MAPS']={
             {RingOf:{X: 0, Y: 0, Radius: 300}, What:{Yl:8,Q:6}},
         ],
     },
-    'Lx590 test':{
-        Place:[
-            {RingOf:{X: 0, Y: 0, Radius: 300}, What:{Yl:1}},
-        ],
-    },
     'Lx482':{
         Place:[
             {RingOf:{X: 0, Y: 0, Radius: 300}, What:{HS:8,Q:6,F:3,M:10,R:4,J:2}},
