@@ -5,11 +5,15 @@ GAMEobject.prototype.resize = function(){
     $('#Game').css({width: this.Dx+'px',height: this.Dy+'px'});
     $('#MainCanvas').css({width: this.Dx+'px',height: this.Dy+'px'}).attr('width',this.Dx).attr('height',this.Dy);
     $('#UnderCanvas').css({width: this.Dx+'px',height: this.Dy+'px'}).attr('width',this.Dx).attr('height',this.Dy);
+    if(BBAdata.GET.BLUR > 0)
+        $('#BlurCanvas').css({width: this.Dx+'px',height: this.Dy+'px'}).attr('width',this.Dx).attr('height',this.Dy);
 
     if($('#MainCanvas').length)
         this.CanvasHandle = document.getElementById('MainCanvas').getContext('2d');
     if($('#UnderCanvas').length)
-          this.UnderCanvasHandle = document.getElementById('UnderCanvas').getContext('2d');
+        this.UnderCanvasHandle = document.getElementById('UnderCanvas').getContext('2d');
+    if($('#BlurCanvas').length)
+        this.BlurCanvasHandle = document.getElementById('BlurCanvas').getContext('2d');
 }
 GAMEobject.prototype.setBoard = function(){
     var html='',html2='';
@@ -56,6 +60,8 @@ GAMEobject.prototype.start = function(Setting,Ship){
     this.setBoard();
     this.CanvasHandle = document.getElementById('MainCanvas').getContext('2d');
     this.UnderCanvasHandle = document.getElementById('UnderCanvas').getContext('2d');
+    if(BBAdata.GET.BLUR > 0)
+        this.BlurCanvasHandle = document.getElementById('BlurCanvas').getContext('2d');
 
 
     if(BBAdata.GET.CANVAS == 1)

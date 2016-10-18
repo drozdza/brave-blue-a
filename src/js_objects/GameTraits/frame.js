@@ -154,13 +154,18 @@ GAMEobject.prototype.frame_draw = function(){
 
     this.mainCanvas = {CH:CH,Px,Py};
 
-    CH.save();
-    CH.fillStyle="rgba(0,0,0,0.12)";
-    if(BBAdata.GET.BLUR > 1) CH.translate(this.shipMoveX,this.shipMoveY);
-    if(!BBAdata.GET.BLUR)
-        CH.fillStyle="transparent";
-    CH.clearRect(0, 0, this.Dx, this.Dy);
-    CH.restore();
+    if(BBAdata.GET.BLUR){
+        this.BlurCanvasHandle.clearRect(0, 0, this.Dx, this.Dy);
+        this.BlurCanvasHandle.globalAlpha = 0.88;
+        this.BlurCanvasHandle.drawImage(document.getElementById('MainCanvas'), 0, 0);
+        CH.clearRect(0, 0, thix.Dx, this.Dy);
+        if(BBAdata.GET.BLUR == 1)
+            CH.drawImage(document.getElementById('BlurCanvas'), 0, 0);
+        else
+            CH.drawImage(document.getElementById('BlurCanvas'), this.shipMoveX, this.shipMoveY);
+    }else{
+        CH.clearRect(0, 0, this.Dx, this.Dy);
+    }
 
     if(BBAdata.GET.DEBUG >= 2) CanvasManager.drawMapHitboxLines(CH, this.MapTileSize, this.Dx, this.Dy, Px, Py, false);
     if(BBAdata.GET.DEBUG >= 3) CanvasManager.drawMapHitboxLines(CH, this.MapTileSize, this.Dx, this.Dy, Px, Py, true);

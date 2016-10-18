@@ -1,5 +1,5 @@
-- 2nd lvl of debug - lines of map boxes
-- 3rd lvl of debug - number of elements in map boxes
++ 2nd lvl of debug - lines of map boxes
++ 3rd lvl of debug - number of elements in map boxes
 
 - Adding squads to maps
 
@@ -41,10 +41,10 @@
 
 - Make SuperSecure board
 
-- Statki unikają niektórych Regionów, lub próbują skrócić przez nie drogę (jeden rozkaz)
-- Statki nie informują pozostałych o obrażeniach od regionów
+- Ships try to avoid some Regions, or try to get out of them as fast as possible
+- Ships may not inform others about dmg from regions
 
-- Estymacja obszarów wybuchów
+- explosion place estimation
 
 - Wycinanie z pół zniszczenia obszarów spokoju innymi fieldami?
 
