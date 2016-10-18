@@ -158,11 +158,17 @@ GAMEobject.prototype.frame_draw = function(){
         this.BlurCanvasHandle.clearRect(0, 0, this.Dx, this.Dy);
         this.BlurCanvasHandle.globalAlpha = 0.88;
         this.BlurCanvasHandle.drawImage(document.getElementById('MainCanvas'), 0, 0);
-        CH.clearRect(0, 0, thix.Dx, this.Dy);
+        CH.clearRect(0, 0, this.Dx, this.Dy);
         if(BBAdata.GET.BLUR == 1)
             CH.drawImage(document.getElementById('BlurCanvas'), 0, 0);
-        else
-            CH.drawImage(document.getElementById('BlurCanvas'), this.shipMoveX, this.shipMoveY);
+        else{
+            var shipMoveX = this.shipX-this.O[0].x;
+            var shipMoveY = this.shipY-this.O[0].y;
+            this.shipX = this.O[0].x;
+            this.shipY = this.O[0].y;
+            CH.drawImage(document.getElementById('BlurCanvas'), shipMoveX, shipMoveY);
+        }
+
     }else{
         CH.clearRect(0, 0, this.Dx, this.Dy);
     }

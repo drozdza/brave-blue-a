@@ -91,6 +91,8 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             delete( this.O[ L ].view.onBackground );
             this.Omoving[ L ]=1;
         }
+        this.putOnXY( L );
+
     }
     else if(explodeObj.explodeType=='putObjs'){
         var objNumb = explodeObj.objMin;

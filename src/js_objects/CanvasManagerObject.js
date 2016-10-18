@@ -555,43 +555,32 @@ function CanvasManagerObject(){
     }
 
     this.drawMapHitboxLines = function(CanCon, MapTileSize, screenX, screenY, Px, Py, advanced){
-        var m,n,t,T={}, M = GAME.Omap;
+        var x,y,text,m,n,t,T={}, M = GAME.Omap;
 
         for(m in M){
-            for(n in M[m][n]){
+            for(n in M[m]){
                 if(typeof T[n] == 'undefined') T[n]={};
                 T[n][m] = Object.keys(M[m][n]).length;
             }
         }
-        var sX,sY;
 
         CanCon.save();
         CanCon.strokeStyle = 'white';
-        CanCon.stroke = 1;
-        CanCon.font = "20px sans-serif";
-        CanCon.fontColor = 'white;'
+        CanCon.strokeWidth = 1;
+        CanCon.font = "14px sans-serif";
+        CanCon.fillStyle = 'white';
 
         for(var t in T){
-            sX1 = t.split('_')[0];
-            sY1 = t.split('_')[1];
+            x = parseInt(t.split('_')[0]*MapTileSize);
+            y = parseInt(t.split('_')[1]*MapTileSize);
 
-            if(sX1<0) sX1-=-1;
-            if(sY1<0) sY1-=-1;
-            sX2 = sX1- -1; // ??????
-            sY2 = sY1- -1; // ??????
+            CanCon.strokeRect(x-Px, y-Py, MapTileSize, MapTileSize);
 
-            x1 = parseInt(sX1*MapTileSize);
-            y1 = parseInt(sY1*MapTileSize);
-            x2 = parseInt(sX2*MapTileSize);     // ??????
-            y2 = parseInt(sY2*MapTileSize);     // ??????
-
-            CanCon.strokeRect(x1*MapTileSize-Px, y1*MapTileSize-Py, MapTileSize, MapTileSize);
-
-            var text = t;
+            text = '['+t+']';
             if(advanced)
                 for(var m in T[t])
-                    text+="\n"+m+': '+T[t][m];
-            CanCon.fillText(text, x1*MapTileSize-Px- -20, y1*MapTileSize-py- -20);
+                    text+=' '+m+':'+T[t][m];
+            CanCon.fillText(text, x-Px- -20, y-Py- -20);
 
         }
         CanCon.restore();

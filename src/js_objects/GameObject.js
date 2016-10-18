@@ -66,6 +66,9 @@ function GAMEobject(){
     this.MSdraw=0;
     this.MSship=0;
 
+    this.shipX=0;
+    this.shipY=0;
+
     this.SHIP={};
     this.SHIPold={};
     }

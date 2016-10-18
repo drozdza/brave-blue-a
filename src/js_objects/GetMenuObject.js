@@ -3,11 +3,11 @@ function GetMenuObject(){
     this.data={
         DEBUG:{
             get: 'debug',
-            values: {Off:false, On:1,Tiles:2,TilesX:3},
+            values: {Off:false, On:1,Ts:2,TsF:3},
         },
         BLUR:{
             get: 'blur',
-            values: {Off:false, On:1},
+            values: {Off:false, On:1, Align:2},
         },
         FRAMES:{
             get: 'frames',
