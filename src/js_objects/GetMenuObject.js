@@ -3,7 +3,7 @@ function GetMenuObject(){
     this.data={
         DEBUG:{
             get: 'debug',
-            values: {Off:false, On:1},
+            values: {Off:false, On:1,Tiles:2,TilesX:3},
         },
         BLUR:{
             get: 'blur',

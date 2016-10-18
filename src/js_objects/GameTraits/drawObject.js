@@ -3,7 +3,7 @@ GAMEobject.prototype.drawObject = function(O,o,CH, Px,Py){
 
     if(!O){ console.log('There is no object to draw: '+o); return false;}
 
-    if(BBAdata.GET.DEBUG){
+    if(BBAdata.GET.DEBUG > 0){
         CH.save();
         CH.strokeStyle = 'white';
         CH.beginPath();

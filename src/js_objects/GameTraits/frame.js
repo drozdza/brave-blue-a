@@ -162,6 +162,9 @@ GAMEobject.prototype.frame_draw = function(){
     CH.clearRect(0, 0, this.Dx, this.Dy);
     CH.restore();
 
+    if(BBAdata.GET.DEBUG >= 2) CanvasManager.drawMapHitboxLines(CH, this.MapTileSize, this.Dx, this.Dy, Px, Py, false);
+    if(BBAdata.GET.DEBUG >= 3) CanvasManager.drawMapHitboxLines(CH, this.MapTileSize, this.Dx, this.Dy, Px, Py, true);
+
     for(o in this.O){
         O = this.O[o];
 

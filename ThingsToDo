@@ -1,3 +1,5 @@
+- 2nd lvl of debug - lines of map boxes
+- 3rd lvl of debug - number of elements in map boxes
 
 - Adding squads to maps
 
@@ -28,6 +30,10 @@
 - 6th lvl of debug: checking ms lag stability
 
 - Make BLUR a feature
+- Make Game Speed a feature
+- Make Resizable Screen
+- Make Resizable Screen a feature
+
 
 - Make "Player SHIP always point/go one site" - feature
 

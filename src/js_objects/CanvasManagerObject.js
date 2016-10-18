@@ -271,7 +271,7 @@ function CanvasManagerObject(){
                 if(R.states[i].Yoffset)
                     Y = parseInt(Y2/2)- R.states[i].Yoffset;
 
-                if(BBAdata.GET.DEBUG){ CanCon.strokeStyle='white'; CanCon.beginPath();    CanCon.moveTo(0,Y1); CanCon.lineTo(X2,Y1); CanCon.stroke(); CanCon.beginPath();    CanCon.moveTo(X1,0); CanCon.lineTo(X1,Y2); CanCon.stroke(); }
+                if(BBAdata.GET.DEBUG > 0){ CanCon.strokeStyle='white'; CanCon.beginPath();    CanCon.moveTo(0,Y1); CanCon.lineTo(X2,Y1); CanCon.stroke(); CanCon.beginPath();    CanCon.moveTo(X1,0); CanCon.lineTo(X1,Y2); CanCon.stroke(); }
 
 
 
@@ -552,5 +552,49 @@ function CanvasManagerObject(){
 
         CanCon.fill();
         CanCon.restore();
+    }
+
+    this.drawMapHitboxLines = function(CanCon, MapTileSize, screenX, screenY, Px, Py, advanced){
+        var m,n,t,T={}, M = GAME.Omap;
+
+        for(m in M){
+            for(n in M[m][n]){
+                if(typeof T[n] == 'undefined') T[n]={};
+                T[n][m] = Object.keys(M[m][n]).length;
+            }
+        }
+        var sX,sY;
+
+        CanCon.save();
+        CanCon.strokeStyle = 'white';
+        CanCon.stroke = 1;
+        CanCon.font = "20px sans-serif";
+        CanCon.fontColor = 'white;'
+
+        for(var t in T){
+            sX1 = t.split('_')[0];
+            sY1 = t.split('_')[1];
+
+            if(sX1<0) sX1-=-1;
+            if(sY1<0) sY1-=-1;
+            sX2 = sX1- -1; // ??????
+            sY2 = sY1- -1; // ??????
+
+            x1 = parseInt(sX1*MapTileSize);
+            y1 = parseInt(sY1*MapTileSize);
+            x2 = parseInt(sX2*MapTileSize);     // ??????
+            y2 = parseInt(sY2*MapTileSize);     // ??????
+
+            CanCon.strokeRect(x1*MapTileSize-Px, y1*MapTileSize-Py, MapTileSize, MapTileSize);
+
+            var text = t;
+            if(advanced)
+                for(var m in T[t])
+                    text+="\n"+m+': '+T[t][m];
+            CanCon.fillText(text, x1*MapTileSize-Px- -20, y1*MapTileSize-py- -20);
+
+        }
+        CanCon.restore();
+
     }
 }
