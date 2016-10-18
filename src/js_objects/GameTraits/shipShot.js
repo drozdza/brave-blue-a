@@ -28,6 +28,9 @@ GAMEobject.prototype.shipShootMissle = function(Enemy,Angle,Speed,Dec,SpeedT,des
         this.O[L].DMG = cloneObj(destrData.DMG);
     if(destrData.explodePreset)
         this.cloneExplosionData(destrData, this.O[L]);
+
+    ++this.C['B_missles'];
+    ++this.C['B_s'+O.S+'_missles'];
 }
 GAMEobject.prototype.shipShootBomb = function(Speed,Dec,bombData,teleportData){
     var O = this.O[0];
@@ -41,6 +44,9 @@ GAMEobject.prototype.shipShootBomb = function(Speed,Dec,bombData,teleportData){
         this.O[L].TeleportMovement = teleportData;
 
     this.cloneExplosionData(bombData, this.O[L]);
+
+    ++this.C['B_bombsShot'];
+    ++this.C['B_s'+O.S+'_bombsShot'];
 }
 GAMEobject.prototype.shipShootLaser = function(Distance,Damage){
     var O = this.O[0];
@@ -68,6 +74,9 @@ GAMEobject.prototype.shipTeleportBomb = function(Distance,offTime,bombData){
         this.O[L].mapCollide = [];
         this.O[L].mapType = 'A';
     }
+
+    ++this.C['B_bombsShot'];
+    ++this.C['B_s'+O.S+'_bombsShot'];
 
     return this.teleportJump(L,iDist,iRad,'TP_trackDark');
 }

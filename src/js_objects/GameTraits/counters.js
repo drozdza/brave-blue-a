@@ -8,7 +8,57 @@ GAMEobject.prototype.prepareCounts = function(){
         S_lifeHealed:0,
         S_shieldProd:0,
         S_lifeLost:0,
-        S_shieldLost:0
+        S_shieldLost:0, // !!!!!
+
+        S_dist:0, // !!!!!
+        S_minSpeed:false, // !!!!
+        S_maxSpeed:false, // !!!!
+        S_lifeMin:false, // !!!!!
+        S_lifeMax:false, // !!!!!
+
+        B_bombsExploded:0,
+        B_s1_bombsExploded:0,
+        B_s2_bombsExploded:0,
+
+        B_bullets:0,
+        B_s1_bullets:0,
+        B_s2_bullets:0,
+        B_s3_bullets:0,
+
+        B_bombsShot:0,
+        B_s1_bombsShot:0,
+        B_s2_bombsShot:0,
+
+        B_missles:0,
+        B_s1_missles:0,
+        B_s2_missles:0,
+
+        'E:mines':0,
+        B_minesSet:0,
+        B_minesExplode:0,
+
+        Hit_missles:0, // !!!!
+        Hit_s1_missles:0, // !!!!
+        Hit_s2_missles:0, // !!!!
+
+        E_enemies_aware:0, // !!!!
+
+
+        DMG_bullets:0, // !!!!
+        DMG_s1_bullets:0, // !!!!
+        DMG_s2_bullets:0, // !!!!
+
+        DMG_explo:0, // !!!!
+        DMG_s1_explo:0, // !!!!
+        DMG_s2_explo:0, // !!!!
+
+        DMG_s2_friendly_fire:0, // !!!!
+        D_enemies_fiendly_fire:0, // !!!!
+
+        B_autoJumps:0, // !!!!
+        B_s1_autoJumps:0, // !!!!
+        B_s2_autoJumps:0, // !!!!
+
     };
     this.CE = {};
 }

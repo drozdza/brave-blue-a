@@ -198,6 +198,8 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
                 var L = this.putObj('ConeField','region',1,x,y);
             }else if(placeWhat=='Mine'){
                 var L = this.putObj('space_mine','comp',1,x,y);
+                ++this.C['B_minesSet'];
+                ++this.C['E:mines'];
             } else {
                 var L = this.putObj(BBAdata['ShipNames'][placeWhat],'comp',1,x,y);
                 this.addBoardMods(L);

@@ -134,7 +134,6 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
     return L;
 }
 GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,DMG){
-
     var O={};
     O.x = x;
     O.y = y;
@@ -150,6 +149,9 @@ GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,DMG){
     O.radius = 4;
     O.dec    = Dec || 30;
     O.DMG  = DMG || {Dmg:1,T:'normal'};
+
+    ++this.C['B_bullets'];
+    ++this.C['B_s'+Side+'_bullets'];
 
     if(Side==3){
         O.mapType = 'B';
@@ -282,6 +284,11 @@ GAMEobject.prototype.putObj_directAnim = function(Type,Data){
 GAMEobject.prototype.removeObj = function(o){
     if(o==0) return false;
     if(typeof this.O[o] == 'undefined') return false;
+
+    if(this.O[o].T=='space_mine'){
+        ++this.C['B_minesExplode'];
+        --this.C['E:mines'];
+    }
 
     if(this.O[o].T!='bullet' && this.O[o].TT!='bgStars' && this.O[o].TT!='anim' && this.O[o].TT!='dirAnim'){    // Czyli co?
 

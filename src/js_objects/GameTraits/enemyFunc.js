@@ -33,6 +33,9 @@ GAMEobject.prototype.shootMissle = function(o,Angle,Speed,Dec,SpeedT,DMG,explode
     if(DMG) this.O[L].DMG = cloneObj(DMG);
     if(explodePreset)
         this.cloneExplosionData({Do:'explode', explodePreset: explodePreset}, this.O[L]);
+
+    ++this.C['B_missles'];
+    ++this.C['B_s'+O.S+'_missles'];
 }
 GAMEobject.prototype.shootHealingMissle = function(o,Target){
     var O = this.O[o];
@@ -60,6 +63,10 @@ GAMEobject.prototype.dropSpaceMine = function(S,x,y,Angle,bombData){
     }
 
     this.cloneExplosionData(bombData, this.O[L]);
+
+    ++this.C['B_minesSet'];
+    ++this.C['E:mines'];
+
 }
 GAMEobject.prototype.shootBomb = function(o,Angle,Speed,Dec,bombData,teleportData){
     var O = this.O[o];
@@ -71,6 +78,9 @@ GAMEobject.prototype.shootBomb = function(o,Angle,Speed,Dec,bombData,teleportDat
         this.O[L].TeleportMovement = teleportData;
 
     this.cloneExplosionData(bombData, this.O[L]);
+
+    ++this.C['B_bombsShot'];
+    ++this.C['B_s'+O.S+'_bombsShot'];
 }
 GAMEobject.prototype.addKoriazShield = function(o,Duration,q){
     var L,O = this.O[o];
