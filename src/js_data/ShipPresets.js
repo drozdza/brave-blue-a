@@ -261,7 +261,7 @@ BBAdata['SHIPpresets']={
         GlueFireToEstimated: 100,
         GlueFireToLaser: 70,
         ShowRadar: true,
-        KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
+        KeysModules:{66:[6],69:[0,5],73:[3,9,10],77:[7],84:[2],81:[4],70:[8],82:[11]},
         FireType: 0,
         FireType2: 8,
         res:{},

@@ -185,7 +185,7 @@ GAMEobject.prototype.decide_ship = function(e){
             if(M.T=='spotRegion') this.shipFunc_showSpotRegions(false);
         }
 
-        if(M.Disable && M.T=='moduleProd') S.ModStorage[ M.ModStorage ].R=0;
+        if(M.Disabled && M.T=='moduleProd') S.ModStorage[ M.ModStorage ].R=0;
         if(M.Disabled == 1)
             continue;
 
