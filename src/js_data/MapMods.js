@@ -29,6 +29,18 @@ BBAdata['MapMODS']={
     colorGold:{
         view:{Color: 'gold'},
     },
+    greenColor:{
+        view:{Color: '#00cc00'},
+    },
+    orangeColor:{
+        view:{Color: '#ffcc00'},
+    },
+    violetColor:{
+        view:{Color: '#440088'},
+    },
+    whiteColor:{
+        view:{Color: 'white'},
+    },
     allAvoid:{
         who:['carras','hajaher','cloaker','dregos','hiacynt','zarahiash','vitotas','slimensen','slimensen1','slimensen2','slimensen3','slimensen4'],
         toDo:[
@@ -45,5 +57,15 @@ BBAdata['MapMODS']={
         who:['carras'],
         lifeM:25,
         life:25,
+    },
+    greenSquadMembers:{
+        squadSchemeType: {data:{SquadMods:['greenColor']}},
+        MapModActions:[{t:'tryBuildSquads'}],
+    },
+    orhenesShipsI:{
+        who:['orhenes'],
+        view:{Color: 'white'},
+        squadSchemeType: {t:'loose', count: 8, data:{type:'enemyShip', objectType:'iskariot', SquadMods:['whiteColor']}},
+        MapModActions:[{t:'tryBuildSquads'}],
     },
 };

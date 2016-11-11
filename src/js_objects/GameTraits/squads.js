@@ -113,6 +113,10 @@ GAMEobject.prototype.setSquadMember = function(o,i,life){
         delete this.O[ Sid ].view.onBackground;
     }
 
+    if(typeof OSS.SquadMods !='undefined')
+        for(var k in OSS.SquadMods)
+            this.addBoardMod(Sid,OSS.SquadMods[k]);
+
     if(typeof OSS.objData !='undefined')
         this.addBoardMod(Sid,OSS.objData);
     this.O[Sid].Flags=[];

@@ -34,8 +34,8 @@ BBAdata['SHIPpresets']={
             2:{T:'changeAngle',    Dec:6, angleBy: 15},
         },
         ChangeSpeedStops:{
-            up: {5:1, 8:1},
-            down: {7:1}
+            up: {8:1},
+            down: {8:1}
         },
         ChangeSpeedDelay:15,
     },

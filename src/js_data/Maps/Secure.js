@@ -1,5 +1,5 @@
 BBAdata['MAPS']['Secure'] = {
-    BoardMods:['sitOnMap','allAvoid'],
+    BoardMods:['sitOnMap','allAvoid','greenColor'],
     WinningConds:[
         {T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, Reward:{Cash:150,Conquer:1}, EndPortal:{X:200,Y:0}},
         {T:'Main',C:{'D:orhenes':{min:6,D:'killMin'},'D:koriaz':{max:0,D:'DsaveMax'}}, Reward:{Cash:100}},

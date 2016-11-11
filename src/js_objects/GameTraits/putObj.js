@@ -119,10 +119,7 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
 
     this.O[ L ]= O;
 
-    if(O.squadSchemeType)
-        this.prepareSquadScheme(O,L);
-    if(O.prepareSquadScheme || O.squadScheme)
-        this.setFlagSquadFull(O);
+    this.tryBuildSquads(O,L);
 
     if(Type!='shieldBlob')
         CanvasManager.requestCanvas( L );
@@ -172,6 +169,12 @@ GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,DMG){
     return L;
 }
 
+GAMEobject.prototype.tryBuildSquads = function(O,L){
+    if(O.squadSchemeType)
+        this.prepareSquadScheme(O,L);
+    if(O.prepareSquadScheme || O.squadScheme)
+        this.setFlagSquadFull(O);
+}
 GAMEobject.prototype.putObj_shipVariables = function(O){
 
     for(var i in {speedArr:1,spotArr:1})

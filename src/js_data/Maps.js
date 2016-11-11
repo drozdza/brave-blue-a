@@ -87,7 +87,10 @@ BBAdata['MAPS']={
     },
     'Q':{
         BoardMods:['sitOnMap'],
-        Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:6, K:5}}],
+        Place:[
+            {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:3, K:2},GroupMods:['greenColor','greenSquadMembers']},
+            {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:3, K:2},GroupMods:['orangeColor','orhenesShipsI']},
+        ],
     },
     'X':{
         BoardMods:['sitOnMap'],
@@ -242,7 +245,7 @@ BBAdata['MAPS']={
         Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, D:10, M:10, N:10, J:10, W:5, T:10, E:10, G:10, R:10, B:10, K:10, F:10, Q:5,X:5,TT:10,Tu:5}}],
     },
     'HardCore':{
-        BoardMods:['sitOnMap','allAvoid'],
+        BoardMods:['sitOnMap','allAvoid','violetColor'],
         EndPortal:{X:0,Y:-120},
         WinningConds:[
             {T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, Reward:{Cash:150,Conquer:1}, EndPortal:{X:0,Y:0}},

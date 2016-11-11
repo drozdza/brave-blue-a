@@ -203,9 +203,10 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
             } else {
                 var L = this.putObj(BBAdata['ShipNames'][placeWhat],'comp',1,x,y);
                 this.addBoardMods(L);
-                if(typeof SET.BoardMods !='undefined')
-                    for(var k in SET.BoardMods)
-                        this.addBoardMod(L,SET.BoardMods[k]);
+                if(typeof SET.GroupMods !='undefined')
+                    for(var k in SET.GroupMods)
+                        this.addBoardMod(L,SET.GroupMods[k]);
+
             }
 
             if(typeof SET.Background != 'undefined'){
@@ -245,6 +246,9 @@ GAMEobject.prototype.addBoardMod = function(o,MODname){
             }
         if(!jest) return false;
     }
+    var ACTIONS = MOD.MapModActions;
+    delete(MOD.who);
+    delete(MOD.MapModActions);
 
     for(var KI in MOD){
         if(KI=='overWriteObjects'){
@@ -269,10 +273,14 @@ GAMEobject.prototype.addBoardMod = function(o,MODname){
             }
         }else if(typeof O[KI] != 'undefined'){
             gentleCloneObj(O,MOD,KI);
-            console.log(O.view);
         }else{
             O[KI] = cloneObj(MOD[KI]);
         }
+    }
+    for(var a in ACTIONS){
+        var A = ACTIONS[a];
+        if(A.t=='tryBuildSquads')
+            this.tryBuildSquads(O,o);
     }
 
     if(typeof MOD.fieldAnim != 'undefined')
