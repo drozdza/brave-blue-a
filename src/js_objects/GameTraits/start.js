@@ -267,8 +267,11 @@ GAMEobject.prototype.addBoardMod = function(o,MODname){
             for(var u in MOD[KI]){
                 O[u] = mergeArrays(O[u],MOD[KI][u]);
             }
+        }else if(typeof O[KI] != 'undefined'){
+            gentleCloneObj(O,MOD,KI);
+            console.log(O.view);
         }else{
-            O[KI] = MOD[KI];
+            O[KI] = cloneObj(MOD[KI]);
         }
     }
 

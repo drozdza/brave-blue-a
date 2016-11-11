@@ -1,5 +1,5 @@
 BBAdata['MAPS']['001'] = {
-    BoardMods:['sitOnMap','allAvoid'],
+    BoardMods:['sitOnMap','allAvoid','colorGold'],
     Place:[
         {Random:{X: 1000, Y: 1000, Radius: 200}, What:{Star: 20, A: 20}},
         {Random:{X: 1000, Y: -1000, Radius: 200}, What:{Star: 20, M: 10}},

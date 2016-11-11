@@ -26,6 +26,9 @@ BBAdata['MapMODS']={
             {N:1, T:'goStraight', straightMin: 200, straightPlus: 100 },
         ],
     },
+    colorGold:{
+        view:{Color: 'gold'},
+    },
     allAvoid:{
         who:['carras','hajaher','cloaker','dregos','hiacynt','zarahiash','vitotas','slimensen','slimensen1','slimensen2','slimensen3','slimensen4'],
         toDo:[

@@ -16,6 +16,22 @@ function cloneObj(obj){
         return copy;
     }
 }
+function gentleCloneObj(A,B,i){
+    if(B[i] instanceof Object){
+        if(typeof A[i] == 'undefined'){
+            A[i]={};
+        }
+        for(var j in B[i]){
+            if(typeof A[i][j] !='undefined'){
+                gentleCloneObj(A[i],B[i],j);
+            }else{
+                A[i][j] = cloneObj(B[i][j]);
+            }
+        }
+    } else {
+        A[i] = B[i];
+    }
+}
 
 function betweenAngles(what,angle1,angle2){
     what = (what- -720)%360;
