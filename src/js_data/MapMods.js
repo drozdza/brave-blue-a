@@ -68,4 +68,23 @@ BBAdata['MapMODS']={
         squadSchemeType: {t:'loose', count: 8, data:{type:'enemyShip', objectType:'iskariot', SquadMods:['whiteColor']}},
         MapModActions:[{t:'tryBuildSquads'}],
     },
+    orhenesSecure1:{
+        who:['orhenes'],
+        squadSchemeTypeArray: [
+            {t:'loose', count: 2, data:{type:'enemyShip', objectType:'fariax'}},
+            {t:'loose', count: 2, data:{type:'enemyShip', objectType:'koriaz'}},
+            {t:'loose', count: 4, data:{type:'enemyShip', objectType:'carras'}},
+        ],
+        MapModActions:[{t:'tryBuildSquads'}],
+    },
+    orhenesSecure2:{
+        who:['orhenes'],
+        view: {Color:'#440088'},
+        squadSchemeTypeArray: [
+            {t:'loose', count: 4, data:{type:'enemyShip', objectType:'iskariot', SquadMods:['violetColor']}},
+            {t:'loose', count: 2, data:{type:'enemyShip', objectType:'muerto', SquadMods:['violetColor']}},
+            {t:'loose', count: 4, data:{type:'enemyShip', objectType:'dregos', SquadMods:['violetColor']}},
+        ],
+        MapModActions:[{t:'tryBuildSquads'}],
+    },
 };

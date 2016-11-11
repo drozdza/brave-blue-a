@@ -170,7 +170,7 @@ GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,DMG){
 }
 
 GAMEobject.prototype.tryBuildSquads = function(O,L){
-    if(O.squadSchemeType)
+    if(O.squadSchemeType || O.squadSchemeTypeArray)
         this.prepareSquadScheme(O,L);
     if(O.prepareSquadScheme || O.squadScheme)
         this.setFlagSquadFull(O);

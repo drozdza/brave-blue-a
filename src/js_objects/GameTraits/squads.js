@@ -1,67 +1,76 @@
 
 GAMEobject.prototype.prepareSquadScheme = function(O,o){
     O.squadScheme = [];
-    var SST = O.squadSchemeType;
+    var SSTs=[];
+    if(O.squadSchemeType)
+        SSTs[0] = O.squadSchemeType;
+    if(O.squadSchemeTypeArray)
+        SSTs = O.squadSchemeTypeArray;
 
-    if(SST.t == 'directPlaces'){
-        var Pos = [];
-        if(SST.placementT == 'round'){
-            for(var i= 0; i<SST.count; ++i){
-                Pos[i] = {
-                    angle: ((360/SST.count)*i)%360,
-                    radius: SST.radius
-                };
-            }
-        } else if(SST.placementT == 'conePart'){
-            for(var i= 0; i<SST.count; ++i){
-                Pos[i] = {
-                    angle: (SST.coneStart- -(SST.conePart/SST.count)*i)%360,
-                    radius: SST.radius
-                };
-            }
-        }
+    var membersTotal = 0;
+    for(var ssX in SSTs){
+        var SST = SSTs[ssX];
 
-        var i = 0;
-        if(SST.placement == 'random'){
-            while(Pos.length){
-                var j = parseInt(Math.random()*Pos.length);
-                O.squadScheme[i++] = {angle: Pos[j].angle, radius: Pos[j].radius, placementT:'directPlaces'};
-                Pos[j] = Pos[ Pos.length-1 ];
-                --Pos.length;
+        if(SST.t == 'directPlaces'){
+            var Pos = [];
+            if(SST.placementT == 'round'){
+                for(var i= 0; i<SST.count; ++i){
+                    Pos[i] = {
+                        angle: ((360/SST.count)*i)%360,
+                        radius: SST.radius
+                    };
+                }
+            } else if(SST.placementT == 'conePart'){
+                for(var ic= 0; ic<SST.count; ++ic){
+                    Pos[ic] = {
+                        angle: (SST.coneStart- -(SST.conePart/SST.count)*ic)%360,
+                        radius: SST.radius
+                    };
+                }
+            }
+
+            if(SST.placement == 'random'){
+                while(Pos.length){
+                    var j = parseInt(Math.random()*Pos.length);
+                    O.squadScheme[i++] = {angle: Pos[j].angle, radius: Pos[j].radius, placementT:'directPlaces'};
+                    Pos[j] = Pos[ Pos.length-1 ];
+                    --Pos.length;
+                }
+            }
+            else if(SST.placement == 'randomStart'){
+                var u = parseInt(Math.random()*SST.count);
+                for(ji=0; ji<SST.count; ++ji){
+                    var j = (ji- -u)%SST.count;
+                    O.squadScheme[i++] = {angle: Pos[j].angle, radius: Pos[j].radius, placementT:'directPlaces'};
+                }
+            }
+            else if(SST.placement == 'oddFirst'){
+                for(j=0; j<SST.count; j-=-2)
+                    O.squadScheme[i++] = {angle: Pos[j].angle, radius: Pos[j].radius, placementT:'directPlaces'};
+                for(j=1; j<SST.count; j-=-2)
+                    O.squadScheme[i++] = {angle: Pos[j].angle, radius: Pos[j].radius, placementT:'directPlaces'};
+            }
+            else {
+                for(i=0; i<SST.count; ++i)
+                    O.squadScheme[i] = {angle: Pos[i].angle, radius: Pos[i].radius, placementT:'directPlaces'};
             }
         }
-        else if(SST.placement == 'randomStart'){
-            var u = parseInt(Math.random()*SST.count);
-            for(ji=0; ji<SST.count; ++ji){
-                var j = (ji- -u)%SST.count;
-                O.squadScheme[i++] = {angle: Pos[j].angle, radius: Pos[j].radius, placementT:'directPlaces'};
-            }
-        }
-        else if(SST.placement == 'oddFirst'){
-            for(j=0; j<SST.count; j-=-2)
-                O.squadScheme[i++] = {angle: Pos[j].angle, radius: Pos[j].radius, placementT:'directPlaces'};
-            for(j=1; j<SST.count; j-=-2)
-                O.squadScheme[i++] = {angle: Pos[j].angle, radius: Pos[j].radius, placementT:'directPlaces'};
-        }
-        else {
+        if(SST.t == 'loose'){
             for(i=0; i<SST.count; ++i)
-                O.squadScheme[i] = {angle: Pos[i].angle, radius: Pos[i].radius, placementT:'directPlaces'};
+                O.squadScheme[membersTotal- -i] = {placementT:'loose'};
         }
-    }
-    if(SST.t == 'loose'){
-        for(i=0; i<SST.count; ++i)
-            O.squadScheme[i] = {placementT:'loose'};
-    }
 
-    for(var i in O.squadScheme){
-        for(var j in SST.data)
-            O.squadScheme[i][j] = SST.data[j];
+        for(i=0; i<SST.count; ++i){
+            for(var j in SST.data)
+                O.squadScheme[membersTotal- -i][j] = SST.data[j];
 
-        if(SST.makeFirst && SST.makeFirst > i){
-            this.setSquadMember(o,i,SST.life);
-        } else {
-            O.squadScheme[i].Oid = -1;
+            if(SST.makeFirst && SST.makeFirst > membersTotal- -i){
+                this.setSquadMember(o,membersTotal- -i,SST.life);
+            } else {
+                O.squadScheme[membersTotal- -i].Oid = -1;
+            }
         }
+        membersTotal-=-SST.count;
     }
 }
 GAMEobject.prototype.setSquadMember = function(o,i,life){
@@ -112,6 +121,8 @@ GAMEobject.prototype.setSquadMember = function(o,i,life){
         CanvasManager.CBM.deleteObjectFromBackground( Sid );
         delete this.O[ Sid ].view.onBackground;
     }
+
+    this.addBoardMods(Sid);
 
     if(typeof OSS.SquadMods !='undefined')
         for(var k in OSS.SquadMods)
