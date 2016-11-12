@@ -54,5 +54,5 @@ GAMEobject.prototype.goToMenu = function(){
     this.stopAnimations(this.gameHash);
     delete GAME;
     $('#Game').unbind('click').html('').hide();
-    $('#Menu').show();
+    MENU.show();
 }

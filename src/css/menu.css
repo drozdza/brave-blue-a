@@ -219,3 +219,32 @@ body{
 #GET_MENU a, #GET_MENU a:hover, #GET_MENU a{ text-decoration: none; color: #aaa;}
 
 #GET_MENU a.current{ font-weight: bold; color: blue;}
+
+
+#starMapContainer{
+    position: relative;
+}
+#starMapContainer .starMapInfo{
+    position: absolute;
+    background: black;
+    width: 298px;
+    padding: 0px;
+    text-align: center;
+    color: white;
+    border: 1px solid blue;
+}
+
+#starMapContainer .startGame{
+    margin: 8px auto;
+    padding: 10px 27px;
+    font-size: 22px;
+    display: inline-block;
+    font-weight: bold;
+    border: 4px double blue;
+    border-radius: 24px/8px;
+}
+#starMapContainer .startGame:hover{
+    background: white;
+    color: blue;
+    cursor: pointer;
+}

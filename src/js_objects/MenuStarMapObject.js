@@ -13,6 +13,9 @@ function MenuStarMapObject(){
     this.clickY = false;
     this.mouseOverMap = false;
     this.choosenMap = false;
+    this.choosenMapMenu = false;
+
+    this.RAD = Math.PI/180;
 
     this.StarMap = {};
 
@@ -24,15 +27,10 @@ function MenuStarMapObject(){
 
         this.Canvas = document.getElementById('starMap').getContext('2d');
 
-        $('#starMap').on('mousedown',function(e){ MENU.SM.mouseDown(e); });
-        $('#starMap').on('mousemove',function(e){ MENU.SM.mouseMove(e); });
-        $('#starMap').on('mouseup',function(e){ MENU.SM.mouseUp(e); });
-        $('#starMap').on('mouseleave',function(e){ MENU.SM.mouseUp(e); });
 
         this.resize();
         this.frame();
         this.startAnimation();
-
     }
 
 
@@ -45,16 +43,31 @@ function MenuStarMapObject(){
 
     this.startAnimation = function(){
         this.intervalId = setInterval(function(){ MENU.SM.frame(); }, 33);
+
+        $('#starMap').on('mousedown',function(e){ MENU.SM.mouseDown(e); });
+        $('#starMap').on('mousemove',function(e){ MENU.SM.mouseMove(e); });
+        $('#starMap').on('mouseup',function(e){ MENU.SM.mouseUp(e); });
+        $('#starMap').on('mouseleave',function(e){ MENU.SM.mouseUp(e); });
+        $('#starMapContainer').on('click','.startGame', function(){ MENU.SM.startMap(); });
     }
     this.stopAnimation = function(){
         clearInterval(this.intervalId);
         this.intervalId = false;
+
+        $('#starMap').unbind('mousedown');
+        $('#starMap').unbind('mouseup');
+        $('#starMap').unbind('mousemove');
+        $('#starMap').unbind('mouseleave');
+        $('#starMapContainer').unbind('click');
     }
 
 
     this.mouseDown = function(e){
         if(this.mouseOverMap === false){
             this.dragStart(e.offsetX, e.offsetY);
+            this.choosenMap = false;
+            this.choosenMapMenu = false;
+            $('.starMapInfo').remove();
         }else{
             this.choosenMap = this.mouseOverMap;
             this.mouseOverMap = false;
@@ -87,8 +100,9 @@ function MenuStarMapObject(){
         this.clickX = false;
     }
 
-    this.chooseMap = function(){
-
+    this.startMap = function(){
+        if(this.choosenMap !== false)
+            MENU.startMap(this.choosenMap);
     }
     this.moveCanvas = function(x,y){
         this.mapX-=-x;
@@ -180,14 +194,14 @@ function MenuStarMapObject(){
 
                 if(A.t=='static'){
                     this.Canvas.translate(A.x, A.y);
-                    this.Canvas.rotate(A.q/180*Math.PI);
+                    this.Canvas.rotate(A.q * this.RAD);
                 }
                 if(A.t=='around'){
-                    var cr = ((A.qStart- -A.qV*this.tick)%360) / 180*Math.PI;
+                    var cr = ((A.qStart- -A.qV*this.tick)%360) * this.RAD;
                     var cx = A.x- -A.r*Math.cos(cr);
                     var cy = A.y- -A.r*Math.sin(cr);
                     this.Canvas.translate(cx, cy);
-                    this.Canvas.rotate(cr- -(A.qDir/180*Math.PI));
+                    this.Canvas.rotate(cr- -(A.qDir * this.RAD));
                 }
 
                 this.Canvas.fillStyle = A.color;
@@ -223,19 +237,18 @@ function MenuStarMapObject(){
 
 
     this.showMapMenu = function(S,s){
-        if(s == this.mouseOverMap){
+        if(s === this.mouseOverMap){
             this.Canvas.strokeStyle = 'blue';
             this.Canvas.lineWidth = 1;
 
-            var v1r1 = ((this.tick*5)%360 )/180*Math.PI;
-            var v1r2 = ((this.tick*5- -300)%360 )/180*Math.PI;
-
-            var v2r1 = ((this.tick*-5)%360 )/180*Math.PI;
-            var v2r2 = ((this.tick*-5- -300)%360 )/180*Math.PI;
-
+            var v1r1 = ((this.tick*5)%360 ) * this.RAD;
+            var v1r2 = ((this.tick*5- -300)%360 ) * this.RAD;
             this.Canvas.beginPath();
             this.Canvas.arc(0, 0, S.mouseRadius-2, v1r1, v1r2);
             this.Canvas.stroke();
+
+            var v2r1 = ((this.tick*-5)%360 ) * this.RAD;
+            var v2r2 = ((this.tick*-5- -300)%360 ) * this.RAD;
             this.Canvas.beginPath();
             this.Canvas.arc(0, 0, S.mouseRadius- -2, v2r1, v2r2);
             this.Canvas.stroke();
@@ -245,29 +258,65 @@ function MenuStarMapObject(){
             this.Canvas.strokeStyle = 'blue';
             this.Canvas.lineWidth = 1;
 
-            var v1r1 = ((this.tick*5)%360 )/180*Math.PI;
-            var v1r2 = ((this.tick*5- -300)%360 )/180*Math.PI;
+            var menuSite = 'left';
+            if(0 > (this.centerX-this.width/2- -S.x))
+            menuSite = 'right';
 
-            var v2r1 = 30/180*Math.PI;
-            var v2r2 = 330/180*Math.PI;
-
+            var v1r1 = ((this.tick*5)%360 ) * this.RAD;
+            var v1r2 = ((this.tick*5- -300)%360 ) * this.RAD;
             this.Canvas.beginPath();
             this.Canvas.arc(0, 0, S.mouseRadius-2, v1r1, v1r2);
             this.Canvas.stroke();
             this.Canvas.beginPath();
+
+            var vr = S.mouseRadius- -2;
+            if(menuSite == 'left'){
+                var v2r1 = 40 * this.RAD;
+                var v2r2 = 320 * this.RAD;
+                var rx = vr*Math.cos(240 * this.RAD);
+                var ry = vr*Math.sin(240 * this.RAD);
+            } else {
+                var v2r1 = 220 * this.RAD;
+                var v2r2 = 140 * this.RAD;
+                var rx = vr*Math.cos(300 * this.RAD);
+                var ry = vr*Math.sin(300 * this.RAD);
+            }
+            this.Canvas.beginPath();
             this.Canvas.arc(0, 0, S.mouseRadius- -2, v2r1, v2r2);
             this.Canvas.stroke();
 
-            var menuSite = 'left';
-            if(0 > (this.centerX-this.width/2- -S.x))
-                menuSite = 'right';
+            this.Canvas.beginPath();
+            this.Canvas.moveTo(rx,ry);
+            if(menuSite == 'left'){
+                this.Canvas.lineTo(-120,-104);
+                this.Canvas.lineTo(-420,-104);
+            }else{
+                this.Canvas.lineTo(120,-104);
+                this.Canvas.lineTo(420,-104);
+            }
+            this.Canvas.stroke();
 
-            console.log(menuSite);
+            if(this.choosenMapMenu === false || this.choosenMapMenu != this.choosenMap){
+                $('.starMapInfo').remove();
+                var html = '';
 
+                var mapName = s;
+                var wx = this.centerX- -S.x;
+                var wy = this.centerY- -S.y;
 
+                if(menuSite == 'left') wx -= 420;
+                        else           wx -=-120;
+                wy -= 100;
 
+                html += '<div class="mapName">'+mapName+'</div>';
+                html += '<div class="startGame">START</div>';
+
+                html = '<div class="starMapInfo" style="left: '+wx+'px; top:'+wy+'px;">'+html+'</div>';
+
+                $('#starMapContainer').append(html);
+                this.choosenMapMenu = this.choosenMap;
+            }
         }
-
     }
 
 
