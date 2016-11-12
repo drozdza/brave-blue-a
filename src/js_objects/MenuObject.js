@@ -54,6 +54,7 @@ function MENUobject(){
         this.ShipPresetChoosen = id;
     }
     this.click_MainMenuButton = function(id){
+        this.SM.stopAnimation();
         $('#Menu').hide();
         if(typeof GAME != 'undefined')
             delete GAME;

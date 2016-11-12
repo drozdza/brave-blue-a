@@ -146,7 +146,7 @@ function CanvasManagerObject(){
             var svgD='';
             var pathSize=View.PathSize/1000;
             var XYoffset = parseInt((X2 - View.PathSize)/2);
-            var PATH = this.LIB[ View.LIBpath ];
+            var PATH = BBAdata.pathLIB[ View.LIBpath ];
             for(var s=0; s<PATH.length;++s)
                 if(isNaN(PATH[s])) svgD+=PATH[s]+' ';
                         else       svgD+=((PATH[s]*pathSize).toFixed(2))+' ';
@@ -301,7 +301,7 @@ function CanvasManagerObject(){
                     var svgD='';
                     var pathSize=R.states[i].pathSize/1000;
                     var XYoffset = parseInt((X2 - R.states[i].pathSize)/2);
-                    var PATH = this.LIB[ R.LIBpath ];
+                    var PATH = BBAdata.pathLIB[ R.LIBpath ];
                     for(var s=0; s<PATH.length;++s)
                         if(isNaN(PATH[s])) svgD+=PATH[s]+' ';
                                 else       svgD+=((PATH[s]*pathSize).toFixed(2))+' ';
@@ -318,7 +318,7 @@ function CanvasManagerObject(){
                         var svgD='';
                         var pathSize=R.states[i].smallStarSize/1000;
                         var XYoffset = parseInt((X2 - R.states[i].pathSize)/2);
-                        var PATH = this.LIB['StarPath'];
+                        var PATH = BBAdata.pathLIB['StarPath'];
                         for(var s=0; s<PATH.length;++s)
                             if(isNaN(PATH[s])) svgD+=PATH[s]+' ';
                                     else       svgD+=((PATH[s]*pathSize).toFixed(2))+' ';

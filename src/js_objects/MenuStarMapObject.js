@@ -2,6 +2,7 @@ function MenuStarMapObject(){
 
     this.Canvas = false;
     this.intervalId = false;
+    this.tick = 0;
 
     this.width = 0;
     this.height = 0;
@@ -10,10 +11,13 @@ function MenuStarMapObject(){
 
     this.clickX = false;
     this.clickY = false;
+    this.mouseOverMap = false;
+    this.choosenMap = false;
 
     this.StarMap = {};
 
-    this.tick = 0;
+    this.centerX = 0;
+    this.centerY = 0;
 
     this.makeMenuStars = function(){
         this.prepareStarMap();
@@ -43,17 +47,22 @@ function MenuStarMapObject(){
         this.intervalId = setInterval(function(){ MENU.SM.frame(); }, 33);
     }
     this.stopAnimation = function(){
-        stopInterval(this.intervalId);
+        clearInterval(this.intervalId);
         this.intervalId = false;
     }
 
 
     this.mouseDown = function(e){
-        this.dragStart(e.offsetX, e.offsetY);
+        if(this.mouseOverMap === false){
+            this.dragStart(e.offsetX, e.offsetY);
+        }else{
+            this.choosenMap = this.mouseOverMap;
+            this.mouseOverMap = false;
+        }
     }
     this.mouseMove = function(e){
-        if(this.clickX===false){
-            this.checkMouseOver(e.offsetX,e.offsetY);
+        if(this.clickX === false){
+            this.checkMouseOver(e.offsetX, e.offsetY);
         }else{
             this.dragMove(e.offsetX, e.offsetY);
         }
@@ -86,21 +95,25 @@ function MenuStarMapObject(){
         this.mapY-=-y;
     }
     this.checkMouseOver = function(ex,ey){
-        var x = ex- -this.mapX - this.width/2;
-        var y = ey- -this.mapY - this.height/2;
+        var x = ex - this.mapX - this.width/2;
+        var y = ey - this.mapY - this.height/2;
 
         for(var s in this.StarMap){
             var S = this.StarMap[s];
             var xx = S.x-x;
             var yy = S.y-y;
-            // console.log(Math.sqrt(xx*xx- -yy*yy));
 
             if(Math.sqrt(xx*xx- -yy*yy) <= S.mouseRadius){
-                console.log(s);
+                if(s != this.choosenMap)
+                    this.mouseOverMap = s;
+                return true;
             }
         }
-
+        this.mouseOverMap = false;
     }
+
+
+
 
 
 
@@ -137,72 +150,126 @@ function MenuStarMapObject(){
         this.Canvas.fillStyle = 'black';
         this.Canvas.fillRect(0,0,this.width,this.height);
 
-        var centerX = parseInt(this.width/2- -this.mapX);
-        var centerY = parseInt(this.height/2- -this.mapY);
+        this.centerX = parseInt(this.width/2- -this.mapX);
+        this.centerY = parseInt(this.height/2- -this.mapY);
 
-        for(var s in this.StarMap){
-            var S = this.StarMap[s];
+        for(var s in this.StarMap)
+            this.showMapElement(s);
+    }
 
-            if(S.t=='simple'){
-                this.Canvas.font="20px Arial";
-                this.Canvas.fillStyle = 'white';
-                if(S.name.substr(0,2)=='Lx'){
-                    this.Canvas.fillText(String.fromCharCode(parseInt(S.name.substr(2))), centerX- -S.x, centerY- -S.y);
-                }else{
-                    this.Canvas.fillText(S.name, centerX- -S.x, centerY- -S.y);
-                }
-            }
+    this.showMapElement = function(s){
+        var S = this.StarMap[s];
 
-            if(S.t=='map'){
-                this.Canvas.save();
-                this.Canvas.translate(centerX- -S.x, centerY- -S.y);
+        this.Canvas.save();
+        this.Canvas.translate(this.centerX- -S.x, this.centerY- -S.y);
 
-                for(var a in S.Anims){
-                    var A = S.Anims[a];
-
-                    this.Canvas.save();
-                    if(A.t=='static'){
-                        this.Canvas.translate(A.x, A.y);
-                        this.Canvas.rotate(A.q/180*Math.PI);
-                    }
-                    if(A.t=='around'){
-                        var cr = ((A.qStart- -A.qV*this.tick)%360) / 180*Math.PI;
-                        var cx = A.x- -A.r*Math.cos(cr);
-                        var cy = A.y- -A.r*Math.sin(cr);
-                        this.Canvas.translate(cx,cy);
-                        this.Canvas.rotate(cr- -(A.qDir/180*Math.PI));
-                    }
-
-                    this.Canvas.fillStyle = A.color;
-
-                    if(typeof A.LIBpath != 'undefined'){
-                        var svgD='';
-                        var pathSize=A.size/1000;
-                        var XYoffset = parseInt(-A.size/2);
-                        var PATH = BBAdata.pathLIB[ A.LIBpath ];
-                        for(var s=0; s<PATH.length;++s)
-                            if(isNaN(PATH[s])) svgD+=PATH[s]+' ';
-                                    else       svgD+=((PATH[s]*pathSize).toFixed(2))+' ';
-                        var svgObj = new Path2D(svgD);
-                        this.Canvas.translate(XYoffset,XYoffset);
-                        this.Canvas.fill(svgObj);
-                    }
-                    if(typeof A.letter != 'undefined'){
-                        this.Canvas.font="bold "+A.size+"px Arial";
-                        this.Canvas.textAlign = 'center';
-                        this.Canvas.textBaseline = 'middle';
-                        this.Canvas.fillText(A.letter, 0, 0);
-
-                    }
-
-
-                    this.Canvas.restore();
-                }
-                this.Canvas.restore();
+        if(S.t=='simple'){
+            this.Canvas.font="20px Arial";
+            this.Canvas.fillStyle = 'white';
+            if(S.name.substr(0,2)=='Lx'){
+                this.Canvas.fillText(String.fromCharCode(parseInt(S.name.substr(2))), this.centerX- -S.x, this.centerY- -S.y);
+            }else{
+                this.Canvas.fillText(S.name, 0, 0);
             }
         }
 
+        if(S.t=='map'){
+            for(var a in S.Anims){
+                var A = S.Anims[a];
+                this.Canvas.save();
+
+                if(A.t=='static'){
+                    this.Canvas.translate(A.x, A.y);
+                    this.Canvas.rotate(A.q/180*Math.PI);
+                }
+                if(A.t=='around'){
+                    var cr = ((A.qStart- -A.qV*this.tick)%360) / 180*Math.PI;
+                    var cx = A.x- -A.r*Math.cos(cr);
+                    var cy = A.y- -A.r*Math.sin(cr);
+                    this.Canvas.translate(cx, cy);
+                    this.Canvas.rotate(cr- -(A.qDir/180*Math.PI));
+                }
+
+                this.Canvas.fillStyle = A.color;
+
+                if(typeof A.LIBpath != 'undefined'){
+                    var svgD='';
+                    var pathSize=A.size/1000;
+                    var XYoffset = parseInt(-A.size/2);
+                    var PATH = BBAdata.pathLIB[ A.LIBpath ];
+                    for(var p=0; p<PATH.length; ++p)
+                        if(isNaN(PATH[p])) svgD+=PATH[p]+' ';
+                                else       svgD+=((PATH[p]*pathSize).toFixed(2))+' ';
+                    var svgObj = new Path2D(svgD);
+                    this.Canvas.translate(XYoffset,XYoffset);
+                    this.Canvas.fill(svgObj);
+                }
+                if(typeof A.letter != 'undefined'){
+                    this.Canvas.font="bold "+A.size+"px Arial";
+                    this.Canvas.textAlign = 'center';
+                    this.Canvas.textBaseline = 'middle';
+                    this.Canvas.fillText(A.letter, 0, 0);
+
+                }
+
+                this.Canvas.restore();
+            }
+
+            this.showMapMenu(S,s);
+
+        }
+        this.Canvas.restore();
     }
+
+
+    this.showMapMenu = function(S,s){
+        if(s == this.mouseOverMap){
+            this.Canvas.strokeStyle = 'blue';
+            this.Canvas.lineWidth = 1;
+
+            var v1r1 = ((this.tick*5)%360 )/180*Math.PI;
+            var v1r2 = ((this.tick*5- -300)%360 )/180*Math.PI;
+
+            var v2r1 = ((this.tick*-5)%360 )/180*Math.PI;
+            var v2r2 = ((this.tick*-5- -300)%360 )/180*Math.PI;
+
+            this.Canvas.beginPath();
+            this.Canvas.arc(0, 0, S.mouseRadius-2, v1r1, v1r2);
+            this.Canvas.stroke();
+            this.Canvas.beginPath();
+            this.Canvas.arc(0, 0, S.mouseRadius- -2, v2r1, v2r2);
+            this.Canvas.stroke();
+        }
+
+        if(s === this.choosenMap){
+            this.Canvas.strokeStyle = 'blue';
+            this.Canvas.lineWidth = 1;
+
+            var v1r1 = ((this.tick*5)%360 )/180*Math.PI;
+            var v1r2 = ((this.tick*5- -300)%360 )/180*Math.PI;
+
+            var v2r1 = 30/180*Math.PI;
+            var v2r2 = 330/180*Math.PI;
+
+            this.Canvas.beginPath();
+            this.Canvas.arc(0, 0, S.mouseRadius-2, v1r1, v1r2);
+            this.Canvas.stroke();
+            this.Canvas.beginPath();
+            this.Canvas.arc(0, 0, S.mouseRadius- -2, v2r1, v2r2);
+            this.Canvas.stroke();
+
+            var menuSite = 'left';
+            if(0 > (this.centerX-this.width/2- -S.x))
+                menuSite = 'right';
+
+            console.log(menuSite);
+
+
+
+        }
+
+    }
+
 
     this.drawCross = function(){    // to remove later
         this.Canvas.strokeStyle = '#ffffff';

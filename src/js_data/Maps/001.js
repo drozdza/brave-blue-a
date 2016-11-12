@@ -1,5 +1,5 @@
 BBAdata['MAPS']['001'] = {
-    StarMap:{ x:100, y:50, mouseRadius: 60, shipRadius: 20,
+    StarMap:{ x:100, y:50, mouseRadius: 70, shipRadius: 20,
         Anims:[
             {t:'static', LIBpath: 'StarPath', size: 35, color:'white', x:0, y:0, q:0},
             {t:'around', letter: 'A', size: 12, color:'red', x:0, y:0, r: 50, qStart:90, qV:-2, qDir:0},
