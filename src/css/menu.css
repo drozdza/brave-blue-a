@@ -12,17 +12,6 @@ body{
     max-width: 100%;
     overflow: hidden;
 }
-.keys{
-    color: white;
-    font-size: 14px;
-}
-.keys:before{
-    content: 'keys: ';
-}
-.keys span{
-    display: inline-block;
-    padding: 5px 12px;
-}
 
 .ShipPresets{
     font-size: 16px;

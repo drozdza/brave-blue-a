@@ -7,14 +7,29 @@ BBAdata['MAPS']={
     'M1':'load',
     '001':'load',
     'A':{
+        StarMap:{ x:210, y:-90, mouseRadius: 20, shipRadius: 20,
+            Anims:[
+                {t:'static', letter: 'A', size: 12, color:'red', x:0, y:0, r: 0, qStart:90, qV:-2, qDir:0},
+            ],
+        },
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 5, A: 25}}],
     },
     'U':{
+        StarMap:{ x:140, y:-200, mouseRadius: 20, shipRadius: 20,
+            Anims:[
+                {t:'static', letter: 'U', size: 12, color:'red', x:0, y:0, r: 0, qStart:90, qV:-2, qDir:0},
+            ],
+        },
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 5, U: 6}}],
     },
     'S':{
+        StarMap:{ x:340, y:-140, mouseRadius: 20, shipRadius: 20,
+            Anims:[
+                {t:'static', letter: 'S', size: 12, color:'red', x:0, y:0, r: 0, qStart:90, qV:-2, qDir:0},
+            ],
+        },
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 5, S: 8}}],
     },
@@ -204,16 +219,19 @@ BBAdata['MAPS']={
         ],
     },
     'Y':{
+        BoardMods:['sitOnMap','allAvoid'],
         Place:[
             {RingOf:{X: 0, Y: 0, Radius: 300}, What:{Y:8,Q:6}},
         ],
     },
     'Lx376':{
+        BoardMods:['sitOnMap','allAvoid'],
         Place:[
             {RingOf:{X: 0, Y: 0, Radius: 300}, What:{Yi:8,Q:6}},
         ],
     },
     'Lx590':{
+        BoardMods:['sitOnMap','allAvoid'],
         Place:[
             {RingOf:{X: 0, Y: 0, Radius: 300}, What:{Yl:8,Q:6}},
         ],

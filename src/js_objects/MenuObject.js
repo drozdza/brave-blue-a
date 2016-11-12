@@ -3,11 +3,13 @@ function MENUobject(){
     this.ShipPresetChoosen = 'start';
 
     this.SB = new MenuShipBuildingObject();
+    this.SM = new MenuStarMapObject();
 
 
     this.start = function(){
         this.makeMenuBoards();
         this.SB.makeMenuShip();
+        this.SM.makeMenuStars();
         this.showMenu='Boards';
         $('.ToggleMenu').click(function(){ MENU.toggleMenu(); });
     }
@@ -17,16 +19,13 @@ function MENUobject(){
     this.makeMenuBoards = function(){
         this.getMenu = new GetMenuObject();
         var html = '';
-        html+='<div class="keys">';
-            html+='<span>1-9 - change Fire Type</span>';
-            html+='<span>P - pause</span>';
-            html+='<span>ESC - end level</span>';
-        html+='</div>';
 
         html+='<div class="ShipPresets"><span>Choose: </span>';
         for(var m in BBAdata['SHIPpresets'])
             html+='<div class="chooseShipPresets" id="chooseShipPresets_'+m+'">'+m+'</div>';
         html+='</div>';
+
+        html+='<canvas id="starMap" style="width: 100%; height: 500px;"></canvas>';
 
         // this.loadMaps();
 

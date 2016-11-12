@@ -1,4 +1,13 @@
 BBAdata['MAPS']['001'] = {
+    StarMap:{ x:100, y:50, mouseRadius: 60, shipRadius: 20,
+        Anims:[
+            {t:'static', LIBpath: 'StarPath', size: 35, color:'white', x:0, y:0, q:0},
+            {t:'around', letter: 'A', size: 12, color:'red', x:0, y:0, r: 50, qStart:90, qV:-2, qDir:0},
+            {t:'around', letter: 'A', size: 12, color:'red', x:0, y:0, r: 58, qStart:75, qV:-2, qDir:0},
+            {t:'around', letter: 'A', size: 12, color:'red', x:0, y:0, r: 66, qStart:90, qV:-2, qDir:0},
+            {t:'around', letter: 'Q', size: 30, color:'red', x:0, y:0, r: 30, qStart:90, qV:1, qDir:180},
+        ],
+    },
     BoardMods:['sitOnMap','allAvoid','colorGold'],
     Place:[
         {Random:{X: 1000, Y: 1000, Radius: 200}, What:{Star: 20, A: 20}},
