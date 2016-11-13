@@ -29,23 +29,14 @@ function MENUobject(){
             html+='<div class="chooseShipPresets" id="chooseShipPresets_'+m+'">'+m+'</div>';
         html+='</div>';
 
-        html+='<div id="starMapContainer"><canvas id="starMap" style="width: 100%; height: 500px;"></canvas></div>';
+        html+='<div id="starMapContainer"><canvas id="starMap" style="width: 100%; height: 650px;"></canvas></div>';
 
         // this.loadMaps();
-
-        for(var m in BBAdata['MAPS']){
-            var name = m;
-            if(m.substr(0,2)=='Lx')
-                name = '&#'+m.substr(2)+';';
-            html+='<div class="MainMenuButton" id="MainMenuButton_'+m+'">'+name+'</div>';
-        }
 
         $('#Menu').append(this.getMenu.makeHtml()+'<div id="MenuBoards">'+html+'</div>');
 
         $('.chooseShipPresets').unbind().click(function(){  MENU.click_chooseShipPresets( $(this).attr('id').split('_')[1] ); });
         $('#chooseShipPresets_'+this.ShipPresetChoosen).addClass('choosenPreset');
-
-        $('.MainMenuButton').unbind().click(function(){  MENU.startMap( $(this).attr('id').split('_')[1] ); });
     }
     this.loadMaps = function(){
          for(var id in BBAdata['MAPS'])

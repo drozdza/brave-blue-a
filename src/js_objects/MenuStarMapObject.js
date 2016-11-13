@@ -38,17 +38,22 @@ function MenuStarMapObject(){
         this.width = $('#starMap').width();
         this.height = $('#starMap').height();
 
+        console.log('resized!');
+
         $('#starMap').attr({width: this.width+'px',height: this.height+'px'});
     }
 
     this.startAnimation = function(){
         this.intervalId = setInterval(function(){ MENU.SM.frame(); }, 33);
 
-        $('#starMap').on('mousedown',function(e){ MENU.SM.mouseDown(e); });
-        $('#starMap').on('mousemove',function(e){ MENU.SM.mouseMove(e); });
-        $('#starMap').on('mouseup',function(e){ MENU.SM.mouseUp(e); });
-        $('#starMap').on('mouseleave',function(e){ MENU.SM.mouseUp(e); });
-        $('#starMapContainer').on('click','.startGame', function(){ MENU.SM.startMap(); });
+        $('#starMap')
+            .on('mousedown',function(e){ MENU.SM.mouseDown(e); })
+            .on('mousemove',function(e){ MENU.SM.mouseMove(e); })
+            .on('mouseup',function(e){ MENU.SM.mouseUp(e); })
+            .on('mouseleave',function(e){ MENU.SM.mouseUp(e); })
+        $('#starMapContainer')
+            .on('click','.startGame', function(){ MENU.SM.startMap(); });
+        $(window).on('resize', function(){ MENU.SM.resize(); });
     }
     this.stopAnimation = function(){
         clearInterval(this.intervalId);
@@ -152,6 +157,7 @@ function MenuStarMapObject(){
                     t: 'simple',
                     name: m,
                     mapName: m,
+                    mouseRadius: 39,
                 };
                 ++noMapY;
             }
@@ -181,7 +187,7 @@ function MenuStarMapObject(){
             this.Canvas.font="20px Arial";
             this.Canvas.fillStyle = 'white';
             if(S.name.substr(0,2)=='Lx'){
-                this.Canvas.fillText(String.fromCharCode(parseInt(S.name.substr(2))), this.centerX- -S.x, this.centerY- -S.y);
+                this.Canvas.fillText(String.fromCharCode(parseInt(S.name.substr(2))), 0, 0);
             }else{
                 this.Canvas.fillText(S.name, 0, 0);
             }
@@ -229,9 +235,9 @@ function MenuStarMapObject(){
                 this.Canvas.restore();
             }
 
-            this.showMapMenu(S,s);
 
         }
+        this.showMapMenu(S,s);
         this.Canvas.restore();
     }
 

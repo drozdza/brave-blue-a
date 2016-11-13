@@ -1,4 +1,6 @@
 Bugs:
+    - some bug with destroying GAME object (?)
+
     - massive shooting thrue destruction fields produces uncatchable crash
 
     - AutoFire should work
