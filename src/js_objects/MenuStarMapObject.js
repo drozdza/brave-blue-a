@@ -35,12 +35,10 @@ function MenuStarMapObject(){
 
 
     this.resize = function(){
-        this.width = $('#starMap').width();
-        this.height = $('#starMap').height();
+        this.width = $(window).width();
+        this.height = $(window).height();
 
-        console.log('resized!');
-
-        $('#starMap').attr({width: this.width+'px',height: this.height+'px'});
+        $('#starMap').attr({width: this.width+'px',height: this.height+'px'}).css({width: this.width+'px',height: this.height+'px'});
     }
 
     this.startAnimation = function(){

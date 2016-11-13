@@ -29,6 +29,10 @@ function GetMenuObject(){
             get: 'gameStats',
             values: {Off:false, On:1},
         },
+        SHIPPRESET:{
+            get: 'shipPresets',
+            values: {start:false, destFields: 'destFields', bombs1: 'bombs1', bombs2: 'bombs2', best: 'best', bombardier: 'bombardier', ethernal: 'ethernal'},
+        }
     };
 
     this.makeHtml = function(){

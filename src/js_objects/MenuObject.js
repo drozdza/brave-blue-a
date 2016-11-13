@@ -12,6 +12,10 @@ function MENUobject(){
         this.SM.makeMenuStars();
         this.showMenu='Boards';
         $('.ToggleMenu').click(function(){ MENU.toggleMenu(); });
+
+        if(BBAdata.GET.SHIPPRESET != 0)
+            this.ShipPresetChoosen = BBAdata.GET.SHIPPRESET;
+
     }
     this.show = function(){
         $('#Menu').show();
@@ -24,29 +28,16 @@ function MENUobject(){
         this.getMenu = new GetMenuObject();
         var html = '';
 
-        html+='<div class="ShipPresets"><span>Choose: </span>';
-        for(var m in BBAdata['SHIPpresets'])
-            html+='<div class="chooseShipPresets" id="chooseShipPresets_'+m+'">'+m+'</div>';
-        html+='</div>';
-
         html+='<div id="starMapContainer"><canvas id="starMap" style="width: 100%; height: 650px;"></canvas></div>';
 
         // this.loadMaps();
 
-        $('#Menu').append(this.getMenu.makeHtml()+'<div id="MenuBoards">'+html+'</div>');
-
-        $('.chooseShipPresets').unbind().click(function(){  MENU.click_chooseShipPresets( $(this).attr('id').split('_')[1] ); });
-        $('#chooseShipPresets_'+this.ShipPresetChoosen).addClass('choosenPreset');
+        $('#Menu').append(html+this.getMenu.makeHtml());
     }
     this.loadMaps = function(){
          for(var id in BBAdata['MAPS'])
             if(BBAdata['MAPS'][id] == 'load')
                 jQuery.getScript('js_data/Maps/'+id+'.js');
-    }
-    this.click_chooseShipPresets = function(id){
-        $('.chooseShipPresets').removeClass('choosenPreset');
-        $('#chooseShipPresets_'+id).addClass('choosenPreset');
-        this.ShipPresetChoosen = id;
     }
     this.startMap = function(id){
         this.SM.stopAnimation();
