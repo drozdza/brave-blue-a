@@ -1,5 +1,5 @@
 Bugs:
-    - some bug with destroying GAME object (?)
+    - some bug with destroying GAME object, something with mouse left-click (?)
 
     - massive shooting thrue destruction fields produces uncatchable crash
 

@@ -34,8 +34,6 @@
 
 - Make "Player SHIP always point/go one site" - feature
 
-- Make color definitions for Enemies
-
 - Make SuperSecure board
 
 - Ships try to avoid some Regions, or try to get out of them as fast as possible
@@ -134,8 +132,12 @@ New Enemies:
 
     - Chewing Gum fields (put an achnor near ship, must be destroyed or wear of)
 
+    - Zombie Ship, after killed wakes up in some time
+        - Zombie master, have impuls to wake killed ships
     - Ship with healing Bombs
     - Star Makers (Healing stars and making new ones)
+
+    - Anti Teleport Binder Ship
 
     - SpaceSnakes!
 
