@@ -1,6 +1,7 @@
 - Adding squads to maps
 
 - Repair BubbleWave
+    - Objects immuned for things that carry the same immunity ID (like local groups)
 
 - Different Endgame Statuses
 - Game saves in cookies
