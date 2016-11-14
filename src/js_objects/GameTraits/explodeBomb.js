@@ -104,15 +104,17 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             L = this.putObj(explodeObj.objName,explodeObj.objType,O.S,O.x,O.y);
 
             this.O[ L ].angle = O.angle;
-            this.O[ L ].speed = 0;
+            if(typeof explodeObj.objSpeed !='undefined')
+                this.O[ L ].speed = explodeObj.objSpeed;
+
             this.cloneDataToObj(L,explodeObj,['life','lifeM','dec','doingTime'],['toDo','Flags']);
 
             if(explodeObj.objName=='shieldBlob')
                 CanvasManager.requestCanvas( L );
-
-            if(explodeObj.moveAlong){
+            if(explodeObj.moveAlong)
                 this.O[ L ].speed = explodeObj.moveAlong;
-            }
+            if(explodeObj.objRandAngle)
+                this.O[ L ].angle = parseInt(Math.random()*360);
 
             this.addBoardMods(L);
         }

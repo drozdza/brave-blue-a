@@ -1907,7 +1907,7 @@ BBAdata['ObjectDatas']={
 
         onDieDelete: true,
         onDieHideExplosion: true,
-        onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen1', objType:'comp', objMin:2, objRand:2},
+        onDie: {Do:'explode', explodeType: 'putObjs', objRandAngle:true, objName:'slimensen1', objType:'comp', objMin:2, objRand:2},
 
         mergeAbility: 0,
         Res: {'mergeAbility': {M:20,T:0}},
@@ -1974,7 +1974,7 @@ BBAdata['ObjectDatas']={
 
         onDieDelete: true,
         onDieHideExplosion: true,
-        onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen2', objType:'comp', objMin:2, objRand:2},
+        onDie: {Do:'explode', explodeType: 'putObjs', objRandAngle:true, objName:'slimensen2', objType:'comp', objMin:2, objRand:2},
 
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 60, maxSpeed: 2, doNextWeapon: true},
@@ -2027,7 +2027,7 @@ BBAdata['ObjectDatas']={
 
         onDieDelete: true,
         onDieHideExplosion: true,
-        onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen3', objType:'comp', objMin:2, objRand:2},
+        onDie: {Do:'explode', explodeType: 'putObjs', objRandAngle:true, objName:'slimensen3', objType:'comp', objMin:2, objRand:2},
 
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
@@ -2080,7 +2080,7 @@ BBAdata['ObjectDatas']={
 
         onDieDelete: true,
         onDieHideExplosion: true,
-        onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen4', objType:'comp', objMin:2, objRand:2},
+        onDie: {Do:'explode', explodeType: 'putObjs', objRandAngle:true, objName:'slimensen4', objType:'comp', objMin:2, objRand:2},
 
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 15, maxSpeed: 2, doNextWeapon: true},
