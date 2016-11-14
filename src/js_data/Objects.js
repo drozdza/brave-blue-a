@@ -1895,9 +1895,9 @@ BBAdata['ObjectDatas']={
     },
     slimensen:{
         view:{
-            Letter: 3168,
+            Letter: 3450,
             LetterSize: 50,
-            Color: 'red',
+            Color: '#00BB00',
             Angle: 90,
             HitPattern: 'HullFire_80',
         },
@@ -1962,9 +1962,9 @@ BBAdata['ObjectDatas']={
     slimensen1:{
         extends: 'slimensen',
         view:{
-            Letter: 3083,
+            Letter: 3445,
             LetterSize: 45,
-            Color: 'red',
+            Color: '#00BB00',
             Angle: 90,
             HitPattern: 'HullFire_60',
         },
@@ -2015,9 +2015,9 @@ BBAdata['ObjectDatas']={
     slimensen2:{
         extends: 'slimensen',
         view:{
-            Letter: 3096,
-            LetterSize: 35,
-            Color: 'red',
+            Letter: 3444,
+            LetterSize: 40,
+            Color: '#00BB00',
             Angle: 90,
             HitPattern: 'HullFire_40',
         },
@@ -2068,9 +2068,9 @@ BBAdata['ObjectDatas']={
     slimensen3:{
         extends: 'slimensen',
         view:{
-            Letter: 3098,
+            Letter: 3454,
             LetterSize: 30,
-            Color: 'red',
+            Color: '#00BB00',
             Angle: 90,
             HitPattern: 'HullFire_20',
         },
@@ -2121,9 +2121,9 @@ BBAdata['ObjectDatas']={
     slimensen4:{
         extends: 'slimensen',
         view:{
-            Letter: 3112,
+            Letter: 3452,
             LetterSize: 25,
-            Color: 'red',
+            Color: '#00BB00',
             Angle: 90,
             HitPattern: 'HullFire_20',
         },
