@@ -1,5 +1,8 @@
 - Adding squads to maps
 
+- Repair torpedo Aiming
+- Repair BubbleWave
+
 - Different Endgame Statuses
 - Game saves in cookies
     - Left the hack lever in cookies
@@ -30,8 +33,6 @@
 
 
 - Make "Player SHIP always point/go one site" - feature
-
-- Make color definitions for Enemies
 
 - Make SuperSecure board
 
@@ -133,8 +134,12 @@ New Enemies:
 
     - Chewing Gum fields (put an achnor near ship, must be destroyed or wear of)
 
+    - Zombie Ship, after killed wakes up in some time
+        - Zombie master, have impuls to wake killed ships
     - Ship with healing Bombs
     - Star Makers (Healing stars and making new ones)
+
+    - Anti Teleport Binder Ship
 
     - SpaceSnakes!
 
