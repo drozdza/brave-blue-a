@@ -256,7 +256,6 @@ GAMEobject.prototype.showEndGameCount = function(){
     var html='';
 
     this.countWinningConds();
-    this.countWinningRewards();
 
     html += 'Results:<br/>';
 
@@ -265,30 +264,12 @@ GAMEobject.prototype.showEndGameCount = function(){
 
     return html;
 }
-GAMEobject.prototype.countWinningRewards = function(){
-    var WC,i,r;
-    var WinTab = {};
-    var DoneI = 0;
-    var Rewards = {Cash: 0};
+GAMEobject.prototype.countWinningTab = function(){
+    var WinningTab = '';
 
-    for(i in this.CWinning){
-        if(this.CWinning[i].State == 'Done'){
-            WC = this.CWinning[i];
-            WinTab[i] = 1;
-            ++DoneI;
-            if(typeof WC.Reward !='undefined'){
-                for(var r in WC.Reward){
-                    if(typeof Rewards[r] == 'undefined')
-                        Rewards[r]=0;
-                    Rewards[r]-=-WC.Reward[r];
-                }
-            }
-        }
-    }
+    for(i in this.CWinning)
+        if(this.CWinning[i].State == 'Done')  WinningTab+='W';
+                    else                      WinningTab+='L';
 
-
-    if(DoneI > 1)
-        Rewards.Cash-=-(DoneI-1)*50;
-
-    WinTab;
+    return WinningTab;
 }
