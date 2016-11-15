@@ -233,6 +233,13 @@ GAMEobject.prototype.decide = function(o){
                     this.changeSpeedLvl(O,TD.gotoSpeed);
             }
 
+            if(TD.T=='goOrbit'){
+                O.doingTime = TD.doingTime || 50;
+                O.Manouver = 'goOrbit';
+                if(!isNaN(TD.gotoSpeed))
+                    this.changeSpeedLvl(O,TD.gotoSpeed);
+            }
+
             if(TD.T=='followEnemyCloaked'){
                 O.doingTime = TD.doingTime || 400;
                 O.Manouver = 'followEnemy';
@@ -440,6 +447,32 @@ GAMEobject.prototype.decide = function(o){
             if(Ei < speedT) speedT = Ei;
             if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
             if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
+        }break;
+        case 'goOrbit':{
+            var Tyk = (O.angle-PlayerAngle- -360)%360;
+            var Ei = 180 - Math.abs(Tyk - 180);
+            if(PlayerDist > 160){
+                var speedT = O.speedT;
+                O.Tyk = Tyk;
+                if(Ei < speedT) speedT = Ei;
+                if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT;  console.log('Ax');}
+                if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; console.log('Ay');}
+            }else if(PlayerDist < 100){
+                Tyk = (Tyk- -180)%360;
+                var speedT = O.speedT;
+                O.Tyk = Tyk;
+                if(Ei < speedT) speedT = Ei;
+                if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; console.log('Bx');}
+                if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; console.log('By');}
+            }else{
+                O.lastSpeedT = 0;
+                Tyk = (Tyk- -180)%360;
+                var speedT = O.speedT;
+                O.Tyk = Tyk;
+                if(Ei < speedT) speedT = Ei;
+                if(Tyk > 90 && Tyk <= 270){ O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; console.log('Cx');}
+                if(Tyk <= 90 || Tyk > 270){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; console.log('Cy');}
+            }
         }break;
         case 'goToXY':{
             var wiX = O.x-O.goToX;
@@ -652,13 +685,21 @@ GAMEobject.prototype.decide = function(o){
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'crabBullets'){
-                var B,CU,cU = [{s:0,t:2,d:10,a:30},{s:1.5,t:2.5,d:5,a:40},{s:3,t:3,d:0,a:50}];
+                var B,CU,cU = [
+                    {s:0,  t:1,  a:30},
+                    {s:0.5,t:1.5,a:35},
+                    {s:1,  t:2,  a:40},
+                    {s:1.5,t:2.5,a:45},
+                    {s:2,  t:3,  a:50},
+                    {s:2.5,t:3.5,a:55},
+                    {s:3,  t:4,  a:60},
+                ];
                 for(var cu in cU){
                     CU = cU[cu];
-                    B = this.shootBulletOnSide(o,0,WP.Speed-CU.s,WP.Dec-CU.d,60- -O.doingTime,27,WP.DMG);
+                    B = this.shootBulletOnSide(o,0,WP.Speed-CU.s,WP.Dec,60- -O.doingTime,27,WP.DMG);
                     B.speedT =-CU.t;
                     B.angle -=-CU.a - O.doingTime;
-                    B = this.shootBulletOnSide(o,0,WP.Speed-CU.s,WP.Dec-CU.d,-60-O.doingTime,27,WP.DMG);
+                    B = this.shootBulletOnSide(o,0,WP.Speed-CU.s,WP.Dec,-60-O.doingTime,27,WP.DMG);
                     B.speedT = CU.t;
                     B.angle -= CU.a- -O.doingTime;
                 }

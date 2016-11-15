@@ -328,7 +328,7 @@ BBAdata['ExplosivesPresets']={
 
     MinePrison:{},
 
-    ShieldBlob:{ onHitDieExpire:{Do:'explode', explodeType:'putObjs', objMin:1, objName:'shieldBlob', objType:'comp', life:6,lifeM:6, toDo:[{T:'slowDownAndDie'}], doingTime: 480, Flags:[]}},
+    ShieldBlob:{ onHitDieExpire:{Do:'explode', explodeType:'putObjs', objSpeed: 0, objMin:1, objName:'shieldBlob', objType:'comp', life:6,lifeM:6, toDo:[{T:'slowDownAndDie'}], doingTime: 480, Flags:[]}},
     ShieldsBlobWall:{
         Dec: 30,
         Speed: 8,

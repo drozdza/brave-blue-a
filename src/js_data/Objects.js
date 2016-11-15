@@ -1346,7 +1346,7 @@ BBAdata['ObjectDatas']={
         weapon:[
             {t:'refilResource', resource: 'ammoPack', gunSpeed: 20, maxSpeed: 2, doNextWeapon: true},
             {t:'changeAction', minDistToEnemy: 70, makeAction: {doingNow:'shooting', gotoSpeed: 2, doingTime: 20, Manouver:'goStraight', doNotInterupt:true}, doingNow:'followEnemy', usedRes:'ammoPack', usedResR: 10 },
-            {t:'crabBullets', DMG:{Dmg:1,T:'normal'}, Dec: 37, Speed: 12, gunSpeed: 5, lastShot: 0, doingNow:'shooting', minDistToEnemy: 500},
+            {t:'crabBullets', DMG:{Dmg:1,T:'normal'}, Dec: 35, Speed: 12, gunSpeed: 5, lastShot: 0, doingNow:'shooting', minDistToEnemy: 500},
         ],
 
         doingNow: 'changeManouver',
@@ -1895,9 +1895,9 @@ BBAdata['ObjectDatas']={
     },
     slimensen:{
         view:{
-            Letter: 3168,
+            Letter: 3450,
             LetterSize: 50,
-            Color: 'red',
+            Color: '#00BB00',
             Angle: 90,
             HitPattern: 'HullFire_80',
         },
@@ -1907,7 +1907,7 @@ BBAdata['ObjectDatas']={
 
         onDieDelete: true,
         onDieHideExplosion: true,
-        onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen1', objType:'comp', objMin:2, objRand:2},
+        onDie: {Do:'explode', explodeType: 'putObjs', objRandAngle:true, objName:'slimensen1', objType:'comp', objMin:2, objRand:2},
 
         mergeAbility: 0,
         Res: {'mergeAbility': {M:20,T:0}},
@@ -1962,9 +1962,9 @@ BBAdata['ObjectDatas']={
     slimensen1:{
         extends: 'slimensen',
         view:{
-            Letter: 3083,
+            Letter: 3445,
             LetterSize: 45,
-            Color: 'red',
+            Color: '#00BB00',
             Angle: 90,
             HitPattern: 'HullFire_60',
         },
@@ -1974,7 +1974,7 @@ BBAdata['ObjectDatas']={
 
         onDieDelete: true,
         onDieHideExplosion: true,
-        onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen2', objType:'comp', objMin:2, objRand:2},
+        onDie: {Do:'explode', explodeType: 'putObjs', objRandAngle:true, objName:'slimensen2', objType:'comp', objMin:2, objRand:2},
 
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 60, maxSpeed: 2, doNextWeapon: true},
@@ -2015,9 +2015,9 @@ BBAdata['ObjectDatas']={
     slimensen2:{
         extends: 'slimensen',
         view:{
-            Letter: 3096,
-            LetterSize: 35,
-            Color: 'red',
+            Letter: 3444,
+            LetterSize: 40,
+            Color: '#00BB00',
             Angle: 90,
             HitPattern: 'HullFire_40',
         },
@@ -2027,7 +2027,7 @@ BBAdata['ObjectDatas']={
 
         onDieDelete: true,
         onDieHideExplosion: true,
-        onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen3', objType:'comp', objMin:2, objRand:2},
+        onDie: {Do:'explode', explodeType: 'putObjs', objRandAngle:true, objName:'slimensen3', objType:'comp', objMin:2, objRand:2},
 
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
@@ -2068,9 +2068,9 @@ BBAdata['ObjectDatas']={
     slimensen3:{
         extends: 'slimensen',
         view:{
-            Letter: 3098,
+            Letter: 3454,
             LetterSize: 30,
-            Color: 'red',
+            Color: '#00BB00',
             Angle: 90,
             HitPattern: 'HullFire_20',
         },
@@ -2080,7 +2080,7 @@ BBAdata['ObjectDatas']={
 
         onDieDelete: true,
         onDieHideExplosion: true,
-        onDie: {Do:'explode', explodeType: 'putObjs', objName:'slimensen4', objType:'comp', objMin:2, objRand:2},
+        onDie: {Do:'explode', explodeType: 'putObjs', objRandAngle:true, objName:'slimensen4', objType:'comp', objMin:2, objRand:2},
 
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 15, maxSpeed: 2, doNextWeapon: true},
@@ -2121,9 +2121,9 @@ BBAdata['ObjectDatas']={
     slimensen4:{
         extends: 'slimensen',
         view:{
-            Letter: 3112,
+            Letter: 3452,
             LetterSize: 25,
-            Color: 'red',
+            Color: '#00BB00',
             Angle: 90,
             HitPattern: 'HullFire_20',
         },

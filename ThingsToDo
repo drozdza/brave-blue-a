@@ -1,7 +1,7 @@
 - Adding squads to maps
 
-- Repair torpedo Aiming
 - Repair BubbleWave
+    - Objects immuned for things that carry the same immunity ID (like local groups)
 
 - Pariath shields enemies from its own explosion
 
@@ -10,15 +10,12 @@
     - Left the hack lever in cookies
 
 
-- >> ships should orbit
-
+- Some stars explode
 - ExplosivePresets "dontCollide" problem
 
 - Mines as Layers [??]
 
 - better way to control particle density of objects.
-
-- X attack as curved NailBombs
 
 - showing last killed enemies (and how?)
 
@@ -132,6 +129,8 @@ New Player Weapons:
 New Enemies:
     - O,P
     - F same się leczą jeśli nie dzieje się nic innego
+
+    - Some Ship with giant { } around
 
     - Ship cleaning Destruction Fields
 

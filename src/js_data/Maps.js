@@ -128,7 +128,10 @@ BBAdata['MAPS']={
     },
     'Lx171':{
         BoardMods:['sitOnMap','allAvoid'],
-        Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, v:20, K:2}}],
+        Place:[
+            {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, v:20, K:2}},
+            {Random:{X: 0, Y: 0, Radius: 800}, What:{v:20}, GroupMods:['violetColor','vuvisOrbit']},
+        ],
     },
     'Lx1130':{
         BoardMods:['sitOnMap','allAvoid'],
@@ -157,7 +160,7 @@ BBAdata['MAPS']={
         BoardMods:['sitOnMap','allAvoid'],
         Place:[{Random:{X: 0, Y: 0, Radius: 1000}, What:{StarX: 60, L:10, F:5, M:10, T:10, K:3}}],
     },
-    'Lx3096':{
+    'Lx3450':{
         BoardMods:['sitOnMap','allAvoid'],
         Place:[
             {RingOf:{X: 0, Y: 0, Radius: 800, RadiusPlus:200}, What:{StarX: 60}},

@@ -28,8 +28,8 @@ GAMEobject.prototype.setBoard = function(){
         html2+='<canvas id="UnderCanvas" style="width:'+this.Dx+'px; height: '+this.Dy+'px;" width="'+this.Dx+'" height="'+this.Dy+'"></canvas>';
         html2+='<canvas id="MainCanvas" style="width:'+this.Dx+'px; height: '+this.Dy+'px;" width="'+this.Dx+'" height="'+this.Dy+'"></canvas>';
         // html2+='<canvas id="OverCanvas" style="width:'+this.Dx+'px; height: '+this.Dy+'px;" width="'+this.Dx+'" height="'+this.Dy+'"></canvas>';
-        html2+='<canvas id="BlurCanvas" style="width:'+this.Dx+'px; height: '+this.Dy+'px;" width="'+this.Dx+'" height="'+this.Dy+'"></canvas>';
         html2+='<div id="gameboard2">'+html+'<div id="gameboardMarkers"></div></div>';
+        html2+='<canvas id="BlurCanvas" style="width:'+this.Dx+'px; height: '+this.Dy+'px;" width="'+this.Dx+'" height="'+this.Dy+'"></canvas>';
     html2+='</div>';
     html2+='<div id="gameOverlay" class="cursorCross"><div id="bulletRadius"><div id="bullRadX"></div></div></div>';
 

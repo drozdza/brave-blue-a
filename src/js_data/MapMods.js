@@ -87,4 +87,10 @@ BBAdata['MapMODS']={
         ],
         MapModActions:[{t:'tryBuildSquads'}],
     },
+    vuvisOrbit:{
+        who:['vuvis'],
+        toDo:[
+            {N:58,T:'goOrbit', minAlarm: 5},
+        ],
+    }
 };

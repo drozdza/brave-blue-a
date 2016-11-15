@@ -136,6 +136,8 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
                     this.makeDMG(SH.DmgTransfer,{Dmg:DMGreduce,T:'transform'},false);
                     var L = this.putObj_directAnim('dmgTransfer', {timeDeath: 10});
                     this.O[L].pathD = ['M', parseInt(o), 'L', parseInt(SH.DmgTransfer)];
+                }else{
+                    DMGval-=-DMGreduce;
                 }
             }
 
