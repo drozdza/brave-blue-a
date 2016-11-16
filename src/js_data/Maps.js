@@ -270,7 +270,7 @@ BBAdata['MAPS']={
         BoardMods:['sitOnMap','allAvoid','violetColor'],
         EndPortal:{X:0,Y:-120},
         WinningConds:[
-            {T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, Reward:{Cash:150,Conquer:1}, EndPortal:{X:0,Y:0}},
+            {T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, Reward:{Gold:150,Conquer:1}, EndPortal:{X:0,Y:0}},
             {T:'Add',C:{'E:koriaz':{max:0,D:'killMax'}}},
             {T:'Add',C:{'E:hedgehog':{max:0,D:'killMax'}}},
             {T:'Add',C:{'E:thunderton':{max:0,D:'killMax'}}},

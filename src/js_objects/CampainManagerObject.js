@@ -3,6 +3,7 @@ CampainManagerObject = function(){
     this.goldTotal = 0;
     this.goldLeft = 0;
     this.campainFlags = {};
+    this.campainRoutes = {};
     this.levelsCompletion = {};
 
     this.makeCampain = function(){
@@ -97,6 +98,38 @@ CampainManagerObject = function(){
     }
 
     this.countGoldAndFlags = function(){
+        this.goldTotal = 0;
+        this.campainFlags = {};
+        this.campainRoutes = {};
+
+        for(var levelName in this.levelsCompletion){
+            var L = this.levelsCompletion[levelName];
+
+            var WinC = BBAdata['MAPS'][levelName].WinningConds;
+
+            for(var w in WinC){
+                var jest = false;
+                for(var p in L.partials)
+                    if(P[p][w] == 'W'){
+                        jest = true;
+                        break;
+                    }
+                if(jest) this.WinC_addGoldAndFlags(levelName,WinC[w]);
+
+            }
+        }
+    }
+    this.WinC_addGoldAndFlags(leveName,WinCw){
+        var Routes = {};
+        if(BBAdata['MAPS'][levelName].Routes) Routes = Routes;
+        if(typeof WinCw.Reward != 'undefined'){
+            if(WinCw.Reward.Gold) this.goldTotal-=-WinCw.Reward.Gold;
+                    else          this.goldTotal-=-100;
+            for(var flag as WinCw)
+
+        }else{
+            this.goldTotal-=-100;
+        }
 
     }
 }
