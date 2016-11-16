@@ -2,13 +2,16 @@ function MENUobject(){
 
     this.ShipPresetChoosen = 'start';
 
+    this.getMenu = new GetMenuObject();
     this.SB = new MenuShipBuildingObject();
     this.SM = new MenuStarMapObject();
 
+    this.CM = new CampainManagerObject();
 
     this.start = function(){
         this.makeMenuBoards();
         this.SB.makeMenuShip();
+        this.CM.makeCampain();
         this.SM.makeMenuStars();
         this.showMenu='Boards';
         $('.ToggleMenu').click(function(){ MENU.toggleMenu(); });
@@ -17,21 +20,15 @@ function MENUobject(){
             this.ShipPresetChoosen = BBAdata.GET.SHIPPRESET;
 
     }
-    this.show = function(){
+    this.show = function(){ // after playing the game
         $('#Menu').show();
         this.SM.startAnimation();
     }
 
-    this.getMenu = false;
 
     this.makeMenuBoards = function(){
-        this.getMenu = new GetMenuObject();
         var html = '';
-
         html+='<div id="starMapContainer"><canvas id="starMap" style="width: 100%; height: 650px;"></canvas></div>';
-
-        // this.loadMaps();
-
         $('#Menu').append(html+this.getMenu.makeHtml());
     }
     this.loadMaps = function(){
@@ -49,12 +46,12 @@ function MENUobject(){
         CanvasManager = new CanvasManagerObject();
         CanvasManager.start();
         GAME = new GAMEobject();
-        GAME.start(BBAdata['MAPS'][id],cloneObj(BBAdata['SHIPpresets'][this.ShipPresetChoosen]));
+        GAME.start(id, BBAdata['MAPS'][id],cloneObj(BBAdata['SHIPpresets'][this.ShipPresetChoosen]));
     }
 
     this.toggleMenu = function(){
-        if(this.showMenu=='Ship')    this.hideMenuShip();
-                else                this.showMenuShip();
+        if(this.showMenu=='Ship') this.hideMenuShip();
+                else              this.showMenuShip();
     }
     this.hideMenuShip = function(){
         this.showMenu = 'Boards';
@@ -64,4 +61,7 @@ function MENUobject(){
         this.showMenu = 'Ship';
         $('#MenuShip').animate({left:'12%'},500);
     }
+
+
+
 }

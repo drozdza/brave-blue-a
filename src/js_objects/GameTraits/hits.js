@@ -181,7 +181,7 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
     }
 
     if(O.Shields){
-        ShieldObj = this.testShields(O,o,DMG);
+        var ShieldObj = this.testShields(O,o,DMG);
         AnimHits = DMGval = ShieldObj.DMGval;
 
         if(DMGval < 1 && ShieldObj.Action == 'die' && q){

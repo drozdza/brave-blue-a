@@ -176,7 +176,7 @@ BBAdata['ExplosivesPresets']={
     },
 
     BubbleMissle:{
-        onHitDieExpire: {Do:'explode',explodeType:'RoundField', fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDMG:{Dmg:3,T:'energy'}, OnDamageExpire:1, ExpireTime:60, moveAlong: 5, dontHit:['ME']},
+        onHitDieExpire: {Do:'explode',explodeType:'RoundField', fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDMG:{Dmg:3,T:'energy'}, OnDamageExpire:1, ExpireTime:60, moveAlong: 5, dontHit:['ME','M']},
     },
     BubbleStorm:{
         Dec: 30,

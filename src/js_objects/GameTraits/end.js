@@ -39,10 +39,11 @@ GAMEobject.prototype.teleportShipOut = function(){
 GAMEobject.prototype.showScoringScreen = function(){
     var html = '';
     html += '<span style="font-size: 70px;">Game End!</span><br/>';
-
     html += this.showEndGameCount();
 
     $('#Game').append('<div id="endGameBoard">'+html+'</div>');
+
+    MENU.CM.completeLevel(this.MapName, this.countWinningTab());
 }
 GAMEobject.prototype.stopAnimations = function(gameHash){
     if(gameHash != this.gameHash) return false;

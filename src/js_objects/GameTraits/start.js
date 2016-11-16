@@ -49,7 +49,8 @@ GAMEobject.prototype.setBoard = function(){
       //  document.addEventListener('mouseup',function(e){     GAME.mouse_up(e); },false);
       //  document.addEventListener('mousemove',function(e){     GAME.mousemove(e); },false);
 }
-GAMEobject.prototype.start = function(Setting,Ship){
+GAMEobject.prototype.start = function(Name,Setting,Ship){
+    this.MapName = Name;
     this.MapSetting = Setting;
     this.gameHash = makeRandomHash();
 

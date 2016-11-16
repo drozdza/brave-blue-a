@@ -1,7 +1,6 @@
 - Adding squads to maps
 
-- Repair BubbleWave
-    - Objects immuned for things that carry the same immunity ID (like local groups)
+- BubbleWave dont hurt D shields
 
 - Pariath shields enemies from its own explosion
 
