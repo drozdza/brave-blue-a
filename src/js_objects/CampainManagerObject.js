@@ -12,7 +12,6 @@ CampainManagerObject = function(){
 
 
     this.completeLevel = function(levelName, partialsTab){
-        console.log(levelName, partialsTab);
         if(partialsTab.search('W') != -1){
             if(typeof this.levelsCompletion[levelName] == 'undefined')
                 this.levelsCompletion[levelName] = {partials:[]};
@@ -20,24 +19,12 @@ CampainManagerObject = function(){
             var l = this.levelsCompletion[levelName].partials.length;
             this.levelsCompletion[levelName].partials[ l ] = partialsTab;
 
-            this.logPartials();
-
             this.scalePartials(levelName);
-
-            this.logPartials();
 
             this.saveCampain();
             this.countGoldAndFlags();
         }
-    }
-
-    this.logPartials = function(){ // to later remove
-        for(var i in this.levelsCompletion){
-            var L = this.levelsCompletion[i];
-            for(var j in L.partials){
-                console.log(i+' '+L.partials[j]);
-            }
-        }
+        this.updateHtml();
     }
 
     this.scalePartials = function(levelName){
@@ -46,10 +33,9 @@ CampainManagerObject = function(){
         var e = 1;
         while((e = this.scalePartials_find(P))!==false){
             var vP = [];
-            for(var a in P){
+            for(var a in P)
                 if(a != e)
                     vP[ vP.length ] = P[a];
-            }
             P = vP;
         }
         this.levelsCompletion[levelName].partials = P;
@@ -59,7 +45,6 @@ CampainManagerObject = function(){
         for(var a in P)
             for(var b in P){
                 if(a==b) continue;
-                console.log('Porownajmy:',P[a],P[b]);
                 var isIn = true;
                 for(var i=0; i<P[a].length; ++i)
                     if(P[a][i]=='W' && P[b][i]=='L'){
@@ -94,7 +79,6 @@ CampainManagerObject = function(){
             }
         }
         setCookie('MistForge_BraveBlueA',cookie,1000);
-        console.log(cookie);
     }
 
     this.countGoldAndFlags = function(){
@@ -104,32 +88,62 @@ CampainManagerObject = function(){
 
         for(var levelName in this.levelsCompletion){
             var L = this.levelsCompletion[levelName];
+            var P = L.partials;
 
             var WinC = BBAdata['MAPS'][levelName].WinningConds;
+            var Routes = {};
+            if(BBAdata['MAPS'][levelName].Routes)
+                Routes = BBAdata['MAPS'][levelName].Routes;
 
             for(var w in WinC){
                 var jest = false;
-                for(var p in L.partials)
+                for(var p in P)
                     if(P[p][w] == 'W'){
                         jest = true;
                         break;
                     }
-                if(jest) this.WinC_addGoldAndFlags(levelName,WinC[w]);
-
+                if(jest) this.WinC_addGoldAndFlags(Routes,WinC[w]);
             }
+
+            this.goldTotal-=-this.countPartialsBonus(P);
         }
     }
-    this.WinC_addGoldAndFlags(leveName,WinCw){
-        var Routes = {};
-        if(BBAdata['MAPS'][levelName].Routes) Routes = Routes;
-        if(typeof WinCw.Reward != 'undefined'){
-            if(WinCw.Reward.Gold) this.goldTotal-=-WinCw.Reward.Gold;
-                    else          this.goldTotal-=-100;
-            for(var flag as WinCw)
 
-        }else{
+    this.WinC_addGoldAndFlags = function(Routes,WinCw){
+        if(typeof WinCw.RewardGold != 'undefined'){
+            if(WinCw.RewardGold) this.goldTotal-=-WinCw.RewardGold;
+                    else         this.goldTotal-=-100;
+        }else
             this.goldTotal-=-100;
-        }
 
+        if(typeof WinCw.RewardFlags != 'undefined')
+            for(var flag in WinCw.RewardFlags){
+                this.campainFlags[flag]=1;
+                if(typeof Routes[flag] == 'undefined')
+                    for(var r in Routes[flag])
+                        this.campainRoutes[r] = cloneObj(Routes[flag][r]);
+            }
+
+    }
+
+    this.countPartialsBonus = function(P){
+        var max = 0;
+        for(var p in P){
+            var count = 0;
+            for(var w in P[p])
+                if(P[p][w]=='W') ++count;
+            if(max < count) max = count;
+        }
+        return (max-1)*50;
+    }
+
+    this.updateHtml = function(){
+        var html = '';
+
+        html += '<div class="gold">'+this.goldTotal+'</div>';
+        for(var flag in this.campainFlags)
+            html += flag+', ';
+
+        $('#goldContainer').html('<div>'+html+'</div>');
     }
 }

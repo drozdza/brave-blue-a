@@ -29,7 +29,7 @@ function MENUobject(){
     this.makeMenuBoards = function(){
         var html = '';
         html+='<div id="starMapContainer"><canvas id="starMap" style="width: 100%; height: 650px;"></canvas></div>';
-        $('#Menu').append(html+this.getMenu.makeHtml());
+        $('#Menu').append(html+this.getMenu.makeHtml()+'<div id="goldContainer"></div>');
     }
     this.loadMaps = function(){
          for(var id in BBAdata['MAPS'])

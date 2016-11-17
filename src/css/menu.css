@@ -180,3 +180,29 @@ body{
     color: blue;
     cursor: pointer;
 }
+
+#goldContainer{
+    position: fixed;
+    top: 0px;
+    left: 50%;
+    width: 1px;
+    height: 1px;
+}
+#goldContainer > div{
+    position: absolute;
+    width: 200px;
+    left: -103px;
+    border-style: double;
+    border-width: 0px 5px 5px 5px;
+    border-color: darkblue;
+    background: black;
+    border-radius: 0px 0px 14px 14px;
+    color: green;
+}
+#goldContainer > div div{
+    color: gold;
+    text-align: center;
+    font-weight: bold;
+    font-size: 28px;
+    margin: 10px;
+}
