@@ -1,4 +1,5 @@
-BBAdata['MAPS']['001'] = {
+if(BBAdata.GET.MAPSMODE)
+BBAdata.MAPS['001'] = {
     StarMap:{ x:100, y:50, mouseRadius: 70, shipRadius: 20,
         Anims:[
             {t:'static', LIBpath: 'StarPath', size: 35, color:'white', x:0, y:0, q:0},

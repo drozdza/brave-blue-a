@@ -6,6 +6,7 @@ BBAdata.GET={
     FPS:0,
     SETF:30,
     GAMESTATS: 0,
+    MAPSMODE: 0,
     SHIPPRESET: 0,
 
 };
@@ -23,6 +24,7 @@ BBAdata.GET={
                 case 'fps':         BBAdata.GET.FPS        = BUM[1]; break;
                 case 'setFrames':   BBAdata.GET.SETF       = BUM[1]; break;
                 case 'gameStats':   BBAdata.GET.GAMESTATS  = BUM[1]; break;
+                case 'mapsMode':    BBAdata.GET.MAPSMODE   = BUM[1]; break;
                 case 'shipPresets': BBAdata.GET.SHIPPRESET = BUM[1]; break;
             }
         }

@@ -1,4 +1,5 @@
-BBAdata['MAPS']['Mines'] = {
+if(BBAdata.GET.MAPSMODE){
+BBAdata.MAPS.Mines = {
     BoardMods:['sitOnMap','allAvoid'],
     Place:[
         {LineOf:{X:-1000, Y:-400, Angle: 0, Distance: 100}, What:{Mine:3}, objData:{explodePreset:'MineExplosionRose'}},

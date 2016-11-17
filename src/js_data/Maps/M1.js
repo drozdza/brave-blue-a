@@ -1,4 +1,5 @@
-BBAdata['MAPS']['M1'] = {
+if(BBAdata.GET.MAPSMODE)
+BBAdata.MAPS.M1 = {
     Place:[
         {Random:{X:-400, Y:0, Radius: 50}, What:{Mine: 60},objData:{explodePreset:'ExplosionSize1'}},
         {Random:{X:-400, Y:0, Radius: 50}, What:{K: 3},objData:{explodePreset:'ExplosionSize3'}},

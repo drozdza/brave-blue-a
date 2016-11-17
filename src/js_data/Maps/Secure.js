@@ -1,4 +1,5 @@
-BBAdata['MAPS']['Secure'] = {
+if(BBAdata.GET.MAPSMODE)
+BBAdataMAPS.Secure = {
     BoardMods:['sitOnMap','allAvoid','greenColor'],
     WinningConds:[
         {T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, RewardGold:150, RewardFlags:{Conquer:1}, EndPortal:{X:200,Y:0}},

@@ -1,4 +1,5 @@
-BBAdata['MAPS']['U1'] = {
+if(BBAdata.GET.MAPSMODE)
+BBAdata.MAPS.U1 = {
     BoardMods:['sitOnMap','allAvoid'],
     Place:[
         {Random:{X: 0, Y: 0, Radius: 200}, What: {K:1}},

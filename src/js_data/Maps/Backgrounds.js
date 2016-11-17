@@ -1,4 +1,5 @@
-BBAdata['MAPS']['Backgrounds'] = {
+if(BBAdata.GET.MAPSMODE)
+BBAdata.MAPS.Backgrounds = {
     Backgrounds:{2: 0.7, 3: 0.3},
     Place:[
         // {RingOf:{X:0, Y:0, Radius: 200, RadiusPlus: 400}, What:{K: 1}},

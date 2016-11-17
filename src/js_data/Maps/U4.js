@@ -1,4 +1,5 @@
-BBAdata['MAPS']['U4'] = {
+if(BBAdata.GET.MAPSMODE)
+BBAdata.MAPS.U4 = {
     BoardMods:['sitOnMap','allAvoid'],
     WinningConds:[
         {T:'Main',C:{'D:gargamon':{min:1,D:'killLeft'}}, Reward:{Conquer:1}},

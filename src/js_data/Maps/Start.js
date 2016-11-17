@@ -1,4 +1,5 @@
-BBAdata['MAPS']['Start'] = {
+if(BBAdata.GET.MAPSMODE)
+BBAdata.MAPS.Start = {
     Place:[
         {Random:{X:0, Y:0, Radius: 600}, What:{Star: 300, K: 1}},
         {LineOf:{X:-110, Y:-600, Angle: 0, Distance: 80}, What:{Mine:20},objData:{explodePreset:'ExplosionSize1'}},
