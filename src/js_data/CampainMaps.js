@@ -9,6 +9,11 @@ BBAdata.MAPS.First = {
     WinningConds:[
         {T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, RewardGold:100, RewardFlags:{Conquer:1}, EndPortal:{X:0,Y:0}},
     ],
+    Routes:{
+        Conquer:{
+            'First_Second':{A:'First',B:'Second'},
+        },
+    },
     Ship:{Start:{X: -500, Y: 0, A:90}},
     BoardMods:['sitOnMap','greenColor'],
     Place:[
@@ -26,6 +31,12 @@ BBAdata.MAPS.Second = {
     WinningConds:[
         {T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, RewardGold:100, RewardFlags:{Conquer:1}, EndPortal:{X:0,Y:0}},
     ],
+    Routes:{
+        Conquer:{
+            'First_Second':{A:'First',B:'Second'},
+            'Second_Third':{A:'Second',B:'Third'},
+        },
+    },
     Ship:{Start:{X: -500, Y: 0, A:90}},
     BoardMods:['sitOnMap','greenColor'],
     Place:[
@@ -44,6 +55,11 @@ BBAdata.MAPS.Third = {
     WinningConds:[
         {T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, RewardGold:100, RewardFlags:{Conquer:1,TroLoLo:1}, EndPortal:{X:0,Y:0}},
     ],
+    Routes:{
+        Conquer:{
+            'Second_Third':{A:'Second',B:'Third'},
+        },
+    },
     Ship:{Start:{X: -500, Y: 0, A:90}},
     BoardMods:['sitOnMap','greenColor'],
     Place:[

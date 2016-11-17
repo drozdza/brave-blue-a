@@ -119,7 +119,7 @@ CampainManagerObject = function(){
         if(typeof WinCw.RewardFlags != 'undefined')
             for(var flag in WinCw.RewardFlags){
                 this.campainFlags[flag]=1;
-                if(typeof Routes[flag] == 'undefined')
+                if(typeof Routes[flag] != 'undefined')
                     for(var r in Routes[flag])
                         this.campainRoutes[r] = cloneObj(Routes[flag][r]);
             }
@@ -143,6 +143,8 @@ CampainManagerObject = function(){
         html += '<div class="gold">'+this.goldTotal+'</div>';
         for(var flag in this.campainFlags)
             html += flag+', ';
+        for(var route in this.campainRoutes)
+            html += route+', ';
 
         $('#goldContainer').html('<div>'+html+'</div>');
     }
