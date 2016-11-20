@@ -116,8 +116,9 @@ function MenuStarMapObject(){
 
         for(var s in this.StarMap){
             var S = this.StarMap[s];
-            var xx = S.x-x;
-            var yy = S.y-y;
+            var MG = BBAdata.MapGroups[S.MapGroup];
+            var xx = S.x- -MG.x-x;
+            var yy = S.y- -MG.y-y;
 
             if(Math.sqrt(xx*xx- -yy*yy) <= S.mouseRadius){
                 if(s != this.choosenMap)
@@ -176,9 +177,10 @@ function MenuStarMapObject(){
 
     this.showMapElement = function(s){
         var S = this.StarMap[s];
+        var MG = BBAdata.MapGroups[S.MapGroup];
 
         this.Canvas.save();
-        this.Canvas.translate(this.centerX- -S.x, this.centerY- -S.y);
+        this.Canvas.translate(this.centerX- -S.x- -MG.x, this.centerY- -S.y- -MG.y);
 
         if(S.t=='simple'){
             this.Canvas.font="20px Arial";
@@ -303,9 +305,11 @@ function MenuStarMapObject(){
                 $('.starMapInfo').remove();
                 var html = '';
 
+                var MG = BBAdata.MapGroups[S.MapGroup];
+
                 var mapName = s;
-                var wx = this.centerX- -S.x;
-                var wy = this.centerY- -S.y;
+                var wx = this.centerX- -S.x- -MG.x;
+                var wy = this.centerY- -S.y- -MG.y;
 
                 if(menuSite == 'left') wx -= 420;
                         else           wx -=-120;

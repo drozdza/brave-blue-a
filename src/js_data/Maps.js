@@ -1,4 +1,5 @@
-BBAdata['MAPS']={};
+BBAdata.MAPS={};
+BBAdata.MapGroups = {};
 
 if(BBAdata.GET.MAPSMODE){
 
