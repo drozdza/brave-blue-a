@@ -253,7 +253,16 @@ BBAdata.MAPS.Lx482={
     Place:[
         {RingOf:{X: 0, Y: 0, Radius: 300}, What:{HS:8,Q:6,F:3,M:10,R:4,J:2}},
     ],
-    },
+};
+BBAdata.MAPS.Lx1414={
+    BoardMods:['sitOnMap','allAvoid'],
+    Place:[
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, K:2, SI:6}},
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{SI:6},GroupMods:['saisungVivusOrbiters']}
+    ],
+};
+
+
 BBAdata.MAPS.HealthSplit={
     BoardMods:['sitOnMap','allAvoid','healthSplit','carras25health'],
     Place:[{Random:{X: 0, Y: 0, Radius: 1000}, What:{StarX: 25, A: 10}}],

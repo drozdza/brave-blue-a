@@ -2724,4 +2724,55 @@ BBAdata['ObjectDatas']={
         ],
         shipVariables:{},
     },
+    saisung:{
+        view:{
+            Letter: 1414,   // big S with I
+            LetterSize: 50,
+            Color: 'red',
+            Angle: 0,
+            HitPattern: 'HullFire_60',
+        },
+
+        lifeM: 40,
+        radius: 25,
+
+        prodSquad: 18,
+        Res: {'prodSquad': {M:18,T:0}},
+        weapon:[
+            {t:'refilResource', resource: 'prodSquad', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
+            {t:'produceSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prodSquad', usedResR: 3, maxSpeed: 2, minDistToEnemy:400, doNextWeapon: true},
+        ],
+
+        squadSchemeType: {t:'loose', count: 6, data:{type:'enemyShip', objectType:'vuvis'}},
+        squadScheme: [],
+
+        doingNow: 'changeManouver',
+        doingTime: -1,
+        Manouver: 'goStraight',
+        toDo: [
+            {N:35,T:'followEnemy', minAlarm: 5},
+            {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+        ],
+
+        speedArr:[0,
+            {S:{shipVar:'speed',Add:-4}, T:1},
+            {S:{shipVar:'speed'},        T:{shipVar:'speedT'}},
+            {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT',Add:-1}}
+
+        ],
+        spotTick: 8,
+        spotArr: [0,
+            {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+            {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+            {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        ],
+
+        shipVariables:{
+            speed: {Const: 6, Rand: 3},
+            speedT: {Const: 1.5, Rand: 1.5},
+            spotRad: {Const: 180, RandInt: 80},
+            spotRad2: {Const: 400, RandInt: 200},
+            spotAngle2: {Const: 40, RandInt: 30}
+        },
+    },
 };

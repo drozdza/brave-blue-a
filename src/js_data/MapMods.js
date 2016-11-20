@@ -131,6 +131,14 @@ BBAdata['MapMODS']={
         ],
         MapModActions:[{t:'tryBuildSquads'}],
     },
+    saisungVivusOrbiters:{
+        who:['saisung'],
+        view: {Color:'#408'},
+        squadSchemeTypeArray: [
+            {t:'loose', count: 6, data:{type:'enemyShip', objectType:'vuvis', SquadMods:['violetColor','vuvisOrbit']}},
+        ],
+        MapModActions:[{t:'tryBuildSquads'}],
+    },
     vuvisOrbit:{
         who:['vuvis'],
         toDo:[
