@@ -6,6 +6,8 @@ CampainManagerObject = function(){
     this.campainRoutes = {};
     this.levelsCompletion = {};
 
+    this.currentLevel = 'First';
+
     this.makeCampain = function(){
         this.getSavedCampain();
     }

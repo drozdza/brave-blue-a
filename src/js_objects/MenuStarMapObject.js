@@ -41,6 +41,7 @@ function MenuStarMapObject(){
     this.startAnimation = function(){
         this.intervalId = setInterval(function(){ MENU.SM.frame(); }, 33);
         this.resize();
+        this.prepareStarMap();
         this.frame();
 
         $('#starMap')
@@ -72,6 +73,7 @@ function MenuStarMapObject(){
             $('.starMapInfo').remove();
         }else{
             this.choosenMap = this.mouseOverMap;
+            MENU.CM.currentLevel = this.mouseOverMap;
             this.mouseOverMap = false;
         }
     }
@@ -116,9 +118,9 @@ function MenuStarMapObject(){
 
         for(var s in this.StarMap){
             var S = this.StarMap[s];
-            var MG = BBAdata.MapGroups[S.MapGroup];
-            var xx = S.x- -MG.x-x;
-            var yy = S.y- -MG.y-y;
+            if(!S.avaliable && MENU.CM.currentLevel != s) continue;
+            var xx = S.x-x;
+            var yy = S.y-y;
 
             if(Math.sqrt(xx*xx- -yy*yy) <= S.mouseRadius){
                 if(s != this.choosenMap)
@@ -142,12 +144,25 @@ function MenuStarMapObject(){
         for(var m in BBAdata['MAPS']){
             var M = BBAdata['MAPS'][m];
             if(M.StarMap){
-                // here we check if its visible
-                // ...
+
+                if(typeof M.StarMap.VisibleIf != 'undefined')
+                    if(this.visibleIf(M.StarMap.VisibleIf)===false) continue;
+                if(typeof M.StarMap.MapGroup != 'undefined')
+                    if(typeof BBAdata.MapGroups[M.StarMap.MapGroup].VisibleIf != 'undefined')
+                        if(this.visibleIf(BBAdata.MapGroups[M.StarMap.MapGroup].VisibleIf)===false) continue;
+
                 this.StarMap[m] = cloneObj(M.StarMap);
+
+                if(typeof M.StarMap.MapGroup != 'undefined'){
+                    var MG = BBAdata.MapGroups[M.StarMap.MapGroup];
+                    this.StarMap[m].x-=-MG.x;
+                    this.StarMap[m].y-=-MG.y;
+                }
+
                 this.StarMap[m].t = 'map';
-                // here we can add some state to it (like convuered)
-                // ...
+
+                this.StarMap[m].avaliable = this.isRouteTo(m);
+
             }else{
                 this.StarMap[m]={
                     x: -400,
@@ -161,6 +176,22 @@ function MenuStarMapObject(){
             }
         }
     }
+    this.visibleIf = function(visibleTab){
+        for(var v in visibleTab){
+            var flagName = visibleTab[v];
+            for(var s in MENU.CM.campainFlags)
+                if(s==flagName) return true;
+        }
+        return false;
+    }
+    this.isRouteTo = function(mapName){
+        for(var r in MENU.CM.campainRoutes){
+            var R = MENU.CM.campainRoutes[r];
+            if(R.A==mapName || R.B==mapName)
+                return true;
+        }
+        return false;
+    }
 
     this.frame = function(){
         ++this.tick;
@@ -171,16 +202,18 @@ function MenuStarMapObject(){
         this.centerX = parseInt(this.width/2- -this.mapX);
         this.centerY = parseInt(this.height/2- -this.mapY);
 
+        for(var r in MENU.CM.campainRoutes)
+            this.showMapRoute(r);
+
         for(var s in this.StarMap)
             this.showMapElement(s);
     }
 
     this.showMapElement = function(s){
         var S = this.StarMap[s];
-        var MG = BBAdata.MapGroups[S.MapGroup];
 
         this.Canvas.save();
-        this.Canvas.translate(this.centerX- -S.x- -MG.x, this.centerY- -S.y- -MG.y);
+        this.Canvas.translate(this.centerX- -S.x, this.centerY- -S.y);
 
         if(S.t=='simple'){
             this.Canvas.font="20px Arial";
@@ -228,15 +261,56 @@ function MenuStarMapObject(){
                     this.Canvas.textAlign = 'center';
                     this.Canvas.textBaseline = 'middle';
                     this.Canvas.fillText(A.letter, 0, 0);
-
                 }
 
                 this.Canvas.restore();
             }
 
+            if(MENU.CM.currentLevel == s){
+                this.Canvas.save();
 
+                var cr = ((5*this.tick)%360) * this.RAD;
+                var cx = S.shipRadius*Math.cos(cr);
+                var cy = S.shipRadius*Math.sin(cr);
+                this.Canvas.translate(cx, cy);
+                this.Canvas.rotate(cr- -(180 * this.RAD));
+
+                this.Canvas.fillStyle = 'blue';
+                this.Canvas.font="bold 12px Arial";
+                this.Canvas.textAlign = 'center';
+                this.Canvas.textBaseline = 'middle';
+                this.Canvas.fillText('A', 0, 0);
+
+                this.Canvas.restore();
+            }
         }
         this.showMapMenu(S,s);
+        this.Canvas.restore();
+    }
+
+    this.showMapRoute = function(r){
+        var R = MENU.CM.campainRoutes[r];
+        var A = this.StarMap[R.A];
+        var B = this.StarMap[R.B];
+
+        var Cx = A.x-B.x;
+        var Cy = A.y-B.y;
+        var Q  = -Math.atan2(-Cx,-Cy)- -Math.PI/2;
+        var R  = Math.sqrt(Cx*Cx- -Cy*Cy);
+        var Ax = A.mouseRadius*Math.cos(Q);
+        var Ay = A.mouseRadius*Math.sin(Q);
+        var Bx = (R-B.mouseRadius)*Math.cos(Q);
+        var By = (R-B.mouseRadius)*Math.sin(Q);
+
+        this.Canvas.save();
+
+        this.Canvas.translate(this.centerX- -A.x, this.centerY- -A.y);
+
+        this.Canvas.strokeStyle = "#222";
+        this.Canvas.lineWidth = 6;
+        this.Canvas.lineCap = 'round';
+        this.Canvas.stroke(new Path2D('M '+Ax+','+Ay+' L '+Bx+','+By));
+
         this.Canvas.restore();
     }
 
@@ -305,11 +379,9 @@ function MenuStarMapObject(){
                 $('.starMapInfo').remove();
                 var html = '';
 
-                var MG = BBAdata.MapGroups[S.MapGroup];
-
                 var mapName = s;
-                var wx = this.centerX- -S.x- -MG.x;
-                var wy = this.centerY- -S.y- -MG.y;
+                var wx = this.centerX- -S.x;
+                var wy = this.centerY- -S.y;
 
                 if(menuSite == 'left') wx -= 420;
                         else           wx -=-120;
