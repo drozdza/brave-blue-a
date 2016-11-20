@@ -282,6 +282,8 @@ GAMEobject.prototype.addBoardMod = function(o,MODname){
         var A = ACTIONS[a];
         if(A.t=='tryBuildSquads')
             this.tryBuildSquads(O,o);
+        if(A.t=='addShield')
+            this.addShield(O,o,A.shield);
     }
 
     if(typeof MOD.fieldAnim != 'undefined')

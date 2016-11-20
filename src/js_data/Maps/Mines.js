@@ -1,4 +1,4 @@
-if(BBAdata.GET.MAPSMODE){
+if(BBAdata.GET.MAPSMODE)
 BBAdata.MAPS.Mines = {
     BoardMods:['sitOnMap','allAvoid'],
     Place:[

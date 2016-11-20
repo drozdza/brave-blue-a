@@ -110,6 +110,13 @@ BBAdata.MAPS.Q={
         {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:3, K:2},GroupMods:['orangeColor','orhenesShipsI']},
     ],
 };
+BBAdata.MAPS.Q2={
+    BoardMods:['sitOnMap'],
+    Place:[
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:2, K:2},GroupMods:['orangeColor','orhenesShipsI']},
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{Q:4},GroupMods:['orhenesSecure5']},
+    ],
+};
 BBAdata.MAPS.X={
     BoardMods:['sitOnMap'],
     Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, X:6, K:2}}],
@@ -263,6 +270,7 @@ BBAdata.MAPS.Backgrounds = 'load';
 BBAdata.MAPS.Mines = 'load';
 BBAdata.MAPS.Secure = 'load';
 BBAdata.MAPS.Secure2 = 'load';
+BBAdata.MAPS.Secure3 = 'load';
 BBAdata.MAPS.BigOnes={
     BoardMods:['sitOnMap','allAvoid'],
     Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, D:10, M:10, N:10, J:10, W:5, T:10, E:10, G:10, R:10, B:10, K:10, F:10, Q:5,X:5,TT:10,Tu:5}}],

@@ -1,10 +1,10 @@
 if(BBAdata.GET.MAPSMODE)
-BBAdata.MAPS.Secure = {
-    BoardMods:['sitOnMap','allAvoid','greenColor'],
+BBAdata.MAPS.Secure3 = {
+    BoardMods:['sitOnMap','allAvoid','colorGold'],
     WinningConds:[
-        {T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, RewardGold:150, RewardFlags:{Conquer:1}, EndPortal:{X:200,Y:0}},
+        {T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, RewardGold:150,RewardFlags:{Conquer:1}, EndPortal:{X:200,Y:0}},
         {T:'Main',C:{'D:orhenes':{min:6,D:'killMin'},'D:koriaz':{max:0,D:'DsaveMax'}}, RewardGold:100},
-        {T:'Main',C:{'D:carras':{min:100,D:'killMin'}}, RewardGold:100, RewardFlags:{Conquer:1}},
+        {T:'Main',C:{'D:carras':{min:100,D:'killMin'}}, RewardGold:100,RewardFlags:{Conquer:1}},
         {T:'Add',C:{seconds:{max:140,D:'timeTo'},gameEnded:{min:1,D:'hidden'}}, hideOnFial:true},
         {T:'Add',C:{seconds:{max:60,D:'timeTo'},'E:koriaz':{max:0,D:'killMax'}}, hideOnFial:true},
         {T:'Add',C:{seconds:{max:60,D:'timeTo'},'E:fariax':{max:0,D:'killMax'}}, hideOnFial:true},
@@ -18,8 +18,10 @@ BBAdata.MAPS.Secure = {
     Place:[
         {RingOf:{X: 0, Y:0, Radius: 800, RadiusPlus: 0}, What:{Star:60}},
         {RingOf:{X: 0, Y:0, Radius: 800, RadiusPlus: 1400}, What:{Star:120}},
-        {RingOf:{X: 0, Y:0, Radius: 2200}, What:{Star:80}},
-        {Random:{X: 0, Y: 0, Radius: 2200}, What: {K:10,F:10,Q:6}},
+        {RingOf:{X: 0, Y:0, Radius: 1400, RadiusPlus: 200}, What:{Star:100}},
+        {RingOf:{X: 0, Y:0, Radius: 2200}, What:{Star:180}},
+        {Random:{X: 0, Y: 0, Radius: 2200}, What: {Q:4}, GroupMods:['orhenesSecure1']},
+        {Random:{X: 0, Y: 0, Radius: 2200}, What: {Q:4}, GroupMods:['orhenesSecure2']},
         {What:{RoundField:1},objData:{x:0,y: -3000, radius:20, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
     ],
 };
