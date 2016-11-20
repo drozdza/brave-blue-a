@@ -2122,14 +2122,14 @@ BBAdata['ObjectDatas']={
         extends: 'slimensen',
         view:{
             Letter: 3452,
-            LetterSize: 25,
+            LetterSize: 18,
             Color: '#00BB00',
             Angle: 90,
             HitPattern: 'HullFire_20',
         },
 
         lifeM: 4,
-        radius: 15,
+        radius: 12,
 
         onDieDelete: false,
         onDieHideExplosion: false,
