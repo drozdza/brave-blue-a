@@ -27,9 +27,6 @@ function MenuStarMapObject(){
 
         this.Canvas = document.getElementById('starMap').getContext('2d');
 
-
-        this.resize();
-        this.frame();
         this.startAnimation();
     }
 
@@ -43,6 +40,8 @@ function MenuStarMapObject(){
 
     this.startAnimation = function(){
         this.intervalId = setInterval(function(){ MENU.SM.frame(); }, 33);
+        this.resize();
+        this.frame();
 
         $('#starMap')
             .on('mousedown',function(e){ MENU.SM.mouseDown(e); })
