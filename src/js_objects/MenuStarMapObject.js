@@ -269,7 +269,7 @@ function MenuStarMapObject(){
             if(MENU.CM.currentLevel == s){
                 this.Canvas.save();
 
-                var cr = ((5*this.tick)%360) * this.RAD;
+                var cr = ((5*this.tick - 30)%360) * this.RAD;
                 var cx = S.shipRadius*Math.cos(cr);
                 var cy = S.shipRadius*Math.sin(cr);
                 this.Canvas.translate(cx, cy);
