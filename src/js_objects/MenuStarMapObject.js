@@ -72,6 +72,7 @@ function MenuStarMapObject(){
             this.choosenMapMenu = false;
             $('.starMapInfo').remove();
         }else{
+            this.createTeleportJump(MENU.CM.currentLevel, this.mouseOverMap);
             this.choosenMap = this.mouseOverMap;
             MENU.CM.currentLevel = this.mouseOverMap;
             this.mouseOverMap = false;
@@ -105,8 +106,13 @@ function MenuStarMapObject(){
     }
 
     this.startMap = function(){
-        if(this.choosenMap !== false)
+        if(this.choosenMap !== false){
             MENU.startMap(this.choosenMap);
+            this.choosenMap = false;
+            this.choosenMapMenu = false;
+            $('.starMapInfo').remove();
+        }
+
     }
     this.moveCanvas = function(x,y){
         this.mapX-=-x;
@@ -171,6 +177,7 @@ function MenuStarMapObject(){
                     name: m,
                     mapName: m,
                     mouseRadius: 39,
+                    avaliable: true,
                 };
                 ++noMapY;
             }
@@ -207,6 +214,9 @@ function MenuStarMapObject(){
 
         for(var s in this.StarMap)
             this.showMapElement(s);
+
+        if(this.teleportJump != false)
+            this.showTeleportJump();
     }
 
     this.showMapElement = function(s){
@@ -287,7 +297,6 @@ function MenuStarMapObject(){
         this.showMapMenu(S,s);
         this.Canvas.restore();
     }
-
     this.showMapRoute = function(r){
         var R = MENU.CM.campainRoutes[r];
         var A = this.StarMap[R.A];
@@ -313,8 +322,6 @@ function MenuStarMapObject(){
 
         this.Canvas.restore();
     }
-
-
     this.showMapMenu = function(S,s){
         if(s === this.mouseOverMap){
             this.Canvas.strokeStyle = 'blue';
@@ -396,6 +403,18 @@ function MenuStarMapObject(){
                 this.choosenMapMenu = this.choosenMap;
             }
         }
+    }
+
+
+    this.showTeleportJump = function(){
+
+    }
+    this.createTeleportJump = function(A,B){
+        console.log('TelportJump:',A,B);
+        if(A == B) return false;
+
+        
+
     }
 
 
