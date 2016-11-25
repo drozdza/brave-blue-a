@@ -50,7 +50,8 @@ function MenuStarMapObject(){
             .on('mouseup',function(e){ MENU.SM.mouseUp(e); })
             .on('mouseleave',function(e){ MENU.SM.mouseUp(e); })
         $('#starMapContainer')
-            .on('click','.startGame', function(){ MENU.SM.startMap(); });
+            .on('click','.startGame', function(){ MENU.SM.startMap(); })
+            .on('click','.winGame', function(){ MENU.SM.winMap(); });
         $(window).on('resize', function(){ MENU.SM.resize(); });
     }
     this.stopAnimation = function(){
@@ -112,7 +113,14 @@ function MenuStarMapObject(){
             this.choosenMapMenu = false;
             $('.starMapInfo').remove();
         }
-
+    }
+    this.winMap = function(){
+        if(this.choosenMap !== false){
+            MENU.CM.autoCompleteLevel(this.choosenMap);
+            this.choosenMap = false;
+            this.choosenMapMenu = false;
+            $('.starMapInfo').remove();
+        }
     }
     this.moveCanvas = function(x,y){
         this.mapX-=-x;
@@ -396,6 +404,7 @@ function MenuStarMapObject(){
 
                 html += '<div class="mapName">'+mapName+'</div>';
                 html += '<div class="startGame">START</div>';
+                html += '<div class="winGame">autoWin</div>';
 
                 html = '<div class="starMapInfo" style="left: '+wx+'px; top:'+wy+'px;">'+html+'</div>';
 
@@ -413,7 +422,7 @@ function MenuStarMapObject(){
         console.log('TelportJump:',A,B);
         if(A == B) return false;
 
-        
+
 
     }
 

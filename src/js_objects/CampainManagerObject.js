@@ -12,7 +12,14 @@ CampainManagerObject = function(){
         this.getSavedCampain();
     }
 
-
+    this.autoCompleteLevel = function(levelName){
+        MENU.SM.stopAnimation();
+        partialsTab = '';
+        for(var i in BBAdata.MAPS[levelName].WinningConds)
+            partialsTab +='W';
+        this.completeLevel(levelName, partialsTab);
+        MENU.SM.startAnimation();
+    }
     this.completeLevel = function(levelName, partialsTab){
         if(partialsTab.search('W') != -1){
             if(typeof this.levelsCompletion[levelName] == 'undefined')

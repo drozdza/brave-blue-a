@@ -30,6 +30,7 @@ BBAdata.MAPS.Second = {
     },
     WinningConds:[
         {T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, RewardGold:100, RewardFlags:{C_Second:1}, EndPortal:{X:0,Y:0}},
+        {T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, RewardGold:100, RewardFlags:{C_Second:1}, EndPortal:{X:0,Y:0}},
     ],
     Routes:{
         C_Second:{
