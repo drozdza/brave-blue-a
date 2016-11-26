@@ -18,12 +18,14 @@ function MenuStarMapObject(){
     this.RAD = Math.PI/180;
 
     this.StarMap = {};
+    this.StarRoutes = {};
 
     this.centerX = 0;
     this.centerY = 0;
 
     this.makeMenuStars = function(){
         this.prepareStarMap();
+        this.prepareStarRoutes();
 
         this.Canvas = document.getElementById('starMap').getContext('2d');
 
@@ -42,6 +44,7 @@ function MenuStarMapObject(){
         this.intervalId = setInterval(function(){ MENU.SM.frame(); }, 33);
         this.resize();
         this.prepareStarMap();
+        this.prepareStarRoutes();
         this.frame();
 
         $('#starMap')
@@ -207,6 +210,28 @@ function MenuStarMapObject(){
         }
         return false;
     }
+    this.prepareStarRoutes = function(){
+        this.StarRoutes = {};
+
+        for(var r in MENU.CM.campainRoutes){
+            var R = this.StarRoutes[r] = cloneObj(MENU.CM.campainRoutes[r]);
+            var A = this.StarMap[R.A];
+            var B = this.StarMap[R.B];
+
+            R.realAx = A.x;
+            R.realAy = A.y;
+            var Cx = A.x-B.x;
+            var Cy = A.y-B.y;
+            var Q  = -Math.atan2(-Cx,-Cy)- -Math.PI/2;
+            R.rad = Math.sqrt(Cx*Cx- -Cy*Cy);
+            R.Ax = A.mouseRadius*Math.cos(Q);
+            R.Ay = A.mouseRadius*Math.sin(Q);
+            R.Bx = (R.rad-B.mouseRadius)*Math.cos(Q);
+            R.By = (R.rad-B.mouseRadius)*Math.sin(Q);
+
+        }
+
+    }
 
     this.frame = function(){
         ++this.tick;
@@ -217,7 +242,7 @@ function MenuStarMapObject(){
         this.centerX = parseInt(this.width/2- -this.mapX);
         this.centerY = parseInt(this.height/2- -this.mapY);
 
-        for(var r in MENU.CM.campainRoutes)
+        for(var r in this.StarRoutes)
             this.showMapRoute(r);
 
         for(var s in this.StarMap)
@@ -306,27 +331,15 @@ function MenuStarMapObject(){
         this.Canvas.restore();
     }
     this.showMapRoute = function(r){
-        var R = MENU.CM.campainRoutes[r];
-        var A = this.StarMap[R.A];
-        var B = this.StarMap[R.B];
-
-        var Cx = A.x-B.x;
-        var Cy = A.y-B.y;
-        var Q  = -Math.atan2(-Cx,-Cy)- -Math.PI/2;
-        var R  = Math.sqrt(Cx*Cx- -Cy*Cy);
-        var Ax = A.mouseRadius*Math.cos(Q);
-        var Ay = A.mouseRadius*Math.sin(Q);
-        var Bx = (R-B.mouseRadius)*Math.cos(Q);
-        var By = (R-B.mouseRadius)*Math.sin(Q);
+        var R = this.StarRoutes[r];
 
         this.Canvas.save();
-
-        this.Canvas.translate(this.centerX- -A.x, this.centerY- -A.y);
+        this.Canvas.translate(this.centerX- -R.realAx, this.centerY- -R.realAy);
 
         this.Canvas.strokeStyle = "#222";
         this.Canvas.lineWidth = 6;
         this.Canvas.lineCap = 'round';
-        this.Canvas.stroke(new Path2D('M '+Ax+','+Ay+' L '+Bx+','+By));
+        this.Canvas.stroke(new Path2D('M '+R.Ax+','+R.Ay+' L '+R.Bx+','+R.By));
 
         this.Canvas.restore();
     }
@@ -419,11 +432,50 @@ function MenuStarMapObject(){
 
     }
     this.createTeleportJump = function(A,B){
-        console.log('TelportJump:',A,B);
         if(A == B) return false;
+        var Route = this.createAllRoutes(A,B);
 
+        console.log(Route);
 
+        var R = {};
 
+        this.teleportJump={
+            tickStart: this.tick,
+            route: R
+        };
+    }
+    this.createAllRoutes = function(a,b){
+        var AllRoutes = {};
+        for(var r in this.StarRoutes){
+            var R = this.StarRoutes[r];
+            if(typeof AllRoutes[R.A] == 'undefined') AllRoutes[R.A] = {};
+            if(typeof AllRoutes[R.B] == 'undefined') AllRoutes[R.B] = {};
+            AllRoutes[R.A][R.B] = R.rad;
+            AllRoutes[R.B][R.A] = R.rad;
+        }
+
+        if(typeof AllRoutes[a][b] != 'undefined')
+            return [a,b];
+
+        var AllStars = [];
+        for(var x in AllRoutes)
+            AllStars[x] = {R:100000,T:[x]};
+        AllStars[a].R = 0;
+
+        var toCheck=[a];
+        while(toCheck.length > 0){
+            var x = toCheck[ toCheck.length-1 ];
+            --toCheck.length;
+            for(var y in AllRoutes[x]){
+                if(AllStars[x].R- -AllRoutes[x][y] <= AllStars[y].R){
+                    AllStars[y].R = AllStars[x].R- -AllRoutes[x][y];
+                    AllStars[y].T = cloneObj(AllStars[x].T);
+                    AllStars[y].T[ AllStars[y].T.length ] = y;
+                    toCheck[ toCheck.length ] = y;
+                }
+            }
+        }
+        return AllStars[b].T;
     }
 
 
