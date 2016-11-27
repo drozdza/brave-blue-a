@@ -162,6 +162,11 @@ body{
 #starMapContainer{
     position: relative;
 }
+#starMapContainer canvas{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
 #starMapContainer .starMapInfo{
     position: absolute;
     background: black;

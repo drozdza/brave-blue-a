@@ -1,6 +1,7 @@
 function MenuStarMapObject(){
 
     this.Canvas = false;
+    this.CanvasB = false;
     this.intervalId = false;
     this.tick = 0;
 
@@ -14,10 +15,12 @@ function MenuStarMapObject(){
     this.mouseOverMap = false;
     this.choosenMap = false;
     this.choosenMapMenu = false;
+    this.backgroundsMoved = true;
 
     this.RAD = Math.PI/180;
 
     this.StarMap = {};
+    this.MapGroups = {};
     this.StarRoutes = {};
 
     this.centerX = 0;
@@ -29,6 +32,7 @@ function MenuStarMapObject(){
         this.prepareStarRoutes();
 
         this.Canvas = document.getElementById('starMap').getContext('2d');
+        this.CanvasB = document.getElementById('starMapBackground').getContext('2d');
 
         this.startAnimation();
     }
@@ -38,7 +42,9 @@ function MenuStarMapObject(){
         this.width = $(window).width();
         this.height = $(window).height();
 
-        $('#starMap').attr({width: this.width+'px',height: this.height+'px'}).css({width: this.width+'px',height: this.height+'px'});
+        $('#starMapContainer, #starMap, #starMapBackground')
+            .attr({width: this.width+'px',height: this.height+'px'})
+            .css( {width: this.width+'px',height: this.height+'px'});
     }
 
     this.startAnimation = function(){
@@ -102,6 +108,7 @@ function MenuStarMapObject(){
         var vY = y - this.clickY;
 
         this.moveCanvas(vX,vY);
+        this.backgroundsMoved = true;
 
         this.clickX = x;
         this.clickY = y;
@@ -152,22 +159,31 @@ function MenuStarMapObject(){
 
 
 
-
-
     this.prepareStarMap = function(){
+        this.backgroundsMoved = true;
         this.StarMap = {};
+        this.MapGroups = {};
+
+        for(var m in BBAdata.MapGroups){
+            var M = BBAdata.MapGroups[m];
+            if(typeof M.VisibleIf != 'undefined'){
+                if(this.visibleIf(M.VisibleIf)===true)
+                    this.MapGroups[m] = true;
+            } else {
+                this.MapGroups[m] = true;
+            }
+        }
 
         var noMapY = 0;
 
-        for(var m in BBAdata['MAPS']){
-            var M = BBAdata['MAPS'][m];
+        for(var m in BBAdata.MAPS){
+            var M = BBAdata.MAPS[m];
             if(M.StarMap){
 
                 if(typeof M.StarMap.VisibleIf != 'undefined')
                     if(this.visibleIf(M.StarMap.VisibleIf)===false) continue;
                 if(typeof M.StarMap.MapGroup != 'undefined')
-                    if(typeof BBAdata.MapGroups[M.StarMap.MapGroup].VisibleIf != 'undefined')
-                        if(this.visibleIf(BBAdata.MapGroups[M.StarMap.MapGroup].VisibleIf)===false) continue;
+                    if(!this.MapGroups[M.StarMap.MapGroup]) continue;
 
                 this.StarMap[m] = cloneObj(M.StarMap);
 
@@ -234,14 +250,20 @@ function MenuStarMapObject(){
 
     }
 
+
+
     this.frame = function(){
         ++this.tick;
 
-        this.Canvas.fillStyle = 'black';
-        this.Canvas.fillRect(0,0,this.width,this.height);
+        this.Canvas.clearRect(0,0,this.width,this.height);
 
         this.centerX = parseInt(this.width/2- -this.mapX);
         this.centerY = parseInt(this.height/2- -this.mapY);
+
+        if(this.backgroundsMoved){
+            this.backgroundsMoved = false;
+            this.drawBackgrounds();
+        }
 
         for(var r in this.StarRoutes)
             this.showMapRoute(r);
@@ -252,6 +274,8 @@ function MenuStarMapObject(){
         if(this.teleportJump !== false)
             this.showTeleportJump();
     }
+
+
 
     this.showMapElement = function(s){
         var S = this.StarMap[s];
@@ -270,7 +294,7 @@ function MenuStarMapObject(){
         }
 
         if(S.t=='map'){
-            this.showElementAnims(S.Anims);
+            this.showElementAnims(S.Anims,this.Canvas);
 
             if(MENU.CM.currentLevel == s){
                 this.Canvas.save();
@@ -293,24 +317,24 @@ function MenuStarMapObject(){
         this.showMapMenu(S,s);
         this.Canvas.restore();
     }
-    this.showElementAnims = function(Anims){
+    this.showElementAnims = function(Anims,Canvas){
         for(var a in Anims){
             var A = Anims[a];
-            this.Canvas.save();
+            Canvas.save();
 
             if(A.t=='static'){
-                this.Canvas.translate(A.x, A.y);
-                this.Canvas.rotate(A.q * this.RAD);
+                Canvas.translate(A.x, A.y);
+                Canvas.rotate(A.q * this.RAD);
             }
             if(A.t=='around'){
                 var cr = ((A.qStart- -A.qV*this.tick)%360) * this.RAD;
                 var cx = A.x- -A.r*Math.cos(cr);
                 var cy = A.y- -A.r*Math.sin(cr);
-                this.Canvas.translate(cx, cy);
-                this.Canvas.rotate(cr- -(A.qDir * this.RAD));
+                Canvas.translate(cx, cy);
+                Canvas.rotate(cr- -(A.qDir * this.RAD));
             }
 
-            this.Canvas.fillStyle = A.color;
+            Canvas.fillStyle = A.color;
 
             if(typeof A.LIBpath != 'undefined'){
                 var svgD='';
@@ -321,17 +345,17 @@ function MenuStarMapObject(){
                     if(isNaN(PATH[p])) svgD+=PATH[p]+' ';
                             else       svgD+=((PATH[p]*pathSize).toFixed(2))+' ';
                 var svgObj = new Path2D(svgD);
-                this.Canvas.translate(XYoffset,XYoffset);
-                this.Canvas.fill(svgObj);
+                Canvas.translate(XYoffset,XYoffset);
+                Canvas.fill(svgObj);
             }
             if(typeof A.letter != 'undefined'){
-                this.Canvas.font="bold "+A.size+"px Arial";
-                this.Canvas.textAlign = 'center';
-                this.Canvas.textBaseline = 'middle';
-                this.Canvas.fillText(A.letter, 0, 0);
+                Canvas.font="bold "+A.size+"px Arial";
+                Canvas.textAlign = 'center';
+                Canvas.textBaseline = 'middle';
+                Canvas.fillText(A.letter, 0, 0);
             }
 
-            this.Canvas.restore();
+            Canvas.restore();
         }
     }
     this.showMapRoute = function(r){
@@ -534,6 +558,37 @@ function MenuStarMapObject(){
         return AllStars[b].T;
     }
 
+    this.drawBackgrounds = function(){
+        this.CanvasB.fillStyle = 'black';
+        this.CanvasB.fillRect(0,0,this.width,this.height);
+
+        Scale = [1,1.7,3,5,10];
+
+        for(var i = 4; i >= 0; --i){
+            for(var g in this.MapGroups){
+                var G = BBAdata.MapGroups[g];
+                if(typeof G.Backgrounds == 'undefined') continue;
+                if(typeof G.Backgrounds[i] == 'undefined') continue;
+                var B = G.Backgrounds[i];
+
+
+                Cx = parseInt(this.width/2- -this.mapX/Scale[i]);
+                Cy = parseInt(this.height/2- -this.mapY/Scale[i]);
+
+
+                for(var b in B){
+                    var S = B[b];
+                    this.CanvasB.save();
+                    this.CanvasB.translate(Cx- -G.x- -S.x, Cy- -G.y- -S.y);
+                    console.log('GGG');
+                    this.showElementAnims(S.Anims,this.CanvasB);
+                    this.CanvasB.restore();
+                }
+            }
+        }
+
+
+    }
 
     this.drawCross = function(){    // to remove later
         this.Canvas.strokeStyle = '#ffffff';

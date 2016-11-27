@@ -99,7 +99,70 @@ BBAdata.MAPS.HardX = {
     ]
 };
 BBAdata.MapGroups = {};
-BBAdata.MapGroups.Tutorial = {x:0, y:0};
-BBAdata.MapGroups.HardOnes = {x:500, y:200, VisibleIf:['TroLoLo']};
+BBAdata.MapGroups.Tutorial = {x:0, y:0,
+    Backgrounds:{
+        0:[
+            {x:100,y:100, Anims:[
+                {t:'static', LIBpath: 'StarPath', size: 45, color:'white', x:0, y:0, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 35, color:'white', x:0, y:-50, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 35, color:'white', x:-50, y:20, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 25, color:'white', x:-30, y:40, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 25, color:'white', x:20, y:70, q:0},
+            ]},
+        ],
+        1:[
+            {x:100,y:100, Anims:[
+                {t:'static', LIBpath: 'StarPath', size: 25, color:'yellow', x:0, y:0, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 15, color:'yellow', x:0, y:-50, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 15, color:'yellow', x:-50, y:20, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 8, color:'yellow', x:-30, y:40, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 8, color:'yellow', x:20, y:70, q:0},
+            ]},
+            {x:300,y:-200, Anims:[
+                {t:'static', LIBpath: 'StarPath', size: 25, color:'yellow', x:0, y:0, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 15, color:'yellow', x:0, y:-50, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 15, color:'yellow', x:-50, y:20, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 8, color:'yellow', x:-30, y:40, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 8, color:'yellow', x:20, y:70, q:0},
+            ]},
+        ],
+        2:[
+            {x:100,y:100, Anims:[
+                {t:'static', LIBpath: 'StarPath', size: 25, color:'orange', x:0, y:0, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 15, color:'orange', x:0, y:-50, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 15, color:'orange', x:-50, y:20, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 8, color:'orange', x:-30, y:40, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 8, color:'orange', x:20, y:70, q:0},
+            ]},
+            {x:-100,y:-200, Anims:[
+                {t:'static', LIBpath: 'StarPath', size: 25, color:'orange', x:0, y:0, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 15, color:'orange', x:0, y:-50, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 15, color:'orange', x:-50, y:20, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 8, color:'orange', x:-30, y:40, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 8, color:'orange', x:20, y:70, q:0},
+            ]},
+        ],
+    },
+};
+BBAdata.MapGroups.HardOnes = {x:500, y:200, VisibleIf:['TroLoLo'],
+    Backgrounds:{
+        2:[
+            {x:100,y:-100, Anims:[
+                {t:'static', LIBpath: 'StarPath', size: 25, color:'orange', x:0, y:0, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 15, color:'orange', x:0, y:-50, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 15, color:'orange', x:-50, y:20, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 8, color:'orange', x:-30, y:40, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 8, color:'orange', x:20, y:70, q:0},
+            ]},
+            {x:-100,y:-200, Anims:[
+                {t:'static', LIBpath: 'StarPath', size: 25, color:'orange', x:0, y:0, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 15, color:'orange', x:0, y:-50, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 15, color:'orange', x:-50, y:20, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 8, color:'orange', x:-30, y:40, q:0},
+                {t:'static', LIBpath: 'StarPath', size: 8, color:'orange', x:20, y:70, q:0},
+            ]},
+        ],
+    },
+};
 
 }
