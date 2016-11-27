@@ -270,45 +270,7 @@ function MenuStarMapObject(){
         }
 
         if(S.t=='map'){
-            for(var a in S.Anims){
-                var A = S.Anims[a];
-                this.Canvas.save();
-
-                if(A.t=='static'){
-                    this.Canvas.translate(A.x, A.y);
-                    this.Canvas.rotate(A.q * this.RAD);
-                }
-                if(A.t=='around'){
-                    var cr = ((A.qStart- -A.qV*this.tick)%360) * this.RAD;
-                    var cx = A.x- -A.r*Math.cos(cr);
-                    var cy = A.y- -A.r*Math.sin(cr);
-                    this.Canvas.translate(cx, cy);
-                    this.Canvas.rotate(cr- -(A.qDir * this.RAD));
-                }
-
-                this.Canvas.fillStyle = A.color;
-
-                if(typeof A.LIBpath != 'undefined'){
-                    var svgD='';
-                    var pathSize=A.size/1000;
-                    var XYoffset = parseInt(-A.size/2);
-                    var PATH = BBAdata.pathLIB[ A.LIBpath ];
-                    for(var p=0; p<PATH.length; ++p)
-                        if(isNaN(PATH[p])) svgD+=PATH[p]+' ';
-                                else       svgD+=((PATH[p]*pathSize).toFixed(2))+' ';
-                    var svgObj = new Path2D(svgD);
-                    this.Canvas.translate(XYoffset,XYoffset);
-                    this.Canvas.fill(svgObj);
-                }
-                if(typeof A.letter != 'undefined'){
-                    this.Canvas.font="bold "+A.size+"px Arial";
-                    this.Canvas.textAlign = 'center';
-                    this.Canvas.textBaseline = 'middle';
-                    this.Canvas.fillText(A.letter, 0, 0);
-                }
-
-                this.Canvas.restore();
-            }
+            this.showElementAnims(S.Anims);
 
             if(MENU.CM.currentLevel == s){
                 this.Canvas.save();
@@ -330,6 +292,47 @@ function MenuStarMapObject(){
         }
         this.showMapMenu(S,s);
         this.Canvas.restore();
+    }
+    this.showElementAnims = function(Anims){
+        for(var a in Anims){
+            var A = Anims[a];
+            this.Canvas.save();
+
+            if(A.t=='static'){
+                this.Canvas.translate(A.x, A.y);
+                this.Canvas.rotate(A.q * this.RAD);
+            }
+            if(A.t=='around'){
+                var cr = ((A.qStart- -A.qV*this.tick)%360) * this.RAD;
+                var cx = A.x- -A.r*Math.cos(cr);
+                var cy = A.y- -A.r*Math.sin(cr);
+                this.Canvas.translate(cx, cy);
+                this.Canvas.rotate(cr- -(A.qDir * this.RAD));
+            }
+
+            this.Canvas.fillStyle = A.color;
+
+            if(typeof A.LIBpath != 'undefined'){
+                var svgD='';
+                var pathSize=A.size/1000;
+                var XYoffset = parseInt(-A.size/2);
+                var PATH = BBAdata.pathLIB[ A.LIBpath ];
+                for(var p=0; p<PATH.length; ++p)
+                    if(isNaN(PATH[p])) svgD+=PATH[p]+' ';
+                            else       svgD+=((PATH[p]*pathSize).toFixed(2))+' ';
+                var svgObj = new Path2D(svgD);
+                this.Canvas.translate(XYoffset,XYoffset);
+                this.Canvas.fill(svgObj);
+            }
+            if(typeof A.letter != 'undefined'){
+                this.Canvas.font="bold "+A.size+"px Arial";
+                this.Canvas.textAlign = 'center';
+                this.Canvas.textBaseline = 'middle';
+                this.Canvas.fillText(A.letter, 0, 0);
+            }
+
+            this.Canvas.restore();
+        }
     }
     this.showMapRoute = function(r){
         var R = this.StarRoutes[r];
@@ -449,7 +452,7 @@ function MenuStarMapObject(){
         if(A == B) return false;
         var Route = this.createAllRoutes(A,B);
 
-        var Star1,Star2,SR,Ax,Ay,Bx,By,R,Ri,CY,TY=false,D = '';
+        var Star1,Star2,SR,Ax,Ay,Bx,By,R,Ri,Cx,Cy,Tx,Ty=false,D = '';
         Star1 = Route[0];
         for(var i=1; i<Route.length; ++i){
             Star2 = Route[i];
@@ -461,7 +464,8 @@ function MenuStarMapObject(){
                 Bx = SR.Bx- -SR.realAx;
                 By = SR.By- -SR.realAy;
                 R  = this.StarMap[SR.A].mouseRadius;
-                CY = this.StarMap[SR.A].y;
+                Cx = this.StarMap[SR.A].x;
+                Cy = this.StarMap[SR.A].y;
             }else{
                 SR = this.StarRoutes[Star2+'_'+Star1];
                 Bx = SR.Ax- -SR.realAx;
@@ -469,14 +473,20 @@ function MenuStarMapObject(){
                 Ax = SR.Bx- -SR.realAx;
                 Ay = SR.By- -SR.realAy;
                 R  = this.StarMap[SR.B].mouseRadius;
-                CY = this.StarMap[SR.B].y;
-        }
-            if(TY!==false){
-                Ri = '0 0';
-                if((TY- -Ay)/2 > CY) Ri = '1 1';
+                Cx = this.StarMap[SR.B].x;
+                Cy = this.StarMap[SR.B].y;
             }
-            TY = Ay;
-            console.log(Ri);
+            Ri = '1 1';
+            if(Ty!==false){
+                var E1 = Math.atan2(Bx-Tx,By-Ty).toFixed(2);
+                var E2 = Math.atan2(Bx-Cx,By-Cy).toFixed(2);
+                E2 = (E2-E1);
+                if(E2 > 0)
+                    Ri = '0 1';
+            }
+            Tx = Bx;
+            Ty = By;
+
             if(i==1) D+='M ';
                 else D+='A '+R+' '+R+' 0 '+Ri;
             D += ' '+Ax+' '+Ay+' L '+Bx+' '+By;
