@@ -115,18 +115,3 @@
 #gameOverlay.cursorCross #bulletRadius #bullRadX{ cursor: crosshair; }
 #gameOverlay.cursorWait{ cursor: not-allowed; }
 #gameOverlay.cursorWait #bulletRadius #bullRadX{ cursor: not-allowed; }
-
-.redMist{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    background: transparent;
-    animation-name: redMist;
-    animation-duration: 0.8s;
-}
-@keyframes redMist {
-    0% { background: rgba(255,0,0,0.3); }
-    100% {background: transparent;}
-}

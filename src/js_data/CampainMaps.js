@@ -21,7 +21,7 @@ BBAdata.MAPS.First = {
     ]
 };
 BBAdata.MAPS.Second = {
-    StarMap:{ x:160, y:-40, mouseRadius: 25, shipRadius: 20, MapGroup: 'Tutorial',
+    StarMap:{ x:160, y:-40, mouseRadius: 50, shipRadius: 20, MapGroup: 'Tutorial',
         VisibleIf:['C_First'],
         Anims:[
             {t:'static', letter: 'A', size: 12, color:'#00cc00', x:-8, y:0, r: 0, qStart:90, qV:-2, qDir:0},

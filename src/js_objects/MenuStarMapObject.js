@@ -22,6 +22,7 @@ function MenuStarMapObject(){
 
     this.centerX = 0;
     this.centerY = 0;
+    this.teleportJump = false;
 
     this.makeMenuStars = function(){
         this.prepareStarMap();
@@ -248,7 +249,7 @@ function MenuStarMapObject(){
         for(var s in this.StarMap)
             this.showMapElement(s);
 
-        if(this.teleportJump != false)
+        if(this.teleportJump !== false)
             this.showTeleportJump();
     }
 
@@ -429,19 +430,62 @@ function MenuStarMapObject(){
 
 
     this.showTeleportJump = function(){
+        var T = this.teleportJump;
+        var time = this.tick - T.tickStart;
+        if(time > 20){
+            this.teleportJump = false;
+            return false;
+        }
 
+        this.Canvas.save();
+        this.Canvas.translate(this.centerX, this.centerY);
+        this.Canvas.strokeStyle = '#AAF';
+        this.Canvas.lineWidth = 10 - Math.abs(time-10);
+        this.Canvas.lineCap = 'round';
+        this.Canvas.stroke(new Path2D(T.route));
+        this.Canvas.restore();
     }
     this.createTeleportJump = function(A,B){
         if(A == B) return false;
         var Route = this.createAllRoutes(A,B);
 
-        console.log(Route);
+        var Star1,Star2,SR,Ax,Ay,Bx,By,R,Ri,CY,TY=false,D = '';
+        Star1 = Route[0];
+        for(var i=1; i<Route.length; ++i){
+            Star2 = Route[i];
 
-        var R = {};
+            if(typeof this.StarRoutes[Star1+'_'+Star2] != 'undefined'){
+                SR = this.StarRoutes[Star1+'_'+Star2];
+                Ax = SR.Ax- -SR.realAx;
+                Ay = SR.Ay- -SR.realAy;
+                Bx = SR.Bx- -SR.realAx;
+                By = SR.By- -SR.realAy;
+                R  = this.StarMap[SR.A].mouseRadius;
+                CY = this.StarMap[SR.A].y;
+            }else{
+                SR = this.StarRoutes[Star2+'_'+Star1];
+                Bx = SR.Ax- -SR.realAx;
+                By = SR.Ay- -SR.realAy;
+                Ax = SR.Bx- -SR.realAx;
+                Ay = SR.By- -SR.realAy;
+                R  = this.StarMap[SR.B].mouseRadius;
+                CY = this.StarMap[SR.B].y;
+        }
+            if(TY!==false){
+                Ri = '0 0';
+                if((TY- -Ay)/2 > CY) Ri = '1 1';
+            }
+            TY = Ay;
+            console.log(Ri);
+            if(i==1) D+='M ';
+                else D+='A '+R+' '+R+' 0 '+Ri;
+            D += ' '+Ax+' '+Ay+' L '+Bx+' '+By;
 
+            Star1 = Star2;
+        }
         this.teleportJump={
             tickStart: this.tick,
-            route: R
+            route: D
         };
     }
     this.createAllRoutes = function(a,b){
@@ -453,6 +497,8 @@ function MenuStarMapObject(){
             AllRoutes[R.A][R.B] = R.rad;
             AllRoutes[R.B][R.A] = R.rad;
         }
+        if(typeof AllRoutes[a] == 'undefined')
+            return false;
 
         if(typeof AllRoutes[a][b] != 'undefined')
             return [a,b];

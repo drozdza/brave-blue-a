@@ -33,9 +33,9 @@
     border-radius: 0px 0px 20px 0px;
     z-index: 1;
 }
-#countHealth .disabledHealth    {    color: grey; }
-#countHealth .XenergyField{            color: #0ff; }
-#countHealth .XenergyFieldDisabled{    color: grey; }
+#countHealth .disabledHealth{       color: grey; }
+#countHealth .XenergyField{         color: #0ff; }
+#countHealth .XenergyFieldDisabled{ color: grey; }
 
 
 #countSpeed{
