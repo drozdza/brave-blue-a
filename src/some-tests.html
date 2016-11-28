@@ -11,11 +11,12 @@
 <body>
     <canvas id="thereheis" width="600" height="600"></canvas>
     <canvas id="ashlung" width="400" height="400" style="display: none;"></canvas>
+    <canvas id="hahax" width="600" height="600"></canvas>
 
 
 <script>
-Canvas = document.getElementById('ashlung').getContext('2d');
 
+Canvas = document.getElementById('ashlung').getContext('2d');
 Canvas.fillStyle='grey';
 Canvas.font='bold 200px Arial';
 Canvas.textAlign='center';
@@ -25,6 +26,7 @@ for(var i = 0; i<10;++i){
     var y = Math.random()*250+100;
     Canvas.fillText('*',x,y);
 }
+
 Canvas = document.getElementById('thereheis').getContext('2d');
 Canvas.translate(100,100);
 Canvas.fillStyle = 'red';
@@ -33,10 +35,34 @@ Canvas.textAlign='center';
 Canvas.textBaseline='middle';
 Canvas.fillText('H',200,200);
 
-
 Img = document.getElementById('ashlung');
 Pat = Canvas.createPattern(Img,'no-repeat');
 Canvas.fillStyle = Pat;
 Canvas.fillText('H',200,200);
+
+
+Canvas = document.getElementById('hahax').getContext('2d');
+Canvas.fillStyle = 'red';
+Canvas.font = 'bold 400px Arial';
+Canvas.textAlign='center';
+Canvas.textBaseline='middle';
+Canvas.fillText('H',300,300);
+
+var i =0;
+do{
+    var x = Math.random()*600;
+    var y = Math.random()*600;
+    ++i;
+}while(Canvas.isPointInPath(x,y) || i > 15);
+
+console.log(i);
+
+Canvas.fillStyle='grey';
+Canvas.font='bold 100px Arial';
+Canvas.textAlign='center';
+Canvas.textBaseline='middle';
+Canvas.fillText('+',x,y);
+
+
 </script>
 </body>
