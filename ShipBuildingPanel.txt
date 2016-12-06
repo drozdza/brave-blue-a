@@ -1,0 +1,28 @@
+
+1) Building Ship
+- Always see:
+    - Ship Basic Stats:
+        - Cost, Life, Energy, MaxSpeed, Weight
+    - Presets Switching Panel
+
+    - 
+
+
+A) Ship Basic Modifications
+    Types: (?)
+     - Shield/Hull Modifications
+     - Energy Modifications
+     - Detector Modifications
+     - Speed Modifications
+
+B) Ship Modules
+    - Set Activation Keys for Modules
+    - Set default Activity
+
+C) Ship Weapons
+    - Set Weapon
+
+D) Ship Special Moves
+
+
+2) Building MotherShip
