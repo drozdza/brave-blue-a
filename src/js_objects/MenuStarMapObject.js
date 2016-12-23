@@ -272,8 +272,6 @@ function MenuStarMapObject(){
         this.dragBorders.R -=- 200;
         this.dragBorders.T -=  150;
         this.dragBorders.B -=- 150;
-
-        console.log(this.dragBorders);
     }
 
 

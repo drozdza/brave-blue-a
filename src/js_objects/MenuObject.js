@@ -29,10 +29,21 @@ function MENUobject(){
     this.makeMenuBoards = function(){
         var html = '';
         html+='<div id="starMapContainer">';
-        html+='<canvas id="starMapBackground" style="width: 100%; height: 100%;"></canvas>';
-        html+='<canvas id="starMap" style="width: 100%; height: 100%;"></canvas>';
+            html+='<canvas id="starMapBackground" style="width: 100%; height: 100%;"></canvas>';
+            html+='<canvas id="starMap" style="width: 100%; height: 100%;"></canvas>';
+            html+='<div id="GoToShipyard">Shipyard</div>';
+        html+='</div>';
+        html+='<div id="shipyardContainer">';
+            html+='<div id="GoToStarMap">StarMap</div>';
+            html+='<div class="shipProperties"></div>';
+            html+='<div class="detailedShipProperties"></div>';
+            html+='<div class="shipElements"></div>';
         html+='</div>';
         $('#Menu').append(html+this.getMenu.makeHtml()+'<div id="goldContainer"></div>');
+
+        $('#GoToShipyard').click(function(){ MENU.startShipBuildingMenu(); });
+        $('#GoToStarMap').click(function(){ MENU.startStarMapMenu(); });
+
     }
     this.loadMaps = function(){
          for(var id in BBAdata['MAPS'])
@@ -52,19 +63,18 @@ function MENUobject(){
         GAME.start(id, BBAdata['MAPS'][id],cloneObj(BBAdata['SHIPpresets'][this.ShipPresetChoosen]));
     }
 
-    this.toggleMenu = function(){
-        if(this.showMenu=='Ship') this.hideMenuShip();
-                else              this.showMenuShip();
+    this.startShipBuildingMenu = function(){
+        this.SM.stopAnimation();
+        $('#starMapContainer').hide();
+        $('#goldContainer').hide();
+        $('#shipyardContainer').show();
     }
-    this.hideMenuShip = function(){
-        this.showMenu = 'Boards';
-        $('#MenuShip').animate({left:'100%'},500);
+    this.startStarMapMenu = function(){
+        $('#shipyardContainer').hide();
+        $('#starMapContainer').show();
+        $('#goldContainer').show();
+        this.SM.startAnimation();
     }
-    this.showMenuShip = function(){
-        this.showMenu = 'Ship';
-        $('#MenuShip').animate({left:'12%'},500);
-    }
-
 
 
 }

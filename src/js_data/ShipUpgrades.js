@@ -1,4 +1,4 @@
-BBAdata['SHIPupgrades']={
+BBAdata.SHIPupgrades={
     sh1:{K:1,P:1,T:'shipHull',     attr:[{lifeM:1,life:1,Weight:5}],
         prices:[250,550,750,1200]},
     eg1:{K:1,P:2,T:'energyGen',    attr:[{EnergyM:2,Weight:5}],
