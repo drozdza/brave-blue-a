@@ -179,7 +179,7 @@ GAMEobject.prototype.shipFunc_speedChange = function(){
     var html='';
     if(O.speed < 0) O.speed=0.0;
     if(O.speed > S.speedM) O.speed=S.speedM;
-    S.Espeed = (O.speed*O.speed/2)*(S.Weight/50);
+    S.Espeed = Speed2Energy(O.speed,S.Weight,S.engineMultiply);
     S.Energy = S.EnergyM - S.Espeed;
 
     $('#modulesEnergyIn').html(S.Energy.toFixed(2));
@@ -187,7 +187,7 @@ GAMEobject.prototype.shipFunc_speedChange = function(){
     html+='<div class="speedBoxEnergy">'+S.Espeed.toFixed(2)+'</div>';
     html+='<span class="speedBoxSpeed">'+O.speed.toFixed(1)+'</span>';
     for(var i=parseInt(O.speed- -0.97); i >0; --i)
-        if(O.speed > i)    html+='<div class="speedOmeter speed_'+i+'"></div>';
+        if(O.speed > i) html+='<div class="speedOmeter speed_'+i+'"></div>';
             else        html+='<div class="speedOmeter speed_'+i+'"><span class="speedCap_'+(i-O.speed).toFixed(1)*10+'0"></span></div>';
     $('#speedOmeterBox').html(html);
     Sx.speed = O.speed;

@@ -4,7 +4,6 @@ BBAdata['SHIPpresets']={
         lifeM: 6,
         life: 6,
         EnergyM: 20,
-        SpeedM: 20,
         engineMultiply: 1,
         speed: 8,
         Storage:{
@@ -52,7 +51,6 @@ BBAdata['SHIPpresets']={
         }],
         EnergyFieldMax: 10,
         EnergyM: 32,
-        SpeedM: 20,
         engineMultiply: 1,
         speed: 8,
         Storage:{
@@ -100,7 +98,6 @@ BBAdata['SHIPpresets']={
         }],
         EnergyFieldMax: 10,
         EnergyM: 32,
-        SpeedM: 20,
         engineMultiply: 1,
         speed: 8,
         Storage:{
@@ -149,7 +146,6 @@ BBAdata['SHIPpresets']={
         }],
         EnergyFieldMax: 10,
         EnergyM: 32,
-        SpeedM: 20,
         engineMultiply: 1,
         speed: 8,
         Storage:{
@@ -192,7 +188,6 @@ BBAdata['SHIPpresets']={
         life: 11,
         lifeM: 11,
         EnergyM: 27,
-        SpeedM: 20,
         engineMultiply: 1,
         speed: 8,
         Storage:{
@@ -244,7 +239,6 @@ BBAdata['SHIPpresets']={
         }],
         EnergyFieldMax: 10,
         EnergyM: 32,
-        SpeedM: 20,
         engineMultiply: 1,
         speed: 8,
         Storage:{
@@ -312,7 +306,6 @@ BBAdata['SHIPpresets']={
         }],
         EnergyFieldMax: 10,
         EnergyM: 32,
-        SpeedM: 20,
         engineMultiply: 1,
         speed: 8,
         Storage:{
@@ -373,7 +366,6 @@ BBAdata['SHIPpresets']={
         }],
         EnergyFieldMax: 10,
         EnergyM: 32,
-        SpeedM: 20,
         engineMultiply: 1,
         speed: 8,
         Storage:{
@@ -424,7 +416,6 @@ BBAdata['SHIPpresets']={
         Weight: 25,
         life: 'x',
         lifeM: 'x',
-        SpeedM: 20,
         engineMultiply: 1,
         speed: 8,
         Storage:{

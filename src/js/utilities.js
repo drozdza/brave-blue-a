@@ -94,3 +94,14 @@ function getCookie(cname) {
     }
     return "";
 }
+
+function Energy2Speed(Energy,Weight,Multiply){
+    var W = (Weight/100)/Multiply;
+    var Speed = Math.sqrt(Energy/W);
+    return Speed;
+}
+function Speed2Energy(Speed,Weight,Multiply){
+    var W = (Weight/100)/Multiply;
+    var Energy = Speed*Speed*W;
+    return Energy;
+}

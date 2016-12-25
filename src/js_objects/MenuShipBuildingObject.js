@@ -150,7 +150,7 @@ function MenuShipBuildingObject(){
         }
 
         // counting maxSpeed
-        this.SHIP.speedM = parseInt((Math.sqrt(this.SHIP.EnergyM*this.SHIP.engineMultiply))/(this.SHIP.Weight/50)*10)/10;
+        this.SHIP.speedM = Energy2Speed(this.SHIP.EnergyM, this.SHIP.Weight, this.SHIP.engineMultiply);
         this.SHIP.life = this.SHIP.lifeM;
     }
     this.buildShip_Storage = function(StorageData){
@@ -177,7 +177,7 @@ BBAdata.SHIPelements={
     eleProd1:{
         Weight: 2,
         Price: 300,
-        EnergyM: 5,
+        EnergyM: 25,
     },
     eleProd2:{
         Weight: 2,
