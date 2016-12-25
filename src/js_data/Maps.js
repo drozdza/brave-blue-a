@@ -39,7 +39,17 @@ BBAdata.MAPS.S={
 };
 BBAdata.MAPS.Constructs={
     BoardMods:['sitOnMap','allAvoid'],
-    Place:[{Random:{X: 1600, Y: 0, Radius: 1400}, What:{StarConstruct: 120, I: 5}}],
+    Place:[
+        {Random:{X:0,Y:0,Radius:100},What:{I:5}},
+        {Random:{X: 2400, Y: 0, Radius: 1400}, What:{Star: 120},
+            Construct:{N:'build1',Min:60,Max:250}},
+        {RingOf:{X: 2400, Y: 0, Radius: 1400, RadiusPlus: 350}, What:{Star: 100},
+            Construct:{N:'build1',Min:60,Max:250}},
+        {CircleOf:{X: 2400, Y: 0, Radius: 1820, AngleStart: 0, AngleBy: 10}, What:{Star: 36},
+            Construct:{N:'build1',Min:60,Max:400}},
+        {CircleOf:{X: 2400, Y: 0, Radius: 1880, AngleStart: 5, AngleBy: 10}, What:{Star: 36},
+            Construct:{N:'build2',Min:100,Max:400}},
+    ],
 };
 BBAdata.MAPS.I={
     BoardMods:['sitOnMap','allAvoid'],
