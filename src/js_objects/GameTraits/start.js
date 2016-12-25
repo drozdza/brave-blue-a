@@ -207,8 +207,10 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
                 if(typeof SET.GroupMods !='undefined')
                     for(var k in SET.GroupMods)
                         this.addBoardMod(L,SET.GroupMods[k]);
-
             }
+
+            if(typeof SET.Construct != 'undefined')
+                this.buildConstructs(L, SET.Construct);
 
             if(typeof SET.Background != 'undefined'){
                 CanvasManager.CBM.deleteObjectFromBackground(L,false,1);

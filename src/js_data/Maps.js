@@ -37,6 +37,20 @@ BBAdata.MAPS.S={
     BoardMods:['sitOnMap','allAvoid'],
     Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 5, S: 8}}],
 };
+BBAdata.MAPS.Constructs={
+    BoardMods:['sitOnMap','allAvoid'],
+    Place:[
+        {Random:{X:0,Y:0,Radius:100},What:{I:5}},
+        {Random:{X: 2400, Y: 0, Radius: 1400}, What:{Star: 120},
+            Construct:{N:'build1',Min:60,Max:250}},
+        {RingOf:{X: 2400, Y: 0, Radius: 1400, RadiusPlus: 350}, What:{Star: 100},
+            Construct:{N:'build1',Min:60,Max:250}},
+        {CircleOf:{X: 2400, Y: 0, Radius: 1820, AngleStart: 0, AngleBy: 10}, What:{Star: 36},
+            Construct:{N:'build1',Min:60,Max:400}},
+        {CircleOf:{X: 2400, Y: 0, Radius: 1880, AngleStart: 5, AngleBy: 10}, What:{Star: 36},
+            Construct:{N:'build2',Min:100,Max:400}},
+    ],
+};
 BBAdata.MAPS.I={
     BoardMods:['sitOnMap','allAvoid'],
     Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, I: 20}}],
@@ -299,7 +313,7 @@ BBAdata.MAPS.HardCore={
     Place:[
         {Random:{X: 0, Y: 0, Radius: 2200}, What:{
             A:5, U:5, S:5, I:10, D:10, M:5, N:5, J:5, W:5, T:5, E:10, C:5, G:5, R:5, H:5, B:5, V:5, K:10, F:10, Q:5, X:6, Z:5, PI:5, WP:5, Ni:10,
-            SH:10, L:5, TT:10, CD:5, HH:5, UU:5, Tu:8, Ii:5,
+            SH:10, L:5, TT:10, CD:5, HH:5, UU:5, Tu:8, Ii:5, HS:5,
         }},
         {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarX:150,iD:10,Wi:10}},
         {What:{Gstar:1},objData:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}}

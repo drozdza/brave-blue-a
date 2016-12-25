@@ -134,6 +134,10 @@ BBAdata['ExplosivesPresets']={
     NailsWirlpool2:{
         onHitDieExpire: {Do:'explode', explodeType: 'nails', NailsRad: 8, NailsSpeed: 0, NailsSpeedPlus: 10, NailsDec: 36, NailsDecPlus: 6, NailsAngleCenter: 8, NailsAngleBoth: 1},
     },
+    HugeNailsWirlpool2:{
+        onHitDieExpire: {Do:'explode', explodeType: 'nails', NailsRad: 8, NailsSpeed: 8, NailsSpeedPlus: 6, NailsDec: 40, NailsDecPlus: 20, NailsAngleCenter: 2, NailsAngleBoth: 1},
+    },
+
 
     NailsConePalm: {
         onHitDieExpire: {Do:'explode',explodeType: 'nailsCone', Nails: 40, NailsRad: 220, NailsSpeed: 5, NailsSpeedPlus: 2, NailsDec: 28, NailsDecPlus: 6, NailsAngleCenter: 3},
