@@ -189,6 +189,9 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
             }else if(placeWhat=='StarX'){
                 var LI = ['','M','S','L'];
                 var L = this.putObj('star'+LI[ parseInt(Math.random()*4) ],'static',1,x,y);
+            }else if(placeWhat=="StarConstruct"){
+                var L = this.putObj('star','static',1,x,y);
+                this.buildConstructs(L,'Wall1',40,250);
             }else if(placeWhat=='Gstar'){
                 var L = this.putObj('Gstar','static',1,x,y);
             }else if(placeWhat=='RoundField'){

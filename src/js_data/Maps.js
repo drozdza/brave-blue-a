@@ -37,6 +37,10 @@ BBAdata.MAPS.S={
     BoardMods:['sitOnMap','allAvoid'],
     Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 5, S: 8}}],
 };
+BBAdata.MAPS.Constructs={
+    BoardMods:['sitOnMap','allAvoid'],
+    Place:[{Random:{X: 1600, Y: 0, Radius: 1400}, What:{StarConstruct: 120, I: 5}}],
+};
 BBAdata.MAPS.I={
     BoardMods:['sitOnMap','allAvoid'],
     Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{Star: 20, I: 20}}],
