@@ -2768,7 +2768,7 @@ BBAdata['ObjectDatas']={
         ],
 
         shipVariables:{
-            speed: {Const: 6, Rand: 3},
+            speed: {Const: 3, Rand: 2},
             speedT: {Const: 1.5, Rand: 1.5},
             spotRad: {Const: 180, RandInt: 80},
             spotRad2: {Const: 400, RandInt: 200},

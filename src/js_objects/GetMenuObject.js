@@ -35,7 +35,7 @@ function GetMenuObject(){
         },
         SHIPPRESET:{
             get: 'shipPresets',
-            values: {start:false, destFields: 'destFields', bombs1: 'bombs1', bombs2: 'bombs2', best: 'best', bombardier: 'bombardier', ethernal: 'ethernal'},
+            values: {start:false, destFields: 'destFields', bombs1: 'bombs1', bombs2: 'bombs2', best: 'best', bombardier: 'bombardier', bombardier2: 'bombardier2', ethernal: 'ethernal'},
         },
         SHOWDEBBUGER:{
             get: 'showDebbuger',
