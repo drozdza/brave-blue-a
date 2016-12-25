@@ -52,7 +52,8 @@ GAMEobject.prototype.makeShipControlPanel = function(){
 
     $('#countSpeed').html(html);
     this.shipFunc_speedChange();
-    this.shipFunc_changeWeapon(1, S.FireType);
+    if(S.FireType!==false)
+        this.shipFunc_changeWeapon(1, S.FireType);
 
 }
 
@@ -60,9 +61,10 @@ GAMEobject.prototype.decide_ship = function(e){
     var O = this.O[0];
     var S = this.SHIP;
     var Sx = this.SHIPold;
-    var F = S.FireTypes[ S.FireType ];
-    if(S.FireType2!==false)
-        var F2 = S.FireTypes[ S.FireType2 ];
+    var F = false;
+    var F2 = false;
+    if(S.FireType!==false)  F = S.FireTypes[ S.FireType ];
+    if(S.FireType2!==false) F2 = S.FireTypes[ S.FireType2 ];
     O.lastSpeedT = 0;
     this.mouseX = this.mouse_x- -(O.x -this.Dx/2);
     this.mouseY = this.mouse_y- -(O.y -this.Dy/2);
@@ -349,7 +351,7 @@ GAMEobject.prototype.decide_ship = function(e){
 
     // STRZELAMY
     var aktywneDziala = {};
-    if(S.MouseDown1) aktywneDziala[ S.FireType ]=1;
+    if(S.FireType!==false  && S.MouseDown1) aktywneDziala[ S.FireType ]=1;
     if(S.FireType2!==false && S.MouseDown2) aktywneDziala[ S.FireType2 ]=1;
     for(var dzi in aktywneDziala) if(S.FireTypes[dzi].gunS > S.FireTypes[dzi].GunSpeed){
 

@@ -59,8 +59,13 @@ function MENUobject(){
             delete CanvasManager;
         CanvasManager = new CanvasManagerObject();
         CanvasManager.start();
+
+        var SHIPpreset = cloneObj(BBAdata.SHIPpresets[this.ShipPresetChoosen]);
+        if(this.SB.useShipyardShip)
+            SHIPpreset = cloneObj(this.SB.SHIP);
+
         GAME = new GAMEobject();
-        GAME.start(id, BBAdata['MAPS'][id],cloneObj(BBAdata['SHIPpresets'][this.ShipPresetChoosen]));
+        GAME.start(id, BBAdata['MAPS'][id], SHIPpreset);
     }
 
     this.startShipBuildingMenu = function(){
@@ -68,8 +73,10 @@ function MENUobject(){
         $('#starMapContainer').hide();
         $('#goldContainer').hide();
         $('#shipyardContainer').show();
+        this.SB.startAnimation();
     }
     this.startStarMapMenu = function(){
+        this.SB.stopAnimation();
         $('#shipyardContainer').hide();
         $('#starMapContainer').show();
         $('#goldContainer').show();

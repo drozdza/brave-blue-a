@@ -1,14 +1,10 @@
 function MenuShipBuildingObject(){
 
-    this.start = function(){
-
-
-    }
-    this.start();
-
     this.money = 999000;
     this.width = 100;
     this.height = 100;
+
+    this.useShipyardShip = false; // to drop later
 
     this.SHIPelems = {};
     this.SHIP = false; // Current Ship
@@ -26,13 +22,13 @@ function MenuShipBuildingObject(){
         Missles: 0,
         BombStorage: 0,
         Bombs: 0,
-        ShowFireRange: true,
+        ShowFireRange: false,
         ShowAmmoIndicator: false,
         GlueFireToEstimated: false,
         GlueFireToLaser: false,
         ShowRadar: false,
         KeysModules:{},
-        FireType: 0,
+        FireType: false,
         FireType2: false,
         MouseDown1: false,
         MouseDown2: false,
@@ -42,6 +38,12 @@ function MenuShipBuildingObject(){
         Modules:[],
     };
 
+    this.startAnimation = function(){
+        this.useShipyardShip = true;
+    }
+    this.stopAnimation = function(){
+
+    }
 
     this.resize = function(){
         this.width = $(window).width();
@@ -149,6 +151,7 @@ function MenuShipBuildingObject(){
 
         // counting maxSpeed
         this.SHIP.speedM = parseInt((Math.sqrt(this.SHIP.EnergyM*this.SHIP.engineMultiply))/(this.SHIP.Weight/50)*10)/10;
+        this.SHIP.life = this.SHIP.lifeM;
     }
     this.buildShip_Storage = function(StorageData){
         for(var storageType in StorageData){
