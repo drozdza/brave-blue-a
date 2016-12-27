@@ -10,6 +10,24 @@ BBAdata.MAPS.U3 = 'load';
 BBAdata.MAPS.U4 = 'load';
 BBAdata.MAPS.M1 = 'load';
 BBAdata.MAPS['001'] = 'load';
+BBAdata.MAPS.First={
+    StarMap:{ x:-200, y:-200, mouseRadius: 25, shipRadius: 20,
+        Anims:[
+            {t:'static', letter: '+100', size: 12, color:'yellow', x:0, y:0, r: 0, qStart:90, qV:-2, qDir:0},
+        ],
+    },
+    BoardMods:['sitOnMap','allAvoid'],
+    Ship:{Start:{X: 0, Y: -400, A:180}},
+    Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{StarX: 20}}],
+    WinningConds:[{T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, RewardGold:100000, RewardFlags:{C_First:1}}],
+    Routes:{C_First:{
+            'First_A':{A:'First',B:'A'},
+            'First_U':{A:'First',B:'U'},
+            'First_S':{A:'First',B:'S'},
+            'First_001':{A:'First',B:'001'},
+    }},
+
+};
 BBAdata.MAPS.A={
     StarMap:{ x:210, y:-90, mouseRadius: 25, shipRadius: 20,
         Anims:[
