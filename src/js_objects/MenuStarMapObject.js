@@ -499,6 +499,8 @@ function MenuStarMapObject(){
     }
     this.createTeleportJump = function(A,B){
         if(A == B) return false;
+        if(this.StarMap[B].t == 'simple') return true;
+
         var Route = this.createAllRoutes(A,B);
 
         var Star1,Star2,SR,Ax,Ay,Bx,By,R,Ri,Cx,Cy,Tx,Ty=false,D = '';
