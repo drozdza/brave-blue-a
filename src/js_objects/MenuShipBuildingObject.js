@@ -145,6 +145,12 @@ function MenuShipBuildingObject(){
                     case 'Storage':
                         this.buildShip_Storage(Edata.Storage);
                     break;
+                    case 'WeaponData':
+                        this.buildShip_WeaponData(Edata.WeaponData);
+                    break;
+                    case 'ModData':
+                        this.buildShip_ModData(Edata);
+                    break;
                 }
             }
         }
@@ -161,6 +167,20 @@ function MenuShipBuildingObject(){
             for(var i in StorageData[storageType])
                 this.SHIP.Storage[storageType][i] -=- StorageData[storageType][i];
         }
+    }
+    this.buildShip_WeaponData = function(WeaponData){
+        var FireTypeI = this.SHIP.FireTypes.length;
+        console.log(FireTypeI);
+        this.SHIP.FireTypes[FireTypeI] = cloneObj(WeaponData);
+
+        if(this.SHIP.FireType === false) this.SHIP.FireType = FireTypeI;
+        if(this.SHIP.FireType2 === false) this.SHIP.FireType2 = FireTypeI;
+        return FireTypeI;
+    }
+
+    this.buildShip_ModData = function(ShipData){
+        var ModI = ShipData.ModPlace;
+        this.SHIP.Modules[ModI] = cloneObj(ShipData.ModData);
     }
 }
 
@@ -213,6 +233,10 @@ BBAdata.SHIPelements={
         Price: 1050,
         Storage:{Ammo:{R:10}},
     },
+    ammoOnStartX:{
+        Price: 1050,
+        Storage:{Ammo:{R:20}},
+    },
     normalShield:{
         Weight: 2,
         Price: 100,
@@ -250,14 +274,46 @@ BBAdata.SHIPelements={
         ModData:{Emin:{A:0.5}},
     },
 
-
+    simpleWeapon:{
+        Weight: 5,
+        Price: 500,
+        WeaponData:{
+            T:'single',
+            gunS:0,
+            GunSpeed: 15,
+            Use:{Ammo:1},
+            Speed: 12,
+            Dec: 20,
+            DMG: {Dmg:1,T:'normal'}
+        }
+    },
+    ammoProduction:{
+        Weight: 1,
+        Price: 300,
+        Mod: 'Prod',
+        ModPlace: 0,
+        ModKey: false,
+        ModData:{
+            T:'Prod',
+            Disabled:0,
+            Prod:0,
+            E:0,
+            Emin:2,
+            Emax:4,
+            ProdX:4,
+            ifProd:40,
+            subT:'Bullet',
+            Storage:'Ammo'
+        },
+        ModDisabled: false,
+        ModSet:{
+            EminMax:true,
+        },
+    },
 
     //{T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,ProdX:1,E:0,Prod:0,ifProd:30 },
 
 
-    weaponX:{
-
-    },
 };
 
 
