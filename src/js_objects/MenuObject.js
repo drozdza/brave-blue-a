@@ -33,16 +33,10 @@ function MENUobject(){
             html+='<canvas id="starMap" style="width: 100%; height: 100%;"></canvas>';
             html+='<div id="GoToShipyard">Shipyard</div>';
         html+='</div>';
-        html+='<div id="shipyardContainer">';
-            html+='<div id="GoToStarMap">StarMap</div>';
-            html+='<div class="shipProperties"></div>';
-            html+='<div class="detailedShipProperties"></div>';
-            html+='<div class="shipElements"></div>';
-        html+='</div>';
+        html+='<div id="shipyardContainer"></div>';
         $('#Menu').append(html+this.getMenu.makeHtml()+'<div id="goldContainer"></div>');
 
         $('#GoToShipyard').click(function(){ MENU.startShipBuildingMenu(); });
-        $('#GoToStarMap').click(function(){ MENU.startStarMapMenu(); });
 
     }
     this.loadMaps = function(){

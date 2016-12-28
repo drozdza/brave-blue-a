@@ -65,6 +65,36 @@ body{
     width: 50%;
     float: right;
 }
+#shipyardContainer .goldTotal{
+    font-size: 30px;
+    color: gold;
+    font-weight: bold;
+}
+#shipyardContainer .elementsTypeMenu{
+    text-align: center;
+}
+#shipyardContainer .typeMenuElement{
+    display: inline-block;
+    padding: 3px 20px;
+    border-width: 1px 1px 0px;
+    border-style: solid;
+    border-color: #00006f;
+    border-radius: 12px 12px 0px 0px;
+    cursor: pointer;
+    color: white;
+    background: black;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0px 2px;
+}
+#shipyardContainer .typeMenuElement.choosen{
+    border-bottom: none;
+    background-color: white;
+}
+#shipyardContainer .typeMenuElement:hover{
+    padding-bottom: 4px;
+    color: blue;
+}
 #shipyardContainer .shipProperties span{
     border: 2px solid #00006f;
     border-radius: 6px;

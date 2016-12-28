@@ -8,6 +8,7 @@ function MenuShipBuildingObject(){
 
     this.SHIPelems = {};
     this.SHIP = false; // Current Ship
+    this.elementsType = 'hull';
 
     this.startAnimation = function(){
         this.resize();
@@ -29,25 +30,57 @@ function MenuShipBuildingObject(){
     this.makeMenuShip = function(){
         this.resize();
 
+        var html ='';
+        html += '<div id="GoToStarMap">StarMap</div>';
+        html += '<div class="shipProperties"></div>';
+        html += '<div class="elementsTypeMenu"></div>';
+        html += '<div class="detailedShipProperties"></div>';
+        html += '<div class="shipElements advancedScroll"></div>';
+        html += '<div class="elementsList advancedScroll"></div>';
+        $('#shipyardContainer').html(html);
+
+        this.buildAdvancedScrolling();
+
         this.buildShip();
 
+        this.showElementsTypeMenu();
         this.showShipProperties();
         this.showShipElements();
 
+        $('.typeMenuElement').click(function(){ MENU.SB.changeElementsType( $(this).attr('typeMenuElement') ); });
+
         $(window).on('resize', function(){ MENU.SB.resize(); });
+
+        $('#GoToStarMap').click(function(){ MENU.startStarMapMenu(); });
+
         $('#shipyardContainer').on('click','.shipElement',function(){
             MENU.SB.toggleShipElement( $(this).attr('elementName') );
         });
     }
 
 
+    this.buildAdvancedScrolling = function(){
+        $('.advancedScroll').html(
+              '<div class="container"></div>'
+            + '<div class="scrollHandler"></div>'
+        );
+    }
 
+    this.showElementsTypeMenu = function(){
+        var TypeMenu = {
+            hull:    'Hull',
+            engine:  'Engine',
+            weapons: 'Weapons',
+            modules: 'Modules',
+        };
+        var html = '';
+        for(var tm in TypeMenu){
+            html +='<div class="typeMenuElement" typeMenuElement="'+tm+'">'+TypeMenu[tm]+'</div>';
+        }
+        $('.elementsTypeMenu').html(html);
+    }
     this.showShipProperties = function(){
         var html='';
-
-        console.log(MENU);
-        console.log(MENU.CM);
-        console.log(MENU.CM.goldTotal);
 
         html += '<div class="goldTotal">';
             html +=' '+(MENU.CM.goldTotal - this.SHIP.Price);
@@ -84,13 +117,22 @@ function MenuShipBuildingObject(){
 
     }
     this.showShipElements = function(){
-        var html='';
+        var html1='',html2='';
         for(var e in BBAdata.SHIPelements){
             var E = BBAdata.SHIPelements[e];
-            html+='<div class="shipElement" elementName="'+e+'">'+e+'</div>';
+            if(typeof E.whereElem != 'undefined')
+                html1 += this.showShipElement(E,e);
+            if(typeof E.where != 'undefined')
+                html2 += this.showShipElement(E,e);
         }
 
-        $('.shipElements').html(html);
+        $('.elementsList').html(html1+'<hr>'+html2);
+    }
+    this.showShipElement = function(E,e){
+        var html = '';
+
+        html+='<div class="shipElement" elementName="'+e+'">'+e+'</div>';
+        return html;
     }
 
     this.toggleShipElement = function(elementName){
@@ -104,6 +146,11 @@ function MenuShipBuildingObject(){
         this.buildShip();
         this.showShipProperties();
     }
+    this.changeElementsType = function(elementsType){
+        this.elementsType = elementsType;
+        this.showShipElements();
+    }
+
 
 
     this.buildShip = function(){
@@ -202,43 +249,43 @@ BBAdata.SHIPempty={
 };
 
 BBAdata.SHIPelements={
-    hullUp:{        Weight: 10, Price: 50,   where:['hull'],
+    hullUp:{        Weight: 10, Price: 50,   where:'hull',
         lifeM: 4,
     },
-    eleProd1:{      Weight: 2,  Price: 300,  where:['hull'],
+    eleProd1:{      Weight: 2,  Price: 300,  where:'hull',
         EnergyM: 25,
     },
-    eleProd2:{      Weight: 2,  Price: 300,  where:['hull'],
+    eleProd2:{      Weight: 2,  Price: 300,  where:'hull',
         EnergyM: 5,
     },
-    eleProd3:{      Weight: 2,  Price: 300,  where:['hull'],
+    eleProd3:{      Weight: 2,  Price: 300,  where:'hull',
         EnergyM: 5,
     },
-    eleProd4:{      Weight: 2,  Price: 300,  where:['hull'],
+    eleProd4:{      Weight: 2,  Price: 300,  where:'hull',
         EnergyM: 5,
     },
-    engine_1:{      Weight: 2,  Price: 100,  where:['engine'],
+    engine_1:{      Weight: 2,  Price: 100,  where:'engine',
         engineMultiply: 0.3
     },
-    startSpeed_4:{              Price: 500,  where:['engine'],
+    startSpeed_4:{              Price: 500,  where:'engine',
         speed: 4,
     },
-    startSpeed_4x:{             Price: 1200, where:['engine'],
+    startSpeed_4x:{             Price: 1200, where:'engine',
         speed: 4,
     },
-    ammoStorageX:{  Weight: 3,  Price: 200,  where:['hull'],
+    ammoStorageX:{  Weight: 3,  Price: 200,  where:'hull',
         Storage:{Ammo:{M:10}},
     },
-    ammoStorageXX:{ Weight: 3,  Price: 200,  where:['hull'],
+    ammoStorageXX:{ Weight: 3,  Price: 200,  where:'hull',
         Storage:{Ammo:{M:20}},
     },
-    ammoOnStart:{               Price: 1050, where:['hull'],
+    ammoOnStart:{               Price: 1050, where:'hull',
         Storage:{Ammo:{R:10}},
     },
-    ammoOnStartX:{              Price: 1050, where:['hull'],
+    ammoOnStartX:{              Price: 1050, where:'hull',
         Storage:{Ammo:{R:20}},
     },
-    normalShield:{  Weight: 2,  Price: 100,  where:['hull'],
+    normalShield:{  Weight: 2,  Price: 100,  where:'hull',
         setFunc:{
             'absorbtionShield':['energyField'],
         },
@@ -246,7 +293,7 @@ BBAdata.SHIPelements={
         EnergyFieldMax: 1,
         EnergyM: -1,
     },
-    shieldProduction:{ Weight: 1, Price: 300,  where:['hull'],
+    shieldProduction:{ Weight: 1, Price: 300,  where:'hull',
         Mod: 'shieldProd',
         ModPlace: 0,
         ModKey: false,
@@ -269,7 +316,7 @@ BBAdata.SHIPelements={
         ModData:{Emin:{A:0.5}},
     },
 
-    simpleWeapon:{ Weight: 5,  Price: 500,  where:['weapon'],
+    simpleWeapon:{ Weight: 5,  Price: 500,  where:'weapons',
         WeaponData:{
             T:'single',
             gunS:0,
@@ -280,7 +327,7 @@ BBAdata.SHIPelements={
             DMG: {Dmg:1,T:'normal'}
         }
     },
-    ammoProduction:{ Weight: 1, Price: 300, where: ['modules'],
+    ammoProduction:{ Weight: 1, Price: 300, where:'modules',
         Mod: 'Prod',
         ModPlace: 0,
         ModKey: false,
