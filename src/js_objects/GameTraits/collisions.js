@@ -265,18 +265,18 @@ GAMEobject.prototype.countSquareCorners = function(x,y,angle,len,width){
     var sC={A:{},B:{},C:{},D:{},E:{}};
     var Radi=Math.PI/180;
 
-    sC.A.x = x - width * Math.sin( (-parseInt(angle) - 90)*Radi);
-    sC.A.y = y - width * Math.cos( (-parseInt(angle) - 90)*Radi);
-    sC.D.x = x - width * Math.sin( (-parseInt(angle)- -90)*Radi);
-    sC.D.y = y - width * Math.cos( (-parseInt(angle)- -90)*Radi);
+    sC.A.x = x - width * Math.sin( (-angle - 90)*Radi);
+    sC.A.y = y - width * Math.cos( (-angle - 90)*Radi);
+    sC.D.x = x - width * Math.sin( (-angle- -90)*Radi);
+    sC.D.y = y - width * Math.cos( (-angle- -90)*Radi);
 
     x -=- len * Math.sin( (-parseInt(angle)-180)*Radi);
     y -=- len * Math.cos( (-parseInt(angle)-180)*Radi);
 
-    sC.B.x = x - width * Math.sin( (-parseInt(angle) - 90)*Radi);
-    sC.B.y = y - width * Math.cos( (-parseInt(angle) - 90)*Radi);
-    sC.C.x = x - width * Math.sin( (-parseInt(angle)- -90)*Radi);
-    sC.C.y = y - width * Math.cos( (-parseInt(angle)- -90)*Radi);
+    sC.B.x = x - width * Math.sin( (-angle - 90)*Radi);
+    sC.B.y = y - width * Math.cos( (-angle - 90)*Radi);
+    sC.C.x = x - width * Math.sin( (-angle- -90)*Radi);
+    sC.C.y = y - width * Math.cos( (-angle- -90)*Radi);
 
     sC.E.x1 = sC.A.x;
     sC.E.x2 = sC.A.x;

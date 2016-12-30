@@ -2254,7 +2254,7 @@ BBAdata['ObjectDatas']={
             angle: 0,
             Oid: -1,
             placementT:'directPlaces',
-            objData: {fieldAnim: 'PlasmaField', radius: 40, PeriodDMG:{Dmg:5,T:'normal'}, PeriodTime: 5, PeriodOffset: 5, PeriodDelay: 130, dontHit:['B','BE'], fieldAnimMoving:true, onDie:{Do:'explode', DMG:{Dmg:13,T:'explo'}, Dist: 210}}
+            objData: {fieldAnim: 'PlasmaField', radius: 40, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 1, PeriodOffset: 3, PeriodDelay: 130, dontHit:['B','BE'], fieldAnimMoving:true, onDie:{Do:'explode', DMG:{Dmg:13,T:'explo'}, Dist: 210}}
         }],
 
         doingNow: 'changeManouver',
@@ -2372,7 +2372,7 @@ BBAdata['ObjectDatas']={
             angle: 0,
             Oid: -1,
             placementT:'directPlaces',
-            objData: {fieldAnim: 'DestructionField', radius: 180, angle: 0, coneAngle: 50, coneRad2: 24, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 15, PeriodOffset: 10, particlesOnBoard:true, fieldAnimMoving:true, dontHit:['B','BE','E','M','ME','A'], mapType:'A', mapCollide:['P'], TT:'dust'}
+            objData: {fieldAnim: 'DestructionField', radius: 180, angle: 0, coneAngle: 50, coneRad2: 24, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 7, PeriodOffset: 7, particlesOnBoard:true, fieldAnimMoving:true, dontHit:['B','BE','E','M','ME','A'], mapType:'A', mapCollide:['P'], TT:'dust'}
         }],
 
         doingNow: 'changeManouver',
@@ -2768,7 +2768,7 @@ BBAdata['ObjectDatas']={
         ],
 
         shipVariables:{
-            speed: {Const: 6, Rand: 3},
+            speed: {Const: 3, Rand: 2},
             speedT: {Const: 1.5, Rand: 1.5},
             spotRad: {Const: 180, RandInt: 80},
             spotRad2: {Const: 400, RandInt: 200},

@@ -286,6 +286,9 @@ GAMEobject.prototype.dieObj = function(O,o){
     if(O.squadScheme)
         this.disbandSquad(O);
 
+    if(O.onDieDesroyConstructs)
+        this.onDieDesroyConstructs(O,o);
+
     if(O.onDieRemove){
         for(var i in O.onDieRemove){
             if(typeof this.O[ O.onDieRemove[i] ] != 'undefined')
@@ -297,11 +300,9 @@ GAMEobject.prototype.dieObj = function(O,o){
         O.toDo=[{T:'explode'}];
         O.Flags.gotHitFlag = false;
         O.doingTime = 3;
-    }
-    else if(O.onDie){
+    }else if(O.onDie){
         this.explodeBomb(o,O.onDie);
-    }
-    else
+    }else
         this.removeObj(o,true);
 
 

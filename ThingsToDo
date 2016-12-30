@@ -7,7 +7,7 @@
     - Left the hack lever in cookies
 
 
-- If StarRoutes would be 1 sided, then we could create starShops - where is possible to change Ship setup, and then create chellenge valleys
+- If StarRoutes would be 1 sided, then we could create starShops - where is possible to change Ship setup, and then create chellenge valleys - NOP!
 
 
 - Some stars explode
@@ -60,6 +60,16 @@
 
 - Moduł do zbierania bonusów (np. trzyma 5 bonusów)
 
+- Constructs have different Types
+    - Constructs destructionAnimation
+    - Constructs as backgrounds after death
+
+- Advanced Map Building:
+    - New random and planned placement engine
+    - excluding some shapes from others
+    - Rectangle shapes
+    - Maybe: minimial distance in random placement
+    - Maybe: cell filling randomization
 
 ================================================================================
 
@@ -74,7 +84,6 @@ Do zrobienia:
 	- Dodać budowanie statków
 	- Gwiazdy w tle (?)
 	- Zaawansowane składy
-	- Mapa Gwiazd
 
 Nowe ficzery:
 	- Baterie które można napełniać a potem zużywać

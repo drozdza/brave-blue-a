@@ -62,7 +62,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
         L = this.putObj(explodeObj.explodeType,'region',O.S,O.x,O.y);
 
         this.cloneDataToObj(L,explodeObj,['radius', 'coneAngle', 'coneRad2',
-            'PeriodTime', 'PeriodOffset',
+            'PeriodTime', 'PeriodOffset','PeriodHeal',
             'OneTimeEffect', 'OneTimeOffset', 'OnDamageExpire',
             'bounceForce', 'bounceType',
             'teleportOnHit', 'teleportOnHitDist', 'teleportOnHitDistPlus',
