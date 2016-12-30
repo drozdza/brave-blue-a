@@ -256,10 +256,10 @@ BBAdata.MAPS.Lx482={
     ],
 };
 BBAdata.MAPS.Lx1414={
-    BoardMods:['sitOnMap','allAvoid'],
+    BoardMods:['sitOnMap','allAvoid','vuvisPlusSpeed'],
     Place:[
         {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, K:2, SI:6}},
-        {Random:{X: 0, Y: 0, Radius: 800}, What:{SI:6},GroupMods:['saisungVivusOrbiters']}
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{SI:6},GroupMods:['saisungVuvisOrbiters']}
     ],
 };
 
