@@ -26,6 +26,12 @@ BBAdata['MapMODS']={
             {N:1, T:'goStraight', straightMin: 200, straightPlus: 100 },
         ],
     },
+    vuvisPlusSpeed:{
+        who:['vuvis'],
+        shipVariables:{
+            speed: {Const: 34, Rand: 6},    // dont work
+        },
+    },
     startWithShield:{
         energyField: 5,
         MapModActions:[{
@@ -131,7 +137,7 @@ BBAdata['MapMODS']={
         ],
         MapModActions:[{t:'tryBuildSquads'}],
     },
-    saisungVivusOrbiters:{
+    saisungVuvisOrbiters:{
         who:['saisung'],
         view: {Color:'#408'},
         squadSchemeTypeArray: [
