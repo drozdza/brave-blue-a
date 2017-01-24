@@ -48,8 +48,10 @@ body{
     min-height: 100%;
 }
 
-#shipyardContainer .shipProperties, #shipyardContainer .detailedShipProperties, #shipyardContainer .shipElements{
-    box-sizing: border-box;
+#shipyardContainer .shipProperties,
+#shipyardContainer .detailedShipProperties,
+#shipyardContainer .shipElements,
+#shipyardContainer .elementsList{
     padding: 30px;
     color: white;
 }
