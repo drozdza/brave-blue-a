@@ -65,6 +65,11 @@ body{
     width: 50%;
     float: right;
 }
+#shipyardContainer .elementsList{
+    width: 50%;
+    height: 40%;
+    float: right;
+}
 #shipyardContainer .goldTotal{
     font-size: 30px;
     color: gold;

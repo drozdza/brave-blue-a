@@ -14,9 +14,7 @@ function MenuShipBuildingObject(){
         this.resize();
         this.useShipyardShip = true;
     }
-    this.stopAnimation = function(){
-
-    }
+    this.stopAnimation = function(){}
 
     this.resize = function(){
         this.width = $(window).width();
@@ -62,7 +60,13 @@ function MenuShipBuildingObject(){
     this.buildAdvancedScrolling = function(){
         $('.advancedScroll').html(
               '<div class="container"></div>'
-            + '<div class="scrollHandler"></div>'
+            + '<div class="scrollHandler">'
+                + '<div class="scrollUp"></div>'
+                + '<div class="scrollBox">'
+                    + '<div class="scrollBit"></div>'
+                + '</div>'
+                + '<div class="scrollDown"></div>'
+            + '</div>'
         );
     }
 
@@ -126,7 +130,7 @@ function MenuShipBuildingObject(){
                 html2 += this.showShipElement(E,e);
         }
 
-        $('.elementsList').html(html1+'<hr>'+html2);
+        $('.elementsList .container').html(html1+'<hr>'+html2);
     }
     this.showShipElement = function(E,e){
         var html = '';

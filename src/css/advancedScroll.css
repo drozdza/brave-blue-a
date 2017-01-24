@@ -1,0 +1,54 @@
+.advancedScroll{
+}
+.advancedScroll .container{
+    width: calc(100% - 35px);
+    height: 100%;
+    overflow: hidden;
+    float: left;
+}
+.advancedScroll .scrollHandler{
+    width: 35px;
+    float: right;
+    height: 100%;
+    min-height: 100%;
+    background: yellow;
+}
+.advancedScroll .scrollHandler .scrollBox{
+    background: red;
+    height: calc(100% - 70px);
+    width: 35px;
+    position: relative;
+}
+.advancedScroll .scrollHandler .scrollBox .scrollBit{
+    background: blue;
+    border-radius: 6px;
+    width: 35px;
+    min-height: 35px;
+    position: absolute;
+    left: 0px;
+}
+
+.advancedScroll .scrollHandler .scrollUp,
+.advancedScroll .scrollHandler .scrollDown{
+    width: 33px;
+    height: 33px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 33px;
+    border: 1px solid darkblue;
+    border-radius: 6px;
+}
+
+.advancedScroll .scrollHandler .scrollUp{
+    background: orange;
+}
+.advancedScroll .scrollHandler .scrollUp:after{
+    content: '/\\';
+}
+.advancedScroll .scrollHandler .scrollDown{
+    background: green;
+}
+.advancedScroll .scrollHandler .scrollDown:after{
+    content: '\\/';
+}
