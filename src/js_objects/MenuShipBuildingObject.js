@@ -58,16 +58,31 @@ function MenuShipBuildingObject(){
 
 
     this.buildAdvancedScrolling = function(){
-        $('.advancedScroll').html(
-              '<div class="container"></div>'
-            + '<div class="scrollHandler">'
-                + '<div class="scrollUp"></div>'
-                + '<div class="scrollBox">'
-                    + '<div class="scrollBit"></div>'
+        __advancedScrollNumber = 0;
+        $('.advancedScroll').each(function(){
+            $(this).html(
+                  '<div class="containerHandler">'
+                    + '<div class="container"  scrollNumber="'+__advancedScrollNumber+'" style="top: 10px;"></div>'
                 + '</div>'
-                + '<div class="scrollDown"></div>'
-            + '</div>'
-        );
+                + '<div class="scrollHandler">'
+                    + '<div class="scrollUp" scrollNumber="'+__advancedScrollNumber+'"></div>'
+                    + '<div class="scrollBox">'
+                        + '<div class="scrollBit"></div>'
+                    + '</div>'
+                    + '<div class="scrollDown" scrollNumber="'+__advancedScrollNumber+'"></div>'
+                + '</div>'
+            );
+            __advancedScrollNumber++;
+        });
+        delete __advancedScrollNumber;
+        $('.advancedScroll .scrollUp').click(function(){
+            var scrollNumber = $(this).attr('scrollNumber');
+            $('.container[scrollNumber='+scrollNumber+']').css({'top': '-=-90'});
+        });
+        $('.advancedScroll .scrollDown').click(function(){
+            var scrollNumber = $(this).attr('scrollNumber');
+            $('.container[scrollNumber='+scrollNumber+']').css({'top': '-=90'});
+        });
     }
 
     this.showElementsTypeMenu = function(){
@@ -124,9 +139,9 @@ function MenuShipBuildingObject(){
         var html1='',html2='';
         for(var e in BBAdata.SHIPelements){
             var E = BBAdata.SHIPelements[e];
-            if(typeof E.whereElem != 'undefined')
+            if(typeof E.whereElem != 'undefined' && typeof this.SHIPelems[elementName] != 'undefined')
                 html1 += this.showShipElement(E,e);
-            if(typeof E.where != 'undefined')
+            if(typeof E.where != 'undefined' && E.where == this.elementsType)
                 html2 += this.showShipElement(E,e);
         }
 
@@ -135,7 +150,11 @@ function MenuShipBuildingObject(){
     this.showShipElement = function(E,e){
         var html = '';
 
-        html+='<div class="shipElement" elementName="'+e+'">'+e+'</div>';
+        html+='<div class="shipElement" elementName="'+e+'">'
+            html+=e;
+            html+='<span class="weight">'+E.Weight+'</span>';
+            html+='<span class="price">'+E.Price+'</span>';
+        html+='</div>';
         return html;
     }
 
@@ -271,10 +290,10 @@ BBAdata.SHIPelements={
     engine_1:{      Weight: 2,  Price: 100,  where:'engine',
         engineMultiply: 0.3
     },
-    startSpeed_4:{              Price: 500,  where:'engine',
+    startSpeed_4:{  Weight: 0,  Price: 500,  where:'engine',
         speed: 4,
     },
-    startSpeed_4x:{             Price: 1200, where:'engine',
+    startSpeed_4x:{ Weight: 0,  Price: 1200, where:'engine',
         speed: 4,
     },
     ammoStorageX:{  Weight: 3,  Price: 200,  where:'hull',
@@ -283,10 +302,10 @@ BBAdata.SHIPelements={
     ammoStorageXX:{ Weight: 3,  Price: 200,  where:'hull',
         Storage:{Ammo:{M:20}},
     },
-    ammoOnStart:{               Price: 1050, where:'hull',
+    ammoOnStart:{   Weight: 0,  Price: 1050, where:'hull',
         Storage:{Ammo:{R:10}},
     },
-    ammoOnStartX:{              Price: 1050, where:'hull',
+    ammoOnStartX:{  Weight: 0,  Price: 1050, where:'hull',
         Storage:{Ammo:{R:20}},
     },
     normalShield:{  Weight: 2,  Price: 100,  where:'hull',

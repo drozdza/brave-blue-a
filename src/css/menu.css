@@ -115,14 +115,23 @@ body{
     padding: 3px 15px;
     margin: 5px;
     cursor: pointer;
-    transition: 1s;
+    transition: 0.5s;
+}
+#shipyardContainer .shipElement .weight{
+    margin: 0px 10px;
+    font-weight: bold;
+    color: #888;
+}
+#shipyardContainer .shipElement .price{
+    margin: 0px 10px;
+    font-weight: bold;
+    color: gold;
 }
 #shipyardContainer .shipElement.choosen{
-    margin-left: -30px;
+    background: #227;
 }
 #shipyardContainer .shipElement:hover{
-    color: black;
-    background: white;
+    border-color: white;
 }
 
 #shipyardContainer .detailedShipProperties table {
