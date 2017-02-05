@@ -52,6 +52,7 @@ GAMEobject.prototype.stopAnimations = function(gameHash){
 }
 GAMEobject.prototype.goToMenu = function(){
     $(window).unbind();
+    $('#FPS').hide();
     this.stopAnimations(this.gameHash);
     delete GAME;
     $('#Game').unbind('click').html('').hide();

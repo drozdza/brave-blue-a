@@ -1,0 +1,279 @@
+#shipyardContainer{
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+}
+
+#shipyardContainer .shipProperties,
+#shipyardContainer .detailedShipProperties,
+#shipyardContainer .shipElements,
+#shipyardContainer .elementsList{
+    padding: 30px 0px;
+    color: white;
+}
+#shipyardContainer .shipProperties{
+    width: 100%;
+    text-align: center;
+}
+#shipyardContainer .detailedShipProperties{
+    width: 50%;
+    float: left;
+}
+#shipyardContainer .shipElements{
+    width: 50%;
+    height: 40%;
+    float: right;
+}
+#shipyardContainer .elementsList{
+    width: 50%;
+    height: 40%;
+    padding: 0px;
+    float: right;
+    clear: right;
+}
+#shipyardContainer .goldTotal{
+    font-size: 30px;
+    color: gold;
+    font-weight: bold;
+}
+#shipyardContainer .elementsTypeMenu{
+    text-align: center;
+}
+#shipyardContainer .typeMenuElement{
+    display: inline-block;
+    padding: 3px 20px;
+    border-width: 1px 1px 0px;
+    border-style: solid;
+    border-color: #00006f;
+    border-radius: 12px 12px 0px 0px;
+    cursor: pointer;
+    color: white;
+    background: black;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0px 2px;
+}
+#shipyardContainer .typeMenuElement.choosen{
+    border-bottom: none;
+    background-color: white;
+}
+#shipyardContainer .typeMenuElement:hover{
+    padding-bottom: 4px;
+    color: blue;
+}
+#shipyardContainer .shipProperties span{
+    border: 2px solid #00006f;
+    border-radius: 6px;
+    margin: 3px;
+    padding: 2px 15px;
+}
+
+#shipyardContainer .shipElement{
+    border-width: 6px;
+    border-style: double;
+    border-color: #00006f;
+    border-radius: 10px;
+    padding: 3px 15px;
+    margin: 5px;
+    cursor: pointer;
+    transition: 0.5s;
+    color: white;
+}
+#shipyardContainer .shipElement.choosen,
+#shipyardContainer .shipElement.disabled.choosen{
+    background: #227;
+    color: white;
+    border-color: #00006f;
+}
+#shipyardContainer .shipElement.disabled{
+    color: #555;
+    border-color: #555;
+}
+#shipyardContainer .shipElement:hover,
+#shipyardContainer .shipElement.disabled:hover{
+    border-color: white;
+}
+
+#shipyardContainer .shipElement .weight{
+    margin: 0px 10px;
+    font-weight: bold;
+    color: #888;
+}
+#shipyardContainer .shipElement .price{
+    margin: 0px 10px;
+    font-weight: bold;
+    color: gold;
+}
+
+#shipyardContainer .shipElementProp{
+    min-height: 40px;
+    border: 6px double darkblue;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 3px 15px;
+}
+
+
+#shipyardContainer .detailedShipProperties table {
+    float: right;
+    clear: both;
+}
+#shipyardContainer .detailedShipProperties td:nth-child(2) {
+    text-align: left;
+}
+#shipyardContainer .detailedShipProperties td {
+    border-bottom: 1px solid white;
+    margin: 0px;
+    padding: 0px 5px;
+    text-align: right;
+}
+
+
+#shipyardContainer .EminMax{
+    border: 3px double darkblue;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    position: relative;
+}
+
+#shipyardContainer .EminMaxTitle{
+    border: 3px double darkblue;
+    position: absolute;
+    border-radius: 10px;
+    padding: 3px 0px;
+    background: black;
+    top: -21px;
+    left: calc(50% - 103px);
+    width: 200px;
+    text-align: center;
+}
+
+#shipyardContainer .EminProp,
+#shipyardContainer .EmaxProp{
+    border: 3px double darkblue;
+    border-radius: 10px;
+    background: black;
+    width: 60px;
+    text-align: center;
+    position: absolute;
+    top: -9px;
+    height: 60px;
+}
+#shipyardContainer .EminProp{
+    left: -5px;
+}
+#shipyardContainer .EmaxProp{
+    right: -5px;
+}
+
+#shipyardContainer .EminMax .minEmin,
+#shipyardContainer .EminMax .minEmax{
+    color: grey;
+    font-size: 12px;
+    height: 17px;
+    line-height: 17px;
+    cursor: pointer;
+}
+#shipyardContainer .EminMax .minEmin:before,
+#shipyardContainer .EminMax .minEmax:before{
+    content: ' ';
+    display: block;
+    width: 0px;
+    height: 0px;
+    border-width: 0px 30px 12px;
+    border-style: solid;
+    border-color: transparent transparent darkblue transparent;
+    position: absolute;
+    top: -12px;
+}
+#shipyardContainer .EminMax .minEmin:hover:before,
+#shipyardContainer .EminMax .minEmax:hover:before{
+    border-bottom-color: white;
+}
+#shipyardContainer .EminMax .maxEmin,
+#shipyardContainer .EminMax .maxEmax{
+    color: grey;
+    font-size: 12px;
+    height: 17px;
+    line-height: 17px;
+    cursor: pointer;
+}
+#shipyardContainer .EminMax .maxEmin:before,
+#shipyardContainer .EminMax .maxEmax:before{
+    content: ' ';
+    display: block;
+    width: 0px;
+    height: 0px;
+    border-width: 12px 30px 0px;
+    border-style: solid;
+    border-color: darkblue transparent transparent transparent;
+    position: absolute;
+    bottom: -12px;
+}
+#shipyardContainer .EminMax .maxEmin:hover:before,
+#shipyardContainer .EminMax .maxEmax:hover:before{
+    border-top-color: white;
+}
+
+#shipyardContainer .EminMax .actualEmin,
+#shipyardContainer .EminMax .actualEmax{
+    position: relative;
+    left: -7px;
+    border: 2px solid darkblue;
+    width: 70px;
+    height: 20px;
+    line-height: 20px;
+    background: black;
+    border-radius: 8px;
+}
+
+
+#shipyardContainer .EminMaxSliderBackground{
+    position: absolute;
+    top: 20px;
+    left: 70px;
+    width: calc(100% - 146px);
+    height: 15px;
+    border: 2px solid darkblue;
+    border-radius: 12px;
+    background: #002;
+}
+#shipyardContainer .EminMaxSlider{
+    position: absolute;
+    top: 0px;
+    left: 25px;
+    width: calc(100% - 50px);
+    height: 15px;
+}
+
+#shipyardContainer .EminMax .activeSliderPart{
+    background: lightblue;
+    position: absolute;
+    top: 0px;
+    left: 20%;
+    width: 50%;
+    height: 15px;
+}
+#shipyardContainer .EminMax .sliderMinAchnor,
+#shipyardContainer .EminMax .sliderMaxAchnor{
+    position: absolute;
+    top: -9px;
+    height: 31px;
+    width: 15px;
+    border: 1px solid darkblue;
+    border-radius: 4px;
+    background: black;
+    cursor: pointer;
+}
+#shipyardContainer .EminMax .sliderMinAchnor{
+    right: 80%;
+}
+#shipyardContainer .EminMax .sliderMaxAchnor{
+    left: 70%;
+}
+#shipyardContainer .EminMax .sliderMinAchnor:hover,
+#shipyardContainer .EminMax .sliderMaxAchnor:hover{
+    background: lightblue;
+}

@@ -47,6 +47,7 @@ function MENUobject(){
     this.startMap = function(id){
         this.SM.stopAnimation();
         $('#Menu').hide();
+        $('#FPS').show();
         if(typeof GAME != 'undefined')
             delete GAME;
         if(typeof CanvasManager != 'undefined')

@@ -9,7 +9,10 @@ function MenuShipBuildingObject(){
     this.SHIPelems = {};
     this.SHIP = false; // Current Ship
     this.elementsType = 'hull';
+    this.sliderMouseMovement = false;
 
+
+    // =================== Inicjalization ======================================
     this.startAnimation = function(){
         this.resize();
         this.useShipyardShip = true;
@@ -28,6 +31,10 @@ function MenuShipBuildingObject(){
     this.makeMenuShip = function(){
         this.resize();
 
+        this.SHIPelems = {};
+        for(var e in BBAdata.SHIPelements)
+            this.SHIPelems[e] = {S:false};
+
         var html ='';
         html += '<div id="GoToStarMap">StarMap</div>';
         html += '<div class="shipProperties"></div>';
@@ -43,7 +50,12 @@ function MenuShipBuildingObject(){
 
         this.showElementsTypeMenu();
         this.showShipProperties();
-        this.showShipElements();
+
+        this.showShipElementsPropertiesList();
+        this.showShipElementsList();
+        this.toggleShipElementsList();
+
+        this.buildEminMaxSliders();
 
         $('.typeMenuElement').click(function(){ MENU.SB.changeElementsType( $(this).attr('typeMenuElement') ); });
 
@@ -51,12 +63,13 @@ function MenuShipBuildingObject(){
 
         $('#GoToStarMap').click(function(){ MENU.startStarMapMenu(); });
 
-        $('#shipyardContainer').on('click','.shipElement',function(){
+        $('#shipyardContainer').on('click','.shipElement:not(.disabled)',function(){
+            console.log('UU');
             MENU.SB.toggleShipElement( $(this).attr('elementName') );
         });
     }
 
-
+    // ==================== JS FUNCTIONS =======================================
     this.buildAdvancedScrolling = function(){
         __advancedScrollNumber = 0;
         $('.advancedScroll').each(function(){
@@ -85,6 +98,146 @@ function MenuShipBuildingObject(){
         });
     }
 
+    this.buildEminMaxSliders = function(){
+        $('.EminMax .minEmin').click(function(){
+            var elementName = $(this).parents('.EminMax').attr('elementName');
+            MENU.SB.changeSliderEminMax(elementName, '-', 'min');
+        });
+        $('.EminMax .maxEmin').click(function(){
+            var elementName = $(this).parents('.EminMax').attr('elementName');
+            MENU.SB.changeSliderEminMax(elementName, '+', 'min');
+        });
+        $('.EminMax .minEmax').click(function(){
+            var elementName = $(this).parents('.EminMax').attr('elementName');
+            MENU.SB.changeSliderEminMax(elementName, '-', 'max');
+        });
+        $('.EminMax .maxEmax').click(function(){
+            var elementName = $(this).parents('.EminMax').attr('elementName');
+            MENU.SB.changeSliderEminMax(elementName, '+', 'max');
+        });
+
+        $('.EminMax .sliderMinAchnor').mousedown(function(event){
+            var elementName = $(this).parents('.EminMax').attr('elementName');
+            MENU.SB.sliderMouseMoveStart(elementName, event.offsetX, 'min');
+
+        });
+        $('.EminMax .sliderMaxAchnor').mousedown(function(event){
+            var elementName = $(this).parents('.EminMax').attr('elementName');
+            MENU.SB.sliderMouseMoveStart(elementName, event.offsetX, 'max');
+        });
+        $(document).mouseup(function(){
+            MENU.SB.sliderMouseMovement = false;
+        }).mousemove(function(event){
+            if(MENU.SB.sliderMouseMovement){
+                MENU.SB.sliderMouseMoved(event);
+            }
+        });
+
+        this.setEminMaxSliders();
+    }
+    this.changeSliderEminMax = function(elementName, what, minMax){
+        var Evar = this.SHIPelems[elementName];
+        var Edata = BBAdata.SHIPelements[elementName].ModData;
+        var Emin = Edata.Emin;
+        var Emax = Edata.Emax;
+
+        if(what == '+'){
+            if(minMax=='max')
+                if(Evar.Emax- -0.1 <= Emax.max) Evar.Emax -=- 0.1;
+            if(minMax=='min')
+                if(Evar.Emin- -0.1 <= Emin.max && Evar.Emin- -0.1 <= Evar.Emax) Evar.Emin -=- 0.1;
+        }
+        if(what == '-'){
+            if(minMax=='max')
+                if(Evar.Emax-0.1 >= Emax.min && Evar.Emax-0.1 >= Evar.Emin) Evar.Emax -= 0.1;
+            if(minMax=='min')
+                if(Evar.Emin-0.1 >= Emin.min) Evar.Emin -= 0.1;
+        }
+        this.showChangesSliderEminMax(elementName);
+    }
+    this.sliderMouseMoveStart = function(elementName, offsetX, minMax)
+    {
+        this.sliderMouseMovement = {
+            elementName: elementName,
+            offsetX: offsetX,
+            minMax: minMax,
+        };
+    }
+    this.sliderMouseMoved = function(event){
+        var e = this.sliderMouseMovement.elementName;
+        var offsetX = this.sliderMouseMovement.offsetX;
+        var minMax = this.sliderMouseMovement.minMax;
+
+        var Evar = this.SHIPelems[e];
+        var Edata = BBAdata.SHIPelements[e].ModData;
+        var Emin = Edata.Emin;
+        var Emax = Edata.Emax;
+
+        var RangeMin = Emin.min;
+        var RangeMax = Emax.max;
+        var Range = RangeMax-RangeMin;
+
+        var TotWidth = $('.EminMax[elementName="'+e+'"] .EminMaxSlider').width();
+        var SliderX = $('.EminMax[elementName="'+e+'"] .EminMaxSlider').offset().left;
+
+
+        var Pos = event.clientX - offsetX;
+        if(minMax=='max') Pos-=- 5;
+        if(minMax=='min') Pos-=- 22;
+        var PosX = Pos-SliderX;
+        var Percente = PosX/TotWidth;
+        var TrySet = RangeMin- -Percente*Range;
+        TrySet = parseInt(TrySet*10)/10;
+
+        if(minMax=='max'){
+            Evar.Emax = TrySet;
+            if(Evar.Emax < Emax.min) Evar.Emax = Emax.min;
+            if(Evar.Emax < Evar.Emin) Evar.Emax = Evar.Emin;
+            if(Evar.Emax > Emax.max) Evar.Emax = Emax.max;
+        }
+        if(minMax=='min'){
+            Evar.Emin = TrySet;
+            if(Evar.Emin > Evar.Emax) Evar.Emin = Evar.Emax;
+            if(Evar.Emin > Emin.max) Evar.Emin = Emin.max;
+            if(Evar.Emin < Emin.min) Evar.Emin = Emin.min;
+
+        }
+
+        this.showChangesSliderEminMax(e);
+    }
+    this.setEminMaxSliders = function(){
+        $('.EminMax').each(function(){
+            var elementName = $(this).attr('elementName');
+            MENU.SB.showChangesSliderEminMax(elementName);
+        });
+    }
+    this.showChangesSliderEminMax = function(elementName){
+        console.log(elementName);
+        var Evar = this.SHIPelems[elementName];
+        var Edata = BBAdata.SHIPelements[elementName].ModData;
+        var Emin = Edata.Emin;
+        var Emax = Edata.Emax;
+
+        var RangeMin = Emin.min;
+        var RangeMax = Emax.max;
+        var Range = RangeMax-RangeMin;
+
+        if(typeof Evar.Emin == 'undefined'){
+            Evar.Emin = Emin.min;
+            Evar.Emax = Emax.max;
+        }
+
+        $('.EminMax[elementName="'+elementName+'"] .sliderMinAchnor').css({right: ((RangeMax-Evar.Emin)/Range)*100+'%'});
+        $('.EminMax[elementName="'+elementName+'"] .sliderMaxAchnor').css({left: ((Evar.Emax-RangeMin)/Range)*100+'%'});
+        $('.EminMax[elementName="'+elementName+'"] .activeSliderPart').css({
+            left: ((Evar.Emin-RangeMin)/Range)*100+'%',
+            width: ((Evar.Emax-Evar.Emin)/Range)*100+'%'
+        });
+        console.log(Evar.Emin);
+        $('.EminMax[elementName="'+elementName+'"] .actualEmin').html(Evar.Emin.toFixed(1));
+        $('.EminMax[elementName="'+elementName+'"] .actualEmax').html(Evar.Emax.toFixed(1));
+    }
+
     this.showElementsTypeMenu = function(){
         var TypeMenu = {
             hull:    'Hull',
@@ -98,6 +251,8 @@ function MenuShipBuildingObject(){
         }
         $('.elementsTypeMenu').html(html);
     }
+
+    // =================== SHOW SHIP PROPERTIES ================================
     this.showShipProperties = function(){
         var html='';
 
@@ -135,13 +290,72 @@ function MenuShipBuildingObject(){
         $('.detailedShipProperties').append('<table>'+html+'</table>');
 
     }
-    this.showShipElements = function(){
+
+
+    // ======================= SHIP ELEMENTS PROPERTIES LIST ===================
+    this.showShipElementsPropertiesList = function(){
+        var html = '';
+        for(var e in BBAdata.SHIPelements){
+            html += this.showShipElementProperties(BBAdata.SHIPelements[e], e);
+        }
+
+        $('.shipElements .container').html(html);
+    }
+    this.showShipElementProperties = function(E,e){
+        var html = '';
+
+        html+='<div class="shipElementProp" elementName="'+e+'"';
+            if(!this.SHIPelems[e].S) html+=' style="display: none;"';
+        html+='>';
+            html+=e;
+
+            if(typeof E.ModSet != 'undefined')
+                for(var ms in E.ModSet){
+                    if(ms =='EminMax') html+=this.showShipElement_EminMax(E,e);
+                }
+            // tutaj duzo html
+        html+='</div>';
+
+        return html;
+    }
+    this.showShipElement_EminMax = function(E,e){
+        var html='';
+
+        var Edata = BBAdata.SHIPelements[e].ModData;
+        var Emin = Edata.Emin;
+        var Emax = Edata.Emax;
+
+        html +='<div class="EminMax" elementName="'+e+'">';
+            html +='<div class="EminMaxTitle">Module Energy Input</div>';
+            html +='<div class="EminProp">';
+                html +='<div class="minEmin">'+Emin.min+'</div>';
+                html +='<div class="actualEmin">'+Emin.min+'</div>';
+                html +='<div class="maxEmin">'+Emin.max+'</div>';
+            html +='</div>';
+            html +='<div class="EminMaxSliderBackground">';
+                html +='<div class="EminMaxSlider">';
+                    html +='<div class="activeSliderPart"></div>';
+                    html +='<div class="sliderMinAchnor"></div>';
+                    html +='<div class="sliderMaxAchnor"></div>';
+                html +='</div>';
+            html +='</div>';
+            html +='<div class="EmaxProp">';
+                html +='<div class="minEmax">'+Emax.min+'</div>';
+                html +='<div class="actualEmax">'+Emax.max+'</div>';
+                html +='<div class="maxEmax">'+Emax.max+'</div>';
+            html +='</div>';
+        html +='</div>';
+
+        return html;
+    }
+    // ======================= SHIP ELEMENTS LIST ==============================
+    this.showShipElementsList = function(){
         var html1='',html2='';
         for(var e in BBAdata.SHIPelements){
             var E = BBAdata.SHIPelements[e];
-            if(typeof E.whereElem != 'undefined' && typeof this.SHIPelems[elementName] != 'undefined')
+            if(typeof E.whereElem != 'undefined')
                 html1 += this.showShipElement(E,e);
-            if(typeof E.where != 'undefined' && E.where == this.elementsType)
+            else if(typeof E.where != 'undefined')
                 html2 += this.showShipElement(E,e);
         }
 
@@ -150,32 +364,66 @@ function MenuShipBuildingObject(){
     this.showShipElement = function(E,e){
         var html = '';
 
-        html+='<div class="shipElement" elementName="'+e+'">'
+        html+='<div class="shipElement';
+        if(this.SHIPelems[e].S) html+=' choosen';
+        html+='" elementName="'+e+'">';
             html+=e;
             html+='<span class="weight">'+E.Weight+'</span>';
             html+='<span class="price">'+E.Price+'</span>';
         html+='</div>';
         return html;
     }
+    this.toggleShipElementsList = function(){
+        $('.shipElement').hide().removeClass('disabled');
+        var goldLeft = MENU.CM.goldTotal - this.SHIP.Price;
+        for(var e in BBAdata.SHIPelements){
+            var E = BBAdata.SHIPelements[e];
+            var show = true;
+            var disable = false;
+
+            if(typeof E.whereElem !='undefined' && this.SHIPelems[ E.whereElem ].S === false)
+                show = false;
+
+            if(typeof E.where !='undefined' && E.where != this.elementsType)
+                show = false;
+
+            if(goldLeft < E.Price)
+                disable = true;
+
+            if(typeof E.EnergyM != 'undefined' && this.SHIP.EnergyM- -E.EnergyM < 0)
+                disable = true;
+
+            if(typeof E.campainFlags != 'undefined'){
+                // require some quest flags
+                // ...
+                show = false;
+            }
+
+            if(show)    $('.shipElement[elementName="'+e+'"]').show();
+            if(disable) $('.shipElement[elementName="'+e+'"]:not(.choosen)').addClass('disabled');
+        }
+
+    }
 
     this.toggleShipElement = function(elementName){
-        if(typeof this.SHIPelems[elementName] == 'undefined'){
+        if(this.SHIPelems[elementName].S === false){
             $('.shipElement[elementName="'+elementName+'"]').addClass('choosen');
-            this.SHIPelems[elementName] = {};
+            $('.shipElementProp[elementName="'+elementName+'"]').show();
+            this.SHIPelems[elementName].S = true;
         }else{
             $('.shipElement[elementName="'+elementName+'"]').removeClass('choosen');
-            delete this.SHIPelems[elementName];
+            $('.shipElementProp[elementName="'+elementName+'"]').hide();
+            this.SHIPelems[elementName].S = false;
         }
         this.buildShip();
         this.showShipProperties();
+        this.toggleShipElementsList();
     }
     this.changeElementsType = function(elementsType){
         this.elementsType = elementsType;
-        this.showShipElements();
+        this.toggleShipElementsList();
     }
-
-
-
+    // ===================== Building the Ship Stats ===========================
     this.buildShip = function(){
         this.SHIP = cloneObj(BBAdata.SHIPempty);
 
@@ -183,6 +431,8 @@ function MenuShipBuildingObject(){
         for(var elementName in this.SHIPelems){
             var Evar = this.SHIPelems[elementName];
             var Edata = BBAdata.SHIPelements[elementName];
+
+            if(!Evar.S) continue;
 
             for(var i in Edata){
                 switch(i){
@@ -241,36 +491,6 @@ function MenuShipBuildingObject(){
 
 // =============================================
 
-BBAdata.SHIPempty={
-    Price: 0,
-    Weight: 20,
-    lifeM: 1,
-    EnergyM: 0,
-    SpeedM: 0,
-    engineMultiply:1,
-    speed: 0,
-    AmmoStorage: 0,
-    Ammo: 0,
-    MissleStorage: 0,
-    Missles: 0,
-    BombStorage: 0,
-    Bombs: 0,
-    ShowFireRange: false,
-    ShowAmmoIndicator: false,
-    GlueFireToEstimated: false,
-    GlueFireToLaser: false,
-    ShowRadar: false,
-    KeysModules:{},
-    FireType: false,
-    FireType2: false,
-    MouseDown1: false,
-    MouseDown2: false,
-    EnergyFieldMax: 0,
-    Storage:{},
-    FireTypes:[],
-    Modules:[],
-};
-
 BBAdata.SHIPelements={
     hullUp:{        Weight: 10, Price: 50,   where:'hull',
         lifeM: 4,
@@ -323,8 +543,8 @@ BBAdata.SHIPelements={
         ModData:{
             T:'shieldProd',
             Disabled: 0,
-            Emin: {A:1,B:5},
-            Emax: {B:3,C:5},
+            Emin: {min:1,max:5},
+            Emax: {min:3,max:5},
             ProdX: 1,
             E: 0,
             Prod: 0,
@@ -335,7 +555,7 @@ BBAdata.SHIPelements={
             EminMax:true,
         },
     },
-    shieldProduction_Mod1:{ Weight: 0, Price: 100, whereElem:['shieldProduction'],
+    shieldProduction_Mod1:{ Weight: 0, Price: 100, where:'hull', whereElem:['shieldProduction'],
         ModData:{Emin:{A:0.5}},
     },
 
@@ -359,8 +579,8 @@ BBAdata.SHIPelements={
             Disabled:0,
             Prod:0,
             E:0,
-            Emin:2,
-            Emax:4,
+            Emin:{min:2,max:4},
+            Emax:{min:2,max:4},
             ProdX:4,
             ifProd:40,
             subT:'Bullet',
@@ -374,6 +594,35 @@ BBAdata.SHIPelements={
     //{T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,ProdX:1,E:0,Prod:0,ifProd:30 },
 };
 
+BBAdata.SHIPempty={
+    Price: 0,
+    Weight: 20,
+    lifeM: 1,
+    EnergyM: 0,
+    SpeedM: 0,
+    engineMultiply:1,
+    speed: 0,
+    AmmoStorage: 0,
+    Ammo: 0,
+    MissleStorage: 0,
+    Missles: 0,
+    BombStorage: 0,
+    Bombs: 0,
+    ShowFireRange: false,
+    ShowAmmoIndicator: false,
+    GlueFireToEstimated: false,
+    GlueFireToLaser: false,
+    ShowRadar: false,
+    KeysModules:{},
+    FireType: false,
+    FireType2: false,
+    MouseDown1: false,
+    MouseDown2: false,
+    EnergyFieldMax: 0,
+    Storage:{},
+    FireTypes:[],
+    Modules:[],
+};
 
 
 Best = {
