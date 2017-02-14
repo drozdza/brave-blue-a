@@ -693,3 +693,468 @@ Best = {
         4:{T:'changePosition', Dec:12, timesBy: 5, Dist: 10, Angle: 180},
     },
 };
+
+
+
+Life:
+    Ship has 1 Life Point
+    Simple Plates: 4x 1 Life = quite heavy
+        - Upgrade to make them lighter (late in the game)
+    Light Plates: 6x 1 Life = light and expensive (10K each)
+    Heavy Plates 4x 2 Life = vary heavy
+        - Upgrade to make them give 3 Life
+
+Energy:
+    EngineCore Mark I, 6 Energy
+    EngineCore Mark II, 8 Energy
+    EngineCore Mark III, 12 Enegry
+    EngineCorem Mark IV, 16 Energy
+
+    Simple Energy Cells 4x 1 Energy = Light&cheap
+        - Upgrade to make them give 2 Energy - extra expensive
+        - Upgrade to make them give 3 Energy - extra expensive
+    Energy Crystals 2x 6 Energy = Exmpensive&Heavy
+        - Upgrade to make them gibe 2 more Energy I & II
+        - Upgrade to make them lighter I & II
+
+    Heavy Energy Cells 6x 2 Energy = Cheap but Heavy
+        - Upgrade makeing them slightly lighter
+
+    Generatus - 16 Energy = extra heavy, max speed cap, rotation speed cap
+        - Upgrade makes +8 Energy I, II
+        - Upgrade makeing it lighter and increasing rotation speed
+        - Upgrade makeing max speed cap higher I,II
+
+Engine:
+    - makeing engineMultiply higher
+    - Leveling increasing max speed cap
+    - Roratation speed
+    - Starting speed
+    - Star bumping speed cap higher
+
+
+Movements:
+    - Change speed Stops
+        - Number of them
+        - Change speed delays
+
+
+
+Storage:
+    - Ammo Storage
+    - Ammo Storage Start filling
+
+
+SHIP MAIN UPGRADES:
+    - second mouse button
+    - Show Ammo Indicator
+    - Show Bullet Weapons Max Distance
+    - Show Bomb Weapons Max Distance
+    - Shob Bomb Weapons predicted radius
+
+Basic Weapons:
+    Single Gun
+        - Gun Speed upgrade I-IV
+        - Bullet Distance upgrade I-III
+        - Bullet Speed Upgdate I-V
+    Rose Gun
+        - Gun Speed upgrade
+        - Bullets number upgrade
+        - Bullets Usage Downgrade
+        - Rose Angle Upgrade (one and other way)
+        - Bullet Speed, Bullet Distance
+
+
+Modules:
+    Produce Bullets
+        - Min Energy
+        - Max Energy
+        - Production Speed
+
+
+    },
+    'destFields':{
+        Shields:[{
+            name: 'absorbtionShield',
+            CatchDmgT: {normal:1, energy:1, explo:1},
+            DmgReduction: 'energyField',
+            ReductionUses: 'infinite',
+            Own: true,
+        }],
+        EnergyFieldMax: 10,
+        EnergyM: 32,
+        engineMultiply: 1,
+        speed: 8,
+        Storage:{
+            Missile: {R:10,M:10},
+        },
+        ModStorage:{
+            TeleJump: {R:0,M:6},
+        },
+        ShowFireRange: false,
+        ShowAmmoIndicator: true,
+        GlueFireToEstimated: 100,
+        GlueFireToLaser: 70,
+        ShowRadar: true,
+        KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
+        FireType: 2,
+        FireType2: 3,
+        res:{},
+        MouseDown1: false,
+        MouseDown2: false,
+        FireTypes:[
+            {T:'missle',  gunS:0,GunSpeed: 10, Use:{'Missile':1}, Speed: 12, SpeedT: 6, Dec: 130, AimRadius: 60, explodePreset:'MissileDestructionFieldGiant'},
+            {T:'missleR', gunS:0,GunSpeed: 6, Use:{'Missile':5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'MissileDestructionFieldSmall'},
+            {T:'bombT',   gunS:0,GunSpeed: 5,  Distance: 500, offTime: 0, explodePreset:'DestructionFieldMedium'},
+            {T:'tele',    gunS:0,GunSpeed: 3, ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
+        ],
+        Modules:[
+            {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,ProdX:1,E:0,Prod:0,ifProd:30 },
+            {T:'spotRegion',Disabled:1,Emin:4,Emax:4,ProdX:1,E:0,Prod:0,ifProd:1 },
+            {T:'moduleProd',Disabled:0,Emin:2,Emax:4,ProdX:4,E:0,Prod:0,ifProd:60, subT:'TeleJump',ModStorage:'TeleJump'},
+            {T:'healerProd',Disabled:0,Emin:4,Emax:16,ProdX:1,E:0,Prod:0,ifProd:90 },
+            {T:'Prod',      subT:'Missile',Storage:'Missile',Disabled:0,Emin:1,Emax:6,ProdX:4,E:0,Prod:0,ifProd:4 },
+            {T:'radar',     Disabled:1,Emin:1,Emax:30,ProdX:20,E:0,Prod:0,ifProd:360,Radius:2500},
+        ],
+    },
+    'bombs1':{
+        Weight: 25,
+        life: 11,
+        lifeM: 11,
+        Shields:[{
+            name: 'absorbtionShield',
+            CatchDmgT: {normal:1, energy:1, explo:1},
+            DmgReduction: 'energyField',
+            ReductionUses: 'infinite',
+            Own: true,
+        }],
+        EnergyFieldMax: 10,
+        EnergyM: 32,
+        engineMultiply: 1,
+        speed: 8,
+        Storage:{
+            Bomb: {R:12, M:12},
+        },
+        ModStorage:{
+            TeleJump: {R:0,M:6},
+        },
+        ShowFireRange: true,
+        ShowAmmoIndicator: true,
+        GlueFireToEstimated: 100,
+        GlueFireToLaser: 70,
+        ShowRadar: true,
+        KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
+        FireType: 3,
+        FireType2: 4,
+        res:{},
+        MouseDown1: false,
+        MouseDown2: false,
+        FireTypes:[
+            {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 50, explodePreset:'NailsBigCircle'},
+            {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 60, explodePreset:'NailsWirlpool'},
+            {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 50, explodePreset:'ExplosionSize1',minDec:6},
+            {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 40, explodePreset:'ExplosionSize3',minDec:13},
+            {T:'tele',    gunS:0,GunSpeed: 3, ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
+        ],
+        Modules:[
+            {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,ProdX:1,E:0,Prod:0,ifProd:30 },
+            {T:'spotRegion',Disabled:1,Emin:4,Emax:4,ProdX:1,E:0,Prod:0,ifProd:1 },
+            {T:'moduleProd',Disabled:0,Emin:2,Emax:4,ProdX:4,E:0,Prod:0,ifProd:60, subT:'TeleJump',ModStorage:'TeleJump'},
+            {T:'healerProd',Disabled:0,Emin:4,Emax:16,ProdX:1,E:0,Prod:0,ifProd:90 },
+            {T:'Prod',      subT:'Bomb',Storage:'Bomb',Disabled:0,Emin:1,Emax:6,ProdX:4,E:0,Prod:0,ifProd:4 },
+            {T:'radar',     Disabled:1,Emin:1,Emax:30,ProdX:20,E:0,Prod:0,ifProd:360,Radius:2500},
+        ],
+    },
+    'bombs2':{
+        Shields:[{
+            name: 'absorbtionShield',
+            CatchDmgT: {normal:1, energy:1, explo:1},
+            DmgReduction: 'energyField',
+            ReductionUses: 'infinite',
+            Own: true,
+        }],
+        EnergyFieldMax: 10,
+        EnergyM: 32,
+        engineMultiply: 1,
+        speed: 8,
+        Storage:{
+            Bomb: {R:12, M:12},
+        },
+        ModStorage:{
+            TeleJump: {R:0,M:6},
+        },
+        ShowFireRange: true,
+        ShowAmmoIndicator: true,
+        GlueFireToEstimated: 100,
+        GlueFireToLaser: 70,
+        ShowRadar: true,
+        KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
+        FireType: 2,
+        FireType2: 6,
+        res:{},
+        MouseDown1: false,
+        MouseDown2: false,
+        FireTypes:[
+            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, explodePreset:'NailsCircleToCenter'},
+            {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, offTime: 60, explodePreset:'NailsBigCircle'},
+            {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, offTime: 60, explodePreset:'NailsBigLongCircle'},
+            {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, offTime: 120, explodePreset:'NailsWirlpool', dontCollide:true},
+            {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 500, offTime: 60, explodePreset:'ExplosionSize1'},
+            {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 500, offTime: 0, explodePreset:'ExplosionSize3'},
+            {T:'tele',    gunS:0,GunSpeed: 3, ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
+        ],
+        Modules:[
+            {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,ProdX:1,E:0,Prod:0,ifProd:30 },
+            {T:'spotRegion',Disabled:1,Emin:4,Emax:4,ProdX:1,E:0,Prod:0,ifProd:1 },
+            {T:'moduleProd',  Disabled:0,Emin:2,Emax:4,ProdX:4,E:0,Prod:0,ifProd:60, subT:'TeleJump', ModStorage:'TeleJump'},
+            {T:'healerProd',Disabled:0,Emin:4,Emax:16,ProdX:1,E:0,Prod:0,ifProd:90 },
+            {T:'Prod',      subT:'Bomb',Storage:'Bomb',Disabled:0,Emin:1,Emax:6,ProdX:4,E:0,Prod:0,ifProd:4 },
+            {T:'radar',     Disabled:1,Emin:1,Emax:30,ProdX:20,E:0,Prod:0,ifProd:360,Radius:2500},
+        ],
+    },
+    'moves1':{
+        Storage:{
+            Ammo: {R:0, M:50},
+            Bomb: {R:12, M:12},
+        },
+        ModStorage:{
+            Moves: {R:0, M:8},
+        },
+        ShowFireRange: false,
+        ShowAmmoIndicator: true,
+        GlueFireToEstimated: 100,
+        GlueFireToLaser: 70,
+        KeysModules:{69:[0,1],82:[11],84:[2],81:[4],70:[5]},
+        FireType: 0,
+        FireType2: 3,
+        res:{},
+        MouseDown1: false,
+        MouseDown2: false,
+        FireTypes:[
+            {T:'single',  gunS:0,GunSpeed: 5, Speed: 17, Dec: 30, Use:{'Ammo':1}, DMG:{Dmg:1,T:'normal'},},
+            {T:'double',  gunS:0,GunSpeed: 1, Speed: 15, Dec: 30, Use:{'Ammo':2}, DMG:{Dmg:1,T:'normal'},},
+            {T:'rose',    gunS:0,GunSpeed: 4, AtOnce: 9, Use:{'Ammo':5}, RoseAngle: 3, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
+            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 30, explodePreset:'ExplosionSize2'},
+        ],
+        Modules:[
+            {T:'Prod', subT:'Bullet',Storage:'Ammo', Disabled:0,Emin:2,Emax:4,ProdX:1,E:0,Prod:0,ifProd:3 },
+            {T:'Prod', subT:'Bomb',  Storage:'Bomb', Disabled:0,Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:10 },
+            {T:'moduleProd',Disabled:0,Emin:2,Emax:4,ProdX:1,E:0,Prod:0,ifProd:20, subT:'Moves', ModStorage:'Moves'},
+            {T:'healerProd',Disabled:0,Emin:1,Emax:16,ProdX:1,E:0,Prod:0,ifProd:9 },
+        ],
+        SpecialMoves:{
+            1:{T:'changeAngle',    ModUse:{'Moves':1}, Dec:6, angleBy: -15},
+            2:{T:'changeAngle',    ModUse:{'Moves':1}, Dec:6, angleBy: 15},
+            3:{T:'changeSpeed',    ModUse:{'Moves':1}, Dec:5, speedBy: 1},
+            4:{T:'changePosition', ModUse:{'Moves':1}, Dec:12, timesBy: 3, Dist: 10, Angle: 180},
+        },
+    },
+    'best':{
+        Shields:[{
+            name: 'absorbtionShield',
+            CatchDmgT: {normal:1, energy:1, explo:1},
+            DmgReduction: 'energyField',
+            ReductionUses: 'infinite',
+            Own: true,
+        }],
+        EnergyFieldMax: 10,
+        Storage:{
+            Ammo: {R:0, M:50},
+            Missile: {R:10,M:10},
+            Bomb: {R:12, M:12},
+        },
+        ModStorage:{
+            TeleJump: {R:0,M:6},
+            Laser: {R:0,M:4}
+        },
+        ShowFireRange: false,
+        ShowAmmoIndicator: true,
+        GlueFireToEstimated: 100,
+        GlueFireToLaser: 70,
+        ShowRadar: true,
+        KeysModules:{66:[6],69:[0,5],73:[3,9,10],77:[7],84:[2],81:[4],70:[8],82:[11]},
+        FireType: 0,
+        FireType2: 8,
+        res:{},
+        MouseDown1: false,
+        MouseDown2: false,
+        FireTypes:[
+            {T:'single',  gunS:0,GunSpeed: 5,  Use:{Ammo:1}, Speed: 17, Dec: 30, DMG:{Dmg:1,T:'normal'},},
+            {T:'double',  gunS:0,GunSpeed: 1,  Use:{Ammo:2}, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
+            {T:'rose',    gunS:0,GunSpeed: 4,  Use:{Ammo:5}, AtOnce: 9, RoseAngle: 3, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
+            {T:'laser',   gunS:0,GunSpeed: 10, ModUse:{Laser:1}, Speed: 650, Dec: 1, DMG:{Dmg:5,T:'energy'},},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Ammo:3}, Speed: 0.1, Teleport:{ Dist: 35, Angle: 270, AngleRand: 180}, Dec: 10, onHitDieExpire:    {Do:'explode',DMG:{Dmg:7,T:'explo'}, Dist: 80}},
+            {T:'missle',  gunS:0,GunSpeed: 10, Use:{Missile:1}, Speed: 12, SpeedT: 4, Dec: 400, AimRadius: 120, DMG:{Dmg:3,T:'explo'},},
+            {T:'missleR', gunS:0,GunSpeed: 6,  Use:{Missile:5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, DMG:{Dmg:3,T:'explo'},},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 10, Dec: 30, explodePreset:'NailsBigCircle'},
+            {T:'tele',    gunS:0,GunSpeed: 3,  ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
+        ],
+        Modules:[
+            {T:'shieldProd',Disabled:0,Prod:0,E:0,Emin:0.1,Emax:1,ProdX:1,ifProd:30 },
+            {T:'spotRegion',Disabled:1,Prod:0,E:0,Emin:4,Emax:4, ProdX:1,ifProd:1 },
+            {T:'moduleProd',Disabled:0,Prod:0,E:0,Emin:2,Emax:4, ProdX:4,ifProd:60, subT:'TeleJump', ModStorage:'TeleJump'},
+            {T:'Prod',      Disabled:0,Prod:0,E:0,Emin:2,Emax:4, ProdX:4,ifProd:40,subT:'Bullet',Storage:'Ammo'},
+            {T:'esteemProd',Disabled:1,Prod:0,E:0,Emin:1,Emax:1, ProdX:1,ifProd:9000 },
+            {T:'healerProd',Disabled:0,Prod:0,E:0,Emin:4,Emax:16,ProdX:1,ifProd:90 },
+            {T:'Prod',      Disabled:0,Prod:0,E:0,Emin:1,Emax:10,ProdX:1,ifProd:60,subT:'Bomb',Storage:'Bomb'},
+            {T:'Prod',      Disabled:0,Prod:0,E:0,Emin:1,Emax:6, ProdX:4,ifProd:4,subT:'Missile',Storage:'Missile'},
+            {T:'moduleProd',Disabled:1,Prod:0,E:0,Emin:2,Emax:4, ProdX:6,ifProd:240, subT:'Laser', ModStorage:'Laser'},
+            {T:'Prod',      Disabled:0,Prod:0,E:0,Emin:2,Emax:4, ProdX:4,ifProd:60,subT:'Bullet',Storage:'Ammo'},
+            {T:'Prod',      Disabled:0,Prod:0,E:0,Emin:6,Emax:12,ProdX:4,ifProd:5,subT:'Bullet',Storage:'Ammo'},
+            {T:'radar',     Disabled:1,Prod:0,E:0,Emin:1,Emax:30,ProdX:20,ifProd:360,Radius:2500},
+        ],
+        SpecialMoves:{
+            1:{T:'changeAll', Dec: 16, angleBy: -7, timesBy:3, Dist: 10, Angle: 180},
+            2:{T:'changeAll', Dec: 16, angleBy: 7 , timesBy:3, Dist: 10, Angle: 180},
+            3:{T:'teleportTo', Dec: 10, Dist: 70, Angle: -90, AngleRand: 190},
+            4:{T:'changePosition', Dec:12, timesBy: 5, Dist: 10, Angle: 180},
+        },
+        SpecialMoves:{
+            1:{T:'changePosition', Dec:6, timesBy:2, Dist: 10, Angle: -120},
+            2:{T:'changePosition', Dec:6, timesBy:2, Dist: 10, Angle: 120},
+            1:{T:'changeAngle',    Dec:6, angleBy: -15},
+            2:{T:'changeAngle',    Dec:6, angleBy: 15},
+        },
+    },
+    'bombardier':{
+        Shields:[{
+            name: 'absorbtionShield',
+            CatchDmgT: {normal:1, energy:1, explo:1},
+            DmgReduction: 'energyField',
+            ReductionUses: 'infinite',
+            Own: true,
+        }],
+        EnergyFieldMax: 10,
+        Storage:{
+            Bomb: {R:42, M:42},
+        },
+        ModStorage:{
+            TeleJump: {R:0,M:6},
+            Laser: {R:0,M:4}
+        },
+        ShowFireRange: false,
+        ShowAmmoIndicator: true,
+        GlueFireToEstimated: 100,
+        GlueFireToLaser: 70,
+        ShowRadar: true,
+        KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
+        FireType: 0,
+        FireType2: 8,
+        res:{},
+        MouseDown1: false,
+        MouseDown2: false,
+        FireTypes:[
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explodePreset:'NailsConePalm'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explodePreset:'HugeNailsConePalm'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 8, Dec: 70, explodePreset:'HugeExplosionRose'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 0.1, Teleport:{ Dist: 55, Angle: 270, AngleRand: 180}, Dec: 60, onHitDieExpire:    {Do:'explode',DMG:{Dmg:11,T:'explo'}, Dist: 120}},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 8, Dec: 10, explodePreset:'BubbleStorm'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 8, Dec: 10, explodePreset:'StrikeOfEvil'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 12, Dec: 10, explodePreset:'ExplosionWorm2'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 8, Dec: 50, explodePreset:'EyeOfEvil'},
+            {T:'tele',    gunS:0,GunSpeed: 3,  ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
+        ],
+        Modules:[
+            {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,ProdX:1,E:0,Prod:0,ifProd:30 },
+            {T:'moduleProd',Disabled:0,Emin:2,Emax:4,ProdX:4,E:0,Prod:0,ifProd:60, subT:'TeleJump', ModStorage:'TeleJump'},
+            {T:'healerProd',Disabled:0,Emin:4,Emax:16,ProdX:1,E:0,Prod:0,ifProd:90 },
+            {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:20 },
+            {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:20 },
+            {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:20 },
+            {T:'radar',     Disabled:1,Emin:1,Emax:30,ProdX:20,E:0,Prod:0,ifProd:360,Radius:2500},
+        ],
+        SpecialMoves:{
+            1:{T:'changeAll', Dec: 16, angleBy: -7, timesBy:3, Dist: 10, Angle: 180},
+            2:{T:'changeAll', Dec: 16, angleBy: 7 , timesBy:3, Dist: 10, Angle: 180},
+            3:{T:'teleportTo', Dec: 10, Dist: 70, Angle: -90, AngleRand: 190},
+            4:{T:'changePosition', Dec:12, timesBy: 5, Dist: 10, Angle: 180},
+        },
+    },
+    'bombardier2':{
+        Shields:[{
+            name: 'absorbtionShield',
+            CatchDmgT: {normal:1, energy:1, explo:1},
+            DmgReduction: 'energyField',
+            ReductionUses: 'infinite',
+            Own: true,
+        }],
+        EnergyFieldMax: 10,
+        Storage:{
+            Bomb: {R:42, M:42},
+        },
+        ModStorage:{
+            TeleJump: {R:0,M:6},
+            Laser: {R:0,M:4}
+        },
+        ShowFireRange: false,
+        ShowAmmoIndicator: true,
+        GlueFireToEstimated: 100,
+        GlueFireToLaser: 70,
+        ShowRadar: true,
+        KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
+        FireType: 0,
+        FireType2: 7,
+        res:{},
+        MouseDown1: false,
+        MouseDown2: false,
+        FireTypes:[
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explodePreset:'NailsConeMicro'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explodePreset:'NailsConeMedium'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explodePreset:'HugeNailsConePalm'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 40, explodePreset:'NailsWirlpool'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 40, explodePreset:'NailsWirlpool2'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 40, explodePreset:'HugeNailsWirlpool2'},
+            {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 40, explodePreset:'NailsBigLongCircle'},
+            {T:'tele',    gunS:0,GunSpeed: 3,  ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
+        ],
+        Modules:[
+            {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,ProdX:1,E:0,Prod:0,ifProd:30 },
+            {T:'moduleProd',Disabled:0,Emin:2,Emax:4,ProdX:4,E:0,Prod:0,ifProd:60, subT:'TeleJump', ModStorage:'TeleJump'},
+            {T:'healerProd',Disabled:0,Emin:4,Emax:16,ProdX:1,E:0,Prod:0,ifProd:90 },
+            {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:20 },
+            {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:20 },
+            {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:20 },
+            {T:'radar',     Disabled:1,Emin:1,Emax:30,ProdX:20,E:0,Prod:0,ifProd:360,Radius:2500},
+        ],
+        SpecialMoves:{
+            1:{T:'changeAll', Dec: 16, angleBy: -7, timesBy:3, Dist: 10, Angle: 180},
+            2:{T:'changeAll', Dec: 16, angleBy: 7 , timesBy:3, Dist: 10, Angle: 180},
+            3:{T:'teleportTo', Dec: 10, Dist: 70, Angle: -90, AngleRand: 190},
+            4:{T:'changePosition', Dec:12, timesBy: 5, Dist: 10, Angle: 180},
+        },
+    },
+    'ethernal':{
+        Storage:{
+            Ammo: {R:0, M:50},
+            Bomb: {R:12, M:12},
+        },
+        ShowFireRange: false,
+        ShowAmmoIndicator: true,
+        GlueFireToEstimated: 100,
+        GlueFireToLaser: 70,
+        KeysModules:{69:[0,1],82:[11],84:[2],81:[4],70:[5]},
+        FireType: 0,
+        FireType2: 3,
+        res:{},
+        MouseDown1: false,
+        MouseDown2: false,
+        FireTypes:[
+            {T:'single',  gunS:0,GunSpeed: 5, Speed: 17, Dec: 30, Use:{'Ammo':1}, DMG:{Dmg:1,T:'normal'},},
+            {T:'double',  gunS:0,GunSpeed: 1, Speed: 15, Dec: 30, Use:{'Ammo':2}, DMG:{Dmg:1,T:'normal'},},
+            {T:'rose',    gunS:0,GunSpeed: 4, AtOnce: 9, Use:{'Ammo':5}, RoseAngle: 3, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
+            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 30, explodePreset:'ExplosionSize2'},
+            {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1,Ammo:5}, Speed: 10, Dec:30, explodePreset:'NailsBigCircle'},
+        ],
+        Modules:[
+            {T:'Prod', subT:'Bullet',Storage:'Ammo', Disabled:0,Emin:2,Emax:4,ProdX:1,E:0,Prod:0,ifProd:3 },
+            {T:'Prod', subT:'Bomb',  Storage:'Bomb', Disabled:0,Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:10 },
+        ],
+        SpecialMoves:{
+            1:{T:'changePosition', Dec:12, timesBy:3, Dist: 10, Angle: -50},
+            2:{T:'changePosition', Dec:12, timesBy:3, Dist: 10, Angle: 50},
+            3:{T:'teleportTo', Dec: 1, Dist: 600, Angle: -10, AngleRand: 20},
+            4:{T:'changeAngle', Dec:9, angleBy: 20},
+        },
+
+    },
+};
