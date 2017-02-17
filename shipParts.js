@@ -290,7 +290,7 @@ BBAdata.SHIPelements['engineCoreIV_up9'] = {        Weight: 0, Price: 7500, wher
 };
 
 
-
+//
 
 
 BBAdata.SHIPelements={
@@ -403,6 +403,34 @@ Movements:
     - Change speed Stops
         - Number of them
         - Change speed delays
+SpecialMoves:
+    -
+
+
+    SpecialMoves:{
+        1:{T:'changeAll',      Dec: 16, angleBy: -7, timesBy:3, Dist: 10, Angle: 180},
+        2:{T:'changeAll',      Dec: 16, angleBy: 7 , timesBy:3, Dist: 10, Angle: 180},
+        3:{T:'teleportTo',     Dec: 10, Dist: 70, Angle: -90, AngleRand: 190},
+        4:{T:'changePosition', Dec:12, timesBy: 5, Dist: 10, Angle: 180},
+    },
+    SpecialMoves:{
+        1:{T:'changePosition', Dec:6, timesBy:2, Dist: 10, Angle: -120},
+        2:{T:'changePosition', Dec:6, timesBy:2, Dist: 10, Angle: 120},
+        1:{T:'changeAngle',    Dec:6, angleBy: -15},
+        2:{T:'changeAngle',    Dec:6, angleBy: 15},
+    },
+    SpecialMoves:{
+        1:{T:'changeAngle',    ModUse:{'Moves':1}, Dec:6, angleBy: -15},
+        2:{T:'changeAngle',    ModUse:{'Moves':1}, Dec:6, angleBy: 15},
+        3:{T:'changeSpeed',    ModUse:{'Moves':1}, Dec:5, speedBy: 1},
+        4:{T:'changePosition', ModUse:{'Moves':1}, Dec:12, timesBy: 3, Dist: 10, Angle: 180},
+    },
+    SpecialMoves:{
+        1:{T:'changePosition', Dec:12, timesBy:3, Dist: 10, Angle: -50},
+        2:{T:'changePosition', Dec:12, timesBy:3, Dist: 10, Angle: 50},
+        3:{T:'teleportTo',     Dec: 1, Dist: 600, Angle: -10, AngleRand: 20},
+        4:{T:'changeAngle',    Dec:9, angleBy: 20},
+    },
 
 
 
@@ -410,7 +438,7 @@ Storage:
     - Ammo Storage
     - Ammo Storage Start filling
 
-    - Missle/Bomb Storage - Different Types
+    - Missle/Bomb Storage - Different Types - Set in bomb booths
 
 
 
@@ -603,12 +631,6 @@ Modules - other:
             {T:'moduleProd',Disabled:0,Emin:2,Emax:4,ProdX:1,E:0,Prod:0,ifProd:20, subT:'Moves', ModStorage:'Moves'},
             {T:'healerProd',Disabled:0,Emin:1,Emax:16,ProdX:1,E:0,Prod:0,ifProd:9 },
         ],
-        SpecialMoves:{
-            1:{T:'changeAngle',    ModUse:{'Moves':1}, Dec:6, angleBy: -15},
-            2:{T:'changeAngle',    ModUse:{'Moves':1}, Dec:6, angleBy: 15},
-            3:{T:'changeSpeed',    ModUse:{'Moves':1}, Dec:5, speedBy: 1},
-            4:{T:'changePosition', ModUse:{'Moves':1}, Dec:12, timesBy: 3, Dist: 10, Angle: 180},
-        },
     },
     'best':{
         Shields:[{
@@ -654,18 +676,6 @@ Modules - other:
             {T:'moduleProd',Disabled:1,Prod:0,E:0,Emin:2,Emax:4, ProdX:6,ifProd:240, subT:'Laser', ModStorage:'Laser'},
             {T:'radar',     Disabled:1,Prod:0,E:0,Emin:1,Emax:30,ProdX:20,ifProd:360,Radius:2500},
         ],
-        SpecialMoves:{
-            1:{T:'changeAll', Dec: 16, angleBy: -7, timesBy:3, Dist: 10, Angle: 180},
-            2:{T:'changeAll', Dec: 16, angleBy: 7 , timesBy:3, Dist: 10, Angle: 180},
-            3:{T:'teleportTo', Dec: 10, Dist: 70, Angle: -90, AngleRand: 190},
-            4:{T:'changePosition', Dec:12, timesBy: 5, Dist: 10, Angle: 180},
-        },
-        SpecialMoves:{
-            1:{T:'changePosition', Dec:6, timesBy:2, Dist: 10, Angle: -120},
-            2:{T:'changePosition', Dec:6, timesBy:2, Dist: 10, Angle: 120},
-            1:{T:'changeAngle',    Dec:6, angleBy: -15},
-            2:{T:'changeAngle',    Dec:6, angleBy: 15},
-        },
     },
     'bombardier':{
         Shields:[{
@@ -710,12 +720,6 @@ Modules - other:
             {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:20 },
             {T:'radar',     Disabled:1,Emin:1,Emax:30,ProdX:20,E:0,Prod:0,ifProd:360,Radius:2500},
         ],
-        SpecialMoves:{
-            1:{T:'changeAll', Dec: 16, angleBy: -7, timesBy:3, Dist: 10, Angle: 180},
-            2:{T:'changeAll', Dec: 16, angleBy: 7 , timesBy:3, Dist: 10, Angle: 180},
-            3:{T:'teleportTo', Dec: 10, Dist: 70, Angle: -90, AngleRand: 190},
-            4:{T:'changePosition', Dec:12, timesBy: 5, Dist: 10, Angle: 180},
-        },
     },
     'bombardier2':{
         Shields:[{
@@ -759,12 +763,6 @@ Modules - other:
             {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:20 },
             {T:'radar',     Disabled:1,Emin:1,Emax:30,ProdX:20,E:0,Prod:0,ifProd:360,Radius:2500},
         ],
-        SpecialMoves:{
-            1:{T:'changeAll', Dec: 16, angleBy: -7, timesBy:3, Dist: 10, Angle: 180},
-            2:{T:'changeAll', Dec: 16, angleBy: 7 , timesBy:3, Dist: 10, Angle: 180},
-            3:{T:'teleportTo', Dec: 10, Dist: 70, Angle: -90, AngleRand: 190},
-            4:{T:'changePosition', Dec:12, timesBy: 5, Dist: 10, Angle: 180},
-        },
     },
     'ethernal':{
         Storage:{
@@ -784,12 +782,5 @@ Modules - other:
         Modules:[
             {T:'Prod', subT:'Bomb',  Storage:'Bomb', Disabled:0,Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:10 },
         ],
-        SpecialMoves:{
-            1:{T:'changePosition', Dec:12, timesBy:3, Dist: 10, Angle: -50},
-            2:{T:'changePosition', Dec:12, timesBy:3, Dist: 10, Angle: 50},
-            3:{T:'teleportTo', Dec: 1, Dist: 600, Angle: -10, AngleRand: 20},
-            4:{T:'changeAngle', Dec:9, angleBy: 20},
-        },
-
     },
 };
