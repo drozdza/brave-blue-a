@@ -490,7 +490,7 @@ function MenuShipBuildingObject(){
 }
 
 // =============================================
-
+/*
 BBAdata.SHIPelements={
     hullUp:{        Weight: 10, Price: 50,   where:'hull',
         lifeM: 4,
@@ -592,7 +592,7 @@ BBAdata.SHIPelements={
         },
     },
     //{T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,ProdX:1,E:0,Prod:0,ifProd:30 },
-};
+};*/
 
 BBAdata.SHIPempty={
     Price: 0,
