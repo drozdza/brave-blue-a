@@ -4,6 +4,55 @@ BBAdata['SHIPpresets']={
         lifeM: 6,
         life: 6,
         EnergyM: 20,
+        engineMultiply: 4,
+        speed: 8,
+        speedAcl: 3,
+        speedDcl: 10,
+        speedT: 10,
+        Storage:{
+            Ammo: {R:0, M:20},
+        },
+        ShowFireRange: false,
+        ShowAmmoIndicator: true,
+        GlueFireToEstimated: 100,
+        GlueFireToLaser: 70,
+        KeysModules:{69:[0]},
+        FireType: 0,
+        FireType2: 1,
+        MouseDown1: false,
+        MouseDown2: false,
+        FireTypes:[
+            {W:'single', },
+            {W:'rose', },
+            {W:'single', GunSpeed: 30, Dec: 70, DMG:{Dmg:11,T:'normal'},},
+        ],
+        Weapons:{
+            'single':{T:'single',  gunS:0,GunSpeed: 5, Speed: 17, Dec: 30, Use:{'Ammo':1}, DMG:{Dmg:1,T:'normal'},},
+            'rose':{T:'rose',    gunS:0,GunSpeed: 4, AtOnce: 9, Use:{'Ammo':5}, RoseAngle: 3, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
+        },
+        Modules:[
+            {T:'Prod',subT:'Bullet',Storage:'Ammo',Disabled:0,Emin:2,Emax:4,ProdX:4,E:0,Prod:0,ifProd:40 },
+        ],
+        SpecialMoves:{
+            1:{T:'changePosition', Dec:6, timesBy:2, Dist: 10, Angle: -120},
+            2:{T:'changePosition', Dec:6, timesBy:2, Dist: 10, Angle: 120},
+            1:{T:'changeAngle',    Dec:6, angleBy: -15},
+            2:{T:'changeAngle',    Dec:6, angleBy: 15},
+        },
+        ChangeSpeedStops:{
+            up: {8:1},
+            down: {8:1}
+        },
+        ChangeSpeedDelay:15,
+    },
+};
+/*
+BBAdata['SHIPpresets']={
+    'start':{
+        Weight: 25,
+        lifeM: 6,
+        life: 6,
+        EnergyM: 20,
         engineMultiply: 1,
         speed: 8,
         Storage:{
@@ -437,3 +486,4 @@ BBAdata['SHIPpresets']={
 
     },
 };
+*/

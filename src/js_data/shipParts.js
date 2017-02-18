@@ -154,7 +154,7 @@ BBAdata.SHIPelements['heavyEnergyCellVI_up'] = {    Weight: -3, Price: 2000, whe
 BBAdata.SHIPelements['energyGeneratus'] = {         Weight: 64, Price: 22000, where:'energy',
     EnergyM: 16,
     maxSpeedCap: 3,
-    maxSpeedRCap: 1,
+    maxSpeedTCap: 1,
 };
 BBAdata.SHIPelements['energyGeneratus_up1'] = {     Weight: 0, Price: 3000, where:'energy', upgrade:'energyGeneratus',
     EnergyM: 8,
@@ -163,7 +163,7 @@ BBAdata.SHIPelements['energyGeneratus_up2'] = {     Weight: 0, Price: 3000, wher
     EnergyM: 8,
 };
 BBAdata.SHIPelements['energyGeneratus_up3'] = {     Weight: -12, Price: 4400, where:'energy', upgrade:'energyGeneratus',
-    maxSpeedRCap: 0.8,
+    maxSpeedTCap: 0.8,
 };
 BBAdata.SHIPelements['energyGeneratus_up4'] = {     Weight: 0, Price: 3200, where:'energy', upgrade:'energyGeneratus',
     maxSpeedCapPlus: 1.3,
@@ -178,8 +178,10 @@ BBAdata.SHIPelements['energyGeneratus_up5'] = {     Weight: 0, Price: 3200, wher
 BBAdata.SHIPelements['engineCoreI'] = {             Weight: 26, Price: 300, where:'engine',
     exclude: ['engineCoreII','engineCoreIII','engineCoreIV'],
     engineMultiply: 1,
-    rotationSpeed: 2.5,
     speed: 7,
+    speedAcl: 2,
+    speedDcl: 2,
+    speedT: 2.5,
     EnergyM: 6,
 };
 BBAdata.SHIPelements['engineCoreI_up1'] = {         Weight: 0, Price: 2700, where:'engine', upgrade:'engineCoreI',
@@ -189,24 +191,26 @@ BBAdata.SHIPelements['engineCoreI_up2'] = {         Weight: 0, Price: 2700, wher
     engineMultiply: 0.2,
 };
 BBAdata.SHIPelements['engineCoreI_up3'] = {         Weight: 0, Price: 1100, where:'engine', upgrade:'engineCoreI',
-    rotationSpeed: 1,
+    speedT: 1,
 };
 
 BBAdata.SHIPelements['engineCoreII'] = {            Weight: 10, Price: 8100, where:'engine',
     exclude: ['engineCoreI','engineCoreIII','engineCoreIV'],
     engineMultiply: 1.6,
-    rotationSpeed: 2,
     speed: 8,
+    speedAcl: 3,
+    speedDcl: 3,
+    speedT: 2,
     EnergyM: 8,
 };
 BBAdata.SHIPelements['engineCoreII_up1'] = {        Weight: 0, Price: 8000, where:'engine', upgrade:'engineCoreII',
     engineMultiply: 3,
 };
 BBAdata.SHIPelements['engineCoreII_up2'] = {        Weight: 0, Price: 5500, where:'engine', upgrade:'engineCoreII',
-    rotationSpeed: 0.4,
+    speedT: 0.4,
 };
 BBAdata.SHIPelements['engineCoreII_up3'] = {        Weight: 0, Price: 5500, where:'engine', upgrade:'engineCoreII',
-    rotationSpeed: 0.4,
+    speedT: 0.4,
 };
 BBAdata.SHIPelements['engineCoreII_up4'] = {        Weight: 0, Price: 600, where:'engine', upgrade:'engineCoreII',
     speed: 2,
@@ -218,8 +222,10 @@ BBAdata.SHIPelements['engineCoreII_up5'] = {        Weight: 0, Price: 2700, wher
 BBAdata.SHIPelements['engineCoreIII'] = {           Weight: 32, Price: 16500, where:'engine',
     exclude: ['engineCoreI','engineCoreII','engineCoreIV'],
     engineMultiply: 2.2,
-    rotationSpeed: 1.5,
     spped: 8,
+    speedAcl: 5,
+    speedDcl: 5,
+    speedT: 1.5,
     EnergyM: 12,
 };
 BBAdata.SHIPelements['engineCoreIII_up1'] = {       Weight: 0, Price: 1400, where:'engine', upgrade:'engineCoreIII',
@@ -231,15 +237,15 @@ BBAdata.SHIPelements['engineCoreIII_up2'] = {       Weight: 0, Price: 1400, wher
     speed: 1,
 };
 BBAdata.SHIPelements['engineCoreIII_up3'] = {       Weight: 0, Price: 3000, where:'engine', upgrade:'engineCoreIII',
-    rotationSpeed: 0.5,
+    speedT: 0.5,
     starBump: 0.5,
 };
 BBAdata.SHIPelements['engineCoreIII_up4'] = {       Weight: 0, Price: 3000, where:'engine', upgrade:'engineCoreIII',
-    rotationSpeed: 0.5,
+    speedT: 0.5,
     starBump: 0.5,
 };
 BBAdata.SHIPelements['engineCoreIII_up5'] = {       Weight: 0, Price: 3000, where:'engine', upgrade:'engineCoreIII',
-    rotationSpeed: 0.5,
+    speedT: 0.5,
     starBump: 0.5,
 };
 BBAdata.SHIPelements['engineCoreIII_up6'] = {       Weight: 0, Price: 7500, where:'engine', upgrade:'engineCoreIII',
@@ -247,18 +253,20 @@ BBAdata.SHIPelements['engineCoreIII_up6'] = {       Weight: 0, Price: 7500, wher
 };
 BBAdata.SHIPelements['engineCoreIII_up7'] = {       Weight: 0, Price: 12000, where:'engine', upgrade:'engineCoreIII',
     maxSpeedCapPlus: 2.5,
-    maxSpeedRCapPlus: 1.5,
+    maxSpeedTCapPlus: 1.5,
 };
 
 BBAdata.SHIPelements['engineCoreIV'] = {            Weight: 22, Price: 45000, where:'engine',
     exclude: ['engineCoreI','engineCoreII','engineCoreIII'],
     engineMultiply: 3,
-    rotationSpeed: 2,
     speed: 8,
+    speedAcl: 6,
+    speedDcl: 6,
+    speedT: 2,
     EnergyM: 16,
 };
 BBAdata.SHIPelements['engineCoreIV_up1'] = {        Weight: 0, Price: 28000, where:'engine', upgrade:'engineCoreIV',
-    rotationSpeed: 0.5,
+    speedT: 0.5,
     engineMultiply: 0.2,
     EnergyM: 6,
 };
@@ -282,11 +290,11 @@ BBAdata.SHIPelements['engineCoreIV_up7'] = {        Weight: 0, Price: 3400, wher
 };
 BBAdata.SHIPelements['engineCoreIV_up8'] = {        Weight: 0, Price: 7500, where:'engine', upgrade:'engineCoreIV',
     maxSpeedCapPlus: 2.5,
-    maxSpeedRCapPlus: 1.5,
+    maxSpeedTCapPlus: 1.5,
 };
 BBAdata.SHIPelements['engineCoreIV_up9'] = {        Weight: 0, Price: 7500, where:'engine', upgrade:'engineCoreIV',
     maxSpeedCapPlus: 2.5,
-    maxSpeedRCapPlus: 1.5,
+    maxSpeedTCapPlus: 1.5,
 };
 
 

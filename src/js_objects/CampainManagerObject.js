@@ -1,6 +1,6 @@
 CampainManagerObject = function(){
 
-    this.goldTotal = 1500; // !!!!! to change
+    this.goldTotal = 1500000; // !!!!! to change
     this.goldLeft = 0;
     this.campainFlags = {};
     this.campainRoutes = {};
@@ -91,7 +91,7 @@ CampainManagerObject = function(){
     }
 
     this.countGoldAndFlags = function(){
-        this.goldTotal = 1500;  // !!!!! should be 0
+        this.goldTotal = 1500000;  // !!!!! should be 0
         this.campainFlags = {};
         this.campainRoutes = {};
 

@@ -155,8 +155,7 @@ function MenuShipBuildingObject(){
         }
         this.showChangesSliderEminMax(elementName);
     }
-    this.sliderMouseMoveStart = function(elementName, offsetX, minMax)
-    {
+    this.sliderMouseMoveStart = function(elementName, offsetX, minMax){
         this.sliderMouseMovement = {
             elementName: elementName,
             offsetX: offsetX,
@@ -241,6 +240,7 @@ function MenuShipBuildingObject(){
     this.showElementsTypeMenu = function(){
         var TypeMenu = {
             hull:    'Hull',
+            energy:  'Energy',
             engine:  'Engine',
             weapons: 'Weapons',
             modules: 'Modules',
@@ -275,8 +275,13 @@ function MenuShipBuildingObject(){
     this.showDetailedShipProperties = function(){
         var html='';
 
-        html += '<tr><td>EnginePower:</td><td>'+this.SHIP.engineMultiply+'</td></tr>';
+        for(var i in this.SHIP){
+            html+='<tr><td>'+i+'</td><td>'+this.SHIP[i]+'</td></tr>';
+        }
 
+
+        // html += '<tr><td>EnginePower:</td><td>'+this.SHIP.engineMultiply+'</td></tr>';
+        //
         $('.detailedShipProperties').html('<table>'+html+'</table>');
     }
     this.showDetailedShipStorage = function(){
@@ -425,7 +430,7 @@ function MenuShipBuildingObject(){
     }
     // ===================== Building the Ship Stats ===========================
     this.buildShip = function(){
-        this.SHIP = cloneObj(BBAdata.SHIPempty);
+        var S = this.SHIP = cloneObj(BBAdata.SHIPempty);
 
         // adding Elements
         for(var elementName in this.SHIPelems){
@@ -441,8 +446,18 @@ function MenuShipBuildingObject(){
                     case 'EnergyM':
                     case 'Price':
                     case 'speed':
+                    case 'speedAcl':
+                    case 'speedDcl':
+                    case 'speedT':
+                    case 'starBump':
+                    case 'maxSpeedCapPlus':
+                    case 'maxSpeedTCapPlus':
                     case 'engineMultiply':
-                        this.SHIP[i]-=-Edata[i];
+                        S[i]-=-Edata[i];
+                    break;
+                    case 'maxSpeedCap':
+                    case 'maxSpeedTCap':
+                        S[i] = Edata[i];
                     break;
                     case 'Storage':
                         this.buildShip_Storage(Edata.Storage);
@@ -458,11 +473,15 @@ function MenuShipBuildingObject(){
         }
 
         // counting maxSpeed
-        this.SHIP.speedM = Energy2Speed(this.SHIP.EnergyM, this.SHIP.Weight, this.SHIP.engineMultiply);
+        S.speedM = Energy2Speed(S.EnergyM, S.Weight, S.engineMultiply);
+        if(S.maxSpeedCap  !== false) S.maxSpeedCap-=-S.maxSpeedCapPlus;
+        if(S.maxSpeedTCap !== false) S.maxSpeedTCap-=-S.maxSpeedTCapPlus;
+        if(S.maxSpeedCap  !== false && S.speedM > S.maxSpeedCap) S.speedM = S.maxSpeedCap;
+        if(S.maxSpeedTCap !== false && S.speedT > S.maxSpeedTCap) S.speedT = S.maxSpeedTCap;
         // full life at start
-        this.SHIP.life = this.SHIP.lifeM;
+        S.life = S.lifeM;
         // start speed under max speed
-        if(this.SHIP.speed > this.SHIP.speedM) this.SHIP.speed = this.SHIP.speedM;
+        if(S.speed > S.speedM) S.speed = S.speedM;
     }
     this.buildShip_Storage = function(StorageData){
         for(var storageType in StorageData){
@@ -490,6 +509,47 @@ function MenuShipBuildingObject(){
 }
 
 // =============================================
+
+BBAdata.SHIPempty={
+    Price: 0,
+    Weight: 20,
+    lifeM: 1,
+
+    EnergyM: 0,
+    SpeedM: 0,
+
+    engineMultiply: 0,
+    speed: 0,
+    speedAcl: 0,
+    speedDcl: 0,
+    speedT: 0,
+    starBump: 3,
+    maxSpeedCap: false,
+    maxSpeedTCap: false,
+    maxSpeedCapPlus: 0,
+    maxSpeedTCapPlus: 0,
+
+    AmmoStorage: 0,
+    Ammo: 0,
+    MissleStorage: 0,
+    Missles: 0,
+    BombStorage: 0,
+    Bombs: 0,
+    ShowFireRange: false,
+    ShowAmmoIndicator: false,
+    GlueFireToEstimated: false,
+    GlueFireToLaser: false,
+    KeysModules:{},
+    FireType: false,
+    FireType2: false,
+    MouseDown1: false,
+    MouseDown2: false,
+    EnergyFieldMax: 0,
+    Storage:{},
+    FireTypes:[],
+    Modules:[],
+};
+
 /*
 BBAdata.SHIPelements={
     hullUp:{        Weight: 10, Price: 50,   where:'hull',
@@ -593,36 +653,6 @@ BBAdata.SHIPelements={
     },
     //{T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,ProdX:1,E:0,Prod:0,ifProd:30 },
 };*/
-
-BBAdata.SHIPempty={
-    Price: 0,
-    Weight: 20,
-    lifeM: 1,
-    EnergyM: 0,
-    SpeedM: 0,
-    engineMultiply:1,
-    speed: 0,
-    AmmoStorage: 0,
-    Ammo: 0,
-    MissleStorage: 0,
-    Missles: 0,
-    BombStorage: 0,
-    Bombs: 0,
-    ShowFireRange: false,
-    ShowAmmoIndicator: false,
-    GlueFireToEstimated: false,
-    GlueFireToLaser: false,
-    KeysModules:{},
-    FireType: false,
-    FireType2: false,
-    MouseDown1: false,
-    MouseDown2: false,
-    EnergyFieldMax: 0,
-    Storage:{},
-    FireTypes:[],
-    Modules:[],
-};
-
 
 Best = {
     Weight: 25,
