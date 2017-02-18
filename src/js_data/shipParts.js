@@ -2,129 +2,129 @@ BBAdata.SHIPelements={};
 
 // HULL
 
-BBAdata.SHIPelements['simplePlateI'] = {            Weight: 10, Prize: 50, where:'hull',
+BBAdata.SHIPelements['simplePlateI'] = {            Weight: 10, Price: 50, where:'hull',
     lifeM: 1,
 };
-BBAdata.SHIPelements['simplePlateI_lighter'] = {    Weight: -4, Prize: 250, where:'hull', upgrade:'simplePlateI' };
-BBAdata.SHIPelements['simplePlateII'] = {           Weight: 10, Prize: 50, where:'hull',
+BBAdata.SHIPelements['simplePlateI_lighter'] = {    Weight: -4, Price: 250, where:'hull', upgrade:'simplePlateI' };
+BBAdata.SHIPelements['simplePlateII'] = {           Weight: 10, Price: 50, where:'hull',
     lifeM: 1,
 };
-BBAdata.SHIPelements['simplePlateII_lighter'] = {   Weight: -4, Prize: 250, where:'hull', upgrade:'simplePlateII' };
-BBAdata.SHIPelements['simplePlateIII'] = {          Weight: 10, Prize: 50, where:'hull',
+BBAdata.SHIPelements['simplePlateII_lighter'] = {   Weight: -4, Price: 250, where:'hull', upgrade:'simplePlateII' };
+BBAdata.SHIPelements['simplePlateIII'] = {          Weight: 10, Price: 50, where:'hull',
     lifeM: 1,
 };
-BBAdata.SHIPelements['simplePlateIII_lighter'] = {  Weight: -4, Prize: 250, where:'hull', upgrade:'simplePlateIII' };
-BBAdata.SHIPelements['simplePlateIV'] = {           Weight: 10, Prize: 50, where:'hull',
+BBAdata.SHIPelements['simplePlateIII_lighter'] = {  Weight: -4, Price: 250, where:'hull', upgrade:'simplePlateIII' };
+BBAdata.SHIPelements['simplePlateIV'] = {           Weight: 10, Price: 50, where:'hull',
     lifeM: 1,
 };
-BBAdata.SHIPelements['simplePlateIV_lighter'] = {   Weight: -4, Prize: 250, where:'hull', upgrade:'simplePlateIV' };
+BBAdata.SHIPelements['simplePlateIV_lighter'] = {   Weight: -4, Price: 250, where:'hull', upgrade:'simplePlateIV' };
 
-BBAdata.SHIPelements['lightPlatesI'] = {            Weight: 3, Prize: 5000, where:'hull',
+BBAdata.SHIPelements['lightPlatesI'] = {            Weight: 3, Price: 5000, where:'hull',
     lifeM: 1,
 }
-BBAdata.SHIPelements['lightPlatesII'] = {           Weight: 3, Prize: 5000, where:'hull',
+BBAdata.SHIPelements['lightPlatesII'] = {           Weight: 3, Price: 5000, where:'hull',
     lifeM: 1,
 }
-BBAdata.SHIPelements['lightPlatesIII'] = {          Weight: 3, Prize: 5000, where:'hull',
+BBAdata.SHIPelements['lightPlatesIII'] = {          Weight: 3, Price: 5000, where:'hull',
     lifeM: 1,
 }
-BBAdata.SHIPelements['lightPlatesIV'] = {           Weight: 3, Prize: 5000, where:'hull',
+BBAdata.SHIPelements['lightPlatesIV'] = {           Weight: 3, Price: 5000, where:'hull',
     lifeM: 1,
 }
-BBAdata.SHIPelements['lightPlatesV'] = {            Weight: 3, Prize: 5000, where:'hull',
+BBAdata.SHIPelements['lightPlatesV'] = {            Weight: 3, Price: 5000, where:'hull',
     lifeM: 1,
 }
-BBAdata.SHIPelements['lightPlatesVI'] = {           Weight: 3, Prize: 5000, where:'hull',
+BBAdata.SHIPelements['lightPlatesVI'] = {           Weight: 3, Price: 5000, where:'hull',
     lifeM: 1,
 }
 
-BBAdata.SHIPelements['heavyPlateI'] = {             Weight: 20, Prize: 2000, where:'hull',
+BBAdata.SHIPelements['heavyPlateI'] = {             Weight: 20, Price: 2000, where:'hull',
     lifeM: 2,
 }
-BBAdata.SHIPelements['heavyPlateI_tough'] = {       Weight: 0, Prize: 3000, where:'hull', upgrade:'heavyPlateI',
+BBAdata.SHIPelements['heavyPlateI_tough'] = {       Weight: 0, Price: 3000, where:'hull', upgrade:'heavyPlateI',
     lifeM: 1,
 }
-BBAdata.SHIPelements['heavyPlateII'] = {            Weight: 20, Prize: 2000, where:'hull',
+BBAdata.SHIPelements['heavyPlateII'] = {            Weight: 20, Price: 2000, where:'hull',
     lifeM: 2,
 }
-BBAdata.SHIPelements['heavyPlateII_tough'] = {      Weight: 0, Prize: 3000, where:'hull', upgrade:'heavyPlateII',
+BBAdata.SHIPelements['heavyPlateII_tough'] = {      Weight: 0, Price: 3000, where:'hull', upgrade:'heavyPlateII',
     lifeM: 1,
 }
-BBAdata.SHIPelements['heavyPlateIII'] = {           Weight: 20, Prize: 2000, where:'hull',
+BBAdata.SHIPelements['heavyPlateIII'] = {           Weight: 20, Price: 2000, where:'hull',
     lifeM: 2,
 }
-BBAdata.SHIPelements['heavyPlateIII_tough'] = {     Weight: 0, Prize: 3000, where:'hull', upgrade:'heavyPlateIII',
+BBAdata.SHIPelements['heavyPlateIII_tough'] = {     Weight: 0, Price: 3000, where:'hull', upgrade:'heavyPlateIII',
     lifeM: 1,
 }
-BBAdata.SHIPelements['heavyPlateIV'] = {            Weight: 20, Prize: 2000, where:'hull',
+BBAdata.SHIPelements['heavyPlateIV'] = {            Weight: 20, Price: 2000, where:'hull',
     lifeM: 2,
 }
-BBAdata.SHIPelements['heavyPlateIV_tough'] = {      Weight: 0, Prize: 3000, where:'hull', upgrade:'heavyPlateIV',
+BBAdata.SHIPelements['heavyPlateIV_tough'] = {      Weight: 0, Price: 3000, where:'hull', upgrade:'heavyPlateIV',
     lifeM: 1,
 }
 
 
 // ENERGY
 
-BBAdata.SHIPelements['simpleEnergyCellI'] = {       Weight: 3, Prize: 250, where:'energy',
+BBAdata.SHIPelements['simpleEnergyCellI'] = {       Weight: 3, Price: 250, where:'energy',
     EnergyM: 1,
 }
-BBAdata.SHIPelements['simpleEnergyCellI_up'] = {    Weight: 0, Prize: 3000, where:'energy', upgrade:'simpleEnergyCellI',
+BBAdata.SHIPelements['simpleEnergyCellI_up'] = {    Weight: 0, Price: 3000, where:'energy', upgrade:'simpleEnergyCellI',
     EnergyM: 1,
 }
-BBAdata.SHIPelements['simpleEnergyCellI_up2'] = {   Weight: 0, Prize: 7000, where:'energy', upgrade:'simpleEnergyCellI',
+BBAdata.SHIPelements['simpleEnergyCellI_up2'] = {   Weight: 0, Price: 7000, where:'energy', upgrade:'simpleEnergyCellI',
     EnergyM: 1,
 }
-BBAdata.SHIPelements['simpleEnergyCellII'] = {      Weight: 3, Prize: 250, where:'energy',
+BBAdata.SHIPelements['simpleEnergyCellII'] = {      Weight: 3, Price: 250, where:'energy',
     EnergyM: 1,
 }
-BBAdata.SHIPelements['simpleEnergyCellII_up'] = {   Weight: 0, Prize: 3000, where:'energy', upgrade:'simpleEnergyCellII',
+BBAdata.SHIPelements['simpleEnergyCellII_up'] = {   Weight: 0, Price: 3000, where:'energy', upgrade:'simpleEnergyCellII',
     EnergyM: 1,
 }
-BBAdata.SHIPelements['simpleEnergyCellII_up2'] = {  Weight: 0, Prize: 7000, where:'energy', upgrade:'simpleEnergyCellII',
+BBAdata.SHIPelements['simpleEnergyCellII_up2'] = {  Weight: 0, Price: 7000, where:'energy', upgrade:'simpleEnergyCellII',
     EnergyM: 1,
 }
-BBAdata.SHIPelements['simpleEnergyCellIII'] = {     Weight: 3, Prize: 250, where:'energy',
+BBAdata.SHIPelements['simpleEnergyCellIII'] = {     Weight: 3, Price: 250, where:'energy',
     EnergyM: 1,
 }
-BBAdata.SHIPelements['simpleEnergyCellIII_up'] = {  Weight: 0, Prize: 3000, where:'energy', upgrade:'simpleEnergyCellIII',
+BBAdata.SHIPelements['simpleEnergyCellIII_up'] = {  Weight: 0, Price: 3000, where:'energy', upgrade:'simpleEnergyCellIII',
     EnergyM: 1,
 }
-BBAdata.SHIPelements['simpleEnergyCellIII_up2'] = { Weight: 0, Prize: 7000, where:'energy', upgrade:'simpleEnergyCellIII',
+BBAdata.SHIPelements['simpleEnergyCellIII_up2'] = { Weight: 0, Price: 7000, where:'energy', upgrade:'simpleEnergyCellIII',
     EnergyM: 1,
 }
-BBAdata.SHIPelements['simpleEnergyCellIV'] = {      Weight: 3, Prize: 250, where:'energy',
+BBAdata.SHIPelements['simpleEnergyCellIV'] = {      Weight: 3, Price: 250, where:'energy',
     EnergyM: 1,
 }
-BBAdata.SHIPelements['simpleEnergyCellIV_up'] = {   Weight: 0, Prize: 3000, where:'energy', upgrade:'simpleEnergyCellIV',
+BBAdata.SHIPelements['simpleEnergyCellIV_up'] = {   Weight: 0, Price: 3000, where:'energy', upgrade:'simpleEnergyCellIV',
     EnergyM: 1,
 }
-BBAdata.SHIPelements['simpleEnergyCellIV_up2'] = {  Weight: 0, Prize: 7000, where:'energy', upgrade:'simpleEnergyCellIV',
+BBAdata.SHIPelements['simpleEnergyCellIV_up2'] = {  Weight: 0, Price: 7000, where:'energy', upgrade:'simpleEnergyCellIV',
     EnergyM: 1,
 }
 
-BBAdata.SHIPelements['energyCrystalI'] = {          Weight: 32, Prize: 8500, where:'energy',
+BBAdata.SHIPelements['energyCrystalI'] = {          Weight: 32, Price: 8500, where:'energy',
     EnergyM: 6,
 };
-BBAdata.SHIPelements['energyCrystalI_en1'] = {      Weight: 6, Prize: 4500, where:'energy', upgrade:'energyCrystalI',
+BBAdata.SHIPelements['energyCrystalI_en1'] = {      Weight: 6, Price: 4500, where:'energy', upgrade:'energyCrystalI',
     EnergyM: 2,
 };
-BBAdata.SHIPelements['energyCrystalI_en2'] = {      Weight: 6, Prize: 4500, where:'energy', upgrade:'energyCrystalI',
+BBAdata.SHIPelements['energyCrystalI_en2'] = {      Weight: 6, Price: 4500, where:'energy', upgrade:'energyCrystalI',
     EnergyM: 2,
 };
-BBAdata.SHIPelements['energyCrystalI_w1'] = {       Weight: -9, Prize: 6500, where:'energy', upgrade:'energyCrystalI'};
-BBAdata.SHIPelements['energyCrystalI_w2'] = {       Weight: -9, Prize: 6500, where:'energy', upgrade:'energyCrystalI'};
-BBAdata.SHIPelements['energyCrystalII'] = {         Weight: 32, Prize: 8500, where:'energy',
+BBAdata.SHIPelements['energyCrystalI_w1'] = {       Weight: -9, Price: 6500, where:'energy', upgrade:'energyCrystalI'};
+BBAdata.SHIPelements['energyCrystalI_w2'] = {       Weight: -9, Price: 6500, where:'energy', upgrade:'energyCrystalI'};
+BBAdata.SHIPelements['energyCrystalII'] = {         Weight: 32, Price: 8500, where:'energy',
     EnergyM: 6,
 };
-BBAdata.SHIPelements['energyCrystalII_en1'] = {     Weight: 6, Prize: 4500, where:'energy', upgrade:'energyCrystalII',
+BBAdata.SHIPelements['energyCrystalII_en1'] = {     Weight: 6, Price: 4500, where:'energy', upgrade:'energyCrystalII',
     EnergyM: 2,
 };
-BBAdata.SHIPelements['energyCrystalII_en2'] = {     Weight: 6, Prize: 4500, where:'energy', upgrade:'energyCrystalII',
+BBAdata.SHIPelements['energyCrystalII_en2'] = {     Weight: 6, Price: 4500, where:'energy', upgrade:'energyCrystalII',
     EnergyM: 2,
 };
-BBAdata.SHIPelements['energyCrystalII_w1'] = {      Weight: -9, Prize: 6500, where:'energy', upgrade:'energyCrystalII'};
-BBAdata.SHIPelements['energyCrystalII_w2'] = {      Weight: -9, Prize: 6500, where:'energy', upgrade:'energyCrystalII'};
+BBAdata.SHIPelements['energyCrystalII_w1'] = {      Weight: -9, Price: 6500, where:'energy', upgrade:'energyCrystalII'};
+BBAdata.SHIPelements['energyCrystalII_w2'] = {      Weight: -9, Price: 6500, where:'energy', upgrade:'energyCrystalII'};
 
 BBAdata.SHIPelements['heavyEnergyCellI'] = {        Weight: 12, Price: 2000, where:'energy',
     EnergyM: 2,
@@ -166,10 +166,10 @@ BBAdata.SHIPelements['energyGeneratus_up3'] = {     Weight: -12, Price: 4400, wh
     maxSpeedRCap: 0.8,
 };
 BBAdata.SHIPelements['energyGeneratus_up4'] = {     Weight: 0, Price: 3200, where:'energy', upgrade:'energyGeneratus',
-    maxSpeedCap: 1.3,
+    maxSpeedCapPlus: 1.3,
 };
 BBAdata.SHIPelements['energyGeneratus_up5'] = {     Weight: 0, Price: 3200, where:'energy', upgrade:'energyGeneratus',
-    maxSpeedCap: 1.3,
+    maxSpeedCapPlus: 1.3,
 };
 
 
@@ -246,8 +246,8 @@ BBAdata.SHIPelements['engineCoreIII_up6'] = {       Weight: 0, Price: 7500, wher
     engineMultiply: 0.5,
 };
 BBAdata.SHIPelements['engineCoreIII_up7'] = {       Weight: 0, Price: 12000, where:'engine', upgrade:'engineCoreIII',
-    maxSpeedCap: 2.5,
-    maxSpeedRCap: 1.5,
+    maxSpeedCapPlus: 2.5,
+    maxSpeedRCapPlus: 1.5,
 };
 
 BBAdata.SHIPelements['engineCoreIV'] = {            Weight: 22, Price: 45000, where:'engine',
@@ -281,12 +281,12 @@ BBAdata.SHIPelements['engineCoreIV_up7'] = {        Weight: 0, Price: 3400, wher
     speed: 4,
 };
 BBAdata.SHIPelements['engineCoreIV_up8'] = {        Weight: 0, Price: 7500, where:'engine', upgrade:'engineCoreIV',
-    maxSpeedCap: 2.5,
-    maxSpeedRCap: 1.5,
+    maxSpeedCapPlus: 2.5,
+    maxSpeedRCapPlus: 1.5,
 };
 BBAdata.SHIPelements['engineCoreIV_up9'] = {        Weight: 0, Price: 7500, where:'engine', upgrade:'engineCoreIV',
-    maxSpeedCap: 2.5,
-    maxSpeedRCap: 1.5,
+    maxSpeedCapPlus: 2.5,
+    maxSpeedRCapPlus: 1.5,
 };
 
 
