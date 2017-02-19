@@ -4,7 +4,7 @@ BBAdata['SHIPpresets']={
         lifeM: 6,
         life: 6,
         EnergyM: 20,
-        engineMultiply: 4,
+        engineMultiply: 2,
         speed: 8,
         speedAcl: 3,
         speedDcl: 10,
@@ -22,13 +22,13 @@ BBAdata['SHIPpresets']={
         MouseDown1: false,
         MouseDown2: false,
         FireTypes:[
-            {W:'single', },
-            {W:'rose', },
-            {W:'single', GunSpeed: 30, Dec: 70, DMG:{Dmg:11,T:'normal'},},
+            {W:'single', GunSpeed: 1, Speed: 17, Dec: 30, shotsToReload: 3, reloadTime: 12, Use:{'Ammo':1}, DMG:{Dmg:1,T:'normal'},},
+            {W:'rose',   GunSpeed: 4, AtOnce: 9, Use:{'Ammo':5}, RoseAngle: 3, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
+            {W:'single', GunSpeed: 20, Speed: 17, Dec: 70, Use:{'Ammo':1}, DMG:{Dmg:11,T:'normal'},},
         ],
         Weapons:{
-            'single':{T:'single',  gunS:0,GunSpeed: 5, Speed: 17, Dec: 30, Use:{'Ammo':1}, DMG:{Dmg:1,T:'normal'},},
-            'rose':{T:'rose',    gunS:0,GunSpeed: 4, AtOnce: 9, Use:{'Ammo':5}, RoseAngle: 3, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
+            'single':{T:'single',  gunS:0,gunU:0,},
+            'rose':  {T:'rose',    gunS:0,gunU:0,},
         },
         Modules:[
             {T:'Prod',subT:'Bullet',Storage:'Ammo',Disabled:0,Emin:2,Emax:4,ProdX:4,E:0,Prod:0,ifProd:40 },

@@ -105,3 +105,22 @@ function Speed2Energy(Speed,Weight,Multiply){
     var Energy = Speed*Speed*W;
     return Energy;
 }
+
+function mergeObjects(A,B){
+    for(var b in B){
+        if(typeof B[b] === 'object'){
+            if(typeof A[b] === 'undefined'){
+                if(Array.isArray(B[b])) A[b] = [];
+                        else            A[b] = {};
+            }
+            mergeObjects(A[b],B[b]);
+        }else if(typeof B[b] === 'number'){
+            if(typeof A[b] === 'undefined') A[b] = 0;
+            A[b]-=-B[b];
+        }else{
+            A[b] = B[b];
+        }
+    }
+
+    return A;
+}

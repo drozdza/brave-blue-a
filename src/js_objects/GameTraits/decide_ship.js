@@ -38,7 +38,7 @@ GAMEobject.prototype.makeShipControlPanel = function(){
 
     Sx.EnergyOut=-1;
     for(var fi in S.FireTypes){
-        html+='<div id="attackModule_'+fi+'" class="attackBox attack_'+S.FireTypes[fi].T+'"><span></span><span></span><span></span><span></span><span></span><div class="attackBoxNum">'+(fi- -1)+'</div></div>';
+        html+='<div id="attackModule_'+fi+'" class="attackBox attack_'+S.FireTypes[fi].W+'"><span></span><span></span><span></span><span></span><span></span><div class="attackBoxNum">'+(fi- -1)+'</div></div>';
     }
 
     Sx.Storage=[];
@@ -62,10 +62,6 @@ GAMEobject.prototype.decide_ship = function(e){
     var O = this.O[0];
     var S = this.SHIP;
     var Sx = this.SHIPold;
-    var F = false;
-    var F2 = false;
-    if(S.FireType!==false)  F = S.FireTypes[ S.FireType ];
-    if(S.FireType2!==false) F2 = S.FireTypes[ S.FireType2 ];
     O.lastSpeedT = 0;
     this.mouseX = this.mouse_x- -(O.x -this.Dx/2);
     this.mouseY = this.mouse_y- -(O.y -this.Dy/2);
@@ -173,10 +169,9 @@ GAMEobject.prototype.decide_ship = function(e){
 
     var EsteemedPos = false;
 
-    var modHtml='';
     for(var m in S.Modules){
         var M = S.Modules[m];
-        modHtml='';
+        var modHtml='';
 
         // Moduły wyłączone:
         if(Sx.Mod[m] != 'disabled'){
@@ -321,30 +316,37 @@ GAMEobject.prototype.decide_ship = function(e){
     }
 
     // ESTYMATORY
-    if(S.GlueFireToLaser!=false && F.T=='laser')
-        this.shipFunc_glueFireToLaser();
-
-    if(S.ShowAmmoIndicator){
-        var useUse = true;
-        if(F.Use)
-            for(var useU in F.Use)
-                if(S.Storage[ useU ].R < F.Use[useU])
-                    useUse = false;
+    // !!!! TO FIX LATER
+    // if(S.GlueFireToLaser!=false && F.T=='laser')
+    //     this.shipFunc_glueFireToLaser();
 
 
-        if(useUse || ((F.T=='tele') && TeleMod!=false) || ((F.T=='laser') && LaserMod!=false))
-            $('#gameOverlay').attr('class','cursorCross');
-        else
-            $('#gameOverlay').attr('class','cursorWait');
-    }
 
-    if(F.T=='missle' || F.T=='missleR')
-        this.shipFunc_glueFireToMissle(F.AimRadius);
+    // !!!! TO FIX LATER
+    // if(S.ShowAmmoIndicator){
+    //     var useUse = true;
+    //     if(F.Use)
+    //         for(var useU in F.Use)
+    //             if(S.Storage[ useU ].R < F.Use[useU])
+    //                 useUse = false;
+    //
+    //
+    //     if(useUse || ((F.T=='tele') && TeleMod!=false) || ((F.T=='laser') && LaserMod!=false))
+    //         $('#gameOverlay').attr('class','cursorCross');
+    //     else
+    //         $('#gameOverlay').attr('class','cursorWait');
+    // }
 
-    if(F.T=='laser'){
-        var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -360)%360;
-        $('#gameboardMarkers').append('<div class="object laserAiming" style="height: '+O.Speed+'px; top: '+(this.Dy/2)+'px; left: '+(this.Dx/2)+'px; transform: rotate('+Angle+'deg);"></div>');
-    }
+    // !!!! TO FIX LATER
+    // if(F.T=='missle' || F.T=='missleR')
+    //     this.shipFunc_glueFireToMissle(F.AimRadius);
+
+    // !!!! TO FIX LATER
+    // if(F.T=='laser'){
+    //     var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -360)%360;
+    //     $('#gameboardMarkers').append('<div class="object laserAiming" style="height: '+O.Speed+'px; top: '+(this.Dy/2)+'px; left: '+(this.Dx/2)+'px; transform: rotate('+Angle+'deg);"></div>');
+    // }
+
 
     if(S.GlueFireToEstimated!=false && EsteemedPos!=false)
         this.shipFunc_glueFireToEstimated(EsteemedPos);
@@ -354,7 +356,7 @@ GAMEobject.prototype.decide_ship = function(e){
     var aktywneDziala = {};
     if(S.FireType!==false  && S.MouseDown1) aktywneDziala[ S.FireType ]=1;
     if(S.FireType2!==false && S.MouseDown2) aktywneDziala[ S.FireType2 ]=1;
-    for(var dzi in aktywneDziala) if(S.FireTypes[dzi].gunS > S.FireTypes[dzi].GunSpeed){
+    for(var dzi in aktywneDziala) if(S.Weapons[ S.FireTypes[dzi].W ].gunS > S.FireTypes[dzi].GunSpeed){
 
         var shotDone = false;
         var Fx = S.FireTypes[dzi];
@@ -364,25 +366,25 @@ GAMEobject.prototype.decide_ship = function(e){
         if(Fx.ModUse) for(var useU in Fx.ModUse) if(S.ModStorage[ useU ].R < Fx.ModUse[useU]) enoughToUse = false;
         if(!enoughToUse) continue;
 
-        if(Fx.T=='single'){
+        if(Fx.W=='single'){
             this.shipShoot(0, Fx.Speed, Fx.Dec, Fx.DMG);
             shotDone = true;
         }
-        if(Fx.T=='double'){
+        if(Fx.W=='double'){
             this.shipShootOnSide(-90, 5, Fx.Speed, Fx.Dec, Fx.DMG);
             this.shipShootOnSide(90, 5, Fx.Speed, Fx.Dec, Fx.DMG);
             shotDone = true;
         }
-        if(Fx.T=='rose'){
+        if(Fx.W=='rose'){
             for(var i = -parseInt(Fx.AtOnce/2); i<= parseInt(Fx.AtOnce/2); ++i)
                 this.shipShoot(i*Fx.RoseAngle, Fx.Speed, Fx.Dec, Fx.DMG);
             shotDone = true;
         }
-        if(Fx.T=='missle' && this.missleAim!=false){
+        if(Fx.W=='missle' && this.missleAim!=false){
             this.shipShootMissle(this.missleAim,O.angle,Fx.Speed,Fx.Dec,Fx.SpeedT,Fx);
             shotDone = true;
         }
-        if(Fx.T=='missleR' && this.missleAim!=false){
+        if(Fx.W=='missleR' && this.missleAim!=false){
             var Pe = [80,280,100,260,120,240,140,220,160,200,175,185];
             var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -180)%360;
 
@@ -390,7 +392,7 @@ GAMEobject.prototype.decide_ship = function(e){
                 this.shipShootMissle(this.missleAim, (Angle- -Pe[iki])%360, (Fx.Speed-parseInt(iki/2)*2),(Fx.Dec- -parseInt(iki/2)*20),(Fx.SpeedT-parseInt(iki/2)),Fx);
             shotDone = true;
         }
-        if(Fx.T=='bomb'){
+        if(Fx.W=='bomb'){
             var mouseDist = Math.sqrt();
             var teleportData = false;
             if(typeof Fx.Teleport !='undefined') teleportData = Fx.Teleport;
@@ -398,34 +400,39 @@ GAMEobject.prototype.decide_ship = function(e){
             this.shipShootBomb(Fx.Speed,Fx.Dec,Fx,teleportData);
             shotDone = true;
         }
-        if(Fx.T=='bombT'){
+        if(Fx.W=='bombT'){
             this.shipTeleportBomb(Fx.Distance,Fx.offTime,Fx);
             shotDone = true;
         }
-        if(Fx.T=='bombD'){
+        if(Fx.W=='bombD'){
             this.shipShootDistanceBomb(Fx.Speed,Fx.Dec,Fx.offTime,Fx);
             shotDone = true;
         }
-        if(Fx.T=='laser'){
+        if(Fx.W=='laser'){
             this.shipShootLaser(Fx.Speed,Fx.DMG);
             shotDone = true;
         }
-        if(Fx.T=='tele'){
+        if(Fx.W=='tele'){
             if(this.shipFunc_teleport(Fx))
                 shotDone = true;
         }
 
         if(shotDone){
-            Fx.gunS=0;
+            S.Weapons[Fx.W].gunS=0;
             if(Fx.Use) for(var useU in Fx.Use) S.Storage[ useU ].R-=Fx.Use[ useU ];
             if(Fx.ModUse) for(var useU in Fx.ModUse) S.ModStorage[ useU ].R-=Fx.ModUse[ useU ];
 
+            S.Weapons[Fx.W].gunU++;
+            if(typeof Fx.shotsToReload != 'undefined' && S.Weapons[Fx.W].gunU >= Fx.shotsToReload){
+                S.Weapons[Fx.W].gunU=0;                
+                S.Weapons[Fx.W].gunS = -Fx.reloadTime;
+            }
         }
     }
 
+    for(var w in S.Weapons)
+        S.Weapons[w].gunS++;
 
-    F.gunS++;
-    if(F2) F2.gunS++;
 
     for(var storU in S.Storage)
         if(S.Storage[storU].R > S.Storage[storU].M)
