@@ -359,7 +359,11 @@ BBAdata.MAPS.Secure2 = 'load';
 BBAdata.MAPS.Secure3 = 'load';
 BBAdata.MAPS.BigOnes={
     BoardMods:['sitOnMap','allAvoid'],
-    Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, D:10, M:10, N:10, J:10, W:5, T:10, E:10, G:10, R:10, B:10, K:10, F:10, Q:5,X:5,TT:10,Tu:5}}],
+    Place:[
+        {Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, D:10, M:10, N:10, J:10, W:5, T:10, E:10, G:10, R:10, B:10, K:10, F:10, Q:5,X:5,TT:10,Tu:5}},
+        {CircleOf:{X:0, Y:-3000, Radius: 120, AngleStart: 0, AngleBy: 22.5}, What:{Star:16}},
+        {What:{RoundField:1},objData:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
+    ],
 };
 BBAdata.MAPS.HardCore={
     BoardMods:['sitOnMap','allAvoid','violetColor'],
@@ -378,7 +382,9 @@ BBAdata.MAPS.HardCore={
             SH:10, L:5, TT:10, CD:5, HH:5, UU:5, Tu:8, Ii:5, HS:5,
         }},
         {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarX:150,iD:10,Wi:10}},
-        {What:{Gstar:1},objData:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}}
+        {What:{Gstar:1},objData:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}},
+        {CircleOf:{X:0, Y:-3000, Radius: 120, AngleStart: 0, AngleBy: 22.5}, What:{Star:16}},
+        {What:{RoundField:1},objData:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
     ]
 };
 
