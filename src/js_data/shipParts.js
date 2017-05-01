@@ -2,174 +2,101 @@ BBAdata.SHIPelements={};
 
 // HULL
 
-BBAdata.SHIPelements['simplePlateI'] = {            Weight: 10, Price: 50,    where:'hull',
+BBAdata.SHIPelements['simplePlate'] = {             Weight: 10, Price: 50,    where:'hull',
     lifeM: 1,
+    upgrades: {
+        'lighter': {                                Weight: -4, Price: 250, },
+    },
+    copies: {
+        'I': {}, 'II': {}, 'III': {}, 'IV': {},
+    },
 };
-BBAdata.SHIPelements['simplePlateI_lighter'] = {    Weight: -4, Price: 250,   where:'hull', upgrade:'simplePlateI' };
-BBAdata.SHIPelements['simplePlateII'] = {           Weight: 10, Price: 50,    where:'hull',
-    lifeM: 1,
-};
-BBAdata.SHIPelements['simplePlateII_lighter'] = {   Weight: -4, Price: 250,   where:'hull', upgrade:'simplePlateII' };
-BBAdata.SHIPelements['simplePlateIII'] = {          Weight: 10, Price: 50,    where:'hull',
-    lifeM: 1,
-};
-BBAdata.SHIPelements['simplePlateIII_lighter'] = {  Weight: -4, Price: 250,   where:'hull', upgrade:'simplePlateIII' };
-BBAdata.SHIPelements['simplePlateIV'] = {           Weight: 10, Price: 50,    where:'hull',
-    lifeM: 1,
-};
-BBAdata.SHIPelements['simplePlateIV_lighter'] = {   Weight: -4, Price: 250,   where:'hull', upgrade:'simplePlateIV' };
 
-BBAdata.SHIPelements['lightPlatesI'] = {            Weight: 3, Price: 5000,   where:'hull',
+BBAdata.SHIPelements['lightPlate'] = {              Weight: 3, Price: 5000,   where:'hull',
     lifeM: 1,
-}
-BBAdata.SHIPelements['lightPlatesII'] = {           Weight: 3, Price: 5000,   where:'hull',
-    lifeM: 1,
-}
-BBAdata.SHIPelements['lightPlatesIII'] = {          Weight: 3, Price: 5000,   where:'hull',
-    lifeM: 1,
-}
-BBAdata.SHIPelements['lightPlatesIV'] = {           Weight: 3, Price: 5000,   where:'hull',
-    lifeM: 1,
-}
-BBAdata.SHIPelements['lightPlatesV'] = {            Weight: 3, Price: 5000,   where:'hull',
-    lifeM: 1,
-}
-BBAdata.SHIPelements['lightPlatesVI'] = {           Weight: 3, Price: 5000,   where:'hull',
-    lifeM: 1,
-}
+    copies: {
+        'I': {}, 'II': {}, 'III': {}, 'IV': {}, 'V': {}, 'VI': {},
+    },
+};
 
-BBAdata.SHIPelements['heavyPlateI'] = {             Weight: 20, Price: 2000,  where:'hull',
+BBAdata.SHIPelements['heavyPlate'] = {              Weight: 20, Price: 2000,  where:'hull',
     lifeM: 2,
-}
-BBAdata.SHIPelements['heavyPlateI_tough'] = {       Weight: 0, Price: 3000,   where:'hull', upgrade:'heavyPlateI',
-    lifeM: 1,
-}
-BBAdata.SHIPelements['heavyPlateII'] = {            Weight: 20, Price: 2000,  where:'hull',
-    lifeM: 2,
-}
-BBAdata.SHIPelements['heavyPlateII_tough'] = {      Weight: 0, Price: 3000,   where:'hull', upgrade:'heavyPlateII',
-    lifeM: 1,
-}
-BBAdata.SHIPelements['heavyPlateIII'] = {           Weight: 20, Price: 2000,  where:'hull',
-    lifeM: 2,
-}
-BBAdata.SHIPelements['heavyPlateIII_tough'] = {     Weight: 0, Price: 3000,   where:'hull', upgrade:'heavyPlateIII',
-    lifeM: 1,
-}
-BBAdata.SHIPelements['heavyPlateIV'] = {            Weight: 20, Price: 2000,  where:'hull',
-    lifeM: 2,
-}
-BBAdata.SHIPelements['heavyPlateIV_tough'] = {      Weight: 0, Price: 3000,   where:'hull', upgrade:'heavyPlateIV',
-    lifeM: 1,
-}
+    upgrades: {
+        'tough': {                                  Weight: 0,  Price: 3000,
+            lifeM: 1,
+        },
+    },
+    copies: {
+        'I': {}, 'II': {}, 'III': {}, 'IV': {},
+    },
+};
 
 
 // ENERGY
 
-BBAdata.SHIPelements['simpleEnergyCellI'] = {       Weight: 3, Price: 250,    where:'energy',
+BBAdata.SHIPelements['simpleEnergyCell'] = {        Weight: 3,  Price: 250,    where:'energy',
     EnergyM: 1,
-}
-BBAdata.SHIPelements['simpleEnergyCellI_up'] = {    Weight: 0, Price: 3000,   where:'energy', upgrade:'simpleEnergyCellI',
-    EnergyM: 1,
-}
-BBAdata.SHIPelements['simpleEnergyCellI_up2'] = {   Weight: 0, Price: 7000,   where:'energy', upgrade:'simpleEnergyCellI',
-    EnergyM: 1,
-}
-BBAdata.SHIPelements['simpleEnergyCellII'] = {      Weight: 3, Price: 250,    where:'energy',
-    EnergyM: 1,
-}
-BBAdata.SHIPelements['simpleEnergyCellII_up'] = {   Weight: 0, Price: 3000,   where:'energy', upgrade:'simpleEnergyCellII',
-    EnergyM: 1,
-}
-BBAdata.SHIPelements['simpleEnergyCellII_up2'] = {  Weight: 0, Price: 7000,   where:'energy', upgrade:'simpleEnergyCellII',
-    EnergyM: 1,
-}
-BBAdata.SHIPelements['simpleEnergyCellIII'] = {     Weight: 3, Price: 250,    where:'energy',
-    EnergyM: 1,
-}
-BBAdata.SHIPelements['simpleEnergyCellIII_up'] = {  Weight: 0, Price: 3000,   where:'energy', upgrade:'simpleEnergyCellIII',
-    EnergyM: 1,
-}
-BBAdata.SHIPelements['simpleEnergyCellIII_up2'] = { Weight: 0, Price: 7000,   where:'energy', upgrade:'simpleEnergyCellIII',
-    EnergyM: 1,
-}
-BBAdata.SHIPelements['simpleEnergyCellIV'] = {      Weight: 3, Price: 250,    where:'energy',
-    EnergyM: 1,
-}
-BBAdata.SHIPelements['simpleEnergyCellIV_up'] = {   Weight: 0, Price: 3000,   where:'energy', upgrade:'simpleEnergyCellIV',
-    EnergyM: 1,
-}
-BBAdata.SHIPelements['simpleEnergyCellIV_up2'] = {  Weight: 0, Price: 7000,   where:'energy', upgrade:'simpleEnergyCellIV',
-    EnergyM: 1,
-}
+    upgrades: {
+        'up': {                                     Weight: 0,  Price: 3000,
+            EnergyM: 1,
+        },
+        'up2': {                                    Weight: 0,  Price: 7000,
+            EnergyM: 1,
+        },
+    },
+    copies: {
+        'I': {}, 'II': {}, 'III': {}, 'IV': {},
+    },
+};
 
-BBAdata.SHIPelements['energyCrystalI'] = {          Weight: 32, Price: 8500,  where:'energy',
+BBAdata.SHIPelements['energyCrystal'] = {           Weight: 32, Price: 8500,  where:'energy',
     EnergyM: 6,
+    upgrades: {
+        'energy1': {                                Weight: 6,  Price: 4500,
+            EnergyM: 2,
+        },
+        'energy2': {                                Weight: 6,  Price: 4500,
+            EnergyM: 2,
+        },
+        'weight1': {                                Weight: -9, Price: 6500, },
+        'weight2': {                                Weight: -9, Price: 6500, },
+    },
+    copies: {
+        'I': {}, 'II': {},
+    },
 };
-BBAdata.SHIPelements['energyCrystalI_en1'] = {      Weight: 6, Price: 4500,   where:'energy', upgrade:'energyCrystalI',
-    EnergyM: 2,
-};
-BBAdata.SHIPelements['energyCrystalI_en2'] = {      Weight: 6, Price: 4500,   where:'energy', upgrade:'energyCrystalI',
-    EnergyM: 2,
-};
-BBAdata.SHIPelements['energyCrystalI_w1'] = {       Weight: -9, Price: 6500,  where:'energy', upgrade:'energyCrystalI'};
-BBAdata.SHIPelements['energyCrystalI_w2'] = {       Weight: -9, Price: 6500,  where:'energy', upgrade:'energyCrystalI'};
-BBAdata.SHIPelements['energyCrystalII'] = {         Weight: 32, Price: 8500,  where:'energy',
-    EnergyM: 6,
-};
-BBAdata.SHIPelements['energyCrystalII_en1'] = {     Weight: 6, Price: 4500,   where:'energy', upgrade:'energyCrystalII',
-    EnergyM: 2,
-};
-BBAdata.SHIPelements['energyCrystalII_en2'] = {     Weight: 6, Price: 4500,   where:'energy', upgrade:'energyCrystalII',
-    EnergyM: 2,
-};
-BBAdata.SHIPelements['energyCrystalII_w1'] = {      Weight: -9, Price: 6500,  where:'energy', upgrade:'energyCrystalII'};
-BBAdata.SHIPelements['energyCrystalII_w2'] = {      Weight: -9, Price: 6500,  where:'energy', upgrade:'energyCrystalII'};
 
-BBAdata.SHIPelements['heavyEnergyCellI'] = {        Weight: 12, Price: 2000,  where:'energy',
+BBAdata.SHIPelements['heavyEnergyCell'] = {         Weight: 12, Price: 2000,  where:'energy',
     EnergyM: 2,
+    upgrades: {
+        'weight': {                                 Weight: -3, Price: 2000, },
+    },
+    copies: {
+        'I': {}, 'II': {}, 'III': {}, 'IV': {}, 'V': {}, 'VI': {},
+    },
 };
-BBAdata.SHIPelements['heavyEnergyCellI_up'] = {     Weight: -3, Price: 2000,  where:'energy', upgrade:'heavyEnergyCellI'};
-BBAdata.SHIPelements['heavyEnergyCellII'] = {       Weight: 12, Price: 2000,  where:'energy',
-    EnergyM: 2,
-};
-BBAdata.SHIPelements['heavyEnergyCellII_up'] = {    Weight: -3, Price: 2000,  where:'energy', upgrade:'heavyEnergyCellII'};
-BBAdata.SHIPelements['heavyEnergyCellIII'] = {      Weight: 12, Price: 2000,  where:'energy',
-    EnergyM: 2,
-};
-BBAdata.SHIPelements['heavyEnergyCellIII_up'] = {   Weight: -3, Price: 2000,  where:'energy', upgrade:'heavyEnergyCellIII'};
-BBAdata.SHIPelements['heavyEnergyCellIV'] = {       Weight: 12, Price: 2000,  where:'energy',
-    EnergyM: 2,
-};
-BBAdata.SHIPelements['heavyEnergyCellIV_up'] = {    Weight: -3, Price: 2000,  where:'energy', upgrade:'heavyEnergyCellIV'};
-BBAdata.SHIPelements['heavyEnergyCellV'] = {        Weight: 12, Price: 2000,  where:'energy',
-    EnergyM: 2,
-};
-BBAdata.SHIPelements['heavyEnergyCellV_up'] = {     Weight: -3, Price: 2000,  where:'energy', upgrade:'heavyEnergyCellV'};
-BBAdata.SHIPelements['heavyEnergyCellVI'] = {       Weight: 12, Price: 2000,  where:'energy',
-    EnergyM: 2,
-};
-BBAdata.SHIPelements['heavyEnergyCellVI_up'] = {    Weight: -3, Price: 2000,  where:'energy', upgrade:'heavyEnergyCellVI'};
 
 BBAdata.SHIPelements['energyGeneratus'] = {         Weight: 64, Price: 22000, where:'energy',
     EnergyM: 16,
     maxSpeedCap: 3,
     maxSpeedTCap: 1,
-};
-BBAdata.SHIPelements['energyGeneratus_up1'] = {     Weight: 0, Price: 3000,   where:'energy', upgrade:'energyGeneratus',
-    EnergyM: 8,
-};
-BBAdata.SHIPelements['energyGeneratus_up2'] = {     Weight: 0, Price: 3000,   where:'energy', upgrade:'energyGeneratus',
-    EnergyM: 8,
-};
-BBAdata.SHIPelements['energyGeneratus_up3'] = {     Weight: -12, Price: 4400, where:'energy', upgrade:'energyGeneratus',
-    maxSpeedTCap: 0.8,
-};
-BBAdata.SHIPelements['energyGeneratus_up4'] = {     Weight: 0, Price: 3200,   where:'energy', upgrade:'energyGeneratus',
-    maxSpeedCapPlus: 1.3,
-};
-BBAdata.SHIPelements['energyGeneratus_up5'] = {     Weight: 0, Price: 3200,   where:'energy', upgrade:'energyGeneratus',
-    maxSpeedCapPlus: 1.3,
+    upgrades: {
+        'up1': {                                    Weight: 0, Price: 3000,
+            EnergyM: 8,
+        },
+        'up2': {                                    Weight: 0, Price: 3000,
+            EnergyM: 8,
+        },
+        'up3': {                                    Weight: -12, Price: 4400,
+            maxSpeedTCap: 0.8,
+        },
+        'up4': {                                    Weight: 0, Price: 3200,
+            maxSpeedCapPlus: 1.3,
+        },
+        'up5': {                                    Weight: 0, Price: 3200,
+            maxSpeedCapPlus: 1.3,
+        },
+    },
 };
 
 
@@ -184,15 +111,17 @@ BBAdata.SHIPelements['engineCoreI'] = {             Weight: 26, Price: 300,   wh
     speedDcl: 2,
     speedT: 2.5,
     EnergyM: 6,
-};
-BBAdata.SHIPelements['engineCoreI_up1'] = {         Weight: 0, Price: 2700,   where:'engine', upgrade:'engineCoreI',
-    engineMultiply: 0.2,
-};
-BBAdata.SHIPelements['engineCoreI_up2'] = {         Weight: 0, Price: 2700,   where:'engine', upgrade:'engineCoreI',
-    engineMultiply: 0.2,
-};
-BBAdata.SHIPelements['engineCoreI_up3'] = {         Weight: 0, Price: 1100,   where:'engine', upgrade:'engineCoreI',
-    speedT: 1,
+    upgrades: {
+        'up1': {                                    Weight: 0, Price: 2700,
+            engineMultiply: 0.2,
+        },
+        'up2': {                                    Weight: 0, Price: 2700,
+            engineMultiply: 0.2,
+        },
+        'up3': {                                    Weight: 0, Price: 1100,
+            speedT: 1,
+        },
+    },
 };
 
 BBAdata.SHIPelements['engineCoreII'] = {            Weight: 10, Price: 8100,  where:'engine', exclude: ['engineCoreI','engineCoreIII','engineCoreIV'],
@@ -202,21 +131,23 @@ BBAdata.SHIPelements['engineCoreII'] = {            Weight: 10, Price: 8100,  wh
     speedDcl: 3,
     speedT: 2,
     EnergyM: 8,
-};
-BBAdata.SHIPelements['engineCoreII_up1'] = {        Weight: 0, Price: 8000,   where:'engine', upgrade:'engineCoreII',
-    engineMultiply: 3,
-};
-BBAdata.SHIPelements['engineCoreII_up2'] = {        Weight: 0, Price: 5500,   where:'engine', upgrade:'engineCoreII',
-    speedT: 0.4,
-};
-BBAdata.SHIPelements['engineCoreII_up3'] = {        Weight: 0, Price: 5500,   where:'engine', upgrade:'engineCoreII',
-    speedT: 0.4,
-};
-BBAdata.SHIPelements['engineCoreII_up4'] = {        Weight: 0, Price: 600,    where:'engine', upgrade:'engineCoreII',
-    speed: 2,
-};
-BBAdata.SHIPelements['engineCoreII_up5'] = {        Weight: 0, Price: 2700,   where:'engine', upgrade:'engineCoreII',
-    starBump: 1,
+    upgrades: {
+        'up1': {                                    Weight: 0, Price: 8000,
+            engineMultiply: 3,
+        },
+        'up2': {                                    Weight: 0, Price: 5500,
+            speedT: 0.4,
+        },
+        'up3': {                                    Weight: 0, Price: 5500,
+            speedT: 0.4,
+        },
+        'up4': {                                    Weight: 0, Price: 600,
+            speed: 2,
+        },
+        'up5': {                                    Weight: 0, Price: 2700,
+            starBump: 1,
+        },
+    },
 };
 
 BBAdata.SHIPelements['engineCoreIII'] = {           Weight: 32, Price: 16500, where:'engine', exclude: ['engineCoreI','engineCoreII','engineCoreIV'],
@@ -226,33 +157,35 @@ BBAdata.SHIPelements['engineCoreIII'] = {           Weight: 32, Price: 16500, wh
     speedDcl: 5,
     speedT: 1.5,
     EnergyM: 12,
-};
-BBAdata.SHIPelements['engineCoreIII_up1'] = {       Weight: 0, Price: 1400,   where:'engine', upgrade:'engineCoreIII',
-    EnergyM: 2,
-    speed: 1,
-};
-BBAdata.SHIPelements['engineCoreIII_up2'] = {       Weight: 0, Price: 1400,   where:'engine', upgrade:'engineCoreIII',
-    EnergyM: 2,
-    speed: 1,
-};
-BBAdata.SHIPelements['engineCoreIII_up3'] = {       Weight: 0, Price: 3000,   where:'engine', upgrade:'engineCoreIII',
-    speedT: 0.5,
-    starBump: 0.5,
-};
-BBAdata.SHIPelements['engineCoreIII_up4'] = {       Weight: 0, Price: 3000,   where:'engine', upgrade:'engineCoreIII',
-    speedT: 0.5,
-    starBump: 0.5,
-};
-BBAdata.SHIPelements['engineCoreIII_up5'] = {       Weight: 0, Price: 3000,   where:'engine', upgrade:'engineCoreIII',
-    speedT: 0.5,
-    starBump: 0.5,
-};
-BBAdata.SHIPelements['engineCoreIII_up6'] = {       Weight: 0, Price: 7500,   where:'engine', upgrade:'engineCoreIII',
-    engineMultiply: 0.5,
-};
-BBAdata.SHIPelements['engineCoreIII_up7'] = {       Weight: 0, Price: 12000,  where:'engine', upgrade:'engineCoreIII',
-    maxSpeedCapPlus: 2.5,
-    maxSpeedTCapPlus: 1.5,
+    upgrades: {
+        'up1': {                                    Weight: 0, Price: 1400,
+            EnergyM: 2,
+            speed: 1,
+        },
+        'up2': {                                    Weight: 0, Price: 1400,
+            EnergyM: 2,
+            speed: 1,
+        },
+        'up3': {                                    Weight: 0, Price: 3000,
+            speedT: 0.5,
+            starBump: 0.5,
+        },
+        'up4': {                                    Weight: 0, Price: 3000,
+            speedT: 0.5,
+            starBump: 0.5,
+        },
+        'up5': {                                    Weight: 0, Price: 3000,
+            speedT: 0.5,
+            starBump: 0.5,
+        },
+        'up6': {                                    Weight: 0, Price: 7500,
+            engineMultiply: 0.5,
+        },
+        'up7': {                                    Weight: 0, Price: 12000,
+            maxSpeedCapPlus: 2.5,
+            maxSpeedTCapPlus: 1.5,
+        },
+    },
 };
 
 BBAdata.SHIPelements['engineCoreIV'] = {            Weight: 22, Price: 45000, where:'engine', exclude: ['engineCoreI','engineCoreII','engineCoreIII'],
@@ -262,37 +195,39 @@ BBAdata.SHIPelements['engineCoreIV'] = {            Weight: 22, Price: 45000, wh
     speedDcl: 6,
     speedT: 2,
     EnergyM: 16,
-};
-BBAdata.SHIPelements['engineCoreIV_up1'] = {        Weight: 0, Price: 28000,  where:'engine', upgrade:'engineCoreIV',
-    speedT: 0.5,
-    engineMultiply: 0.2,
-    EnergyM: 6,
-};
-BBAdata.SHIPelements['engineCoreIV_up2'] = {        Weight: 0, Price: 9000,   where:'engine', upgrade:'engineCoreIV',
-    engineMultiply: 0.2,
-};
-BBAdata.SHIPelements['engineCoreIV_up3'] = {        Weight: 0, Price: 9000,   where:'engine', upgrade:'engineCoreIV',
-    engineMultiply: 0.2,
-};
-BBAdata.SHIPelements['engineCoreIV_up4'] = {        Weight: 0, Price: 6500,   where:'engine', upgrade:'engineCoreIV',
-    starBump: 1.5,
-};
-BBAdata.SHIPelements['engineCoreIV_up5'] = {        Weight: 0, Price: 6500,   where:'engine', upgrade:'engineCoreIV',
-    starBump: 1.5,
-};
-BBAdata.SHIPelements['engineCoreIV_up6'] = {        Weight: 0, Price: 6500,   where:'engine', upgrade:'engineCoreIV',
-    starBump: 1.5,
-};
-BBAdata.SHIPelements['engineCoreIV_up7'] = {        Weight: 0, Price: 3400,   where:'engine', upgrade:'engineCoreIV',
-    speed: 4,
-};
-BBAdata.SHIPelements['engineCoreIV_up8'] = {        Weight: 0, Price: 7500,   where:'engine', upgrade:'engineCoreIV',
-    maxSpeedCapPlus: 2.5,
-    maxSpeedTCapPlus: 1.5,
-};
-BBAdata.SHIPelements['engineCoreIV_up9'] = {        Weight: 0, Price: 7500,   where:'engine', upgrade:'engineCoreIV',
-    maxSpeedCapPlus: 2.5,
-    maxSpeedTCapPlus: 1.5,
+    upgrades: {
+        'up1': {                                    Weight: 0, Price: 28000,
+            speedT: 0.5,
+            engineMultiply: 0.2,
+            EnergyM: 6,
+        },
+        'up2': {                                    Weight: 0, Price: 9000,
+            engineMultiply: 0.2,
+        },
+        'up3': {                                    Weight: 0, Price: 9000,
+            engineMultiply: 0.2,
+        },
+        'up4': {                                    Weight: 0, Price: 6500,
+            starBump: 1.5,
+        },
+        'up5': {                                    Weight: 0, Price: 6500,
+            starBump: 1.5,
+        },
+        'up6': {                                    Weight: 0, Price: 6500,
+            starBump: 1.5,
+        },
+        'up7': {                                    Weight: 0, Price: 3400,
+            speed: 4,
+        },
+        'up8': {                                    Weight: 0, Price: 7500,
+            maxSpeedCapPlus: 2.5,
+            maxSpeedTCapPlus: 1.5,
+        },
+        'up9': {                                    Weight: 0, Price: 7500,
+            maxSpeedCapPlus: 2.5,
+            maxSpeedTCapPlus: 1.5,
+        },
+    },
 };
 
 
@@ -310,60 +245,62 @@ BBAdata.SHIPelements['basicGun'] = {                Weight: 5, Price: 100,    wh
         Dec: 20,
         DMG: {Dmg:1,T:'normal'}
     }},
-};
-BBAdata.SHIPelements['basicGun_up9'] = {            Weight: 0, Price: 300,    where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{GunSpeed:-10}},
-};
-BBAdata.SHIPelements['basicGun_up10'] = {           Weight: 0, Price: 500,    where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{GunSpeed:-5}},
-};
-BBAdata.SHIPelements['basicGun_up11'] = {           Weight: 0, Price: 800,    where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{GunSpeed:-5}},
-};
-BBAdata.SHIPelements['basicGun_up12'] = {           Weight: 0, Price: 1200,   where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{GunSpeed:-2}},
-};
-BBAdata.SHIPelements['basicGun_up13'] = {           Weight: 0, Price: 2100,   where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{GunSpeed:-2}},
-};
-BBAdata.SHIPelements['basicGun_up14'] = {           Weight: 0, Price: 3400,   where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{GunSpeed:-2}},
-};
-BBAdata.SHIPelements['basicGun_up15'] = {           Weight: 0, Price: 5000,   where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{GunSpeed:-1}},
-};
-BBAdata.SHIPelements['basicGun_up16'] = {           Weight: 0, Price: 9800,   where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{GunSpeed:-1}},
-};
-BBAdata.SHIPelements['basicGun_up1'] = {            Weight: 0, Price: 2000,   where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{Speed:2}},
-};
-BBAdata.SHIPelements['basicGun_up2'] = {            Weight: 0, Price: 2000,   where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{Speed:2}},
-};
-BBAdata.SHIPelements['basicGun_up3'] = {            Weight: 0, Price: 5500,   where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{Speed:1}},
-};
-BBAdata.SHIPelements['basicGun_up4'] = {            Weight: 0, Price: 5500,   where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{Speed:1}},
-};
-BBAdata.SHIPelements['basicGun_up5'] = {            Weight: 0, Price: 5500,   where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{Speed:1}},
-};
-BBAdata.SHIPelements['basicGun_up6'] = {            Weight: 0, Price: 800,    where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{Dec:15}},
-};
-BBAdata.SHIPelements['basicGun_up7'] = {            Weight: 0, Price: 800,    where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{Dec:15}},
-};
-BBAdata.SHIPelements['basicGun_up8'] = {            Weight: 0, Price: 6200,   where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{Dec:10}},
-};
-BBAdata.SHIPelements['basicGun_up17'] = {           Weight: 0, Price: 300,    where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{ShowFireRange: true}},
-};
-BBAdata.SHIPelements['basicGun_up18'] = {           Weight: 0, Price: 0,      where:'weapons', upgrade:'basicGun',
-    WeaponData:{'single':{EstimateShootRad: 100}},
+    upgrades: {
+        'up9': {                                    Weight: 0, Price: 300,
+            WeaponData:{'single':{GunSpeed:-10}},
+        },
+        'up10': {                                   Weight: 0, Price: 500,
+            WeaponData:{'single':{GunSpeed:-5}},
+        },
+        'up11': {                                   Weight: 0, Price: 800,
+            WeaponData:{'single':{GunSpeed:-5}},
+        },
+        'up12': {                                   Weight: 0, Price: 1200,
+            WeaponData:{'single':{GunSpeed:-2}},
+        },
+        'up13': {                                   Weight: 0, Price: 2100,
+            WeaponData:{'single':{GunSpeed:-2}},
+        },
+        'up14': {                                   Weight: 0, Price: 3400,
+            WeaponData:{'single':{GunSpeed:-2}},
+        },
+        'up15': {                                   Weight: 0, Price: 5000,
+            WeaponData:{'single':{GunSpeed:-1}},
+        },
+        'up16': {                                   Weight: 0, Price: 9800,
+            WeaponData:{'single':{GunSpeed:-1}},
+        },
+        'up1': {                                    Weight: 0, Price: 2000,
+            WeaponData:{'single':{Speed:2}},
+        },
+        'up2': {                                    Weight: 0, Price: 2000,
+            WeaponData:{'single':{Speed:2}},
+        },
+        'up3': {                                    Weight: 0, Price: 5500,
+            WeaponData:{'single':{Speed:1}},
+        },
+        'up4': {                                    Weight: 0, Price: 5500,
+            WeaponData:{'single':{Speed:1}},
+        },
+        'up5': {                                    Weight: 0, Price: 5500,
+            WeaponData:{'single':{Speed:1}},
+        },
+        'up6': {                                    Weight: 0, Price: 800,
+            WeaponData:{'single':{Dec:15}},
+        },
+        'up7': {                                    Weight: 0, Price: 800,
+            WeaponData:{'single':{Dec:15}},
+        },
+        'up8': {                                    Weight: 0, Price: 6200,
+            WeaponData:{'single':{Dec:10}},
+        },
+        'up17': {                                   Weight: 0, Price: 300,
+            WeaponData:{'single':{ShowFireRange: true}},
+        },
+        'up18': {                                   Weight: 0, Price: 0,
+            WeaponData:{'single':{EstimateShootRad: 100}},
+        },
+    },
 };
 
 BBAdata.SHIPelements['doubleGun'] = {               Weight: 8, Price: 2700,   where:'weapons',
@@ -379,60 +316,62 @@ BBAdata.SHIPelements['doubleGun'] = {               Weight: 8, Price: 2700,   wh
         BreakTime: 30,
         DMG: {Dmg:1,T:'normal'}
     }},
-};
-BBAdata.SHIPelements['doubleGun_up1'] = {           Weight: 0, Price: 4800,   where:'weapons', upgrade:'doubleGun',
-    WeaponData:{'double':{GunSpeed:-10}},
-};
-BBAdata.SHIPelements['doubleGun_up2'] = {           Weight: 0, Price: 7800,   where:'weapons', upgrade:'doubleGun',
-    WeaponData:{'double':{GunSpeed:-8}},
-};
-BBAdata.SHIPelements['doubleGun_up3'] = {           Weight: 0, Price: 12300,  where:'weapons', upgrade:'doubleGun',
-    WeaponData:{'double':{GunSpeed:-6}},
-};
-BBAdata.SHIPelements['doubleGun_up4'] = {           Weight: 0, Price: 18500,  where:'weapons', upgrade:'doubleGun',
-    WeaponData:{'double':{GunSpeed:-3}},
-};
-BBAdata.SHIPelements['doubleGun_up5'] = {           Weight: 0, Price: 42000,  where:'weapons', upgrade:'doubleGun',
-    WeaponData:{'double':{GunSpeed:-1}},
-};
-BBAdata.SHIPelements['doubleGun_up6'] = {           Weight: 0, Price: 6200,   where:'weapons', upgrade:'doubleGun',
-    WeaponData:{'double':{Speed:2}},
-};
-BBAdata.SHIPelements['doubleGun_up7'] = {           Weight: 0, Price: 6200,   where:'weapons', upgrade:'doubleGun',
-    WeaponData:{'double':{Speed:2}},
-};
-BBAdata.SHIPelements['doubleGun_up8'] = {           Weight: 0, Price: 6200,   where:'weapons', upgrade:'doubleGun',
-    WeaponData:{'double':{Speed:2}},
-};
-BBAdata.SHIPelements['doubleGun_up9'] = {           Weight: 0, Price: 7000,   where:'weapons', upgrade:'doubleGun',
-    WeaponData:{'double':{Dec:10}},
-};
-BBAdata.SHIPelements['doubleGun_up10'] = {          Weight: 0, Price: 27000,  where:'weapons', upgrade:'doubleGun',
-    WeaponData:{'double':{Dec:10}},
-};
-BBAdata.SHIPelements['doubleGun_up11'] = {          Weight: 0, Price: 36800,  where:'weapons', upgrade:'doubleGun',
-    WeaponData:{'double':{Use:{Ammo:-1}}},
-};
-BBAdata.SHIPelements['doubleGun_up12'] = {          Weight: 0, Price: 4200,   where:'weapons', upgrade:'doubleGun',
-    WeaponData:{'double':{ShootTime: 20}},
-};
-BBAdata.SHIPelements['doubleGun_up13'] = {          Weight: 0, Price: 8000,   where:'weapons', upgrade:'doubleGun',
-    WeaponData:{'double':{
-        ShootTime: 10,
-        BreakTime: -10,
-    }},
-};
-BBAdata.SHIPelements['doubleGun_up14'] = {          Weight: 0, Price: 14500,  where:'weapons', upgrade:'doubleGun',
-    WeaponData:{'double':{BreakTime: -20}},
-};
-BBAdata.SHIPelements['doubleGun_up15'] = {          Weight: 0, Price: 300,    where:'weapons', upgrade:'doubleGun',
-    WeaponData:{'double':{ShowFireRange: true}},
-};
-BBAdata.SHIPelements['doubleGun_up16'] = {          Weight: 0, Price: 0,      where:'weapons', upgrade:'doubleGun',
-    WeaponData:{'double':{EstimateShootRad: 100}},
-};
-BBAdata.SHIPelements['doubleGun_up17'] = {          Weight: 0, Price: 125000, where:'weapons', upgrade:'doubleGun',
-    WeaponData:{'double':{T:'triple'}},
+    upgrades: {
+        'up1': {                                    Weight: 0, Price: 4800,
+            WeaponData:{'double':{GunSpeed:-10}},
+        },
+        'up2': {                                    Weight: 0, Price: 7800,
+            WeaponData:{'double':{GunSpeed:-8}},
+        },
+        'up3': {                                    Weight: 0, Price: 12300,
+            WeaponData:{'double':{GunSpeed:-6}},
+        },
+        'up4': {                                    Weight: 0, Price: 18500,
+            WeaponData:{'double':{GunSpeed:-3}},
+        },
+        'up5': {                                    Weight: 0, Price: 42000,
+            WeaponData:{'double':{GunSpeed:-1}},
+        },
+        'up6': {                                    Weight: 0, Price: 6200,
+            WeaponData:{'double':{Speed:2}},
+        },
+        'up7': {                                    Weight: 0, Price: 6200,
+            WeaponData:{'double':{Speed:2}},
+        },
+        'up8': {                                    Weight: 0, Price: 6200,
+            WeaponData:{'double':{Speed:2}},
+        },
+        'up9': {                                    Weight: 0, Price: 7000,
+            WeaponData:{'double':{Dec:10}},
+        },
+        'up10': {                                   Weight: 0, Price: 27000,
+            WeaponData:{'double':{Dec:10}},
+        },
+        'up11': {                                   Weight: 0, Price: 36800,
+            WeaponData:{'double':{Use:{Ammo:-1}}},
+        },
+        'up12': {                                   Weight: 0, Price: 4200,
+            WeaponData:{'double':{ShootTime: 20}},
+        },
+        'up13': {                                   Weight: 0, Price: 8000,
+            WeaponData:{'double':{
+                ShootTime: 10,
+                BreakTime: -10,
+            }},
+        },
+        'up14': {                                   Weight: 0, Price: 14500,
+            WeaponData:{'double':{BreakTime: -20}},
+        },
+        'up15': {                                   Weight: 0, Price: 300,
+            WeaponData:{'double':{ShowFireRange: true}},
+        },
+        'up16': {                                   Weight: 0, Price: 0,
+            WeaponData:{'double':{EstimateShootRad: 100}},
+        },
+        'up17': {                                   Weight: 0, Price: 125000,
+            WeaponData:{'double':{T:'triple'}},
+        },
+    },
 };
 
 // EKHM... more than 1 setting
@@ -449,79 +388,82 @@ BBAdata.SHIPelements['roseGun'] = {                 Weight: 12, Price: 1500,  wh
         Dec: 30,
         DMG:{Dmg:1,T:'normal'},
     }},
-};
-BBAdata.SHIPelements['roseGun_up1'] = {             Weight: -6, Price: 300,   where:'weapons', upgrade:'roseGun'};
-BBAdata.SHIPelements['roseGun_up2'] = {             Weight: 0, Price: 300,    where:'weapons', upgrade:'roseGun',
-    WeaponData:{'rose':{
-        Use:{Ammo:2},
-        AtOnce: 2,
-    }},
-};
-BBAdata.SHIPelements['roseGun_up3'] = {             Weight: 0, Price: 600,    where:'weapons', upgrade:'roseGun',
-    WeaponData:{'rose':{Use:{Ammo:-2}}},
-};
-BBAdata.SHIPelements['roseGun_up4'] = {             Weight: 0, Price: 300,    where:'weapons', upgrade:'roseGun',
-    WeaponData:{'rose':{
-        Use:{Ammo:2},
-        AtOnce: 2,
-    }},
-};
-BBAdata.SHIPelements['roseGun_up5'] = {             Weight: 0, Price: 500,    where:'weapons', upgrade:'roseGun',
-    WeaponData:{'rose':{
-        Use:{Ammo:2},
-        AtOnce: 2,
-    }},
-};
-BBAdata.SHIPelements['roseGun_up6'] = {             Weight: 0, Price: 1200,   where:'weapons', upgrade:'roseGun',
-    WeaponData:{'rose':{Use:{Ammo:-2}}},
-};
-BBAdata.SHIPelements['roseGun_up7'] = {             Weight: 0, Price: 700,    where:'weapons', upgrade:'roseGun',
-    WeaponData:{'rose':{
-        Use:{Ammo:2},
-        AtOnce: 2,
-    }},
-};
-BBAdata.SHIPelements['roseGun_up8'] = {             Weight: 0, Price: 700,    where:'weapons', upgrade:'roseGun',
-    WeaponData:{'rose':{
-        Use:{Ammo:3},
-        AtOnce: 3,
-    }},
-};
-BBAdata.SHIPelements['roseGun_up9'] = {             Weight: 0, Price: 300,    where:'weapons', upgrade:'roseGun',
-    WeaponData:{'rose':{Use:{Ammo:-3}}},
-};
-BBAdata.SHIPelements['roseGun_up10'] = {            Weight: 0, Price: 300,    where:'weapons', upgrade:'roseGun',
-    WeaponData:{'rose':{
-        Use:{Ammo:4},
-        AtOnce: 4,
-    }},
-};
-BBAdata.SHIPelements['roseGun_up11'] = {            Weight: 0, Price: 300,    where:'weapons', upgrade:'roseGun',
-    WeaponData:{'rose':{Use:{Ammo:-3}}},
-};
-BBAdata.SHIPelements['roseGun_up12'] = {            Weight: 0, Price: 300,    where:'weapons', upgrade:'roseGun',
-    WeaponData:{'rose':{
-        Use:{Ammo:6},
-        AtOnce: 6,
-    }},
-};
-BBAdata.SHIPelements['roseGun_up13'] = {            Weight: 0, Price: 300,    where:'weapons', upgrade:'roseGun',
-    WeaponData:{'rose':{
-        W:'rose',
-        Use:{Ammo:-3},
-    }},
-};
-BBAdata.SHIPelements['roseGun_up14'] = {            Weight: 0, Price: 2500,   where:'weapons', upgrade:'roseGun',
-    WeaponData:{'rose':{
-        Use:{Ammo:16},
-        AtOnce: 16,
-    }},
-};
-BBAdata.SHIPelements['roseGun_up15'] = {            Weight: 0, Price: 3100,   where:'weapons', upgrade:'roseGun',
-    WeaponData:{'rose':{Use:{Ammo:-12}}},
-};
-BBAdata.SHIPelements['roseGun_up16'] = {            Weight: 0, Price: 4100,   where:'weapons', upgrade:'roseGun',
-    WeaponData:{'rose':{Use:{Ammo:-6}}},
+    upgrades: {
+        'up1': {                                    Weight: -6, Price: 300,
+        },
+        'up2': {                                    Weight: 0, Price: 300,
+            WeaponData:{'rose':{
+                Use:{Ammo:2},
+                AtOnce: 2,
+            }},
+        },
+        'up3': {                                    Weight: 0, Price: 600,
+            WeaponData:{'rose':{Use:{Ammo:-2}}},
+        },
+        'up4': {                                    Weight: 0, Price: 300,
+            WeaponData:{'rose':{
+                Use:{Ammo:2},
+                AtOnce: 2,
+            }},
+        },
+        'up5': {                                    Weight: 0, Price: 500,
+            WeaponData:{'rose':{
+                Use:{Ammo:2},
+                AtOnce: 2,
+            }},
+        },
+        'up6': {                                    Weight: 0, Price: 1200,
+            WeaponData:{'rose':{Use:{Ammo:-2}}},
+        },
+        'up7': {                                    Weight: 0, Price: 700,
+            WeaponData:{'rose':{
+                Use:{Ammo:2},
+                AtOnce: 2,
+            }},
+        },
+        'up8': {                                    Weight: 0, Price: 700,
+            WeaponData:{'rose':{
+                Use:{Ammo:3},
+                AtOnce: 3,
+            }},
+        },
+        'up9': {                                    Weight: 0, Price: 300,
+            WeaponData:{'rose':{Use:{Ammo:-3}}},
+        },
+        'up10': {                                   Weight: 0, Price: 300,
+            WeaponData:{'rose':{
+                Use:{Ammo:4},
+                AtOnce: 4,
+            }},
+        },
+        'up11': {                                   Weight: 0, Price: 300,
+            WeaponData:{'rose':{Use:{Ammo:-3}}},
+        },
+        'up12': {                                   Weight: 0, Price: 300,
+            WeaponData:{'rose':{
+                Use:{Ammo:6},
+                AtOnce: 6,
+            }},
+        },
+        'up13': {                                   Weight: 0, Price: 300,
+            WeaponData:{'rose':{
+                W:'rose',
+                Use:{Ammo:-3},
+            }},
+        },
+        'up14': {                                   Weight: 0, Price: 2500,
+            WeaponData:{'rose':{
+                Use:{Ammo:16},
+                AtOnce: 16,
+            }},
+        },
+        'up15': {                                   Weight: 0, Price: 3100,
+            WeaponData:{'rose':{Use:{Ammo:-12}}},
+        },
+        'up16': {                                   Weight: 0, Price: 4100,
+            WeaponData:{'rose':{Use:{Ammo:-6}}},
+        },
+    },
 };
 
 /*

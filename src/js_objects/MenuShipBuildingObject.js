@@ -463,16 +463,14 @@ function MenuShipBuildingObject(){
     }
     // ======================= SHIP ELEMENTS LIST ==============================
     this.showShipElementsList = function(){
-        var html1='',html2='';
+        var html='';
         for(var e in BBAdata.SHIPelements){
             var E = BBAdata.SHIPelements[e];
-            if(typeof E.whereElem != 'undefined')
-                html1 += this.showShipElement(E,e);
-            else if(typeof E.where != 'undefined')
-                html2 += this.showShipElement(E,e);
+            if(typeof E.where != 'undefined')
+                html += this.showShipElement(E,e);
         }
 
-        $('.elementsList .container').html(html1+'<hr>'+html2);
+        $('.elementsList .container').html(html);
     }
     this.showShipElement = function(E,e){
         var html = '';
@@ -672,6 +670,13 @@ function MenuShipBuildingObject(){
         var ModI = ShipData.ModPlace;
         this.SHIP.Modules[ModI] = cloneObj(ShipData.ModData);
     }
+
+
+    // ==================== WEAPONS CONFIGURATION ==============================
+
+    // ==================== MODULES CONFIGURATION ==============================
+
+    // ================= SPECIAL MOVES CONFIGURATION ===========================
 }
 
 // =============================================
