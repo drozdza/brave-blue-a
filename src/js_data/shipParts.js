@@ -1,8 +1,53 @@
+BBAdata.SHIPempty={
+    Price: 0,
+    Weight: 20,
+    lifeM: 1,
+
+    EnergyM: 0,
+    SpeedM: 0,
+
+    engineMultiply: 0,
+    speed: 0,
+    speedAcl: 0,
+    speedDcl: 0,
+    speedT: 0,
+    starBump: 3,
+    maxSpeedCap: false,
+    maxSpeedTCap: false,
+    maxSpeedCapPlus: 0,
+    maxSpeedTCapPlus: 0,
+
+    AmmoStorage: 0,
+    Ammo: 0,
+    MissleStorage: 0,
+    Missles: 0,
+    BombStorage: 0,
+    Bombs: 0,
+    ShowFireRange: false,
+    ShowAmmoIndicator: false,
+    GlueFireToEstimated: false,
+    GlueFireToLaser: false,
+    KeysModules:{},
+    FireType: false,
+    FireType2: false,
+    MouseDown1: false,
+    MouseDown2: false,
+    EnergyFieldMax: 0,
+    Storage:{},
+    FireTypes:[],
+    Weapons:{},
+    Modules:[],
+};
+
+
+
 BBAdata.SHIPelements={};
 
 // HULL
 
 BBAdata.SHIPelements['simplePlate'] = {             Weight: 10, Price: 50,    where:'hull',
+    name: 'Simple Plating',
+    info: 'Increases number of life points',
     lifeM: 1,
     upgrades: {
         'lighter': {                                Weight: -4, Price: 250, },
@@ -13,6 +58,8 @@ BBAdata.SHIPelements['simplePlate'] = {             Weight: 10, Price: 50,    wh
 };
 
 BBAdata.SHIPelements['lightPlate'] = {              Weight: 3, Price: 5000,   where:'hull',
+    name: 'Light Plating',
+    info: 'Increases number of life points',
     lifeM: 1,
     copies: {
         'I': {}, 'II': {}, 'III': {}, 'IV': {}, 'V': {}, 'VI': {},
@@ -20,6 +67,8 @@ BBAdata.SHIPelements['lightPlate'] = {              Weight: 3, Price: 5000,   wh
 };
 
 BBAdata.SHIPelements['heavyPlate'] = {              Weight: 20, Price: 2000,  where:'hull',
+    name: 'Heavy Plating',
+    info: 'Increases number of life points',
     lifeM: 2,
     upgrades: {
         'tough': {                                  Weight: 0,  Price: 3000,
