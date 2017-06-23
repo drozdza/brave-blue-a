@@ -378,8 +378,10 @@ BBAdata.MAPS.HardCore={
             SH:10, L:5, TT:10, CD:5, HH:5, UU:5, Tu:8, Ii:5, HS:5,
         }},
         {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarX:150,iD:10,Wi:10}},
-        {What:{Gstar:1},objData:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}}
+        {What:{Gstar:1},objData:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}},
+        {What:{RoundField:1},objData:{x:0,y: -3000, radius:40, fieldAnim: 'HealingField', PeriodTime: 20, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
     ]
+
 };
 
 }
