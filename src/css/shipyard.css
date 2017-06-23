@@ -36,9 +36,6 @@
     color: gold;
     font-weight: bold;
 }
-#shipyardContainer .elementsTypeMenu{
-    text-align: center;
-}
 #shipyardContainer .typeMenuElement{
     display: inline-block;
     padding: 3px 20px;
@@ -373,4 +370,85 @@
 #shipyardContainer .EminMax .sliderMinAchnor:hover,
 #shipyardContainer .EminMax .sliderMaxAchnor:hover{
     background: lightblue;
+}
+
+
+/* ========================================================================== */
+#shipyardContainer .shipAssembly {
+    width: 100%;
+    height: calc(100% - 100px);
+    position: absolute;
+}
+#shipyardContainer .elementsTypeMenu{
+    text-align: left;
+    width: calc(100% - 20px);
+    padding: 0px 10px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 30px;
+    border-bottom: 6px double darkblue;
+}
+.shipPartChooser,
+.shipPartEditor {
+    position: absolute;
+    top: 36px;
+    width: calc(33% - 6px);
+    height: calc(100% - 36px);
+    background: #001;
+    box-sizing: border-box;
+    padding: 10px 20px;
+}
+.shipPartEditor {
+    right: 0px;
+}
+.shipPartChooser {
+    left: 0px;
+}
+
+
+.shipPartEditor {
+    color: white;
+}
+.shipPartEditor .eaName {
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.4em;
+    border: 1px solid darkblue;
+}
+.shipPartEditor .eaInfo {
+    position: relative;
+    top: -1px;
+    padding: 5px 10px;
+    border: 1px solid darkblue;
+}
+.shipPartEditor .eaData {
+    margin-top: 10px;
+    min-height: 20px;
+    padding: 5px 10px;
+    border: 1px solid darkblue;
+    border-radius: 8px 8px 0px 0px;
+}
+.shipPartEditor .eaUpgrades {
+    position: relative;
+    top: -1px;
+    padding: 5px 10px;
+    border: 1px solid darkblue;
+    border-radius: 0px 0px 8px 8px;
+}
+
+.shipPartEditor .eaClosed {
+    
+}
+
+
+.shipAssemblyView {
+    position: absolute;
+    top: 36px;
+    left: calc(33% - 6px);
+    width: 34%;
+    height: calc(100% - 36px);
+    border-left: 6px double darkblue;
+    border-right: 6px double darkblue;
 }
