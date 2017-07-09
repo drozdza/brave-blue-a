@@ -34,7 +34,7 @@ function MenuShipBuildingObject(){
 
         this.SHIPelems = {};
         for(var e in BBAdata.SHIPelements)
-            this.SHIPelems[e] = {S:false};
+            this.SHIPelems[e] = {Active:false};
 
         var html ='';
         html += '<div id="GoToStarMap">StarMap</div>';
@@ -53,10 +53,9 @@ function MenuShipBuildingObject(){
         this.showElementsTypeMenu();
 
         this.showShipProperties(); // ?
-
-        this.showShipElementsPropertiesList(); // ?
-        this.showShipElementsList(); // ?
-        this.toggleShipElementsList(); // ?
+        //
+        // this.showShipElementsPropertiesList(); // ?
+        this.showShipElementsList();
 
 
 
@@ -69,10 +68,15 @@ function MenuShipBuildingObject(){
             console.log('Ship Element: ', elementName);
             MENU.SB.toggleShipElement(elementName);
             MENU.SB.showPartEditor(elementName);
+        }).on('mouseover', '.shipElement:not(.partEditorOn)', function(){
+            var elementName = $(this).attr('elementName');
+            $('.shipElement').removeClass('partEditorOn');
+            $(this).addClass('partEditorOn');
+            MENU.SB.showPartEditor(elementName);
         });
     }
 
-    // ==================== ASSEMBLY UPPER MENU=================================
+    // ==================== ASSEMBLY UPPER MENU ================================
 
     this.showElementsTypeMenu = function(){
         var TypeMenu = {
@@ -172,7 +176,7 @@ function MenuShipBuildingObject(){
     }
 
 
-    // ======================= SHIP ELEMENTS PROPERTIES LIST ===================
+    // =============== SHIP ELEMENTS PROPERTIES LIST ===========================
     this.showShipElementsPropertiesList = function(){
         var html = '';
         for(var e in BBAdata.SHIPelements){
@@ -314,12 +318,13 @@ function MenuShipBuildingObject(){
         }
 
         $('.shipPartChooser').html(html);
+        this.toggleShipElementsList();
+
     }
     this.showShipElement = function(E,e){
         var html = '';
 
         html+='<div class="shipElement';
-        if(this.SHIPelems[e].S) html+=' choosen';
         if(typeof E.upgrade !='undefined') html+=' upgrade';
         html+='" elementName="'+e+'">';
             html+=e;
@@ -354,7 +359,6 @@ function MenuShipBuildingObject(){
                     }
 
 
-
             if(goldLeft < E.Price)
                 disable = true;
 
@@ -376,20 +380,21 @@ function MenuShipBuildingObject(){
 
     }
 
+
     this.toggleShipElement = function(elementName){
-        if(this.SHIPelems[elementName].S === false){
+        if(this.SHIPelems[elementName].Active === false){
             if(this.elementPossibleToAdd(elementName)){
                 $('.shipElement[elementName="'+elementName+'"]').addClass('choosen');
                 $('.shipElementProp[elementName="'+elementName+'"]').show();
-                this.SHIPelems[elementName].S = true;
                 this.showShipElementProperties_refresh(elementName);
+                this.SHIPelems[elementName].Active = true;
             }
         }else{
             if(this.elementPossibleToRemove(elementName)){
                 $('.shipElement[elementName="'+elementName+'"]').removeClass('choosen');
                 $('.shipElementProp[elementName="'+elementName+'"]').hide();
-                this.SHIPelems[elementName].S = false;
                 this.showShipElementProperties_refresh(elementName);
+                this.SHIPelems[elementName].Active = false;
             }
         }
         this.buildShip();
@@ -410,7 +415,7 @@ function MenuShipBuildingObject(){
 
         return true;
     }
-    // ===================== Building the Ship Stats ===========================
+    // ================== Building the Ship Stats ==============================
     this.buildShip = function(){
         var S = this.SHIP = cloneObj(BBAdata.SHIPempty);
 

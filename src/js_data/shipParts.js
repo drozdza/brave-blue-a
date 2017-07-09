@@ -84,6 +84,7 @@ BBAdata.SHIPelements['heavyPlate'] = {              Weight: 20, Price: 2000,  wh
 // ENERGY
 
 BBAdata.SHIPelements['simpleEnergyCell'] = {        Weight: 3,  Price: 250,    where:'energy',
+    name: 'Simple Energy Cell',
     EnergyM: 1,
     upgrades: {
         'up': {                                     Weight: 0,  Price: 3000,

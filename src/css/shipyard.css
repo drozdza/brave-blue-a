@@ -92,6 +92,7 @@
     border-color: #555;
 }
 #shipyardContainer .shipElement:hover,
+#shipyardContainer .shipElement.partEditorOn,
 #shipyardContainer .shipElement.disabled:hover{
     border-color: white;
 }
@@ -439,7 +440,7 @@
 }
 
 .shipPartEditor .eaClosed {
-    
+
 }
 
 

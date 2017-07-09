@@ -37,14 +37,14 @@ function GetMenuObject(){
             get: 'shipPresets',
             values: {start:false, destFields: 'destFields', bombs1: 'bombs1', bombs2: 'bombs2', best: 'best', bombardier: 'bombardier', bombardier2: 'bombardier2', ethernal: 'ethernal'},
         },
-        SHOWDEBBUGER:{
-            get: 'showDebbuger',
+        DEBUG:{
+            get: 'debug',
             values: false,
         }
     };
 
     this.makeHtml = function(){
-        if(BBAdata.GET.SHOWDEBBUGER == 0) return '';
+        if(BBAdata.GET.DEBUG == 0) return '';
         var html='<div id="GET_MENU">';
 
         for(var i in this.data){
