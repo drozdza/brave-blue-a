@@ -1,6 +1,6 @@
 BBAdata.GET={
     DEBUG:0,
-    DEBUG:0,
+    MENU:0,
     BLUR:0,
     FRAMES:0,
     CANVAS:0,
@@ -27,7 +27,7 @@ BBAdata.GET={
                 case 'gameStats':    BBAdata.GET.GAMESTATS    = BUM[1]; break;
                 case 'mapsMode':     BBAdata.GET.MAPSMODE     = BUM[1]; break;
                 case 'shipPresets':  BBAdata.GET.SHIPPRESET   = BUM[1]; break;
-                case 'debug':        BBAdata.GET.DEBUG        = BUM[1]; break;
+                case 'menu':         BBAdata.GET.MENU         = BUM[1]; break;
             }
         }
     }
