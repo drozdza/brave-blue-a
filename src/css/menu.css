@@ -131,6 +131,14 @@ body{
     border-color: white;
 }
 
+#hiddenMenu{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+#hiddenMenu a {
+    color: black;
+}
 #GET_MENU{
     position: absolute;
     top: 0px;
