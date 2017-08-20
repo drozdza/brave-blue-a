@@ -43,14 +43,17 @@ BBAdata.SHIPempty={
 
 BBAdata.SHIPelements={};
 
-// HULL
+//================================= HULL =======================================
 
 BBAdata.SHIPelements['simplePlate'] = {             Weight: 10, Price: 50,    where:'hull',
     name: 'Simple Plating',
     info: 'Increases number of life points',
     lifeM: 1,
     upgrades: {
-        'lighter': {                                Weight: -4, Price: 250, },
+
+        'lighter': {                                Weight: -4, Price: 250,
+            name: 'Lighter plates'
+        },
     },
     copies: {
         'I': {}, 'II': {}, 'III': {}, 'IV': {},
@@ -81,7 +84,7 @@ BBAdata.SHIPelements['heavyPlate'] = {              Weight: 20, Price: 2000,  wh
 };
 
 
-// ENERGY
+//================================= ENERGY =====================================
 
 BBAdata.SHIPelements['simpleEnergyCell'] = {        Weight: 3,  Price: 250,    where:'energy',
     name: 'Simple Energy Cell',
@@ -150,7 +153,7 @@ BBAdata.SHIPelements['energyGeneratus'] = {         Weight: 64, Price: 22000, wh
 };
 
 
-// ENGINE
+//================================= ENGINE =====================================
 
 /* LOWER MAX energy usage */
 
@@ -281,7 +284,8 @@ BBAdata.SHIPelements['engineCoreIV'] = {            Weight: 22, Price: 45000, wh
 };
 
 
-// WEAPONS
+//================================= WEAPONS ====================================
+
 /* Low speed shooting guns can have "fast shooting/long reload" upgrades */
 
 BBAdata.SHIPelements['basicGun'] = {                Weight: 5, Price: 100,    where:'weapons',

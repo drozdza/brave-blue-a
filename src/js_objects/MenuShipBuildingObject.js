@@ -1,15 +1,26 @@
 function MenuShipBuildingObject(){
 
+    this.activeElementsType = 'hull';
+    this.SHIPelems = {};
+
+
+
+    // DEPRECATED
     this.money = 999000;
+    // DEPRECATED
     this.width = 100;
+    // DEPRECATED
     this.height = 100;
 
+    // DEPRECATED
     this.useShipyardShip = false; // to drop later
 
-    this.SHIPelems = {};
+    // DEPRECATED
+    // DEPRECATED
     this.SHIP = false; // Current Ship
-    this.activeElementsType = 'hull';
+    // DEPRECATED
     this.activeElement = '';
+    // DEPRECATED
     this.sliderMouseMovement = false;
 
 
@@ -34,7 +45,7 @@ function MenuShipBuildingObject(){
 
         this.SHIPelems = {};
         for(var e in BBAdata.SHIPelements)
-            this.SHIPelems[e] = {Active:false};
+            this.SHIPelems[e] = {Active:false, Copies:{}};
 
         var html ='';
         html += '<div id="GoToStarMap">StarMap</div>';
@@ -47,33 +58,13 @@ function MenuShipBuildingObject(){
         html += '</div>';
         $('#shipyardContainer').html(html);
 
-
         this.buildShip();
-
         this.showElementsTypeMenu();
-
-        this.showShipProperties(); // ?
-        //
-        // this.showShipElementsPropertiesList(); // ?
         this.showShipElementsList();
 
 
-
         $(window).on('resize', function(){ MENU.SB.resize(); });
-
         $('#GoToStarMap').click(function(){ MENU.startStarMapMenu(); });
-
-        $('#shipyardContainer').on('click','.shipElement:not(.disabled)',function(){
-            var elementName = $(this).attr('elementName');
-            console.log('Ship Element: ', elementName);
-            MENU.SB.toggleShipElement(elementName);
-            MENU.SB.showPartEditor(elementName);
-        }).on('mouseover', '.shipElement:not(.partEditorOn)', function(){
-            var elementName = $(this).attr('elementName');
-            $('.shipElement').removeClass('partEditorOn');
-            $(this).addClass('partEditorOn');
-            MENU.SB.showPartEditor(elementName);
-        });
     }
 
     // ==================== ASSEMBLY UPPER MENU ================================
@@ -100,6 +91,7 @@ function MenuShipBuildingObject(){
     }
 
     // =================== SHOW SHIP PROPERTIES ================================
+    // DEPRECATED
     this.showShipProperties = function(){
         var html='';
 
@@ -119,6 +111,7 @@ function MenuShipBuildingObject(){
         this.showDetailedShipProperties();
         this.showDetailedShipStorage();
     }
+    // DEPRECATED
     this.showDetailedShipProperties = function(){
         var html='';
 
@@ -163,6 +156,7 @@ function MenuShipBuildingObject(){
         //
         $('.detailedShipProperties').html('<table>'+html+'</table>');
     }
+    // DEPRECATED
     this.showDetailedShipStorage = function(){
         var html='';
 
@@ -177,6 +171,7 @@ function MenuShipBuildingObject(){
 
 
     // =============== SHIP ELEMENTS PROPERTIES LIST ===========================
+    // DEPRECATED
     this.showShipElementsPropertiesList = function(){
         var html = '';
         for(var e in BBAdata.SHIPelements){
@@ -188,6 +183,7 @@ function MenuShipBuildingObject(){
 
         $('.shipElements .container').html(html);
     }
+    // DEPRECATED
     this.showShipElementProperties_refresh = function(e){
         var E = BBAdata.SHIPelements[e];
         if(typeof E.upgrade === 'undefined'){
@@ -196,6 +192,7 @@ function MenuShipBuildingObject(){
             this.showShipElementProperties_refresh(E.upgrade);
         }
     }
+    // DEPRECATED
     this.showShipElementProperties = function(E,e){
         var html = '';
 
@@ -216,6 +213,7 @@ function MenuShipBuildingObject(){
 
         return html;
     }
+    // DEPRECATED
     this.getElementWithUpgrades = function(e){
         var X = mergeObjects({}, BBAdata.SHIPelements[e]);
         for(var u in this.SHIPelems){
@@ -227,6 +225,7 @@ function MenuShipBuildingObject(){
         }
         return X;
     }
+    // DEPRECATED
     this.showDetailedElementData = function(D){
         var html = '';
 
@@ -278,6 +277,7 @@ function MenuShipBuildingObject(){
 
         return html;
     }
+    // DEPRECATED
     this.showShipElement_EminMax = function(E,e){
         var html='';
 
@@ -318,24 +318,47 @@ function MenuShipBuildingObject(){
         }
 
         $('.shipPartChooser').html(html);
-        this.toggleShipElementsList();
 
+        $('#shipyardContainer')
+            .on('click','.shipElement_buy',function(){
+                var elementName = $(this).attr('elementName');
+                console.log('Ship Element: ', elementName);
+                MENU.SB.toggleShipElement(elementName);
+                MENU.SB.showPartEditor(elementName);
+            })
+            .on('click', '.shipElement_show', function(){
+                var elementName = $(this).attr('elementName');
+                $('.shipElement').removeClass('viewing');
+                $('.shipElement[elementName="'+elementName+'"]').addClass('viewing');
+                MENU.SB.showPartEditor(elementName);
+            });
+
+        this.toggleShipElementsList();
     }
+
     this.showShipElement = function(E,e){
         var html = '';
+        html+='<div class="shipElement" elementName="'+e+'">';
+        html+='<div class="shipElement_buy" elementName="'+e+'">';
+        if(typeof E.name != 'undefined') html+=E.name;
+                    else                 html+=e;
+        html+='</div>';
 
-        html+='<div class="shipElement';
-        if(typeof E.upgrade !='undefined') html+=' upgrade';
-        html+='" elementName="'+e+'">';
-            html+=e;
-            if(E.Price   && E.Price != 0)   html+='<span class="Price">'+E.Price.toLocaleString()+'</span>';
-            if(E.Weight  && E.Weight != 0)  html+='<span class="Weight">'+E.Weight+'</span>';
-            if(E.EnergyM && E.EnergyM != 0) html+='<span class="Energy">'+(E.EnergyM>0?'+':'')+E.EnergyM+'</span>';
-            if(E.lifeM   && E.lifeM != 0)   html+='<span class="Life">'+(E.lifeM>0?'+':'')+E.lifeM+'</span>';
+        html+='<div class="shipElement_show" elementName="'+e+'">Show</div>';
         html+='</div>';
         return html;
     }
+
     this.toggleShipElementsList = function(){
+        $('.shipElement').hide();
+        for(var e in BBAdata.SHIPelements){
+            var E = BBAdata.SHIPelements[e];
+            if(typeof E.where !='undefined' && E.where == this.activeElementsType)
+                $('.shipElement[elementName="'+e+'"]').show();
+        }
+    }
+
+    this.toggleShipElementsList_deprecated = function(){
         $('.shipElement').hide().removeClass('disabled');
         $('.shipElementProp').hide();
 
@@ -372,7 +395,7 @@ function MenuShipBuildingObject(){
             }
 
             if(show) $('.shipElement[elementName="'+e+'"]').show();
-            if(disable) $('.shipElement[elementName="'+e+'"]:not(.choosen)').addClass('disabled');
+            if(disable) $('.shipElement[elementName="'+e+'"]:not(.bought)').addClass('disabled');
 
             if(E.where == this.activeElementsType && this.SHIPelems[ e].S === true)
                 $('.shipElementProp[elementName="'+e+'"]').show();
@@ -380,31 +403,31 @@ function MenuShipBuildingObject(){
 
     }
 
-
     this.toggleShipElement = function(elementName){
         if(this.SHIPelems[elementName].Active === false){
             if(this.elementPossibleToAdd(elementName)){
-                $('.shipElement[elementName="'+elementName+'"]').addClass('choosen');
-                $('.shipElementProp[elementName="'+elementName+'"]').show();
-                this.showShipElementProperties_refresh(elementName);
-                this.SHIPelems[elementName].Active = true;
+                $('.shipElement[elementName="'+elementName+'"]').addClass('bought');
+                var S = this.SHIPelems[elementName];
+                S.Active = true;
+
+                var anyParts = false;
+                for(var sX in S.Copies) anyParts = true;
+                if(!anyParts) S.Copies['I']={'_main':1};
             }
         }else{
             if(this.elementPossibleToRemove(elementName)){
-                $('.shipElement[elementName="'+elementName+'"]').removeClass('choosen');
-                $('.shipElementProp[elementName="'+elementName+'"]').hide();
-                this.showShipElementProperties_refresh(elementName);
+                $('.shipElement[elementName="'+elementName+'"]').removeClass('bought');
                 this.SHIPelems[elementName].Active = false;
             }
         }
         this.buildShip();
-        this.showShipProperties();
-        this.toggleShipElementsList();
     }
 
+    // DEPRECATED
     this.elementPossibleToAdd = function(elementName){
         return true;
     }
+    // DEPRECATED
     this.elementPossibleToRemove = function(elementName){
         var E = this.SHIPelems[elementName];
         for(var x in this.SHIPelems)
@@ -416,6 +439,7 @@ function MenuShipBuildingObject(){
         return true;
     }
     // ================== Building the Ship Stats ==============================
+    // DEPRECATED
     this.buildShip = function(){
         var S = this.SHIP = cloneObj(BBAdata.SHIPempty);
 
@@ -469,7 +493,10 @@ function MenuShipBuildingObject(){
         S.life = S.lifeM;
         // start speed under max speed
         if(S.speed > S.speedM) S.speed = S.speedM;
+
+        this.showShipProperties();
     }
+    // DEPRECATED
     this.buildShip_Storage = function(StorageData){
         for(var storageType in StorageData){
             if(typeof this.SHIP.Storage[storageType] == 'undefined')
@@ -479,6 +506,7 @@ function MenuShipBuildingObject(){
                 this.SHIP.Storage[storageType][i] -=- StorageData[storageType][i];
         }
     }
+    // DEPRECATED
     this.buildShip_WeaponData = function(WeaponData){
         for(var w in WeaponData){
             if(typeof this.SHIP.Weapons[w] === 'undefined')
@@ -510,6 +538,7 @@ function MenuShipBuildingObject(){
         }
     }
 
+    // DEPRECATED
     this.buildShip_ModData = function(ShipData){
         var ModI = ShipData.ModPlace;
         this.SHIP.Modules[ModI] = cloneObj(ShipData.ModData);
@@ -517,20 +546,19 @@ function MenuShipBuildingObject(){
 
 
     // ==================== ELEMENT CONFIGURATOR -==============================
+    // DEPRECATED
     this.showPartEditor = function(elementName) {
         this.activeElement = elementName;
         var E = BBAdata.SHIPelements[elementName];
-
+        var SE = this.SHIPelems[elementName];
         var html = '';
 
-        if (typeof E.name != 'undefined')
-            html += '<div class="eaName">' + E.name + '</div>';
-        else
-            html += '<div class="eaName">' + elementName + '</div>';
+        html += '<div class="partName">';
+        if (typeof E.name != 'undefined') html += E.name;
+                    else                  html += elementName;
+        html += '</div>';
 
-        if (typeof E.info != 'undefined')
-            html += '<div class="eaInfo">' + E.info + '</div>';
-
+        if (typeof E.info != 'undefined') html += '<div class="partInfo">' + E.info + '</div>';
 
         var Copies = {'I':{}};
         if (E.copies != 'undefined') {
@@ -540,16 +568,43 @@ function MenuShipBuildingObject(){
         }
 
         for (var eC in Copies) {
-            html += '<div class="eaData"></div>';
+
+            html += '<div class="partCopy">';
+            if (typeof E.name != 'undefined') html += E.name;
+                        else                  html += elementName;
+            html += ' '+eC;
+
+
+            if (typeof SE.Copies[eC] == 'undefined' || SE.Copies[eC]['_main']==false){
+                html += '<div class="addElementPart" elementName="'+elementName+'" elementCopy="'+eC+'" elementUpgrade="_main">Add</div>';
+                html += '</div>';
+                continue;
+            }else {
+                html += '<div class="removeElementPart" elementName="'+elementName+'" elementCopy="'+eC+'" elementUpgrade="_main">Remove</div>';
+            }
 
             if (typeof E.upgrades != 'undefined') {
-                html += '<div class="eaUpgrades">';
                 for (var eU in E.upgrades) {
-                    console.log(eU);
-                    html += eU + '<br/>';
+                    var U = E.upgrades[eU];
+                    html += '<div class="partCopyUpgrade';
+                    if(typeof SE.Copies[eC][eU] != 'undefined')
+                        html +=' active';
+                    html += '" elementName="'+elementName+'" elementCopy="'+eC+'" elementUpgrade="_main"';
+
+
+                    html += '<div class="upgradeName">';
+                    if(typeof U.name != 'undefined') html+=U.name;
+                                else                 html+=eU;
+                    html += '</div>';
+
+
+
+
+                    html += '</div>';
                 }
-                html += '</div>';
             }
+
+            html += '</div>';
         }
 
 
