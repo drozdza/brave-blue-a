@@ -39,6 +39,7 @@ GAMEobject.prototype.teleportShipOut = function(){
 GAMEobject.prototype.showScoringScreen = function(){
     var html = '';
     html += '<span style="font-size: 70px;">Game End!</span><br/>';
+    html += '<span style="font-size: 40px;">'+parseInt((this.tick/30)/60)+':'+parseInt((this.tick/30)%60)+'</span><br/>';
     html += this.showEndGameCount();
 
     $('#Game').append('<div id="endGameBoard">'+html+'</div>');
