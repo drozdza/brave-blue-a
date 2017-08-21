@@ -3,15 +3,12 @@ function MenuShipBuildingObject(){
     this.activeElementsType = 'hull';
     this.SHIPelems = {};
 
+    this.width = 100;
+    this.height = 100;
 
 
     // DEPRECATED
     this.money = 999000;
-    // DEPRECATED
-    this.width = 100;
-    // DEPRECATED
-    this.height = 100;
-
     // DEPRECATED
     this.useShipyardShip = false; // to drop later
 
@@ -319,19 +316,7 @@ function MenuShipBuildingObject(){
 
         $('.shipPartChooser').html(html);
 
-        $('#shipyardContainer')
-            .on('click','.shipElement_buy',function(){
-                var elementName = $(this).attr('elementName');
-                console.log('Ship Element: ', elementName);
-                MENU.SB.toggleShipElement(elementName);
-                MENU.SB.showPartEditor(elementName);
-            })
-            .on('click', '.shipElement_show', function(){
-                var elementName = $(this).attr('elementName');
-                $('.shipElement').removeClass('viewing');
-                $('.shipElement[elementName="'+elementName+'"]').addClass('viewing');
-                MENU.SB.showPartEditor(elementName);
-            });
+        this.addToggleElementsActions();
 
         this.toggleShipElementsList();
     }
@@ -347,6 +332,29 @@ function MenuShipBuildingObject(){
         html+='<div class="shipElement_show" elementName="'+e+'">Show</div>';
         html+='</div>';
         return html;
+    }
+
+    this.addToggleElementsActions = function(){
+        $('#shipyardContainer')
+            .on('click','.shipElement_buy',function(){
+                var elementName = $(this).attr('elementName');
+                console.log('Ship Element: ', elementName);
+                MENU.SB.toggleShipElement(elementName);
+                MENU.SB.showPartEditor(elementName);
+            })
+            .on('click', '.shipElement_show', function(){
+                var elementName = $(this).attr('elementName');
+                $('.shipElement').removeClass('viewing');
+                $('.shipElement[elementName="'+elementName+'"]').addClass('viewing');
+                MENU.SB.showPartEditor(elementName);
+            })
+            .on('click', '.toggleElementPart', function(){
+                var elementName    = $(this).attr('elementName');
+                var elementCopy    = $(this).attr('elementCopy');
+                var elementUpgrade = $(this).attr('elementUpgrade');
+                MENU.SB.toggleShipElementPart(elementName, elementCopy, elementUpgrade);
+            });
+
     }
 
     this.toggleShipElementsList = function(){
@@ -421,6 +429,33 @@ function MenuShipBuildingObject(){
             }
         }
         this.buildShip();
+    }
+
+    this.toggleShipElementPart = function(elementName, elementCopy, elementUpgrade){
+        console.log('toggleShipElementPart(',elementName, elementCopy, elementUpgrade,')');
+        var S = this.SHIPelems[elementName];
+
+        if(typeof S.Copies[elementCopy] == 'undefined'){
+            S.Copies[elementCopy] = {'_main':1};
+            S.Copies[elementCopy][elementUpgrade] = 1;
+        }else{
+            if(typeof S.Copies[elementCopy][elementUpgrade] != 'undefined'){
+                delete S.Copies[elementCopy][elementUpgrade];
+                var someLeft = false; for(var i in S.Copies[elementCopy]) someLeft = true;
+                if(!someLeft){
+                    delete S.Copies[elementCopy];
+                    someLeft = false; for(var i in S.Copies) someLeft = true;
+                    if(!someLeft){
+                        S.Active = false;
+                    }
+                }
+            }else{
+                S.Copies[elementCopy][elementUpgrade] = 1;
+            }
+        }
+
+        this.buildShip();
+        this.showPartEditor(elementName);
     }
 
     // DEPRECATED
@@ -547,49 +582,50 @@ function MenuShipBuildingObject(){
 
     // ==================== ELEMENT CONFIGURATOR -==============================
     // DEPRECATED
-    this.showPartEditor = function(elementName) {
+    this.showPartEditor = function(elementName){
+        console.log('showPartEditor(',elementName,')')
         this.activeElement = elementName;
         var E = BBAdata.SHIPelements[elementName];
         var SE = this.SHIPelems[elementName];
         var html = '';
 
         html += '<div class="partName">';
-        if (typeof E.name != 'undefined') html += E.name;
-                    else                  html += elementName;
+        if(typeof E.name != 'undefined') html += E.name;
+                    else                 html += elementName;
         html += '</div>';
 
-        if (typeof E.info != 'undefined') html += '<div class="partInfo">' + E.info + '</div>';
+        if(typeof E.info != 'undefined') html += '<div class="partInfo">' + E.info + '</div>';
 
         var Copies = {'I':{}};
-        if (E.copies != 'undefined') {
-            for (var eC in E.copies) {
+        if(E.copies != 'undefined'){
+            for(var eC in E.copies){
                 Copies[eC] = E.copies[eC];
             }
         }
 
-        for (var eC in Copies) {
+        for(var eC in Copies){
 
             html += '<div class="partCopy">';
-            if (typeof E.name != 'undefined') html += E.name;
-                        else                  html += elementName;
+            if(typeof E.name != 'undefined') html += E.name;
+                    else                     html += elementName;
             html += ' '+eC;
 
 
-            if (typeof SE.Copies[eC] == 'undefined' || SE.Copies[eC]['_main']==false){
-                html += '<div class="addElementPart" elementName="'+elementName+'" elementCopy="'+eC+'" elementUpgrade="_main">Add</div>';
+            if(typeof SE.Copies[eC] == 'undefined' || SE.Copies[eC]['_main']==false){
+                html += '<div class="addElementPart toggleElementPart" elementName="'+elementName+'" elementCopy="'+eC+'" elementUpgrade="_main">Add</div>';
                 html += '</div>';
                 continue;
-            }else {
-                html += '<div class="removeElementPart" elementName="'+elementName+'" elementCopy="'+eC+'" elementUpgrade="_main">Remove</div>';
+            }else{
+                html += '<div class="removeElementPart toggleElementPart" elementName="'+elementName+'" elementCopy="'+eC+'" elementUpgrade="_main">Remove</div>';
             }
 
-            if (typeof E.upgrades != 'undefined') {
-                for (var eU in E.upgrades) {
+            if(typeof E.upgrades != 'undefined'){
+                for(var eU in E.upgrades){
                     var U = E.upgrades[eU];
-                    html += '<div class="partCopyUpgrade';
+                    html += '<div class="partCopyUpgrade toggleElementPart';
                     if(typeof SE.Copies[eC][eU] != 'undefined')
                         html +=' active';
-                    html += '" elementName="'+elementName+'" elementCopy="'+eC+'" elementUpgrade="_main"';
+                    html += '" elementName="'+elementName+'" elementCopy="'+eC+'" elementUpgrade="'+eU+'"';
 
 
                     html += '<div class="upgradeName">';
