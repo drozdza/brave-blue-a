@@ -46,6 +46,22 @@ BBAdata['SHIPpresets']={
         ChangeSpeedDelay:15,
     },
 };
+BBAdata['SHIPpresets']={
+    {
+        "simplePlate":{
+            "I":{"_main":1,"lighter":1,},
+            "III":{"_main":1,"lighter":1,},
+        },
+        "heavyPlate":{
+            "I":{"_main":1,"tough":1,},
+            "IV":{"_main":1,"tough":1,},
+            "III":{"_main":1,"tough":1,},
+        },
+        "doubleGun":{
+            "I":{"_main":1,"up6":1,"up11":1,"up13":1,"up9":1,"up8":1,"up7":1,},
+        },
+    }
+};
 /*
 BBAdata['SHIPpresets']={
     'start':{

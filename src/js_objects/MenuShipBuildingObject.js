@@ -2,6 +2,7 @@ function MenuShipBuildingObject(){
 
     this.activeElementsType = 'hull';
     this.SHIPelems = {};
+    this.SHIP = false; // Current Ship
 
     this.width = 100;
     this.height = 100;
@@ -12,9 +13,6 @@ function MenuShipBuildingObject(){
     // DEPRECATED
     this.useShipyardShip = false; // to drop later
 
-    // DEPRECATED
-    // DEPRECATED
-    this.SHIP = false; // Current Ship
     // DEPRECATED
     this.activeElement = '';
     // DEPRECATED
@@ -438,6 +436,7 @@ function MenuShipBuildingObject(){
         if(typeof S.Copies[elementCopy] == 'undefined'){
             S.Copies[elementCopy] = {'_main':1};
             S.Copies[elementCopy][elementUpgrade] = 1;
+            S.Active = true;
         }else{
             if(typeof S.Copies[elementCopy][elementUpgrade] != 'undefined'){
                 delete S.Copies[elementCopy][elementUpgrade];
@@ -474,7 +473,6 @@ function MenuShipBuildingObject(){
         return true;
     }
     // ================== Building the Ship Stats ==============================
-    // DEPRECATED
     this.buildShip = function(){
         var S = this.SHIP = cloneObj(BBAdata.SHIPempty);
 
@@ -483,37 +481,15 @@ function MenuShipBuildingObject(){
             var Evar = this.SHIPelems[elementName];
             var Edata = BBAdata.SHIPelements[elementName];
 
-            if(!Evar.S) continue;
+            if(!Evar.Active) continue;
 
-            for(var i in Edata){
-                switch(i){
-                    case 'Weight':
-                    case 'lifeM':
-                    case 'EnergyM':
-                    case 'Price':
-                    case 'speed':
-                    case 'speedAcl':
-                    case 'speedDcl':
-                    case 'speedT':
-                    case 'starBump':
-                    case 'maxSpeedCapPlus':
-                    case 'maxSpeedTCapPlus':
-                    case 'engineMultiply':
-                        S[i]-=-Edata[i];
-                    break;
-                    case 'maxSpeedCap':
-                    case 'maxSpeedTCap':
-                        S[i] = Edata[i];
-                    break;
-                    case 'Storage':
-                        this.buildShip_Storage(Edata.Storage);
-                    break;
-                    case 'WeaponData':
-                        this.buildShip_WeaponData(Edata.WeaponData);
-                    break;
-                    case 'ModData':
-                        this.buildShip_ModData(Edata);
-                    break;
+            for(var uCopy in Evar.Copies){
+                var elemCopy = Evar.Copies[uCopy];
+                for(var uUpgrade in elemCopy)
+                if(uUpgrade == '_main'){
+                    this.buildShip_addElement(S, Edata);
+                }else{
+                    this.buildShip_addElement(S, Edata.upgrades[uUpgrade]);
                 }
             }
         }
@@ -531,7 +507,41 @@ function MenuShipBuildingObject(){
 
         this.showShipProperties();
     }
-    // DEPRECATED
+
+    this.buildShip_addElement = function(S, Edata){
+        for(var i in Edata){
+            switch(i){
+                case 'Weight':
+                case 'lifeM':
+                case 'EnergyM':
+                case 'Price':
+                case 'speed':
+                case 'speedAcl':
+                case 'speedDcl':
+                case 'speedT':
+                case 'starBump':
+                case 'maxSpeedCapPlus':
+                case 'maxSpeedTCapPlus':
+                case 'engineMultiply':
+                    S[i]-=-Edata[i];
+                break;
+                case 'maxSpeedCap':
+                case 'maxSpeedTCap':
+                    S[i] = Edata[i];
+                break;
+                case 'Storage':
+                    this.buildShip_Storage(Edata.Storage);
+                break;
+                case 'WeaponData':
+                    this.buildShip_WeaponData(Edata.WeaponData);
+                break;
+                case 'ModData':
+                    this.buildShip_ModData(Edata);
+                break;
+            }
+        }
+    }
+
     this.buildShip_Storage = function(StorageData){
         for(var storageType in StorageData){
             if(typeof this.SHIP.Storage[storageType] == 'undefined')
@@ -541,7 +551,7 @@ function MenuShipBuildingObject(){
                 this.SHIP.Storage[storageType][i] -=- StorageData[storageType][i];
         }
     }
-    // DEPRECATED
+
     this.buildShip_WeaponData = function(WeaponData){
         for(var w in WeaponData){
             if(typeof this.SHIP.Weapons[w] === 'undefined')
@@ -573,7 +583,6 @@ function MenuShipBuildingObject(){
         }
     }
 
-    // DEPRECATED
     this.buildShip_ModData = function(ShipData){
         var ModI = ShipData.ModPlace;
         this.SHIP.Modules[ModI] = cloneObj(ShipData.ModData);
@@ -581,9 +590,7 @@ function MenuShipBuildingObject(){
 
 
     // ==================== ELEMENT CONFIGURATOR -==============================
-    // DEPRECATED
     this.showPartEditor = function(elementName){
-        console.log('showPartEditor(',elementName,')')
         this.activeElement = elementName;
         var E = BBAdata.SHIPelements[elementName];
         var SE = this.SHIPelems[elementName];
@@ -605,7 +612,10 @@ function MenuShipBuildingObject(){
 
         for(var eC in Copies){
 
-            html += '<div class="partCopy">';
+            html += '<div class="partCopy';
+            if(typeof SE.Copies[eC] != 'undefined' && SE.Copies[eC]['_main']!=false)
+                html += ' bought';
+            html += '">';
             if(typeof E.name != 'undefined') html += E.name;
                     else                     html += elementName;
             html += ' '+eC;
@@ -624,7 +634,7 @@ function MenuShipBuildingObject(){
                     var U = E.upgrades[eU];
                     html += '<div class="partCopyUpgrade toggleElementPart';
                     if(typeof SE.Copies[eC][eU] != 'undefined')
-                        html +=' active';
+                        html +=' bought';
                     html += '" elementName="'+elementName+'" elementCopy="'+eC+'" elementUpgrade="'+eU+'"';
 
 
@@ -632,17 +642,11 @@ function MenuShipBuildingObject(){
                     if(typeof U.name != 'undefined') html+=U.name;
                                 else                 html+=eU;
                     html += '</div>';
-
-
-
-
-                    html += '</div>';
                 }
+                html += '</div>';
             }
-
             html += '</div>';
         }
-
 
         $('.shipPartEditor').html(html);
     }
@@ -652,6 +656,30 @@ function MenuShipBuildingObject(){
     // ==================== MODULES CONFIGURATION ==============================
 
     // ================= SPECIAL MOVES CONFIGURATION ===========================
+
+
+    // ====================== PRESET SHIPS MENU ================================
+    this.print = function(){
+        var P = '{';
+        for(var e in this.SHIPelems){
+            var E = this.SHIPelems[e];
+            if(E.Active == true){
+                P+='\n    "'+e+'":{';
+                for(var c in E.Copies){
+                    var C = E.Copies[c];
+                    P+='\n        "'+c+'":{';
+                    for(var u in C){
+                        P+='"'+u+'":1,';
+                    }
+                    P+='},';
+                }
+                P+='\n    },';
+            }
+        }
+        P+='\n}';
+        console.log(P);
+    }
 }
+
 
 // =============================================

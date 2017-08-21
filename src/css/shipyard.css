@@ -100,12 +100,12 @@
 
 #shipyardContainer .shipElement.bought .shipElement_buy,
 #shipyardContainer .shipElement.bought .shipElement_show{
-    border-color: white;
+    background: #227;
 }
 
 #shipyardContainer .shipElement.viewing .shipElement_buy,
 #shipyardContainer .shipElement.viewing .shipElement_show{
-    background: #227;
+    border-color: white;
 }
 
 
@@ -413,6 +413,10 @@
     border-radius: 8px 8px 0px 0px;
     position: relative;
 }
+.shipPartEditor .partCopy.bought{
+    background: #227;
+}
+
 .shipPartEditor .partCopy .addElementPart,
 .shipPartEditor .partCopy .removeElementPart {
     position: absolute;
@@ -429,6 +433,10 @@
     top: -1px;
     padding: 5px 10px;
     border: 1px solid darkblue;
+    background: black;
+}
+.shipPartEditor .partCopyUpgrade.bought{
+    background: #227;
 }
 .shipPartEditor .partCopyUpgrade:last-child {
     border-radius: 0px 0px 8px 8px;

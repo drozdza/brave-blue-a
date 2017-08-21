@@ -50,7 +50,6 @@ BBAdata.SHIPelements['simplePlate'] = {             Weight: 10, Price: 50,    wh
     info: 'Increases number of life points',
     lifeM: 1,
     upgrades: {
-
         'lighter': {                                Weight: -4, Price: 250,
             name: 'Lighter plates'
         },
@@ -76,6 +75,7 @@ BBAdata.SHIPelements['heavyPlate'] = {              Weight: 20, Price: 2000,  wh
     upgrades: {
         'tough': {                                  Weight: 0,  Price: 3000,
             lifeM: 1,
+            name: 'Tougher plates',
         },
     },
     copies: {
