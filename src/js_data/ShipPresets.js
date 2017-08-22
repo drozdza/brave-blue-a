@@ -10,7 +10,7 @@ BBAdata['SHIPpresets']={
         speedDcl: 10,
         speedT: 10,
         Storage:{
-            Ammo: {R:0, M:20},
+            Ammo: {R:0, M:50},
         },
         ShowFireRange: false,
         ShowAmmoIndicator: true,
@@ -22,15 +22,16 @@ BBAdata['SHIPpresets']={
         MouseDown1: false,
         MouseDown2: false,
         FireTypes:[
-            {W:'single', GunSpeed: 1, Speed: 17, Dec: 30, shotsToReload: 3, reloadTime: 12, Use:{'Ammo':1}, DMG:{Dmg:1,T:'normal'},},
-            {W:'rose',   GunSpeed: 4, AtOnce: 9, Use:{'Ammo':5}, RoseAngle: 3, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
-            {W:'single', GunSpeed: 20, Speed: 17, Dec: 70, Use:{'Ammo':1}, DMG:{Dmg:11,T:'normal'},},
+            {W:'single', GunSpeed: 1, Speed: 17, Dec: 30, shotsToReload: 6, reloadTime: 12, Use:{'Ammo':1}, DMG:{Dmg:1,T:'normal'},},
+            {W:'rose',   GunSpeed: 4, AtOnce: 9, Use:{'Ammo':7}, RoseAngle: 3, Speed: 15, Dec: 30, DMG:{Dmg:4,T:'normal'},},
+            {W:'single', GunSpeed: 10, Speed: 17, Dec: 70, Use:{'Ammo':1}, DMG:{Dmg:11,T:'normal'},},
         ],
         Weapons:{
             'single':{T:'single',  gunS:0,gunU:0,},
             'rose':  {T:'rose',    gunS:0,gunU:0,},
         },
         Modules:[
+            {T:'Prod',subT:'Bullet',Storage:'Ammo',Disabled:0,Emin:2,Emax:4,ProdX:4,E:0,Prod:0,ifProd:40 },
             {T:'Prod',subT:'Bullet',Storage:'Ammo',Disabled:0,Emin:2,Emax:4,ProdX:4,E:0,Prod:0,ifProd:40 },
         ],
         SpecialMoves:{
@@ -46,22 +47,22 @@ BBAdata['SHIPpresets']={
         ChangeSpeedDelay:15,
     },
 };
-BBAdata['SHIPpresets']={
-    {
-        "simplePlate":{
-            "I":{"_main":1,"lighter":1,},
-            "III":{"_main":1,"lighter":1,},
-        },
-        "heavyPlate":{
-            "I":{"_main":1,"tough":1,},
-            "IV":{"_main":1,"tough":1,},
-            "III":{"_main":1,"tough":1,},
-        },
-        "doubleGun":{
-            "I":{"_main":1,"up6":1,"up11":1,"up13":1,"up9":1,"up8":1,"up7":1,},
-        },
-    }
-};
+// BBAdata['SHIPpresets']={
+//     {
+//         "simplePlate":{
+//             "I":{"_main":1,"lighter":1,},
+//             "III":{"_main":1,"lighter":1,},
+//         },
+//         "heavyPlate":{
+//             "I":{"_main":1,"tough":1,},
+//             "IV":{"_main":1,"tough":1,},
+//             "III":{"_main":1,"tough":1,},
+//         },
+//         "doubleGun":{
+//             "I":{"_main":1,"up6":1,"up11":1,"up13":1,"up9":1,"up8":1,"up7":1,},
+//         },
+//     }
+// };
 /*
 BBAdata['SHIPpresets']={
     'start':{
