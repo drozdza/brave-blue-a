@@ -473,6 +473,31 @@ function MenuShipBuildingObject(){
         return true;
     }
     // ================== Building the Ship Stats ==============================
+    this.getShipFromPresets = function(sPresetsName){
+        this.prepareElemsFromPresets(sPresetsName);
+        this.buildShip();
+        return this.SHIP;
+    }
+    this.prepareElemsFromPresets = function(sPresetsName){
+        var PT = cloneObj(BBAdata.SHIPpresets[sPresetsName]);
+
+        this.SHIPelems = {};
+        for(var e in BBAdata.SHIPelements)
+            this.SHIPelems[e] = {Active:false, Copies:{}};
+
+        for(var p in PT){
+            var P = PT[p];
+            this.SHIPelems[p].Active = true;
+            for(var c in P){
+                var C = P[c];
+                this.SHIPelems[p].Copies[c]={};
+                for(var u in C){
+                    this.SHIPelems[p].Copies[c][u] = C[u];
+                }
+            }
+        }
+    }
+
     this.buildShip = function(){
         var S = this.SHIP = cloneObj(BBAdata.SHIPempty);
 
@@ -529,8 +554,8 @@ function MenuShipBuildingObject(){
                 case 'maxSpeedTCap':
                     S[i] = Edata[i];
                 break;
-                case 'Storage':
-                    this.buildShip_Storage(Edata.Storage);
+                case 'StorageData':
+                    this.buildShip_StorageData(Edata.StorageData);
                 break;
                 case 'WeaponData':
                     this.buildShip_WeaponData(Edata.WeaponData);
@@ -542,7 +567,7 @@ function MenuShipBuildingObject(){
         }
     }
 
-    this.buildShip_Storage = function(StorageData){
+    this.buildShip_StorageData = function(StorageData){
         for(var storageType in StorageData){
             if(typeof this.SHIP.Storage[storageType] == 'undefined')
                 this.SHIP.Storage[storageType] = {M:0,R:0};
@@ -554,32 +579,33 @@ function MenuShipBuildingObject(){
 
     this.buildShip_WeaponData = function(WeaponData){
         for(var w in WeaponData){
-            if(typeof this.SHIP.Weapons[w] === 'undefined')
-                this.SHIP.Weapons[w] = {};
+            // nie zawsze robimy nową
+            Weapon = {};
             var Wx = WeaponData[w]
             for(var x in Wx){
                 if(typeof Wx[x] == 'object'){
-                    if(typeof this.SHIP.Weapons[w][x] === 'undefined')
-                        this.SHIP.Weapons[w][x] = {};
+                    if(typeof Weapon[x] === 'undefined')
+                        Weapon[x] = {};
                     for(var y in Wx[x]){
-                        if(typeof this.SHIP.Weapons[w][x][y] === 'undefined')
-                            this.SHIP.Weapons[w][x][y] = 0;
+                        if(typeof Weapon[x][y] === 'undefined')
+                            Weapon[x][y] = 0;
                         if(typeof Wx[x][y] === 'number'){
-                            this.SHIP.Weapons[w][x][y]-=-Wx[x][y];
+                            Weapon[x][y]-=-Wx[x][y];
                         }else{
-                            this.SHIP.Weapons[w][x][y] = Wx[x][y];
+                            Weapon[x][y] = Wx[x][y];
                         }
                     }
                 }else{
-                    if(typeof this.SHIP.Weapons[w][x] === 'undefined')
-                        this.SHIP.Weapons[w][x] = 0;
+                    if(typeof Weapon[x] === 'undefined')
+                        Weapon[x] = 0;
                     if(typeof Wx[x] === 'number'){
-                        this.SHIP.Weapons[w][x]-=-Wx[x];
+                        Weapon[x]-=-Wx[x];
                     }else{
-                        this.SHIP.Weapons[w][x] = Wx[x];
+                        Weapon[x] = Wx[x];
                     }
                 }
             }
+            this.SHIP.Weapons.push(Weapon);
         }
     }
 

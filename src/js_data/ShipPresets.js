@@ -1,4 +1,4 @@
-BBAdata['SHIPpresets']={
+BBAdata['SHIPpresetsOld']={
     'start':{
         Weight: 25,
         lifeM: 6,
@@ -17,79 +17,18 @@ BBAdata['SHIPpresets']={
         GlueFireToEstimated: 100,
         GlueFireToLaser: 70,
         KeysModules:{69:[0]},
-        FireType: 0,
-        FireType2: 1,
+        Weapon1: 0,
+        Weapon2: 1,
         MouseDown1: false,
         MouseDown2: false,
-        FireTypes:[
-            {W:'single', GunSpeed: 1, Speed: 17, Dec: 30, shotsToReload: 3, reloadTime: 12, Use:{'Ammo':1}, DMG:{Dmg:1,T:'normal'},},
-            {W:'rose',   GunSpeed: 4, AtOnce: 9, Use:{'Ammo':5}, RoseAngle: 3, Speed: 15, Dec: 90, DMG:{Dmg:1,T:'normal'},},
-            {W:'single', GunSpeed: 20, Speed: 17, Dec: 70, Use:{'Ammo':1}, DMG:{Dmg:11,T:'normal'},},
+        Weapons:[
+            {T:'single', gunS:0,gunU:0, GunSpeed: 1, Speed: 17, Dec: 30, shotsToReload: 3, reloadTime: 12, Use:{'Ammo':1}, DMG:{Dmg:1,T:'normal'},},
+            {T:'rose',   gunS:0,gunU:0, GunSpeed: 4, AtOnce: 9, Use:{'Ammo':5}, RoseAngle: 3, Speed: 15, Dec: 90, DMG:{Dmg:1,T:'normal'},},
+            {T:'single', gunS:0,gunU:0, GunSpeed: 20, Speed: 17, Dec: 70, Use:{'Ammo':1}, DMG:{Dmg:11,T:'normal'},},
         ],
-        Weapons:{
-            'single':{T:'single',  gunS:0,gunU:0,},
-            'rose':  {T:'rose',    gunS:0,gunU:0,},
-        },
         Modules:[
             {T:'Prod',subT:'Bullet',Storage:'Ammo',Disabled:0,Emin:2,Emax:4,ProdX:4,E:0,Prod:0,ifProd:20 },
             {T:'Prod',subT:'Bullet',Storage:'Ammo',Disabled:0,Emin:2,Emax:4,ProdX:4,E:0,Prod:0,ifProd:20 },
-        ],
-        SpecialMoves:{
-            1:{T:'changePosition', Dec:6, timesBy:2, Dist: 10, Angle: -120},
-            2:{T:'changePosition', Dec:6, timesBy:2, Dist: 10, Angle: 120},
-            1:{T:'changeAngle',    Dec:6, angleBy: -15},
-            2:{T:'changeAngle',    Dec:6, angleBy: 15},
-        },
-        ChangeSpeedStops:{
-            up: {8:1},
-            down: {8:1}
-        },
-        ChangeSpeedDelay:15,
-    },
-};
-// BBAdata['SHIPpresets']={
-//     {
-//         "simplePlate":{
-//             "I":{"_main":1,"lighter":1,},
-//             "III":{"_main":1,"lighter":1,},
-//         },
-//         "heavyPlate":{
-//             "I":{"_main":1,"tough":1,},
-//             "IV":{"_main":1,"tough":1,},
-//             "III":{"_main":1,"tough":1,},
-//         },
-//         "doubleGun":{
-//             "I":{"_main":1,"up6":1,"up11":1,"up13":1,"up9":1,"up8":1,"up7":1,},
-//         },
-//     }
-// };
-/*
-BBAdata['SHIPpresets']={
-    'start':{
-        Weight: 25,
-        lifeM: 6,
-        life: 6,
-        EnergyM: 20,
-        engineMultiply: 1,
-        speed: 8,
-        Storage:{
-            Ammo: {R:0, M:20},
-        },
-        ShowFireRange: false,
-        ShowAmmoIndicator: true,
-        GlueFireToEstimated: 100,
-        GlueFireToLaser: 70,
-        KeysModules:{69:[0]},
-        FireType: 0,
-        FireType2: 1,
-        MouseDown1: false,
-        MouseDown2: false,
-        FireTypes:[
-            {T:'single',  gunS:0,GunSpeed: 5, Speed: 17, Dec: 30, Use:{'Ammo':1}, DMG:{Dmg:1,T:'normal'},},
-            {T:'rose',    gunS:0,GunSpeed: 4, AtOnce: 9, Use:{'Ammo':5}, RoseAngle: 3, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
-        ],
-        Modules:[
-            {T:'Prod',subT:'Bullet',Storage:'Ammo',Disabled:0,Emin:2,Emax:4,ProdX:4,E:0,Prod:0,ifProd:40 },
         ],
         SpecialMoves:{
             1:{T:'changePosition', Dec:6, timesBy:2, Dist: 10, Angle: -120},
@@ -129,11 +68,11 @@ BBAdata['SHIPpresets']={
         GlueFireToEstimated: 100,
         GlueFireToLaser: 70,
         KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
-        FireType: 2,
-        FireType2: 3,
+        Weapon1: 2,
+        Weapon2: 3,
         MouseDown1: false,
         MouseDown2: false,
-        FireTypes:[
+        Weapons:[
             {T:'missle',  gunS:0,GunSpeed: 10, Use:{'Missile':1}, Speed: 12, SpeedT: 6, Dec: 130, AimRadius: 60, explodePreset:'MissileDestructionFieldGiant'},
             {T:'missleR', gunS:0,GunSpeed: 6, Use:{'Missile':5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'MissileDestructionFieldSmall'},
             {T:'bombT',   gunS:0,GunSpeed: 5,  Distance: 500, offTime: 0, explodePreset:'DestructionFieldMedium'},
@@ -174,11 +113,11 @@ BBAdata['SHIPpresets']={
         GlueFireToEstimated: 100,
         GlueFireToLaser: 70,
         KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
-        FireType: 3,
-        FireType2: 4,
+        Weapon1: 3,
+        Weapon2: 4,
         MouseDown1: false,
         MouseDown2: false,
-        FireTypes:[
+        Weapons:[
             {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 50, explodePreset:'NailsBigCircle'},
             {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 60, explodePreset:'NailsWirlpool'},
             {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 50, explodePreset:'ExplosionSize1',minDec:6},
@@ -220,11 +159,11 @@ BBAdata['SHIPpresets']={
         GlueFireToEstimated: 100,
         GlueFireToLaser: 70,
         KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
-        FireType: 2,
-        FireType2: 6,
+        Weapon1: 2,
+        Weapon2: 6,
         MouseDown1: false,
         MouseDown2: false,
-        FireTypes:[
+        Weapons:[
             {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, explodePreset:'NailsCircleToCenter'},
             {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, offTime: 60, explodePreset:'NailsBigCircle'},
             {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, offTime: 60, explodePreset:'NailsBigLongCircle'},
@@ -261,11 +200,11 @@ BBAdata['SHIPpresets']={
         GlueFireToEstimated: 100,
         GlueFireToLaser: 70,
         KeysModules:{69:[0,1],82:[11],84:[2],81:[4],70:[5]},
-        FireType: 0,
-        FireType2: 3,
+        Weapon1: 0,
+        Weapon2: 3,
         MouseDown1: false,
         MouseDown2: false,
-        FireTypes:[
+        Weapons:[
             {T:'single',  gunS:0,GunSpeed: 5, Speed: 17, Dec: 30, Use:{'Ammo':1}, DMG:{Dmg:1,T:'normal'},},
             {T:'double',  gunS:0,GunSpeed: 1, Speed: 15, Dec: 30, Use:{'Ammo':2}, DMG:{Dmg:1,T:'normal'},},
             {T:'rose',    gunS:0,GunSpeed: 4, AtOnce: 9, Use:{'Ammo':5}, RoseAngle: 3, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
@@ -313,11 +252,11 @@ BBAdata['SHIPpresets']={
         GlueFireToEstimated: 100,
         GlueFireToLaser: 70,
         KeysModules:{66:[6],69:[0,5],73:[3,9,10],77:[7],84:[2],81:[4],70:[8],82:[11]},
-        FireType: 0,
-        FireType2: 8,
+        Weapon1: 0,
+        Weapon2: 8,
         MouseDown1: false,
         MouseDown2: false,
-        FireTypes:[
+        Weapons:[
             {T:'single',  gunS:0,GunSpeed: 5,  Use:{Ammo:1}, Speed: 17, Dec: 30, DMG:{Dmg:1,T:'normal'},},
             {T:'double',  gunS:0,GunSpeed: 1,  Use:{Ammo:2}, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
             {T:'rose',    gunS:0,GunSpeed: 4,  Use:{Ammo:5}, AtOnce: 9, RoseAngle: 3, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
@@ -376,11 +315,11 @@ BBAdata['SHIPpresets']={
         GlueFireToEstimated: 100,
         GlueFireToLaser: 70,
         KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
-        FireType: 0,
-        FireType2: 8,
+        Weapon1: 0,
+        Weapon2: 8,
         MouseDown1: false,
         MouseDown2: false,
-        FireTypes:[
+        Weapons:[
             {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explodePreset:'NailsConePalm'},
             {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explodePreset:'HugeNailsConePalm'},
             {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 8, Dec: 70, explodePreset:'HugeExplosionRose'},
@@ -434,11 +373,11 @@ BBAdata['SHIPpresets']={
         GlueFireToEstimated: 100,
         GlueFireToLaser: 70,
         KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
-        FireType: 0,
-        FireType2: 7,
+        Weapon1: 0,
+        Weapon2: 7,
         MouseDown1: false,
         MouseDown2: false,
-        FireTypes:[
+        Weapons:[
             {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explodePreset:'NailsConeMicro'},
             {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explodePreset:'NailsConeMedium'},
             {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explodePreset:'HugeNailsConePalm'},
@@ -479,11 +418,11 @@ BBAdata['SHIPpresets']={
         GlueFireToEstimated: 100,
         GlueFireToLaser: 70,
         KeysModules:{69:[0,1],82:[11],84:[2],81:[4],70:[5]},
-        FireType: 0,
-        FireType2: 3,
+        Weapon1: 0,
+        Weapon2: 3,
         MouseDown1: false,
         MouseDown2: false,
-        FireTypes:[
+        Weapons:[
             {T:'single',  gunS:0,GunSpeed: 5, Speed: 17, Dec: 30, Use:{'Ammo':1}, DMG:{Dmg:1,T:'normal'},},
             {T:'double',  gunS:0,GunSpeed: 1, Speed: 15, Dec: 30, Use:{'Ammo':2}, DMG:{Dmg:1,T:'normal'},},
             {T:'rose',    gunS:0,GunSpeed: 4, AtOnce: 9, Use:{'Ammo':5}, RoseAngle: 3, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
@@ -503,4 +442,64 @@ BBAdata['SHIPpresets']={
 
     },
 };
-*/
+
+
+
+
+BBAdata['SHIPpresets']={
+    'start2':{
+        "simplePlate":{
+            "I":{"_main":1,"lighter":1,},
+            "IV":{"_main":1,"lighter":1,},
+            "III":{"_main":1,"lighter":1,},
+            "II":{"_main":1,"lighter":1,},
+        },
+        "lightPlate":{
+            "I":{"_main":1,},
+            "VI":{"_main":1,},
+            "V":{"_main":1,},
+            "IV":{"_main":1,},
+            "III":{"_main":1,},
+            "II":{"_main":1,},
+        },
+        "heavyPlate":{
+            "I":{"_main":1,"tough":1,},
+            "IV":{"_main":1,"tough":1,},
+            "III":{"_main":1,"tough":1,},
+            "II":{"_main":1,"tough":1,},
+        },
+        "simpleEnergyCell":{
+            "IV":{"_main":1,"up2":1,"up":1,},
+            "III":{"_main":1,"up2":1,"up":1,},
+            "II":{"_main":1,"up2":1,"up":1,},
+            "I":{"_main":1,"up2":1,"up":1,},
+        },
+        "energyCrystal":{
+            "II":{"_main":1,"weight2":1,"weight1":1,"energy2":1,"energy1":1,},
+            "I":{"_main":1,"weight2":1,"weight1":1,"energy2":1,"energy1":1,},
+        },
+        "heavyEnergyCell":{
+            "VI":{"_main":1,"weight":1,},
+            "V":{"_main":1,"weight":1,},
+            "IV":{"_main":1,"weight":1,},
+            "III":{"_main":1,"weight":1,},
+            "II":{"_main":1,"weight":1,},
+            "I":{"_main":1,"weight":1,},
+        },
+        "energyGeneratus":{
+            "I":{"_main":1,"up5":1,"up4":1,"up2":1,"up3":1,"up1":1,},
+        },
+        "engineCoreIV":{
+            "I":{"_main":1,"up9":1,"up8":1,"up7":1,"up6":1,"up5":1,"up4":1,"up2":1,"up3":1,"up1":1,},
+        },
+        "basicGun":{
+            "I":{"_main":1,"up18":1,"up17":1,"up8":1,"up7":1,"up6":1,"up5":1,"up4":1,"up3":1,"up2":1,"up1":1,"up16":1,"up15":1,"up14":1,"up13":1,"up12":1,"up11":1,"up10":1,"up9":1,},
+        },
+        "ammoStorage":{
+            "I":{"_main":1,"lighter":1,"fullOnStart":1,},
+            "IV":{"_main":1,"lighter":1,},
+            "III":{"_main":1,"lighter":1,},
+            "II":{"_main":1,"lighter":1,},
+        },
+    },
+};

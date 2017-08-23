@@ -28,13 +28,13 @@ BBAdata.SHIPempty={
     GlueFireToEstimated: false,
     GlueFireToLaser: false,
     KeysModules:{},
-    FireType: false,
-    FireType2: false,
+    Weapon1: false,
+    Weapon2: false,
     MouseDown1: false,
     MouseDown2: false,
     EnergyFieldMax: 0,
     Storage:{},
-    FireTypes:[],
+    Weapon1s:[],
     Weapons:{},
     Modules:[],
 };
@@ -520,6 +520,24 @@ BBAdata.SHIPelements['roseGun'] = {                 Weight: 12, Price: 1500,  wh
     },
 };
 
+
+BBAdata.SHIPelements['ammoStorage'] = {             Weight: 5, Price: 100, where:'weapons',
+    name: 'Ammo Storage',
+    StorageData:{Ammo:{R:0, M:10}},
+    upgrades: {
+        'lighter': {                                Weight: -3,  Price: 3000,
+            lifeM: 1,
+            name: 'Lighter Storages',
+        },
+        'fullOnStart': {                            Price: 4000,
+            StorageData:{Ammo:{R:10}},
+        },
+    },
+    copies: {
+        'I': {}, 'II': {}, 'III': {}, 'IV': {},
+    },
+};
+
 /*
 Basic Weapons:
     Rose Gun
@@ -735,7 +753,7 @@ Modules - other:
         TeleJump: {R:0,M:6},
     },
     KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
-    FireTypes:[
+    Weapon1s:[
         {T:'missle',  gunS:0,GunSpeed: 10, Use:{'Missile':1}, Speed: 12, SpeedT: 6, Dec: 130, AimRadius: 60, explodePreset:'MissileDestructionFieldGiant'},
         {T:'missleR', gunS:0,GunSpeed: 6, Use:{'Missile':5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'MissileDestructionFieldSmall'},
         {T:'bombT',   gunS:0,GunSpeed: 5,  Distance: 500, offTime: 0, explodePreset:'DestructionFieldMedium'},
@@ -764,7 +782,7 @@ Modules - other:
         TeleJump: {R:0,M:6},
     },
     KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
-    FireTypes:[
+    Weapon1s:[
         {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 50, explodePreset:'NailsBigCircle'},
         {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 60, explodePreset:'NailsWirlpool'},
         {T:'bombD',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 50, explodePreset:'ExplosionSize1',minDec:6},
@@ -794,7 +812,7 @@ Modules - other:
         TeleJump: {R:0,M:6},
     },
     KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
-    FireTypes:[
+    Weapon1s:[
         {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, explodePreset:'NailsCircleToCenter'},
         {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, offTime: 60, explodePreset:'NailsBigCircle'},
         {T:'bombT',   gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Distance: 400, offTime: 60, explodePreset:'NailsBigLongCircle'},
@@ -819,7 +837,7 @@ Modules - other:
         Moves: {R:0, M:8},
     },
     KeysModules:{69:[0,1],82:[11],84:[2],81:[4],70:[5]},
-    FireTypes:[
+    Weapon1s:[
         {T:'single',  gunS:0,GunSpeed: 5, Speed: 17, Dec: 30, Use:{'Ammo':1}, DMG:{Dmg:1,T:'normal'},},
         {T:'double',  gunS:0,GunSpeed: 1, Speed: 15, Dec: 30, Use:{'Ammo':2}, DMG:{Dmg:1,T:'normal'},},
         {T:'rose',    gunS:0,GunSpeed: 4, AtOnce: 9, Use:{'Ammo':5}, RoseAngle: 3, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
@@ -850,7 +868,7 @@ Modules - other:
         Laser: {R:0,M:4}
     },
     KeysModules:{66:[6],69:[0,5],73:[3,9,10],77:[7],84:[2],81:[4],70:[8],82:[11]},
-    FireTypes:[
+    Weapon1s:[
         {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Ammo:3}, Speed: 0.1, Teleport:{ Dist: 35, Angle: 270, AngleRand: 180}, Dec: 10, onHitDieExpire:    {Do:'explode',DMG:{Dmg:7,T:'explo'}, Dist: 80}},
         {T:'missle',  gunS:0,GunSpeed: 10, Use:{Missile:1}, Speed: 12, SpeedT: 4, Dec: 400, AimRadius: 120, DMG:{Dmg:3,T:'explo'},},
         {T:'missleR', gunS:0,GunSpeed: 6,  Use:{Missile:5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, DMG:{Dmg:3,T:'explo'},},
@@ -884,7 +902,7 @@ Modules - other:
         Laser: {R:0,M:4}
     },
     KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
-    FireTypes:[
+    Weapon1s:[
         {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explodePreset:'NailsConePalm'},
         {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explodePreset:'HugeNailsConePalm'},
         {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 8, Dec: 70, explodePreset:'HugeExplosionRose'},
@@ -920,7 +938,7 @@ Modules - other:
         Laser: {R:0,M:4}
     },
     KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
-    FireTypes:[
+    Weapon1s:[
         {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explodePreset:'NailsConeMicro'},
         {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explodePreset:'NailsConeMedium'},
         {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 15, Dec: 10, explodePreset:'HugeNailsConePalm'},
@@ -944,7 +962,7 @@ Modules - other:
         Bomb: {R:12, M:12},
     },
     KeysModules:{69:[0,1],82:[11],84:[2],81:[4],70:[5]},
-    FireTypes:[
+    Weapon1s:[
         {T:'bomb',    gunS:0,GunSpeed: 5, Use:{Bomb:1}, Speed: 10, Dec: 30, explodePreset:'ExplosionSize2'},
         {T:'bomb',    gunS:0,GunSpeed: 5, Use:{Bomb:1,Ammo:5}, Speed: 10, Dec:30, explodePreset:'NailsBigCircle'},
     ],

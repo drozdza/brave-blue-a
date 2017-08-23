@@ -37,8 +37,8 @@ GAMEobject.prototype.makeShipControlPanel = function(){
     html+='<div class="cBox"><div class="energyBox energyCap_00"><span id="modulesEnergyIn">'+S.Energy.toFixed(2)+'</span><div class="ammoBoxBox"><div class="ammoBoxes">';
 
     Sx.EnergyOut=-1;
-    for(var fi in S.FireTypes){
-        html+='<div id="attackModule_'+fi+'" class="attackBox attack_'+S.FireTypes[fi].W+'"><span></span><span></span><span></span><span></span><span></span><div class="attackBoxNum">'+(fi- -1)+'</div></div>';
+    for(var fi in S.Weapons){
+        html+='<div id="attackModule_'+fi+'" class="attackBox attack_'+S.Weapons[fi].W+'"><span></span><span></span><span></span><span></span><span></span><div class="attackBoxNum">'+(fi- -1)+'</div></div>';
     }
 
     Sx.Storage=[];
@@ -53,8 +53,8 @@ GAMEobject.prototype.makeShipControlPanel = function(){
 
     $('#countSpeed').html(html);
     this.shipFunc_speedChange();
-    if(S.FireType!==false)
-        this.shipFunc_changeWeapon(1, S.FireType);
+    if(S.Weapon1!==false)
+        this.shipFunc_changeWeapon(1, S.Weapon1);
 
 }
 
@@ -354,78 +354,78 @@ GAMEobject.prototype.decide_ship = function(e){
 
     // STRZELAMY
     var aktywneDziala = {};
-    if(S.FireType!==false  && S.MouseDown1) aktywneDziala[ S.FireType ]=1;
-    if(S.FireType2!==false && S.MouseDown2) aktywneDziala[ S.FireType2 ]=1;
-    for(var dzi in aktywneDziala) if(S.Weapons[ S.FireTypes[dzi].W ].gunS > S.FireTypes[dzi].GunSpeed){
+    if(S.Weapon1!==false  && S.MouseDown1) aktywneDziala[ S.Weapon1 ]=1;
+    if(S.Weapon2!==false && S.MouseDown2) aktywneDziala[ S.Weapon2 ]=1;
+    for(var dzi in aktywneDziala) if(S.Weapons[ dzi ].gunS > S.Weapons[dzi].GunSpeed){
 
         var shotDone = false;
-        var Fx = S.FireTypes[dzi];
+        var Weapon = S.Weapons[dzi];
 
         var enoughToUse = true
-        if(Fx.Use) for(var useU in Fx.Use) if(S.Storage[ useU ].R < Fx.Use[useU]) enoughToUse = false;
-        if(Fx.ModUse) for(var useU in Fx.ModUse) if(S.ModStorage[ useU ].R < Fx.ModUse[useU]) enoughToUse = false;
+        if(Weapon.Use) for(var useU in Weapon.Use) if(S.Storage[ useU ].R < Weapon.Use[useU]) enoughToUse = false;
+        if(Weapon.ModUse) for(var useU in Weapon.ModUse) if(S.ModStorage[ useU ].R < Weapon.ModUse[useU]) enoughToUse = false;
         if(!enoughToUse) continue;
 
-        if(Fx.W=='single'){
-            this.shipShoot(0, Fx.Speed, Fx.Dec, Fx.DMG);
+        if(Weapon.T=='single'){
+            this.shipShoot(0, Weapon.Speed, Weapon.Dec, Weapon.DMG);
             shotDone = true;
         }
-        if(Fx.W=='double'){
-            this.shipShootOnSide(-90, 5, Fx.Speed, Fx.Dec, Fx.DMG);
-            this.shipShootOnSide(90, 5, Fx.Speed, Fx.Dec, Fx.DMG);
+        if(Weapon.T=='double'){
+            this.shipShootOnSide(-90, 5, Weapon.Speed, Weapon.Dec, Weapon.DMG);
+            this.shipShootOnSide(90, 5, Weapon.Speed, Weapon.Dec, Weapon.DMG);
             shotDone = true;
         }
-        if(Fx.W=='rose'){
-            for(var i = -parseInt(Fx.AtOnce/2); i<= parseInt(Fx.AtOnce/2); ++i)
-                this.shipShoot(i*Fx.RoseAngle, Fx.Speed, Fx.Dec, Fx.DMG);
+        if(Weapon.T=='rose'){
+            for(var i = -parseInt(Weapon.AtOnce/2); i<= parseInt(Weapon.AtOnce/2); ++i)
+                this.shipShoot(i*Weapon.RoseAngle, Weapon.Speed, Weapon.Dec, Weapon.DMG);
             shotDone = true;
         }
-        if(Fx.W=='missle' && this.missleAim!=false){
-            this.shipShootMissle(this.missleAim,O.angle,Fx.Speed,Fx.Dec,Fx.SpeedT,Fx);
+        if(Weapon.T=='missle' && this.missleAim!=false){
+            this.shipShootMissle(this.missleAim,O.angle,Weapon.Speed,Weapon.Dec,Weapon.SpeedT,Weapon);
             shotDone = true;
         }
-        if(Fx.W=='missleR' && this.missleAim!=false){
+        if(Weapon.T=='missleR' && this.missleAim!=false){
             var Pe = [80,280,100,260,120,240,140,220,160,200,175,185];
             var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -180)%360;
 
-            for(var iki=0; iki<Fx.AtOnce; ++iki)
-                this.shipShootMissle(this.missleAim, (Angle- -Pe[iki])%360, (Fx.Speed-parseInt(iki/2)*2),(Fx.Dec- -parseInt(iki/2)*20),(Fx.SpeedT-parseInt(iki/2)),Fx);
+            for(var iki=0; iki<Weapon.AtOnce; ++iki)
+                this.shipShootMissle(this.missleAim, (Angle- -Pe[iki])%360, (Weapon.Speed-parseInt(iki/2)*2),(Weapon.Dec- -parseInt(iki/2)*20),(Weapon.SpeedT-parseInt(iki/2)),Weapon);
             shotDone = true;
         }
-        if(Fx.W=='bomb'){
+        if(Weapon.T=='bomb'){
             var mouseDist = Math.sqrt();
             var teleportData = false;
-            if(typeof Fx.Teleport !='undefined') teleportData = Fx.Teleport;
+            if(typeof Weapon.Teleport !='undefined') teleportData = Weapon.Teleport;
 
-            this.shipShootBomb(Fx.Speed,Fx.Dec,Fx,teleportData);
+            this.shipShootBomb(Weapon.Speed,Weapon.Dec,Weapon,teleportData);
             shotDone = true;
         }
-        if(Fx.W=='bombT'){
-            this.shipTeleportBomb(Fx.Distance,Fx.offTime,Fx);
+        if(Weapon.T=='bombT'){
+            this.shipTeleportBomb(Weapon.Distance,Weapon.offTime,Weapon);
             shotDone = true;
         }
-        if(Fx.W=='bombD'){
-            this.shipShootDistanceBomb(Fx.Speed,Fx.Dec,Fx.offTime,Fx);
+        if(Weapon.T=='bombD'){
+            this.shipShootDistanceBomb(Weapon.Speed,Weapon.Dec,Weapon.offTime,Weapon);
             shotDone = true;
         }
-        if(Fx.W=='laser'){
-            this.shipShootLaser(Fx.Speed,Fx.DMG);
+        if(Weapon.T=='laser'){
+            this.shipShootLaser(Weapon.Speed,Weapon.DMG);
             shotDone = true;
         }
-        if(Fx.W=='tele'){
-            if(this.shipFunc_teleport(Fx))
+        if(Weapon.T=='tele'){
+            if(this.shipFunc_teleport(Weapon))
                 shotDone = true;
         }
 
         if(shotDone){
-            S.Weapons[Fx.W].gunS=0;
-            if(Fx.Use) for(var useU in Fx.Use) S.Storage[ useU ].R-=Fx.Use[ useU ];
-            if(Fx.ModUse) for(var useU in Fx.ModUse) S.ModStorage[ useU ].R-=Fx.ModUse[ useU ];
+            Weapon.gunS=0;
+            if(Weapon.Use) for(var useU in Weapon.Use) S.Storage[ useU ].R-=Weapon.Use[ useU ];
+            if(Weapon.ModUse) for(var useU in Weapon.ModUse) S.ModStorage[ useU ].R-=Weapon.ModUse[ useU ];
 
-            S.Weapons[Fx.W].gunU++;
-            if(typeof Fx.shotsToReload != 'undefined' && S.Weapons[Fx.W].gunU >= Fx.shotsToReload){
-                S.Weapons[Fx.W].gunU=0;                
-                S.Weapons[Fx.W].gunS = -Fx.reloadTime;
+            Weapon.gunU++;
+            if(typeof Weapon.shotsToReload != 'undefined' && Weapon.gunU >= Weapon.shotsToReload){
+                Weapon.gunU=0;
+                Weapon.gunS = -Weapon.reloadTime;
             }
         }
     }

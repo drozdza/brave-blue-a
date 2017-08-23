@@ -13,15 +13,15 @@ GAMEobject.prototype.mouse_down = function(e){
     }
     if(e.clientY - this.Dy > -32){
         var u = parseInt((e.clientX-105)/33);
-        if(u>-1 && u < this.SHIP.FireTypes.length){
-            if(this.SHIP.FireType2!==false && e.which==3)
+        if(u>-1 && u < this.SHIP.Weapons.length){
+            if(this.SHIP.Weapon2!==false && e.which==3)
                 this.shipFunc_changeWeapon(2, u);
             else
                 this.shipFunc_changeWeapon(1, u);
             return true;
         }
     }
-    if(this.SHIP.FireType2!==false && e.which==3)
+    if(this.SHIP.Weapon2!==false && e.which==3)
         this.SHIP.MouseDown2=true;
     else
         this.SHIP.MouseDown1=true;
@@ -66,7 +66,7 @@ GAMEobject.prototype.keyup = function(e){
 
 
     if(e.keyCode > 48 && e.keyCode < 58){    // Numeric 1-9
-        if(e.keyCode-49 < this.SHIP.FireTypes.length)
+        if(e.keyCode-49 < this.SHIP.Weapons.length)
             this.shipFunc_changeWeapon(1, e.keyCode-49);
     }
 

@@ -55,7 +55,11 @@ function MENUobject(){
         CanvasManager = new CanvasManagerObject();
         CanvasManager.start();
 
-        var SHIPpreset = cloneObj(BBAdata.SHIPpresets[this.ShipPresetChoosen]);
+        if(typeof BBAdata.SHIPpresetsOld[this.ShipPresetChoosen] != 'undefined')
+            var SHIPpreset = cloneObj(BBAdata.SHIPpresetsOld[this.ShipPresetChoosen]);
+        else
+            var SHIPpreset = cloneObj((this.SB.getShipFromPresets(this.ShipPresetChoosen)));
+
         if(this.SB.useShipyardShip)
             SHIPpreset = cloneObj(this.SB.SHIP);
 

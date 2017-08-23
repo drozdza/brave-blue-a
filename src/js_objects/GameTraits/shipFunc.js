@@ -197,19 +197,19 @@ GAMEobject.prototype.shipFunc_changeWeapon = function(Fx,weaponId){
     $('.attackBox').removeClass('attackBoxActive');
 
     if(Fx==1){
-        S.FireType = weaponId;
-        var F = S.FireTypes[ S.FireType ];
+        S.Weapon1 = weaponId;
+        var Weapon = S.Weapons[ S.Weapon1 ];
         if(S.ShowFireRange){
-            var RadX = F.Speed*F.Dec;
-            if(F.T=='bombT') RadX = F.Distance;
+            var RadX = Weapon.Speed*Weapon.Dec;
+            if(Weapon.T=='bombT') RadX = Weapon.Distance;
             $('#bullRadX').css({width: RadX*2+'px',height: RadX*2+'px',top: (-RadX)+'px',left: (-RadX)+'px'});
         }
     }else{
-        S.FireType2 = weaponId;
+        S.Weapon2 = weaponId;
     }
-    $('#attackModule_'+S.FireType).addClass('attackBoxActive');
-    if(S.FireType2 !==false)
-        $('#attackModule_'+S.FireType2).addClass('attackBoxActive');
+    $('#attackModule_'+S.Weapon1).addClass('attackBoxActive');
+    if(S.Weapon2 !==false)
+        $('#attackModule_'+S.Weapon2).addClass('attackBoxActive');
 }
 GAMEobject.prototype.shipFunc_showSpotRegions = function(show){
     if(show==true){

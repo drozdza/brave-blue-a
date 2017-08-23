@@ -203,7 +203,7 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
     if(DMGval < 1) return true;
 
     if(O.life < 1){
-        console.log(O.T+' ['+o+'] is dead but got hit!');
+        if(o > 0) console.log(O.T+' ['+o+'] is dead but got hit!');
         return true;
     }
 
