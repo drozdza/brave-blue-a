@@ -57,6 +57,9 @@ BBAdata['SHIPpresetsOld']={
         EnergyM: 32,
         engineMultiply: 1,
         speed: 8,
+        speedAcl: 3,
+        speedDcl: 10,
+        speedT: 4,
         Storage:{
             Missile: {R:10,M:10},
         },
@@ -102,6 +105,9 @@ BBAdata['SHIPpresetsOld']={
         EnergyM: 32,
         engineMultiply: 1,
         speed: 8,
+        speedAcl: 3,
+        speedDcl: 10,
+        speedT: 4,
         Storage:{
             Bomb: {R:12, M:12},
         },
@@ -148,6 +154,9 @@ BBAdata['SHIPpresetsOld']={
         EnergyM: 32,
         engineMultiply: 1,
         speed: 8,
+        speedAcl: 3,
+        speedDcl: 10,
+        speedT: 4,
         Storage:{
             Bomb: {R:12, M:12},
         },
@@ -188,6 +197,9 @@ BBAdata['SHIPpresetsOld']={
         EnergyM: 27,
         engineMultiply: 1,
         speed: 8,
+        speedAcl: 3,
+        speedDcl: 10,
+        speedT: 4,
         Storage:{
             Ammo: {R:0, M:50},
             Bomb: {R:12, M:12},
@@ -238,6 +250,9 @@ BBAdata['SHIPpresetsOld']={
         EnergyM: 32,
         engineMultiply: 1,
         speed: 8,
+        speedAcl: 3,
+        speedDcl: 10,
+        speedT: 4,
         Storage:{
             Ammo: {R:0, M:50},
             Missile: {R:10,M:10},
@@ -303,6 +318,9 @@ BBAdata['SHIPpresetsOld']={
         EnergyM: 32,
         engineMultiply: 1,
         speed: 8,
+        speedAcl: 3,
+        speedDcl: 10,
+        speedT: 4,
         Storage:{
             Bomb: {R:42, M:42},
         },
@@ -361,6 +379,9 @@ BBAdata['SHIPpresetsOld']={
         EnergyM: 32,
         engineMultiply: 1,
         speed: 8,
+        speedAcl: 3,
+        speedDcl: 10,
+        speedT: 4,
         Storage:{
             Bomb: {R:42, M:42},
         },
@@ -391,9 +412,9 @@ BBAdata['SHIPpresetsOld']={
             {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,ProdX:1,E:0,Prod:0,ifProd:30 },
             {T:'moduleProd',Disabled:0,Emin:2,Emax:4,ProdX:4,E:0,Prod:0,ifProd:60, subT:'TeleJump', ModStorage:'TeleJump'},
             {T:'healerProd',Disabled:0,Emin:4,Emax:16,ProdX:1,E:0,Prod:0,ifProd:90 },
-            {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:20 },
-            {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:20 },
-            {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:20 },
+            {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:15 },
+            {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:15 },
+            {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,ProdX:1,E:0,Prod:0,ifProd:15 },
             {T:'radar',     Disabled:1,Emin:1,Emax:30,ProdX:20,E:0,Prod:0,ifProd:360,Radius:2500},
         ],
         SpecialMoves:{
@@ -409,6 +430,9 @@ BBAdata['SHIPpresetsOld']={
         lifeM: 'x',
         engineMultiply: 1,
         speed: 8,
+        speedAcl: 3,
+        speedDcl: 10,
+        speedT: 12,
         Storage:{
             Ammo: {R:0, M:50},
             Bomb: {R:12, M:12},

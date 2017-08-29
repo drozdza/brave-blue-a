@@ -2743,14 +2743,14 @@ BBAdata['ObjectDatas']={
             {t:'produceSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prodSquad', usedResR: 3, maxSpeed: 2, minDistToEnemy:400, doNextWeapon: true},
         ],
 
-        squadSchemeType: {t:'loose', count: 6, data:{type:'enemyShip', objectType:'vuvis'}},
+        squadSchemeType: {t:'loose', count: 12, data:{type:'enemyShip', objectType:'vuvis'}},
         squadScheme: [],
 
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
         toDo: [
-            {N:35,T:'followEnemy', minAlarm: 5},
+            // {N:35,T:'followEnemy', minAlarm: 5},
             {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
         ],
 

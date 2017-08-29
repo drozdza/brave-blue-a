@@ -172,7 +172,7 @@ function MenuStarMapObject(){
 
         this.prepareMapGroups();
 
-        var noMapY = 0;
+        var noMapY = -50;
 
         for(var m in BBAdata.MAPS){
             var M = BBAdata.MAPS[m];

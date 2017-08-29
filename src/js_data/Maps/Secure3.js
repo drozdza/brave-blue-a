@@ -17,8 +17,9 @@ BBAdata.MAPS.Secure3 = {
     Ship:{Start:{X: 0, Y: 0, A:0}},
     Place:[
         {RingOf:{X: 0, Y:0, Radius: 800, RadiusPlus: 0}, What:{Star:60}},
-        {RingOf:{X: 0, Y:0, Radius: 800, RadiusPlus: 1400}, What:{Star:120}},
-        {RingOf:{X: 0, Y:0, Radius: 1400, RadiusPlus: 200}, What:{Star:100}},
+        {RingOf:{X: 0, Y:0, Radius: 800, RadiusPlus: 1400}, What:{StarX:120}},
+        {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarX:120}},
+        {RingOf:{X: 0, Y:0, Radius: 1400, RadiusPlus: 200}, What:{StarX:120}},
         {RingOf:{X: 0, Y:0, Radius: 2200}, What:{Star:180}},
         {Random:{X: 0, Y: 0, Radius: 2200}, What: {Q:4}, GroupMods:['orhenesSecure1']},
         {Random:{X: 0, Y: 0, Radius: 2200}, What: {Q:4}, GroupMods:['orhenesSecure2']},
