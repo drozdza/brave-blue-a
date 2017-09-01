@@ -7,6 +7,9 @@ function MenuShipBuildingObject(){
     this.width = 100;
     this.height = 100;
 
+    this.lastWeapon = false;
+    this.lastModule = false;
+
 
     // DEPRECATED
     this.money = 999000;
@@ -510,6 +513,8 @@ function MenuShipBuildingObject(){
 
             for(var uCopy in Evar.Copies){
                 var elemCopy = Evar.Copies[uCopy];
+                this.lastWeapon = false;
+                this.lastModule = false;
                 for(var uUpgrade in elemCopy)
                 if(uUpgrade == '_main'){
                     this.buildShip_addElement(S, Edata);
@@ -529,6 +534,8 @@ function MenuShipBuildingObject(){
         S.life = S.lifeM;
         // start speed under max speed
         if(S.speed > S.speedM) S.speed = S.speedM;
+
+        this.showShipAssemblyView();
 
         this.showShipProperties();
     }
@@ -560,8 +567,8 @@ function MenuShipBuildingObject(){
                 case 'WeaponData':
                     this.buildShip_WeaponData(Edata.WeaponData);
                 break;
-                case 'ModData':
-                    this.buildShip_ModData(Edata);
+                case 'ModulesData':
+                    this.buildShip_ModulesData(Edata.ModulesData);
                 break;
             }
         }
@@ -578,10 +585,14 @@ function MenuShipBuildingObject(){
     }
 
     this.buildShip_WeaponData = function(WeaponData){
+        if(this.lastWeapon === false){
+            this.lastWeapon = this.SHIP.Weapons.length;
+            this.SHIP.Weapons[this.SHIP.Weapons.length] = {};
+        }
+        Weapon = this.SHIP.Weapons[this.lastWeapon];
+
         for(var w in WeaponData){
-            // nie zawsze robimy nową
-            Weapon = {};
-            var Wx = WeaponData[w]
+            var Wx = WeaponData[w];
             for(var x in Wx){
                 if(typeof Wx[x] == 'object'){
                     if(typeof Weapon[x] === 'undefined')
@@ -605,13 +616,43 @@ function MenuShipBuildingObject(){
                     }
                 }
             }
-            this.SHIP.Weapons.push(Weapon);
         }
     }
 
-    this.buildShip_ModData = function(ShipData){
-        var ModI = ShipData.ModPlace;
-        this.SHIP.Modules[ModI] = cloneObj(ShipData.ModData);
+    this.buildShip_ModulesData = function(ModuleData){
+        if(this.lastModule === false){
+            this.lastModule = this.SHIP.Modules.length;
+            this.SHIP.Modules[this.SHIP.Modules.length] = {};
+        }
+        Module = this.SHIP.Modules[this.lastModule];
+
+        for(var m in ModuleData){
+            var Mx = ModuleData[m];
+            console.log(m);
+            // for(var x in Mx){
+                // if(typeof Mx[x] == 'object'){
+                //     if(typeof Module[x] === 'undefined')
+                //         Module[x] = {};
+                //     for(var y in Mx[x]){
+                //         if(typeof Module[x][y] === 'undefined')
+                //             Module[x][y] = 0;
+                //         if(typeof Mx[x][y] === 'number'){
+                //             Module[x][y]-=-Mx[x][y];
+                //         }else{
+                //             Module[x][y] = Mx[x][y];
+                //         }
+                //     }
+                // }else{
+                    if(typeof Module[m] === 'undefined')
+                        Module[m] = 0;
+                    if(typeof Mx === 'number'){
+                        Module[m]-=-Mx;
+                    }else{
+                        Module[m] = Mx;
+                    }
+                // }
+            // }
+        }
     }
 
 
@@ -705,6 +746,26 @@ function MenuShipBuildingObject(){
         P+='\n}';
         console.log(P);
     }
+
+    this.showShipAssemblyView = function(){
+        var html='';
+        var html2='';
+        for(var s in this.SHIP){
+            if(typeof this.SHIP[s] == 'object') {
+                html2 += s +':<br/>';
+                for(var s2 in this.SHIP[s]) {
+                    html2+= '<div style="text-align: center;">'+s2+'</br>';
+                    for(var s3 in this.SHIP[s][s2]){
+                        html2+= s3+': '+this.SHIP[s][s2][s3]+', ';
+                    }
+                    html2+='</div>';
+                }
+            } else
+                html+= '<span style="width: 50%; text-align: right; display: inline-block;">'+s + ':</span> ' + this.SHIP[s] + '<br/>';
+        }
+        $('.shipAssemblyView').html(html2+html).css({color: 'white'});
+    }
+
 }
 
 

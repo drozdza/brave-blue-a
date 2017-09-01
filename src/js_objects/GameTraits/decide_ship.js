@@ -251,7 +251,7 @@ GAMEobject.prototype.decide_ship = function(e){
                 else   modeName = BBAdata['ModuleNames'][M.T];
             modHtml+='<div class="titleBox">'+modeName+'</div>';
         }
-        var U = M.ProdX*(M.E/M.Emax);
+        var U = (M.E/M.Emax);
 
         M.Prod-=-U;
         if(M.Prod > M.ifProd){
