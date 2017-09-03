@@ -2,7 +2,7 @@ GAMEobject.prototype.killPlayer = function(){
     this.C.playerDead = 1;
     this.O[0].speed = 0;
 
-    setTimeout("GAME.endGame('"+this.gameHash+"');",3500);
+    setTimeout("GAME.endGame('"+this.gameHash+"');", 3500);
 }
 GAMEobject.prototype.endGame = function(gameHash){
     if(gameHash != this.gameHash) return false;
@@ -11,7 +11,7 @@ GAMEobject.prototype.endGame = function(gameHash){
 
     this.showScoringScreen();
 
-    setTimeout("GAME.stopAnimations('"+this.gameHash+"');",3500);
+    setTimeout("GAME.stopAnimations('"+this.gameHash+"');",13500);
     setTimeout("$('#Game').unbind('click').click(function(){ GAME.goToMenu(); });",700);
 }
 GAMEobject.prototype.teleportShipOut = function(){

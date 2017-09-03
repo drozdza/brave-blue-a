@@ -22,7 +22,7 @@ function gentleCloneObj(A,B,i){
             A[i]={};
         }
         for(var j in B[i]){
-            if(typeof A[i][j] !='undefined'){
+            if(typeof A[i][j] != 'undefined'){
                 gentleCloneObj(A[i],B[i],j);
             }else{
                 A[i][j] = cloneObj(B[i][j]);
@@ -123,4 +123,34 @@ function mergeObjects(A,B){
     }
 
     return A;
+}
+
+
+function showObject(obj,lvl1,lvl2,lvl3){
+    var s='';
+    for(var a in obj){
+        if(obj[a] instanceof Object){
+            s+=a+ ' :[';
+            for(var b in obj[a]){
+                if(obj[a][b] instanceof Object){
+                    s+=b+ ' :[';
+                    for(var c in obj[a][b]){
+                        if(obj[a][b][c] instanceof Object){
+                            s+=c+ ' :[';
+                            for(var d in obj[a][b][c]){
+                                s+=d+' : '+obj[a][b][c][d]+', ';
+                            }
+                            s+='], ';
+                        }else s+=c+' : '+obj[a][b][c]+', ';
+                        if(lvl3) s+='<br/>';
+                    }
+                    s+='], ';
+                }else s+=b+' : '+obj[a][b]+', ';
+                if(lvl2) s+='<br/>';
+            }
+            s+='], ';
+        }else s+=a+' : '+obj[a]+', ';
+        if(lvl1) s+='<br/>';
+    }
+    return s;
 }

@@ -536,10 +536,8 @@ function MenuShipBuildingObject(){
         if(S.speed > S.speedM) S.speed = S.speedM;
 
         this.showShipAssemblyView();
-
         this.showShipProperties();
     }
-
     this.buildShip_addElement = function(S, Edata){
         for(var i in Edata){
             switch(i){
@@ -583,42 +581,16 @@ function MenuShipBuildingObject(){
                 this.SHIP.Storage[storageType][i] -=- StorageData[storageType][i];
         }
     }
-
     this.buildShip_WeaponData = function(WeaponData){
         if(this.lastWeapon === false){
             this.lastWeapon = this.SHIP.Weapons.length;
             this.SHIP.Weapons[this.SHIP.Weapons.length] = {};
         }
+        console.log(this.lastWeapon, WeaponData);
         Weapon = this.SHIP.Weapons[this.lastWeapon];
 
-        for(var w in WeaponData){
-            var Wx = WeaponData[w];
-            for(var x in Wx){
-                if(typeof Wx[x] == 'object'){
-                    if(typeof Weapon[x] === 'undefined')
-                        Weapon[x] = {};
-                    for(var y in Wx[x]){
-                        if(typeof Weapon[x][y] === 'undefined')
-                            Weapon[x][y] = 0;
-                        if(typeof Wx[x][y] === 'number'){
-                            Weapon[x][y]-=-Wx[x][y];
-                        }else{
-                            Weapon[x][y] = Wx[x][y];
-                        }
-                    }
-                }else{
-                    if(typeof Weapon[x] === 'undefined')
-                        Weapon[x] = 0;
-                    if(typeof Wx[x] === 'number'){
-                        Weapon[x]-=-Wx[x];
-                    }else{
-                        Weapon[x] = Wx[x];
-                    }
-                }
-            }
-        }
+        Weapon = mergeObjects(Weapon,WeaponData);
     }
-
     this.buildShip_ModulesData = function(ModuleData){
         if(this.lastModule === false){
             this.lastModule = this.SHIP.Modules.length;
@@ -626,35 +598,8 @@ function MenuShipBuildingObject(){
         }
         Module = this.SHIP.Modules[this.lastModule];
 
-        for(var m in ModuleData){
-            var Mx = ModuleData[m];
-            console.log(m);
-            // for(var x in Mx){
-                // if(typeof Mx[x] == 'object'){
-                //     if(typeof Module[x] === 'undefined')
-                //         Module[x] = {};
-                //     for(var y in Mx[x]){
-                //         if(typeof Module[x][y] === 'undefined')
-                //             Module[x][y] = 0;
-                //         if(typeof Mx[x][y] === 'number'){
-                //             Module[x][y]-=-Mx[x][y];
-                //         }else{
-                //             Module[x][y] = Mx[x][y];
-                //         }
-                //     }
-                // }else{
-                    if(typeof Module[m] === 'undefined')
-                        Module[m] = 0;
-                    if(typeof Mx === 'number'){
-                        Module[m]-=-Mx;
-                    }else{
-                        Module[m] = Mx;
-                    }
-                // }
-            // }
-        }
+        Module = mergeObjects(Module,ModuleData);
     }
-
 
     // ==================== ELEMENT CONFIGURATOR -==============================
     this.showPartEditor = function(elementName){
@@ -678,7 +623,6 @@ function MenuShipBuildingObject(){
         }
 
         for(var eC in Copies){
-
             html += '<div class="partCopy';
             if(typeof SE.Copies[eC] != 'undefined' && SE.Copies[eC]['_main']!=false)
                 html += ' bought';
@@ -690,10 +634,12 @@ function MenuShipBuildingObject(){
 
             if(typeof SE.Copies[eC] == 'undefined' || SE.Copies[eC]['_main']==false){
                 html += '<div class="addElementPart toggleElementPart" elementName="'+elementName+'" elementCopy="'+eC+'" elementUpgrade="_main">Add</div>';
+                html += '<div class="elementPartStats_'+elementName+'_'+eC+'">'+this.showPartEditor_updateElemStats(elementName,eC,false)+'</div>';
                 html += '</div>';
                 continue;
             }else{
                 html += '<div class="removeElementPart toggleElementPart" elementName="'+elementName+'" elementCopy="'+eC+'" elementUpgrade="_main">Remove</div>';
+                html += '<div id="elementPartStats_'+elementName+'_'+eC+'">'+this.showPartEditor_updateElemStats(elementName,eC,false)+'</div>';
             }
 
             if(typeof E.upgrades != 'undefined'){
@@ -708,6 +654,8 @@ function MenuShipBuildingObject(){
                     html += '<div class="upgradeName">';
                     if(typeof U.name != 'undefined') html+=U.name;
                                 else                 html+=eU;
+                        html +=this.showPartEditor_printElem(U);
+
                     html += '</div>';
                 }
                 html += '</div>';
@@ -718,7 +666,51 @@ function MenuShipBuildingObject(){
         $('.shipPartEditor').html(html);
     }
 
+    this.showPartEditor_printElem = function(U){
+        var html='<br/>';
+        for(var u in U){
+            if(u=='name' || u=='Price') continue;
+            if(typeof U[u] == 'object'){
+                html+=u+':[';
+                html+=showObject(U[u]);
+                html+='],';
 
+            }else{
+                html+=u+':'+U[u]+', ';
+            }
+        }
+
+        return html;
+    }
+
+    this.showPartEditor_updateElemStats = function(elementName,Copy,update){
+        var html = '';
+        var SE = BBAdata.SHIPelements[elementName];
+        var C = this.SHIPelems[elementName].Copies[Copy];
+        if(typeof C === 'undefined') return '';
+
+        var Elem = {};
+        for(var c in C){
+            if(c=='_main'){
+                Elem = cloneObj(SE);
+            }else{
+                Elem = mergeObjects(Elem,SE.upgrades[c]);
+            }
+        }
+        delete Elem.upgrades;
+        delete Elem.copies;
+        delete Elem.Price;
+        delete Elem.name;
+        delete Elem.where;
+
+        html = showObject(Elem, true);
+
+        if(update===true){
+            $('#elementPartStats_'+elementName+'_'+Copy).html(html);
+        }else{
+            return html;
+        }
+    }
 
     // ==================== MODULES CONFIGURATION ==============================
 
@@ -755,9 +747,7 @@ function MenuShipBuildingObject(){
                 html2 += s +':<br/>';
                 for(var s2 in this.SHIP[s]) {
                     html2+= '<div style="text-align: center;">'+s2+'</br>';
-                    for(var s3 in this.SHIP[s][s2]){
-                        html2+= s3+': '+this.SHIP[s][s2][s3]+', ';
-                    }
+                    html2+= showObject(this.SHIP[s][s2]);
                     html2+='</div>';
                 }
             } else

@@ -38,15 +38,15 @@ GAMEobject.prototype.makeShipControlPanel = function(){
 
     Sx.EnergyOut=-1;
     for(var fi in S.Weapons){
-        html+='<div id="attackModule_'+fi+'" class="attackBox attack_'+S.Weapons[fi].W+'"><span></span><span></span><span></span><span></span><span></span><div class="attackBoxNum">'+(fi- -1)+'</div></div>';
+        html+='<div id="attackModule_'+fi+'" class="attackBox attack_'+S.Weapons[fi].T+'"><span></span><span></span><span></span><span></span><span></span><div class="attackBoxNum">'+(fi- -1)+'</div></div>';
     }
 
     Sx.Storage=[];
     for(var Stype in S.Storage){
         Sx.Storage[Stype]={R:0};
-        if(Stype=='Ammo' || Stype=='Bomb' || Stype=='Missile'){
-            html+='<div class="ammoBox" id="'+Stype+'Storage"></div>';
-        }
+        if(Stype=='Ammo' || Stype=='Bomb' || Stype=='Missile')
+            if(typeof S.Storage[Stype].Hidden == 'undefined')
+                html+='<div class="ammoBox" id="'+Stype+'Storage"></div>';
     }
 
     html+='</div></div></div></div>';
@@ -251,9 +251,8 @@ GAMEobject.prototype.decide_ship = function(e){
                 else   modeName = BBAdata['ModuleNames'][M.T];
             modHtml+='<div class="titleBox">'+modeName+'</div>';
         }
-        var U = (M.E/M.Emax);
 
-        M.Prod-=-U;
+        M.Prod-=-M.E;
         if(M.Prod > M.ifProd){
             if(M.T=='moduleProd' && modR < modM)
                 modR = ++S.ModStorage[M.ModStorage].R;
@@ -274,15 +273,15 @@ GAMEobject.prototype.decide_ship = function(e){
         }
 
         if(M.T!='esteemProd' && M.T!='spotRegion' && M.T!='radar' && !(M.T=='moduleProd' && modR == modM)){
-            if(30/(M.ifProd/U) > 1){
-                if(modHtml != '') modHtml+=(30/(M.ifProd/U)).toFixed(2)+'/sec';
+            if(30/(M.ifProd/M.E) > 1){
+                if(modHtml != '') modHtml+=(30/(M.ifProd/M.E)).toFixed(2)+'/sec';
             }else{
-                modHtml+='<div class="progresBar"><div class="progresBarOBar green" style="width: '+parseInt((M.Prod/M.ifProd)*100)+'px;"></div><div class="info">'+(((M.ifProd-M.Prod)/U)/30).toFixed(2)+'sec</div></div>';
+                modHtml+='<div class="progresBar"><div class="progresBarOBar green" style="width: '+parseInt((M.Prod/M.ifProd)*100)+'px;"></div><div class="info">'+(((M.ifProd-M.Prod)/M.E)/30).toFixed(2)+'sec</div></div>';
                 Sx.Mod[m]=-23;
             }
         }
         if(M.T=='radar')
-            if(modHtml!='') modHtml+=((M.ifProd/U)/30).toFixed(2)+'sec';
+            if(modHtml!='') modHtml+=((M.ifProd/M.E)/30).toFixed(2)+'sec';
         if(M.T=='moduleProd' && modR == modM)
             if(modHtml!='') modHtml+='READY';
 
@@ -302,7 +301,7 @@ GAMEobject.prototype.decide_ship = function(e){
         }
 
         if(M.T=='radar')
-            this.shipFunc_workingRadar(U,M.Prod,M.Radius);
+            this.shipFunc_workingRadar(M.E, (M.Prod/M.ifProd)*360, M.Radius);
 
         if(M.T=='esteemProd' && M.E==M.Emax && (F.T=='single' || F.T=='double' || F.T=='rose' || F.T=='bomb'))
             EsteemedPos = this.shipFunc_esteemedPositions(O,F);
@@ -310,15 +309,23 @@ GAMEobject.prototype.decide_ship = function(e){
         if(modHtml != '')
             $('#moduleBox_'+m).html(modHtml);
     }
+
     if(Sx.EnergyOut != S.Energy){
         $('#modulesEnergyOut').html(S.Energy.toFixed(2));
         Sx.EnergyOut = S.Energy;
     }
 
+
+    F1T = false;
+    F2T = false;
+    if(S.Weapon1!==false) F1T = S.Weapons[S.Weapon1].T;
+    if(S.Weapon2!==false) F2T = S.Weapons[S.Weapon2].T;
+
+
     // ESTYMATORY
     // !!!! TO FIX LATER
-    // if(S.GlueFireToLaser!=false && F.T=='laser')
-    //     this.shipFunc_glueFireToLaser();
+    if(S.GlueFireToLaser!=false && (F1T=='laser' || F2T=='laser'))
+        this.shipFunc_glueFireToLaser();
 
 
 
@@ -337,15 +344,16 @@ GAMEobject.prototype.decide_ship = function(e){
     //         $('#gameOverlay').attr('class','cursorWait');
     // }
 
-    // !!!! TO FIX LATER
-    // if(F.T=='missle' || F.T=='missleR')
-    //     this.shipFunc_glueFireToMissle(F.AimRadius);
+    if(F1T=='missle' || F1T=='missleR')
+        this.shipFunc_glueFireToMissle(S.Weapons[S.Weapon1].AimRadius);
+    if(F2T=='missle' || F2T=='missleR')
+        this.shipFunc_glueFireToMissle(S.Weapons[S.Weapon2].AimRadius);
 
     // !!!! TO FIX LATER
-    // if(F.T=='laser'){
-    //     var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -360)%360;
-    //     $('#gameboardMarkers').append('<div class="object laserAiming" style="height: '+O.Speed+'px; top: '+(this.Dy/2)+'px; left: '+(this.Dx/2)+'px; transform: rotate('+Angle+'deg);"></div>');
-    // }
+    if(F1T=='laser' || F2T=='laser'){
+        var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -360)%360;
+        $('#gameboardMarkers').append('<div class="object laserAiming" style="height: '+O.Speed+'px; top: '+(this.Dy/2)+'px; left: '+(this.Dx/2)+'px; transform: rotate('+Angle+'deg);"></div>');
+    }
 
 
     if(S.GlueFireToEstimated!=false && EsteemedPos!=false)
@@ -354,7 +362,7 @@ GAMEobject.prototype.decide_ship = function(e){
 
     // STRZELAMY
     var aktywneDziala = {};
-    if(S.Weapon1!==false  && S.MouseDown1) aktywneDziala[ S.Weapon1 ]=1;
+    if(S.Weapon1!==false && S.MouseDown1) aktywneDziala[ S.Weapon1 ]=1;
     if(S.Weapon2!==false && S.MouseDown2) aktywneDziala[ S.Weapon2 ]=1;
     for(var dzi in aktywneDziala) if(S.Weapons[ dzi ].gunS > S.Weapons[dzi].GunSpeed){
 
