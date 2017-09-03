@@ -383,6 +383,12 @@ GAMEobject.prototype.decide_ship = function(e){
             this.shipShootOnSide(90, 5, Weapon.Speed, Weapon.Dec, Weapon.DMG);
             shotDone = true;
         }
+        if(Weapon.T=='triple'){
+            this.shipShootOnSide(-90, 5, Weapon.Speed, Weapon.Dec, Weapon.DMG);
+            this.shipShootOnSide(0, 5, Weapon.Speed, Weapon.Dec, Weapon.DMG);
+            this.shipShootOnSide(90, 5, Weapon.Speed, Weapon.Dec, Weapon.DMG);
+            shotDone = true;
+        }
         if(Weapon.T=='rose'){
             for(var i = -parseInt(Weapon.AtOnce/2); i<= parseInt(Weapon.AtOnce/2); ++i)
                 this.shipShoot(i*Weapon.RoseAngle, Weapon.Speed, Weapon.Dec, Weapon.DMG);
