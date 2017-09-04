@@ -556,10 +556,32 @@ BBAdata.SHIPelements['ammoStorage'] = {             Weight: 5, Price: 100, where
 };
 
 
+BBAdata.SHIPelements['laserGun'] = {                Weight: 5, Price: 100,    where:'weapons',
+    WeaponData:{
+        T:'laser',
+        gunS:0,
+        GunSpeed: 20,
+        ModUse:{Laser:1},
+        Speed: 400,
+        Dec: 1,
+        DMG:{Dmg:3,T:'energy'},},
+    },
+    upgrades: {
+        'up1':{ Price: 300,  WeaponData:{Speed:200}},
+        'up2':{ Price: 300,  WeaponData:{Speed:50}},
+        'up3':{ Price: 300,  WeaponData:{Speed:150}},
+        'up4':{ Price: 300,  WeaponData:{DMG:{Dmg:1}}},
+        'up5':{ Price: 300,  WeaponData:{DMG:{Dmg:1}}},
+        'up6':{ Price: 300,  WeaponData:{DMG:{Dmg:1}}},
+        'up7':{ Price: 300,  WeaponData:{GunSpeed:-5}},
+        'up8':{ Price: 300,  WeaponData:{GunSpeed:-5}},
+    },
+};
+
 //============================= MODULES ========================================
 
 BBAdata.SHIPelements['bulletProd'] = {             Weight: 5, Price: 100, where:'modules',
-    name: 'Weapon Prod',
+    name: 'Ammo Prod',
     ModulesData: {
         T: 'Prod',
         subT: 'Bullet',
@@ -584,6 +606,20 @@ BBAdata.SHIPelements['bulletProd'] = {             Weight: 5, Price: 100, where:
         'I': {}, 'II': {}, 'III': {}, 'IV': {},
     },
 };
+
+
+BBAdata.SHIPelements['laserProd'] = {              Weight: 5, Price: 100, where:'modules',
+    name: 'Laser Prod',
+    ModulesData: {
+
+    },
+    upgrades: {
+
+    }
+};
+
+
+ModStorageData:{Laser:{R:0,M:1}},
 
 
 

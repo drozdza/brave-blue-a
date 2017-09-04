@@ -534,6 +534,14 @@ function MenuShipBuildingObject(){
         S.life = S.lifeM;
         // start speed under max speed
         if(S.speed > S.speedM) S.speed = S.speedM;
+        // remove unused hidden Storages
+        for(var type in S.Storage){
+            var ST = S.Storage[type];
+            if(typeof ST.Hidden != 'undefined' && ST.Hidden != ST.M){
+                ST.M -= ST.Hidden;
+                delete S.Storage[type].Hidden;
+            }
+        }
 
         this.showShipAssemblyView();
         this.showShipProperties();
