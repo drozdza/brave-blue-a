@@ -454,7 +454,8 @@ BBAdata['SHIPpresetsOld']={
             {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 30, explodePreset:'ExplosionSize2'},
             {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1,Ammo:5}, Speed: 10, Dec:30, explodePreset:'NailsBigCircle'},
             {T:'missleR', gunS:0,GunSpeed: 6, Use:{'Missile':1}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'ExplosionSize2'},
-            {T:'missleR', gunS:0,GunSpeed: 6, Use:{'Missile':1}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'NailedMine2'},
+            {T:'missleR', gunS:0,GunSpeed: 6, Use:{'Missile':1}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'NailedBomb2'},
+            {T:'missle',  gunS:0,GunSpeed: 3, Use:{Missile:1}, Speed: 12, SpeedT: 4, Dec: 400, AimRadius: 60, explodePreset:'NailsCircleToCenter2'},
         ],
         Modules:[
             {T:'Prod', subT:'Bullet',Storage:'Ammo', Disabled:0,Emin:2,Emax:4,E:0,Prod:0,ifProd:12 },

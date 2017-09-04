@@ -330,6 +330,7 @@ function MenuShipBuildingObject(){
                     else                 html+=e;
         html+='</div>';
 
+        html+='<div class="shipElement_addAll" elementName="'+e+'">Add All</div>';
         html+='<div class="shipElement_show" elementName="'+e+'">Show</div>';
         html+='</div>';
         return html;
@@ -341,6 +342,11 @@ function MenuShipBuildingObject(){
                 var elementName = $(this).attr('elementName');
                 console.log('Ship Element: ', elementName);
                 MENU.SB.toggleShipElement(elementName);
+                MENU.SB.showPartEditor(elementName);
+            })
+            .on('click','.shipElement_addAll',function(){
+                var elementName = $(this).attr('elementName');
+                MENU.SB.addAllShipElement(elementName);
                 MENU.SB.showPartEditor(elementName);
             })
             .on('click', '.shipElement_show', function(){
@@ -431,6 +437,28 @@ function MenuShipBuildingObject(){
         }
         this.buildShip();
     }
+    this.addAllShipElement = function(elementName){
+        var S = this.SHIPelems[elementName];
+        var SE = BBAdata.SHIPelements[elementName];
+
+        S.Active = true;
+        if(typeof SE.copies != 'undefined'){
+            var Copies = SE.copies;
+        }else{
+            var Copies = {'I':{}};
+        }
+        for(var C in Copies){
+            S.Copies[C] = {'_main':1};
+            if(typeof SE.upgrades != 'undefined'){
+                for(var E in SE.upgrades){
+                    S.Copies[C][E] = 1;
+                }
+            }
+        }
+        $('.shipElement[elementName="'+elementName+'"]').addClass('bought');
+        this.buildShip();
+    }
+
 
     this.toggleShipElementPart = function(elementName, elementCopy, elementUpgrade){
         console.log('toggleShipElementPart(',elementName, elementCopy, elementUpgrade,')');
@@ -537,7 +565,9 @@ function MenuShipBuildingObject(){
         // remove unused hidden Storages
         for(var type in S.Storage){
             var ST = S.Storage[type];
+            console.log(ST);
             if(typeof ST.Hidden != 'undefined' && ST.Hidden != ST.M){
+                console.log(ST.M, ST.Hidden);
                 ST.M -= ST.Hidden;
                 delete S.Storage[type].Hidden;
             }
@@ -564,11 +594,15 @@ function MenuShipBuildingObject(){
                     S[i]-=-Edata[i];
                 break;
                 case 'maxSpeedCap':
+                case 'GlueFireToLaser':
                 case 'maxSpeedTCap':
                     S[i] = Edata[i];
                 break;
                 case 'StorageData':
                     this.buildShip_StorageData(Edata.StorageData);
+                break;
+                case 'ModStorageData':
+                    this.buildShip_ModStorageData(Edata.ModStorageData);
                 break;
                 case 'WeaponData':
                     this.buildShip_WeaponData(Edata.WeaponData);
@@ -585,8 +619,20 @@ function MenuShipBuildingObject(){
             if(typeof this.SHIP.Storage[storageType] == 'undefined')
                 this.SHIP.Storage[storageType] = {M:0,R:0};
 
-            for(var i in StorageData[storageType])
+            for(var i in StorageData[storageType]){
+                if(typeof this.SHIP.Storage[storageType][i] == 'undefined')
+                    this.SHIP.Storage[storageType][i] = 0;
                 this.SHIP.Storage[storageType][i] -=- StorageData[storageType][i];
+            }
+        }
+    }
+    this.buildShip_ModStorageData = function(ModStorageData){
+        for(var storageType in ModStorageData){
+            if(typeof this.SHIP.ModStorage[storageType] == 'undefined')
+                this.SHIP.ModStorage[storageType] = {M:0,R:0};
+
+            for(var i in ModStorageData[storageType])
+                this.SHIP.ModStorage[storageType][i] -=- ModStorageData[storageType][i];
         }
     }
     this.buildShip_WeaponData = function(WeaponData){
@@ -632,7 +678,7 @@ function MenuShipBuildingObject(){
 
         for(var eC in Copies){
             html += '<div class="partCopy';
-            if(typeof SE.Copies[eC] != 'undefined' && SE.Copies[eC]['_main']!=false)
+            if(typeof SE.Copies[eC] != 'undefined' && typeof SE.Copies[eC]['_main'] != 'undefined')
                 html += ' bought';
             html += '">';
             if(typeof E.name != 'undefined') html += E.name;
@@ -640,9 +686,9 @@ function MenuShipBuildingObject(){
             html += ' '+eC;
 
 
-            if(typeof SE.Copies[eC] == 'undefined' || SE.Copies[eC]['_main']==false){
+            if(typeof SE.Copies[eC] == 'undefined' || typeof SE.Copies[eC]['_main']== 'undefined'){
                 html += '<div class="addElementPart toggleElementPart" elementName="'+elementName+'" elementCopy="'+eC+'" elementUpgrade="_main">Add</div>';
-                html += '<div class="elementPartStats_'+elementName+'_'+eC+'">'+this.showPartEditor_updateElemStats(elementName,eC,false)+'</div>';
+                //html += '<div class="elementPartStats_'+elementName+'_'+eC+'">'+this.showPartEditor_updateElemStats(elementName,eC,false)+'</div>';
                 html += '</div>';
                 continue;
             }else{

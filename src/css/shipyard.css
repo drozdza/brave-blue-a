@@ -85,6 +85,17 @@
     box-sizing: border-box;
 }
 
+#shipyardContainer .shipElement .shipElement_addAll{
+    position: absolute;
+    top: 0px;
+    right: 74px;
+    width: 86px;
+    padding: 5px 10px;
+    border: 6px double #00006f;
+    cursor: pointer;
+    color: white;
+    box-sizing: border-box;
+}
 #shipyardContainer .shipElement .shipElement_show{
     position: absolute;
     top: 0px;
@@ -99,11 +110,13 @@
 }
 
 #shipyardContainer .shipElement.bought .shipElement_buy,
+#shipyardContainer .shipElement.bought .shipElement_addAll,
 #shipyardContainer .shipElement.bought .shipElement_show{
     background: #227;
 }
 
 #shipyardContainer .shipElement.viewing .shipElement_buy,
+#shipyardContainer .shipElement.viewing .shipElement_addAll,
 #shipyardContainer .shipElement.viewing .shipElement_show{
     border-color: white;
 }

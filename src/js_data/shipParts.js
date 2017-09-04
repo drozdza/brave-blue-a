@@ -36,6 +36,7 @@ BBAdata.SHIPempty={
     Storage:{},
     Weapons:[],
     Modules:[],
+    ModStorage:{},
 };
 
 
@@ -564,9 +565,10 @@ BBAdata.SHIPelements['laserGun'] = {                Weight: 5, Price: 100,    wh
         ModUse:{Laser:1},
         Speed: 400,
         Dec: 1,
-        DMG:{Dmg:3,T:'energy'},},
+        DMG:{Dmg:3,T:'energy'},
     },
-    upgrades: {
+    ModStorageData:{Laser:{R:0,M:0}},
+    upgrades:{
         'up1':{ Price: 300,  WeaponData:{Speed:200}},
         'up2':{ Price: 300,  WeaponData:{Speed:50}},
         'up3':{ Price: 300,  WeaponData:{Speed:150}},
@@ -575,6 +577,7 @@ BBAdata.SHIPelements['laserGun'] = {                Weight: 5, Price: 100,    wh
         'up6':{ Price: 300,  WeaponData:{DMG:{Dmg:1}}},
         'up7':{ Price: 300,  WeaponData:{GunSpeed:-5}},
         'up8':{ Price: 300,  WeaponData:{GunSpeed:-5}},
+        'up9':{ Price: 100,  GlueFireToLaser: true},
     },
 };
 
@@ -591,7 +594,7 @@ BBAdata.SHIPelements['bulletProd'] = {             Weight: 5, Price: 100, where:
         Disabled: 0,
         Emin: 2,
         Emax: 4,
-        ifProd: 20,
+        ifProd: 100,
     },
     upgrades: {
         'lowerMin':{    Price: 100, ModulesData: {Emin:-1}},
@@ -599,8 +602,8 @@ BBAdata.SHIPelements['bulletProd'] = {             Weight: 5, Price: 100, where:
         'higherMax':{   Price: 100, ModulesData: {Emax: 1}},
         'higherMax2':{  Price: 100, ModulesData: {Emax: 2}},
         'higherMax3':{  Price: 100, ModulesData: {Emax: 3}},
-        'faster':{      Price: 100, ModulesData: {ifProd:-5}},
-        'faster2':{     Price: 100, ModulesData: {ifProd:-5}},
+        'faster':{      Price: 100, ModulesData: {ifProd:-20}},
+        'faster2':{     Price: 100, ModulesData: {ifProd:-20}},
     },
     copies: {
         'I': {}, 'II': {}, 'III': {}, 'IV': {},
@@ -611,15 +614,23 @@ BBAdata.SHIPelements['bulletProd'] = {             Weight: 5, Price: 100, where:
 BBAdata.SHIPelements['laserProd'] = {              Weight: 5, Price: 100, where:'modules',
     name: 'Laser Prod',
     ModulesData: {
-
+        T:'moduleProd',
+        Disabled: 0,
+        Prod: 0,
+        E: 0,
+        Emin: 2,
+        Emax: 4,
+        ifProd: 400,
+        subT: 'Laser',
+        ModStorage: 'Laser'
     },
+    ModStorageData:{Laser:{R:0,M:1}},
     upgrades: {
-
+        'up1':{},
     }
 };
 
 
-ModStorageData:{Laser:{R:0,M:1}},
 
 
 

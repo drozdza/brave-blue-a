@@ -123,8 +123,14 @@ BBAdata['ExplosivesPresets']={
     NailsCircleToCenter:{
         onHitDieExpire: {Do:'explode', explodeType: 'nails', NailsRad: 8, NailsSpeed: 6, NailsDec: 26, NailsAngleCenter: 7, NailsAngleBoth: 1, ringRadius: 100, NailsNeutral:true},
     },
+    NailsCircleToCenter2:{
+        onHitDieExpire: {Do:'explode', explodeType: 'nails', NailsRad: 8, NailsSpeed: 6, NailsDec: 26, NailsAngleCenter: 7, NailsAngleBoth: 1, ringRadius: 100},
+    },
     NailsBomb:{
         onHitDieExpire: {Do:'explode', explodeType: 'nails', NailsRad: 12, NailsSpeed: 5, NailsSpeedPlus: 5, NailsDec: 6, NailsDecPlus: 6},
+    },
+    NailedBomb2:{
+        onHitDieExpire: {Do:'explode', explodeType: 'nails', NailsRad: 24, NailsSpeed: 4, NailsSpeedPlus: 6, NailsDec: 16, NailsDecPlus: 6},
     },
 
     NailsWirlpool:{
