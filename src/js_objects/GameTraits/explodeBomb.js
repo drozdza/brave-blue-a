@@ -22,7 +22,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             this.O[ L ].dec = explodeObj.NailsDec;
             if(explodeObj.NailsDecPlus)
                 this.O[ L ].dec-=-parseInt(Math.random()*explodeObj.NailsDecPlus);
-            this.O[ L ].angle = i;
+            this.O[ L ].angle = i+parseInt(Math.random()*360);
             if(explodeObj.ringRadius)
                 if(explodeObj.NailsAngleBoth==1 && L%2==0)
                     this.O[ L ].angle-=-90;

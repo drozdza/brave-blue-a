@@ -352,7 +352,9 @@ GAMEobject.prototype.decide_ship = function(e){
     // !!!! TO FIX LATER
     if(F1T=='laser' || F2T=='laser'){
         var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -360)%360;
-        $('#gameboardMarkers').append('<div class="object laserAiming" style="height: '+O.Speed+'px; top: '+(this.Dy/2)+'px; left: '+(this.Dx/2)+'px; transform: rotate('+Angle+'deg);"></div>');
+        if(F1T=='laser') var LaserLenght = S.Weapons[S.Weapon1].Speed;
+            else         var LaserLenght = S.Weapons[S.Weapon2].Speed;
+        $('#gameboardMarkers').append('<div class="object laserAiming" style="height: '+LaserLenght+'px; top: '+(this.Dy/2)+'px; left: '+(this.Dx/2)+'px; transform: rotate('+Angle+'deg);"></div>');
     }
 
 

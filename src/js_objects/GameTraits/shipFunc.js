@@ -7,7 +7,7 @@ GAMEobject.prototype.shipFunc_glueFireToLaser = function(){
     var dist = 1000000;
     for(F in Found){
         if(this.O[F].undestructible > 0) continue;
-        X = this.mouseX - this.O[F].x;
+        X = this.mouseX - this.O[F].x; 
         Y = this.mouseY - this.O[F].y;
         R = X*X- -Y*Y;
         if(R < dist){
