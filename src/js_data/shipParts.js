@@ -602,10 +602,62 @@ BBAdata.SHIPelements['laserProd'] = {              Weight: 5, Price: 100, where:
         'up6':{ModulesData:{Emin:-0.5}},
         'up7':{ModulesData:{Emin:-0.5}},
         'up8':{ModulesData:{ifProd:-100}},
+        'up9':{ModulesData:{ifProd:-100}},
+        'up10':{ModulesData:{ifProd:-150}},
     }
 };
 
 
+BBAdata.SHIPelements['healMod'] = {                  Weight: 10, Price: 4000, where:'modules',
+    name: 'Healing',
+    ModulesData: {
+        T:'healerProd',
+        Disabled:0,
+        Emin:6,
+        Emax:10,
+        E:0,
+        Prod:0,
+        ifProd:1440
+    },
+    upgrades: {
+        'up1':{ModulesData:{Emin:-2,Emax:6}},
+        'up2':{ModulesData:{Emin:-2,Emax:6}},
+        'up3':{ModulesData:{Emin:-1,Emax:8}},
+        'up4':{ModulesData:{ifProd:-220}},
+        'up5':{ModulesData:{ifProd:-220}},
+        'up6':{ModulesData:{ifProd:-200}},
+        'up7':{ModulesData:{ifProd:-100}},
+    },
+    copies: {'I': {}, 'II': {}, 'III': {}},
+};
+
+BBAdata.SHIPelements['radar'] = {                  Weight: 10, Price: 4000, where:'modules',
+    name: 'Radar',
+    ModulesData: {
+        T:'radar',
+        Disabled: 0,
+        Emin: 5,
+        Emax: 10,
+        E: 0,
+        Prod: 0,
+        ifProd: 6000,
+        Radius: 1500
+    },
+    upgrades: {
+        'up1':{ModulesData:{Emin:-1,Emax:5}},
+        'up2':{ModulesData:{Emin:-1,Emax:5}},
+        'up3':{ModulesData:{Emin:-2,Emax:10}},
+        'up4':{ModulesData:{ifProd:-1000}},
+        'up5':{ModulesData:{ifProd:-1000}},
+        'up6':{ModulesData:{ifProd:-1000}},
+        'up7':{ModulesData:{ifProd:-1000}},
+        'up8':{ModulesData:{ifProd:-1000}},
+        'up9':{ModulesData:{ifProd:1200,Radius:1000}},
+        'up10':{ModulesData:{ifProd:1200,Radius:1000}},
+        'up11':{ModulesData:{ifProd:1200,Radius:1000}},
+        'up12':{ModulesData:{ifProd:1200,Radius:1000}},
+    },
+};
 
 
 
