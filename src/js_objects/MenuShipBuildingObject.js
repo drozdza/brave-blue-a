@@ -591,6 +591,7 @@ function MenuShipBuildingObject(){
                 case 'maxSpeedCapPlus':
                 case 'maxSpeedTCapPlus':
                 case 'engineMultiply':
+                case 'GlueFireToEstimated':
                     S[i]-=-Edata[i];
                 break;
                 case 'maxSpeedCap':

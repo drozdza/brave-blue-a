@@ -7,7 +7,7 @@ GAMEobject.prototype.shipFunc_glueFireToLaser = function(){
     var dist = 1000000;
     for(F in Found){
         if(this.O[F].undestructible > 0) continue;
-        X = this.mouseX - this.O[F].x; 
+        X = this.mouseX - this.O[F].x;
         Y = this.mouseY - this.O[F].y;
         R = X*X- -Y*Y;
         if(R < dist){
@@ -63,11 +63,14 @@ GAMEobject.prototype.shipFunc_esteemedPositions = function(O,F){
         if(this.O[Fo].undestructible > 0) continue;
         if(this.O[Fo].life < 1) continue;
         WU = this.countFutureShoot(Fo,O.x,O.y,F.Speed,F.Dec);
+        console.log('Esteem:',WU);
         if(WU.r){
             EsteemedPos[Fo]={x:WU.x,y:WU.y};
             var X = WU.x - this.O[0].x- -this.Dx/2;
             var Y = WU.y - this.O[0].y- -this.Dy/2;
-            $('#gameboardMarkers').append('<div class="estimationMarkers" style="top: '+Y+'px; left: '+X+'px;"></div>');
+            //!!!!! Tutaj trzeba przepisać do canvasa
+            // this.
+            // $('#gameboardMarkers').append('<div class="estimationMarkers" style="top: '+Y+'px; left: '+X+'px;"></div>');
         }
     }
     return EsteemedPos;

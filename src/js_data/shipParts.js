@@ -631,6 +631,21 @@ BBAdata.SHIPelements['healMod'] = {                  Weight: 10, Price: 4000, wh
     copies: {'I': {}, 'II': {}, 'III': {}},
 };
 
+
+BBAdata.SHIPelements['esteemMod'] = {                  Weight: 10, Price: 4000, where:'modules',
+    name: 'Enemy Estimation',
+    ModulesData: {
+        T:'esteemProd',
+        Disabled:0,
+        Prod:0,
+        E:0,
+        Emin:1,
+        Emax:1,
+        ifProd:9000
+    },
+    GlueFireToEstimated: 100,
+};
+
 BBAdata.SHIPelements['radar'] = {                  Weight: 10, Price: 4000, where:'modules',
     name: 'Radar',
     ModulesData: {

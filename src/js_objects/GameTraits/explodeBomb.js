@@ -5,12 +5,13 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
     ++this.C['B_s'+O.S+'_bombsExploded'];
 
     if(explodeObj.explodeType=='nails'){
+        var randQ = parseInt(Math.random()*360);
         for(i=0; i<360; i-=-explodeObj.NailsRad){
             var x = O.x;
             var y = O.y;
             if(explodeObj.ringRadius){
-                x-=-explodeObj.ringRadius*Math.sin((-i)*(Math.PI/180));
-                y-=-explodeObj.ringRadius*Math.cos((-i)*(Math.PI/180));
+                x-=-explodeObj.ringRadius*Math.sin((-i-randQ)*(Math.PI/180));
+                y-=-explodeObj.ringRadius*Math.cos((-i-randQ)*(Math.PI/180));
             }
             if(explodeObj.NailsNeutral)
                 L = this.putBullet(3,x,y);
@@ -22,7 +23,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             this.O[ L ].dec = explodeObj.NailsDec;
             if(explodeObj.NailsDecPlus)
                 this.O[ L ].dec-=-parseInt(Math.random()*explodeObj.NailsDecPlus);
-            this.O[ L ].angle = i+parseInt(Math.random()*360);
+            this.O[ L ].angle = i+randQ;
             if(explodeObj.ringRadius)
                 if(explodeObj.NailsAngleBoth==1 && L%2==0)
                     this.O[ L ].angle-=-90;

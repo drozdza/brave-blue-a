@@ -167,6 +167,12 @@ GAMEobject.prototype.decide_ship = function(e){
 
     S.Energy = S.EnergyM - S.Espeed;
 
+    var F1T = false;
+    var F2T = false;
+    if(S.Weapon1!==false) F1T = S.Weapons[S.Weapon1].T;
+    if(S.Weapon2!==false) F2T = S.Weapons[S.Weapon2].T;
+
+
     var EsteemedPos = false;
 
     for(var m in S.Modules){
@@ -190,7 +196,7 @@ GAMEobject.prototype.decide_ship = function(e){
         // Moduły niepotrzebne:
         if( (M.T=='Prod' && S.Storage[ M.Storage ].R >= S.Storage[ M.Storage ].M)
          || (M.T=='healerProd' && S.lifeM <= O.life)
-         || (M.T=='esteemProd' && (F.T=='missle' || F.T=='missleR' || F.T=='laser'))
+         || (M.T=='esteemProd' && (F1T=='missle' || F1T=='missleR' || F1T=='laser'))
          || (M.T=='shieldProd' && S.EnergyFieldMax <= O.energyField) ){
             if(Sx.Mod[m] != 'done'){
                 if(M.subT) modeName = BBAdata['ModuleNames'][M.T+M.subT];
@@ -303,8 +309,8 @@ GAMEobject.prototype.decide_ship = function(e){
         if(M.T=='radar')
             this.shipFunc_workingRadar(M.E, (M.Prod/M.ifProd)*360, M.Radius);
 
-        if(M.T=='esteemProd' && M.E==M.Emax && (F.T=='single' || F.T=='double' || F.T=='rose' || F.T=='bomb'))
-            EsteemedPos = this.shipFunc_esteemedPositions(O,F);
+        if(M.T=='esteemProd' && M.E==M.Emax && (F1T=='single' || F1T=='double' || F1T=='triple' || F1T=='rose' || F1T=='bomb'))
+            EsteemedPos = this.shipFunc_esteemedPositions(O,S.Weapons[S.Weapon1]);
 
         if(modHtml != '')
             $('#moduleBox_'+m).html(modHtml);
@@ -316,17 +322,10 @@ GAMEobject.prototype.decide_ship = function(e){
     }
 
 
-    F1T = false;
-    F2T = false;
-    if(S.Weapon1!==false) F1T = S.Weapons[S.Weapon1].T;
-    if(S.Weapon2!==false) F2T = S.Weapons[S.Weapon2].T;
-
 
     // ESTYMATORY
-    // !!!! TO FIX LATER
     if(S.GlueFireToLaser!=false && (F1T=='laser' || F2T=='laser'))
         this.shipFunc_glueFireToLaser();
-
 
 
     // !!!! TO FIX LATER
@@ -349,7 +348,6 @@ GAMEobject.prototype.decide_ship = function(e){
     if(F2T=='missle' || F2T=='missleR')
         this.shipFunc_glueFireToMissle(S.Weapons[S.Weapon2].AimRadius);
 
-    // !!!! TO FIX LATER
     if(F1T=='laser' || F2T=='laser'){
         var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -360)%360;
         if(F1T=='laser') var LaserLenght = S.Weapons[S.Weapon1].Speed;
