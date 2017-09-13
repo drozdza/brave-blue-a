@@ -99,7 +99,7 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
             if(SH.ReductionUses != 'infinite' && O[SH.ReductionUses] < 1)
                 continue;
 
-            if(o==0) var DmgReductionCount = O.ShieldStorage[SH.DmgReduction].R;
+            if(o==0) var DmgReductionCount = this.SHIP.ShieldStorage[SH.DmgReduction].R;
                 else var DmgReductionCount = O[SH.DmgReduction];
 
             if(SH.DmgReduction && (SH.DmgReduction=='infinite' || DmgReductionCount > 0)){
@@ -126,7 +126,7 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
 
                     ShieldHits-=-DMGreduce;
                     DMGval -= DMGreduce;
-                    if(o==0) O.ShieldStorage[SH.DmgReduction].R -= DMGreduce;
+                    if(o==0) this.SHIP.ShieldStorage[SH.DmgReduction].R -= DMGreduce;
                         else O[SH.DmgReduction] -= DMGreduce;
                 }
             }
@@ -222,6 +222,7 @@ GAMEobject.prototype.drawShields = function(O,o,CH){
                 lineWidth = 2;
             } else {
                 lineWidth = O[SH.DmgReduction];
+                if(o==0) lineWidth = this.SHIP.ShieldStorage[SH.DmgReduction].R;
                 if(lineWidth == 0) continue;
             }
             if(lineWidth > 2) lineWidth = 2- -(lineWidth-2)/2;

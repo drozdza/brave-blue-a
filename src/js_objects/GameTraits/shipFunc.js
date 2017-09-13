@@ -31,7 +31,6 @@ GAMEobject.prototype.shipFunc_glueFireToMissle = function(aimRadius){
     var missleAim = false;
     var dist = 1000000;
     for(F in Found){
-        console.log(F);
         if(this.O[F].undestructible > 0) continue;
         X = this.mouseX - this.O[F].x;
         Y = this.mouseY - this.O[F].y;
@@ -48,10 +47,7 @@ GAMEobject.prototype.shipFunc_glueFireToMissle = function(aimRadius){
         X = this.O[missleAim].x-this.O[0].x- -this.Dx/2;
         Y = this.O[missleAim].y-this.O[0].y- -this.Dy/2;
         $('#gameboardMarkers').append('<div class="estimationMarkers MissleAim" style="top: '+Y+'px; left: '+X+'px;"><span style="width: '+(2*aimRadius)+'px; height: '+(2*aimRadius)+'px; top: -'+(aimRadius- -2)+'px; left: -'+(aimRadius- -2)+'px;"></span></div>');
-
-        console.log(missleAim);
     } else {
-        console.log('bee');
         this.missleAim = false;
     }
 }
@@ -237,8 +233,8 @@ GAMEobject.prototype.shipFunc_showHealth = function(){
     for(var i=0; i<S.lifeM - O.life; ++i)
         html+='A';
     html+='</span>';
-    for(var shieldType in O.ShieldStorage){
-        var SS = O.ShieldStorage[shieldType];
+    for(var shieldType in S.ShieldStorage){
+        var SS = S.ShieldStorage[shieldType];
         var shieldLetter = 'O';
         if(shieldType=='bullet') shieldLetter = 'B';
         if(shieldType=='explosion') shieldLetter = 'E';

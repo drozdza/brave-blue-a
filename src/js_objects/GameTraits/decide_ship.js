@@ -196,7 +196,6 @@ GAMEobject.prototype.decide_ship = function(e){
         // Moduły niepotrzebne:
         if( (M.T=='Prod' && S.Storage[ M.Storage ].R >= S.Storage[ M.Storage ].M)
          || (M.T=='healerProd' && S.lifeM <= O.life)
-
          || (M.T=='esteemProd' && (F1T=='missle' || F1T=='missleR' || F1T=='laser'))
          || (M.T=='shieldProd' && S.ShieldStorage[ M.ShieldStorage ].R >= S.ShieldStorage[ M.ShieldStorage ].M)){
 

@@ -684,7 +684,7 @@ BBAdata.SHIPelements['shieldProd'] = {             Weight: 5, Price: 2000,
     Shields:{
         name: 'absorbtionShield',
         CatchDmgT: {normal:1, energy:1, explo:1},
-        DmgReduction: 'energyField',
+        DmgReduction: 'absorbtion',
         ReductionUses: 'infinite',
         Own: true,
     },
