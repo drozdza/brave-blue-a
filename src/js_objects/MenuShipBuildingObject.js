@@ -599,10 +599,13 @@ function MenuShipBuildingObject(){
                     S[i] = Edata[i];
                 break;
                 case 'StorageData':
-                    this.buildShip_StorageData(Edata.StorageData);
+                    this.buildShip_StorageData(Edata.StorageData,'Storage');
                 break;
                 case 'ModStorageData':
-                    this.buildShip_ModStorageData(Edata.ModStorageData);
+                    this.buildShip_StorageData(Edata.ModStorageData,'ModStorage');
+                break;
+                case 'ShieldStorageData':
+                    this.buildShip_StorageData(Edata.ShieldStorageData,'ShieldStorage');
                 break;
                 case 'WeaponData':
                     this.buildShip_WeaponData(Edata.WeaponData);
@@ -614,25 +617,16 @@ function MenuShipBuildingObject(){
         }
     }
 
-    this.buildShip_StorageData = function(StorageData){
+    this.buildShip_StorageData = function(StorageData, StorageType){
         for(var storageType in StorageData){
-            if(typeof this.SHIP.Storage[storageType] == 'undefined')
-                this.SHIP.Storage[storageType] = {M:0,R:0};
+            if(typeof this.SHIP[StorageType][storageType] == 'undefined')
+                this.SHIP[StorageType][storageType] = {M:0,R:0};
 
             for(var i in StorageData[storageType]){
-                if(typeof this.SHIP.Storage[storageType][i] == 'undefined')
-                    this.SHIP.Storage[storageType][i] = 0;
-                this.SHIP.Storage[storageType][i] -=- StorageData[storageType][i];
+                if(typeof this.SHIP[StorageType][storageType][i] == 'undefined')
+                    this.SHIP[StorageType][storageType][i] = 0;
+                this.SHIP[StorageType][storageType][i] -=- StorageData[storageType][i];
             }
-        }
-    }
-    this.buildShip_ModStorageData = function(ModStorageData){
-        for(var storageType in ModStorageData){
-            if(typeof this.SHIP.ModStorage[storageType] == 'undefined')
-                this.SHIP.ModStorage[storageType] = {M:0,R:0};
-
-            for(var i in ModStorageData[storageType])
-                this.SHIP.ModStorage[storageType][i] -=- ModStorageData[storageType][i];
         }
     }
     this.buildShip_WeaponData = function(WeaponData){

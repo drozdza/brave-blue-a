@@ -17,12 +17,6 @@ BBAdata.SHIPempty={
     maxSpeedCapPlus: 0,
     maxSpeedTCapPlus: 0,
 
-    AmmoStorage: 0,
-    Ammo: 0,
-    MissleStorage: 0,
-    Missles: 0,
-    BombStorage: 0,
-    Bombs: 0,
     ShowFireRange: false,
     ShowAmmoIndicator: false,
     GlueFireToEstimated: false,
@@ -32,11 +26,12 @@ BBAdata.SHIPempty={
     Weapon2: false,
     MouseDown1: false,
     MouseDown2: false,
-    EnergyFieldMax: 0,
+
     Storage:{},
+    ModStorage:{},
+    ShieldStorage:{},
     Weapons:[],
     Modules:[],
-    ModStorage:{},
 };
 
 
@@ -608,7 +603,7 @@ BBAdata.SHIPelements['laserProd'] = {              Weight: 5, Price: 100, where:
 };
 
 
-BBAdata.SHIPelements['healMod'] = {                  Weight: 10, Price: 4000, where:'modules',
+BBAdata.SHIPelements['healMod'] = {                Weight: 10, Price: 4000, where:'modules',
     name: 'Healing',
     ModulesData: {
         T:'healerProd',
@@ -658,6 +653,36 @@ BBAdata.SHIPelements['radar'] = {                  Weight: 10, Price: 4000, wher
         'up12':{ModulesData:{ifProd:1200,Radius:1000}},
     },
 };
+
+BBAdata.SHIPelements['shieldProd'] = {             Weight: 5, Price: 2000,
+    where:'modules',
+    ModulesData: {
+        T: 'shieldProd',
+        Disabled: 0,
+        Emin: 0.1,
+        Emax: 1,
+        E: 0,
+        Prod: 0,
+        ifProd: 30,
+        ShieldStorageData: 'absorbtion'
+    },
+    Shields:{
+        name: 'absorbtionShield',
+        CatchDmgT: {normal:1, energy:1, explo:1},
+        DmgReduction: 'energyField',
+        ReductionUses: 'infinite',
+        Own: true,
+    },
+    ShieldStorage:{'absorbtion':{R:0,M:0}},
+    upgrades: {
+        'up1':{},
+    },
+    copies: {
+        'I': {}, 'II': {}, 'III': {},
+    },
+
+}
+
 
 
 

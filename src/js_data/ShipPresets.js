@@ -49,7 +49,7 @@ BBAdata['SHIPpresetsOld']={
         Shields:[{
             name: 'absorbtionShield',
             CatchDmgT: {normal:1, energy:1, explo:1},
-            DmgReduction: 'energyField',
+            DmgReduction: 'absorbtion',
             ReductionUses: 'infinite',
             Own: true,
         }],
@@ -65,6 +65,9 @@ BBAdata['SHIPpresetsOld']={
         },
         ModStorage:{
             TeleJump: {R:0,M:6},
+        },
+        ShieldStorage:{
+            absorbtion: {R:0, M:10},
         },
         ShowFireRange: false,
         ShowAmmoIndicator: true,
@@ -82,7 +85,7 @@ BBAdata['SHIPpresetsOld']={
             {T:'tele',    gunS:0,GunSpeed: 3, ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
         ],
         Modules:[
-            {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,E:0,Prod:0,ifProd:30 },
+            {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,E:0,Prod:0,ifProd:30, ShieldStorage:'absorbtion' },
             {T:'spotRegion',Disabled:1,Emin:4,Emax:4,E:0,Prod:0,ifProd:4 },
             {T:'moduleProd',Disabled:0,Emin:2,Emax:4,E:0,Prod:0,ifProd:60, subT:'TeleJump',ModStorage:'TeleJump'},
             {T:'healerProd',Disabled:0,Emin:4,Emax:16,E:0,Prod:0,ifProd:1440 },
@@ -97,7 +100,7 @@ BBAdata['SHIPpresetsOld']={
         Shields:[{
             name: 'absorbtionShield',
             CatchDmgT: {normal:1, energy:1, explo:1},
-            DmgReduction: 'energyField',
+            DmgReduction: 'absorbtion',
             ReductionUses: 'infinite',
             Own: true,
         }],
@@ -113,6 +116,9 @@ BBAdata['SHIPpresetsOld']={
         },
         ModStorage:{
             TeleJump: {R:0,M:6},
+        },
+        ShieldStorage:{
+            absorbtion: {R:0, M:10},
         },
         ShowFireRange: true,
         ShowAmmoIndicator: true,
@@ -131,7 +137,7 @@ BBAdata['SHIPpresetsOld']={
             {T:'tele',    gunS:0,GunSpeed: 3, ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
         ],
         Modules:[
-            {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,E:0,Prod:0,ifProd:30 },
+            {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,E:0,Prod:0,ifProd:30, ShieldStorage:'absorbtion' },
             {T:'spotRegion',Disabled:1,Emin:4,Emax:4,E:0,Prod:0,ifProd:4 },
             {T:'moduleProd',Disabled:0,Emin:2,Emax:4,E:0,Prod:0,ifProd:60, subT:'TeleJump',ModStorage:'TeleJump'},
             {T:'healerProd',Disabled:0,Emin:4,Emax:16,E:0,Prod:0,ifProd:1440 },
@@ -146,7 +152,7 @@ BBAdata['SHIPpresetsOld']={
         Shields:[{
             name: 'absorbtionShield',
             CatchDmgT: {normal:1, energy:1, explo:1},
-            DmgReduction: 'energyField',
+            DmgReduction: 'absorbtion',
             ReductionUses: 'infinite',
             Own: true,
         }],
@@ -162,6 +168,9 @@ BBAdata['SHIPpresetsOld']={
         },
         ModStorage:{
             TeleJump: {R:0,M:6},
+        },
+        ShieldStorage:{
+            absorbtion: {R:0, M:10},
         },
         ShowFireRange: true,
         ShowAmmoIndicator: true,
@@ -182,7 +191,7 @@ BBAdata['SHIPpresetsOld']={
             {T:'tele',    gunS:0,GunSpeed: 3, ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
         ],
         Modules:[
-            {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,E:0,Prod:0,ifProd:30 },
+            {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,E:0,Prod:0,ifProd:30, ShieldStorage:'absorbtion' },
             {T:'spotRegion',Disabled:1,Emin:4,Emax:4,E:0,Prod:0,ifProd:4 },
             {T:'moduleProd',  Disabled:0,Emin:2,Emax:4,E:0,Prod:0,ifProd:60, subT:'TeleJump', ModStorage:'TeleJump'},
             {T:'healerProd',Disabled:0,Emin:4,Emax:16,E:0,Prod:0,ifProd:1440 },
@@ -207,6 +216,7 @@ BBAdata['SHIPpresetsOld']={
         ModStorage:{
             Moves: {R:0, M:8},
         },
+        ShieldStorage:{},
         ShowFireRange: false,
         ShowAmmoIndicator: true,
         GlueFireToEstimated: 100,
@@ -242,7 +252,7 @@ BBAdata['SHIPpresetsOld']={
         Shields:[{
             name: 'absorbtionShield',
             CatchDmgT: {normal:1, energy:1, explo:1},
-            DmgReduction: 'energyField',
+            DmgReduction: 'absorbtion',
             ReductionUses: 'infinite',
             Own: true,
         }],
@@ -261,6 +271,9 @@ BBAdata['SHIPpresetsOld']={
         ModStorage:{
             TeleJump: {R:0,M:6},
             Laser: {R:0,M:4}
+        },
+        ShieldStorage:{
+            absorbtion: {R:0, M:10},
         },
         ShowFireRange: false,
         ShowAmmoIndicator: true,
@@ -283,7 +296,7 @@ BBAdata['SHIPpresetsOld']={
             {T:'tele',    gunS:0,GunSpeed: 3,  ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
         ],
         Modules:[
-            {T:'shieldProd',Disabled:0,Prod:0,E:0,Emin:0.1,Emax:1,ifProd:30 },
+            {T:'shieldProd',Disabled:0,Prod:0,E:0,Emin:0.1,Emax:1,ifProd:30, ShieldStorage:'absorbtion' },
             {T:'spotRegion',Disabled:1,Prod:0,E:0,Emin:4,Emax:4, ifProd:4 },
             {T:'moduleProd',Disabled:0,Prod:0,E:0,Emin:2,Emax:4, ifProd:60, subT:'TeleJump', ModStorage:'TeleJump'},
             {T:'Prod',      Disabled:0,Prod:0,E:0,Emin:2,Emax:4, ifProd:10,subT:'Bullet',Storage:'Ammo'},
@@ -310,11 +323,10 @@ BBAdata['SHIPpresetsOld']={
         Shields:[{
             name: 'absorbtionShield',
             CatchDmgT: {normal:1, energy:1, explo:1},
-            DmgReduction: 'energyField',
+            DmgReduction: 'absorbtion',
             ReductionUses: 'infinite',
             Own: true,
         }],
-        EnergyFieldMax: 10,
         EnergyM: 32,
         engineMultiply: 1,
         speed: 8,
@@ -327,6 +339,9 @@ BBAdata['SHIPpresetsOld']={
         ModStorage:{
             TeleJump: {R:0,M:6},
             Laser: {R:0,M:4}
+        },
+        ShieldStorage:{
+            absorbtion: {R:0, M:10},
         },
         ShowFireRange: false,
         ShowAmmoIndicator: true,
@@ -349,7 +364,7 @@ BBAdata['SHIPpresetsOld']={
             {T:'tele',    gunS:0,GunSpeed: 3,  ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
         ],
         Modules:[
-            {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,E:0,Prod:0,ifProd:30 },
+            {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,E:0,Prod:0,ifProd:30, ShieldStorage:'absorbtion' },
             {T:'moduleProd',Disabled:0,Emin:2,Emax:4,E:0,Prod:0,ifProd:60, subT:'TeleJump', ModStorage:'TeleJump'},
             {T:'healerProd',Disabled:0,Emin:4,Emax:16,E:0,Prod:0,ifProd:1440 },
             {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,E:0,Prod:0,ifProd:200 },
@@ -371,11 +386,10 @@ BBAdata['SHIPpresetsOld']={
         Shields:[{
             name: 'absorbtionShield',
             CatchDmgT: {normal:1, energy:1, explo:1},
-            DmgReduction: 'energyField',
+            DmgReduction: 'absorbtion',
             ReductionUses: 'infinite',
             Own: true,
         }],
-        EnergyFieldMax: 10,
         EnergyM: 32,
         engineMultiply: 1,
         speed: 8,
@@ -388,6 +402,9 @@ BBAdata['SHIPpresetsOld']={
         ModStorage:{
             TeleJump: {R:0,M:6},
             Laser: {R:0,M:4}
+        },
+        ShieldStorage:{
+            absorbtion: {R:0, M:10},
         },
         ShowFireRange: false,
         ShowAmmoIndicator: true,
@@ -409,7 +426,7 @@ BBAdata['SHIPpresetsOld']={
             {T:'tele',    gunS:0,GunSpeed: 3,  ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
         ],
         Modules:[
-            {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,E:0,Prod:0,ifProd:30 },
+            {T:'shieldProd',Disabled:0,Emin:0.1,Emax:1,E:0,Prod:0,ifProd:30, ShieldStorage:'absorbtion' },
             {T:'moduleProd',Disabled:0,Emin:2,Emax:4,E:0,Prod:0,ifProd:60, subT:'TeleJump', ModStorage:'TeleJump'},
             {T:'healerProd',Disabled:0,Emin:4,Emax:16,E:0,Prod:0,ifProd:1440 },
             {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,E:0,Prod:0,ifProd:150 },
