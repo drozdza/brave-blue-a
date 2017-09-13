@@ -9,6 +9,7 @@ function MenuShipBuildingObject(){
 
     this.lastWeapon = false;
     this.lastModule = false;
+    this.lastShield = false;
 
 
     // DEPRECATED
@@ -543,6 +544,7 @@ function MenuShipBuildingObject(){
                 var elemCopy = Evar.Copies[uCopy];
                 this.lastWeapon = false;
                 this.lastModule = false;
+                this.lastShield = false;
                 for(var uUpgrade in elemCopy)
                 if(uUpgrade == '_main'){
                     this.buildShip_addElement(S, Edata);
@@ -614,6 +616,9 @@ function MenuShipBuildingObject(){
                 case 'ModulesData':
                     this.buildShip_ModulesData(Edata.ModulesData);
                 break;
+                case 'ShieldsData':
+                    this.buildShip_ShieldsData(Edata.ShieldsData);
+                break;
             }
         }
     }
@@ -648,6 +653,15 @@ function MenuShipBuildingObject(){
         Module = this.SHIP.Modules[this.lastModule];
 
         Module = mergeObjects(Module,ModuleData);
+    }
+    this.buildShip_ShieldsData = function(ShieldsData){
+        if(this.lastShield === false){
+            this.lastShield = this.SHIP.Shields.length;
+            this.SHIP.Shields[this.SHIP.Shields.length] = {};
+        }
+        Shield = this.SHIP.Shields[this.lastShield];
+
+        Shield = mergeObjects(Shield,ShieldsData);
     }
 
     // ==================== ELEMENT CONFIGURATOR -==============================

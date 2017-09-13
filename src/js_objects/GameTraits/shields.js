@@ -96,11 +96,16 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
                 if(Math.random()*100 > SH.ShieldProbability)
                     continue;
 
-            if(SH.ReductionUses != 'infinite' && O[SH.ReductionUses] < 1)
+            var ReductionUsesCount = O[SH.ReductionUses];
+            if(SH.ReductionUses!='infinite' && o==0)
+                ReductionUsesCount = this.SHIP.ShieldStorage[SH.ReductionUses].R;
+
+            if(SH.ReductionUses != 'infinite' && ReductionUsesCount < 1)
                 continue;
 
-            if(o==0) var DmgReductionCount = this.SHIP.ShieldStorage[SH.DmgReduction].R;
-                else var DmgReductionCount = O[SH.DmgReduction];
+            var DmgReductionCount = O[SH.DmgReduction];
+            if(SH.DmgReduction!='infinite' && o==0)
+                DmgReductionCount = this.SHIP.ShieldStorage[SH.DmgReduction].R;
 
             if(SH.DmgReduction && (SH.DmgReduction=='infinite' || DmgReductionCount > 0)){
                 DMGreduce = 99999;
@@ -131,8 +136,10 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
                 }
             }
 
-            if(DMGreduce > 0 && SH.ReductionUses!='infinite')
-                --O[SH.ReductionUses];
+            if(DMGreduce > 0 && SH.ReductionUses!='infinite'){
+                if(o==0) --this.SHIP.ShieldStorage[SH.ReductionUses].R;
+                    else --O[SH.ReductionUses];
+            }
 
             if(SH.DmgTransfer){
                 var DTF = SH.DmgTransfer;
@@ -230,6 +237,7 @@ GAMEobject.prototype.drawShields = function(O,o,CH){
         }
         if(SH.name == 'explosionShield'){
             var lineWidth = O[SH.ReductionUses];
+            if(o==0) lineWidth = this.SHIP.ShieldStorage[SH.ReductionUses].R;
             if(lineWidth == 0) continue;
             lineWidth *= 3;
             ToDraw[ ToDraw.length ] = {n:SH.name,w:lineWidth};

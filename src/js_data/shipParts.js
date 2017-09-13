@@ -27,11 +27,13 @@ BBAdata.SHIPempty={
     MouseDown1: false,
     MouseDown2: false,
 
+
     Storage:{},
     ModStorage:{},
     ShieldStorage:{},
     Weapons:[],
     Modules:[],
+    Shields:[],
 };
 
 
@@ -75,6 +77,51 @@ BBAdata.SHIPelements['heavyPlate'] = {              Weight: 20, Price: 2000,  wh
     },
     copies: {
         'I': {}, 'II': {}, 'III': {}, 'IV': {},
+    },
+};
+
+BBAdata.SHIPelements['absShield'] = {               Weight: 5, Price: 2000,
+    where:'hull',
+    name: 'Absorbtion Shield',
+    ShieldsData:{
+        name: 'absorbtionShield',
+        CatchDmgT: {normal:1, energy:1, explo:1},
+        DmgReduction: 'absorbtion',
+        ReductionUses: 'infinite',
+        Own: true,
+    },
+    EnergyM: -1,
+    ShieldStorageData:{'absorbtion':{R:0,M:1}},
+    upgrades: {
+        'up1':{ShieldStorageData:{'absorbtion':{M:1}},EnergyM:-1},
+        'up2':{ShieldStorageData:{'absorbtion':{M:2}},EnergyM:-2},
+        'up3':{ShieldStorageData:{'absorbtion':{M:2}},EnergyM:-2},
+        'up4':{ShieldStorageData:{'absorbtion':{M:3}},EnergyM:-3},
+        'up5':{ShieldStorageData:{'absorbtion':{M:3}},EnergyM:-3},
+        'up6':{ShieldStorageData:{'absorbtion':{M:4}},EnergyM:-4},
+        'up7':{ShieldStorageData:{'absorbtion':{M:5}},EnergyM:-5},
+        'up8':{ShieldStorageData:{'absorbtion':{M:6}},EnergyM:-6},
+        'up9':{ShieldStorageData:{'absorbtion':{M:6}},EnergyM:-6},
+    },
+};
+
+BBAdata.SHIPelements['exploShield'] = {               Weight: 5, Price: 2000,
+    where:'hull',
+    name: 'Explosion Shield',
+    ShieldsData:{
+        name: 'explosionShield',
+        CatchDmgT: {explo:1},
+        DmgReduction: 'infinite',
+        ReductionUses: 'explosion',
+        HitDieAnimation: 'dontShow',
+        Own: true,
+    },
+    EnergyM: -3,
+    ShieldStorageData:{'explosion':{R:0,M:1}},
+    upgrades: {
+        'up1':{ShieldStorageData:{'explosion':{M:1}},EnergyM:-4},
+        'up2':{ShieldStorageData:{'explosion':{M:1}},EnergyM:-5},
+        'up3':{ShieldStorageData:{'explosion':{M:1}},EnergyM:-6},
     },
 };
 
@@ -669,35 +716,58 @@ BBAdata.SHIPelements['radar'] = {                  Weight: 10, Price: 4000, wher
     },
 };
 
-BBAdata.SHIPelements['shieldProd'] = {             Weight: 5, Price: 2000,
+BBAdata.SHIPelements['absProdProd'] = {             Weight: 5, Price: 2000,
     where:'modules',
+    name: 'Absorbtion Shield Prod',
     ModulesData: {
         T: 'shieldProd',
         Disabled: 0,
-        Emin: 0.1,
+        Emin: 1,
         Emax: 1,
         E: 0,
         Prod: 0,
-        ifProd: 30,
-        ShieldStorageData: 'absorbtion'
+        ifProd: 120,
+        ShieldStorage: 'absorbtion'
     },
-    Shields:{
-        name: 'absorbtionShield',
-        CatchDmgT: {normal:1, energy:1, explo:1},
-        DmgReduction: 'absorbtion',
-        ReductionUses: 'infinite',
-        Own: true,
-    },
-    ShieldStorage:{'absorbtion':{R:0,M:0}},
     upgrades: {
-        'up1':{},
+        'up1':{ModulesData:{ifProd:-30}},
+        'up2':{ModulesData:{ifProd:-30}},
+        'up3':{ModulesData:{ifProd:-30}},
+        'up4':{ModulesData:{Emin:-0.3}},
+        'up5':{ModulesData:{Emin:-0.3}},
+        'up6':{ModulesData:{Emin:-0.3}},
+        'up7':{ModulesData:{Emax:1}},
+        'up8':{ModulesData:{Emax:1}},
     },
     copies: {
         'I': {}, 'II': {}, 'III': {},
     },
+};
 
-}
-
+BBAdata.SHIPelements['exploProdProd'] = {             Weight: 5, Price: 2000,
+    where:'modules',
+    name: 'Explosion Shield Prod',
+    ModulesData: {
+        T: 'shieldProd',
+        Disabled: 0,
+        Emin: 5,
+        Emax: 5,
+        E: 0,
+        Prod: 0,
+        ifProd: 2000,
+        ShieldStorage: 'explosion'
+    },
+    upgrades: {
+        'up1':{ModulesData:{ifProd:-400}},
+        'up2':{ModulesData:{ifProd:-400}},
+        'up3':{ModulesData:{ifProd:-400}},
+        'up4':{ModulesData:{Emin:-1}},
+        'up5':{ModulesData:{Emin:-1}},
+        'up6':{ModulesData:{Emin:-1}},
+        'up7':{ModulesData:{Emax:4}},
+        'up8':{ModulesData:{Emax:5}},
+    },
+};
 
 
 
