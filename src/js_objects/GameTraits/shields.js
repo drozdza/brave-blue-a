@@ -99,7 +99,10 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
             if(SH.ReductionUses != 'infinite' && O[SH.ReductionUses] < 1)
                 continue;
 
-            if(SH.DmgReduction && (SH.DmgReduction=='infinite' || O[SH.DmgReduction] > 0)){
+            if(o==0) var DmgReductionCount = O.ShieldStorage[SH.DmgReduction].R;
+                else var DmgReductionCount = O[SH.DmgReduction];
+
+            if(SH.DmgReduction && (SH.DmgReduction=='infinite' || DmgReductionCount > 0)){
                 DMGreduce = 99999;
                 if(SH.PartialReduction){
                     P = SH.PartialReduction;
@@ -119,11 +122,12 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
                     ShieldHits-=-DMGreduce;
                     DMGval -= DMGreduce;
                 }else{
-                    DMGreduce = Math.min(DMGval, O[SH.DmgReduction], DMGreduce);
+                    DMGreduce = Math.min(DMGval, DmgReductionCount, DMGreduce);
 
                     ShieldHits-=-DMGreduce;
                     DMGval -= DMGreduce;
-                    O[SH.DmgReduction] -= DMGreduce;
+                    if(o==0) O.ShieldStorage[SH.DmgReduction].R -= DMGreduce;
+                        else O[SH.DmgReduction] -= DMGreduce;
                 }
             }
 

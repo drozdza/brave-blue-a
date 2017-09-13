@@ -196,8 +196,10 @@ GAMEobject.prototype.decide_ship = function(e){
         // Moduły niepotrzebne:
         if( (M.T=='Prod' && S.Storage[ M.Storage ].R >= S.Storage[ M.Storage ].M)
          || (M.T=='healerProd' && S.lifeM <= O.life)
+
          || (M.T=='esteemProd' && (F1T=='missle' || F1T=='missleR' || F1T=='laser'))
-         || (M.T=='shieldProd' && S.EnergyFieldMax <= O.energyField) ){
+         || (M.T=='shieldProd' && S.ShieldStorage[ M.ShieldStorage ].R >= S.ShieldStorage[ M.ShieldStorage ].M)){
+
             if(Sx.Mod[m] != 'done'){
                 if(M.subT) modeName = BBAdata['ModuleNames'][M.T+M.subT];
                     else   modeName = BBAdata['ModuleNames'][M.T];
@@ -269,8 +271,7 @@ GAMEobject.prototype.decide_ship = function(e){
             }
             if(M.T=='shieldProd'){
                 ++this.C.S_shieldProd;
-                if(++O.energyField == 1)
-                    $('#O_0').prepend('<div class="energyField"></div>');
+                ++S.ShieldStorage[ M.ShieldStorage ].R;
                 this.shipFunc_showHealth();
             }
             M.Prod-=M.ifProd;

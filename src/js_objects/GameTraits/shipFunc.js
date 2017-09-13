@@ -229,19 +229,24 @@ GAMEobject.prototype.shipFunc_showSpotRegions = function(show){
 }
 GAMEobject.prototype.shipFunc_showHealth = function(){
     var html='';
-    for(var i=0; i<this.O[0].life; ++i)
+    var O = this.O[0];
+    var S = this.SHIP;
+    for(var i=0; i<O.life; ++i)
         html+='A';
     html+='<span class="disabledHealth">';
-    for(var i=0; i<this.SHIP.lifeM - this.O[0].life; ++i)
+    for(var i=0; i<S.lifeM - O.life; ++i)
         html+='A';
     html+='</span>';
-    if(typeof this.O[0].energyField !='undefined'){
+    for(var shieldType in O.ShieldStorage){
+        var SS = O.ShieldStorage[shieldType];
+        var shieldLetter = 'O';
+        if(shieldType=='bullet') shieldLetter = 'B';
+        if(shieldType=='explosion') shieldLetter = 'E';
+
         html+='<span class="XenergyField">';
-        for(var i=0; i<this.O[0].energyField; ++i)
-            html+='O';
+        for(var i=0; i<SS.R; ++i) html+=shieldLetter;
         html+='</span><span class="XenergyFieldDisabled">';
-        for(var i=0; i<this.SHIP.EnergyFieldMax - this.O[0].energyField; ++i)
-            html+='O';
+        for(var i=0; i<SS.M - SS.R; ++i) html+=shieldLetter;
         html+='</span>';
     }
     $('#countHealth').html(html);
