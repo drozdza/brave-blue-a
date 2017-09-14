@@ -776,6 +776,7 @@ GAMEobject.prototype.decide = function(o){
                     if(++O[WP.resource] > O.Res[WP.resource].M)
                         O[WP.resource] = O.Res[WP.resource].M;
                     O.Res[WP.resource].T = 0;
+                    O.Res[WP.resource].R = O[WP.resource];
                 }
             }
             if(WP.t == 'changeAction'){

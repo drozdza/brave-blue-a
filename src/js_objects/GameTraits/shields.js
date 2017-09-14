@@ -98,15 +98,15 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
                     continue;
 
             var ReductionUsesCount = O[SH.ReductionUses];
-            if(SH.ReductionUses!='infinite' && o==0)
-                ReductionUsesCount = this.SHIP.ShieldStorage[SH.ReductionUses].R;
+            if(SH.ReductionUses!='infinite' && typeof SH.ResPath != 'undefined')
+                ReductionUsesCount = O[SH.ResPath][SH.ReductionUses].R;
 
             if(SH.ReductionUses != 'infinite' && ReductionUsesCount < 1)
                 continue;
 
             var DmgReductionCount = O[SH.DmgReduction];
-            if(SH.DmgReduction!='infinite' && o==0)
-                DmgReductionCount = this.SHIP.ShieldStorage[SH.DmgReduction].R;
+            if(SH.DmgReduction!='infinite' && typeof SH.ResPath != 'undefined')
+                DmgReductionCount = this.SHIP[SH.ResPath][SH.DmgReduction].R;
 
             if(SH.DmgReduction && (SH.DmgReduction=='infinite' || DmgReductionCount > 0)){
                 DMGreduce = 99999;
@@ -132,13 +132,13 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
 
                     ShieldHits-=-DMGreduce;
                     DMGval -= DMGreduce;
-                    if(o==0) this.SHIP.ShieldStorage[SH.DmgReduction].R -= DMGreduce;
+                    if(typeof SH.ResPath != 'undefined') O[SH.ResPath][SH.DmgReduction].R -= DMGreduce;
                         else O[SH.DmgReduction] -= DMGreduce;
                 }
             }
 
             if(DMGreduce > 0 && SH.ReductionUses!='infinite'){
-                if(o==0) --this.SHIP.ShieldStorage[SH.ReductionUses].R;
+                if(typeof SH.ResPath != 'undefined') --O[SH.ResPath][SH.ReductionUses].R;
                     else --O[SH.ReductionUses];
             }
 
@@ -151,6 +151,13 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
                 }else{
                     DMGval-=-DMGreduce;
                 }
+            }
+
+            if(SH.jumpOnHit){
+                var iRad = Math.random()*360;
+                this.teleportJump(o,SH.jumpOnHit,iRad);
+                this.checkHits(o);
+
             }
 
             // {
@@ -230,7 +237,7 @@ GAMEobject.prototype.drawShields = function(O,o,CH){
                 lineWidth = 2;
             } else {
                 lineWidth = O[SH.DmgReduction];
-                if(o==0) lineWidth = this.SHIP.ShieldStorage[SH.DmgReduction].R;
+                if(typeof SH.ResPath != 'undefined') lineWidth = this.SHIP[SH.ResPath][SH.DmgReduction].R;
                 if(lineWidth == 0) continue;
             }
             if(lineWidth > 2) lineWidth = 2- -(lineWidth-2)/2;
@@ -238,7 +245,7 @@ GAMEobject.prototype.drawShields = function(O,o,CH){
         }
         if(SH.name == 'explosionShield'){
             var lineWidth = O[SH.ReductionUses];
-            if(o==0) lineWidth = this.SHIP.ShieldStorage[SH.ReductionUses].R;
+            if(typeof SH.ResPath != 'undefined') lineWidth = this.SHIP[SH.ResPath][SH.ReductionUses].R;
             if(lineWidth == 0) continue;
             lineWidth *= 3;
             ToDraw[ ToDraw.length ] = {n:SH.name,w:lineWidth};

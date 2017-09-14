@@ -740,8 +740,19 @@ BBAdata['ObjectDatas']={
 
         lifeM: 3,
 
+        Shields:[{
+            name: 'jumpShield',
+            CatchDmgT: {normal:1, energy:1, explo:1},
+            DmgReduction: 'infinite',
+            ReductionUses: 'onHitJump',
+            ResPath: 'Res',
+            jumpOnHit: 170,
+            Own: true,
+            HitDieAnimation: 'dontShow',
+        }],
+
         onHitJump: 3,
-        Res: {'onHitJump': {M:3,T:0}},
+        Res: {'onHitJump': {M:3,R:3,T:0}},
         weapon:[
             {t:'refilResource', resource: 'onHitJump', gunSpeed: 300, maxSpeed: 2, doNextWeapon: true},
             {t:'double2', DMG:{Dmg:1,T:'normal'}, Dec: 35, Speed: 12, gunSpeed: 20, lastShot: 100, maxSpeed: 2, minAlarm: 5},

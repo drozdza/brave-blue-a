@@ -601,14 +601,14 @@ function MenuShipBuildingObject(){
                 case 'maxSpeedTCap':
                     S[i] = Edata[i];
                 break;
-                case 'StorageData':
-                    this.buildShip_StorageData(Edata.StorageData,'Storage');
+                case 'Storage':
+                    this.buildShip_Storage(Edata.Storage,'Storage');
                 break;
-                case 'ModStorageData':
-                    this.buildShip_StorageData(Edata.ModStorageData,'ModStorage');
+                case 'ModStorage':
+                    this.buildShip_Storage(Edata.ModStorage,'ModStorage');
                 break;
-                case 'ShieldStorageData':
-                    this.buildShip_StorageData(Edata.ShieldStorageData,'ShieldStorage');
+                case 'ShieldStorage':
+                    this.buildShip_Storage(Edata.ShieldStorage,'ShieldStorage');
                 break;
                 case 'WeaponData':
                     this.buildShip_WeaponData(Edata.WeaponData);
@@ -623,15 +623,15 @@ function MenuShipBuildingObject(){
         }
     }
 
-    this.buildShip_StorageData = function(StorageData, StorageType){
-        for(var storageType in StorageData){
+    this.buildShip_Storage = function(Storage, StorageType){
+        for(var storageType in Storage){
             if(typeof this.SHIP[StorageType][storageType] == 'undefined')
                 this.SHIP[StorageType][storageType] = {M:0,R:0};
 
-            for(var i in StorageData[storageType]){
+            for(var i in Storage[storageType]){
                 if(typeof this.SHIP[StorageType][storageType][i] == 'undefined')
                     this.SHIP[StorageType][storageType][i] = 0;
-                this.SHIP[StorageType][storageType][i] -=- StorageData[storageType][i];
+                this.SHIP[StorageType][storageType][i] -=- Storage[storageType][i];
             }
         }
     }

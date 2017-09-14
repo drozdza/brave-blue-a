@@ -223,17 +223,6 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
         }
     }
 
-    // ON HIT JUMP
-    if(O.onHitJump && O.onHitJump > 0){
-        if(this.teleportJump(o,170,Math.random()*360)){
-            --O.onHitJump;
-            this.checkHits(o);
-            this.removeObj(q);
-        }
-        return true;
-    }
-
-
 
     // HIT animation
     if(q){
