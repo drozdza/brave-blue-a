@@ -80,6 +80,26 @@ BBAdata.SHIPelements['heavyPlate'] = {              Weight: 20, Price: 2000,  wh
     },
 };
 
+BBAdata.SHIPelements['exploShield'] = {               Weight: 5, Price: 2000,
+    where:'hull',
+    name: 'Explosion Shield',
+    ShieldsData:{
+        name: 'explosionShield',
+        CatchDmgT: {explo:1},
+        DmgReduction: 'infinite',
+        ReductionUses: 'explosion',
+        HitDieAnimation: 'dontShow',
+        Own: true,
+    },
+    EnergyM: -3,
+    ShieldStorageData:{'explosion':{R:0,M:1}},
+    upgrades: {
+        'up1':{ShieldStorageData:{'explosion':{M:1}},EnergyM:-4},
+        'up2':{ShieldStorageData:{'explosion':{M:1}},EnergyM:-5},
+        'up3':{ShieldStorageData:{'explosion':{M:1}},EnergyM:-6},
+    },
+};
+
 BBAdata.SHIPelements['absShield'] = {               Weight: 5, Price: 2000,
     where:'hull',
     name: 'Absorbtion Shield',
@@ -102,26 +122,6 @@ BBAdata.SHIPelements['absShield'] = {               Weight: 5, Price: 2000,
         'up7':{ShieldStorageData:{'absorbtion':{M:5}},EnergyM:-5},
         'up8':{ShieldStorageData:{'absorbtion':{M:6}},EnergyM:-6},
         'up9':{ShieldStorageData:{'absorbtion':{M:6}},EnergyM:-6},
-    },
-};
-
-BBAdata.SHIPelements['exploShield'] = {               Weight: 5, Price: 2000,
-    where:'hull',
-    name: 'Explosion Shield',
-    ShieldsData:{
-        name: 'explosionShield',
-        CatchDmgT: {explo:1},
-        DmgReduction: 'infinite',
-        ReductionUses: 'explosion',
-        HitDieAnimation: 'dontShow',
-        Own: true,
-    },
-    EnergyM: -3,
-    ShieldStorageData:{'explosion':{R:0,M:1}},
-    upgrades: {
-        'up1':{ShieldStorageData:{'explosion':{M:1}},EnergyM:-4},
-        'up2':{ShieldStorageData:{'explosion':{M:1}},EnergyM:-5},
-        'up3':{ShieldStorageData:{'explosion':{M:1}},EnergyM:-6},
     },
 };
 

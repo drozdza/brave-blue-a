@@ -44,6 +44,7 @@ GAMEobject.prototype.addShield = function(O,o,Shield){
 }
 GAMEobject.prototype.ShieldValues={
     koriazMax: 15,
+    jumpShield: 12,
     bulletShield: 11,
     explosionShield: 10,
     absorbtionShield: 9,
@@ -88,7 +89,7 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
     var ToDelete=[];
 
     for(var sh in O.Shields){
-        var SH = O.Shields[sh];
+        SH = O.Shields[sh];
 
         if(SH.CatchDmgT[DMGtype]){
 
@@ -172,7 +173,7 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
             if((O[SH.DmgReduction]==0 || O[SH.ReductionUses]==0) && !SH.Own)
                 ToDelete[ ToDelete.length ] = sh;
 
-            if(DMGreduce > 0 && Action =='die'){
+            if(DMGreduce > 0 && Action == 'die'){
                 if(SH.HitDieAnimation){
                     if(SH.HitDieAnimation!='dontShow')
                         this.showHits(O.x, O.y, DMGreduce, SH.HitDieAnimation);

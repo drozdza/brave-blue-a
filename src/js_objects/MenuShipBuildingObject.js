@@ -640,7 +640,6 @@ function MenuShipBuildingObject(){
             this.lastWeapon = this.SHIP.Weapons.length;
             this.SHIP.Weapons[this.SHIP.Weapons.length] = {};
         }
-        console.log(this.lastWeapon, WeaponData);
         Weapon = this.SHIP.Weapons[this.lastWeapon];
 
         Weapon = mergeObjects(Weapon,WeaponData);
