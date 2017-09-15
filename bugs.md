@@ -9,3 +9,7 @@ Bugs:
     - star sitters W sometimes don't die (also SLimensen's have this problem)
 
     - Killing D ships sometimes give undefined .T fatal error
+
+
+Chrome Linux v61 fix:
+chrome://flags/#enable-color-correct-rendering - to disabled
