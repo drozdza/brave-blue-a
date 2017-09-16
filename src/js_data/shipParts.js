@@ -80,6 +80,29 @@ BBAdata.SHIPelements['heavyPlate'] = {              Weight: 20, Price: 2000,  wh
     },
 };
 
+BBAdata.SHIPelements['jumpShield'] = {              Weight: 10, Price: 2000, where:'hull',
+    name: 'Teleport Jump Shield',
+    ShieldsData:{
+        name: 'jumpShield',
+        CatchDmgT: {normal:1, energy:1, explo:1},
+        DmgReduction: 'infinite',
+        ReductionUses: 'TeleJump',
+        ResPath: 'ModStorage',
+        jumpOnHit: 30,
+        Own: true,
+        HitDieAnimation: 'dontShow',
+    },
+    ModStorage:{'TeleJump':{R:0,M:0}},
+    upgrades:{
+        'up1':{ShieldsData:{jumpOnHit:40}},
+        'up2':{ShieldsData:{jumpOnHit:50}},
+        'up3':{ShieldsData:{jumpOnHit:70}},
+        'up4':{ShieldsData:{jumpOnHit:60}},
+        'up6':{ShieldsData:{jumpOnHit:70}},
+        'up5':{ShieldsData:{ReductionUses:'infinite'}},
+    }
+};
+
 BBAdata.SHIPelements['exploShield'] = {               Weight: 5, Price: 2000,
     where:'hull',
     name: 'Explosion Shield',
@@ -593,6 +616,29 @@ BBAdata.SHIPelements['laserGun'] = {                Weight: 5, Price: 100,    wh
     },
 };
 
+BBAdata.SHIPelements['teleJump'] = {                Weight: 5, Price: 100,    where:'weapons',
+    name: 'Teleport',
+    WeaponData:{
+        T:'tele',
+        gunS: 0,
+        GunSpeed: 40,
+        ModUse:{TeleJump:1},
+        Speed: 400,
+        Dec: 1,
+    },
+    ModStorage:{TeleJump:{R:0,M:0}},
+    upgrades:{
+        'up1':{ Price: 300,  WeaponData:{Speed:200}},
+        'up2':{ Price: 300,  WeaponData:{Speed:50}},
+        'up3':{ Price: 300,  WeaponData:{Speed:150}},
+        'up4':{ Price: 300,  WeaponData:{GunSpeed:-10}},
+        'up5':{ Price: 300,  WeaponData:{GunSpeed:-10}},
+        'up6':{ Price: 300,  WeaponData:{GunSpeed:-10}},
+        'up7':{ Price: 300,  WeaponData:{GunSpeed:-5}},
+        'up8':{ Price: 300,  WeaponData:{GunSpeed:-2}},
+    },
+};
+
 //============================= MODULES ========================================
 
 BBAdata.SHIPelements['bulletProd'] = {             Weight: 5, Price: 100, where:'modules',
@@ -718,7 +764,42 @@ BBAdata.SHIPelements['radar'] = {                  Weight: 10, Price: 4000, wher
     },
 };
 
-BBAdata.SHIPelements['absProdProd'] = {             Weight: 5, Price: 2000,
+BBAdata.SHIPelements['teleJumpProd'] = {             Weight: 5, Price: 2000,
+    where:'modules',
+    name: 'Teleport Jumps Prod',
+    ModulesData: {
+        T: 'moduleProd',
+        subT: 'TeleJump',
+        Disabled: 0,
+        Emin: 4,
+        Emax: 6,
+        E: 0,
+        Prod: 0,
+        ifProd: 180,
+        ModStorage: 'TeleJump',
+    },
+    ModStorage: {'TeleJump':{R:0,M:1}},
+    upgrades: {
+        'up1':{ModulesData:{ifProd:-30}},
+        'up2':{ModulesData:{ifProd:-30}},
+        'up3':{ModulesData:{ifProd:-30}},
+        'up4':{ModulesData:{Emin:-1}},
+        'up5':{ModulesData:{Emin:-1}},
+        'up6':{ModulesData:{Emin:-1}},
+        'up7':{ModulesData:{Emax:4}},
+        'up8':{ModulesData:{Emax:5}},
+        'up9':{ModulesData:{Emax:5}},
+        'up10':{ModStorage:{'TeleJump':{M:1}}},
+        'up11':{ModStorage:{'TeleJump':{M:2}}},
+        'up12':{ModStorage:{'TeleJump':{M:4}}},
+        'up13':{ModStorage:{'TeleJump':{M:4}}},
+    },
+    copies: {
+        'I': {}, 'II': {}, 'III': {},
+    },
+};
+
+BBAdata.SHIPelements['absShieldProd'] = {             Weight: 5, Price: 2000,
     where:'modules',
     name: 'Absorbtion Shield Prod',
     ModulesData: {
@@ -746,7 +827,7 @@ BBAdata.SHIPelements['absProdProd'] = {             Weight: 5, Price: 2000,
     },
 };
 
-BBAdata.SHIPelements['exploProdProd'] = {             Weight: 5, Price: 2000,
+BBAdata.SHIPelements['exploShieldProd'] = {             Weight: 5, Price: 2000,
     where:'modules',
     name: 'Explosion Shield Prod',
     ModulesData: {

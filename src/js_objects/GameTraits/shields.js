@@ -100,6 +100,7 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
             var ReductionUsesCount = O[SH.ReductionUses];
             if(SH.ReductionUses!='infinite' && typeof SH.ResPath != 'undefined')
                 ReductionUsesCount = O[SH.ResPath][SH.ReductionUses].R;
+                // SHIP have things in different place !
 
             if(SH.ReductionUses != 'infinite' && ReductionUsesCount < 1)
                 continue;
