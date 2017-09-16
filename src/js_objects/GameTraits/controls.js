@@ -5,30 +5,30 @@ GAMEobject.prototype.mouse_down = function(e){
 
     if(e.clientX > 50 && e.clientX < 121){
         var u = parseInt((e.clientY-this.Dy)/-32)-1;
-        if(u>-1 && u< this.SHIP.Modules.length){
-            if( this.SHIP.Modules[u].Disabled == 1) this.SHIP.Modules[u].Disabled = 0;
-                        else                        this.SHIP.Modules[u].Disabled = 1;
+        if(u>-1 && u< this.O[0].Modules.length){
+            if( this.O[0].Modules[u].Disabled == 1) this.O[0].Modules[u].Disabled = 0;
+                        else                        this.O[0].Modules[u].Disabled = 1;
             return true;
         }
     }
     if(e.clientY - this.Dy > -32){
         var u = parseInt((e.clientX-105)/33);
-        if(u>-1 && u < this.SHIP.Weapons.length){
-            if(this.SHIP.Weapon2!==false && e.which==3)
+        if(u>-1 && u < this.O[0].Weapons.length){
+            if(this.O[0].Weapon2!==false && e.which==3)
                 this.shipFunc_changeWeapon(2, u);
             else
                 this.shipFunc_changeWeapon(1, u);
             return true;
         }
     }
-    if(this.SHIP.Weapon2!==false && e.which==3)
-        this.SHIP.MouseDown2=true;
+    if(this.O[0].Weapon2!==false && e.which==3)
+        this.O[0].MouseDown2=true;
     else
-        this.SHIP.MouseDown1=true;
+        this.O[0].MouseDown1=true;
 }
 GAMEobject.prototype.mouse_up = function(e){
-    this.SHIP.MouseDown1=false;
-    this.SHIP.MouseDown2=false;
+    this.O[0].MouseDown1=false;
+    this.O[0].MouseDown2=false;
 }
 GAMEobject.prototype.mousemove = function(e){
     var P = $('#Game').offset();
@@ -66,15 +66,15 @@ GAMEobject.prototype.keyup = function(e){
 
 
     if(e.keyCode > 48 && e.keyCode < 58){    // Numeric 1-9
-        if(e.keyCode-49 < this.SHIP.Weapons.length)
+        if(e.keyCode-49 < this.O[0].Weapons.length)
             this.shipFunc_changeWeapon(1, e.keyCode-49);
     }
 
-    if(typeof this.SHIP.KeysModules[ e.keyCode ] !='undefined'){
-        var M = this.SHIP.KeysModules[ e.keyCode ];
+    if(typeof this.O[0].KeysModules[ e.keyCode ] !='undefined'){
+        var M = this.O[0].KeysModules[ e.keyCode ];
         for(var m=0; m < M.length; ++m){
-            if(this.SHIP.Modules[ M[m] ].Disabled == 1) this.SHIP.Modules[ M[m] ].Disabled = 0;
-                            else                        this.SHIP.Modules[ M[m] ].Disabled = 1;
+            if(this.O[0].Modules[ M[m] ].Disabled == 1) this.O[0].Modules[ M[m] ].Disabled = 0;
+                            else                        this.O[0].Modules[ M[m] ].Disabled = 1;
         }
     }
 

@@ -1,6 +1,6 @@
 
 GAMEobject.prototype.shipFunc_glueFireToLaser = function(){
-    var F,X,Y,R,dist=1000000,laserAim=false,radius = this.SHIP.GlueFireToLaser;
+    var F,X,Y,R,dist=1000000,laserAim=false,radius = this.O[0].GlueFireToLaser;
     var Found = this.getCollidingWithCircle(this.mouseX,this.mouseY,radius,['E','ME','A','R']);
 
     var laserAim = false;
@@ -74,7 +74,7 @@ GAMEobject.prototype.shipFunc_esteemedPositions = function(O,F){
 GAMEobject.prototype.shipFunc_glueFireToEstimated = function(EsteemedPos){
 
     var jest = false;
-    var Rad = this.SHIP.GlueFireToEstimated;
+    var Rad = this.O[0].GlueFireToEstimated;
     var Rad2 = Rad*Rad;
     var dist = 1000000;
     for(F in EsteemedPos){
@@ -176,17 +176,16 @@ GAMEobject.prototype.shipFunc_workingRadar = function(U,Prod,Radius){
 }
 GAMEobject.prototype.shipFunc_speedChange = function(){
     var O = this.O[0];
-    var S = this.SHIP;
     var Sx = this.SHIPold;
     var html='';
     if(O.speed < 0) O.speed=0.0;
-    if(O.speed > S.speedM) O.speed=S.speedM;
-    S.Espeed = Speed2Energy(O.speed,S.Weight,S.engineMultiply);
-    S.Energy = S.EnergyM - S.Espeed;
+    if(O.speed > O.speedM) O.speed=O.speedM;
+    O.Espeed = Speed2Energy(O.speed,O.Weight,O.engineMultiply);
+    O.Energy = O.EnergyM - O.Espeed;
 
-    $('#modulesEnergyIn').html(S.Energy.toFixed(2));
+    $('#modulesEnergyIn').html(O.Energy.toFixed(2));
 
-    html+='<div class="speedBoxEnergy">'+S.Espeed.toFixed(2)+'</div>';
+    html+='<div class="speedBoxEnergy">'+O.Espeed.toFixed(2)+'</div>';
     html+='<span class="speedBoxSpeed">'+O.speed.toFixed(1)+'</span>';
     for(var i=parseInt(O.speed- -0.97); i >0; --i)
         if(O.speed > i) html+='<div class="speedOmeter speed_'+i+'"></div>';
@@ -195,23 +194,23 @@ GAMEobject.prototype.shipFunc_speedChange = function(){
     Sx.speed = O.speed;
 }
 GAMEobject.prototype.shipFunc_changeWeapon = function(Fx,weaponId){
-    var S = this.SHIP;
+    var O = this.O[0];
     $('.attackBox').removeClass('attackBoxActive');
 
     if(Fx==1){
-        S.Weapon1 = weaponId;
-        var Weapon = S.Weapons[ S.Weapon1 ];
-        if(S.ShowFireRange){
+        O.Weapon1 = weaponId;
+        var Weapon = O.Weapons[ O.Weapon1 ];
+        if(O.ShowFireRange){
             var RadX = Weapon.Speed*Weapon.Dec;
             if(Weapon.T=='bombT') RadX = Weapon.Distance;
             $('#bullRadX').css({width: RadX*2+'px',height: RadX*2+'px',top: (-RadX)+'px',left: (-RadX)+'px'});
         }
     }else{
-        S.Weapon2 = weaponId;
+        O.Weapon2 = weaponId;
     }
-    $('#attackModule_'+S.Weapon1).addClass('attackBoxActive');
-    if(S.Weapon2 !==false)
-        $('#attackModule_'+S.Weapon2).addClass('attackBoxActive');
+    $('#attackModule_'+O.Weapon1).addClass('attackBoxActive');
+    if(O.Weapon2 !==false)
+        $('#attackModule_'+O.Weapon2).addClass('attackBoxActive');
 }
 GAMEobject.prototype.shipFunc_showSpotRegions = function(show){
     if(show==true){
@@ -226,15 +225,14 @@ GAMEobject.prototype.shipFunc_showSpotRegions = function(show){
 GAMEobject.prototype.shipFunc_showHealth = function(){
     var html='';
     var O = this.O[0];
-    var S = this.SHIP;
     for(var i=0; i<O.life; ++i)
         html+='A';
     html+='<span class="disabledHealth">';
-    for(var i=0; i<S.lifeM - O.life; ++i)
+    for(var i=0; i<O.lifeM - O.life; ++i)
         html+='A';
     html+='</span>';
-    for(var shieldType in S.ShieldStorage){
-        var SS = S.ShieldStorage[shieldType];
+    for(var shieldType in O.ShieldStorage){
+        var SS = O.ShieldStorage[shieldType];
         var shieldLetter = 'O';
         if(shieldType=='bullet') shieldLetter = 'B';
         if(shieldType=='explosion') shieldLetter = 'E';

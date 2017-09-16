@@ -1,5 +1,33 @@
 BBAdata['SHIPpresetsOld']={
     'start':{
+        radius: 7,
+        S: 2,
+        T: 'ship',
+        speedM: 0,
+        lastSpeedT: 0,
+        // energyField: 0,
+        // ammo: 0,
+        M: 'moving',
+        view:{
+            Letter: 'A',
+            LetterSize: 16,
+            Color: 'blue',
+            Angle: 0,
+            HitPattern: 'HullFire_20',
+            shieldsRadius: 14,
+            Shields:{
+                absorbtionShield:{
+                    strokeStyle: 'rgba(154,255,255,0.8)',
+                    fillStyle: 'rgba(154,255,255,0.2)',
+                },
+            },
+        },
+        mapType: 'P',
+        mapCollide: ['A','ME'],
+        periodDMG: {},
+        Flags: {},
+
+
         Weight: 25,
         lifeM: 6,
         life: 6,
@@ -43,6 +71,35 @@ BBAdata['SHIPpresetsOld']={
         ChangeSpeedDelay:15,
     },
     'destFields':{
+        radius: 7,
+        S: 2,
+        T: 'ship',
+        speedM: 0,
+        lastSpeedT: 0,
+        // energyField: 0,
+        // ammo: 0,
+        M: 'moving',
+        view:{
+            Letter: 'A',
+            LetterSize: 16,
+            Color: 'blue',
+            Angle: 0,
+            HitPattern: 'HullFire_20',
+            shieldsRadius: 14,
+            Shields:{
+                absorbtionShield:{
+                    strokeStyle: 'rgba(154,255,255,0.8)',
+                    fillStyle: 'rgba(154,255,255,0.2)',
+                },
+            },
+        },
+        mapType: 'P',
+        mapCollide: ['A','ME'],
+        periodDMG: {},
+        Flags: {},
+
+
+
         Weight: 25,
         life: 11,
         lifeM: 11,
@@ -95,6 +152,35 @@ BBAdata['SHIPpresetsOld']={
         ],
     },
     'bombs1':{
+        radius: 7,
+        S: 2,
+        T: 'ship',
+        speedM: 0,
+        lastSpeedT: 0,
+        // energyField: 0,
+        // ammo: 0,
+        M: 'moving',
+        view:{
+            Letter: 'A',
+            LetterSize: 16,
+            Color: 'blue',
+            Angle: 0,
+            HitPattern: 'HullFire_20',
+            shieldsRadius: 14,
+            Shields:{
+                absorbtionShield:{
+                    strokeStyle: 'rgba(154,255,255,0.8)',
+                    fillStyle: 'rgba(154,255,255,0.2)',
+                },
+            },
+        },
+        mapType: 'P',
+        mapCollide: ['A','ME'],
+        periodDMG: {},
+        Flags: {},
+
+
+
         Weight: 25,
         life: 11,
         lifeM: 11,
@@ -148,6 +234,35 @@ BBAdata['SHIPpresetsOld']={
         ],
     },
     'bombs2':{
+        radius: 7,
+        S: 2,
+        T: 'ship',
+        speedM: 0,
+        lastSpeedT: 0,
+        // energyField: 0,
+        // ammo: 0,
+        M: 'moving',
+        view:{
+            Letter: 'A',
+            LetterSize: 16,
+            Color: 'blue',
+            Angle: 0,
+            HitPattern: 'HullFire_20',
+            shieldsRadius: 14,
+            Shields:{
+                absorbtionShield:{
+                    strokeStyle: 'rgba(154,255,255,0.8)',
+                    fillStyle: 'rgba(154,255,255,0.2)',
+                },
+            },
+        },
+        mapType: 'P',
+        mapCollide: ['A','ME'],
+        periodDMG: {},
+        Flags: {},
+
+
+
         Weight: 25,
         life: 11,
         lifeM: 11,
@@ -203,6 +318,35 @@ BBAdata['SHIPpresetsOld']={
         ],
     },
     'moves1':{
+        radius: 7,
+        S: 2,
+        T: 'ship',
+        speedM: 0,
+        lastSpeedT: 0,
+        // energyField: 0,
+        // ammo: 0,
+        M: 'moving',
+        view:{
+            Letter: 'A',
+            LetterSize: 16,
+            Color: 'blue',
+            Angle: 0,
+            HitPattern: 'HullFire_20',
+            shieldsRadius: 14,
+            Shields:{
+                absorbtionShield:{
+                    strokeStyle: 'rgba(154,255,255,0.8)',
+                    fillStyle: 'rgba(154,255,255,0.2)',
+                },
+            },
+        },
+        mapType: 'P',
+        mapCollide: ['A','ME'],
+        periodDMG: {},
+        Flags: {},
+
+
+
         Weight: 25,
         life: 11,
         lifeM: 11,
@@ -249,6 +393,36 @@ BBAdata['SHIPpresetsOld']={
         },
     },
     'best':{
+        radius: 7,
+        S: 2,
+        T: 'ship',
+        speedM: 0,
+        lastSpeedT: 0,
+        // energyField: 0,
+        // ammo: 0,
+        M: 'moving',
+        view:{
+            Letter: 'A',
+            LetterSize: 16,
+            Color: 'blue',
+            Angle: 0,
+            HitPattern: 'HullFire_20',
+            shieldsRadius: 14,
+            Shields:{
+                absorbtionShield:{
+                    strokeStyle: 'rgba(154,255,255,0.8)',
+                    fillStyle: 'rgba(154,255,255,0.2)',
+                },
+            },
+        },
+        mapType: 'P',
+        mapCollide: ['A','ME'],
+        periodDMG: {},
+        Flags: {},
+
+
+
+
         Weight: 25,
         life: 11,
         lifeM: 11,
@@ -321,6 +495,36 @@ BBAdata['SHIPpresetsOld']={
         },
     },
     'bombardier':{
+        radius: 7,
+        S: 2,
+        T: 'ship',
+        speedM: 0,
+        lastSpeedT: 0,
+        // energyField: 0,
+        // ammo: 0,
+        M: 'moving',
+        view:{
+            Letter: 'A',
+            LetterSize: 16,
+            Color: 'blue',
+            Angle: 0,
+            HitPattern: 'HullFire_20',
+            shieldsRadius: 14,
+            Shields:{
+                absorbtionShield:{
+                    strokeStyle: 'rgba(154,255,255,0.8)',
+                    fillStyle: 'rgba(154,255,255,0.2)',
+                },
+            },
+        },
+        mapType: 'P',
+        mapCollide: ['A','ME'],
+        periodDMG: {},
+        Flags: {},
+
+
+
+
         Weight: 25,
         life: 11,
         lifeM: 11,
@@ -385,6 +589,36 @@ BBAdata['SHIPpresetsOld']={
         },
     },
     'bombardier2':{
+        radius: 7,
+        S: 2,
+        T: 'ship',
+        speedM: 0,
+        lastSpeedT: 0,
+        // energyField: 0,
+        // ammo: 0,
+        M: 'moving',
+        view:{
+            Letter: 'A',
+            LetterSize: 16,
+            Color: 'blue',
+            Angle: 0,
+            HitPattern: 'HullFire_20',
+            shieldsRadius: 14,
+            Shields:{
+                absorbtionShield:{
+                    strokeStyle: 'rgba(154,255,255,0.8)',
+                    fillStyle: 'rgba(154,255,255,0.2)',
+                },
+            },
+        },
+        mapType: 'P',
+        mapCollide: ['A','ME'],
+        periodDMG: {},
+        Flags: {},
+
+
+
+
         Weight: 25,
         life: 11,
         lifeM: 11,
@@ -457,6 +691,36 @@ BBAdata['SHIPpresetsOld']={
         },
     },
     'ethernal':{
+        radius: 7,
+        S: 2,
+        T: 'ship',
+        speedM: 0,
+        lastSpeedT: 0,
+        // energyField: 0,
+        // ammo: 0,
+        M: 'moving',
+        view:{
+            Letter: 'A',
+            LetterSize: 16,
+            Color: 'blue',
+            Angle: 0,
+            HitPattern: 'HullFire_20',
+            shieldsRadius: 14,
+            Shields:{
+                absorbtionShield:{
+                    strokeStyle: 'rgba(154,255,255,0.8)',
+                    fillStyle: 'rgba(154,255,255,0.2)',
+                },
+            },
+        },
+        mapType: 'P',
+        mapCollide: ['A','ME'],
+        periodDMG: {},
+        Flags: {},
+
+
+
+
         Weight: 25,
         life: 'x',
         lifeM: 'x',

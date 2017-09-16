@@ -1,4 +1,32 @@
 BBAdata.SHIPempty={
+    radius: 7,
+    S: 2,
+    T: 'ship',
+    speedM: 0,
+    lastSpeedT: 0,
+    // energyField: 0,
+    // ammo: 0,
+    M: 'moving',
+    view:{
+        Letter: 'A',
+        LetterSize: 16,
+        Color: 'blue',
+        Angle: 0,
+        HitPattern: 'HullFire_20',
+        shieldsRadius: 14,
+        Shields:{
+            absorbtionShield:{
+                strokeStyle: 'rgba(154,255,255,0.8)',
+                fillStyle: 'rgba(154,255,255,0.2)',
+            },
+        },
+    },
+    mapType: 'P',
+    mapCollide: ['A','ME'],
+    periodDMG: {},
+    Flags: {},
+
+
     Price: 0,
     Weight: 20,
     lifeM: 1,
@@ -794,9 +822,6 @@ BBAdata.SHIPelements['teleJumpProd'] = {             Weight: 5, Price: 2000,
         'up12':{ModStorage:{'TeleJump':{M:4}}},
         'up13':{ModStorage:{'TeleJump':{M:4}}},
     },
-    copies: {
-        'I': {}, 'II': {}, 'III': {},
-    },
 };
 
 BBAdata.SHIPelements['absShieldProd'] = {             Weight: 5, Price: 2000,
@@ -812,6 +837,7 @@ BBAdata.SHIPelements['absShieldProd'] = {             Weight: 5, Price: 2000,
         ifProd: 120,
         ShieldStorage: 'absorbtion'
     },
+    ShieldStorage:{'absorbtion':{R:0,M:0}},
     upgrades: {
         'up1':{ModulesData:{ifProd:-30}},
         'up2':{ModulesData:{ifProd:-30}},
@@ -840,6 +866,7 @@ BBAdata.SHIPelements['exploShieldProd'] = {             Weight: 5, Price: 2000,
         ifProd: 2000,
         ShieldStorage: 'explosion'
     },
+    ShieldStorage:{'explosion':{R:0,M:0}},
     upgrades: {
         'up1':{ModulesData:{ifProd:-400}},
         'up2':{ModulesData:{ifProd:-400}},

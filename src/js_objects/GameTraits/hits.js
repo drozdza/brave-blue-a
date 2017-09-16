@@ -63,8 +63,8 @@ GAMEobject.prototype.hit = function(o,q){
 
     if(Q.SlowDown && O.T=='ship'){
         if(O.speed > Q.SlowDown) O.speed = Q.SlowDown;
-        if(this.specialMove != -1 && this.SHIP.SpecialMoves)
-            if(this.SHIP.SpecialMoves[ this.specialMove ].T=='changePosition'){
+        if(this.specialMove != -1 && this.O[0].SpecialMoves)
+            if(this.O[0].SpecialMoves[ this.specialMove ].T=='changePosition'){
                 this.specialMoveT = -1;
                 this.specialMove = -1;
             }

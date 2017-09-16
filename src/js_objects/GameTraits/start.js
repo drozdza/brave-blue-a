@@ -57,7 +57,7 @@ GAMEobject.prototype.start = function(Name,Setting,Ship){
     this.prepareCounts();
     this.prepareWinningConds();
 
-    this.SHIP = Ship;
+    this.O[0] = Ship;
     this.resize();
     this.setBoard();
     this.CanvasHandle = document.getElementById('MainCanvas').getContext('2d');
@@ -101,51 +101,10 @@ GAMEobject.prototype.setPlayerShip = function(){
         if(this.MapSetting.Ship.Start.A) startA = this.MapSetting.Ship.Start.A;
     }
 
-    this.O[0]={
-        x: startX,
-        y: startY,
-        angle: startA,
-        life: this.SHIP.life,
-        lifeM: this.SHIP.lifeM,
+    this.O[0].x = startX;
+    this.O[0].y = startY;
+    this.O[0].angle = startA;
 
-        radius: 7,
-        S: 2,
-
-        speed: this.SHIP.speed,
-        speedAcl: this.SHIP.speedAcl,
-        speedDcl: this.SHIP.speedDcl,
-        speedT: this.SHIP.speedT,
-        starBump: this.SHIP.starBump,
-        maxSpeedCap: this.SHIP.maxSpeedCap,
-        speedM: 0,
-        lastSpeedT: 0,
-
-        energyField: 0,
-        T: 'ship',
-        ammo: 0,
-        M: 'moving',
-        view:{
-            Letter: 'A',
-            LetterSize: 16,
-            Color: 'blue',
-            Angle: 0,
-            HitPattern: 'HullFire_20',
-            shieldsRadius: 14,
-            Shields:{
-                absorbtionShield:{
-                    strokeStyle: 'rgba(154,255,255,0.8)',
-                    fillStyle: 'rgba(154,255,255,0.2)',
-                },
-            },
-        },
-        mapType: 'P',
-        mapCollide: ['A','ME'],
-        periodDMG: {},
-        Flags: {},
-    };
-
-    if(this.SHIP.Shields)
-        this.O[0].Shields = cloneObj(this.SHIP.Shields);
 
     this.putOnXY(0);
     CanvasManager.requestCanvas(0);

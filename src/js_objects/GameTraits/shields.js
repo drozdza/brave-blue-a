@@ -107,7 +107,7 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
 
             var DmgReductionCount = O[SH.DmgReduction];
             if(SH.DmgReduction!='infinite' && typeof SH.ResPath != 'undefined')
-                DmgReductionCount = this.SHIP[SH.ResPath][SH.DmgReduction].R;
+                DmgReductionCount = O[SH.ResPath][SH.DmgReduction].R;
 
             if(SH.DmgReduction && (SH.DmgReduction=='infinite' || DmgReductionCount > 0)){
                 DMGreduce = 99999;
@@ -238,7 +238,7 @@ GAMEobject.prototype.drawShields = function(O,o,CH){
                 lineWidth = 2;
             } else {
                 lineWidth = O[SH.DmgReduction];
-                if(typeof SH.ResPath != 'undefined') lineWidth = this.SHIP[SH.ResPath][SH.DmgReduction].R;
+                if(typeof SH.ResPath != 'undefined') lineWidth = O[SH.ResPath][SH.DmgReduction].R;
                 if(lineWidth == 0) continue;
             }
             if(lineWidth > 2) lineWidth = 2- -(lineWidth-2)/2;
@@ -246,7 +246,7 @@ GAMEobject.prototype.drawShields = function(O,o,CH){
         }
         if(SH.name == 'explosionShield'){
             var lineWidth = O[SH.ReductionUses];
-            if(typeof SH.ResPath != 'undefined') lineWidth = this.SHIP[SH.ResPath][SH.ReductionUses].R;
+            if(typeof SH.ResPath != 'undefined') lineWidth = O[SH.ResPath][SH.ReductionUses].R;
             if(lineWidth == 0) continue;
             lineWidth *= 3;
             ToDraw[ ToDraw.length ] = {n:SH.name,w:lineWidth};

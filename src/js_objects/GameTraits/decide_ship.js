@@ -1,51 +1,50 @@
 
 GAMEobject.prototype.makeShipControlPanel = function(){
     var O = this.O[0];
-    var S = this.SHIP;
     var Sx = this.SHIPold;
     var html='',modeName;
-    S.speedM = Energy2Speed(S.EnergyM,S.Weight,S.engineMultiply);
-    if(S.maxSpeedCap !== false && S.speedM > S.maxSpeedCap) S.speedM = S.maxSpeedCap;
+    O.speedM = Energy2Speed(O.EnergyM,O.Weight,O.engineMultiply);
+    if(O.maxSpeedCap !== false && O.speedM > O.maxSpeedCap) O.speedM = O.maxSpeedCap;
 
     Sx.speed = -17;
     html+='<div class="speedBox" id="speedOmeterBox"></div>';
     this.shipFunc_speedChange();
 
-    if(S.ShowFireRange==false) $('#bullRadX').remove();
+    if(O.ShowFireRange==false) $('#bullRadX').remove();
 
     var letter,modHtml='';
 
     Sx.Mod={};
-    for(var m in S.Modules){
+    for(var m in O.Modules){
         html=modHtml+html;
         modHtml='';
         Sx.Mod[m]='disabled';
         letter='';
-        for(var pimk in S.KeysModules)
-            for(var pomk=0; pomk < S.KeysModules[pimk].length; ++pomk)
-                if(m == S.KeysModules[pimk][pomk])
+        for(var pimk in O.KeysModules)
+            for(var pomk=0; pomk < O.KeysModules[pimk].length; ++pomk)
+                if(m == O.KeysModules[pimk][pomk])
                     letter='<div class="letter">'+String.fromCharCode(pimk)+'</div>';
 
-        if(S.Modules[m].subT) modeName = BBAdata['ModuleNames'][S.Modules[m].T+S.Modules[m].subT];
-                else          modeName = BBAdata['ModuleNames'][S.Modules[m].T];
+        if(O.Modules[m].subT) modeName = BBAdata['ModuleNames'][O.Modules[m].T+O.Modules[m].subT];
+                else          modeName = BBAdata['ModuleNames'][O.Modules[m].T];
 
         modHtml+='<div class="cBox">'+letter+'<span id="moduleBox_'+m+'"><div class="energyBox min"><span class="smaller">Disabled</span><div class="infoBox">'+modeName+'</div></div></span></div>';
 
     }
-    html ='<div class="cBox"><div class="energyBox energyCap_00" id="modulesEnergyOut">'+S.Energy.toFixed(2)+'</div></div>'+modHtml+html;
+    html ='<div class="cBox"><div class="energyBox energyCap_00" id="modulesEnergyOut">'+O.Energy.toFixed(2)+'</div></div>'+modHtml+html;
 
-    html+='<div class="cBox"><div class="energyBox energyCap_00"><span id="modulesEnergyIn">'+S.Energy.toFixed(2)+'</span><div class="ammoBoxBox"><div class="ammoBoxes">';
+    html+='<div class="cBox"><div class="energyBox energyCap_00"><span id="modulesEnergyIn">'+O.Energy.toFixed(2)+'</span><div class="ammoBoxBox"><div class="ammoBoxes">';
 
     Sx.EnergyOut=-1;
-    for(var fi in S.Weapons){
-        html+='<div id="attackModule_'+fi+'" class="attackBox attack_'+S.Weapons[fi].T+'"><span></span><span></span><span></span><span></span><span></span><div class="attackBoxNum">'+(fi- -1)+'</div></div>';
+    for(var fi in O.Weapons){
+        html+='<div id="attackModule_'+fi+'" class="attackBox attack_'+O.Weapons[fi].T+'"><span></span><span></span><span></span><span></span><span></span><div class="attackBoxNum">'+(fi- -1)+'</div></div>';
     }
 
     Sx.Storage=[];
-    for(var Stype in S.Storage){
+    for(var Stype in O.Storage){
         Sx.Storage[Stype]={R:0};
         if(Stype=='Ammo' || Stype=='Bomb' || Stype=='Missile')
-            if(typeof S.Storage[Stype].Hidden == 'undefined')
+            if(typeof O.Storage[Stype].Hidden == 'undefined')
                 html+='<div class="ammoBox" id="'+Stype+'Storage"></div>';
     }
 
@@ -53,14 +52,13 @@ GAMEobject.prototype.makeShipControlPanel = function(){
 
     $('#countSpeed').html(html);
     this.shipFunc_speedChange();
-    if(S.Weapon1!==false)
-        this.shipFunc_changeWeapon(1, S.Weapon1);
+    if(O.Weapon1!==false)
+        this.shipFunc_changeWeapon(1, O.Weapon1);
 
 }
 
 GAMEobject.prototype.decide_ship = function(e){
     var O = this.O[0];
-    var S = this.SHIP;
     var Sx = this.SHIPold;
     O.lastSpeedT = 0;
     this.mouseX = this.mouse_x- -(O.x -this.Dx/2);
@@ -70,13 +68,13 @@ GAMEobject.prototype.decide_ship = function(e){
 
     // Start special move
     if(this.specialMoveT < 0 && this.specialMove > 0)
-        if(S.SpecialMoves && S.SpecialMoves[ this.specialMove ]){
-            var SpecMove = S.SpecialMoves[ this.specialMove ];
+        if(O.SpecialMoves && O.SpecialMoves[ this.specialMove ]){
+            var SpecMove = O.SpecialMoves[ this.specialMove ];
             var goOn = true;
-            if(SpecMove.ModUse) for(var useU in SpecMove.ModUse) if(S.ModStorage[useU].R < SpecMove.ModUse[useU]) goOn = false;
+            if(SpecMove.ModUse) for(var useU in SpecMove.ModUse) if(O.ModStorage[useU].R < SpecMove.ModUse[useU]) goOn = false;
             if(goOn){
                 this.specialMoveT = SpecMove.Dec-1;
-                if(SpecMove.ModUse) for(var useU in SpecMove.ModUse) S.ModStorage[useU].R -= SpecMove.ModUse[useU];
+                if(SpecMove.ModUse) for(var useU in SpecMove.ModUse) O.ModStorage[useU].R -= SpecMove.ModUse[useU];
             } else {
                 this.specialMove = -1;
             }
@@ -88,31 +86,31 @@ GAMEobject.prototype.decide_ship = function(e){
         if(this.keyUpDown==1 && --this.changeSpeedDelay < 0){
             var oldSpeed = O.speed;
             var newSpeed = O.speed-=-O.speedAcl/this.Frames;
-            if(S.ChangeSpeedStops && S.ChangeSpeedStops.up)
-                for(var stopX in S.ChangeSpeedStops.up){
+            if(O.ChangeSpeedStops && O.ChangeSpeedStops.up)
+                for(var stopX in O.ChangeSpeedStops.up){
                     if(oldSpeed < stopX && newSpeed >= stopX){
                         O.speed = stopX*1.0;
-                        this.changeSpeedDelay = S.ChangeSpeedDelay;
+                        this.changeSpeedDelay = O.ChangeSpeedDelay;
                     }
                 }
         }
         if(this.keyUpDown==-1 && --this.changeSpeedDelay < 0){
             var oldSpeed = O.speed;
             var newSpeed = O.speed-=O.speedDcl/this.Frames;
-            if(S.ChangeSpeedStops && S.ChangeSpeedStops.up)
-                for(var stopX in S.ChangeSpeedStops.down){
+            if(O.ChangeSpeedStops && O.ChangeSpeedStops.up)
+                for(var stopX in O.ChangeSpeedStops.down){
                     if(oldSpeed > stopX && newSpeed <= stopX){
                         O.speed = stopX*1.0;
-                        this.changeSpeedDelay = S.ChangeSpeedDelay;
+                        this.changeSpeedDelay = O.ChangeSpeedDelay;
                     }
                 }
         }
     }
     // Do special move
-    if(this.specialMoveT > -1 && S.SpecialMoves[ this.specialMove ]){
+    if(this.specialMoveT > -1 && O.SpecialMoves[ this.specialMove ]){
         var oldX = O.x;
         var oldY = O.y;
-        var SpecMove = S.SpecialMoves[ this.specialMove ];
+        var SpecMove = O.SpecialMoves[ this.specialMove ];
         if(SpecMove.T=='changeSpeed')
             O.speed-=-SpecMove.speedBy;
         if(SpecMove.T=='changeAngle'){
@@ -165,18 +163,18 @@ GAMEobject.prototype.decide_ship = function(e){
     if(O.speed != Sx.speed)
         this.shipFunc_speedChange();
 
-    S.Energy = S.EnergyM - S.Espeed;
+    O.Energy = O.EnergyM - O.Espeed;
 
     var F1T = false;
     var F2T = false;
-    if(S.Weapon1!==false) F1T = S.Weapons[S.Weapon1].T;
-    if(S.Weapon2!==false) F2T = S.Weapons[S.Weapon2].T;
+    if(O.Weapon1!==false) F1T = O.Weapons[O.Weapon1].T;
+    if(O.Weapon2!==false) F2T = O.Weapons[O.Weapon2].T;
 
 
     var EsteemedPos = false;
 
-    for(var m in S.Modules){
-        var M = S.Modules[m];
+    for(var m in O.Modules){
+        var M = O.Modules[m];
         var modHtml='';
 
         // Moduły wyłączone:
@@ -189,15 +187,15 @@ GAMEobject.prototype.decide_ship = function(e){
             if(M.T=='spotRegion') this.shipFunc_showSpotRegions(false);
         }
 
-        if(M.Disabled && M.T=='moduleProd') S.ModStorage[ M.ModStorage ].R=0;
+        if(M.Disabled && M.T=='moduleProd') O.ModStorage[ M.ModStorage ].R=0;
         if(M.Disabled == 1)
             continue;
 
         // Moduły niepotrzebne:
-        if( (M.T=='Prod' && S.Storage[ M.Storage ].R >= S.Storage[ M.Storage ].M)
-         || (M.T=='healerProd' && S.lifeM <= O.life)
+        if( (M.T=='Prod' && O.Storage[ M.Storage ].R >= O.Storage[ M.Storage ].M)
+         || (M.T=='healerProd' && O.lifeM <= O.life)
          || (M.T=='esteemProd' && (F1T=='missle' || F1T=='missleR' || F1T=='laser'))
-         || (M.T=='shieldProd' && S.ShieldStorage[ M.ShieldStorage ].R >= S.ShieldStorage[ M.ShieldStorage ].M)){
+         || (M.T=='shieldProd' && O.ShieldStorage[ M.ShieldStorage ].R >= O.ShieldStorage[ M.ShieldStorage ].M)){
 
             if(Sx.Mod[m] != 'done'){
                 if(M.subT) modeName = BBAdata['ModuleNames'][M.T+M.subT];
@@ -209,10 +207,10 @@ GAMEobject.prototype.decide_ship = function(e){
         }
 
         // Moduły bez energii:
-        if(M.Emin > S.Energy){
+        if(M.Emin > O.Energy){
             M.E=0;
             if(M.T=='moduleProd')
-                S.ModStorage[M.ModStorage].R = 0;
+                O.ModStorage[M.ModStorage].R = 0;
             if(M.T=='teleProd') M.TeleLoad = 0;
             if(Sx.Mod[m] != 0){
                 if(M.subT) modeName = BBAdata['ModuleNames'][M.T+M.subT];
@@ -224,8 +222,8 @@ GAMEobject.prototype.decide_ship = function(e){
             continue;
         }
         if(M.T=='moduleProd'){
-            var modR = S.ModStorage[M.ModStorage].R;
-            var modM = S.ModStorage[M.ModStorage].M;
+            var modR = O.ModStorage[M.ModStorage].R;
+            var modM = O.ModStorage[M.ModStorage].M;
         }
         // Moduły działające:
         if(M.T=='moduleProd' && modR == modM){
@@ -233,16 +231,16 @@ GAMEobject.prototype.decide_ship = function(e){
                 modHtml+='<div class="energyBox active"><div class="active">active</div>'+M.Emin.toFixed(2)+'<div class="infoBox">';
                 Sx.Mod[m] = 'active';
             }
-            S.Energy-=M.Emin;
+            O.Energy-=M.Emin;
             M.E = M.Emin;
         }else{
-            if(S.Energy < M.Emax){
-                M.E = S.Energy;
-                if(Sx.Mod[m] != S.Energy){
+            if(O.Energy < M.Emax){
+                M.E = O.Energy;
+                if(Sx.Mod[m] != O.Energy){
                     modHtml+='<div class="energyBox energyCap_'+((M.E-M.Emin)/(M.Emax-M.Emin)).toFixed(1)*10+'0">'+M.E.toFixed(2)+'<div class="infoBox">';
-                    Sx.Mod[m] = S.Energy;
+                    Sx.Mod[m] = O.Energy;
                 }
-                S.Energy=0;
+                O.Energy=0;
             } else{
                 M.E = M.Emax;
                 if(Sx.Mod[m] != M.E){
@@ -250,7 +248,7 @@ GAMEobject.prototype.decide_ship = function(e){
                     Sx.Mod[m] = M.E;
                     if(M.T=='spotRegion') this.shipFunc_showSpotRegions(true);
                 }
-                S.Energy-=M.Emax;
+                O.Energy-=M.Emax;
             }
         }
         if(modHtml!=''){
@@ -262,15 +260,15 @@ GAMEobject.prototype.decide_ship = function(e){
         M.Prod-=-M.E;
         if(M.Prod > M.ifProd){
             if(M.T=='moduleProd' && modR < modM)
-                modR = ++S.ModStorage[M.ModStorage].R;
-            if(M.T=='Prod') ++S.Storage [ M.Storage ].R;
+                modR = ++O.ModStorage[M.ModStorage].R;
+            if(M.T=='Prod') ++O.Storage [ M.Storage ].R;
             if(M.T=='healerProd'){
                 ++this.C.S_lifeHealed;
                 this.healObj(0,1);
             }
             if(M.T=='shieldProd'){
                 ++this.C.S_shieldProd;
-                ++S.ShieldStorage[ M.ShieldStorage ].R;
+                ++O.ShieldStorage[ M.ShieldStorage ].R;
                 this.shipFunc_showHealth();
             }
             M.Prod-=M.ifProd;
@@ -310,30 +308,30 @@ GAMEobject.prototype.decide_ship = function(e){
             this.shipFunc_workingRadar(M.E, (M.Prod/M.ifProd)*360, M.Radius);
 
         if(M.T=='esteemProd' && M.E==M.Emax && (F1T=='single' || F1T=='double' || F1T=='triple' || F1T=='rose' || F1T=='bomb'))
-            EsteemedPos = this.shipFunc_esteemedPositions(O,S.Weapons[S.Weapon1]);
+            EsteemedPos = this.shipFunc_esteemedPositions(O,O.Weapons[O.Weapon1]);
 
         if(modHtml != '')
             $('#moduleBox_'+m).html(modHtml);
     }
 
-    if(Sx.EnergyOut != S.Energy){
-        $('#modulesEnergyOut').html(S.Energy.toFixed(2));
-        Sx.EnergyOut = S.Energy;
+    if(Sx.EnergyOut != O.Energy){
+        $('#modulesEnergyOut').html(O.Energy.toFixed(2));
+        Sx.EnergyOut = O.Energy;
     }
 
 
 
     // ESTYMATORY
-    if(S.GlueFireToLaser!=false && (F1T=='laser' || F2T=='laser'))
+    if(O.GlueFireToLaser!=false && (F1T=='laser' || F2T=='laser'))
         this.shipFunc_glueFireToLaser();
 
 
     // !!!! TO FIX LATER
-    // if(S.ShowAmmoIndicator){
+    // if(O.ShowAmmoIndicator){
     //     var useUse = true;
     //     if(F.Use)
     //         for(var useU in F.Use)
-    //             if(S.Storage[ useU ].R < F.Use[useU])
+    //             if(O.Storage[ useU ].R < F.Use[useU])
     //                 useUse = false;
     //
     //
@@ -344,34 +342,34 @@ GAMEobject.prototype.decide_ship = function(e){
     // }
 
     if(F1T=='missle' || F1T=='missleR')
-        this.shipFunc_glueFireToMissle(S.Weapons[S.Weapon1].AimRadius);
+        this.shipFunc_glueFireToMissle(O.Weapons[O.Weapon1].AimRadius);
     if(F2T=='missle' || F2T=='missleR')
-        this.shipFunc_glueFireToMissle(S.Weapons[S.Weapon2].AimRadius);
+        this.shipFunc_glueFireToMissle(O.Weapons[O.Weapon2].AimRadius);
 
     if(F1T=='laser' || F2T=='laser'){
         var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -360)%360;
-        if(F1T=='laser') var LaserLenght = S.Weapons[S.Weapon1].Speed;
-            else         var LaserLenght = S.Weapons[S.Weapon2].Speed;
+        if(F1T=='laser') var LaserLenght = O.Weapons[O.Weapon1].Speed;
+            else         var LaserLenght = O.Weapons[O.Weapon2].Speed;
         $('#gameboardMarkers').append('<div class="object laserAiming" style="height: '+LaserLenght+'px; top: '+(this.Dy/2)+'px; left: '+(this.Dx/2)+'px; transform: rotate('+Angle+'deg);"></div>');
     }
 
 
-    if(S.GlueFireToEstimated!=false && EsteemedPos!=false)
+    if(O.GlueFireToEstimated!=false && EsteemedPos!=false)
         this.shipFunc_glueFireToEstimated(EsteemedPos);
 
 
     // STRZELAMY
     var aktywneDziala = {};
-    if(S.Weapon1!==false && S.MouseDown1) aktywneDziala[ S.Weapon1 ]=1;
-    if(S.Weapon2!==false && S.MouseDown2) aktywneDziala[ S.Weapon2 ]=1;
-    for(var dzi in aktywneDziala) if(S.Weapons[ dzi ].gunS > S.Weapons[dzi].GunSpeed){
+    if(O.Weapon1!==false && O.MouseDown1) aktywneDziala[ O.Weapon1 ]=1;
+    if(O.Weapon2!==false && O.MouseDown2) aktywneDziala[ O.Weapon2 ]=1;
+    for(var dzi in aktywneDziala) if(O.Weapons[ dzi ].gunS > O.Weapons[dzi].GunSpeed){
 
         var shotDone = false;
-        var Weapon = S.Weapons[dzi];
+        var Weapon = O.Weapons[dzi];
 
         var enoughToUse = true
-        if(Weapon.Use) for(var useU in Weapon.Use) if(S.Storage[ useU ].R < Weapon.Use[useU]) enoughToUse = false;
-        if(Weapon.ModUse) for(var useU in Weapon.ModUse) if(S.ModStorage[ useU ].R < Weapon.ModUse[useU]) enoughToUse = false;
+        if(Weapon.Use) for(var useU in Weapon.Use) if(O.Storage[ useU ].R < Weapon.Use[useU]) enoughToUse = false;
+        if(Weapon.ModUse) for(var useU in Weapon.ModUse) if(O.ModStorage[ useU ].R < Weapon.ModUse[useU]) enoughToUse = false;
         if(!enoughToUse) continue;
 
         if(Weapon.T=='single'){
@@ -433,8 +431,8 @@ GAMEobject.prototype.decide_ship = function(e){
 
         if(shotDone){
             Weapon.gunS=0;
-            if(Weapon.Use) for(var useU in Weapon.Use) S.Storage[ useU ].R-=Weapon.Use[ useU ];
-            if(Weapon.ModUse) for(var useU in Weapon.ModUse) S.ModStorage[ useU ].R-=Weapon.ModUse[ useU ];
+            if(Weapon.Use) for(var useU in Weapon.Use) O.Storage[ useU ].R-=Weapon.Use[ useU ];
+            if(Weapon.ModUse) for(var useU in Weapon.ModUse) O.ModStorage[ useU ].R-=Weapon.ModUse[ useU ];
 
             Weapon.gunU++;
             if(typeof Weapon.shotsToReload != 'undefined' && Weapon.gunU >= Weapon.shotsToReload){
@@ -444,28 +442,28 @@ GAMEobject.prototype.decide_ship = function(e){
         }
     }
 
-    for(var w in S.Weapons)
-        S.Weapons[w].gunS++;
+    for(var w in O.Weapons)
+        O.Weapons[w].gunS++;
 
 
-    for(var storU in S.Storage)
-        if(S.Storage[storU].R > S.Storage[storU].M)
-            S.Storage[storU].R = S.Storage[storU].M;
+    for(var storU in O.Storage)
+        if(O.Storage[storU].R > O.Storage[storU].M)
+            O.Storage[storU].R = O.Storage[storU].M;
     O.ammo++;
 
-    for(var storU in S.Storage)
-        if(S.Storage[storU].R != Sx.Storage[storU].R){
+    for(var storU in O.Storage)
+        if(O.Storage[storU].R != Sx.Storage[storU].R){
             var letter = 'i';
             if(storU=='Bomb') letter = 'P';
             if(storU=='Missile') letter = 'Y';
 
-            var A = S.Storage[storU].R;
-            var B = S.Storage[storU].M - A;
+            var A = O.Storage[storU].R;
+            var B = O.Storage[storU].M - A;
             html='<span>';
             for(var x=0; x<A; ++x) html+=letter;
             html+='</span>';
             for(var x=0; x<B; ++x) html+=letter;
             $('#'+storU+'Storage').html(html);
-            Sx.Storage[storU].R = S.Storage[storU].R;
+            Sx.Storage[storU].R = O.Storage[storU].R;
         }
 }
