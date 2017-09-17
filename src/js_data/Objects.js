@@ -543,8 +543,7 @@ BBAdata['ObjectDatas']={
 
         ShieldsRejection:{koriazMax:1},
 
-        prodSquad: 5,
-        Res: {'prodSquad': {M:5,T:0}},
+        Res: {'prodSquad': {R:5,M:5,T:0}},
         weapon:[
             {t:'refilResource', resource: 'prodSquad', gunSpeed: 22, maxSpeed: 2, doNextWeapon: true},
             {t:'healSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prodSquad', usedResR: 1, maxSpeed: 2, doNextWeapon: true},
@@ -644,8 +643,7 @@ BBAdata['ObjectDatas']={
         lifeM: 9,
         radius: 20,
 
-        fieldCharges: 10,
-        Res: {'fieldCharges': {M:10,T:0}},
+        Res: {'fieldCharges': {R:10,M:10,T:0}},
         weapon:[
             {t:'refilResource', resource: 'fieldCharges', gunSpeed: 16, maxSpeed: 2, FlagsRequired:{squadFull:false}, doNextWeapon: true},
             {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, maxSpeed: 2, FlagsRequired:{squadFull:false }},
@@ -694,8 +692,7 @@ BBAdata['ObjectDatas']={
 
         lifeM: 4,
 
-        shieldBlobProd: 0,
-        Res: {'shieldBlobProd': {M:10,T:0}},
+        Res: {'shieldBlobProd': {R:0,M:10,T:0}},
         weapon:[
             {t:'refilResource', resource: 'shieldBlobProd', gunSpeed: 20, maxSpeed: 2, doNextWeapon: true},
             {t:'changeAction', minSpeed: 3, minDistToEnemy: 50, makeAction: {doingNow:'shooting', gotoSpeed:2, doingTime:31, Manouver:'goStraight'}, doingNow:'followEnemy', usedRes:'shieldBlobProd', usedResR: 10},
@@ -751,7 +748,6 @@ BBAdata['ObjectDatas']={
             HitDieAnimation: 'dontShow',
         }],
 
-        onHitJump: 3,
         Res: {'onHitJump': {M:3,R:3,T:0}},
         weapon:[
             {t:'refilResource', resource: 'onHitJump', gunSpeed: 300, maxSpeed: 2, doNextWeapon: true},
@@ -976,9 +972,7 @@ BBAdata['ObjectDatas']={
 
         lifeM: 9,
 
-
-        misslePack: 6,
-        Res: {'misslePack': {M:6,T:0}},
+        Res: {'misslePack': {R:6,M:6,T:0}},
         weapon:[
             {t:'refilResource', resource: 'misslePack', gunSpeed: 90, maxSpeed: 1, doNextWeapon: true},
             {t:'misslesDouble', gunSpeed: 140, lastShot: 100, usedRes: 'misslePack', usedResR: 1, minSpeed: 2, minAlarm: 5, minDistToEnemy: 500},
@@ -1083,8 +1077,7 @@ BBAdata['ObjectDatas']={
 
         lifeM: 3,
 
-        cloakingProd: 0,
-        Res: {'cloakingProd': {M:10,T:0}},
+        Res: {'cloakingProd': {R:0,M:10,T:0}},
         weapon:[
             {t:'refilResource', resource: 'cloakingProd', gunSpeed: 22, maxSpeed: 2, doNextWeapon: true},
             {t:'changeAction', minSpeed: 3, minDistToEnemy: 50, makeAction: {doingNow:'shooting', gotoSpeed:2, doingTime:8, Manouver:'goStraight', unCloak:true}, doingNow:'followEnemyCloaked', usedRes:'cloakingProd', usedResR: 10},
@@ -1178,8 +1171,7 @@ BBAdata['ObjectDatas']={
         lifeM: 60,
         radius: 40,
 
-        prodSquad: 40,
-        Res: {'prodSquad': {M:80,T:0}},
+        Res: {'prodSquad': {R:40,M:80,T:0}},
         weapon:[
             {t:'refilResource', resource: 'prodSquad', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
             {t:'produceSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prodSquad', usedResR: 10, maxSpeed: 2, minDistToEnemy:400, doNextWeapon: true},
@@ -1238,17 +1230,18 @@ BBAdata['ObjectDatas']={
             DmgReduction: 'infinite',
             ReductionUses: 'exploShield',
             HitDieAnimation: 'dontShow',
+            ResPath:'Res',
             Own: true,
         },{
             name: 'absorbtionShield',
             CatchDmgT: {normal:1, energy:1, explo:1},
             DmgReduction: 'energyField',
             ReductionUses: 'infinite',
+            ResPath:'Res',
             Own: true,
         }],
-        energyField: 20,
-        exploShield: 2,
-        Res: {energyField: {M:20,T:0}, exploShield: {M:2,T:0}},
+
+        Res: {energyField: {R:20,M:20,T:0}, exploShield: {R:2,M:2,T:0}},
         weapon:[
             {t:'refilResource', resource: 'energyField', gunSpeed: 60, maxSpeed: 2, doNextWeapon: true},
             {t:'refilResource', resource: 'exploShield', gunSpeed: 240, maxSpeed: 2, doNextWeapon: true},
@@ -1304,8 +1297,8 @@ BBAdata['ObjectDatas']={
             Own: true,
             HitActionObj: 'bounce',
         }],
-        misslePack: 0,
-        Res: {'misslePack': {M:10,T:0}},
+
+        Res: {'misslePack': {R:0,M:10,T:0}},
         weapon:[
             {t:'refilResource', resource: 'misslePack', gunSpeed: 18, maxSpeed: 2, doNextWeapon: true},
             {t:'changeAction', makeAction: {doingNow:'shooting', doingTime: 33, Manouver:'goStraight'}, doingNow:'followEnemy', doingTime:1, usedRes:'misslePack', usedResR: 10},
@@ -1352,8 +1345,7 @@ BBAdata['ObjectDatas']={
 
 
 
-        ammoPack: 0,
-        Res: {'ammoPack': {M:10,T:0}},
+        Res: {'ammoPack': {R:0,M:10,T:0}},
         weapon:[
             {t:'refilResource', resource: 'ammoPack', gunSpeed: 20, maxSpeed: 2, doNextWeapon: true},
             {t:'changeAction', minDistToEnemy: 70, makeAction: {doingNow:'shooting', gotoSpeed: 2, doingTime: 20, Manouver:'goStraight', doNotInterupt:true}, doingNow:'followEnemy', usedRes:'ammoPack', usedResR: 10 },
@@ -1400,8 +1392,7 @@ BBAdata['ObjectDatas']={
         lifeM: 13,
         radius: 15,
 
-        fieldCharges: 0,
-        Res: {'fieldCharges': {M:10,T:0}},
+        Res: {'fieldCharges': {R:0,M:10,T:0}},
         weapon:[
             {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true},maxSpeed: 2},
             {t:'refilResource', resource: 'fieldCharges', gunSpeed: 20, maxSpeed: 2, doNextWeapon: true},
@@ -1755,8 +1746,7 @@ BBAdata['ObjectDatas']={
         lifeM: 5,
         radius: 15,
 
-        fieldCharges: 10,
-        Res: {'fieldCharges': {M:10,T:0}},
+        Res: {'fieldCharges': {R:10, M:10,T:0}},
         weapon:[
             {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, maxSpeed: 2, FlagsRequired:{squadFull:false }},
             {t:'refilResource', resource: 'fieldCharges', gunSpeed: 16, maxSpeed: 2, FlagsRequired:{squadFull:false}, doNextWeapon: true},
@@ -1812,8 +1802,7 @@ BBAdata['ObjectDatas']={
         lifeM: 13,
         radius: 25,
 
-        fieldCharges: 0,
-        Res: {'fieldCharges': {M:10,T:0}},
+        Res: {'fieldCharges': {R:0,M:10,T:0}},
         weapon:[
             {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true}, minSpeed: 2},
             {t:'refilResource', resource: 'fieldCharges', gunSpeed: 30, minSpeed: 2, doNextWeapon: true},
@@ -1920,8 +1909,7 @@ BBAdata['ObjectDatas']={
         onDieHideExplosion: true,
         onDie: {Do:'explode', explodeType: 'putObjs', objRandAngle:true, objName:'slimensen1', objType:'comp', objMin:2, objRand:2},
 
-        mergeAbility: 0,
-        Res: {'mergeAbility': {M:20,T:0}},
+        Res: {'mergeAbility': {R:0,M:20,T:0}},
         weapon:[
             {t:'refilResource', resource: 'mergeAbility', gunSpeed: 120, maxSpeed: 2, doNextWeapon: true},
             {t:'rose', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 7, gunSpeed: 20, lastShot: 100, AtOnce: 60, RoseAngle: 6, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
@@ -2207,8 +2195,8 @@ BBAdata['ObjectDatas']={
             HitDieAnimation: 'dontShow',
             Own: true,
         }],
-        exploShield: 4,
-        Res: {'exploShield': {M:4,T:0}},
+
+        Res: {'exploShield': {R:4,M:4,T:0}},
         weapon:[
             {t:'refilResource', resource: 'exploShield', gunSpeed: 240, maxSpeed: 2, doNextWeapon: true},
             {t:'bomb', Speed: 0.1, Teleport:{ Dist: 35, Angle: 270, AngleRand: 180}, Dec: 10, BombType: 0, gunSpeed: 10, lastShot: 100, maxSpeed: 2, minAlarm: 5, gunWork:80, gunReload:900, minDistToEnemy:500},
@@ -2251,8 +2239,7 @@ BBAdata['ObjectDatas']={
         lifeM: 18,
         radius: 30,
 
-        fieldCharges: 0,
-        Res: {'fieldCharges': {M:10,T:0}},
+        Res: {'fieldCharges': {R:0,M:10,T:0}},
         weapon:[
             {t:'shootSquadMember', Speed: 7, MemberAge: 130, DieTime: 100},
             {t:'produceSquad', gunSpeed: 1, makeAction: {doingNow:'followEnemyX', gotoSpeed: 0, doingTime: 130, Manouver:'followEnemy', doNotInterupt:true}, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, maxSpeed: 2, FlagsRequired:{squadFull:false}, minDistToEnemy:450},
@@ -2310,8 +2297,8 @@ BBAdata['ObjectDatas']={
         radius: 25,
 
         ShieldsRejection:{koriazMax:1},
-        prodSquad: 5,
-        Res: {'prodSquad': {M:5,T:0}},
+
+        Res: {'prodSquad': {R:5,M:5,T:0}},
         weapon:[
             {t:'refilResource', resource: 'prodSquad', gunSpeed: 60, maxSpeed: 2, doNextWeapon: true},
             {t:'produceSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prodSquad', usedResR: 5, maxSpeed: 2, doNextWeapon: true},
@@ -2369,8 +2356,7 @@ BBAdata['ObjectDatas']={
         lifeM: 13,
         radius: 20,
 
-        fieldCharges: 0,
-        Res: {'fieldCharges': {M:10,T:0}},
+        Res: {'fieldCharges': {R:0,M:10,T:0}},
         weapon:[
             {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true},maxSpeed: 2},
             {t:'refilResource', resource: 'fieldCharges', gunSpeed: 20, maxSpeed: 2, doNextWeapon: true},
@@ -2475,8 +2461,8 @@ BBAdata['ObjectDatas']={
 
         lifeM: 3,
 
-        onHitKoriazShield: 2,
-        Res: {onHitKoriazShield: {M:2,T:0}},
+
+        Res: {onHitKoriazShield: {R:2,M:2,T:0}},
         weapon:[
             {t:'refilResource', resource: 'onHitKoriazShield', gunSpeed: 450, maxSpeed: 2, doNextWeapon: true},
             {t:'double2', DMG:{Dmg:1,T:'normal'}, Dec: 35, Speed: 12, gunSpeed: 5, gunWork: 20, gunReload: 90, lastShot: 100, maxSpeed: 2, minAlarm: 5},
@@ -2747,8 +2733,7 @@ BBAdata['ObjectDatas']={
         lifeM: 40,
         radius: 25,
 
-        prodSquad: 18,
-        Res: {'prodSquad': {M:18,T:0}},
+        Res: {'prodSquad': {R:18, M:18,T:0}},
         weapon:[
             {t:'refilResource', resource: 'prodSquad', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
             {t:'produceSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prodSquad', usedResR: 3, maxSpeed: 2, minDistToEnemy:400, doNextWeapon: true},

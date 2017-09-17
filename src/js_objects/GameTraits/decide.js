@@ -135,7 +135,7 @@ GAMEobject.prototype.decide = function(o){
             if(TD.maxAlarm && TD.maxAlarm < O.alarmLvl) continue;
             if(!isNaN(TD.maxSpeedLvl) && TD.maxSpeedLvl < O.speedLvl) continue;
             if(TD.minSpeedLvl && TD.minSpeedLvl > O.speedLvl) continue;
-            if(TD.usedRes && O[ TD.usedRes ] < TD.usedResR) continue;
+            if(TD.usedRes && O.Res[ TD.usedRes ].R < TD.usedResR) continue;
             if(TD.minDistToEnemy && TD.minDistToEnemy < PlayerDist) continue;
 
             if(TD.FlagsRequired){
@@ -624,7 +624,7 @@ GAMEobject.prototype.decide = function(o){
             if(WP.gunSpeed > (this.tick-WP.lastShot)) continue;
             if(WP.doingNow && WP.doingNow != O.doingNow) continue;
             if(WP.doingTime && WP.doingTime != O.doingTime) continue;
-            if(WP.usedRes && O[ WP.usedRes ] < WP.usedResR) continue;
+            if(WP.usedRes && O.Res[ WP.usedRes ].R < WP.usedResR) continue;
 
             if(WP.FlagsRequired){
                 var notAllFlags = false;
@@ -710,13 +710,13 @@ GAMEobject.prototype.decide = function(o){
 
             if(WP.t == 'missle'){
                 this.shootMissle(o,PlayerAngle,15,150,3,WP.DMG,WP.explodePreset);
-                O[ WP.usedRes ] -= WP.usedResR;
+                O.Res[ WP.usedRes ].R -= WP.usedResR;
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'misslesDouble'){
                 this.shootMissle(o,PlayerAngle - 20,15,150,3,WP.DMG,WP.explodePreset);
                 this.shootMissle(o,PlayerAngle- -20,15,150,3,WP.DMG,WP.explodePreset);
-                O[ WP.usedRes ] -= WP.usedResR;
+                O.Res[ WP.usedRes ].R -= WP.usedResR;
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'missleX5'){
@@ -773,15 +773,14 @@ GAMEobject.prototype.decide = function(o){
 
             if(WP.t == 'refilResource'){
                 if(++O.Res[WP.resource].T >= WP.gunSpeed){
-                    if(++O[WP.resource] > O.Res[WP.resource].M)
-                        O[WP.resource] = O.Res[WP.resource].M;
+                    if(++O.Res[WP.resource].R > O.Res[WP.resource].M)
+                        O.Res[WP.resource].R = O.Res[WP.resource].M;
                     O.Res[WP.resource].T = 0;
-                    O.Res[WP.resource].R = O[WP.resource];
                 }
             }
             if(WP.t == 'changeAction'){
                 WP.lastShot = this.tick;
-                if(WP.usedRes) O[ WP.usedRes ] -= WP.usedResR;
+                if(WP.usedRes) O.Res[ WP.usedRes ].R -= WP.usedResR;
             }
 
             if(WP.t == 'produceSquad'){
@@ -797,9 +796,9 @@ GAMEobject.prototype.decide = function(o){
                     if(iUnset !== false){
                         this.setSquadMember(o,iUnset,1);
 
-                        O[ WP.usedRes ] -= WP.usedResR;
+                        O.Res[ WP.usedRes ].R -= WP.usedResR;
                         WP.lastShot = this.tick;
-                        if(O[ WP.usedRes ] < WP.usedResR) break;
+                        if(O.Res[ WP.usedRes ].R < WP.usedResR) break;
                         weMadeSomething = true;
                     }
                 }while(weMadeSomething);
@@ -826,8 +825,8 @@ GAMEobject.prototype.decide = function(o){
                         CanvasManager.requestCanvas( OSS.Oid );
 
                         WP.lastShot = this.tick;
-                        O[ WP.usedRes ] -= WP.usedResR;
-                        if(O[ WP.usedRes ] < WP.usedResR) break;
+                        O.Res[ WP.usedRes ].R -= WP.usedResR;
+                        if(O.Res[ WP.usedRes ].R < WP.usedResR) break;
                         weMadeSomething = true;
                     }
 

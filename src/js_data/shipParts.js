@@ -4,8 +4,6 @@ BBAdata.SHIPempty={
     T: 'ship',
     speedM: 0,
     lastSpeedT: 0,
-    // energyField: 0,
-    // ammo: 0,
     M: 'moving',
     view:{
         Letter: 'A',
