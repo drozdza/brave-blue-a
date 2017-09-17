@@ -105,7 +105,6 @@ GAMEobject.prototype.setPlayerShip = function(){
     this.O[0].y = startY;
     this.O[0].angle = startA;
 
-
     this.putOnXY(0);
     CanvasManager.requestCanvas(0);
 

@@ -131,7 +131,7 @@ BBAdata.SHIPelements['jumpShield'] = {              Weight: 10, Price: 2000, whe
     }
 };
 
-BBAdata.SHIPelements['exploShield'] = {               Weight: 5, Price: 2000,
+BBAdata.SHIPelements['exploShield'] = {             Weight: 5, Price: 2000,
     where:'hull',
     name: 'Explosion Shield',
     ShieldsData:{
@@ -490,7 +490,6 @@ BBAdata.SHIPelements['doubleGun'] = {               Weight: 8, Price: 2700,   wh
     },
 };
 
-// EKHM... more than 1 setting
 BBAdata.SHIPelements['roseGun'] = {                 Weight: 12, Price: 1500,  where:'weapons',
     WeaponData:{
         T:'rose',
@@ -597,7 +596,6 @@ BBAdata.SHIPelements['roseGun'] = {                 Weight: 12, Price: 1500,  wh
     },
 };
 
-
 BBAdata.SHIPelements['ammoStorage'] = {             Weight: 5, Price: 100, where:'weapons',
     name: 'Ammo Storage',
     Storage:{Ammo:{R:0, M:10}},
@@ -614,7 +612,6 @@ BBAdata.SHIPelements['ammoStorage'] = {             Weight: 5, Price: 100, where
         'I': {}, 'II': {}, 'III': {}, 'IV': {},
     },
 };
-
 
 BBAdata.SHIPelements['laserGun'] = {                Weight: 5, Price: 100,    where:'weapons',
     name: 'Laser',
@@ -669,7 +666,7 @@ BBAdata.SHIPelements['teleJump'] = {                Weight: 5, Price: 100,    wh
 
 //============================= MODULES ========================================
 
-BBAdata.SHIPelements['bulletProd'] = {             Weight: 5, Price: 100, where:'modules',
+BBAdata.SHIPelements['bulletProd'] = {              Weight: 5, Price: 100, where:'modules',
     name: 'Ammo Prod',
     ModulesData: {
         T: 'Prod',
@@ -696,8 +693,7 @@ BBAdata.SHIPelements['bulletProd'] = {             Weight: 5, Price: 100, where:
     },
 };
 
-
-BBAdata.SHIPelements['laserProd'] = {              Weight: 5, Price: 100, where:'modules',
+BBAdata.SHIPelements['laserProd'] = {               Weight: 5, Price: 100, where:'modules',
     name: 'Laser Prod',
     ModulesData: {
         T:'moduleProd',
@@ -725,8 +721,7 @@ BBAdata.SHIPelements['laserProd'] = {              Weight: 5, Price: 100, where:
     }
 };
 
-
-BBAdata.SHIPelements['healMod'] = {                Weight: 10, Price: 4000, where:'modules',
+BBAdata.SHIPelements['healMod'] = {                 Weight: 10, Price: 4000, where:'modules',
     name: 'Healing',
     ModulesData: {
         T:'healerProd',
@@ -749,8 +744,7 @@ BBAdata.SHIPelements['healMod'] = {                Weight: 10, Price: 4000, wher
     copies: {'I': {}, 'II': {}, 'III': {}},
 };
 
-
-BBAdata.SHIPelements['esteemMod'] = {                  Weight: 10, Price: 4000, where:'modules',
+BBAdata.SHIPelements['esteemMod'] = {               Weight: 10, Price: 4000, where:'modules',
     name: 'Enemy Estimation',
     ModulesData: {
         T:'esteemProd',
@@ -764,7 +758,7 @@ BBAdata.SHIPelements['esteemMod'] = {                  Weight: 10, Price: 4000, 
     GlueFireToEstimated: 100,
 };
 
-BBAdata.SHIPelements['radar'] = {                  Weight: 10, Price: 4000, where:'modules',
+BBAdata.SHIPelements['radar'] = {                   Weight: 10, Price: 4000, where:'modules',
     name: 'Radar',
     ModulesData: {
         T:'radar',
@@ -792,7 +786,7 @@ BBAdata.SHIPelements['radar'] = {                  Weight: 10, Price: 4000, wher
     },
 };
 
-BBAdata.SHIPelements['teleJumpProd'] = {             Weight: 5, Price: 2000,
+BBAdata.SHIPelements['teleJumpProd'] = {            Weight: 5, Price: 2000,
     where:'modules',
     name: 'Teleport Jumps Prod',
     ModulesData: {
@@ -824,7 +818,7 @@ BBAdata.SHIPelements['teleJumpProd'] = {             Weight: 5, Price: 2000,
     },
 };
 
-BBAdata.SHIPelements['absShieldProd'] = {             Weight: 5, Price: 2000,
+BBAdata.SHIPelements['absShieldProd'] = {           Weight: 5, Price: 2000,
     where:'modules',
     name: 'Absorbtion Shield Prod',
     ModulesData: {
@@ -853,7 +847,7 @@ BBAdata.SHIPelements['absShieldProd'] = {             Weight: 5, Price: 2000,
     },
 };
 
-BBAdata.SHIPelements['exploShieldProd'] = {             Weight: 5, Price: 2000,
+BBAdata.SHIPelements['exploShieldProd'] = {         Weight: 5, Price: 2000,
     where:'modules',
     name: 'Explosion Shield Prod',
     ModulesData: {
