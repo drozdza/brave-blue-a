@@ -661,6 +661,56 @@ BBAdata.SHIPelements['ammoStorage'] = {             Weight: 5, Price: 100, where
     },
 };
 
+BBAdata.SHIPelements['missile'] = {                 Weight: 5, Price: 100, where:'weapons',
+    name: 'Missile',
+    WeaponData:{
+        T:'missile',
+        gunS:0,
+        GunSpeed: 10,
+        Use:{Missile:1},
+        Speed: 12,
+        SpeedT: 4,
+        Dec: 400,
+        AimRadius: 120,
+        DMG:{Dmg:3,T:'explo'},
+    },
+    Storage:{Missile:{R:0,M:0}},
+};
+
+BBAdata.SHIPelements['missileR'] = {                Weight: 5, Price: 100, where:'weapons',
+    name: 'Missile Royal Ring',
+    WeaponData:{
+        T:'missileR',
+        gunS:0,
+        GunSpeed: 10,
+        Use:{Missile:5},
+        Speed: 12,
+        AtOnce: 8,
+        SpeedT: 6,
+        Dec: 95,
+        AimRadius: 60,
+        DMG:{Dmg:3,T:'explo'},
+    },
+    Storage:{Missile:{R:0,M:0}},
+};
+
+BBAdata.SHIPelements['missileStorage'] = {             Weight: 5, Price: 100, where:'weapons',
+    name: 'Missile Storage',
+    Storage:{Missile:{R:0, M:10}},
+    upgrades: {
+        'lighter': {                                Weight: -3,  Price: 3000,
+            lifeM: 1,
+            name: 'Lighter Storages',
+        },
+        'fullOnStart': {                            Price: 4000,
+            Storage:{Missile:{R:10}},
+        },
+    },
+    copies: {
+        'I': {}, 'II': {},
+    },
+};
+
 BBAdata.SHIPelements['laserGun'] = {                Weight: 5, Price: 100,    where:'weapons',
     name: 'Laser',
     WeaponData:{
@@ -727,6 +777,35 @@ BBAdata.SHIPelements['bulletProd'] = {              Weight: 5, Price: 100, where
         Emax: 4,
         ifProd: 100,
     },
+    Storage:{Bullet:{R:0,M:0}},
+    upgrades: {
+        'lowerMin':{    Price: 100, ModulesData: {Emin:-1}},
+        'lowerMin2':{   Price: 100, ModulesData: {Emin:-0.6}},
+        'higherMax':{   Price: 100, ModulesData: {Emax: 1}},
+        'higherMax2':{  Price: 100, ModulesData: {Emax: 2}},
+        'higherMax3':{  Price: 100, ModulesData: {Emax: 3}},
+        'faster':{      Price: 100, ModulesData: {ifProd:-20}},
+        'faster2':{     Price: 100, ModulesData: {ifProd:-20}},
+    },
+    copies: {
+        'I': {}, 'II': {}, 'III': {}, 'IV': {},
+    },
+};
+
+BBAdata.SHIPelements['missileProd'] = {              Weight: 5, Price: 100, where:'modules',
+    name: 'Missile Prod',
+    ModulesData: {
+        T: 'Prod',
+        subT: 'Missile',
+        Storage: 'Missile',
+        E: 0,
+        Prod: 0,
+        Disabled: 0,
+        Emin: 2,
+        Emax: 4,
+        ifProd: 100,
+    },
+    Storage:{Missile:{R:0,M:0}},
     upgrades: {
         'lowerMin':{    Price: 100, ModulesData: {Emin:-1}},
         'lowerMin2':{   Price: 100, ModulesData: {Emin:-0.6}},
@@ -976,7 +1055,7 @@ Storage:
     - Ammo Storage
     - Ammo Storage Start filling
 
-    - Missle/Bomb Storage - Different Types - Set in bomb booths
+    - Missile/Bomb Storage - Different Types - Set in bomb booths
 
 
 
@@ -1008,9 +1087,9 @@ Modules - Production:
         - Min Energy
         - Max Energy
         - Production Speed
-    Produce Missles:
+    Produce Missiles:
         - Min Energy, Max Energy, Prod Speed
-        - Different Types of missles
+        - Different Types of missiles
 
 Modules - other:
 

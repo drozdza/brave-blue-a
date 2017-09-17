@@ -29,17 +29,17 @@ GAMEobject.prototype.prepareCounts = function(){
         B_s1_bombsShot:0,
         B_s2_bombsShot:0,
 
-        B_missles:0,
-        B_s1_missles:0,
-        B_s2_missles:0,
+        B_missiles:0,
+        B_s1_missiles:0,
+        B_s2_missiles:0,
 
         'E:mines':0,
         B_minesSet:0,
         B_minesExplode:0,
 
-        Hit_missles:0, // !!!!
-        Hit_s1_missles:0, // !!!!
-        Hit_s2_missles:0, // !!!!
+        Hit_missiles:0, // !!!!
+        Hit_s1_missiles:0, // !!!!
+        Hit_s2_missiles:0, // !!!!
 
         E_enemies_aware:0, // !!!!
 

@@ -194,7 +194,7 @@ GAMEobject.prototype.decide_ship = function(e){
         // Moduły niepotrzebne:
         if( (M.T=='Prod' && O.Storage[ M.Storage ].R >= O.Storage[ M.Storage ].M)
          || (M.T=='healerProd' && O.lifeM <= O.life)
-         || (M.T=='esteemProd' && (F1T=='missle' || F1T=='missleR' || F1T=='laser'))
+         || (M.T=='esteemProd' && (F1T=='missile' || F1T=='missileR' || F1T=='laser'))
          || (M.T=='shieldProd' && O.ShieldStorage[ M.ShieldStorage ].R >= O.ShieldStorage[ M.ShieldStorage ].M)){
 
             if(Sx.Mod[m] != 'done'){
@@ -341,10 +341,10 @@ GAMEobject.prototype.decide_ship = function(e){
     //         $('#gameOverlay').attr('class','cursorWait');
     // }
 
-    if(F1T=='missle' || F1T=='missleR')
-        this.shipFunc_glueFireToMissle(O.Weapons[O.Weapon1].AimRadius);
-    if(F2T=='missle' || F2T=='missleR')
-        this.shipFunc_glueFireToMissle(O.Weapons[O.Weapon2].AimRadius);
+    if(F1T=='missile' || F1T=='missileR')
+        this.shipFunc_glueFireToMissile(O.Weapons[O.Weapon1].AimRadius);
+    if(F2T=='missile' || F2T=='missileR')
+        this.shipFunc_glueFireToMissile(O.Weapons[O.Weapon2].AimRadius);
 
     if(F1T=='laser' || F2T=='laser'){
         var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -360)%360;
@@ -392,16 +392,16 @@ GAMEobject.prototype.decide_ship = function(e){
                 this.shipShoot(i*Weapon.RoseAngle, Weapon.Speed, Weapon.Dec, Weapon.DMG);
             shotDone = true;
         }
-        if(Weapon.T=='missle' && this.missleAim!=false){
-            this.shipShootMissle(this.missleAim,O.angle,Weapon.Speed,Weapon.Dec,Weapon.SpeedT,Weapon);
+        if(Weapon.T=='missile' && this.missileAim!=false){
+            this.shipShootMissile(this.missileAim,O.angle,Weapon.Speed,Weapon.Dec,Weapon.SpeedT,Weapon);
             shotDone = true;
         }
-        if(Weapon.T=='missleR' && this.missleAim!=false){
+        if(Weapon.T=='missileR' && this.missileAim!=false){
             var Pe = [80,280,100,260,120,240,140,220,160,200,175,185];
             var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -180)%360;
 
             for(var iki=0; iki<Weapon.AtOnce; ++iki)
-                this.shipShootMissle(this.missleAim, (Angle- -Pe[iki])%360, (Weapon.Speed-parseInt(iki/2)*2),(Weapon.Dec- -parseInt(iki/2)*20),(Weapon.SpeedT-parseInt(iki/2)),Weapon);
+                this.shipShootMissile(this.missileAim, (Angle- -Pe[iki])%360, (Weapon.Speed-parseInt(iki/2)*2),(Weapon.Dec- -parseInt(iki/2)*20),(Weapon.SpeedT-parseInt(iki/2)),Weapon);
             shotDone = true;
         }
         if(Weapon.T=='bomb'){

@@ -4,8 +4,8 @@
             {N:73,T:'avoidIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 2, avoidTime: 12},
             {N:72,T:'avoidIncomingFire', FlagsRequired:{incomingFireFlag:true}, minAlarm: 5, avoidTime: 12},
 
-            {N:67,T:'lowerSpeedForResources', minAlarm: 0, wantedRes: 'misslePack', wantedResR: 20, gotoSpeed: 1},
-            {N:66,T:'speedUpIfResources', minAlarm: 0, wantedRes: 'misslePack', wantedResR: 20, gotoSpeed: 2},
+            {N:67,T:'lowerSpeedForResources', minAlarm: 0, wantedRes: 'missilePack', wantedResR: 20, gotoSpeed: 1},
+            {N:66,T:'speedUpIfResources', minAlarm: 0, wantedRes: 'missilePack', wantedResR: 20, gotoSpeed: 2},
             {N:61,T:'speedUp', maxSpeedLvl: 1, gotoSpeed: 2},
 
             {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},

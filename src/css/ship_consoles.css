@@ -385,17 +385,17 @@
 #countSpeed .energyBox .attackBox.attack_rose span:nth-child(5){ top: 6px; left: 7px; transform: rotate(-50deg); }
 #countSpeed .energyBox .attackBox.attack_rose span:nth-child(5):before{ content: 'i'; }
 
-#countSpeed .energyBox .attackBox.attack_missle span:nth-child(1){ top: 2px; left: 12px; }
-#countSpeed .energyBox .attackBox.attack_missle span:nth-child(1):before{ content: 'Y'; font-size: 16px; }
+#countSpeed .energyBox .attackBox.attack_missile span:nth-child(1){ top: 2px; left: 12px; }
+#countSpeed .energyBox .attackBox.attack_missile span:nth-child(1):before{ content: 'Y'; font-size: 16px; }
 
 
-#countSpeed .energyBox .attackBox.attack_missleR span{ font-size: 8px; }
-#countSpeed .energyBox .attackBox.attack_missleR span:nth-child(1){ top: 0px; left: 15px; }
-#countSpeed .energyBox .attackBox.attack_missleR span:nth-child(1):before{ content: 'Y'; }
-#countSpeed .energyBox .attackBox.attack_missleR span:nth-child(2){ top: 2px; left: 20px; transform: rotate(45deg);}
-#countSpeed .energyBox .attackBox.attack_missleR span:nth-child(2):before{ content: 'Y'; }
-#countSpeed .energyBox .attackBox.attack_missleR span:nth-child(3){ top: 3px; left: 7px; transform: rotate(-45deg); }
-#countSpeed .energyBox .attackBox.attack_missleR span:nth-child(3):before{ content: 'Y'; }
+#countSpeed .energyBox .attackBox.attack_missileR span{ font-size: 8px; }
+#countSpeed .energyBox .attackBox.attack_missileR span:nth-child(1){ top: 0px; left: 15px; }
+#countSpeed .energyBox .attackBox.attack_missileR span:nth-child(1):before{ content: 'Y'; }
+#countSpeed .energyBox .attackBox.attack_missileR span:nth-child(2){ top: 2px; left: 20px; transform: rotate(45deg);}
+#countSpeed .energyBox .attackBox.attack_missileR span:nth-child(2):before{ content: 'Y'; }
+#countSpeed .energyBox .attackBox.attack_missileR span:nth-child(3){ top: 3px; left: 7px; transform: rotate(-45deg); }
+#countSpeed .energyBox .attackBox.attack_missileR span:nth-child(3):before{ content: 'Y'; }
 
 
 
@@ -426,10 +426,10 @@
     border-radius: 100%;
 }
 
-.estimationMarkers.MissleAim{
+.estimationMarkers.MissileAim{
     background: transparent;
 }
-.estimationMarkers.MissleAim span{
+.estimationMarkers.MissileAim span{
     position: absolute;
     border: 2px dashed rgba(255,255,0,0.4);
     border-radius: 100%;

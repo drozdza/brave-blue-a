@@ -708,30 +708,30 @@ GAMEobject.prototype.decide = function(o){
             }
 
 
-            if(WP.t == 'missle'){
-                this.shootMissle(o,PlayerAngle,15,150,3,WP.DMG,WP.explodePreset);
+            if(WP.t == 'missile'){
+                this.shootMissile(o,PlayerAngle,15,150,3,WP.DMG,WP.explodePreset);
                 O.Res[ WP.usedRes ].R -= WP.usedResR;
                 WP.lastShot = this.tick;
             }
-            if(WP.t == 'misslesDouble'){
-                this.shootMissle(o,PlayerAngle - 20,15,150,3,WP.DMG,WP.explodePreset);
-                this.shootMissle(o,PlayerAngle- -20,15,150,3,WP.DMG,WP.explodePreset);
+            if(WP.t == 'missilesDouble'){
+                this.shootMissile(o,PlayerAngle - 20,15,150,3,WP.DMG,WP.explodePreset);
+                this.shootMissile(o,PlayerAngle- -20,15,150,3,WP.DMG,WP.explodePreset);
                 O.Res[ WP.usedRes ].R -= WP.usedResR;
                 WP.lastShot = this.tick;
             }
-            if(WP.t == 'missleX5'){
-                if(O.doingTime == 32) this.shootMissle(o,O.angle- -40,15,150,3,WP.DMG,WP.explodePreset);
-                if(O.doingTime == 24) this.shootMissle(o,O.angle- -20,15,150,3,WP.DMG,WP.explodePreset);
-                if(O.doingTime == 16) this.shootMissle(o,O.angle     ,15,150,3,WP.DMG,WP.explodePreset);
-                if(O.doingTime == 8)  this.shootMissle(o,O.angle - 20,15,150,3,WP.DMG,WP.explodePreset);
-                if(O.doingTime == 0)  this.shootMissle(o,O.angle - 40,15,150,3,WP.DMG,WP.explodePreset);
+            if(WP.t == 'missileX5'){
+                if(O.doingTime == 32) this.shootMissile(o,O.angle- -40,15,150,3,WP.DMG,WP.explodePreset);
+                if(O.doingTime == 24) this.shootMissile(o,O.angle- -20,15,150,3,WP.DMG,WP.explodePreset);
+                if(O.doingTime == 16) this.shootMissile(o,O.angle     ,15,150,3,WP.DMG,WP.explodePreset);
+                if(O.doingTime == 8)  this.shootMissile(o,O.angle - 20,15,150,3,WP.DMG,WP.explodePreset);
+                if(O.doingTime == 0)  this.shootMissile(o,O.angle - 40,15,150,3,WP.DMG,WP.explodePreset);
                 WP.lastShot = this.tick;
             }
-            if(WP.t == 'missleCrown'){
+            if(WP.t == 'missileCrown'){
                 var Pe = [80,280,100,260,120,240,140,220];
 
                 for(var iki=0; iki<8; ++iki)
-                    this.shootMissle(o, (PlayerAngle- -Pe[iki])%360, (WP.Speed-parseInt(iki/2)*2),(WP.Dec- -parseInt(iki/2)*20),(6-parseInt(iki/2)),WP.DMG,WP.explodePreset);
+                    this.shootMissile(o, (PlayerAngle- -Pe[iki])%360, (WP.Speed-parseInt(iki/2)*2),(WP.Dec- -parseInt(iki/2)*20),(6-parseInt(iki/2)),WP.DMG,WP.explodePreset);
 
                 WP.lastShot = this.tick;
             }
@@ -876,11 +876,11 @@ GAMEobject.prototype.decide = function(o){
                     this.addMaxShield(i,WP.shieldTime,o);
                 WP.lastShot = this.tick;
             }
-            if(WP.t == 'shootHealingMissle'){
+            if(WP.t == 'shootHealingMissile'){
                 var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
                 for(var i in inRange) if(i != o)
                     if(this.O[i].life < this.O[i].lifeM){
-                        this.shootHealingMissle(o,i);
+                        this.shootHealingMissile(o,i);
                         WP.lastShot = this.tick;
                         break;
                     }
@@ -906,12 +906,12 @@ GAMEobject.prototype.decide = function(o){
                         break;
                     }
             }
-            if(WP.t == 'shootShieldAddMissle'){
+            if(WP.t == 'shootShieldAddMissile'){
                 var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
                 for(var i in inRange) if(i != o){
                     var eO = this.O[i];
-                    if((typeof eO.energyField == 'undefined' || eO.energyField < parseInt(eO.lifeM/2)) && (!eO.ShieldsRejection || eO.ShieldsRejection.absorbtionShield)){
-                        this.shootShieldAddMissle(o,i);
+                    if((typeof eO.Res == 'undefined' || typeof eO.Res['energyField'] == 'undefined' || eO.Res['energyField'].R < parseInt(eO.lifeM/2)) && (!eO.ShieldsRejection || eO.ShieldsRejection.absorbtionShield)){
+                        this.shootShieldAddMissile(o,i);
                         WP.lastShot = this.tick;
                         break;
                     }

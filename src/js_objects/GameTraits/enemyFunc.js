@@ -22,9 +22,9 @@ GAMEobject.prototype.shootBulletOnSide2 = function(o,Enemy,Speed,Dec,SideAngle,S
     var L = this.putBullet(O.S,Xp,Yp,Speed,Dec,Angle,DMG);
     return this.O[L];
 }
-GAMEobject.prototype.shootMissle = function(o,Angle,Speed,Dec,SpeedT,DMG,explodePreset){
+GAMEobject.prototype.shootMissile = function(o,Angle,Speed,Dec,SpeedT,DMG,explodePreset){
     var O = this.O[o];
-    var L = this.putObj('missle','comp',O.S,O.x,O.y);
+    var L = this.putObj('missile','comp',O.S,O.x,O.y);
     this.O[L].speed = Speed;
     this.O[L].doingTime = Dec;
     this.O[L].Manouver = 'followEnemy';
@@ -34,18 +34,18 @@ GAMEobject.prototype.shootMissle = function(o,Angle,Speed,Dec,SpeedT,DMG,explode
     if(explodePreset)
         this.cloneExplosionData({Do:'explode', explodePreset: explodePreset}, this.O[L]);
 
-    ++this.C['B_missles'];
-    ++this.C['B_s'+O.S+'_missles'];
+    ++this.C['B_missiles'];
+    ++this.C['B_s'+O.S+'_missiles'];
 }
-GAMEobject.prototype.shootHealingMissle = function(o,Target){
+GAMEobject.prototype.shootHealingMissile = function(o,Target){
     var O = this.O[o];
-    var L = this.putObj('healing_missle','comp',O.S,O.x,O.y);
+    var L = this.putObj('healing_missile','comp',O.S,O.x,O.y);
     this.O[L].angle = O.angle;
     this.O[L].FollowWho = Target;
 }
-GAMEobject.prototype.shootShieldAddMissle = function(o,Target){
+GAMEobject.prototype.shootShieldAddMissile = function(o,Target){
     var O = this.O[o];
-    var L = this.putObj('energy_field_missle','comp',O.S,O.x,O.y);
+    var L = this.putObj('energy_field_missile','comp',O.S,O.x,O.y);
     this.O[L].angle = O.angle;
     this.O[L].FollowWho = Target;
     this.O[L].MaxEnergyField = parseInt(this.O[Target].lifeM/2);

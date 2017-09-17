@@ -83,7 +83,7 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
         O.mapCollide      = ['M'];
     }
 
-    if(Type=='healing_missle' || Type=='energy_field_missle' || Type=='missle' || Type=='bullet_bomb' || Type=='space_mine' || Type=='shieldBlob'){
+    if(Type=='healing_missile' || Type=='energy_field_missile' || Type=='missile' || Type=='bullet_bomb' || Type=='space_mine' || Type=='shieldBlob'){
         if(Side==2){
             O.mapType = 'M';
             O.mapCollide = ['E','ME','A'];
@@ -103,7 +103,7 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
         O.mapCollide = ['P'];
     }
 
-    if(O.T=='healing_missle' || O.T=='energy_field_missle'){
+    if(O.T=='healing_missile' || O.T=='energy_field_missile'){
         O.mapCollide = ['E'];
     }
 

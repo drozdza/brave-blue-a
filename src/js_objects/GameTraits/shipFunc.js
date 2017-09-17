@@ -24,11 +24,11 @@ GAMEobject.prototype.shipFunc_glueFireToLaser = function(){
         $('#gameboardMarkers').append('<div class="estimationMarkers LaserAim" style="top: '+Y+'px; left: '+X+'px;"><span style="width: '+(2*radius)+'px; height: '+(2*radius)+'px; top: -'+(radius- -2)+'px; left: -'+(radius- -2)+'px;"></span></div>');
     }
 }
-GAMEobject.prototype.shipFunc_glueFireToMissle = function(aimRadius){
+GAMEobject.prototype.shipFunc_glueFireToMissile = function(aimRadius){
     var F,X,Y,R,dist=1000000,laserAim=false;
     var Found = this.getCollidingWithCircle(this.mouseX,this.mouseY,aimRadius,['E','ME','A','R']);
 
-    var missleAim = false;
+    var missileAim = false;
     var dist = 1000000;
     for(F in Found){
         if(this.O[F].undestructible > 0) continue;
@@ -36,19 +36,19 @@ GAMEobject.prototype.shipFunc_glueFireToMissle = function(aimRadius){
         Y = this.mouseY - this.O[F].y;
         R = X*X- -Y*Y;
         if(R < dist){
-            missleAim = F;
+            missileAim = F;
             dist = R;
         }
     }
 
-    if(missleAim != false){
-        this.missleAim = missleAim;
+    if(missileAim != false){
+        this.missileAim = missileAim;
 
-        X = this.O[missleAim].x-this.O[0].x- -this.Dx/2;
-        Y = this.O[missleAim].y-this.O[0].y- -this.Dy/2;
-        $('#gameboardMarkers').append('<div class="estimationMarkers MissleAim" style="top: '+Y+'px; left: '+X+'px;"><span style="width: '+(2*aimRadius)+'px; height: '+(2*aimRadius)+'px; top: -'+(aimRadius- -2)+'px; left: -'+(aimRadius- -2)+'px;"></span></div>');
+        X = this.O[missileAim].x-this.O[0].x- -this.Dx/2;
+        Y = this.O[missileAim].y-this.O[0].y- -this.Dy/2;
+        $('#gameboardMarkers').append('<div class="estimationMarkers MissileAim" style="top: '+Y+'px; left: '+X+'px;"><span style="width: '+(2*aimRadius)+'px; height: '+(2*aimRadius)+'px; top: -'+(aimRadius- -2)+'px; left: -'+(aimRadius- -2)+'px;"></span></div>');
     } else {
-        this.missleAim = false;
+        this.missileAim = false;
     }
 }
 GAMEobject.prototype.shipFunc_esteemedPositions = function(O,F){

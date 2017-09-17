@@ -5,8 +5,6 @@ BBAdata['SHIPpresetsOld']={
         T: 'ship',
         speedM: 0,
         lastSpeedT: 0,
-        // energyField: 0,
-        // ammo: 0,
         M: 'moving',
         view:{
             Letter: 'A',
@@ -76,8 +74,6 @@ BBAdata['SHIPpresetsOld']={
         T: 'ship',
         speedM: 0,
         lastSpeedT: 0,
-        // energyField: 0,
-        // ammo: 0,
         M: 'moving',
         view:{
             Letter: 'A',
@@ -137,8 +133,8 @@ BBAdata['SHIPpresetsOld']={
         MouseDown1: false,
         MouseDown2: false,
         Weapons:[
-            {T:'missle',  gunS:0,GunSpeed: 10, Use:{'Missile':1}, Speed: 12, SpeedT: 6, Dec: 130, AimRadius: 60, explodePreset:'MissileDestructionFieldGiant'},
-            {T:'missleR', gunS:0,GunSpeed: 6, Use:{'Missile':5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'MissileDestructionFieldSmall'},
+            {T:'missile',  gunS:0,GunSpeed: 10, Use:{'Missile':1}, Speed: 12, SpeedT: 6, Dec: 130, AimRadius: 60, explodePreset:'MissileDestructionFieldGiant'},
+            {T:'missileR', gunS:0,GunSpeed: 6, Use:{'Missile':5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'MissileDestructionFieldSmall'},
             {T:'bombT',   gunS:0,GunSpeed: 5,  Distance: 500, offTime: 0, explodePreset:'DestructionFieldMedium'},
             {T:'tele',    gunS:0,GunSpeed: 3, ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
         ],
@@ -157,8 +153,6 @@ BBAdata['SHIPpresetsOld']={
         T: 'ship',
         speedM: 0,
         lastSpeedT: 0,
-        // energyField: 0,
-        // ammo: 0,
         M: 'moving',
         view:{
             Letter: 'A',
@@ -239,8 +233,6 @@ BBAdata['SHIPpresetsOld']={
         T: 'ship',
         speedM: 0,
         lastSpeedT: 0,
-        // energyField: 0,
-        // ammo: 0,
         M: 'moving',
         view:{
             Letter: 'A',
@@ -323,8 +315,6 @@ BBAdata['SHIPpresetsOld']={
         T: 'ship',
         speedM: 0,
         lastSpeedT: 0,
-        // energyField: 0,
-        // ammo: 0,
         M: 'moving',
         view:{
             Letter: 'A',
@@ -398,8 +388,6 @@ BBAdata['SHIPpresetsOld']={
         T: 'ship',
         speedM: 0,
         lastSpeedT: 0,
-        // energyField: 0,
-        // ammo: 0,
         M: 'moving',
         view:{
             Letter: 'A',
@@ -468,8 +456,8 @@ BBAdata['SHIPpresetsOld']={
             {T:'rose',    gunS:0,GunSpeed: 4,  Use:{Ammo:5}, AtOnce: 9, RoseAngle: 3, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
             {T:'laser',   gunS:0,GunSpeed: 10, ModUse:{Laser:1}, Speed: 650, Dec: 1, DMG:{Dmg:5,T:'energy'},},
             {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Ammo:3}, Speed: 0.1, Teleport:{ Dist: 35, Angle: 270, AngleRand: 180}, Dec: 10, onHitDieExpire:    {Do:'explode',DMG:{Dmg:7,T:'explo'}, Dist: 80}},
-            {T:'missle',  gunS:0,GunSpeed: 10, Use:{Missile:1}, Speed: 12, SpeedT: 4, Dec: 400, AimRadius: 120, DMG:{Dmg:3,T:'explo'},},
-            {T:'missleR', gunS:0,GunSpeed: 6,  Use:{Missile:5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, DMG:{Dmg:3,T:'explo'},},
+            {T:'missile',  gunS:0,GunSpeed: 10, Use:{Missile:1}, Speed: 12, SpeedT: 4, Dec: 400, AimRadius: 120, DMG:{Dmg:3,T:'explo'},},
+            {T:'missileR', gunS:0,GunSpeed: 6,  Use:{Missile:5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, DMG:{Dmg:3,T:'explo'},},
             {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 10, Dec: 30, explodePreset:'NailsBigCircle'},
             {T:'tele',    gunS:0,GunSpeed: 3,  ModUse:{TeleJump:1}, Speed: 400, Dec: 1},
         ],
@@ -500,8 +488,6 @@ BBAdata['SHIPpresetsOld']={
         T: 'ship',
         speedM: 0,
         lastSpeedT: 0,
-        // energyField: 0,
-        // ammo: 0,
         M: 'moving',
         view:{
             Letter: 'A',
@@ -594,8 +580,6 @@ BBAdata['SHIPpresetsOld']={
         T: 'ship',
         speedM: 0,
         lastSpeedT: 0,
-        // energyField: 0,
-        // ammo: 0,
         M: 'moving',
         view:{
             Letter: 'A',
@@ -696,8 +680,6 @@ BBAdata['SHIPpresetsOld']={
         T: 'ship',
         speedM: 0,
         lastSpeedT: 0,
-        // energyField: 0,
-        // ammo: 0,
         M: 'moving',
         view:{
             Letter: 'A',
@@ -749,9 +731,9 @@ BBAdata['SHIPpresetsOld']={
             {T:'rose',    gunS:0,GunSpeed: 4, AtOnce: 36, Use:{'Ammo':5}, RoseAngle: 10, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
             {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1}, Speed: 10, Dec: 30, explodePreset:'ExplosionSize2'},
             {T:'bomb',    gunS:0,GunSpeed: 5, Use:{'Bomb':1,Ammo:5}, Speed: 10, Dec:30, explodePreset:'NailsBigCircle'},
-            {T:'missleR', gunS:0,GunSpeed: 6, Use:{'Missile':1}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'ExplosionSize2'},
-            {T:'missleR', gunS:0,GunSpeed: 6, Use:{'Missile':1}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'NailedBomb2'},
-            {T:'missle',  gunS:0,GunSpeed: 3, Use:{Missile:1}, Speed: 12, SpeedT: 4, Dec: 400, AimRadius: 60, explodePreset:'NailsCircleToCenter2'},
+            {T:'missileR', gunS:0,GunSpeed: 6, Use:{'Missile':1}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'ExplosionSize2'},
+            {T:'missileR', gunS:0,GunSpeed: 6, Use:{'Missile':1}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'NailedBomb2'},
+            {T:'missile',  gunS:0,GunSpeed: 3, Use:{Missile:1}, Speed: 12, SpeedT: 4, Dec: 400, AimRadius: 60, explodePreset:'NailsCircleToCenter2'},
         ],
         Modules:[
             {T:'Prod', subT:'Bullet',Storage:'Ammo', Disabled:0,Emin:2,Emax:4,E:0,Prod:0,ifProd:12 },

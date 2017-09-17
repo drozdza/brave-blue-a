@@ -21,9 +21,9 @@ function GAMEobject(){
     this.Omap={};                // map of Maps
     // No map for: B-Bullets, BE-BulletsE, T-TeleportsRoutes
     this.Omap['P']={elems:1};    // Player
-    this.Omap['M']={elems:0};    // Missles
+    this.Omap['M']={elems:0};    // Missiles
     this.Omap['E']={elems:0};    // Enemies
-    this.Omap['ME']={elems:0};   // MisslesE
+    this.Omap['ME']={elems:0};   // MissilesE
     this.Omap['A']={elems:0};    // Asteroids - only for Player Ship
     this.Omap['R']={elems:0};    // Regions
     this.Omap['D']={elems:0};    // Dead objects (for spotting)
@@ -31,7 +31,7 @@ function GAMEobject(){
 
 
     this.Omoving={};    // moving
-    this.Ocomp={};      // sterowane statki / missle
+    this.Ocomp={};      // sterowane statki / missile
     this.Obullet={};    // tablica kul
     this.Oanim={};      // animations
     this.Oregion={};    // regions

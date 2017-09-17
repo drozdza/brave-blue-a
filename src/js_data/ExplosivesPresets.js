@@ -185,7 +185,7 @@ BBAdata['ExplosivesPresets']={
         onExpire: {Do:'explode',explodeType: 'RoundField', radius:230, fieldAnim: 'DestructionField', PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 10, PeriodOffset: 10, ExpireTime: 300, dontHit:['B','BE']},
     },
 
-    BubbleMissle:{
+    BubbleMissile:{
         onHitDieExpire: {Do:'explode',explodeType:'RoundField', fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 0, OneTimeDMG:{Dmg:3,T:'energy'}, OnDamageExpire:1, ExpireTime:60, moveAlong: 5, dontHit:['ME','M']},
     },
     BubbleStorm:{
@@ -196,7 +196,7 @@ BBAdata['ExplosivesPresets']={
             explodeType: 'none',
             Shards:[{
                 ShardsNum: 12,
-                explodePreset: 'BubbleMissle',
+                explodePreset: 'BubbleMissile',
                 exploAddTo:{onHitDieExpire:{
                     radius: 10,
                     radiusPlus: 30,

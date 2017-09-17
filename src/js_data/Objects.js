@@ -1,5 +1,5 @@
 BBAdata['ObjectDatas']={
-    healing_missle:{
+    healing_missile:{
         view:{
             Letter: 'J',
             LetterSize: 12,
@@ -17,7 +17,7 @@ BBAdata['ObjectDatas']={
         Manouver: 'followEntity',
         Flags:{},
     },
-    energy_field_missle:{
+    energy_field_missile:{
         view:{
             Letter: 'E',
             LetterSize: 12,
@@ -34,7 +34,7 @@ BBAdata['ObjectDatas']={
         Manouver: 'followEntity',
         Flags:{},
     },
-    missle:{
+    missile:{
         view:{
             Letter: 'Y',
             LetterSize: 12,
@@ -603,7 +603,7 @@ BBAdata['ObjectDatas']={
         radius: 20,
 
         weapon:[
-            {t:'missleCrown', DMG:{Dmg:1,T:'explo'}, Dec: 95, Speed: 12, gunSpeed: 120, lastShot: 0, minDistToEnemy: 400},
+            {t:'missileCrown', DMG:{Dmg:1,T:'explo'}, Dec: 95, Speed: 12, gunSpeed: 120, lastShot: 0, minDistToEnemy: 400},
         ],
 
         doingNow: 'changeManouver',
@@ -933,7 +933,7 @@ BBAdata['ObjectDatas']={
         radius: 20,
 
         weapon:[
-            {t:'shootHealingMissle', Radius: 350, gunSpeed: 20, lastShot: 100},
+            {t:'shootHealingMissile', Radius: 350, gunSpeed: 20, lastShot: 100},
         ],
 
         doingNow: 'changeManouver',
@@ -972,18 +972,18 @@ BBAdata['ObjectDatas']={
 
         lifeM: 9,
 
-        Res: {'misslePack': {R:6,M:6,T:0}},
+        Res: {'missilePack': {R:6,M:6,T:0}},
         weapon:[
-            {t:'refilResource', resource: 'misslePack', gunSpeed: 90, maxSpeed: 1, doNextWeapon: true},
-            {t:'misslesDouble', gunSpeed: 140, lastShot: 100, usedRes: 'misslePack', usedResR: 1, minSpeed: 2, minAlarm: 5, minDistToEnemy: 500},
+            {t:'refilResource', resource: 'missilePack', gunSpeed: 90, maxSpeed: 1, doNextWeapon: true},
+            {t:'missilesDouble', gunSpeed: 140, lastShot: 100, usedRes: 'missilePack', usedResR: 1, minSpeed: 2, minAlarm: 5, minDistToEnemy: 500},
         ],
 
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
         toDo: [
-            {N:67,T:'lowerSpeedForResources', minAlarm: 0, wantedRes: 'misslePack', wantedResR: 1, gotoSpeed: 1},
-            {N:66,T:'speedUpIfResources', minAlarm: 0, wantedRes: 'misslePack', wantedResR: 6, gotoSpeed: 2},
+            {N:67,T:'lowerSpeedForResources', minAlarm: 0, wantedRes: 'missilePack', wantedResR: 1, gotoSpeed: 1},
+            {N:66,T:'speedUpIfResources', minAlarm: 0, wantedRes: 'missilePack', wantedResR: 6, gotoSpeed: 2},
             {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
             {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, gotoAlarm: 4, goToSpotLvl: 2},
             {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3, minSpeedLvl: 2},
@@ -1298,18 +1298,18 @@ BBAdata['ObjectDatas']={
             HitActionObj: 'bounce',
         }],
 
-        Res: {'misslePack': {R:0,M:10,T:0}},
+        Res: {'missilePack': {R:0,M:10,T:0}},
         weapon:[
-            {t:'refilResource', resource: 'misslePack', gunSpeed: 18, maxSpeed: 2, doNextWeapon: true},
-            {t:'changeAction', makeAction: {doingNow:'shooting', doingTime: 33, Manouver:'goStraight'}, doingNow:'followEnemy', doingTime:1, usedRes:'misslePack', usedResR: 10},
-            {t:'missleX5', DMG:{Dmg:1,T:'explo'}, Dec: 25, Speed: 14, gunSpeed: 8, lastShot: 0, doingNow:'shooting', minDistToEnemy: 500},
+            {t:'refilResource', resource: 'missilePack', gunSpeed: 18, maxSpeed: 2, doNextWeapon: true},
+            {t:'changeAction', makeAction: {doingNow:'shooting', doingTime: 33, Manouver:'goStraight'}, doingNow:'followEnemy', doingTime:1, usedRes:'missilePack', usedResR: 10},
+            {t:'missileX5', DMG:{Dmg:1,T:'explo'}, Dec: 25, Speed: 14, gunSpeed: 8, lastShot: 0, doingNow:'shooting', minDistToEnemy: 500},
         ],
 
         doingNow: 'changeManouver',
         doingTime: -1,
         Manouver: 'goStraight',
         toDo: [
-            {N:55,T:'followEnemy', minAlarm: 5, doingTime: 40, usedRes:'misslePack', usedResR: 10},
+            {N:55,T:'followEnemy', minAlarm: 5, doingTime: 40, usedRes:'missilePack', usedResR: 10},
             {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
         ],
 
@@ -1865,7 +1865,7 @@ BBAdata['ObjectDatas']={
         ShieldsRejection:{absorbtionShield:1},
 
         weapon:[
-            {t:'shootShieldAddMissle', Radius: 350, gunSpeed: 20, lastShot: 100},
+            {t:'shootShieldAddMissile', Radius: 350, gunSpeed: 20, lastShot: 100},
         ],
 
         doingNow: 'changeManouver',
@@ -2193,6 +2193,7 @@ BBAdata['ObjectDatas']={
             DmgReduction: 'infinite',
             ReductionUses: 'exploShield',
             HitDieAnimation: 'dontShow',
+            ResPath: 'Res',
             Own: true,
         }],
 
@@ -2536,7 +2537,7 @@ BBAdata['ObjectDatas']={
 
         weapon:[
             {t:'bomb', Speed: 10, Dec: 10, BombRandom: 2, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600},
-            {t:'missle', DMG:{Dmg:0,T:'normal'}, explodePreset:'EyeOfMines', Dec: 95, Speed: 12, gunSpeed: 120, lastShot: 0, minDistToEnemy: 400},
+            {t:'missile', DMG:{Dmg:0,T:'normal'}, explodePreset:'EyeOfMines', Dec: 95, Speed: 12, gunSpeed: 120, lastShot: 0, minDistToEnemy: 400},
         ],
 
         doingNow: 'changeManouver',

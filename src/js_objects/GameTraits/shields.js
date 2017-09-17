@@ -99,18 +99,10 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
                 if(Math.random()*100 > SH.ShieldProbability)
                     continue;
 
-            var ReductionUsesCount = O[SH.ReductionUses];
-            if(SH.ReductionUses!='infinite' && typeof SH.ResPath != 'undefined')
-                ReductionUsesCount = O[SH.ResPath][SH.ReductionUses].R;
-
-            if(SH.ReductionUses != 'infinite' && ReductionUsesCount < 1)
+            if(SH.ReductionUses != 'infinite' && O[SH.ResPath][SH.ReductionUses].R < 1)
                 continue;
 
-            var DmgReductionCount = O[SH.DmgReduction];
-            if(SH.DmgReduction!='infinite' && typeof SH.ResPath != 'undefined')
-                DmgReductionCount = O[SH.ResPath][SH.DmgReduction].R;
-
-            if(SH.DmgReduction && (SH.DmgReduction=='infinite' || DmgReductionCount > 0)){
+            if(SH.DmgReduction && (SH.DmgReduction=='infinite' || O[SH.ResPath][SH.DmgReduction].R > 0)){
                 DMGreduce = 99999;
                 if(SH.PartialReduction){
                     P = SH.PartialReduction;
@@ -130,19 +122,16 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
                     ShieldHits-=-DMGreduce;
                     DMGval -= DMGreduce;
                 }else{
-                    DMGreduce = Math.min(DMGval, DmgReductionCount, DMGreduce);
+                    DMGreduce = Math.min(DMGval, O[SH.ResPath][SH.DmgReduction].R, DMGreduce);
 
                     ShieldHits-=-DMGreduce;
                     DMGval -= DMGreduce;
-                    if(typeof SH.ResPath != 'undefined') O[SH.ResPath][SH.DmgReduction].R -= DMGreduce;
-                        else O[SH.DmgReduction] -= DMGreduce;
+                    O[SH.ResPath][SH.DmgReduction].R -= DMGreduce;
                 }
             }
 
-            if(DMGreduce > 0 && SH.ReductionUses!='infinite'){
-                if(typeof SH.ResPath != 'undefined') --O[SH.ResPath][SH.ReductionUses].R;
-                    else --O[SH.ReductionUses];
-            }
+            if(DMGreduce > 0 && SH.ReductionUses!='infinite')
+                --O[SH.ResPath][SH.ReductionUses].R;
 
             if(SH.DmgTransfer){
                 var DTF = SH.DmgTransfer;

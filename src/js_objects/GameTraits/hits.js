@@ -49,13 +49,13 @@ GAMEobject.prototype.hit = function(o,q){
     if(O.teleportOnHit){ this.region_teleportOnHit(O,q); return 1; }
     if(Q.teleportOnHit){ this.region_teleportOnHit(Q,o); return 1; }
 
-    if(O.T=='healing_missle' && O.FollowWho == q){
+    if(O.T=='healing_missile' && O.FollowWho == q){
         if(!this.healObj(q,1,o))
             this.removeObj(o);
         return 1;
     }
 
-    if(O.T=='energy_field_missle' && O.FollowWho == q){
+    if(O.T=='energy_field_missile' && O.FollowWho == q){
         if(!this.giveEnergyField(q,1,o,O.MaxEnergyField))
             this.removeObj(o);
         return 1;
@@ -78,20 +78,20 @@ GAMEobject.prototype.hit = function(o,q){
     if(O.OneTimeEffect)    this.makeOneTimeEffect(o,q);
     if(Q.OneTimeEffect)    this.makeOneTimeEffect(q,o);
 
-    if(O.T=='missle' || O.T=='bullet'){
+    if(O.T=='missile' || O.T=='bullet'){
         if(O.S==Q.S) return 1;
 
         if(Q.T=='ship'){
             this.makeDMG(q,O.DMG,o);
             this.shipFunc_showHealth();
         }
-        if(Q.TT=='enemy' || Q.mapType=='A' || Q.T=='missle' || Q.T=='bullet_bomb' || Q.T=='shieldBlob')
+        if(Q.TT=='enemy' || Q.mapType=='A' || Q.T=='missile' || Q.T=='bullet_bomb' || Q.T=='shieldBlob')
             this.makeDMG(q,O.DMG,o);
         if(Q.T=='space_mine'){
             this.explodeBomb(q,Q.onDie);
             this.removeObj(o);
         }
-        if(Q.T=='healing_missle' || Q.T=='energy_field_missle')
+        if(Q.T=='healing_missile' || Q.T=='energy_field_missile')
             this.removeObj(q);
     }
 }
@@ -103,7 +103,7 @@ GAMEobject.prototype.makePeriodEffect = function(o,q){
         if(O.PeriodDelay- -O.bornTime > this.tick) return 1;
 
 
-    if(Q.T=='bullet_bomb' && (typeof O.dontHurtOwnMissle != 'undefined' && O.dontHurtOwnMissle==true) && O.S==Q.S) return 1;
+    if(Q.T=='bullet_bomb' && (typeof O.dontHurtOwnMissile != 'undefined' && O.dontHurtOwnMissile==true) && O.S==Q.S) return 1;
 
     var makeAction = false;
     for(var P in Q.periodDMG)
@@ -247,7 +247,7 @@ GAMEobject.prototype.dieObj = function(O,o){
             this.C[umo]=0;
         ++this.C[umo];
     }
-    if(O.T!='missle' && O.T!='bullet_bomb' && O.T!='space_mine' && !O.onDieHideExplosion)
+    if(O.T!='missile' && O.T!='bullet_bomb' && O.T!='space_mine' && !O.onDieHideExplosion)
         this.putObj_animation('hitBig', O.x, O.y);
 
     if(O.squadDirectPlace)
@@ -317,14 +317,17 @@ GAMEobject.prototype.hitEnergyField = function(o,q,DMG){
 }
 GAMEobject.prototype.giveEnergyField = function(q,DMG,o,max){
     var Q = this.O[q];
-    if(typeof Q.energyField == 'undefined')
-        Q.energyField = 0;
-    if(Q.energyField >= max) return false;
+    if(typeof Q.Res == 'undefined')
+        Q.Res={};
+    if(typeof Q.Res['energyField'] == 'undefined')
+        Q.Res['energyField'] = {R:0,M:max};
+    if(Q.Res['energyField'].R >= max) return false;
     this.addShield(Q,q,{
         name: 'absorbtionShield',
         CatchDmgT: {normal:1, energy:1, explo:1},
         DmgReduction: 'energyField',
         ReductionUses: 'infinite',
+        ResPath: 'Res',
     });
     if(o){
         this.putObj_animation('hit_healing', this.O[o].x, this.O[o].y);
@@ -332,5 +335,5 @@ GAMEobject.prototype.giveEnergyField = function(q,DMG,o,max){
     }else{
         this.putObj_animation('hit_healing', Q.x, Q.y);
     }
-    Q.energyField-=-DMG;
+    Q.Res['energyField'].R-=-DMG;
 }
