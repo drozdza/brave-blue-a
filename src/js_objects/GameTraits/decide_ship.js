@@ -466,4 +466,6 @@ GAMEobject.prototype.decide_ship = function(e){
             $('#'+storU+'Storage').html(html);
             Sx.Storage[storU].R = O.Storage[storU].R;
         }
+
+    this.checkShields(O,0);
 }

@@ -2463,7 +2463,7 @@ BBAdata['ObjectDatas']={
 
         Shields:[{
             name: 'shieldAdder',
-            CatchDmgT: {normal:1, energy:1, explo:1},
+            CatchDmgT: {normal:1,energy:1,acid:1,explo:1},
             DmgReduction: 'infinite',
             ReductionUses: 'onHitMaxShield',
             ResPath: 'Res',

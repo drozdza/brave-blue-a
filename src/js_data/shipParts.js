@@ -176,6 +176,56 @@ BBAdata.SHIPelements['absShield'] = {               Weight: 5, Price: 2000,
     },
 };
 
+BBAdata.SHIPelements['tempBulletShieldShield'] = {   Weight: 5, Price: 2000,
+    where: 'hull',
+    name: 'Temp Bullet Shield',
+
+    ShieldsData:{
+        name: 'shieldAdder',
+        CatchDmgT: {normal:1},
+        DmgReduction: 'infinite',
+        ReductionUses: 'tempBulletShield',
+        ResPath: 'ShieldStorage',
+        Own: true,
+        HitActionObj: 'bounce',
+        AddShield: {
+            name: 'bulletShield',
+            CatchDmgT: {normal:1},
+            DmgReduction: 'infinite',
+            ReductionUses: 'infinite',
+            ShieldProbability: 85,
+            ExpireTime: 150,
+            HitActionObj: 'bounce',
+        },
+    },
+
+    ShieldStorage:{'tempBulletShield':{R:10,M:10}},
+}
+
+BBAdata.SHIPelements['tempMaxShield'] = {   Weight: 5, Price: 2000,
+    where: 'hull',
+    name: 'Temp Max Shield',
+
+    ShieldsData:{
+        name: 'shieldAdder',
+        CatchDmgT: {normal:1, energy:1, explo:1},
+        DmgReduction: 'infinite',
+        ReductionUses: 'kuku',
+        ResPath: 'ShieldStorage',
+        Own: true,
+        HitActionObj: 'remove',
+        AddShield: {
+            name:'maxShield',
+            CatchDmgT:{normal:1,energy:1,acid:1,explo:1},
+            DmgReduction: 'infinite',
+            ReductionUses: 'infinite',
+            ExpireTime: 45,
+            HitActionObj: 'remove',
+        },
+    },
+
+    ShieldStorage:{'kuku':{R:10,M:10}},
+}
 
 //================================= ENERGY =====================================
 
