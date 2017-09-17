@@ -870,10 +870,10 @@ GAMEobject.prototype.decide = function(o){
                 WP.lastShot = this.tick;
             }
 
-            if(WP.t == 'addKoriazShield'){
+            if(WP.t == 'addMaxShield'){
                 var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
                 for(var i in inRange)
-                    this.addKoriazShield(i,WP.shieldTime,o);
+                    this.addMaxShield(i,WP.shieldTime,o);
                 WP.lastShot = this.tick;
             }
             if(WP.t == 'shootHealingMissle'){

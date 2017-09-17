@@ -16,7 +16,7 @@ GAMEobject.prototype.addShield = function(O,o,Shield){
         var SHI=[];
         var V = this.ShieldValues;
         if(O.Shields.length == 0){
-            SHI[ isThere=0 ] = Shield;
+            SHI[ isThere = 0 ]= cloneObj(Shield);
         }else{
             var sOld = 9999;
             var sNew = 9999;
@@ -24,18 +24,19 @@ GAMEobject.prototype.addShield = function(O,o,Shield){
                 sOld = sNew;
                 sNew = V[O.Shields[s].name];
                 if(sOld > V[ Shield.name ] && sNew < V[ Shield.name ])
-                    SHI[ isThere=SHI.length ]= Shield;
+                    SHI[ isThere = SHI.length ]= cloneObj(Shield);
                 SHI[ SHI.length ]=O.Shields[s];
             }
             if(sNew > V[ Shield.name ])
-                SHI[ isThere=SHI.length ]= Shield;
+                SHI[ isThere = SHI.length ]= cloneObj(Shield);
         }
         O.Shields = SHI;
     }
 
     var SH = O.Shields[isThere];
-    if(Shield.ExpireTime && Shield.ExpireTime != 'infinite')
+    if(Shield.ExpireTime && Shield.ExpireTime != 'infinite'){
         O.Shields[isThere].ExpireTime = Shield.ExpireTime- -this.tick;
+    }
 
     if(Shield.DmgTransfer)
         O.Shields[isThere].DmgTransfer = Shield.DmgTransfer;
@@ -43,11 +44,12 @@ GAMEobject.prototype.addShield = function(O,o,Shield){
     return true;
 }
 GAMEobject.prototype.ShieldValues={
-    koriazMax: 15,
+    maxShield: 15,
     jumpShield: 12,
     bulletShield: 11,
     explosionShield: 10,
     absorbtionShield: 9,
+    shieldAdder: 4,
     dmgTransfer: 3,
 };
 GAMEobject.prototype.checkShields = function(O,o){
@@ -100,7 +102,6 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
             var ReductionUsesCount = O[SH.ReductionUses];
             if(SH.ReductionUses!='infinite' && typeof SH.ResPath != 'undefined')
                 ReductionUsesCount = O[SH.ResPath][SH.ReductionUses].R;
-                // SHIP have things in different place !
 
             if(SH.ReductionUses != 'infinite' && ReductionUsesCount < 1)
                 continue;
@@ -154,6 +155,10 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
                 }
             }
 
+            if(SH.AddShield){
+                this.addShield(O,o,SH.AddShield);
+            }
+
             if(SH.jumpOnHit){
                 var iRad = Math.random()*360;
                 this.teleportJump(o,SH.jumpOnHit,iRad);
@@ -162,7 +167,7 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
             }
 
             // {
-            //     name: 'koriazMax' / ,
+            //     name: 'maxShield' / ,
             //     CatchDmgT: {normal:1, energy:1, acid:1, explo:1},
             //     ShieldProbability: 70,
             //     PartialReduction: {MinLeft: 1, Reduce: 4, MaxPercent: 30},
@@ -201,7 +206,7 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
 
 
 GAMEobject.prototype.viewShields={
-    koriazMax:{
+    maxShield:{
         strokeStyle:'rgba(100,180,255,0.8)',
         fillStyle:'rgba(100,180,255,0.2)',
     },
@@ -225,8 +230,8 @@ GAMEobject.prototype.drawShields = function(O,o,CH){
     var lineWidth,ToDraw = [];
     for(var s in O.Shields){
         var SH = O.Shields[s];
-        if(SH.name == 'koriazMax'){
-            ToDraw = [{n:'koriazMax',w:2}];
+        if(SH.name == 'maxShield'){
+            ToDraw = [{n:'maxShield',w:2}];
             break;
         }
         if(SH.name == 'dmgTransfer'

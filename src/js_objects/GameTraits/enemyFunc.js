@@ -82,11 +82,11 @@ GAMEobject.prototype.shootBomb = function(o,Angle,Speed,Dec,bombData,teleportDat
     ++this.C['B_bombsShot'];
     ++this.C['B_s'+O.S+'_bombsShot'];
 }
-GAMEobject.prototype.addKoriazShield = function(o,Duration,q){
+GAMEobject.prototype.addMaxShield = function(o,Duration,q){
     var L,O = this.O[o];
 
     if(this.addShield(O,o, {
-        name:'koriazMax',
+        name:'maxShield',
         CatchDmgT:{normal:1,energy:1,acid:1,explo:1},
         DmgReduction: 'infinite',
         ReductionUses: 'infinite',

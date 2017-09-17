@@ -207,23 +207,6 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
         return true;
     }
 
-    // ON HIT SHIELD
-    if(O.onHitKoriazShield && O.onHitKoriazShield > 0){
-        if(this.addShield(O,o,{
-            name:'koriazMax',
-            CatchDmgT:{normal:1,energy:1,acid:1,explo:1},
-            DmgReduction: 'infinite',
-            ReductionUses: 'infinite',
-            ExpireTime: 45,
-            HitActionObj: 'remove',
-        })){
-            --O.onHitKoriazShield;
-            this.removeObj(q);
-            return true;
-        }
-    }
-
-
     // HIT animation
     if(q){
         var Q = this.O[q];

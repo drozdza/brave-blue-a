@@ -541,7 +541,7 @@ BBAdata['ObjectDatas']={
         lifeM: 7,
         radius: 20,
 
-        ShieldsRejection:{koriazMax:1},
+        ShieldsRejection:{maxShield:1},
 
         Res: {'prodSquad': {R:5,M:5,T:0}},
         weapon:[
@@ -890,9 +890,9 @@ BBAdata['ObjectDatas']={
         lifeM: 7,
         radius: 10,
 
-        ShieldsRejection:{koriazMax:1},
+        ShieldsRejection:{maxShield:1},
         weapon:[
-            {t:'addKoriazShield', Radius: 500, shieldTime: 15, gunSpeed: 12, lastShot: 100},
+            {t:'addMaxShield', Radius: 500, shieldTime: 15, gunSpeed: 12, lastShot: 100},
         ],
 
         doingNow: 'changeManouver',
@@ -1466,7 +1466,7 @@ BBAdata['ObjectDatas']={
         lifeM: 13,
         radius: 20,
 
-        ShieldsRejection:{koriazMax:1},
+        ShieldsRejection:{maxShield:1},
         weapon:[
             {t:'changeAction', makeAction: {doingNow:'standBy', gotoSpeed: 1, gotoAlarm: 4, doingTime: 30, changeView: 'view1', Manouver: 'goStraight', doNotInterupt:true}, doingNow:'lowerAlarmLvl'},
             {t:'changeAction', makeAction: {doingNow:'shooting', doingTime: 30, changeView: 'view2', gotoAlarm: 7, Manouver: 'followEnemy', doNotInterupt:true}, doingNow:'standBy', minAlarm: 5, maxAlarm: 6},
@@ -2296,7 +2296,7 @@ BBAdata['ObjectDatas']={
         lifeM: 7,
         radius: 25,
 
-        ShieldsRejection:{koriazMax:1},
+        ShieldsRejection:{maxShield:1},
 
         Res: {'prodSquad': {R:5,M:5,T:0}},
         weapon:[
@@ -2461,10 +2461,27 @@ BBAdata['ObjectDatas']={
 
         lifeM: 3,
 
+        Shields:[{
+            name: 'shieldAdder',
+            CatchDmgT: {normal:1, energy:1, explo:1},
+            DmgReduction: 'infinite',
+            ReductionUses: 'onHitMaxShield',
+            ResPath: 'Res',
+            Own: true,
+            HitActionObj: 'remove',
+            AddShield: {
+                name:'maxShield',
+                CatchDmgT:{normal:1,energy:1,acid:1,explo:1},
+                DmgReduction: 'infinite',
+                ReductionUses: 'infinite',
+                ExpireTime: 45,
+                HitActionObj: 'remove',
+            },
+        }],
 
-        Res: {onHitKoriazShield: {R:2,M:2,T:0}},
+        Res: {onHitMaxShield: {R:2,M:2,T:0}},
         weapon:[
-            {t:'refilResource', resource: 'onHitKoriazShield', gunSpeed: 450, maxSpeed: 2, doNextWeapon: true},
+            {t:'refilResource', resource: 'onHitMaxShield', gunSpeed: 450, maxSpeed: 2, doNextWeapon: true},
             {t:'double2', DMG:{Dmg:1,T:'normal'}, Dec: 35, Speed: 12, gunSpeed: 5, gunWork: 20, gunReload: 90, lastShot: 100, maxSpeed: 2, minAlarm: 5},
         ],
 
