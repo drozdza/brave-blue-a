@@ -1,3 +1,27 @@
+------------- Closest Works:
+
+Shipyard:
+ - adjusting guns positions / choosing starting guns
+ - adjusting modules position / shortcuts / enability
+ - Proper parts properties display
+ - Admin mode - all parts available / add parts avaliability
+
+
+Others:
+ - Pause debug mode (showing element's properties, scrolling map)
+ - Debug Mode: count number of rendered objects, rendered backgrounds, changed backgrounds
+ - Enemies objects made from parts, keeps prototype after creation
+ - All objects has collision submodule, display submodule, movement submodule
+
+
+
+
+
+
+
+=========================================================================
+
+
 - Adding squads to maps
 
 - Following ships can avoid bullets and bombs

@@ -49,9 +49,9 @@ GAMEobject.prototype.shipShootBomb = function(Speed,Dec,bombData,teleportData){
     ++this.C['B_s'+O.S+'_bombsShot'];
 }
 GAMEobject.prototype.shipShootLaser = function(Distance,Damage){
-    var O = this.O[0];
-    var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -180)%360;
-    this.shootLaser(0,Distance,Damage,Angle);
+    var P = this.O[0];
+    var Angle = parseInt(- (Math.atan2(this.mouseX-P.x,this.mouseY-P.y)*180/Math.PI)- -180)%360;
+    this.shootLaser(P,Distance,Damage,Angle);
 }
 GAMEobject.prototype.shipTeleportBomb = function(Distance,offTime,bombData){
     var O = this.O[0];

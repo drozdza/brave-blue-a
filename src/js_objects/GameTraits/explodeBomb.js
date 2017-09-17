@@ -40,6 +40,23 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             }
         }
     }
+    else if(explodeObj.explodeType=='lasers'){
+        var randQ = 0;
+        if(explodeObj.RadType=='random')
+            randQ = parseInt(Math.random()*360);
+        if(explodeObj.RadType=='parent')
+            randQ = O.angle;
+
+        for(i=0; i<360; i-=-explodeObj.LaserRad){
+            var Speed = explodeObj.LaserSpeed;
+            if(explodeObj.LaserSpeedPlus)
+                Speed-=-parseInt(Math.random()*explodeObj.LaserSpeedPlus);
+
+            var dummyO = {x:O.x, y:O.y};
+
+            this.shootLaser(o, Speed, explodeObj.DMG, i+randQ);
+        }
+    }
     else if(explodeObj.explodeType=='nailsCone'){
         for(i=0; i<explodeObj.Nails; ++i){
             if(explodeObj.NailsNeutral)

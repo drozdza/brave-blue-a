@@ -15,6 +15,14 @@ BBAdata['ExplosivesPresets']={
     },
 
 
+    LaserBomb:{
+        onHitDieExpire: {Do:'explode', explodeType: 'lasers', LaserRad: 45, RadType: 'random', LaserSpeed: 100, LaserSpeedPlus: 100, DMG:{Dmg:3,T:'energy'}}
+    },
+    DirectLaser:{
+        onHitDieExpire: {Do:'explode', explodeType: 'lasers', LaserRad: 360, RadType: 'parent', LaserSpeed: 300, LaserSpeedPlus: 0, DMG:{Dmg:3,T:'energy'}}
+    },
+
+
     WarasteinExploCone:{
         explodePreset: 'ExplosionSize1',
         exploAddTo:{ onExpire: { Shards:[

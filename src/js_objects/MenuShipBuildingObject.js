@@ -13,15 +13,7 @@ function MenuShipBuildingObject(){
 
 
     // DEPRECATED
-    this.money = 999000;
-    // DEPRECATED
     this.useShipyardShip = false; // to drop later
-
-    // DEPRECATED
-    this.activeElement = '';
-    // DEPRECATED
-    this.sliderMouseMovement = false;
-
 
     // =================== Inicjalization ======================================
     this.startAnimation = function(){
@@ -564,6 +556,11 @@ function MenuShipBuildingObject(){
         S.life = S.lifeM;
         // start speed under max speed
         if(S.speed > S.speedM) S.speed = S.speedM;
+        // set default Weapon
+        if(S.Weapons.length > 0 && S.Weapon1 === false)
+            S.Weapon1 = 0;
+        if(S.Weapons.length > 0 && S.Weapon2 === false)
+            S.Weapon2 = 0;
         // remove unused hidden Storages
         for(var type in S.Storage){
             var ST = S.Storage[type];

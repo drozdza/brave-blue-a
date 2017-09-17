@@ -459,6 +459,7 @@
 
 .shipAssemblyView {
     position: absolute;
+    overflow: auto;
     top: 36px;
     left: calc(33% - 6px);
     width: 34%;

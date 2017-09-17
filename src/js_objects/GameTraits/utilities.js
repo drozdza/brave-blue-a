@@ -2,12 +2,20 @@
 GAMEobject.prototype.shootLaser = function(o,Distance,Damage,angle){
     var X,Y,Ox,Oy,Found,D,F,shipShoot=false, O = this.O[o];
 
-    var Angle = O.laserAngle;
+    if(typeof O == 'undefined'){
+        console.log(o);
+        return false;
+    }
+
+    var Angle = 0;
+    if(typeof O != 'undefined' && typeof O.laserAngle != 'undefined')
+        Angle = O.laserAngle;
     if(typeof angle != 'undefined')
         Angle = angle;
 
+    console.log(O);
     var enemyArr=['P','M','E','R'];
-    if(o==0) enemyArr=['E','ME','A','R'];
+    if(O.S==2) enemyArr=['E','ME','A','R'];
 
     var L = this.putObj_directAnim('laserShoot', {timeDeath: 12});
     Ox = O.x;

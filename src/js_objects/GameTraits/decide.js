@@ -767,7 +767,7 @@ GAMEobject.prototype.decide = function(o){
                     this.removeObj(O.squadScheme[0].Oid);
                     O.squadScheme[0].Oid = -1;
                 }
-                this.shootLaser(o,WP.Distance,WP.DMG);
+                this.shootLaser(O,WP.Distance,WP.DMG);
                 WP.lastShot = this.tick;
             }
 
