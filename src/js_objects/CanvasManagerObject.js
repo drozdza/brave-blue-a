@@ -390,7 +390,7 @@ function CanvasManagerObject(){
             CanCon.restore();
         }
 
-        if(Type=='laserShoot'){
+        if(Type.search('laserShoot') != -1){
             CanCon.save();
             CanCon.lineCap = 'round';
             CanCon.strokeStyle = 'rgba('+StyleData.states[Frame].color2[0]+','+StyleData.states[Frame].color2[1]+','+StyleData.states[Frame].color2[2]+','+StyleData.states[Frame].color2[3]+')';

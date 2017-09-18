@@ -2,10 +2,7 @@
 GAMEobject.prototype.shootLaser = function(o,Distance,Damage,angle){
     var X,Y,Ox,Oy,Found,D,F,shipShoot=false, O = this.O[o];
 
-    if(typeof O == 'undefined'){
-        console.log(o);
-        return false;
-    }
+    if(typeof O == 'undefined') return false;
 
     var Angle = 0;
     if(typeof O != 'undefined' && typeof O.laserAngle != 'undefined')
@@ -13,11 +10,16 @@ GAMEobject.prototype.shootLaser = function(o,Distance,Damage,angle){
     if(typeof angle != 'undefined')
         Angle = angle;
 
-    console.log(O);
     var enemyArr=['P','M','E','R'];
     if(O.S==2) enemyArr=['E','ME','A','R'];
 
-    var L = this.putObj_directAnim('laserShoot', {timeDeath: 12});
+    var animType = 'laserShoot_blue';
+    var animsTab = ['violet', 'blue', 'lightblue', 'lightgreen', 'yellow', 'orange', 'red'];
+    animType = 'laserShoot_' + animsTab[ parseInt(Math.random()*7) ];
+
+    console.log(animType);
+
+    var L = this.putObj_directAnim(animType, {timeDeath: 12});
     Ox = O.x;
     Oy = O.y;
 
