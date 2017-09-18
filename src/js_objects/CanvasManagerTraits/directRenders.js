@@ -45,16 +45,7 @@ CanvasManagerObject.prototype.directRenders={
             100:{ width: 8, color: [0,200,0,1]}
         },
     },
-    laserShoot_violet:{
-        pointPoint:true,
-        frames: 12,
-        states:{
-            0:{ width2: 2, color2: [128,0,255,1], color: [0,0,0,0], width: 4},
-            5:{ width2: 8, color2: [192,128,255,1], color: [255,255,255,0.5], width: 10},
-            11:{ width2: 4, color2: [255,255,255,1], color: [255,255,255,0.1], width: 12}
-        },
-    },
-    laserShoot_blue:{
+    laserShoot:{
         pointPoint:true,
         frames: 12,
         states:{
@@ -63,13 +54,31 @@ CanvasManagerObject.prototype.directRenders={
             11:{ width2: 4, color2: [255,255,255,1], color: [255,255,255,0.1], width: 12}
         },
     },
+    laserShoot_violet:{
+        pointPoint:true,
+        frames: 12,
+        states:{
+            0:{ width2: 2, color2: [128,0,255,1], color: [0,0,0,0], width: 4},
+            5:{ width2: 8, color2: [128,0,255,1], color: [255,255,255,0.5], width: 10},
+            11:{ width2: 4, color2: [192,128,255,1], color: [255,255,255,0.1], width: 12}
+        },
+    },
+    laserShoot_blue:{
+        pointPoint:true,
+        frames: 12,
+        states:{
+            0:{ width2: 2, color2: [0,0,255,1], color: [0,0,0,0], width: 4},
+            5:{ width2: 8, color2: [0,0,255,1], color: [255,255,255,0.5], width: 10},
+            11:{ width2: 4, color2: [128,128,255,1], color: [255,255,255,0.1], width: 12}
+        },
+    },
     laserShoot_lightblue:{
         pointPoint:true,
         frames: 12,
         states:{
             0:{ width2: 2, color2: [0,255,255,1], color: [0,0,0,0], width: 4},
-            5:{ width2: 8, color2: [128,255,255,1], color: [255,255,255,0.5], width: 10},
-            11:{ width2: 4, color2: [255,255,255,1], color: [255,255,255,0.1], width: 12}
+            5:{ width2: 8, color2: [0,255,255,1], color: [255,255,255,0.5], width: 10},
+            11:{ width2: 4, color2: [128,255,255,1], color: [255,255,255,0.1], width: 12}
         },
     },
     laserShoot_lightgreen:{
@@ -77,8 +86,8 @@ CanvasManagerObject.prototype.directRenders={
         frames: 12,
         states:{
             0:{ width2: 2, color2: [0,255,0,1], color: [0,0,0,0], width: 4},
-            5:{ width2: 8, color2: [128,255,128,1], color: [255,255,255,0.5], width: 10},
-            11:{ width2: 4, color2: [255,255,255,1], color: [255,255,255,0.1], width: 12}
+            5:{ width2: 8, color2: [0,255,0,1], color: [255,255,255,0.5], width: 10},
+            11:{ width2: 4, color2: [128,255,128,1], color: [255,255,255,0.1], width: 12}
         },
     },
     laserShoot_yellow:{
@@ -86,8 +95,8 @@ CanvasManagerObject.prototype.directRenders={
         frames: 12,
         states:{
             0:{ width2: 2, color2: [255,255,0,1], color: [0,0,0,0], width: 4},
-            5:{ width2: 8, color2: [255,255,128,1], color: [255,255,255,0.5], width: 10},
-            11:{ width2: 4, color2: [255,255,255,1], color: [255,255,255,0.1], width: 12}
+            5:{ width2: 8, color2: [255,255,0,1], color: [255,255,255,0.5], width: 10},
+            11:{ width2: 4, color2: [255,255,128,1], color: [255,255,255,0.1], width: 12}
         },
     },
     laserShoot_orange:{
@@ -95,8 +104,8 @@ CanvasManagerObject.prototype.directRenders={
         frames: 12,
         states:{
             0:{ width2: 2, color2: [255,128,0,1], color: [0,0,0,0], width: 4},
-            5:{ width2: 8, color2: [255,192,128,1], color: [255,255,255,0.5], width: 10},
-            11:{ width2: 4, color2: [255,255,255,1], color: [255,255,255,0.1], width: 12}
+            5:{ width2: 8, color2: [255,128,0,1], color: [255,255,255,0.5], width: 10},
+            11:{ width2: 4, color2: [255,192,128,1], color: [255,255,255,0.1], width: 12}
         },
     },
     laserShoot_red:{
@@ -104,8 +113,8 @@ CanvasManagerObject.prototype.directRenders={
         frames: 12,
         states:{
             0:{ width2: 2, color2: [255,0,0,1], color: [0,0,0,0], width: 4},
-            5:{ width2: 8, color2: [255,128,128,1], color: [255,255,255,0.5], width: 10},
-            11:{ width2: 4, color2: [255,255,255,1], color: [255,255,255,0.1], width: 12}
+            5:{ width2: 8, color2: [255,0,0,1], color: [255,255,255,0.5], width: 10},
+            11:{ width2: 4, color2: [255,128,128,1], color: [255,255,255,0.1], width: 12}
         },
     },
     DestrFieldStart:{
