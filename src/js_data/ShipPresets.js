@@ -743,10 +743,11 @@ BBAdata['SHIPpresetsOld']={
         MouseDown1: false,
         MouseDown2: false,
         Weapons:[
-            {T:'single',   gunS:0,GunSpeed: 5,  Use:{Ammo:1}, Speed: 17, Dec: 30, DMG:{Dmg:11,T:'normal'},},
             {T:'triple',   gunS:0,GunSpeed: 1,  Use:{Ammo:2}, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
-            {T:'bomb',     gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 12, Dec: 80, explodePreset:'LaserBomb'},
             {T:'missileR', gunS:0,GunSpeed: 6,  Use:{Missile:5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'DirectLaser'},
+            {T:'bomb',     gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 12, Dec: 80, explodePreset:'LaserBomb'},
+            {T:'missileR', gunS:0,GunSpeed: 6,  Use:{Missile:5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'LaserRay'},
+            {T:'bomb',     gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 0, Dec: 1, explodePreset:'GoombaLaser'},
         ],
         Modules:[
             {T:'shieldProd',Disabled:0,Prod:0,E:0,Emin:0.1,Emax:1,ifProd:30, ShieldStorage:'absorbtion' },

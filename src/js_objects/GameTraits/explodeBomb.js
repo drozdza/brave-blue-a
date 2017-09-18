@@ -46,15 +46,17 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             randQ = parseInt(Math.random()*360);
         if(explodeObj.RadType=='parent')
             randQ = O.angle;
+        
+        var ShardPoints = [];
 
         for(i=0; i<360; i-=-explodeObj.LaserRad){
             var Speed = explodeObj.LaserSpeed;
             if(explodeObj.LaserSpeedPlus)
                 Speed-=-parseInt(Math.random()*explodeObj.LaserSpeedPlus);
 
-            var dummyO = {x:O.x, y:O.y};
-
-            this.shootLaser(o, Speed, explodeObj.DMG, i+randQ);
+            var iAngle = i+randQ;
+            var ShootEnd = this.shootLaser(o, Speed, explodeObj.DMG, iAngle);
+            ShardPoints.push({x:ShootEnd.x, y:ShootEnd.y, angle: iAngle});
         }
     }
     else if(explodeObj.explodeType=='nailsCone'){
@@ -163,26 +165,33 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             var ShardsNum = 1;
             if(Sh.ShardsNum) ShardsNum = Sh.ShardsNum;
 
-            var iAngle = (O.angle- -Sh.Angle- -360)%360;
-            if(Sh.AnglePlus) iAngle-=-parseInt(Math.random()*Sh.AnglePlus);
+            if(typeof ShardPoints == 'undefined')
+                var ShardPoints = [{x:O.x, y:O.y, angle:O.angle}];
 
-            for(var i=0; i<ShardsNum; ++i){
-                L = this.putObj('bullet_bomb','comp',O.S,O.x,O.y);
+            for(var iSP in ShardPoints){
+                var SP = ShardPoints[iSP];
 
-                if(i!=0 || Sh.AngleNext == 'undefined'){
-                    if(Sh.AnglePlus) iAngle-=-parseInt(Math.random()*Sh.AnglePlus);
+                var iAngle = (SP.angle- -Sh.Angle- -360)%360;
+                if(Sh.AnglePlus) iAngle-=-parseInt(Math.random()*Sh.AnglePlus);
+
+                for(var i=0; i<ShardsNum; ++i){
+                    L = this.putObj('bullet_bomb','comp',O.S,SP.x,SP.y);
+
+                    if(i!=0 || Sh.AngleNext == 'undefined'){
+                        if(Sh.AnglePlus) iAngle-=-parseInt(Math.random()*Sh.AnglePlus);
+                    }
+                    if(i!=0){
+                        if(Sh.AngleNext) iAngle -=- Sh.AngleNext;
+                    }
+
+                    this.O[L].angle = iAngle;
+                    this.O[L].speed = Sh.Speed;
+                    this.O[L].doingTime = Sh.Dec;
+
+                    if(Sh.SpeedPlus) this.O[ L ].speed-=-Math.random()*Sh.SpeedPlus;
+                    if(Sh.DecPlus)   this.O[ L ].doingTime-=-parseInt(Math.random()*Sh.DecPlus);
+                    this.cloneExplosionData(Sh, this.O[L]);
                 }
-                if(i!=0){
-                    if(Sh.AngleNext) iAngle -=- Sh.AngleNext;
-                }
-
-                this.O[L].angle = iAngle;
-                this.O[L].speed = Sh.Speed;
-                this.O[L].doingTime = Sh.Dec;
-
-                if(Sh.SpeedPlus) this.O[ L ].speed-=-Math.random()*Sh.SpeedPlus;
-                if(Sh.DecPlus)   this.O[ L ].doingTime-=-parseInt(Math.random()*Sh.DecPlus);
-                this.cloneExplosionData(Sh, this.O[L]);
             }
         }
 

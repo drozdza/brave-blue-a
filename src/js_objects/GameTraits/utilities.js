@@ -13,11 +13,9 @@ GAMEobject.prototype.shootLaser = function(o,Distance,Damage,angle){
     var enemyArr=['P','M','E','R'];
     if(O.S==2) enemyArr=['E','ME','A','R'];
 
-    var animType = 'laserShoot_blue';
+    var animType = 'laserShoot';
     var animsTab = ['violet', 'blue', 'lightblue', 'lightgreen', 'yellow', 'orange', 'red'];
     animType = 'laserShoot_' + animsTab[ parseInt(Math.random()*7) ];
-
-    console.log(animType);
 
     var L = this.putObj_directAnim(animType, {timeDeath: 12});
     Ox = O.x;
@@ -40,11 +38,12 @@ GAMEobject.prototype.shootLaser = function(o,Distance,Damage,angle){
             }
         }
     }
-    this.O[ L ].pathD=pathD.concat(['L',{x: Ox, y: Oy}]);
+    this.O[ L ].pathD = pathD.concat(['L',{x: Ox, y: Oy}]);
 
     delete(Damaged[o]);
     for(var d in Damaged)
         this.makeDMG(d,Damage);
+    return {x: Ox, y: Oy};
 }
 
 GAMEobject.prototype.teleportJump = function(o,Distance,angle,graphicType){

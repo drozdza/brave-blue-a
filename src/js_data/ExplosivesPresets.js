@@ -19,10 +19,10 @@ BBAdata['ExplosivesPresets']={
         onHitDieExpire: {Do:'explode', explodeType: 'lasers', LaserRad: 45, RadType: 'random', LaserSpeed: 100, LaserSpeedPlus: 100, DMG:{Dmg:3,T:'energy'}},
         exploAddTo:{ onHitDieExpire: {
             Shards:[{
-                explodePreset:'ExplosionSIze1',
+                explodePreset:'ExplosionSize1',
                 ShardsNum: 1,
                 Angle: 0,
-                Dec: 6,
+                Dec: 0,
                 Speed: 0,
             }]
         }}
@@ -30,7 +30,33 @@ BBAdata['ExplosivesPresets']={
     DirectLaser:{
         onHitDieExpire: {Do:'explode', explodeType: 'lasers', LaserRad: 360, RadType: 'parent', LaserSpeed: 300, LaserSpeedPlus: 0, DMG:{Dmg:3,T:'energy'}}
     },
-
+    LaserRay:{
+        onHitDieExpire: {Do:'explode', explodeType: 'lasers', LaserRad: 360, RadType: 'parent', LaserSpeed: 70, LaserSpeedPlus: 70, DMG:{Dmg:3,T:'energy'}},
+        exploAddTo:{ onHitDieExpire: {
+            Shards:[{
+                onHitDieExpire: {Do:'explode', explodeType: 'lasers', LaserRad: 360, RadType: 'parent', LaserSpeed: 100, LaserSpeedPlus: 100, DMG:{Dmg:3,T:'energy'}},
+                ShardsNum: 5,
+                Angle: 30,
+                AngleNext: -15,
+                Dec: 0,
+                Speed: 0,
+            }]
+        }}
+    },
+    GoombaLaser:{
+        onHitDieExpire: {Do:'explode', explodeType: 'lasers', LaserRad: 360, RadType: 'parent', LaserSpeed: 70, LaserSpeedPlus: 70, DMG:{Dmg:3,T:'energy'}},
+        exploAddTo:{ onHitDieExpire: {
+            Shards:[{
+                onHitDieExpire: {Do:'explode', explodeType: 'lasers', LaserRad: 360, RadType: 'parent', LaserSpeed: 70, LaserSpeedPlus: 70, DMG:{Dmg:3,T:'energy'}},
+                ShardsNum: 1,
+                Angle: 30,
+                AnglePlus: -60,
+                Dec: 0,
+                Speed: 0,
+                CopyShardTimes: 8,
+            }]
+        }}
+    },
 
     WarasteinExploCone:{
         explodePreset: 'ExplosionSize1',
@@ -355,7 +381,9 @@ BBAdata['ExplosivesPresets']={
 
     MinePrison:{},
 
-    ShieldBlob:{ onHitDieExpire:{Do:'explode', explodeType:'putObjs', objSpeed: 0, objMin:1, objName:'shieldBlob', objType:'comp', life:6,lifeM:6, toDo:[{T:'slowDownAndDie'}], doingTime: 480, Flags:[]}},
+    ShieldBlob:{
+        onHitDieExpire:{Do:'explode', explodeType:'putObjs', objSpeed: 0, objMin:1, objName:'shieldBlob', objType:'comp', life:6,lifeM:6, toDo:[{T:'slowDownAndDie'}], doingTime: 480, Flags:[]}
+    },
     ShieldsBlobWall:{
         Dec: 30,
         Speed: 8,
@@ -427,7 +455,9 @@ BBAdata['ExplosivesPresets']={
         }
     },
 
-    WindField:{onHitDieExpire:{ Do:'explode', explodeType:'ConeField', fieldAnim:'WindField', ExpireTime:240, dontHit:['ME','E','BE','A'], vectorType:'wind', vectorForce:5, windAngle:60, radius: 350, coneAngle: 50, coneRad2: 0}},
+    WindField:{
+        onHitDieExpire:{ Do:'explode', explodeType:'ConeField', fieldAnim:'WindField', ExpireTime:240, dontHit:['ME','E','BE','A'], vectorType:'wind', vectorForce:5, windAngle:60, radius: 350, coneAngle: 50, coneRad2: 0}
+    },
 
     EyeOfEvil:{
         onExpire: {
@@ -462,11 +492,17 @@ BBAdata['ExplosivesPresets']={
     },
 
 
-    SlowDownConeFields:{onHitDieExpire:{ Do:'explode', explodeType:'ConeField', fieldAnim: 'ShellField', SlowDownTo: 2.5, SlowDownBy: 11, dontHit:['E','ME','BE'], ExpireTime: 240, radius: 160, coneAngle: 80, coneRad2: 110}},
+    SlowDownConeFields:{
+        onHitDieExpire:{ Do:'explode', explodeType:'ConeField', fieldAnim: 'ShellField', SlowDownTo: 2.5, SlowDownBy: 11, dontHit:['E','ME','BE'], ExpireTime: 240, radius: 160, coneAngle: 80, coneRad2: 110}
+    },
 
-    TeleportConeField:{onHitDieExpire:{ Do:'explode', explodeType:'ConeField', simpleFilling: 'rgba(0,0,255,0.2)', ExpireTime:240, dontHit:['ME','E','BE','A'], teleportOnHit: 'withAngle', teleportOnHitDist: 520, teleportOnHitDistPlus: 200, radius: 160, coneAngle: 80, coneRad2: 110}},
+    TeleportConeField:{
+        onHitDieExpire:{ Do:'explode', explodeType:'ConeField', simpleFilling: 'rgba(0,0,255,0.2)', ExpireTime:240, dontHit:['ME','E','BE','A'], teleportOnHit: 'withAngle', teleportOnHitDist: 520, teleportOnHitDistPlus: 200, radius: 160, coneAngle: 80, coneRad2: 110}
+    },
 
-    SetMine1:{onExpire:{ Do:'explode', explodeType:'setMine', mineExplodePreset:{explodePreset:'NailedMine'},overWriteObjects:['MineMod_mediumCircle']}},
+    SetMine1:{
+        onExpire:{ Do:'explode', explodeType:'setMine', mineExplodePreset:{explodePreset:'NailedMine'},overWriteObjects:['MineMod_mediumCircle']}
+    },
     EyeOfMines:{
         onHit: {
             Do:'explode',
