@@ -42,7 +42,7 @@ GAMEobject.prototype.setBoard = function(){
         .mousemove(function(e){ GAME.mousemove(e); })
         .keydown(function(e){ GAME.keydown(e); })
         .keyup(function(e){ GAME.keyup(e); })
-        .blur(function(e){ if(!GAME.doEndGame){ GAME.pause=true;    clearInterval(GAME.intervalIndex);    $('#pause').show();    }    })
+        .blur(function(e){ if(!GAME.doEndGame) GAME.pauseStart(); })
         .resize(function(e){ GAME.resize(); });
 
       //  document.addEventListener('mousedown',function(e){     GAME.mouse_down(e); },false);

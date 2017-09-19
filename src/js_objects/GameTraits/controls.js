@@ -84,14 +84,9 @@ GAMEobject.prototype.keyup = function(e){
     }
     if(e.keyCode==80 && this.doEndGame==false){    // P - pause
         if(this.pause==false){
-            this.pause=true;
-            window.cancelAnimationFrame(this.intervalIndex);
-            $('#pause').show();
+            this.pauseStart();
         } else {
-            this.pause=false;
-            this.FRAME_TIME = new Date().getTime();
-            this.intervalIndex = window.requestAnimationFrame(function(){ GAME.frame(); });
-            $('#pause').hide();
+            this.pauseEnd();
         }
     }
     if(e.keyCode==27){    // ESC - escape

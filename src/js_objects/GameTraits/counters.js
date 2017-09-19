@@ -52,6 +52,7 @@ GAMEobject.prototype.prepareCounts = function(){
         DMG_s1_explo:0, // !!!!
         DMG_s2_explo:0, // !!!!
 
+        DMG_friendly_fire:0,
         DMG_s2_friendly_fire:0, // !!!!
         D_enemies_fiendly_fire:0, // !!!!
 

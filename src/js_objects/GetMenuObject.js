@@ -16,6 +16,11 @@ function GetMenuObject(){
             values: {Off:0, On:1, Align:2},
             default: 0,
         },
+        PAUSEDEBUG:{
+            get: 'pauseDebug',
+            values: {Off:1, On:2},
+            default: false,
+        },
         FRAMES:{
             get: 'frames',
             values: {Max:0, M1:1, M2:2, M3:3, M4:4},
@@ -48,9 +53,21 @@ function GetMenuObject(){
         },
         SHIPPRESET:{
             get: 'shipPresets',
-            values: {start: 0, start2:'start2', destFields: 'destFields', bombs1: 'bombs1', bombs2: 'bombs2', best: 'best', bombardier: 'bombardier', bombardier2: 'bombardier2', kagelis: 'kagelis', ethernal: 'ethernal'},
+            values: {
+                start: 0,
+                start2:'start2',
+                destFields: 'destFields',
+                bombs1: 'bombs1',
+                bombs2: 'bombs2',
+                best: 'best',
+                bombardier: 'bombardier',
+                bombardier2: 'bombardier2',
+                kagelis: 'kagelis',
+                ethernal: 'ethernal',
+            },
             default: 0,
         },
+
     };
 
     this.makeHtml = function(){

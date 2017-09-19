@@ -50,36 +50,6 @@
 }
 #endGameBoard .killed{ color: #444; }
 
-#pause{
-    border-radius: 0px 0px 0px 400px;
-    border-style: double;
-    border-color: blue;
-    border-width: 0px 0px 20px 20px;
-    background: darkblue;
-    background: rgba(0,0,120,0.5);
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 360px;
-    height: 360px;
-    display: none;
-    z-index: 1;
-}
-#pause span{
-    font-size: 100px;
-    font-weight: bold;
-    border-radius: 100%;
-    display: block;
-    width: 130px;
-    line-height: 130px;
-    text-align: center;
-    background: darkblue;
-    color: white;
-    position: absolute;
-    top: 60px;
-    right: 60px;
-}
-
 #UnderCanvas,#MainCanvas{
     position: absolute;
 }

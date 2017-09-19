@@ -9,6 +9,7 @@ BBAdata.GET={
     GAMESTATS: 0,
     MAPSMODE: 0,
     SHIPPRESET: 0,
+    PAUSEDEBUG:1,
 };
 (function(){
     var GETs = document.location.href.split('?')[1];
@@ -27,6 +28,7 @@ BBAdata.GET={
                 case 'gameStats':    BBAdata.GET.GAMESTATS    = BUM[1]; break;
                 case 'mapsMode':     BBAdata.GET.MAPSMODE     = BUM[1]; break;
                 case 'shipPresets':  BBAdata.GET.SHIPPRESET   = BUM[1]; break;
+                case 'pauseDebug':   BBAdata.GET.PAUSEDEBUG   = BUM[1]; break;
             }
         }
     }

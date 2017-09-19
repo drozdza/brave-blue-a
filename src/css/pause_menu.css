@@ -1,0 +1,106 @@
+
+#pause{
+    display: none;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+#pause.simpleInfo{
+    border-radius: 0px 0px 0px 400px;
+    border-style: double;
+    border-color: blue;
+    border-width: 0px 0px 20px 20px;
+    background: darkblue;
+    background: rgba(0,0,120,0.5);
+    width: 360px;
+    height: 360px;
+}
+#pause span.bigP{
+    font-size: 100px;
+    font-weight: bold;
+    border-radius: 100%;
+    display: block;
+    width: 130px;
+    line-height: 130px;
+    text-align: center;
+    background: darkblue;
+    color: white;
+    position: absolute;
+    top: 60px;
+    right: 60px;
+}
+
+#pause .time{
+    background: rgba(0,0,0,0.5);
+    border-radius: 0px 0px 12px 12px;
+    border-style: double;
+    border-width: 0px 9px 9px 9px;
+    border-color: darkblue;
+    padding: 3px 20px;
+    font-size: 32px;
+    color: blue;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    left: calc(50% - 60px);
+}
+#pause .time span{
+    display: block;
+    font-size: 16px;
+    text-align: center;
+}
+#pause .time span:before{ content: '('; }
+#pause .time span:after{ content: ')'; }
+
+#pause .unsorted{
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    top: 27px;
+    padding: 3px 10px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 12px 0px 0px 12px;
+    border-style: double;
+    border-width: 9px 0px 9px 9px;
+    border-color: darkblue;
+    color: blue;
+    text-align: center;
+    max-height: 90%;
+    overflow: auto;
+}
+
+#pause .enemies{
+    display: inline-block;
+    position: absolute;
+    top: 35px;
+    left: 10px;
+    border: 9px double darkblue;
+    border-radius: 12px;
+    color: blue;
+    background: rgba(0,0,0,0.8);
+    padding: 3px 10px;
+}
+#pause table td{
+    text-align: center;
+}
+#pause table td.L{
+    padding-right: 10px;
+    text-align: right;
+}
+
+#pause .Bcounters{
+    display: inline-block;
+    position: absolute;
+    top: 35px;
+    left: 210px;
+    border: 9px double darkblue;
+    border-radius: 12px;
+    color: blue;
+    background: rgba(0,0,0,0.8);
+    padding: 3px 10px;
+}
