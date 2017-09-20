@@ -358,6 +358,12 @@ BBAdata.MAPS.Secure2 = 'load';
 BBAdata.MAPS.Secure3 = 'load';
 BBAdata.MAPS.BigOnes={
     BoardMods:['sitOnMap','allAvoid'],
+    WinningConds:[
+        {T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, RewardGold:150, RewardFlags:{Conquer:1}, EndPortal:{X:0,Y:0}},
+        {T:'Add',C:{'E:koriaz':{max:0,D:'killMax'}}},
+        {T:'Add',C:{'E:thunderton':{max:0,D:'killMax'}}},
+        {T:'Add',C:{'E:talrax':{max:0,D:'killMax'}}},
+    ],
     Place:[
         {Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, D:10, M:10, N:10, J:10, W:5, T:10, E:10, G:10, R:10, B:10, K:10, F:10, Q:5,X:5,TT:10,Tu:5}},
         {CircleOf:{X:0, Y:-3000, Radius: 120, AngleStart: 0, AngleBy: 22.5}, What:{Star:16}},
