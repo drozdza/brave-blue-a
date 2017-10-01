@@ -746,6 +746,7 @@ BBAdata['SHIPpresetsOld']={
             {T:'triple',   gunS:0,GunSpeed: 1,  Use:{Ammo:2}, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
             {T:'missileR', gunS:0,GunSpeed: 6,  Use:{Missile:5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'DirectLaser'},
             {T:'bomb',     gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 12, Dec: 80, explodePreset:'LaserBomb'},
+            {T:'bomb',     gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 12, Dec: 80, explodePreset:'LaserABoom'},
             {T:'missileR', gunS:0,GunSpeed: 6,  Use:{Missile:5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'LaserRay'},
             {T:'bomb',     gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 0, Dec: 1, explodePreset:'GoombaLaser'},
         ],
