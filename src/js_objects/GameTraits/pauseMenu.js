@@ -75,6 +75,9 @@ GAMEobject.prototype.pause_showGameStats = function(){
     }
     html +='</table></div>';
 
+    
+
+
 
 
     html +='<div class="unsorted">';
