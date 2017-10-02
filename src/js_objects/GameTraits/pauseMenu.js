@@ -1,4 +1,3 @@
-
 GAMEobject.prototype.pauseStart = function(){
     this.pause=true;
     clearInterval(GAME.intervalIndex);
@@ -75,7 +74,7 @@ GAMEobject.prototype.pause_showGameStats = function(){
     }
     html +='</table></div>';
 
-    
+
 
 
 
