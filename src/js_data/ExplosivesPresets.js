@@ -27,6 +27,22 @@ BBAdata['ExplosivesPresets']={
             }]
         }}
     },
+    LaserABoom:{
+        explodePreset: 'ExplosionSize1',
+        exploAddTo:{ onHitDieExpire: {
+            Shards:[{
+                ShardsNum: 12,
+                explodePreset: 'DirectLaser',
+                Angle: 0,
+                AnglePlus: 30,
+                AngleNext: 30,
+                Dec: 4,
+                DecPlus: 16,
+                Speed: 10,
+                SpeedPlus: 3,
+            }]
+        }}
+    },
     DirectLaser:{
         onHitDieExpire: {Do:'explode', explodeType: 'lasers', LaserRad: 360, RadType: 'parent', LaserSpeed: 300, LaserSpeedPlus: 0, DMG:{Dmg:3,T:'energy'}}
     },
