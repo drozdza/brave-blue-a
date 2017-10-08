@@ -1,4 +1,3 @@
-
 GAMEobject.prototype.pauseStart = function(){
     this.pause=true;
     clearInterval(GAME.intervalIndex);
@@ -26,6 +25,27 @@ GAMEobject.prototype.pause_showGameStats = function(){
 
     html +='<div class="time">'+parseInt((this.tick/30)/60)+':'+(('0' + parseInt((this.tick/30)%60)).slice(-2))+'<span>'+this.tick+'</span></div>';
 
+    html += this.pause_showGameStats_enemies();
+    html += this.pause_showGameStats_coutners();
+
+
+
+    html +='<div class="unsorted">';
+    for(var c in this.C){
+        if(c.search('D:') === -1)
+        if(c.search('B_') !== 0)
+        if(c.search('DMG_') !== 0)
+        if(c.search('Hit_') !== 0)
+            html +=c+':'+this.C[c]+'<br/>';
+    }
+    html +='</div>';
+
+    $('#pause').removeClass('simgleInfo').html(html);
+}
+
+GAME.object.prototype.pause_showGameStats_enemies = function(){
+    var html='';
+
     var enemies = {};
     for(var c in this.CE){
         var e = c.split('E:')[1];
@@ -46,6 +66,11 @@ GAMEobject.prototype.pause_showGameStats = function(){
         html +='<tr><td class="L">'+e+'</td><td>'+enemies[e].E+'</td><td>'+(enemies[e].E- -enemies[e].D)+'</td></tr>';
     html +='</table></div>';
 
+    return html;
+}
+
+GAMEobject.prototype.pause_showGameStats_coutners = function(){
+    var html='';
 
     var stuff={B:{},DMG:{},Hit:{}};
     for(var s in stuff){
@@ -75,17 +100,5 @@ GAMEobject.prototype.pause_showGameStats = function(){
     }
     html +='</table></div>';
 
-
-
-    html +='<div class="unsorted">';
-    for(var c in this.C){
-        if(c.search('D:') === -1)
-        if(c.search('B_') !== 0)
-        if(c.search('DMG_') !== 0)
-        if(c.search('Hit_') !== 0)
-            html +=c+':'+this.C[c]+'<br/>';
-    }
-    html +='</div>';
-
-    $('#pause').removeClass('simgleInfo').html(html);
+    return html;
 }
