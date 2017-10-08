@@ -326,6 +326,12 @@ BBAdata.MAPS.Lx590={
         {RingOf:{X: 0, Y: 0, Radius: 300}, What:{Yl:8,Q:6}},
     ],
 };
+BBAdata.MAPS.Lx7822={
+    BoardMods:['sitOnMap','allAvoid'],
+    Place:[
+        {RingOf:{X: 0, Y: 0, Radius: 300}, What:{Yb:8,Q:6}},
+    ],
+};
 BBAdata.MAPS.Lx482={
     Place:[
         {RingOf:{X: 0, Y: 0, Radius: 300}, What:{HS:8,Q:6,F:3,M:10,R:4,J:2}},
@@ -383,9 +389,10 @@ BBAdata.MAPS.HardCore={
     Ship:{Start:{X: 2400, Y: 0, A:90}},
     Place:[
         {Random:{X: 0, Y: 0, Radius: 2200}, What:{
-            A:5, U:5, S:5, I:10, D:10, M:5, N:5, J:5, W:5, T:5, E:10, C:5, G:5, R:5, H:5, B:5, V:5, K:10, F:10, Q:5,
-            X:6, Z:5, PI:5, WP:5, Ni:10,
-            SH:10, L:5, TT:10, CD:5, HH:5, UU:5, Tu:8, Ii:5, HS:5, Y:8, Yi:8, Yl:8, HS:8,
+            A:5, U:5, S:5, I:10, D:10, M:5, N:5, J:5, W:5, T:5, E:10, C:5, G:5, R:5, H:5, B:5, V:5,
+            //K:10,
+            F:10, Q:5, X:6, Z:5, PI:5, WP:5, Ni:10,
+            SH:10, L:5, TT:10, CD:5, HH:5, UU:5, Tu:8, Ii:5, HS:5, Y:8, Yi:8, Yl:8, Yb:8, HS:8,
         }},
         {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarX:150,iD:10,Wi:10}},
         {What:{Gstar:1},objData:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}},

@@ -30,6 +30,8 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
                 else
                     this.O[ L ].angle-= 90;
 
+            if(explodeObj.NailsSlowBy)
+                this.O[ L ].speedSlowBy = explodeObj.NailsSlowBy;
 
             this.O[ L ].DMG={Dmg:1,T:'normal'};
             if(explodeObj.NailsAngleCenter){
@@ -46,7 +48,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             randQ = parseInt(Math.random()*360);
         if(explodeObj.RadType=='parent')
             randQ = O.angle;
-        
+
         var ShardPoints = [];
 
         for(i=0; i<360; i-=-explodeObj.LaserRad){
@@ -75,6 +77,9 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             this.O[ L ].DMG={Dmg:1,T:'normal'};
             if(explodeObj.NailsAngleCenter)
                 this.O[ L ].speedT = -((i- -0.5)/(explodeObj.Nails/2)- 1) * explodeObj.NailsAngleCenter;
+            if(explodeObj.NailsSlowBy)
+                this.O[ L ].speedSlowBy = explodeObj.NailsSlowBy;
+
         }
     }
     else if(explodeObj.explodeType=='RoundField' || explodeObj.explodeType=='ConeField'){

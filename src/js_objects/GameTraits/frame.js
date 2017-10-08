@@ -24,6 +24,10 @@ GAMEobject.prototype.frame_decide = function(){
     for(o in this.Obullet){
         O = this.O[o];
         if(O.speedT) O.angle -=- O.speedT;
+        if(O.speedSlowBy && O.speed > 0){
+            O.speed *= O.speedSlowBy;
+            if(O.speed < 0.2) O.speed = 0;
+        }
 
         if(this.Obullet[o]==1){
             var X = O.x-P.x;

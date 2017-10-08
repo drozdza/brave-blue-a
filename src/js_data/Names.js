@@ -45,6 +45,7 @@ BBAdata['ShipNames']={
     Y:'yehes',
     Yi:'yehestis',
     Yl:'yeheslar',
+    Yb:'yebuhas',
     HS:'hesiolumbus',
     SI:'saisung',
 };
