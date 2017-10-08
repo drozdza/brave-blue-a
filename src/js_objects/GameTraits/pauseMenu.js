@@ -43,7 +43,7 @@ GAMEobject.prototype.pause_showGameStats = function(){
     $('#pause').removeClass('simgleInfo').html(html);
 }
 
-GAME.object.prototype.pause_showGameStats_enemies = function(){
+GAMEobject.prototype.pause_showGameStats_enemies = function(){
     var html='';
 
     var enemies = {};
