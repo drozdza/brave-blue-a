@@ -19,7 +19,7 @@ function GetMenuObject(){
         PAUSEDEBUG:{
             get: 'pauseDebug',
             values: {Off:1, On:2},
-            default: false,
+            default: 2,
         },
         FRAMES:{
             get: 'frames',

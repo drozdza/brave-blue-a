@@ -143,13 +143,17 @@ GAMEobject.prototype.frame_move = function(){
     this.MSmove-=-((new Date()).getTime() - MS);
 }
 
-GAMEobject.prototype.frame_draw = function(){
+GAMEobject.prototype.frame_draw = function(frameCenter){
     var MS = (new Date()).getTime();
     var o,O;
     var P = this.O[0];
     var CH = this.CanvasHandle;
     var Px = P.x-(this.Dx/2);
     var Py = P.y-(this.Dy/2);
+    if(frameCenter){
+        var Px = frameCenter.x-(this.Dx/2);
+        var Py = frameCenter.y-(this.Dy/2);
+    }
     var Cbull = CanvasManager.C['bullet_'];
     var Radi = Math.PI/180;
 
@@ -163,10 +167,10 @@ GAMEobject.prototype.frame_draw = function(){
         if(BBAdata.GET.BLUR == 1)
             CH.drawImage(document.getElementById('BlurCanvas'), 0, 0);
         else{
-            var shipMoveX = this.shipX-this.O[0].x;
-            var shipMoveY = this.shipY-this.O[0].y;
-            this.shipX = this.O[0].x;
-            this.shipY = this.O[0].y;
+            var shipMoveX = this.shipX-P.x;
+            var shipMoveY = this.shipY-P.y;
+            this.shipX = P.x;
+            this.shipY = P.y;
             CH.drawImage(document.getElementById('BlurCanvas'), shipMoveX, shipMoveY);
         }
 

@@ -1,14 +1,20 @@
 GAMEobject.prototype.pauseStart = function(){
+    if(this.pause===true) return false;
     this.pause=true;
     clearInterval(GAME.intervalIndex);
     window.cancelAnimationFrame(this.intervalIndex);
     $('#pause').show();
 
-    console.log(BBAdata.GET);
     if(BBAdata.GET.PAUSEDEBUG==2){
         this.pause_showGameStats();
     }else{
         $('#pause').addClass('simpleInfo').html('<span class="bigP">P</span>');
+    }
+
+    this.pauseViewPoint = {
+        x: this.O[0].x,
+        y: this.O[0].y,
+        o: false,
     }
 }
 
@@ -28,8 +34,6 @@ GAMEobject.prototype.pause_showGameStats = function(){
     html += this.pause_showGameStats_enemies();
     html += this.pause_showGameStats_coutners();
 
-
-
     html +='<div class="unsorted">';
     for(var c in this.C){
         if(c.search('D:') === -1)
@@ -40,10 +44,12 @@ GAMEobject.prototype.pause_showGameStats = function(){
     }
     html +='</div>';
 
-    $('#pause').removeClass('simgleInfo').html(html);
+    html +='<div class="aimer"></div>';
+
+    $('#pause').html(html);
 }
 
-GAME.object.prototype.pause_showGameStats_enemies = function(){
+GAMEobject.prototype.pause_showGameStats_enemies = function(){
     var html='';
 
     var enemies = {};
@@ -101,4 +107,61 @@ GAMEobject.prototype.pause_showGameStats_coutners = function(){
     html +='</table></div>';
 
     return html;
+}
+
+GAMEobject.prototype.pause_showGameStats_object = function(o){
+    var O = this.O[o];
+    var html = '';
+
+    html +='<span style="font-size: 35px;">ID: '+o+' ('+O.T+')</span><br/>';
+
+    html += showObjInTable(O,[
+        {T:'noshow',canvasId:'noshow',Flags:'inline'},
+        {},
+        {CatchDmgT:'inline',Angle2:'inline'},
+    ]).html;
+
+    $('#pause .Oshower').remove();
+    $('#pause').append('<div class="Oshower"><table>'+html+'</table></div>');
+}
+
+GAMEobject.prototype.pause_keyMove = function(){
+    var chop = 50;
+    this.pauseViewPoint.x -= this.keyLeftRight*chop;
+    this.pauseViewPoint.y -= this.keyUpDown*chop;
+    this.pauseViewPoint.o = false;
+
+    $('#pause .Oshower').remove();
+    this.frame_draw(this.pauseViewPoint);
+}
+
+GAMEobject.prototype.pause_keyNearest = function(way){
+    if(this.pauseViewPoint.o === false)
+        way = 'both';
+
+    var oDist = 1000000;
+    var oO = false;
+    for(var o in this.O){
+        if(way == 'next' && parseInt(o) <= parseInt(this.pauseViewPoint.o)) continue;
+        if(way == 'prev' && parseInt(o) >= parseInt(this.pauseViewPoint.o)) continue;
+
+        var uX = this.O[o].x - this.pauseViewPoint.x;
+        var uY = this.O[o].y - this.pauseViewPoint.y;
+        var uDist = Math.sqrt(uX*uX- -uY*uY);
+        if(uDist < oDist){
+            oDist = uDist;
+            oO = o;
+        }
+    }
+    if(oO != false){
+        this.pauseViewPoint.o = oO;
+        this.pauseViewPoint.x = this.O[oO].x;
+        this.pauseViewPoint.y = this.O[oO].y;
+
+        console.log(oO);
+
+        this.pause_showGameStats_object(oO);
+
+        this.frame_draw(this.pauseViewPoint);
+    }
 }

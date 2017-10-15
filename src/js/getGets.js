@@ -6,10 +6,10 @@ BBAdata.GET={
     CANVAS:0,
     FPS:0,
     SETF:30,
-    GAMESTATS: 0,
-    MAPSMODE: 0,
-    SHIPPRESET: 0,
-    PAUSEDEBUG:1,
+    GAMESTATS:0,
+    MAPSMODE:0,
+    SHIPPRESET:0,
+    PAUSEDEBUG:2,
 };
 (function(){
     var GETs = document.location.href.split('?')[1];

@@ -154,3 +154,44 @@ function showObject(obj,lvl1,lvl2,lvl3){
     }
     return s;
 }
+
+function showObjInTable(obj,lvls,lvl){
+    lvl = lvl || 0;
+    if(lvl > 7) return '';
+    var html='';
+    var rows = 0;
+
+    for(var i in obj){
+        if(typeof lvls[lvl] != 'undefined' && typeof lvls[lvl][i] != 'undefined' && lvls[lvl][i]=='noshow')
+            continue;
+
+        if(!rows==0 || lvl == 0) html += '<tr>';
+
+        if(obj[i] instanceof Object){
+            if(typeof lvls[lvl] != 'undefined' && typeof lvls[lvl][i] != 'undefined' && lvls[lvl][i]=='inline'){
+                html+='<td class="nachos">'+i+'</td><td colspan="'+(10-lvl)+'">'+showObjInLine(obj[i])+'</td>';
+                rows-=-1;
+            }else{
+                t = showObjInTable(obj[i], lvls, lvl+1);
+                html+='<td rowspan="'+t.rows+'" class="tapas">'+i+'</td>'+t.html;
+                rows+=t.rows;
+            }
+
+        }else{
+            html+='<td class="nachos">'+i+'</td><td colspan="'+(10-lvl)+'">'+obj[i]+'</td></tr>'+"\n";
+            rows-=-1;
+        }
+    }
+    return {html:html,rows:rows};
+}
+function showObjInLine(obj){
+    var html = '';
+    for(var i in obj){
+        if(obj[i] instanceof Object){
+            html +=  i +':['+showObjInLine(obj[i])+'], ';
+        }else{
+            html += i +': '+obj[i]+', ';
+        }
+    }
+    return html;
+}

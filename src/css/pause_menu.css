@@ -104,3 +104,61 @@
     background: rgba(0,0,0,0.8);
     padding: 3px 10px;
 }
+
+#pause .aimer{
+    width: 200px;
+    height: 200px;
+    border: 1px dashed darkblue;
+    border-radius: 100%;
+    position: absolute;
+    top: calc(50% - 101px);
+    left: calc(50% - 101px);
+}
+#pause .aimer:after,
+#pause .aimer:before{
+    content: ' ';
+    position: absolute;
+    display: block;
+}
+#pause .aimer:after{
+    width: 1px;
+    height: 260px;
+    top: -30px;
+    left: 100px;
+    border-left: 1px dashed darkblue;
+}
+#pause .aimer:before{
+    width: 260px;
+    height: 1px;
+    top: 100px;
+    left: -30px;
+    border-bottom: 1px dashed darkblue;
+}
+#pause .Oshower{
+    display: inline-block;
+    position: absolute;
+    top: 35px;
+    left: calc(50% + 70px);
+    border: 9px double darkblue;
+    border-radius: 12px;
+    color: blue;
+    background: rgba(0,0,0,0.8);
+    padding: 3px 10px;
+    max-width: calc(50% - 80px);
+    max-height: calc(100% - 80px);
+    overflow: auto;
+}
+#pause .Oshower table td{
+    text-align: left;
+    padding: 0px 2px;
+    line-height: 12px;
+    position: relative;
+}
+#pause .Oshower table td.tapas{
+    border-right: 1px solid darkblue;
+    border-top: 1px solid darkblue;
+    border-bottom: 1px solid darkblue;
+}
+#pause .Oshower table tr:nth-child(odd) td.nachos:not(.tapas){
+    background-color: #001;
+}

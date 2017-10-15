@@ -37,25 +37,55 @@ GAMEobject.prototype.mousemove = function(e){
 }
 GAMEobject.prototype.keydown = function(e){
     var NOW = (new Date()).getTime();
-    if(e.keyCode==37 || e.keyCode==65){
-        if(this.keyLeftRight == 0 && NOW - this.keyLeftDT < this.DoubleKeyTime) this.specialMove = 1;
-        if(this.keyLeftRight == 0) this.keyLeftDT = NOW;
-        this.keyLeftRight = 1;
+    var key = false;
+    switch(e.keyCode){
+        case 37: case 65: key = 'right';       break;
+        case 39: case 68: key = 'left';        break;
+        case 38: case 87: key = 'down';        break;
+        case 40: case 83: key = 'up';          break;
+        case 33:          key = 'next';        break;
+        case 34:          key = 'prev';        break;
+        default:          return false;
     }
-    if(e.keyCode==39 || e.keyCode==68){
-        if(this.keyLeftRight == 0 && NOW - this.keyRightDT < this.DoubleKeyTime) this.specialMove = 2;
-        if(this.keyLeftRight == 0) this.keyRightDT = NOW;
-        this.keyLeftRight = -1;
+    switch(key){
+        case 'right':{
+            if(this.pause!==true && this.keyLeftRight == 0){
+                if (NOW - this.keyLeftDT < this.DoubleKeyTime) this.specialMove = 1;
+                else this.keyLeftDT = NOW;
+            }
+            this.keyLeftRight = 1;
+        }break;
+        case 'left':{
+            if(this.pause!==true && this.keyLeftRight == 0){
+                if (NOW - this.keyRightDT < this.DoubleKeyTime) this.specialMove = 2;
+                else this.keyRightDT = NOW;
+            }
+            this.keyLeftRight = -1;
+        }break;
+        case 'down':{
+            if(this.pause!==true && this.keyUpDown == 0){
+                if (NOW - this.keyDownDT < this.DoubleKeyTime) this.specialMove = 3;
+                else this.keyDownDT = NOW;
+            }
+            this.keyUpDown = 1;
+        }break;
+        case 'up':{
+            if(this.pause!==true && this.keyUpDown == 0){
+                if (NOW - this.keyUpDT < this.DoubleKeyTime) this.specialMove = 4;
+                else this.keyUpDT = NOW;
+            }
+            this.keyUpDown = -1;
+        }break;
     }
-    if(e.keyCode==38 || e.keyCode==87){
-        if(this.keyUpDown == 0 && NOW - this.keyDownDT < this.DoubleKeyTime) this.specialMove = 3;
-        if(this.keyUpDown == 0) this.keyDownDT = NOW;
-        this.keyUpDown = 1;
-    }
-    if(e.keyCode==40 || e.keyCode==83){
-        if(this.keyUpDown == 0 && NOW - this.keyUpDT < this.DoubleKeyTime) this.specialMove = 4;
-        if(this.keyUpDown == 0) this.keyUpDT = NOW;
-        this.keyUpDown = -1;
+    if(this.pause===true && BBAdata.GET.PAUSEDEBUG > 1){
+        switch(key){
+            case 'right': case 'left': case 'down': case 'up':
+                this.pause_keyMove();
+            break;
+            case 'next': case 'prev':
+                this.pause_keyNearest(key);
+            break;
+        }
     }
 }
 GAMEobject.prototype.keyup = function(e){
