@@ -22,6 +22,11 @@ Others:
 =========================================================================
 
 
+- Crabs sitting on stars and try to hide on other side then player (shooting some missles)
+- Thunderton's generate ball that shoots 10 teleporting bombs
+- Thunderton on death release escape pod
+
+
 - Adding squads to maps
 
 - Following ships can avoid bullets and bombs
@@ -103,40 +108,40 @@ Others:
 
 Pomoce dla statku:
   - obliczanie jak lasery się zaginają o przeszkody
-	- pokazywanie jaki będzie obszar wybuchu
-	- o co zachaczy bomba, gdzie się odbije
-	- automatyczne strzelanie jeśli coś wejdzie w linię strzału
+  - pokazywanie jaki będzie obszar wybuchu
+  - o co zachaczy bomba, gdzie się odbije
+  - automatyczne strzelanie jeśli coś wejdzie w linię strzału
   - Pokazywanie zasięgu bomb z oznaczonym miejscem wybuchu
 
 Do zrobienia:
-	- Dodać budowanie statków
-	- Gwiazdy w tle (?)
-	- Zaawansowane składy
+  - Dodać budowanie statków
+  - Gwiazdy w tle (?)
+  - Zaawansowane składy
 
 Nowe ficzery:
-	- Baterie które można napełniać a potem zużywać
-	- Różne rodzaje tarcz, niektóre pochłaniają część siły ataku, inne wytrzymują X wybuchów, inne chronią przed polami energetycznymi i laserami.
-	- Bonusy
-		- Zbieramy je z planszy:
-			- Wypadają z pokonanych jednostek
-			- Unoszą się w powietrzu
-			- Są produkowane przez jakieś specjalne punkty
-		- Można mieć ustawione spalanie automatyczne bonusów
-		- Można aktywować każdy bonus miejsce
-		- Bonus spalany automatycznie od razu próbuje się aktywować.
-		- Bonus może wyłączać moduły (Np. bonus leczący dezaktywuje moduł leczący jeśli zostało 1 życia) "bonus Priority"
-		- Niektóre bonusy mają działanie natychmiastowe, inne działają po czasie
-		- 2 Identyczne bonusy nie mogą działać na raz
-		Przykładowe bonusy:
-			- Leczenie. Aktywuje się, odczekuje pewien czas, a potem odnawia 1 HP
-			- Tarcza tymczasowa. Daje jakiś typ tarczy, a po jakimś czasie znika
-			- Tarcza jednorazowa. Dodaje dodatkową tarczę która jak się zużyje to zużyje.
-			- Dodatkowa energia. Działa jak baterie. Gdy jest potrzebna, wprowadza dodatkową energię do systemu.
-			- Przyspieszenie. Przez pewien czas daje dodatkowe X szybkości.
-			- Szybsze skręty. Przez pewien czas dodaje manewrowości.
-			- Dodatkowa amunicja.
-			- Silniejsze strzały.
-			- Teleport zamiast obrażeń.
+  - Baterie które można napełniać a potem zużywać
+  - Różne rodzaje tarcz, niektóre pochłaniają część siły ataku, inne wytrzymują X wybuchów, inne chronią przed polami energetycznymi i laserami.
+  - Bonusy
+    - Zbieramy je z planszy:
+      - Wypadają z pokonanych jednostek
+      - Unoszą się w powietrzu
+      - Są produkowane przez jakieś specjalne punkty
+    - Można mieć ustawione spalanie automatyczne bonusów
+    - Można aktywować każdy bonus miejsce
+    - Bonus spalany automatycznie od razu próbuje się aktywować.
+    - Bonus może wyłączać moduły (Np. bonus leczący dezaktywuje moduł leczący jeśli zostało 1 życia) "bonus Priority"
+    - Niektóre bonusy mają działanie natychmiastowe, inne działają po czasie
+    - 2 Identyczne bonusy nie mogą działać na raz
+    Przykładowe bonusy:
+      - Leczenie. Aktywuje się, odczekuje pewien czas, a potem odnawia 1 HP
+      - Tarcza tymczasowa. Daje jakiś typ tarczy, a po jakimś czasie znika
+      - Tarcza jednorazowa. Dodaje dodatkową tarczę która jak się zużyje to zużyje.
+      - Dodatkowa energia. Działa jak baterie. Gdy jest potrzebna, wprowadza dodatkową energię do systemu.
+      - Przyspieszenie. Przez pewien czas daje dodatkowe X szybkości.
+      - Szybsze skręty. Przez pewien czas dodaje manewrowości.
+      - Dodatkowa amunicja.
+      - Silniejsze strzały.
+      - Teleport zamiast obrażeń.
             - Włączenie tarczy zamiast obrażeń.
     - PlayerShip damage system
         - energy production lowered
@@ -224,114 +229,114 @@ New Enemies:
     - Laser Taran Ship
     - Different Cinds of Lasers
 
-	Fields:
-		- Immunity Field
+  Fields:
+    - Immunity Field
 
 
 Nowe Typy Ataków:
-	- Kwas. Omija wszystkie tarcze.
-		- Miotacz Kwasu.
-		- Bomba Kwasowa
-	- Duży obszar na którym summonują się bomby różnej wielkości (po chwili)
-	- Pocisk neutralizujący tarczę
-	- Atak neutralizujący tarczę
-	- Błękitne pociski (co robią?)
-	- Pociski tworzące wierzyczki (ostrzeliwujące przez kilka sekund wroga)
+  - Kwas. Omija wszystkie tarcze.
+    - Miotacz Kwasu.
+    - Bomba Kwasowa
+  - Duży obszar na którym summonują się bomby różnej wielkości (po chwili)
+  - Pocisk neutralizujący tarczę
+  - Atak neutralizujący tarczę
+  - Błękitne pociski (co robią?)
+  - Pociski tworzące wierzyczki (ostrzeliwujące przez kilka sekund wroga)
 
 ================================================================================
 
 SQUADY:
-	Squad ma swojego szefa
-	 - Szef nie wykonuje rozkazów squadu
-	Rozkaz squadu:
-		- Formacja
-			- Mamy różne typy formacji, typy statków mają konkretne podstawowe typy formacji.
-				- Zmienianie typów formacji w zależności od sytuacji?
-			- Niektóre formacje mają miejsca przeznaczone dla konkretnych typów statków, np. dla K albo F
-			- Szef formacji wylicza porządane miejsca dla każdego członka formacji
-			- Członkowie formacji próbują dogonić swoje miejsce, albo są na nie  przesuwani
-		- Orbitowanie wokół punktu (?)
-			- wyliczamy sobie jakąś stałą siłę skrętu
-			- próbujemy dolecieć do punktu XY
-			- jeśli wypadniemy poza obszar orbity +20%, wracamy do pola gwałtownie i orbitujemy dalej
-			? A może lepiej wyznaczać jakiś punkt na orbicie do którego lecimy?
-		- Zdążanie do punktu (punktów)
-			- mamy listę punktów
-			- może być jednorazowa lub cykliczna
-			- jeśli dolecimy na X do jakiegoś punktu, wyznaczmay sobie następny
-		- Wracanie do punktu X jeśli jest się rannym (a wróg poza zasięgiem)
-		- Wysyłanie sygnałów o znalezieniu wroga
-		- Oczekiwanie w punkcie
-		- Okrążanie obszaru
-			- każdy ze statków ustawia się wokół jakiegoś obszaru i zwraca się do środka
-		- Rozejście się na boki wszystkich jednostek podczas ostrzału na follow (wysyła jednostka która oberwała)
+  Squad ma swojego szefa
+   - Szef nie wykonuje rozkazów squadu
+  Rozkaz squadu:
+    - Formacja
+      - Mamy różne typy formacji, typy statków mają konkretne podstawowe typy formacji.
+        - Zmienianie typów formacji w zależności od sytuacji?
+      - Niektóre formacje mają miejsca przeznaczone dla konkretnych typów statków, np. dla K albo F
+      - Szef formacji wylicza porządane miejsca dla każdego członka formacji
+      - Członkowie formacji próbują dogonić swoje miejsce, albo są na nie  przesuwani
+    - Orbitowanie wokół punktu (?)
+      - wyliczamy sobie jakąś stałą siłę skrętu
+      - próbujemy dolecieć do punktu XY
+      - jeśli wypadniemy poza obszar orbity +20%, wracamy do pola gwałtownie i orbitujemy dalej
+      ? A może lepiej wyznaczać jakiś punkt na orbicie do którego lecimy?
+    - Zdążanie do punktu (punktów)
+      - mamy listę punktów
+      - może być jednorazowa lub cykliczna
+      - jeśli dolecimy na X do jakiegoś punktu, wyznaczmay sobie następny
+    - Wracanie do punktu X jeśli jest się rannym (a wróg poza zasięgiem)
+    - Wysyłanie sygnałów o znalezieniu wroga
+    - Oczekiwanie w punkcie
+    - Okrążanie obszaru
+      - każdy ze statków ustawia się wokół jakiegoś obszaru i zwraca się do środka
+    - Rozejście się na boki wszystkich jednostek podczas ostrzału na follow (wysyła jednostka która oberwała)
 
 
-		- Szukanie wroga wokół punktu X na obszarze Y
-			- Patrzymy na ilość statków biorących udział w zadaniu
-			- każdy ze statków leci pod innym kontem w daną stronę.
+    - Szukanie wroga wokół punktu X na obszarze Y
+      - Patrzymy na ilość statków biorących udział w zadaniu
+      - każdy ze statków leci pod innym kontem w daną stronę.
 
 
-	- Strzelane seriami.
-		Np. mamy kilka M, i strzelają one na przemian po kilka (na 2 salwy, na 3 salwy) a nie chaotycznie.
+  - Strzelane seriami.
+    Np. mamy kilka M, i strzelają one na przemian po kilka (na 2 salwy, na 3 salwy) a nie chaotycznie.
 
 
-	Squad po stracie szefa może:
-		- rozwiązać się
-		- wybrać nowego szefa
+  Squad po stracie szefa może:
+    - rozwiązać się
+    - wybrać nowego szefa
 
 
-	Rozkazy?
+  Rozkazy?
 
 
 
-	STATEK MA:
-		- tryby szybkości: zero, wolno, normalnie, szybko
-		- Poziom czujności
-		- Tryb brawurowości
+  STATEK MA:
+    - tryby szybkości: zero, wolno, normalnie, szybko
+    - Poziom czujności
+    - Tryb brawurowości
 
-		- Refleks/Wypatrywanie (co ile tyknięć statek wypatruje)
-		- Średnicę koła 100% wypatrywania
-		- Średnicę i rozwartość strefy dalekiego wypatrywania.
-
-
-	ZACHOWANIA
-		- zachowania są typowe dla jakiegoś typu statku
-
-		NP:
-			 - [Przy oberwaniu] Sprawdza czy nie jest za mocno uszkodzona i czy nie zawrócić. Do miejsca zbiórki [!].
-			 - [Raz na X tick][To robimy cały czas] Sprawdza czy nie ma wroga w pobliżu (statki moją podwójną strefę kontroli?
-			 - Rajd na wroga, próba dogonienia go i strzelania do niego.
-			 - Skręcanie. Wróg decyduje czy skręcić w prawo czy w lewo i o ile.
-			 - Poruszanie się do najbliższej rannej jednostki która znajduje się z sasięgu.
-			 - Jeśli wróg jest z zasięgu, próbujemy ukryć za jakąś inną jednostką.
-			 - Uciekanie od Gracza.
-			 - Uciekanie od Gracza poprzez skręcanie w losowych momentach.
-			 - Brawurowość podnosi się jeśli statek trafi gracza, lub gdy zobaczy gracza który jest mocno ranny.
-
-			 - Jeśli gracz leci bardzo wolno, orbitujemy wokół niego.
-
-	ROZKAZY
-
-		NP:
-			- Patrol. Wróg przemieszcza się do najbliższego punktu patrolowego, jeśli do niego dotrze, wyznacza sobie następny.
-
-			- Orbitowanie wokół punktu
+    - Refleks/Wypatrywanie (co ile tyknięć statek wypatruje)
+    - Średnicę koła 100% wypatrywania
+    - Średnicę i rozwartość strefy dalekiego wypatrywania.
 
 
-	STANY ALARMU:
-		[1]- Wyłączony
-		[2]- Nie poruszający się (refleks wolniejszy)
-		[3]- Nie zaalarmowany
-		[4]- Już widział wroga / dostał od kogoś informacje o wrogu
+  ZACHOWANIA
+    - zachowania są typowe dla jakiegoś typu statku
 
-		- Słyszał wybuchy, widział wraki
+    NP:
+       - [Przy oberwaniu] Sprawdza czy nie jest za mocno uszkodzona i czy nie zawrócić. Do miejsca zbiórki [!].
+       - [Raz na X tick][To robimy cały czas] Sprawdza czy nie ma wroga w pobliżu (statki moją podwójną strefę kontroli?
+       - Rajd na wroga, próba dogonienia go i strzelania do niego.
+       - Skręcanie. Wróg decyduje czy skręcić w prawo czy w lewo i o ile.
+       - Poruszanie się do najbliższej rannej jednostki która znajduje się z sasięgu.
+       - Jeśli wróg jest z zasięgu, próbujemy ukryć za jakąś inną jednostką.
+       - Uciekanie od Gracza.
+       - Uciekanie od Gracza poprzez skręcanie w losowych momentach.
+       - Brawurowość podnosi się jeśli statek trafi gracza, lub gdy zobaczy gracza który jest mocno ranny.
+
+       - Jeśli gracz leci bardzo wolno, orbitujemy wokół niego.
+
+  ROZKAZY
+
+    NP:
+      - Patrol. Wróg przemieszcza się do najbliższego punktu patrolowego, jeśli do niego dotrze, wyznacza sobie następny.
+
+      - Orbitowanie wokół punktu
 
 
-		- Ścigający wroga
+  STANY ALARMU:
+    [1]- Wyłączony
+    [2]- Nie poruszający się (refleks wolniejszy)
+    [3]- Nie zaalarmowany
+    [4]- Już widział wroga / dostał od kogoś informacje o wrogu
 
-		- Trzymający się na uboczu - brak amunicji lub ładowanie
-		- Uszkodzony - uciekający przed wrogiem
+    - Słyszał wybuchy, widział wraki
+
+
+    - Ścigający wroga
+
+    - Trzymający się na uboczu - brak amunicji lub ładowanie
+    - Uszkodzony - uciekający przed wrogiem
 
 
 ================================================================================

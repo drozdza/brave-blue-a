@@ -595,4 +595,15 @@ BBAdata['ExplosivesPresets']={
     },
 
 
+    StasisBulletWall:{
+        onHitDieExpire: {Do:'explode', explodeType: 'nailsCone', Nails: 40, NailsRad: 220, NailsSlowBy: 0.955, NailsSpeed: 8, NailsSpeedPlus: 4, NailsDec: 300, NailsDecPlus: 60, NailsAngleCenter:3},
+    },
+    StatisBulletBomb:{
+        onHitDieExpire: {Do:'explode', explodeType: 'nails', NailsRad: 10, NailsSlowBy: 0.95, NailsSpeed: 2, NailsSpeedPlus: 12, NailsDec: 300, NailsDecPlus: 60},
+    },
+
+    GraviBall:{
+        onHitDieExpire: {Do:'explode', explodeType:'RoundField', fieldAnim: 'GravityField', vectorType:'gravity',vectorForce:9, ExpireTime:170, moveAlong:6, dontHit:['ME','E','BE','A','B'], radius: 120},
+    },
+
 };
