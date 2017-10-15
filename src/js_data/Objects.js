@@ -74,7 +74,7 @@ BBAdata['ObjectDatas']={
             Color: '#ff0',
             Angle: 0,
         },
-
+        M: 'comp',
         speed:0,
         angle:0,
         radius:6,
@@ -233,7 +233,7 @@ BBAdata['ObjectDatas']={
         },
     },
 
-    star:{
+    Star:{
         view:{
             LIBpath:'StarPath',
             PathSize:30,
@@ -242,6 +242,7 @@ BBAdata['ObjectDatas']={
             HitPattern:'StarHit',
             onBackground: 1,
         },
+        M: 'static',
 
         SlowDown: 3,
         lifeM:6,
@@ -249,19 +250,19 @@ BBAdata['ObjectDatas']={
         mapType:'A',
         TT:'bgStars',
     },
-    starS:{
-        extends:'star',
+    StarS:{
+        extends:'Star',
         mergeArrays:{view:{PathSize:18}},
         radius: 9,
     },
-    starM:{
-        extends:'star',
+    StarM:{
+        extends:'Star',
         mergeArrays:{view:{PathSize:60}},
         radius: 30,
         lifeM: 10,
     },
-    starL:{
-        extends:'star',
+    StarL:{
+        extends:'Star',
         mergeArrays:{view:{PathSize:80}},
         radius: 40,
         lifeM: 17,
@@ -275,7 +276,7 @@ BBAdata['ObjectDatas']={
             XY:180,
             onBackground: 1,
         },
-
+        M:'static',
         radius: 90,
         undestructible: 1,
         bounceType: 'straight',
@@ -287,6 +288,7 @@ BBAdata['ObjectDatas']={
             circleColor:[255,255,255,0.2],
             onBackground: 1,
         },
+        M: 'region',
         radius: 50,
         undestructible: 1,
     },
@@ -295,6 +297,7 @@ BBAdata['ObjectDatas']={
             color: 'red',
             onBackground: 1,
         },
+        M: 'region',
         radius: 50,
         squareAngle: 0,
         squareLen: 50,
@@ -307,6 +310,7 @@ BBAdata['ObjectDatas']={
             onBackground: 1,
         },
 
+        M: 'region',
         radius: 50,
         coneAngle: 180,
         coneRad2: 50,
@@ -332,6 +336,7 @@ BBAdata['ObjectDatas']={
 
 
     enemyShip:{
+        M: 'comp',
         TT: 'enemy',
         lastSpeedT: 0,
         doSquad: -1,//??

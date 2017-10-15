@@ -64,13 +64,18 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
     O.y = y;
     O.S = Side;
     O.T = Type;
-    O.M = Mode;
     O.bornTime = this.tick;
     O.periodDMG={};
     O.radius = 15;
     O.TT = 'dust';
 
     O = this.putObj_fromArray(O,Type);
+
+    if(Mode === false) Mode = O.M;
+            else       O.M = Mode;
+
+
+
 
     if(O.shipVariables)
         this.putObj_shipVariables(O);

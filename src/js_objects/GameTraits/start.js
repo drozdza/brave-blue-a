@@ -112,14 +112,17 @@ GAMEobject.prototype.setPlayerShip = function(){
     this.Olen=1;
 }
 GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
-    var Radi = Math.PI*2/360;
+    var Odata,Otype,Radi = Math.PI*2/360;
 
     if( typeof defX == 'undefined' ){
         defX = 0;
         defY = 0;
     }
     for(var placeWhat in SET.What){
-        for(var j=0; j < SET.What[placeWhat]; ++j){
+        if(isNaN(placeWhat)) Odata = {t:placeWhat,q:SET.What[placeWhat]};
+                else         Odata = SET.What[placeWhat];
+
+        for(var j=0; j < Odata.q; ++j){
 
             var x = defX;
             var y = defY;
@@ -147,25 +150,35 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
                 y = SET.RingOf.Y- -Dist*Math.cos((-parseInt(rAngle)-180)*Radi);
             }
 
-            if(placeWhat=='Star'){
-                var L = this.putObj('star','static',1,x,y);
-            }else if(placeWhat=='StarX'){
+            if(Array.isArray(Odata.t)){
+                Otype = Odata.t[ parseInt(Math.random()*Odata.t.length) ];
+            }else{
+                Otype = Odata.t;
+            }
+
+            if()
+            var L = this.putObj(Otype,false,1,x,y);
+
+
+            if(Otype=='Star'){
+                var L = this.putObj('Star',false,1,x,y);
+            }else if(Otype=='StarX'){
                 var LI = ['','M','S','L'];
-                var L = this.putObj('star'+LI[ parseInt(Math.random()*4) ],'static',1,x,y);
-            }else if(placeWhat=='Gstar'){
+                var L = this.putObj('Star'+LI[ parseInt(Math.random()*4) ],'static',1,x,y);
+            }else if(Otype=='Gstar'){
                 var L = this.putObj('Gstar','static',1,x,y);
-            }else if(placeWhat=='RoundField'){
+            }else if(Otype=='RoundField'){
                 var L = this.putObj('RoundField','region',1,x,y);
-            }else if(placeWhat=='SquareField'){
+            }else if(Otype=='SquareField'){
                 var L = this.putObj('SquareField','region',1,x,y);
-            }else if(placeWhat=='ConeField'){
+            }else if(Otype=='ConeField'){
                 var L = this.putObj('ConeField','region',1,x,y);
-            }else if(placeWhat=='Mine'){
+            }else if(Otype=='Mine'){
                 var L = this.putObj('space_mine','comp',1,x,y);
                 ++this.C['B_minesSet'];
                 ++this.C['E:mines'];
             } else {
-                var L = this.putObj(BBAdata['ShipNames'][placeWhat],'comp',1,x,y);
+                var L = this.putObj(BBAdata['ShipNames'][Otype],'comp',1,x,y);
                 this.addBoardMods(L);
                 if(typeof SET.GroupMods !='undefined')
                     for(var k in SET.GroupMods)

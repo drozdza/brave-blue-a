@@ -392,7 +392,17 @@ BBAdata.MAPS.HardCore={
         {CircleOf:{X:0, Y:-3000, Radius: 120, AngleStart: 0, AngleBy: 22.5}, What:{Star:16}},
         {What:{RoundField:1},objData:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
     ]
+};
 
+BBAdata.MAPS.BuildTry={
+    Place:[
+        {Random:{X:0, Y:0, Radius: 100}, What:{
+            0:{t:'carras',q:5},
+        }},
+        {Random:{X:-400, Y:0, Radius: 300}, What:{
+            0:{t:['Star','StarS','StarL','StarM'],q:30},
+        }},
+    ],
 };
 
 }
