@@ -5,7 +5,7 @@ GAMEobject.prototype.regionAngleChange = function(Q,O){
         var kat2 = (O.angle - kat- -720)%360;
         var BF=1;
         if(Q.bounceForce) BF = Q.bounceForce;
-        if(kat2 < 180-BF)    O.angle = (O.angle - BF)%360;
+        if(kat2 < 180 - BF)    O.angle = (O.angle - BF)%360;
         if(kat2 > 180- -BF)    O.angle = (O.angle- -BF)%360;
         return O;
     }

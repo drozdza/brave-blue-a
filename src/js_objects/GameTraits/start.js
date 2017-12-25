@@ -156,7 +156,7 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
                 Otype = Odata.t;
             }
 
-            if()
+            // if()
             var L = this.putObj(Otype,false,1,x,y);
 
 

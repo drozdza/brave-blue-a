@@ -13,3 +13,4 @@ Bugs:
 
 Chrome Linux v61 fix:
 chrome://flags/#enable-color-correct-rendering - to disabled
+https://productforums.google.com/forum/#!msg/chrome/AQ0fR1iQ_VY/jAIE2BUwAQAJ

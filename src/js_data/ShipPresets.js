@@ -738,8 +738,8 @@ BBAdata['SHIPpresetsOld']={
         GlueFireToEstimated: 100,
         GlueFireToLaser: 70,
         KeysModules:{66:[6],69:[0,5],73:[3,9,10],77:[7],84:[2],81:[4],70:[8],82:[11]},
-        Weapon1: 2,
-        Weapon2: 3,
+        Weapon1: 1,
+        Weapon2: 6,
         MouseDown1: false,
         MouseDown2: false,
         Weapons:[
@@ -749,10 +749,12 @@ BBAdata['SHIPpresetsOld']={
             {T:'bomb',     gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 12, Dec: 80, explodePreset:'LaserABoom'},
             {T:'missileR', gunS:0,GunSpeed: 6,  Use:{Missile:5}, Speed: 12, AtOnce: 8, SpeedT: 6, Dec: 95, AimRadius: 60, explodePreset:'LaserRay'},
             {T:'bomb',     gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 0, Dec: 1, explodePreset:'GoombaLaser'},
+            {T:'tele',    gunS:0,GunSpeed: 3, ModUse:{TeleJump:1}, Speed: 550, Dec: 1},
         ],
         Modules:[
             {T:'shieldProd',Disabled:0,Prod:0,E:0,Emin:0.1,Emax:1,ifProd:30, ShieldStorage:'absorbtion' },
             {T:'spotRegion',Disabled:1,Prod:0,E:0,Emin:4,Emax:4, ifProd:4 },
+            {T:'moduleProd',Disabled:0,Emin:2,Emax:4,E:0,Prod:0,ifProd:60, subT:'TeleJump',ModStorage:'TeleJump'},
             {T:'Prod',      Disabled:0,Prod:0,E:0,Emin:2,Emax:4, ifProd:10,subT:'Bullet',Storage:'Ammo'},
             {T:'esteemProd',Disabled:1,Prod:0,E:0,Emin:1,Emax:1, ifProd:9000 },
             {T:'healerProd',Disabled:0,Prod:0,E:0,Emin:4,Emax:16,ifProd:1440 },
