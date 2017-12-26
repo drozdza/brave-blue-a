@@ -250,7 +250,7 @@ GAMEobject.prototype.openEndPortal = function(i){
         if(WC.EndPortal.Y) portalY = WC.EndPortal.Y;
     }
 
-    var E = this.putObj('EndPortal','static',1,portalX,portalY);
+    var E = this.putObj('EndPortal',1,portalX,portalY);
     this.setRegionAnimation(E,'EndPortal');
 }
 GAMEobject.prototype.showEndGameCount = function(){

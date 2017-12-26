@@ -88,7 +88,7 @@ GAMEobject.prototype.setSquadMember = function(o,i,life){
     }
 
     if(OSS.type == 'shieldBlob'){
-        var Sid = this.putObj('shieldBlob','moving',O.S,iX,iY);
+        var Sid = this.putObj('shieldBlob',O.S,iX,iY);
         var oS = this.O[Sid];
         oS.angle = iAngle;
         oS.life = life;
@@ -96,24 +96,25 @@ GAMEobject.prototype.setSquadMember = function(o,i,life){
         this.bindWithSquad(o, i, Sid);
     }
     if(OSS.type == 'RoundField'){
-        var Sid = this.putObj('RoundField','region',1,iX,iY);
+        var Sid = this.putObj('RoundField',1,iX,iY);
         this.Omoving[Sid]=1;
         this.bindWithSquad(o, i, Sid);
     }
     if(OSS.type == 'ConeField'){
         var acType = 'region';
         if(OSS.acType) acType = OSS.acType;
-        var Sid = this.putObj('ConeField',acType,1,iX,iY);
+        var Sid = this.putObj('ConeField',1,iX,iY);
+        this.putObj_changeMode(Sid, acType);
         this.Omoving[Sid]=1;
         this.bindWithSquad(o, i, Sid);
     }
     if(OSS.type == 'SquareField'){
-        var Sid = this.putObj('SquareField','region',1,iX,iY);
+        var Sid = this.putObj('SquareField',1,iX,iY);
         this.Omoving[Sid]=1;
         this.bindWithSquad(o, i, Sid);
     }
     if(OSS.type == 'enemyShip'){
-        var Sid = this.putObj(OSS.objectType,'comp',1,iX,iY);
+        var Sid = this.putObj(OSS.objectType,1,iX,iY);
         this.bindWithSquad(o, i, Sid);
     }
 

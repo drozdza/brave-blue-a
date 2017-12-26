@@ -84,7 +84,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
     }
     else if(explodeObj.explodeType=='RoundField' || explodeObj.explodeType=='ConeField'){
 
-        L = this.putObj(explodeObj.explodeType,'region',O.S,O.x,O.y);
+        L = this.putObj(explodeObj.explodeType,O.S,O.x,O.y);
 
         this.cloneDataToObj(L,explodeObj,['radius', 'coneAngle', 'coneRad2',
             'PeriodTime', 'PeriodOffset','PeriodHeal',
@@ -126,7 +126,8 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
         var objNumb = explodeObj.objMin;
         if(explodeObj.objRand) objNumb-=-parseInt(Math.random()*(explodeObj.objRand- -1));
         for(var i=0; i<objNumb; ++i){
-            L = this.putObj(explodeObj.objName,explodeObj.objType,O.S,O.x,O.y);
+            L = this.putObj(explodeObj.objName,O.S,O.x,O.y);
+            this.putObj_changeMode(L, explodeObj.objType);
 
             this.O[ L ].angle = O.angle;
             if(typeof explodeObj.objSpeed !='undefined')
@@ -151,7 +152,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
     }
     else if(explodeObj.explodeType=='none'){}
     else {
-        L = this.putObj('destruction_field','region',O.S,O.x,O.y);
+        L = this.putObj('destruction_field',O.S,O.x,O.y);
         this.O[L].radius = explodeObj.Dist;
         this.O[L].ActiveTime = this.tick- -2;
         this.O[L].DieTime = this.tick- -6;
@@ -180,7 +181,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
                 if(Sh.AnglePlus) iAngle-=-parseInt(Math.random()*Sh.AnglePlus);
 
                 for(var i=0; i<ShardsNum; ++i){
-                    L = this.putObj('bullet_bomb','comp',O.S,SP.x,SP.y);
+                    L = this.putObj('bullet_bomb',O.S,SP.x,SP.y);
 
                     if(i!=0 || Sh.AngleNext == 'undefined'){
                         if(Sh.AnglePlus) iAngle-=-parseInt(Math.random()*Sh.AnglePlus);

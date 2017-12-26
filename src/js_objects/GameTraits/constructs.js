@@ -30,7 +30,7 @@ GAMEobject.prototype.buildConstructs = function(o,SETconstruct){
                         bounceTeleport:true,
                     };
 
-                    var L = this.putObj('SquareField','region',1,x,y);
+                    var L = this.putObj('SquareField',1,x,y);
                     this.addBoardMod(L, objData);
                     Q.constructsDone[q+'_'+o] = L;
                     O.constructsDone[o+'_'+q] = L;

@@ -83,7 +83,7 @@ GAMEobject.prototype.start = function(Name,Setting,Ship){
 
     if(typeof Setting.Place != 'undefined')
         for(var i=0; i<Setting.Place.length; ++i)
-            this.mapPlaceObj(Setting, Setting.Place[i]);
+            this.mapPlace(Setting, Setting.Place[i]);
 
 
     if(BBAdata.GET.CANVAS == 0){
@@ -111,7 +111,7 @@ GAMEobject.prototype.setPlayerShip = function(){
     this.Omoving={0:1};
     this.Olen=1;
 }
-GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
+GAMEobject.prototype.mapPlace = function(Setting,SET,defX,defY){
     var Odata,Otype,Radi = Math.PI*2/360;
 
     if( typeof defX == 'undefined' ){
@@ -150,35 +150,27 @@ GAMEobject.prototype.mapPlaceObj = function(Setting,SET,defX,defY){
                 y = SET.RingOf.Y- -Dist*Math.cos((-parseInt(rAngle)-180)*Radi);
             }
 
-            if(Array.isArray(Odata.t)){
-                Otype = Odata.t[ parseInt(Math.random()*Odata.t.length) ];
-            }else{
-                Otype = Odata.t;
-            }
+            if(Array.isArray(Odata.t)) Otype = Odata.t[ parseInt(Math.random()*Odata.t.length) ];
+                        else           Otype = Odata.t;
 
-            // if()
-            var L = this.putObj(Otype,false,1,x,y);
+            if(typeof BBAdata.ShipNames[Otype] != 'undefined') Otype = BBAdata.ShipNames[Otype];
 
 
-            if(Otype=='Star'){
-                var L = this.putObj('Star',false,1,x,y);
-            }else if(Otype=='StarX'){
+            if(Otype=='StarX'){
                 var LI = ['','M','S','L'];
-                var L = this.putObj('Star'+LI[ parseInt(Math.random()*4) ],'static',1,x,y);
-            }else if(Otype=='Gstar'){
-                var L = this.putObj('Gstar','static',1,x,y);
+                var L = this.putObj('Star'+LI[ parseInt(Math.random()*4) ],1,x,y);
             }else if(Otype=='RoundField'){
-                var L = this.putObj('RoundField','region',1,x,y);
+                var L = this.putObj('RoundField',1,x,y);
             }else if(Otype=='SquareField'){
-                var L = this.putObj('SquareField','region',1,x,y);
+                var L = this.putObj('SquareField',1,x,y);
             }else if(Otype=='ConeField'){
-                var L = this.putObj('ConeField','region',1,x,y);
+                var L = this.putObj('ConeField',1,x,y);
             }else if(Otype=='Mine'){
-                var L = this.putObj('space_mine','comp',1,x,y);
+                var L = this.putObj('space_mine',1,x,y);
                 ++this.C['B_minesSet'];
                 ++this.C['E:mines'];
             } else {
-                var L = this.putObj(BBAdata['ShipNames'][Otype],'comp',1,x,y);
+                var L = this.putObj(Otype,1,x,y);
                 this.addBoardMods(L);
                 if(typeof SET.GroupMods !='undefined')
                     for(var k in SET.GroupMods)
@@ -232,7 +224,7 @@ GAMEobject.prototype.addBoardMod = function(o,MODname){
     for(var KI in MOD){
         if(KI=='overWriteObjects'){
             for(var i in MOD[KI])
-                this.addBoardMod(o,BBAdata['ObjectDatas'][ MOD[KI][i] ]);
+                this.addBoardMod(o,BBAdata['ObjectData'][ MOD[KI][i] ]);
         }else if(KI=='toDo'){
             for(var i in MOD.toDo)
                 this.addToToDoList(o,MOD.toDo[i]);

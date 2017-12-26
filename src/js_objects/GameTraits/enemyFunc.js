@@ -24,7 +24,7 @@ GAMEobject.prototype.shootBulletOnSide2 = function(o,Enemy,Speed,Dec,SideAngle,S
 }
 GAMEobject.prototype.shootMissile = function(o,Angle,Speed,Dec,SpeedT,DMG,explodePreset){
     var O = this.O[o];
-    var L = this.putObj('missile','comp',O.S,O.x,O.y);
+    var L = this.putObj('missile',O.S,O.x,O.y);
     this.O[L].speed = Speed;
     this.O[L].doingTime = Dec;
     this.O[L].Manouver = 'followEnemy';
@@ -39,19 +39,19 @@ GAMEobject.prototype.shootMissile = function(o,Angle,Speed,Dec,SpeedT,DMG,explod
 }
 GAMEobject.prototype.shootHealingMissile = function(o,Target){
     var O = this.O[o];
-    var L = this.putObj('healing_missile','comp',O.S,O.x,O.y);
+    var L = this.putObj('healing_missile',O.S,O.x,O.y);
     this.O[L].angle = O.angle;
     this.O[L].FollowWho = Target;
 }
 GAMEobject.prototype.shootShieldAddMissile = function(o,Target){
     var O = this.O[o];
-    var L = this.putObj('energy_field_missile','comp',O.S,O.x,O.y);
+    var L = this.putObj('energy_field_missile',O.S,O.x,O.y);
     this.O[L].angle = O.angle;
     this.O[L].FollowWho = Target;
     this.O[L].MaxEnergyField = parseInt(this.O[Target].lifeM/2);
 }
 GAMEobject.prototype.dropSpaceMine = function(S,x,y,Angle,bombData){
-    var L = this.putObj('space_mine','comp',S,x,y);
+    var L = this.putObj('space_mine',S,x,y);
     if(Angle){
         this.O[L].angle=Angle;
         this.O[L].speed=20;
@@ -70,7 +70,7 @@ GAMEobject.prototype.dropSpaceMine = function(S,x,y,Angle,bombData){
 }
 GAMEobject.prototype.shootBomb = function(o,Angle,Speed,Dec,bombData,teleportData){
     var O = this.O[o];
-    var L = this.putObj('bullet_bomb','comp',O.S,O.x,O.y);
+    var L = this.putObj('bullet_bomb',O.S,O.x,O.y);
     this.O[L].speed = Speed || 10;
     this.O[L].doingTime = Dec || 30;
     this.O[L].angle = Angle;
@@ -138,7 +138,7 @@ GAMEobject.prototype.mergeShips = function(o,q){
     var x = parseInt(O.x- -(O.x-Q.x)/2);
     var y = parseInt(O.y- -(O.y-Q.y)/2);
 
-    var L = this.putObj(what,'comp',O.S,x,y);
+    var L = this.putObj(what,O.S,x,y);
     this.O[L].angle = O.angle;
     this.addBoardMods(L);
 

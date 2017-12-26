@@ -17,7 +17,7 @@ GAMEobject.prototype.shipShootMissile = function(Enemy,Angle,Speed,Dec,SpeedT,de
     var O = this.O[0];
     var E = this.O[Enemy];
 
-    var L = this.putObj('missile','comp',O.S,O.x,O.y);
+    var L = this.putObj('missile',O.S,O.x,O.y);
     this.O[L].speed = Speed || 12;
     this.O[L].speedT = SpeedT || 3;
     this.O[L].doingTime = Dec || 30;
@@ -35,7 +35,7 @@ GAMEobject.prototype.shipShootMissile = function(Enemy,Angle,Speed,Dec,SpeedT,de
 GAMEobject.prototype.shipShootBomb = function(Speed,Dec,bombData,teleportData){
     var O = this.O[0];
     var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -180)%360;
-    var L = this.putObj('bullet_bomb','comp',O.S,O.x,O.y);
+    var L = this.putObj('bullet_bomb',O.S,O.x,O.y);
     this.O[L].speed = Speed || 10;
     this.O[L].doingTime = Dec || 30;
     this.O[L].angle = Angle;
@@ -64,7 +64,7 @@ GAMEobject.prototype.shipTeleportBomb = function(Distance,offTime,bombData){
         iDist = Distance;
 
     var Angle = parseInt(- (Math.atan2(this.mouseX-O.x,this.mouseY-O.y)*180/Math.PI)- -180)%360;
-    var L = this.putObj('bullet_bomb','comp',O.S,O.x,O.y);
+    var L = this.putObj('bullet_bomb',O.S,O.x,O.y);
     this.O[L].speed = 0;
     this.O[L].doingTime = offTime;
     this.O[L].angle = iRad;

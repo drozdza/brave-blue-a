@@ -9,15 +9,15 @@ GAMEobject.prototype.putObj_fromArray = function(O){
     }
 
     if(isEnemyShip){
-        for(var i in BBAdata.ObjectDatas.enemyShip){
-            var X = BBAdata.ObjectDatas.enemyShip[i];
+        for(var i in BBAdata.ObjectData.enemyShip){
+            var X = BBAdata.ObjectData.enemyShip[i];
             if(typeof X == 'object') O[i] = cloneObj(X);
                 else                 O[i] = X;
         }
     }
-    if(typeof BBAdata.ObjectDatas[O.T] != 'undefined'){
-        if(typeof BBAdata.ObjectDatas[O.T].extends != 'undefined'){
-            var U = BBAdata.ObjectDatas[ BBAdata.ObjectDatas[O.T].extends ];
+    if(typeof BBAdata.ObjectData[O.T] != 'undefined'){
+        if(typeof BBAdata.ObjectData[O.T].extends != 'undefined'){
+            var U = BBAdata.ObjectData[ BBAdata.ObjectData[O.T].extends ];
             for(var i in U){
                 var X = U[i];
                 if(typeof X == 'object') O[i] = cloneObj(X);
@@ -25,8 +25,8 @@ GAMEobject.prototype.putObj_fromArray = function(O){
             }
         }
 
-        for(var i in BBAdata.ObjectDatas[O.T]){
-            var X = BBAdata.ObjectDatas[O.T][i];
+        for(var i in BBAdata.ObjectData[O.T]){
+            var X = BBAdata.ObjectData[O.T][i];
             if(typeof X == 'object') O[i] = cloneObj(X);
                 else                 O[i] = X;
         }
@@ -47,7 +47,7 @@ GAMEobject.prototype.putObj_fromArray = function(O){
 }
 
 
-GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
+GAMEobject.prototype.putObj = function(Type,Side,x,y){
     var MapRadius = 1000;
     if(typeof x === "undefined"){
         do{
@@ -56,8 +56,6 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
         }while( Math.sqrt(x*x- -y*y) > MapRadius );
     }
     var L = this.Olen++;
-    var Enemy='';
-
 
     var O={};
     O.x = x;
@@ -65,23 +63,19 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
     O.S = Side;
     O.T = Type;
     O.bornTime = this.tick;
-    O.periodDMG={};
+    O.periodDMG = {};
     O.radius = 15;
     O.TT = 'dust';
 
     O = this.putObj_fromArray(O,Type);
 
-    if(Mode === false) Mode = O.M;
-            else       O.M = Mode;
-
-
+    var Mode = O.M;
 
 
     if(O.shipVariables)
         this.putObj_shipVariables(O);
 
     if(O.TT=='enemy'){
-        Enemy=' enemy';
         this.Enemies[ L ] = 1;
         O.angle           = parseInt(Math.random()*360);
         O.mapType         = 'E';
@@ -114,16 +108,9 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
 
     O.life = O.lifeM;
 
-    if(Mode!='static' && Mode!='region')
-        this.Omoving[ L ] = 1;
-    if(Mode=='region')
-        this.Oregion[ L ] = 1;
+    this.O[ L ] = O;
 
-    if(Mode=='comp')
-        this.Ocomp[ L ] = Side;
-
-    this.O[ L ]= O;
-
+    this.putObj_changeMode(L, Mode);
     this.tryBuildSquads(O,L);
 
     if(Type!='shieldBlob')
@@ -134,6 +121,27 @@ GAMEobject.prototype.putObj = function(Type,Mode,Side,x,y){
 
     this.putOnXY( L );
     return L;
+}
+GAMEobject.prototype.putObj_changeMode = function(L, newMode){
+    var O = this.O[L];
+    var oldMode = O.M;
+    O.M = newMode;
+
+    if(oldMode == 'comp' && newMode != 'comp')
+        delete this.Ocomp[ L ];
+    if(newMode == 'comp')
+        this.Ocomp[ L ] = O.S;
+
+    if(oldMode == 'region' && newMode != 'region')
+        delete this.Oregion[ L ];
+    if(newMode == 'region')
+        this.Oregion[ L ] = 1;
+
+    if((oldMode=='static' || oldMode=='region') && (newMode!='static' && newMode!='region'))
+        delete this.Omoving[ L ];
+    if(newMode!='static' && newMode!='region')
+        this.Omoving[ L ] = 1;
+
 }
 GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,DMG){
     var O={};

@@ -402,6 +402,7 @@ BBAdata.MAPS.HardCore={
 };
 
 BBAdata.MAPS.BuildTry={
+    BoardMods:['sitOnMap','allAvoid','violetColor'],
     Place:[
         {Random:{X:0, Y:0, Radius: 100}, What:{
             0:{t:'carras',q:5},

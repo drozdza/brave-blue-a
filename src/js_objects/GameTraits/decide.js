@@ -850,7 +850,8 @@ GAMEobject.prototype.decide = function(o){
             }
 
             if(WP.t == 'shotShieldBlob'){
-                var L = this.putObj('shieldBlob','comp',O.S,O.x,O.y);
+                var L = this.putObj('shieldBlob',O.S,O.x,O.y);
+                this.putObj_changeMode(L, 'comp');
                 this.O[L].angle = PlayerAngle - parseInt(Math.random()*WP.RandAngle*2)- -WP.RandAngle;
                 this.O[L].speed = WP.Speed;
                 this.O[L].dec = WP.Dec;
