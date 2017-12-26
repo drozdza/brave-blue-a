@@ -150,11 +150,11 @@ GAMEobject.prototype.mapPlace = function(Setting,SET,defX,defY){
                 y = SET.RingOf.Y- -Dist*Math.cos((-parseInt(rAngle)-180)*Radi);
             }
 
+
             if(Array.isArray(Odata.t)) Otype = Odata.t[ parseInt(Math.random()*Odata.t.length) ];
                         else           Otype = Odata.t;
 
             if(typeof BBAdata.ShipNames[Otype] != 'undefined') Otype = BBAdata.ShipNames[Otype];
-
 
             if(Otype=='StarX'){
                 var LI = ['','M','S','L'];
@@ -175,6 +175,14 @@ GAMEobject.prototype.mapPlace = function(Setting,SET,defX,defY){
                 if(typeof SET.GroupMods !='undefined')
                     for(var k in SET.GroupMods)
                         this.addBoardMod(L,SET.GroupMods[k]);
+
+                var Team = false;
+                if(typeof SET.Team != 'undefined')   Team = SET.Team;
+                if(typeof Odata.Team != 'undefined') Team = Odata.Team;
+                if(Team){
+                    // this.addToTeam(L, Team);
+                    this.addTeamMods(L, Team);
+                }
             }
 
             if(typeof SET.Construct != 'undefined')
@@ -200,6 +208,14 @@ GAMEobject.prototype.addBoardMods = function(o){
     if(typeof Setting.BoardMods !='undefined')
         for(var k in Setting.BoardMods)
             this.addBoardMod(o,Setting.BoardMods[k]);
+}
+
+GAMEobject.prototype.addTeamMods = function(o, Team){
+    var Setting = this.MapSetting;
+
+    if(typeof Setting.TeamMods != 'undefined' && typeof Setting.TeamMods[Team] != 'undefined')
+        for(var k in Setting.TeamMods[Team])
+            this.addBoardMod(o,Setting.TeamMods[Team][k]);
 }
 
 GAMEobject.prototype.addBoardMod = function(o,MODname){
@@ -297,6 +313,9 @@ GAMEobject.prototype.addToToDoList = function(o,toDo){
 }
 GAMEobject.prototype.addToWeapon = function(o,Weapon){
     this.O[o].weapon.unshift(cloneObj(Weapon));
+}
+GAMEobject.prototype.addToTeam = function(o,Team){
+    this.O[o].Team = Team;
 }
 
 GAMEobject.prototype.setRegionAnimation = function(o,animType){
