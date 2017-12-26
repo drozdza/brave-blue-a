@@ -60,6 +60,7 @@ BBAdata.MAPS.Constructs={
     Place:[
         {Random:{X:0,Y:0,Radius:100},What:{I:5}},
 
+        // Huge circle
         {Random:{X: 2400, Y: 0, Radius: 1400}, What:{Star: 120},
             Construct:{N:'build1',Min:60,Max:250}},
         {RingOf:{X: 2400, Y: 0, Radius: 1400, RadiusPlus: 350}, What:{Star: 100},
@@ -69,6 +70,7 @@ BBAdata.MAPS.Constructs={
         {CircleOf:{X: 2400, Y: 0, Radius: 1880, AngleStart: 5, AngleBy: 10}, What:{Star: 36},
             Construct:{N:'build2',Min:100,Max:400}},
 
+        // Circle with construct
         {CircleOf:{X: -1800, Y: 0, Radius: 800, AngleStart: 0, AngleBy: 15}, What:{Star: 24},
             Construct:{N:'build3',Min:60,Max:300}},
         {CircleOf:{X: -1800, Y: 0, Radius: 1000, AngleStart: 7.5, AngleBy: 15}, What:{Star: 24},
@@ -86,7 +88,7 @@ BBAdata.MAPS.Constructs={
         {CircleOf:{X: -1400, Y: 1530, Radius: 200, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
             Construct:{N:'build6',Min:50,Max:210}},
 
-
+        // Hex construct
         {CircleOf:{X: -0, Y: -500, Radius: 120, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
             Construct:{N:'build4',Min:50,Max:133}},
         {CircleOf:{X: -180, Y: -809, Radius: 120, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
@@ -420,5 +422,54 @@ BBAdata.MAPS.BuildTry={
         }},
     ],
 };
+
+BBAdata.MAPS.BuildTry2={
+    PlaceGroups:{
+        huge_circle:{
+            Add:[
+                {CircleOf:{X:0, Y:0, Radius: 1000, AngleStart: 0, AngleBy:5}, N:'mainCircle'},
+                {CircleOf:{X:0, Y:0, Radius: 1100, AngleStart: 2.5, AngleBy:5}, N:'mainCircle'},
+            ],
+        },
+        towersAndPortals:{
+            Add:[
+                {CircleOf:{X:0, Y:0, Radius: 1000, AngleStart: 0, AngleBy:45}},
+            ],
+        },
+        portal:{
+            Add:[
+                {CircleOf:{X:0, Y:0, Radius: 220, AngleStart: 30, AngleBy:10, Max:12}},
+                {CircleOf:{X:0, Y:0, Radius: 220, AngleStart:-30, AngleBy:-10, Max:12}},
+            ],
+            Remove:[
+                {Circle:{X:0,Y:0, Radius: 200}, N:'mainCircle'},
+            ],
+        },
+        tower:{
+            Add:[
+                {CircleOf:{X:0, Y:0, Radius: 300, AngleStart:30, AngleBy:10, Max:30}},
+                {CircleOf:{X:0, Y:0, Radius: 350, AngleStart:30, AngleBy:10, Max:30}},
+            ],
+            Remove:[
+                {Circle:{X:0,Y:0, Radius: 200}, N:'mainCircle'},
+            ],
+        }
+    },
+    Place:[
+        {PlaceGroup:{PG:'huge_circle', X:0, Y:-1500}, What:{
+            0:{t:'StarL',q:9999},
+        }},
+        {PlaceGroup:{PG:'towersAndPortals', X:0, Y:-1500}, WhatPlace:{
+            0:{PlaceGroup:'tower', q:3, What:{
+                0:{t:'Star', q:9999}
+            }},
+            1:{PlaceGroup:'portal', q:2, What:{
+                0:{t:'StarM', q:9999}
+            }},
+        }},
+    ],
+};
+
+
 
 }
