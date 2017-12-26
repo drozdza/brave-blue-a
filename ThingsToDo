@@ -1,5 +1,22 @@
 ------------- Closest Works:
 
+Hit & Die Anims:
+ - show Missles destruction
+ - properly show hits on ships
+ - show burning particles instead of red "A"
+ - show particles on destruction
+ - change explosion animation for more dynamic
+
+ Advanced map building:
+ - Advanced Place patterns, keeped during game
+ - Debug Constructs and MineFields lag
+ - Enemies objects made from parts, keeps prototype after creation
+ - All objects has collision submodule, display submodule, movement submodule
+ - New fancy types of Constructs
+
+Squads:
+ - Ship visions
+
 Shipyard:
  - adjusting guns positions / choosing starting guns
  - adjusting modules position / shortcuts / enability
@@ -8,10 +25,8 @@ Shipyard:
 
 
 Others:
- - Pause debug mode (showing element's properties, scrolling map)
+ - Pause Debug: buttons and keys (next-prev elem)
  - Debug Mode: count number of rendered objects, rendered backgrounds, changed backgrounds
- - Enemies objects made from parts, keeps prototype after creation
- - All objects has collision submodule, display submodule, movement submodule
 
 
 
