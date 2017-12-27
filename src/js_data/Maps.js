@@ -433,7 +433,7 @@ BBAdata.MAPS.BuildTry2={
         },
         towersAndPortals:{
             Add:[
-                {CircleOf:{X:0, Y:0, Radius: 1000, AngleStart: 0, AngleBy:45}},
+                {CircleOf:{X:0, Y:0, Radius: 1000, AngleStart: 22.5, AngleBy:45}},
             ],
         },
         portal:{
@@ -451,20 +451,20 @@ BBAdata.MAPS.BuildTry2={
                 {CircleOf:{X:0, Y:0, Radius: 350, AngleStart:30, AngleBy:10, Max:30}},
             ],
             Remove:[
-                {Circle:{X:0,Y:0, Radius: 200}, N:'mainCircle'},
+                {Circle:{X:0,Y:0, Radius: 280}, N:'mainCircle'},
             ],
         }
     },
     Place:[
-        {PlaceGroup:{PG:'huge_circle', X:0, Y:-1500}, What:{
-            0:{t:'StarL',q:9999},
+        {PlaceGroup:{N:'huge_circle', X:0, Y:-1500}, What:{
+            0:{t:'StarL',q:999},
         }},
-        {PlaceGroup:{PG:'towersAndPortals', X:0, Y:-1500}, WhatPlace:{
-            0:{PlaceGroup:'tower', q:3, What:{
-                0:{t:'Star', q:9999}
+        {PlaceGroup:{N:'towersAndPortals', X:0, Y:-1500}, What:{
+            0:{PlaceGroup:{N:'tower', X:0, Y:0}, q:3, What:{
+                0:{t:'Star', q:99}
             }},
-            1:{PlaceGroup:'portal', q:2, What:{
-                0:{t:'StarM', q:9999}
+            1:{PlaceGroup:{N:'portal', X:0, Y:0}, q:2, What:{
+                0:{t:'StarM', q:99}
             }},
         }},
     ],
