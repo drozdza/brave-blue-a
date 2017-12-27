@@ -195,6 +195,7 @@ GAMEobject.prototype.mapPlace_removeTagFromDEF = function(DEF, defXY){
                 var vX = centerXY.x - O.x;
                 var vY = centerXY.y - O.y;
                 if(Math.sqrt(vX*vX- -vY*vY) < SET.Radius){
+                    O.TT='toDelete';
                     CanvasManager.CBM.deleteObjectFromBackground(o);
                     this.dieObj(o);
                     this.removeObj(o);
