@@ -435,6 +435,7 @@ BBAdata.MAPS.BuildTry2={
             Add:[
                 {CircleOf:{X:0, Y:0, Radius: 1000, AngleStart: 22.5, AngleBy:45}},
             ],
+            AddShuffle:true,
         },
         portal:{
             Add:[

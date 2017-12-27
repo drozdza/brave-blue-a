@@ -195,3 +195,15 @@ function showObjInLine(obj){
     }
     return html;
 }
+
+function ArrayShuffle(A1){
+    var A2 = [];
+    var Len = A1.length;
+    while(Len > 0){
+        var i = parseInt(Math.random()*Len);
+        A2.push( A1[i] );
+        A1[i] = A1[--Len];
+    }
+    A1 = A2;
+    return A2;
+}
