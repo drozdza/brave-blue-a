@@ -207,3 +207,26 @@ function ArrayShuffle(A1){
     A1 = A2;
     return A2;
 }
+
+function sumTwoXYA(A, B){
+    var Radi = Math.PI/180;
+    var XYA = {x:0, y:0, a:0};
+
+    XYA.a = A.a- -B.a;
+    XYA.x = A.x;
+    XYA.y = A.y;
+
+    if(B.x != 0 || B.y != 0){
+        if(XYA.a == 0){
+            XYA.x -=- B.x;
+            XYA.y -=- B.y;
+        }else{
+            var r = Math.sqrt(B.x*B.x- -B.y*B.y);
+            var a = Math.atan2(B.x, B.y)/Radi-90;
+            XYA.x -=- r*Math.cos((XYA.a- -a)*Radi);
+            XYA.y -=- r*Math.sin((XYA.a- -a)*Radi);
+        }
+    }
+
+    return XYA;
+}

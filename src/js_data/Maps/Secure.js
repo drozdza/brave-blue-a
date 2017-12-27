@@ -20,7 +20,7 @@ BBAdata.MAPS.Secure = {
         {RingOf:{X: 0, Y:0, Radius: 800, RadiusPlus: 1400}, What:{Star:120}},
         {RingOf:{X: 0, Y:0, Radius: 2200}, What:{Star:80}},
         {Random:{X: 0, Y: 0, Radius: 2200}, What: {K:10,F:10,Q:6}},
-        {CircleOf:{X:0, Y:-3000, Radius: 120, AngleStart: 0, AngleBy: 22.5}, What:{Star:16}},
+        {CircleOf:{X:0, Y:-3000, Radius: 120, Angle: 0, AnglePlus: 22.5}, What:{Star:16}},
         {What:{RoundField:1},objData:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
     ],
 };

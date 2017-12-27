@@ -65,53 +65,53 @@ BBAdata.MAPS.Constructs={
             Construct:{N:'build1',Min:60,Max:250}},
         {RingOf:{X: 2400, Y: 0, Radius: 1400, RadiusPlus: 350}, What:{Star: 100},
             Construct:{N:'build1',Min:60,Max:250}},
-        {CircleOf:{X: 2400, Y: 0, Radius: 1820, AngleStart: 0, AngleBy: 10}, What:{Star: 36},
+        {CircleOf:{X: 2400, Y: 0, Radius: 1820, Angle: 0, AnglePlus: 10}, What:{Star: 36},
             Construct:{N:'build1',Min:60,Max:400}},
-        {CircleOf:{X: 2400, Y: 0, Radius: 1880, AngleStart: 5, AngleBy: 10}, What:{Star: 36},
+        {CircleOf:{X: 2400, Y: 0, Radius: 1880, Angle: 5, AnglePlus: 10}, What:{Star: 36},
             Construct:{N:'build2',Min:100,Max:400}},
 
         // Circle with construct
-        {CircleOf:{X: -1800, Y: 0, Radius: 800, AngleStart: 0, AngleBy: 15}, What:{Star: 24},
+        {CircleOf:{X: -1800, Y: 0, Radius: 800, Angle: 0, AnglePlus: 15}, What:{Star: 24},
             Construct:{N:'build3',Min:60,Max:300}},
-        {CircleOf:{X: -1800, Y: 0, Radius: 1000, AngleStart: 7.5, AngleBy: 15}, What:{Star: 24},
+        {CircleOf:{X: -1800, Y: 0, Radius: 1000, Angle: 7.5, AnglePlus: 15}, What:{Star: 24},
             Construct:{N:'build3',Min:100,Max:300}},
         {LineOf:{X: -1900, Y: 1000, Angle: 0, Distance: 200}, What:{Star: 20},
             Construct:{N:'build3',Min:60,Max:330}},
         {LineOf:{X: -1700, Y: 1000, Angle: 0, Distance: 200}, What:{Star: 20},
             Construct:{N:'build3',Min:100,Max:330}},
-        {CircleOf:{X: -1800, Y: 1300, Radius: 200, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
+        {CircleOf:{X: -1800, Y: 1300, Radius: 200, Angle: 30, AnglePlus: 60}, What:{Star: 6},
             Construct:{N:'build3',Min:50,Max:210}},
-        {CircleOf:{X: -1800, Y: 1760, Radius: 200, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
+        {CircleOf:{X: -1800, Y: 1760, Radius: 200, Angle: 30, AnglePlus: 60}, What:{Star: 6},
             Construct:{N:'build4',Min:50,Max:210}},
-        {CircleOf:{X: -2200, Y: 1530, Radius: 200, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
+        {CircleOf:{X: -2200, Y: 1530, Radius: 200, Angle: 30, AnglePlus: 60}, What:{Star: 6},
             Construct:{N:'build5',Min:50,Max:210}},
-        {CircleOf:{X: -1400, Y: 1530, Radius: 200, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
+        {CircleOf:{X: -1400, Y: 1530, Radius: 200, Angle: 30, AnglePlus: 60}, What:{Star: 6},
             Construct:{N:'build6',Min:50,Max:210}},
 
         // Hex construct
-        {CircleOf:{X: -0, Y: -500, Radius: 120, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
+        {CircleOf:{X: -0, Y: -500, Radius: 120, Angle: 30, AnglePlus: 60}, What:{Star: 6},
             Construct:{N:'build4',Min:50,Max:133}},
-        {CircleOf:{X: -180, Y: -809, Radius: 120, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
+        {CircleOf:{X: -180, Y: -809, Radius: 120, Angle: 30, AnglePlus: 60}, What:{Star: 6},
             Construct:{N:'build4',Min:50,Max:133}},
-        {CircleOf:{X: 180, Y: -809, Radius: 120, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
+        {CircleOf:{X: 180, Y: -809, Radius: 120, Angle: 30, AnglePlus: 60}, What:{Star: 6},
             Construct:{N:'build4',Min:50,Max:133}},
-        {CircleOf:{X: -0, Y: -1118, Radius: 120, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
+        {CircleOf:{X: -0, Y: -1118, Radius: 120, Angle: 30, AnglePlus: 60}, What:{Star: 6},
             Construct:{N:'build4',Min:50,Max:133}},
-        {CircleOf:{X: -180, Y: -1427, Radius: 120, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
+        {CircleOf:{X: -180, Y: -1427, Radius: 120, Angle: 30, AnglePlus: 60}, What:{Star: 6},
             Construct:{N:'build4',Min:50,Max:133}},
-        {CircleOf:{X: 180, Y: -1427, Radius: 120, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
+        {CircleOf:{X: 180, Y: -1427, Radius: 120, Angle: 30, AnglePlus: 60}, What:{Star: 6},
             Construct:{N:'build4',Min:50,Max:133}},
-        {CircleOf:{X: -540, Y: -809, Radius: 120, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
+        {CircleOf:{X: -540, Y: -809, Radius: 120, Angle: 30, AnglePlus: 60}, What:{Star: 6},
             Construct:{N:'build4',Min:50,Max:133}},
-        {CircleOf:{X: -720, Y: -1118, Radius: 120, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
+        {CircleOf:{X: -720, Y: -1118, Radius: 120, Angle: 30, AnglePlus: 60}, What:{Star: 6},
             Construct:{N:'build4',Min:50,Max:133}},
-        {CircleOf:{X: -360, Y: -1118, Radius: 120, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
+        {CircleOf:{X: -360, Y: -1118, Radius: 120, Angle: 30, AnglePlus: 60}, What:{Star: 6},
             Construct:{N:'build4',Min:50,Max:133}},
-        {CircleOf:{X: 540, Y: -809, Radius: 120, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
+        {CircleOf:{X: 540, Y: -809, Radius: 120, Angle: 30, AnglePlus: 60}, What:{Star: 6},
             Construct:{N:'build4',Min:50,Max:133}},
-        {CircleOf:{X: 720, Y: -1118, Radius: 120, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
+        {CircleOf:{X: 720, Y: -1118, Radius: 120, Angle: 30, AnglePlus: 60}, What:{Star: 6},
             Construct:{N:'build4',Min:50,Max:133}},
-        {CircleOf:{X: 360, Y: -1118, Radius: 120, AngleStart: 30, AngleBy: 60}, What:{Star: 6},
+        {CircleOf:{X: 360, Y: -1118, Radius: 120, Angle: 30, AnglePlus: 60}, What:{Star: 6},
             Construct:{N:'build4',Min:50,Max:133}},
     ],
 };
@@ -374,7 +374,7 @@ BBAdata.MAPS.BigOnes={
     ],
     Place:[
         {Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, D:10, M:10, N:10, J:10, W:5, T:10, E:10, G:10, R:10, B:10, K:10, F:10, Q:5,X:5,TT:10,Tu:5}},
-        {CircleOf:{X:0, Y:-3000, Radius: 120, AngleStart: 0, AngleBy: 22.5}, What:{Star:16}},
+        {CircleOf:{X:0, Y:-3000, Radius: 120, Angle: 0, AnglePlus: 22.5}, What:{Star:16}},
         {What:{RoundField:1},objData:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
     ],
 };
@@ -394,11 +394,12 @@ BBAdata.MAPS.HardCore={
             A:5, U:5, S:5, I:10, D:10, M:5, N:5, J:5, W:5, T:5, E:10, C:5, G:5, R:5, H:5, B:5, V:5,
             K:10,
             F:10, Q:5, X:6, Z:5, PI:5, WP:5, Ni:10,
-            SH:10, L:5, TT:10, CD:5, HH:5, UU:5, Tu:8, Ii:5, HS:5, Y:8, Yi:8, Yl:8, Yb:8, HS:8,
+            SH:10, L:5, TT:10, CD:5, HH:5, UU:5, Tu:8, Ii:5, HS:5, HS:8,
+            Y:8, Yi:8, Yl:8, Yb:8,
         }},
         {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarX:150,iD:10,Wi:10}},
         {What:{Gstar:1},objData:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}},
-        {CircleOf:{X:0, Y:-3000, Radius: 120, AngleStart: 0, AngleBy: 22.5}, What:{Star:16}},
+        {CircleOf:{X:0, Y:-3000, Radius: 120, Angle: 0, AnglePlus: 22.5}, What:{Star:16}},
         {What:{RoundField:1},objData:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
     ]
 };
@@ -427,20 +428,20 @@ BBAdata.MAPS.BuildTry2={
     PlaceGroups:{
         huge_circle:{
             Add:[
-                {CircleOf:{X:0, Y:0, Radius: 1000, AngleStart: 0, AngleBy:5}, N:'mainCircle'},
-                {CircleOf:{X:0, Y:0, Radius: 1100, AngleStart: 2.5, AngleBy:5}, N:'mainCircle'},
+                {CircleOf:{X:0, Y:0, Radius: 1000, Angle: 0, AnglePlus:5}, N:'mainCircle'},
+                {CircleOf:{X:0, Y:0, Radius: 1100, Angle: 2.5, AnglePlus:5}, N:'mainCircle'},
             ],
         },
         towersAndPortals:{
             Add:[
-                {CircleOf:{X:0, Y:0, Radius: 1000, AngleStart: 22.5, AngleBy:45}},
+                {CircleOf:{X:0, Y:0, Radius: 1000, Angle: 22.5, AnglePlus:45}},
             ],
             AddShuffle:true,
         },
         portal:{
             Add:[
-                {CircleOf:{X:0, Y:0, Radius: 220, AngleStart: 30, AngleBy:10, Max:12}},
-                {CircleOf:{X:0, Y:0, Radius: 220, AngleStart:-30, AngleBy:-10, Max:12}},
+                {CircleOf:{X:0, Y:0, Radius: 220, Angle: 30, AnglePlus:10, Max:12}},
+                {CircleOf:{X:0, Y:0, Radius: 220, Angle:-30, AnglePlus:-10, Max:12}},
             ],
             Remove:[
                 {Circle:{X:0,Y:0, Radius: 200}, N:'mainCircle'},
@@ -448,8 +449,8 @@ BBAdata.MAPS.BuildTry2={
         },
         tower:{
             Add:[
-                {CircleOf:{X:0, Y:0, Radius: 300, AngleStart:30, AngleBy:10, Max:30}},
-                {CircleOf:{X:0, Y:0, Radius: 350, AngleStart:30, AngleBy:10, Max:30}},
+                {CircleOf:{X:0, Y:0, Radius: 300, Angle:210, AnglePlus:10, Max:31}},
+                {CircleOf:{X:0, Y:0, Radius: 350, Angle:210, AnglePlus:10, Max:31}},
             ],
             Remove:[
                 {Circle:{X:0,Y:0, Radius: 280}, N:'mainCircle'},
@@ -461,10 +462,10 @@ BBAdata.MAPS.BuildTry2={
             0:{t:'StarL',q:999},
         }},
         {PlaceGroup:{N:'towersAndPortals', X:0, Y:-1500}, What:{
-            0:{PlaceGroup:{N:'tower', X:0, Y:0}, q:3, What:{
+            0:{PlaceGroup:{N:'tower', X:200, Y:0}, q:3, What:{
                 0:{t:'Star', q:99}
             }},
-            1:{PlaceGroup:{N:'portal', X:0, Y:0}, q:2, What:{
+            1:{PlaceGroup:{N:'portal', X:50, Y:0}, q:2, What:{
                 0:{t:'StarM', q:99}
             }},
         }},

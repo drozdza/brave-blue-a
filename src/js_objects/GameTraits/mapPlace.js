@@ -20,7 +20,6 @@ GAMEobject.prototype.mapPlace = function(Setting,Place,defXY){
             if(Odata.PlaceGroup){
                 this.mapPlace(Setting, Odata, mapXY);
                 // console.log('mamy to');
-
                 continue;
             }
 
@@ -57,6 +56,8 @@ GAMEobject.prototype.mapPlace = function(Setting,Place,defXY){
                     this.addTeamMods(L, Team);
                 }
             }
+            if(mapXY.N)
+                this.O[L].mapBuildName = mapXY.N;
 
             if(typeof Place.Construct != 'undefined')
                 this.buildConstructs(L, Place.Construct);
@@ -87,38 +88,38 @@ GAMEobject.prototype.mapPlace_setPlaceDef = function(Setting,Place,defXY){
     if(Place.PlaceGroup){
         DEF.PlaceGroup = cloneObj(Place.PlaceGroup);
         var PG = Setting.PlaceGroups[DEF.PlaceGroup.N];
-        var x = DEF.PlaceGroup.X- -defXY.x;
-        var y = DEF.PlaceGroup.Y- -defXY.y;
-        var a = defXY.a;
-        if(DEF.PlaceGroup.Angle) a-=-DEF.PlaceGroup.Angle;
 
-        DEF.Spots={};
-        DEF.FreeSpots=[];
-        var iSpot = 0;
+        defXY = sumTwoXYA(defXY, {x:DEF.PlaceGroup.X || 0, y:DEF.PlaceGroup.Y || 0, a:DEF.PlaceGroup.Angle || 0});
 
-        for(var iAdd in PG.Add){
-            var ADD = PG.Add[iAdd];
+        if(PG.Add){
+            DEF.Spots={};
+            DEF.FreeSpots=[];
+            var iSpot = 0;
+            for(var iAdd in PG.Add){
+                var ADD = PG.Add[iAdd];
 
-            var iMax = 500;
+                var iMax = 500;
 
-            for(var placeI = 0; placeI < iMax; ++placeI){
-                var mapXY = this.mapPlace_getPosFromDEF(ADD, defXY, placeI);
-                if(mapXY === false) break;
+                for(var placeI = 0; placeI < iMax; ++placeI){
+                    var mapXY = this.mapPlace_getPosFromDEF(ADD, defXY, placeI);
+                    if(mapXY === false) break;
 
-                DEF.Spots[iSpot] = cloneObj(mapXY);
-                if(ADD.N) DEF.Spots[iSpot].N = ADD.N;
-                DEF.FreeSpots.push(iSpot);
-                ++iSpot;
+                    DEF.Spots[iSpot] = cloneObj(mapXY);
+                    if(ADD.N) DEF.Spots[iSpot].N = ADD.N;
+                    DEF.FreeSpots.push(iSpot);
+                    ++iSpot;
 
-                if(placeI > 500){
-                    console.log('TOO LOOPY!!!!!!!!!!!!!!!');
-                    break;
+                    if(placeI > 500){
+                        console.log('TOO LOOPY!!!!!!!!!!!!!!!');
+                        break;
+                    }
                 }
             }
+            if(PG.AddShuffle) DEF.FreeSpots = ArrayShuffle(DEF.FreeSpots);
         }
-        if(PG.AddShuffle) DEF.FreeSpots = ArrayShuffle(DEF.FreeSpots);
-
-
+        if(PG.Remove)
+            for(var iRemove in PG.Remove)
+                this.mapPlace_removeTagFromDEF(PG.Remove[iRemove], defXY);
     }
 
     this.mapPlaceDefs.push(DEF);
@@ -133,9 +134,7 @@ GAMEobject.prototype.mapPlace_getPlace = function(defXY, elemI){
     var mapXY = false;
 
     if(DEF.PlaceGroup){
-        if(DEF.FreeSpots.length < 1){
-            return false;
-        }
+        if(DEF.FreeSpots.length < 1) return false;
         var iSpot = DEF.FreeSpots.shift();
         mapXY = DEF.Spots[ iSpot ];
     } else {
@@ -146,37 +145,61 @@ GAMEobject.prototype.mapPlace_getPlace = function(defXY, elemI){
 }
 
 GAMEobject.prototype.mapPlace_getPosFromDEF = function(DEF, defXY, elemI){
-    var x,y,a,Radi = Math.PI*2/360;
+    var x,y,a,SET,Radi = Math.PI/180;
+
+    if(DEF.Random)   SET = DEF.Random;
+    if(DEF.LineOf)   SET = DEF.LineOf;
+    if(DEF.RingOf)   SET = DEF.RingOf;
+    if(DEF.CircleOf) SET = DEF.CircleOf;
+
+    var centerXY = sumTwoXYA(defXY, {x:SET.X || 0, y:SET.Y || 0, a:SET.Angle || 0});
 
     if(DEF.Random){
-        var SET = DEF.Random;
         do{
             x = Math.random()*SET.Radius*2-SET.Radius;
             y = Math.random()*SET.Radius*2-SET.Radius;
         }while( (x*x- -y*y) > SET.Radius*SET.Radius );
-        x-=-SET.X;
-        y-=-SET.Y;
+        x-=-centerXY.x;
+        y-=-centerXY.y;
     }
     if(DEF.LineOf){
-        var SET = DEF.LineOf;
-        x = SET.X- -elemI*SET.Distance*Math.sin((-parseInt(SET.Angle)-180)*Radi);
-        y = SET.Y- -elemI*SET.Distance*Math.cos((-parseInt(SET.Angle)-180)*Radi);
+        x = centerXY.x- -elemI*SET.Distance*Math.cos(centerXY.a*Radi);
+        y = centerXY.y- -elemI*SET.Distance*Math.sin(centerXY.a*Radi);
     }
     if(DEF.CircleOf){
-        var SET = DEF.CircleOf;
         if(SET.Max && SET.Max <= elemI) return false;
-        if(SET.AngleBy*elemI >= 360 || SET.AngleBy*elemI <= -360) return false;
-        a = SET.AngleStart- -defXY.a- -elemI*SET.AngleBy;
-        x = SET.X- -defXY.x- -SET.Radius*Math.sin((-a-180)*Radi);
-        y = SET.Y- -defXY.y- -SET.Radius*Math.cos((-a-180)*Radi);
+        if(SET.AnglePlus*elemI >= 360 || SET.AnglePlus*elemI <= -360) return false;
+        a = centerXY.a- -elemI*SET.AnglePlus;
+        x = centerXY.x- -SET.Radius*Math.cos(a*Radi);
+        y = centerXY.y- -SET.Radius*Math.sin(a*Radi);
     }
     if(DEF.RingOf){
-        var SET = DEF.RingOf;
         var rAngle = Math.random()*360;
         var Dist = SET.Radius;
         if(SET.RadiusPlus) Dist-=-Math.random()*SET.RadiusPlus;
-        x = SET.X- -Dist*Math.sin((-parseInt(rAngle)-180)*Radi);
-        y = SET.Y- -Dist*Math.cos((-parseInt(rAngle)-180)*Radi);
+        x = centerXY.x- -Dist*Math.cos(rAngle*Radi);
+        y = centerXY.y- -Dist*Math.sin(rAngle*Radi);
     }
     return {x:x, y:y, a:a};
+}
+
+GAMEobject.prototype.mapPlace_removeTagFromDEF = function(DEF, defXY){
+    if(DEF.Circle) SET = DEF.Circle;
+
+    var centerXY = sumTwoXYA(defXY, {x:SET.X || 0, y:SET.Y || 0, a:SET.Angle || 0});
+
+    if(DEF.Circle){
+        for(var o in this.O){
+            var O = this.O[o];
+            if(O.mapBuildName && O.mapBuildName == DEF.N){
+                var vX = centerXY.x - O.x;
+                var vY = centerXY.y - O.y;
+                if(Math.sqrt(vX*vX- -vY*vY) < SET.Radius){
+                    CanvasManager.CBM.deleteObjectFromBackground(o);
+                    this.dieObj(o);
+                    this.removeObj(o);
+                }
+            }
+        }
+    }
 }
