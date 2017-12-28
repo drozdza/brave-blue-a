@@ -80,10 +80,11 @@ GAMEobject.prototype.mapPlace_setPlaceDef = function(Setting,Place,defXY){
         this.mapPlaceDefs = [];
     }
     var DEF = {};
-    if(Place.Random)   DEF.Random   = cloneObj(Place.Random);
-    if(Place.LineOf)   DEF.LineOf   = cloneObj(Place.LineOf);
-    if(Place.RingOf)   DEF.RingOf   = cloneObj(Place.RingOf);
-    if(Place.CircleOf) DEF.CircleOf = cloneObj(Place.CircleOf);
+         if(Place.Random)   DEF.Random   = cloneObj(Place.Random);
+    else if(Place.LineOf)   DEF.LineOf   = cloneObj(Place.LineOf);
+    else if(Place.RingOf)   DEF.RingOf   = cloneObj(Place.RingOf);
+    else if(Place.CircleOf) DEF.CircleOf = cloneObj(Place.CircleOf);
+    else                    DEF.Point    = {X:0,Y:0};
 
     if(Place.PlaceGroup){
         DEF.PlaceGroup = cloneObj(Place.PlaceGroup);
@@ -138,6 +139,7 @@ GAMEobject.prototype.mapPlace_getPlace = function(defXY, elemI){
         var iSpot = DEF.FreeSpots.shift();
         mapXY = DEF.Spots[ iSpot ];
     } else {
+        console.log(DEF);
         mapXY = this.mapPlace_getPosFromDEF(DEF, defXY, elemI);
     }
 
@@ -145,8 +147,10 @@ GAMEobject.prototype.mapPlace_getPlace = function(defXY, elemI){
 }
 
 GAMEobject.prototype.mapPlace_getPosFromDEF = function(DEF, defXY, elemI){
+    console.log('GU!');
     var x,y,a,SET,Radi = Math.PI/180;
 
+    if(DEF.Point)    SET = DEF.Point;
     if(DEF.Random)   SET = DEF.Random;
     if(DEF.LineOf)   SET = DEF.LineOf;
     if(DEF.RingOf)   SET = DEF.RingOf;
@@ -154,7 +158,12 @@ GAMEobject.prototype.mapPlace_getPosFromDEF = function(DEF, defXY, elemI){
 
     var centerXY = sumTwoXYA(defXY, {x:SET.X || 0, y:SET.Y || 0, a:SET.Angle || 0});
 
+    x = centerXY.x;
+    y = centerXY.y;
+    a = centerXY.a;
+
     if(DEF.Random){
+        console.log('Random');
         do{
             x = Math.random()*SET.Radius*2-SET.Radius;
             y = Math.random()*SET.Radius*2-SET.Radius;
@@ -163,10 +172,12 @@ GAMEobject.prototype.mapPlace_getPosFromDEF = function(DEF, defXY, elemI){
         y-=-centerXY.y;
     }
     if(DEF.LineOf){
+        console.log('LineOf');
         x = centerXY.x- -elemI*SET.Distance*Math.cos(centerXY.a*Radi);
         y = centerXY.y- -elemI*SET.Distance*Math.sin(centerXY.a*Radi);
     }
     if(DEF.CircleOf){
+        console.log('CircleOf');
         if(SET.Max && SET.Max <= elemI) return false;
         if(SET.AnglePlus*elemI >= 360 || SET.AnglePlus*elemI <= -360) return false;
         a = centerXY.a- -elemI*SET.AnglePlus;
@@ -174,9 +185,11 @@ GAMEobject.prototype.mapPlace_getPosFromDEF = function(DEF, defXY, elemI){
         y = centerXY.y- -SET.Radius*Math.sin(a*Radi);
     }
     if(DEF.RingOf){
+        console.log('RingOf');
         var rAngle = Math.random()*360;
         var Dist = SET.Radius;
         if(SET.RadiusPlus) Dist-=-Math.random()*SET.RadiusPlus;
+        console.log(Dist);
         x = centerXY.x- -Dist*Math.cos(rAngle*Radi);
         y = centerXY.y- -Dist*Math.sin(rAngle*Radi);
     }
