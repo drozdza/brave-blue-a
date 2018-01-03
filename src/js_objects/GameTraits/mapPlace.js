@@ -1,25 +1,26 @@
-GAMEobject.prototype.mapPlace = function(Setting,Place,defXY){
-    var Odata,Otype;
 
+GAMEobject.prototype.mapPlace = function(Setting,Place,defXY){
     if(typeof defXY == 'undefined') defXY = {x:0,y:0,a:0};
 
-    // tu trzeba podać defX, defY, defA;
     this.mapPlace_setPlaceDef(Setting,Place,defXY);
+    this.mapPlace_What(Setting, Place, Place.What, defXY);
+    this.mapPlace_removePlaceDef();
+}
+GAMEobject.prototype.mapPlace_What = function(Setting, Place, What, defXY){
+    var Odata,Otype,w,elemI,mapXY,L,StarType;
+    for(w in What){
+        if(isNaN(w)) Odata = {t:w, q:What[w]};
+            else     Odata = What[w];
 
-    for(var placeWhat in Place.What){
-        if(isNaN(placeWhat)) Odata = {t:placeWhat, q:Place.What[placeWhat]};
-                else         Odata = Place.What[placeWhat];
+        for(elemI=0; elemI < Odata.q; ++elemI){
 
-        for(var elemI=0; elemI < Odata.q; ++elemI){
-
-            var mapXY = this.mapPlace_getPlace(defXY, elemI);
+            mapXY = this.mapPlace_getPlace(defXY, elemI);
             if(mapXY === false){
-                console.log('ERROR: not enough mapPlaces!');
+                console.log('Error: Not enough mapPlaces!');
                 break;
             }
             if(Odata.PlaceGroup){
                 this.mapPlace(Setting, Odata, mapXY);
-                // console.log('mamy to');
                 continue;
             }
 
@@ -29,24 +30,24 @@ GAMEobject.prototype.mapPlace = function(Setting,Place,defXY){
             if(typeof BBAdata.ShipNames[Otype] != 'undefined') Otype = BBAdata.ShipNames[Otype];
 
             if(Otype=='StarX'){
-                var LI = ['','M','S','L'];
-                var L = this.putObj('Star'+LI[ parseInt(Math.random()*4) ], 1, mapXY.x, mapXY.y);
+                StarType = ['','M','S','L'];
+                L = this.putObj('Star'+StarType[ parseInt(Math.random()*4) ], 1, mapXY.x, mapXY.y);
             }else if(Otype=='RoundField'){
-                var L = this.putObj('RoundField', 1, mapXY.x, mapXY.y);
+                L = this.putObj('RoundField', 1, mapXY.x, mapXY.y);
             }else if(Otype=='SquareField'){
-                var L = this.putObj('SquareField', 1, mapXY.x, mapXY.y);
+                L = this.putObj('SquareField', 1, mapXY.x, mapXY.y);
             }else if(Otype=='ConeField'){
-                var L = this.putObj('ConeField',1, mapXY.x, mapXY.y);
+                L = this.putObj('ConeField',1, mapXY.x, mapXY.y);
             }else if(Otype=='Mine'){
-                var L = this.putObj('space_mine',1, mapXY.x, mapXY.y);
+                L = this.putObj('space_mine',1, mapXY.x, mapXY.y);
                 ++this.C['B_minesSet'];
                 ++this.C['E:mines'];
             } else {
-                var L = this.putObj(Otype,1, mapXY.x, mapXY.y);
+                L = this.putObj(Otype,1, mapXY.x, mapXY.y);
                 this.addBoardMods(L);
                 if(typeof Place.GroupMods !='undefined')
                     for(var k in Place.GroupMods)
-                        this.addBoardMod(L,Place.GroupMods[k]);
+                        this.addBoardMod(L, Place.GroupMods[k]);
 
                 var Team = false;
                 if(typeof Place.Team != 'undefined') Team = Place.Team;
@@ -73,9 +74,11 @@ GAMEobject.prototype.mapPlace = function(Setting,Place,defXY){
                 this.addBoardMod(L,Place.objData);
         }
     }
-    this.mapPlace_removePlaceDef();
 }
+
 GAMEobject.prototype.mapPlace_setPlaceDef = function(Setting,Place,defXY){
+    console.log('mapPlace_setPlaceDef():', Place);
+
     if(typeof this.mapPlaceDefs == 'undefined'){
         this.mapPlaceDefs = [];
     }
@@ -85,6 +88,7 @@ GAMEobject.prototype.mapPlace_setPlaceDef = function(Setting,Place,defXY){
     else if(Place.RingOf)   DEF.RingOf   = cloneObj(Place.RingOf);
     else if(Place.CircleOf) DEF.CircleOf = cloneObj(Place.CircleOf);
     else                    DEF.Point    = {X:0,Y:0};
+
 
     if(Place.PlaceGroup){
         DEF.PlaceGroup = cloneObj(Place.PlaceGroup);
@@ -98,9 +102,7 @@ GAMEobject.prototype.mapPlace_setPlaceDef = function(Setting,Place,defXY){
             var iSpot = 0;
             for(var iAdd in PG.Add){
                 var ADD = PG.Add[iAdd];
-
                 var iMax = 500;
-
                 for(var placeI = 0; placeI < iMax; ++placeI){
                     var mapXY = this.mapPlace_getPosFromDEF(ADD, defXY, placeI);
                     if(mapXY === false) break;
@@ -111,10 +113,11 @@ GAMEobject.prototype.mapPlace_setPlaceDef = function(Setting,Place,defXY){
                     ++iSpot;
 
                     if(placeI > 500){
-                        console.log('TOO LOOPY!!!!!!!!!!!!!!!');
+                        console.log('Error: TOO LOOPY!!!!!!!!!!!!!!!');
                         break;
                     }
                 }
+
             }
             if(PG.AddShuffle) DEF.FreeSpots = ArrayShuffle(DEF.FreeSpots);
         }
@@ -124,6 +127,15 @@ GAMEobject.prototype.mapPlace_setPlaceDef = function(Setting,Place,defXY){
     }
 
     this.mapPlaceDefs.push(DEF);
+
+    if(PG = Place.PalceGroup && PG.Add){
+        for(var iAdd in PG.Add){
+            if(PG.Add[iAdd].What){
+                this.mapPlace_What(Setting, PG.Add[iAdd], PG.Add[iAdd].What, defXY);
+                console.log('DU!');
+            }
+        }
+    }
 }
 GAMEobject.prototype.mapPlace_removePlaceDef = function(){
     delete (this.mapPlaceDefs[ this.mapPlaceDefs.length-1 ]);
@@ -139,7 +151,6 @@ GAMEobject.prototype.mapPlace_getPlace = function(defXY, elemI){
         var iSpot = DEF.FreeSpots.shift();
         mapXY = DEF.Spots[ iSpot ];
     } else {
-        console.log(DEF);
         mapXY = this.mapPlace_getPosFromDEF(DEF, defXY, elemI);
     }
 
@@ -147,7 +158,6 @@ GAMEobject.prototype.mapPlace_getPlace = function(defXY, elemI){
 }
 
 GAMEobject.prototype.mapPlace_getPosFromDEF = function(DEF, defXY, elemI){
-    console.log('GU!');
     var x,y,a,SET,Radi = Math.PI/180;
 
     if(DEF.Point)    SET = DEF.Point;
@@ -163,7 +173,6 @@ GAMEobject.prototype.mapPlace_getPosFromDEF = function(DEF, defXY, elemI){
     a = centerXY.a;
 
     if(DEF.Random){
-        console.log('Random');
         do{
             x = Math.random()*SET.Radius*2-SET.Radius;
             y = Math.random()*SET.Radius*2-SET.Radius;
@@ -172,12 +181,10 @@ GAMEobject.prototype.mapPlace_getPosFromDEF = function(DEF, defXY, elemI){
         y-=-centerXY.y;
     }
     if(DEF.LineOf){
-        console.log('LineOf');
         x = centerXY.x- -elemI*SET.Distance*Math.cos(centerXY.a*Radi);
         y = centerXY.y- -elemI*SET.Distance*Math.sin(centerXY.a*Radi);
     }
     if(DEF.CircleOf){
-        console.log('CircleOf');
         if(SET.Max && SET.Max <= elemI) return false;
         if(SET.AnglePlus*elemI >= 360 || SET.AnglePlus*elemI <= -360) return false;
         a = centerXY.a- -elemI*SET.AnglePlus;
@@ -185,11 +192,9 @@ GAMEobject.prototype.mapPlace_getPosFromDEF = function(DEF, defXY, elemI){
         y = centerXY.y- -SET.Radius*Math.sin(a*Radi);
     }
     if(DEF.RingOf){
-        console.log('RingOf');
         var rAngle = Math.random()*360;
         var Dist = SET.Radius;
         if(SET.RadiusPlus) Dist-=-Math.random()*SET.RadiusPlus;
-        console.log(Dist);
         x = centerXY.x- -Dist*Math.cos(rAngle*Radi);
         y = centerXY.y- -Dist*Math.sin(rAngle*Radi);
     }

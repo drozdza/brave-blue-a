@@ -1,5 +1,14 @@
 ------------- Closest Works:
 
+
+- wiele tematów na grupę
+- tablice z elementami teamów
+- usuwanie elementów po teamie
+- rozkaz trzymania się środka danego elementu
+- rozkaz patrolowania
+- losowe patrolowanie kilku pathy
+- rozkazywanie całemu teamowi
+
 Hit & Die Anims:
  - show Missles destruction
  - properly show hits on ships
@@ -36,6 +45,7 @@ Others:
 
 =========================================================================
 
+- Types of shields heal defender or regenerate its powers
 
 - When some ship sees you, it runs to the base. It is succedd then base spawn (or somewhere else on the map) big chunk of heavy enemies.
 
