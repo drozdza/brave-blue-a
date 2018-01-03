@@ -19,136 +19,123 @@
 
 
 
-BBAdata['MapMODS']={
-    sitOnMap:{
-        toDo:[
-            {N:23,T:'stayInRegion', X:0, Y:0, Radius: 700 },
-            {N:1, T:'goStraight', straightMin: 200, straightPlus: 100 },
-        ],
+BBAdata.MapMODS = {};
+BBAdata.MapMODS.sitOnMap={
+    toDo:[
+        {N:23,T:'stayInRegion', X:0, Y:0, Radius: 700 },
+        {N:1, T:'goStraight', straightMin: 200, straightPlus: 100 },
+    ],
+};
+BBAdata.MapMODS.vuvisPlusSpeed={
+    who:['vuvis'],
+    shipVariables:{
+        speed: {Const: 34, Rand: 6},    // dont work
     },
-    vuvisPlusSpeed:{
-        who:['vuvis'],
-        shipVariables:{
-            speed: {Const: 34, Rand: 6},    // dont work
+};
+BBAdata.MapMODS.startWithShield={
+    energyField: 5,
+    MapModActions:[{
+        t:'addShield',
+        shield:{
+            name: 'absorbtionShield',
+            CatchDmgT: {normal:1, energy:1, explo:1},
+            DmgReduction: 'energyField',
+            ReductionUses: 'infinite',
         },
-    },
-    startWithShield:{
-        energyField: 5,
-        MapModActions:[{
-            t:'addShield',
-            shield:{
-                name: 'absorbtionShield',
-                CatchDmgT: {normal:1, energy:1, explo:1},
-                DmgReduction: 'energyField',
-                ReductionUses: 'infinite',
-            },
-        }],
-    },
-    colorGold:{
-        view:{Color: 'gold'},
-    },
-    darkGreenColor:{
-        view:{Color: '#070'},
-    },
-    greenColor:{
-        view:{Color: '#0C0'},
-    },
-    orangeColor:{
-        view:{Color: '#FC0'},
-    },
-    violetColor:{
-        view:{Color: '#408'},
-    },
-    whiteColor:{
-        view:{Color: 'white'},
-    },
+    }],
+};
+BBAdata.MapMODS.colorGold={      view:{Color: 'gold'} };
+BBAdata.MapMODS.darkGreenColor={ view:{Color: '#070'} };
+BBAdata.MapMODS.greenColor={     view:{Color: '#0C0'} };
+BBAdata.MapMODS.orangeColor={    view:{Color: '#FC0'} };
+BBAdata.MapMODS.violetColor={    view:{Color: '#408'} };
+BBAdata.MapMODS.whiteColor={     view:{Color: 'white'} };
 
-    allAvoid:{
-        who:['carras','hajaher','cloaker','dregos','hiacynt','zarahiash','vitotas','slimensen','slimensen1','slimensen2','slimensen3','slimensen4'],
-        toDo:[
-            {N:74,T:'alarmAboutIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 5, alarmRadius: 150},
-            {N:73,T:'avoidIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 2, avoidTime: 12},
-            {N:72,T:'avoidIncomingFire', FlagsRequired:{incomingFireFlag:true}, minAlarm: 5, avoidTime: 12},
-        ],
-    },
-    healthSplit:{
-        who:['carras'],
-        weapon:[{t:'healthSplit', gunSpeed: 5, lastShot: 100, minHealth: 1, Radius: 200, doNextWeapon: true}],
-    },
-    carras25health:{
-        who:['carras'],
-        lifeM:25,
-        life:25,
-    },
-    greenSquadMembers:{
-        squadSchemeType: {data:{SquadMods:['greenColor']}},
-        MapModActions:[{t:'tryBuildSquads'}],
-    },
-    orhenesShipsI:{
-        who:['orhenes'],
-        view:{Color: 'white'},
-        squadSchemeType: {t:'loose', count: 8, data:{type:'enemyShip', objectType:'iskariot', SquadMods:['whiteColor']}},
-        MapModActions:[{t:'tryBuildSquads'}],
-    },
-    orhenesSecure1:{
-        who:['orhenes'],
-        squadSchemeTypeArray: [
-            {t:'loose', count: 2, data:{type:'enemyShip', objectType:'fariax'}},
-            {t:'loose', count: 2, data:{type:'enemyShip', objectType:'koriaz'}},
-            {t:'loose', count: 4, data:{type:'enemyShip', objectType:'carras'}},
-        ],
-        MapModActions:[{t:'tryBuildSquads'}],
-    },
-    orhenesSecure2:{
-        who:['orhenes'],
-        view: {Color:'#408'},
-        squadSchemeTypeArray: [
-            {t:'loose', count: 4, data:{type:'enemyShip', objectType:'iskariot', SquadMods:['violetColor']}},
-            {t:'loose', count: 2, data:{type:'enemyShip', objectType:'muerto',   SquadMods:['violetColor']}},
-            {t:'loose', count: 4, data:{type:'enemyShip', objectType:'dregos',   SquadMods:['violetColor']}},
-        ],
-        MapModActions:[{t:'tryBuildSquads'}],
-    },
-    orhenesSecure3:{
-        who:['orhenes'],
-        view: {Color:'#070'},
-        squadSchemeTypeArray: [
-            {t:'loose', count: 3, data:{type:'enemyShip', objectType:'loliax', SquadMods:['darkGreenColor']}},
-            {t:'loose', count: 2, data:{type:'enemyShip', objectType:'royale', SquadMods:['darkGreenColor']}},
-            {t:'loose', count: 5, data:{type:'enemyShip', objectType:'dregos', SquadMods:['darkGreenColor']}},
-        ],
-        MapModActions:[{t:'tryBuildSquads'}],
-    },
-    orhenesSecure4:{
-        who:['orhenes'],
-        view: {Color:'#0C0'},
-        squadSchemeTypeArray: [
-            {t:'loose', count: 1, data:{type:'enemyShip', objectType:'patiarch', SquadMods:['greenColor']}},
-            {t:'loose', count: 2, data:{type:'enemyShip', objectType:'urser',    SquadMods:['greenColor']}},
-            {t:'loose', count: 5, data:{type:'enemyShip', objectType:'nientes',  SquadMods:['greenColor']}},
-        ],
-        MapModActions:[{t:'tryBuildSquads'}],
-    },
-    orhenesSecure5:{
-        who:['orhenes'],
-        view: {Color:'#408'},
-        squadSchemeTypeArray: [
-            {t:'loose', count: 8, data:{type:'enemyShip', objectType:'dregos',   SquadMods:['violetColor','startWithShield']}},
-        ],
-        MapModActions:[{t:'tryBuildSquads'}],
-    },
-    saisungVuvisOrbiters:{
-        who:['saisung'],
-        view: {Color:'#408'},
-        squadSchemeTypeArray: [
-            {t:'loose', count: 6, data:{type:'enemyShip', objectType:'vuvis', SquadMods:['violetColor','vuvisOrbit']}},
-        ],
-        MapModActions:[{t:'tryBuildSquads'}],
-    },
-    vuvisOrbit:{
-        who:['vuvis'],
-        toDo:[
-            {N:58,T:'goOrbit', minAlarm: 5},
-        ],
-    }
+BBAdata.MapMODS.allAvoid={
+    who:['carras','hajaher','cloaker','dregos','hiacynt','zarahiash','vitotas','slimensen','slimensen1','slimensen2','slimensen3','slimensen4'],
+    toDo:[
+        {N:74,T:'alarmAboutIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 5, alarmRadius: 150},
+        {N:73,T:'avoidIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 2, avoidTime: 12},
+        {N:72,T:'avoidIncomingFire', FlagsRequired:{incomingFireFlag:true}, minAlarm: 5, avoidTime: 12},
+    ],
+};
+BBAdata.MapMODS.healthSplit={
+    who:['carras'],
+    weapon:[{t:'healthSplit', gunSpeed: 5, lastShot: 100, minHealth: 1, Radius: 200, doNextWeapon: true}],
+};
+BBAdata.MapMODS.carras25health={
+    who:['carras'],
+    lifeM:25,
+    life:25,
+};
+BBAdata.MapMODS.greenSquadMembers={
+    squadSchemeType: {data:{SquadMods:['greenColor']}},
+    MapModActions:[{t:'tryBuildSquads'}],
+};
+BBAdata.MapMODS.orhenesShipsI={
+    who:['orhenes'],
+    view:{Color: 'white'},
+    squadSchemeType: {t:'loose', count: 8, data:{type:'enemyShip', objectType:'iskariot', SquadMods:['whiteColor']}},
+    MapModActions:[{t:'tryBuildSquads'}],
+};
+BBAdata.MapMODS.orhenesSecure1={
+    who:['orhenes'],
+    squadSchemeTypeArray: [
+        {t:'loose', count: 2, data:{type:'enemyShip', objectType:'fariax'}},
+        {t:'loose', count: 2, data:{type:'enemyShip', objectType:'koriaz'}},
+        {t:'loose', count: 4, data:{type:'enemyShip', objectType:'carras'}},
+    ],
+    MapModActions:[{t:'tryBuildSquads'}],
+};
+BBAdata.MapMODS.orhenesSecure2={
+    who:['orhenes'],
+    view: {Color:'#408'},
+    squadSchemeTypeArray: [
+        {t:'loose', count: 4, data:{type:'enemyShip', objectType:'iskariot', SquadMods:['violetColor']}},
+        {t:'loose', count: 2, data:{type:'enemyShip', objectType:'muerto',   SquadMods:['violetColor']}},
+        {t:'loose', count: 4, data:{type:'enemyShip', objectType:'dregos',   SquadMods:['violetColor']}},
+    ],
+    MapModActions:[{t:'tryBuildSquads'}],
+};
+BBAdata.MapMODS.orhenesSecure3={
+    who:['orhenes'],
+    view: {Color:'#070'},
+    squadSchemeTypeArray: [
+        {t:'loose', count: 3, data:{type:'enemyShip', objectType:'loliax', SquadMods:['darkGreenColor']}},
+        {t:'loose', count: 2, data:{type:'enemyShip', objectType:'royale', SquadMods:['darkGreenColor']}},
+        {t:'loose', count: 5, data:{type:'enemyShip', objectType:'dregos', SquadMods:['darkGreenColor']}},
+    ],
+    MapModActions:[{t:'tryBuildSquads'}],
+};
+BBAdata.MapMODS.orhenesSecure4={
+    who:['orhenes'],
+    view: {Color:'#0C0'},
+    squadSchemeTypeArray: [
+        {t:'loose', count: 1, data:{type:'enemyShip', objectType:'patiarch', SquadMods:['greenColor']}},
+        {t:'loose', count: 2, data:{type:'enemyShip', objectType:'urser',    SquadMods:['greenColor']}},
+        {t:'loose', count: 5, data:{type:'enemyShip', objectType:'nientes',  SquadMods:['greenColor']}},
+    ],
+    MapModActions:[{t:'tryBuildSquads'}],
+};
+BBAdata.MapMODS.orhenesSecure5={
+    who:['orhenes'],
+    view: {Color:'#408'},
+    squadSchemeTypeArray: [
+        {t:'loose', count: 8, data:{type:'enemyShip', objectType:'dregos',   SquadMods:['violetColor','startWithShield']}},
+    ],
+    MapModActions:[{t:'tryBuildSquads'}],
+};
+BBAdata.MapMODS.saisungVuvisOrbiters={
+    who:['saisung'],
+    view: {Color:'#408'},
+    squadSchemeTypeArray: [
+        {t:'loose', count: 6, data:{type:'enemyShip', objectType:'vuvis', SquadMods:['violetColor','vuvisOrbit']}},
+    ],
+    MapModActions:[{t:'tryBuildSquads'}],
+};
+BBAdata.MapMODS.vuvisOrbit={
+    who:['vuvis'],
+    toDo:[
+        {N:58,T:'goOrbit', minAlarm: 5},
+    ],
 };

@@ -1,4 +1,5 @@
-BBAdata['ObjectData']={};
+BBAdata.ObjectData={};
+BBAdata.ObjectMod={};
 
 BBAdata.ObjectData.destruction_field={
     M: 'region',
@@ -241,7 +242,7 @@ BBAdata.ObjectData.MineMod_hedgehog={
     },
 };
 
-BBAdata.ObjectData.Star={
+BBAdata.ObjectMod.Star={
     view:{
         LIBpath:'StarPath',
         PathSize:30,
@@ -250,31 +251,41 @@ BBAdata.ObjectData.Star={
         HitPattern:'StarHit',
         onBackground: 1,
     },
-    M: 'static',
-
-    SlowDown: 3,
+    radius:15,
     lifeM:6,
+
+    SlowDown:3,
+    M: 'static',
     Flags:{},
     mapType:'A',
     TT:'bgStars',
 };
+
+BBAdata.ObjectData.Star={
+    LoadModules:{
+        Star:{}
+        aliveUnit:{lifeM:6},
+    },
+};
 BBAdata.ObjectData.StarS={
-    extends:'Star',
-    mergeArrays:{view:{PathSize:18}},
-    radius: 9,
+    LoadModules:{
+        Star:{view:{PathSize: 18}, radius: 9},
+        aliveUnit:{lifeM:6},
+    },
 };
 BBAdata.ObjectData.StarM={
-    extends:'Star',
-    mergeArrays:{view:{PathSize:60}},
-    radius: 30,
-    lifeM: 10,
+    LoadModules:{
+        Star:{view:{PathSize: 60}, radius: 30},
+        aliveUnit:{lifeM:9},
+    },
 };
 BBAdata.ObjectData.StarL={
-    extends:'Star',
-    mergeArrays:{view:{PathSize:80}},
-    radius: 40,
-    lifeM: 17,
+    LoadModules:{
+        Star:{view:{PathSize: 80}, radius: 40},
+        aliveUnit:{lifeM:17},
+    },
 };
+;
 BBAdata.ObjectData.Gstar={
     view:{
         LIBpath:'StarPath',
@@ -370,6 +381,68 @@ BBAdata.ObjectData.enemyShip={
     speedLvl: 2,
     spotLvl: 2,
 };
+
+
+BBAdata.ObjectMod.enemyShip={
+    M: 'comp',
+    TT: 'enemy',
+    lastSpeedT: 0,
+    doSquad: -1,//??
+    dec: 50,    //??
+    ammo: -50,    //??
+    radius: 15,
+    Flags:{
+        spotEnemyFlag: false,
+        gotHitFlag: false,
+        heardExplosionFlag: false,
+        newOrderFlag: false,
+        awareAboutEnemy: false,
+        lastSeenEnemy: -1
+    },
+
+    Res:{},
+    toDo:[],
+    doingTime: -1,
+    Manouver: 'goStraight',
+
+    alarmLvl: 2,
+    speedLvl: 2,
+    spotLvl: 2,
+};
+BBAdata.ObjectMod.viewLetterSmall={
+    view:{
+        Letter: 'A',
+        LetterSize: 16,
+        Color: 'red',
+        Angle: 0,
+        HitPattern: 'HullFire_20',
+    },
+};
+BBAdata.ObjectMod.viewLetterMedium={
+    view:{
+        Letter: 'A',
+        LetterSize: 40,
+        Color: 'red',
+        Angle: 0,
+        HitPattern: 'HullFire_40',
+    },
+};
+BBAdata.ObjectMod.viewLetterBig={
+    view:{
+        Letter: 'A',
+        LetterSize: 80,
+        Color: 'red',
+        Angle: 0,
+        HitPattern: 'HullFire_80',
+    },
+};
+
+BBAdata.ObjectData.carras={
+    LoadModules:{
+        'enemyShip':{},
+        'viewLetterSmall':{Letter: 'A', LetterSize: 16},
+    },
+}
 BBAdata.ObjectData.carras={
     view:{
         Letter: 'A',
