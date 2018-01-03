@@ -22,7 +22,7 @@
 BBAdata['MapMODS']={
     sitOnMap:{
         toDo:[
-            {N:22,T:'stayInRegion', X:0, Y:0, Radius: 700 },
+            {N:23,T:'stayInRegion', X:0, Y:0, Radius: 700 },
             {N:1, T:'goStraight', straightMin: 200, straightPlus: 100 },
         ],
     },
