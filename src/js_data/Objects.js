@@ -242,6 +242,9 @@ BBAdata.ObjectData.MineMod_hedgehog={
     },
 };
 
+BBAdata.ObjectMod.aliveUnit={
+    lifeM: 1,
+};
 BBAdata.ObjectMod.Star={
     view:{
         LIBpath:'StarPath',
@@ -252,7 +255,6 @@ BBAdata.ObjectMod.Star={
         onBackground: 1,
     },
     radius:15,
-    lifeM:6,
 
     SlowDown:3,
     M: 'static',
@@ -263,7 +265,7 @@ BBAdata.ObjectMod.Star={
 
 BBAdata.ObjectData.Star={
     LoadModules:{
-        Star:{}
+        Star:{},
         aliveUnit:{lifeM:6},
     },
 };
@@ -285,7 +287,7 @@ BBAdata.ObjectData.StarL={
         aliveUnit:{lifeM:17},
     },
 };
-;
+
 BBAdata.ObjectData.Gstar={
     view:{
         LIBpath:'StarPath',
@@ -387,10 +389,10 @@ BBAdata.ObjectMod.enemyShip={
     M: 'comp',
     TT: 'enemy',
     lastSpeedT: 0,
-    doSquad: -1,//??
-    dec: 50,    //??
-    ammo: -50,    //??
-    radius: 15,
+    doSquad: -1,   //??
+    dec: 50,       //??
+    ammo: -50,     //??
+    radius: 100,
     Flags:{
         spotEnemyFlag: false,
         gotHitFlag: false,
@@ -439,25 +441,17 @@ BBAdata.ObjectMod.viewLetterBig={
 
 BBAdata.ObjectData.carras={
     LoadModules:{
-        'enemyShip':{},
-        'viewLetterSmall':{Letter: 'A', LetterSize: 16},
-    },
-}
-BBAdata.ObjectData.carras={
-    view:{
-        Letter: 'A',
-        LetterSize: 16,
-        Color: 'red',
-        Angle: 0,
-        HitPattern: 'HullFire_20',
+        enemyShip:{},
+        viewLetterSmall:{view:{Letter: 'A', LetterSize: 2}},
     },
 
+
     lifeM: 5,
+    radius: 8,
 
     weapon:[{t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5}],
 
     doingNow: 'changeManouver',
-    doingTime: -1,
     Manouver: 'goStraight',
     toDo: [
         {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
@@ -487,6 +481,9 @@ BBAdata.ObjectData.carras={
     },
 };
 BBAdata.ObjectData.muerto={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'M',
         LetterSize: 40,
@@ -529,6 +526,9 @@ BBAdata.ObjectData.muerto={
 
 };
 BBAdata.ObjectData.nemezis={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'N',
         LetterSize: 40,
@@ -572,6 +572,9 @@ BBAdata.ObjectData.nemezis={
     },
 };
 BBAdata.ObjectData.warastein={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'W',
         LetterSize: 40,
@@ -615,6 +618,9 @@ BBAdata.ObjectData.warastein={
 
 };
 BBAdata.ObjectData.dandares={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'D',
         LetterSize: 40,
@@ -677,6 +683,9 @@ BBAdata.ObjectData.shieldBlob={
     radius: 21,
 };
 BBAdata.ObjectData.royale={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'R',
         LetterSize: 40,
@@ -718,6 +727,9 @@ BBAdata.ObjectData.royale={
     },
 };
 BBAdata.ObjectData.edison={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'E',
         LetterSize: 40,
@@ -768,6 +780,9 @@ BBAdata.ObjectData.edison={
 
 };
 BBAdata.ObjectData.hiacynt={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'H',
         LetterSize: 20,
@@ -813,6 +828,9 @@ BBAdata.ObjectData.hiacynt={
     },
 };
 BBAdata.ObjectData.iskariot={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'I',
         LetterSize: 20,
@@ -872,6 +890,9 @@ BBAdata.ObjectData.iskariot={
     },
 };
 BBAdata.ObjectData.tartaros={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'T',
         LetterSize: 60,
@@ -914,6 +935,9 @@ BBAdata.ObjectData.tartaros={
     },
 };
 BBAdata.ObjectData.belzebub={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'B',
         LetterSize: 40,
@@ -964,6 +988,9 @@ BBAdata.ObjectData.belzebub={
     },
 };
 BBAdata.ObjectData.koriaz={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'K',
         LetterSize: 16,
@@ -1006,6 +1033,9 @@ BBAdata.ObjectData.koriaz={
     },
 };
 BBAdata.ObjectData.fariax={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'F',
         LetterSize: 40,
@@ -1047,6 +1077,9 @@ BBAdata.ObjectData.fariax={
     },
 };
 BBAdata.ObjectData.dregos={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'U',
         LetterSize: 20,
@@ -1097,6 +1130,9 @@ BBAdata.ObjectData.dregos={
     },
 };
 BBAdata.ObjectData.vitotas={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'V',
         LetterSize: 20,
@@ -1151,6 +1187,9 @@ BBAdata.ObjectData.vitotas={
     },
 };
 BBAdata.ObjectData.cloaker={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'C',
         LetterSize: 20,
@@ -1196,6 +1235,9 @@ BBAdata.ObjectData.cloaker={
     },
 };
 BBAdata.ObjectData.hajaher={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'S',
         LetterSize: 20,
@@ -1243,6 +1285,9 @@ BBAdata.ObjectData.hajaher={
     },
 };
 BBAdata.ObjectData.orhenes={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'Q',
         LetterSize: 80,
@@ -1289,6 +1334,9 @@ BBAdata.ObjectData.orhenes={
     },
 };
 BBAdata.ObjectData.juggernaut={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'J',
         LetterSize: 80,
@@ -1360,6 +1408,9 @@ BBAdata.ObjectData.juggernaut={
 
 };
 BBAdata.ObjectData.gargamon={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'G',
         LetterSize: 80,
@@ -1415,6 +1466,9 @@ BBAdata.ObjectData.gargamon={
     },
 };
 BBAdata.ObjectData.xaurus={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'X',
         LetterSize: 60,
@@ -1464,6 +1518,9 @@ BBAdata.ObjectData.xaurus={
     },
 };
 BBAdata.ObjectData.zarahiash={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'Z',
         LetterSize: 20,
@@ -1522,6 +1579,9 @@ BBAdata.ObjectData.zarahiash={
     },
 };
 BBAdata.ObjectData.durishka={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         LIBpath:'StarPath',
         PathSize:30,
@@ -1584,6 +1644,9 @@ BBAdata.ObjectData.durishka={
     },
 };
 BBAdata.ObjectData.pitagoras={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 960,
         LetterSize: 40,
@@ -1627,6 +1690,9 @@ BBAdata.ObjectData.pitagoras={
     },
 };
 BBAdata.ObjectData.patiarch={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 1130, // some funny H
         LetterSize: 50,
@@ -1683,6 +1749,9 @@ BBAdata.ObjectData.patiarch={
     },
 };
 BBAdata.ObjectData.wariankiel={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 373, // W with ^
         LetterSize: 20,
@@ -1729,6 +1798,9 @@ BBAdata.ObjectData.wariankiel={
     Flags:{noStar:true},
 };
 BBAdata.ObjectData.vuvis={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 171, // some <<
         LetterSize: 22,
@@ -1770,6 +1842,9 @@ BBAdata.ObjectData.vuvis={
     },
 };
 BBAdata.ObjectData.hirieshka={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 294, // some funny H
         LetterSize: 50,
@@ -1818,6 +1893,9 @@ BBAdata.ObjectData.hirieshka={
     },
 };
 BBAdata.ObjectData.nientes={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 948,
         LetterSize: 25,
@@ -1874,6 +1952,9 @@ BBAdata.ObjectData.nientes={
     },
 };
 BBAdata.ObjectData.shieldoorz={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 1002,
         LetterSize: 50,
@@ -1934,6 +2015,9 @@ BBAdata.ObjectData.shieldoorz={
     },
 };
 BBAdata.ObjectData.loliax={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'L',
         LetterSize: 40,
@@ -1977,6 +2061,9 @@ BBAdata.ObjectData.loliax={
     },
 };
 BBAdata.ObjectData.slimensen={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 3450,
         LetterSize: 50,
@@ -2041,6 +2128,9 @@ BBAdata.ObjectData.slimensen={
     },
 };
 BBAdata.ObjectData.slimensen1={
+    LoadModules:{
+        enemyShip:{},
+    },
     extends: 'slimensen',
     view:{
         Letter: 3445,
@@ -2093,6 +2183,9 @@ BBAdata.ObjectData.slimensen1={
     },
 };
 BBAdata.ObjectData.slimensen2={
+    LoadModules:{
+        enemyShip:{},
+    },
     extends: 'slimensen',
     view:{
         Letter: 3444,
@@ -2145,6 +2238,9 @@ BBAdata.ObjectData.slimensen2={
     },
 };
 BBAdata.ObjectData.slimensen3={
+    LoadModules:{
+        enemyShip:{},
+    },
     extends: 'slimensen',
     view:{
         Letter: 3454,
@@ -2197,6 +2293,9 @@ BBAdata.ObjectData.slimensen3={
     },
 };
 BBAdata.ObjectData.slimensen4={
+    LoadModules:{
+        enemyShip:{},
+    },
     extends: 'slimensen',
     view:{
         Letter: 3452,
@@ -2249,6 +2348,9 @@ BBAdata.ObjectData.slimensen4={
     },
 };
 BBAdata.ObjectData.thunderton={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 1006,
         LetterSize: 80,
@@ -2307,6 +2409,9 @@ BBAdata.ObjectData.thunderton={
     },
 };
 BBAdata.ObjectData.doomderos={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 992,
         LetterSize: 60,
@@ -2363,6 +2468,9 @@ BBAdata.ObjectData.doomderos={
     },
 };
 BBAdata.ObjectData.hedgehog={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 937,
         LetterSize: 60,
@@ -2424,6 +2532,9 @@ BBAdata.ObjectData.hedgehog={
     },
 };
 BBAdata.ObjectData.urser={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 467,
         LetterSize: 35,
@@ -2479,6 +2590,9 @@ BBAdata.ObjectData.urser={
     },
 };
 BBAdata.ObjectData.talrax={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 5084,
         LetterSize: 80,
@@ -2529,6 +2643,9 @@ BBAdata.ObjectData.talrax={
     },
 };
 BBAdata.ObjectData.iskarianz={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 238,
         LetterSize: 30,
@@ -2596,6 +2713,9 @@ BBAdata.ObjectData.iskarianz={
     },
 };
 BBAdata.ObjectData.prisander={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 338,
         LetterSize: 60,
@@ -2645,6 +2765,9 @@ BBAdata.ObjectData.prisander={
     },
 };
 BBAdata.ObjectData.yehes={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 'Y',
         LetterSize: 80,
@@ -2689,6 +2812,9 @@ BBAdata.ObjectData.yehes={
     shipVariables:{},
 };
 BBAdata.ObjectData.yehestis={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 376,
         LetterSize: 80,
@@ -2733,6 +2859,9 @@ BBAdata.ObjectData.yehestis={
     shipVariables:{},
 };
 BBAdata.ObjectData.yeheslar={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 590,
         LetterSize: 80,
@@ -2777,6 +2906,9 @@ BBAdata.ObjectData.yeheslar={
     shipVariables:{},
 };
 BBAdata.ObjectData.yebuhas={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 7822,
         LetterSize: 80,
@@ -2821,6 +2953,9 @@ BBAdata.ObjectData.yebuhas={
     shipVariables:{},
 };
 BBAdata.ObjectData.hesiolumbus={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 482,
         LetterSize: 80,
@@ -2861,6 +2996,9 @@ BBAdata.ObjectData.hesiolumbus={
     shipVariables:{},
 };
 BBAdata.ObjectData.saisung={
+    LoadModules:{
+        enemyShip:{},
+    },
     view:{
         Letter: 1414,   // big S with I
         LetterSize: 50,

@@ -77,8 +77,6 @@ GAMEobject.prototype.mapPlace_What = function(Setting, Place, What, defXY){
 }
 
 GAMEobject.prototype.mapPlace_setPlaceDef = function(Setting,Place,defXY){
-    console.log('mapPlace_setPlaceDef():', Place);
-
     if(typeof this.mapPlaceDefs == 'undefined'){
         this.mapPlaceDefs = [];
     }
@@ -132,7 +130,6 @@ GAMEobject.prototype.mapPlace_setPlaceDef = function(Setting,Place,defXY){
         for(var iAdd in PG.Add){
             if(PG.Add[iAdd].What){
                 this.mapPlace_What(Setting, PG.Add[iAdd], PG.Add[iAdd].What, defXY);
-                console.log('DU!');
             }
         }
     }

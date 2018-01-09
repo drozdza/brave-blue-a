@@ -1,44 +1,33 @@
+// to do refaktoryzacji
+GAMEobject.prototype.putObj_getModules = function(moduleName, moduleData){
+    var Omods = {};
+
+    if(typeof BBAdata.ObjectMod[moduleName] == 'undefined'){
+        console.log('ObjectMod "'+moduleName+'" not found!');
+        return {};
+    }
+
+    Omods = cloneObj(BBAdata.ObjectMod[moduleName]);
+
+    if(Omods.LoadModules){
+        for(var mmName in Omods.LoadModules){
+            mergeObjects(Omods, this.putObj_getModules(mmName, Omods.LoadModules[mmName]) );
+        }
+    }
+    mergeObjects(Omods, moduleData);
+    return Omods;
+}
 
 GAMEobject.prototype.putObj_fromArray = function(O){
-    var isEnemyShip = false;
-    for(var i in BBAdata['ShipNames']){
-        if(O.T==BBAdata['ShipNames'][i]){
-            isEnemyShip=true;
-            break;
-        }
-    }
 
-    if(isEnemyShip){
-        for(var i in BBAdata.ObjectData.enemyShip){
-            var X = BBAdata.ObjectData.enemyShip[i];
-            if(typeof X == 'object') O[i] = cloneObj(X);
-                else                 O[i] = X;
-        }
-    }
     if(typeof BBAdata.ObjectData[O.T] != 'undefined'){
-        if(typeof BBAdata.ObjectData[O.T].extends != 'undefined'){
-            var U = BBAdata.ObjectData[ BBAdata.ObjectData[O.T].extends ];
-            for(var i in U){
-                var X = U[i];
-                if(typeof X == 'object') O[i] = cloneObj(X);
-                    else                 O[i] = X;
-            }
-        }
+        mergeObjects(O, BBAdata.ObjectData[O.T]);
 
-        for(var i in BBAdata.ObjectData[O.T]){
-            var X = BBAdata.ObjectData[O.T][i];
-            if(typeof X == 'object') O[i] = cloneObj(X);
-                else                 O[i] = X;
-        }
+        if(O.LoadModules)
+            for(var moduleName in O.LoadModules)
+                mergeObjects(O, this.putObj_getModules(moduleName, O.LoadModules[moduleName]) );
+        delete(O.LoadModules);
     }
-
-    if(typeof O.mergeArrays != 'undefined'){
-        for(var mA in O.mergeArrays)
-            O[mA] = mergeArrays(O[mA],O.mergeArrays[mA]);
-    }
-
-    delete(O.extends);
-    delete(O.mergeArrays);
 
     if(O.explodePreset || O.exploAddTo || O.onHitDieExpire)
         this.cloneExplosionData(O, O);
