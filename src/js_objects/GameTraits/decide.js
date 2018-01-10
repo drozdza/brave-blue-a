@@ -597,9 +597,10 @@ GAMEobject.prototype.decide = function(o){
             O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
         }break;
         case 'iddleOnStar':{
-            if(O.myStar === false){
+            if(O.myStar === false || typeof O.myStar == 'undefined'){
                 O.Flags.noStar = true;
                 O.doingTime = -1;
+                break;
             }
             var dO = this.O[O.myStar];
             if(dO.life < 1){
