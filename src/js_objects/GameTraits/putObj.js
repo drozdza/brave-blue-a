@@ -11,21 +11,21 @@ GAMEobject.prototype.putObj_getModules = function(moduleName, moduleData){
 
     if(Omods.LoadModules){
         for(var mmName in Omods.LoadModules){
-            mergeArrays(Omods, this.putObj_getModules(mmName, Omods.LoadModules[mmName]) );
+            carefullyMergeObjects(Omods, this.putObj_getModules(mmName, Omods.LoadModules[mmName]) );
         }
     }
-    mergeArrays(Omods, moduleData);
+    carefullyMergeObjects(Omods, moduleData);
     return Omods;
 }
 
 GAMEobject.prototype.putObj_fromArray = function(O){
 
     if(typeof BBAdata.ObjectData[O.T] != 'undefined'){
-        mergeArrays(O, BBAdata.ObjectData[O.T]);
+        carefullyMergeObjects(O, BBAdata.ObjectData[O.T]);
 
         if(O.LoadModules)
             for(var moduleName in O.LoadModules)
-                mergeArrays(O, this.putObj_getModules(moduleName, O.LoadModules[moduleName]) );
+                carefullyMergeObjects(O, this.putObj_getModules(moduleName, O.LoadModules[moduleName]) );
         delete(O.LoadModules);
     }
 

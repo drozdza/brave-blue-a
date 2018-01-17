@@ -55,6 +55,23 @@ function mergeArrays(arr1,arr2){
     }
     return arr1;
 }
+function carefullyMergeObjects(O1, O2){
+    for(var o in O2){
+        if(typeof O1[o] == 'undefined'){
+            O1[o] = cloneObj(O2[o]);
+        }else if(typeof O1[o] == 'string' || typeof O1[o] == 'number'){
+            if(typeof O2[o] == 'string' || typeof O2[o] == 'number'){
+                O1[o] = O2[o];
+            }else{
+                O1[o] = cloneObj(O2[o]);
+            }
+        }else{
+            O1[o] = carefullyMergeObjects(O1[o], O2[o]);
+        }
+    }
+
+    return O1;
+}
 
 function showAsSeconds(i){
     var min = parseInt(i/60);
