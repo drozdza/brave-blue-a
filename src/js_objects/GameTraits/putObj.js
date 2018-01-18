@@ -21,11 +21,18 @@ GAMEobject.prototype.putObj_getModules = function(moduleName, moduleData){
 GAMEobject.prototype.putObj_fromArray = function(O){
 
     if(typeof BBAdata.ObjectData[O.T] != 'undefined'){
-        carefullyMergeObjects(O, BBAdata.ObjectData[O.T]);
+        var OD = BBAdata.ObjectData[O.T];
 
-        if(O.LoadModules)
-            for(var moduleName in O.LoadModules)
-                carefullyMergeObjects(O, this.putObj_getModules(moduleName, O.LoadModules[moduleName]) );
+        if(OD.LoadModules){
+            Omods = {};
+            for(var moduleName in OD.LoadModules)
+                carefullyMergeObjects(Omods, this.putObj_getModules(moduleName, OD.LoadModules[moduleName]));
+            carefullyMergeObjects(O, Omods);
+        }
+
+        carefullyMergeObjects(O, OD);
+        // O = carefullyMergeObjects(OD, O);
+
         delete(O.LoadModules);
     }
 

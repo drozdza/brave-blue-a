@@ -56,6 +56,8 @@ function mergeArrays(arr1,arr2){
     return arr1;
 }
 function carefullyMergeObjects(O1, O2){
+    // console.log('carefullyMergeObjects(',O1,',', O2,')');
+    // console.log('carefullyMergeObjects()');
     for(var o in O2){
         if(typeof O1[o] == 'undefined'){
             O1[o] = cloneObj(O2[o]);

@@ -442,7 +442,7 @@ BBAdata.ObjectMod.viewLetterBig={
 BBAdata.ObjectData.carras={
     LoadModules:{
         enemyShip:{},
-        viewLetterSmall:{view:{Letter: 'A', LetterSize: 2}},
+        viewLetterSmall:{view:{Letter: 'A', LetterSize: 16}},
     },
 
 
