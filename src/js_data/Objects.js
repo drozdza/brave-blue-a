@@ -392,7 +392,7 @@ BBAdata.ObjectMod.enemyShip={
     doSquad: -1,   //??
     dec: 50,       //??
     ammo: -50,     //??
-    radius: 100,
+    radius: 15,
     Flags:{
         spotEnemyFlag: false,
         gotHitFlag: false,
@@ -447,7 +447,7 @@ BBAdata.ObjectData.carras={
 
 
     lifeM: 5,
-    radius: 8,
+    radius: 15,
 
     weapon:[{t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5}],
 
@@ -792,6 +792,7 @@ BBAdata.ObjectData.hiacynt={
     },
 
     lifeM: 4,
+    radius: 15,
 
     Res: {'shieldBlobProd': {R:0,M:10,T:0}},
     weapon:[
@@ -840,6 +841,7 @@ BBAdata.ObjectData.iskariot={
     },
 
     lifeM: 3,
+    radius: 15,
 
     Shields:[{
         name: 'jumpShield',
@@ -1089,6 +1091,7 @@ BBAdata.ObjectData.dregos={
     },
 
     lifeM: 9,
+    radius: 15,
 
     Res: {'missilePack': {R:6,M:6,T:0}},
     weapon:[
@@ -1142,6 +1145,7 @@ BBAdata.ObjectData.vitotas={
     },
 
     lifeM: 5,
+    radius: 15,
 
     weapon:[
         {t:'laserAim', minDistToEnemy: 400, lastShot: 100, gunSpeed: 100, makeAction:{ doingNow:'laserAim', doingTime:30, Manouver: 'goStraight', doNotInterupt: true}},
@@ -1199,6 +1203,7 @@ BBAdata.ObjectData.cloaker={
     },
 
     lifeM: 3,
+    radius: 15,
 
     Res: {'cloakingProd': {R:0,M:10,T:0}},
     weapon:[
@@ -1247,6 +1252,7 @@ BBAdata.ObjectData.hajaher={
     },
 
     lifeM: 6,
+    radius: 15,
 
     weapon:[
         {t:'getAcurateAngle', Dec: 50, Speed: 10, maxSpeed: 2, minAlarm: 5, doNextWeapon:true},
@@ -1808,8 +1814,10 @@ BBAdata.ObjectData.vuvis={
         Angle: 270,
         HitPattern: 'HullFire_20',
     },
+
     lifeM: 2,
     radius: 9,
+
     Res: {},
     weapon:[{t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5}],
 
@@ -2656,6 +2664,7 @@ BBAdata.ObjectData.iskarianz={
     },
 
     lifeM: 3,
+    radius: 15,
 
     Shields:[{
         name: 'shieldAdder',
