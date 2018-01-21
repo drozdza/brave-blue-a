@@ -136,7 +136,7 @@ GAMEobject.prototype.putObj_changeMode = function(L, newMode){
 
     if((oldMode=='static' || oldMode=='region') && (newMode!='static' && newMode!='region'))
         delete this.Omoving[ L ];
-    if(newMode!='static' && newMode!='region' && newMode!='routePoints')
+    if(newMode!='static' && newMode!='region' && newMode!='routePoint')
         this.Omoving[ L ] = 1;
 
     if(newMode == 'routePoint')

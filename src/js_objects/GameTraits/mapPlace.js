@@ -52,8 +52,6 @@ GAMEobject.prototype.mapPlace_What = function(Setting, Place, What, defXY){
                     for(var k in Place.GroupMods)
                         this.addBoardMod(L, Place.GroupMods[k]);
 
-                console.log(Odata);
-
                 var Team = false;
                 if(typeof Place.Team != 'undefined') Team = Place.Team;
                 if(typeof Odata.Team != 'undefined') Team = Odata.Team;

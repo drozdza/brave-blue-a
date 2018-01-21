@@ -26,6 +26,24 @@ GAMEobject.prototype.drawObject = function(O,o,CH, Px,Py){
         CH.restore();
     }
 
+    if(BBAdata.GET.ORDERS > 0 && O.T == 'routePoint'){
+        CH.save();
+        CH.beginPath();
+        CH.arc(O.x-Px, O.y-Py,O.radius,0,2*Math.PI,true);
+        CH.closePath();
+        CH.fillStyle = "rgba(20,0,40,0.3)";
+        CH.strokeStyle = "rgba(20,0,40,0.5)";
+        CH.lineWidth = 10;
+        CH.setLineDash([20,5]);
+        CH.fill();
+        CH.stroke();
+        CH.fillStyle = 'rgb(40,0,80)';
+        CH.font = "20px Arial";
+        CH.textAlign = "center";
+        CH.fillText(O.rName, O.x-Px, O.y-Py- -O.radius- -20);
+        CH.restore();
+    }
+
     if(typeof O.canvasId != 'undefined'){
         CH.save();
         CH.translate((O.x-Px).toFixed(0), (O.y-Py).toFixed(0));
@@ -62,4 +80,12 @@ GAMEobject.prototype.drawObject = function(O,o,CH, Px,Py){
         return true;
     }
 
+    if(BBAdata.GET.ORDERS > 1 && O.TT == 'enemy'){
+        CH.save();
+        CH.fillStyle = 'white';
+        CH.font = "13px Arial";
+        CH.textAlign = "left";
+        CH.fillText(O.alarmLvl+' '+O.doingNow, O.x-Px-O.radius, O.y-Py-O.radius-7);
+        CH.restore();
+    }
 }
