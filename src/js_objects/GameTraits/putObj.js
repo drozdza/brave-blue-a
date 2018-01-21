@@ -115,7 +115,8 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
     if(O.view && O.view.onBackground)
         CanvasManager.CBM.addObjectToBackground( L );
 
-    this.putOnXY( L );
+    if(Mode != 'routePoint')
+        this.putOnXY( L );
     return L;
 }
 GAMEobject.prototype.putObj_changeMode = function(L, newMode){
@@ -135,8 +136,11 @@ GAMEobject.prototype.putObj_changeMode = function(L, newMode){
 
     if((oldMode=='static' || oldMode=='region') && (newMode!='static' && newMode!='region'))
         delete this.Omoving[ L ];
-    if(newMode!='static' && newMode!='region')
+    if(newMode!='static' && newMode!='region' && newMode!='routePoints')
         this.Omoving[ L ] = 1;
+
+    if(newMode == 'routePoint')
+        this.Oroute[ L ] = 1;
 
 }
 GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,DMG){

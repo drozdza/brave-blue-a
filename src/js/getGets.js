@@ -1,6 +1,7 @@
 BBAdata.GET={
     MENU:0,
     DEBUG:0,
+    ORDERS:0,
     BLUR:0,
     FRAMES:4,
     CANVAS:0,
@@ -20,6 +21,7 @@ BBAdata.GET={
             switch(BUM[0]){
                 case 'menu':         BBAdata.GET.MENU         = BUM[1]; break;
                 case 'debug':        BBAdata.GET.DEBUG        = BUM[1]; break;
+                case 'orders':       BBAdata.GET.ORDERS       = BUM[1]; break;
                 case 'blur':         BBAdata.GET.BLUR         = BUM[1]; break;
                 case 'frames':       BBAdata.GET.FRAMES       = BUM[1]; break;
                 case 'canvas':       BBAdata.GET.CANVAS       = BUM[1]; break;

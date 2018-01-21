@@ -1,5 +1,12 @@
 BBAdata.ObjectData={};
 BBAdata.ObjectMod={};
+// =============================================================================
+
+BBAdata.ObjectData.routePoint={
+    T: 'routePoint',
+    M: 'routePoint',
+    radius: 20,
+};
 
 BBAdata.ObjectData.destruction_field={
     M: 'region',

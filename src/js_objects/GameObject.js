@@ -35,6 +35,7 @@ function GAMEobject(){
     this.Obullet={};    // tablica kul
     this.Oanim={};      // animations
     this.Oregion={};    // regions
+    this.Oroute={};     // routePoints
 
     this.Squads={};     // moving in Squads
     this.SquadLen=0;

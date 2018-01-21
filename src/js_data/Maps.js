@@ -411,16 +411,19 @@ BBAdata.MAPS.BuildTry={
         team2:['orangeColor'],
     },
     Place:[
-        {Random:{X:0, Y:0, Radius: 100}, What:{
-            0:{t:'carras',q:5, Team:'team1'},
-        }},
-        {Random:{X:500, Y:0, Radius: 100}, Team:'team2', What:{
-            0:{t:'carras',q:5},
-            1:{t:'tartaros',q:1}
-        }},
-        {Random:{X:-400, Y:0, Radius: 300}, What:{
-            0:{t:['Star','StarS','StarL','StarM'],q:30},
-        }},
+        {Random:{X:0, Y:0, Radius: 100}, What:[
+            {t:'carras',q:5, Team:'team1'},
+        ]},
+        {Random:{X:500, Y:0, Radius: 100}, Team:'team2', What:[
+            {t:'carras',q:5},
+            {t:'tartaros',q:1}
+        ]},
+        // {Random:{X:-400, Y:0, Radius: 300}, What:[
+        //     {t:['Star','StarS','StarL','StarM'],q:30},
+        // ]},
+        {Point:{X: -400, Y:0}, What:[{t:'routePoint', ObjMod:{radius: 120, rName:'routePoint1'}}]},
+        {Point:{X: 200, Y:-400}, What:[{t:'routePoint', ObjMod:{rName:'routePoint2'}}]},
+        {Point:{X: 200, Y:400}, What:[{t:'routePoint', ObjMod:{rName:'routePoint3'}}]},
     ],
 };
 
@@ -463,16 +466,16 @@ BBAdata.MAPS.BuildTry2={
     },
     Place:[
         {PlaceGroup:{N:'huge_circle', X:0, Y:0}, What:{
-            0:{t:'StarL',q:10},
+            0:{t:'StarL',q:144},
         }},
-        // {PlaceGroup:{N:'towersAndPortals', X:0, Y:0}, What:{
-        //     0:{PlaceGroup:{N:'tower', X:200, Y:0}, q:3, What:{
-        //         0:{t:'StarM', q:99}
-        //     }},
-        //     1:{PlaceGroup:{N:'portal', X:50, Y:0}, q:2, What:{
-        //         0:{t:'StarM', q:99}
-        //     }},
-        // }},
+        {PlaceGroup:{N:'towersAndPortals', X:0, Y:0}, What:{
+            0:{PlaceGroup:{N:'tower', X:200, Y:0}, q:3, What:{
+                0:{t:'StarM', q:99}
+            }},
+            1:{PlaceGroup:{N:'portal', X:50, Y:0}, q:2, What:{
+                0:{t:'StarM', q:99}
+            }},
+        }},
     ],
 };
 

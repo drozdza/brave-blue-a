@@ -11,6 +11,11 @@ function GetMenuObject(){
             values: {Off:0, On:1,Ts:2,TsF:3},
             default: 0,
         },
+        ORDERS:{
+            get: 'orders',
+            values: {Off:0, P:1,T:2},
+            default: 0,
+        },
         BLUR:{
             get: 'blur',
             values: {Off:0, On:1, Align:2},

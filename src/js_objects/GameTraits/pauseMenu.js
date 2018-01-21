@@ -5,16 +5,16 @@ GAMEobject.prototype.pauseStart = function(){
     window.cancelAnimationFrame(this.intervalIndex);
     $('#pause').show();
 
-    if(BBAdata.GET.PAUSEDEBUG==2){
-        this.pause_showGameStats();
-    }else{
-        $('#pause').addClass('simpleInfo').html('<span class="bigP">P</span>');
-    }
-
     this.pauseViewPoint = {
         x: this.O[0].x,
         y: this.O[0].y,
         o: false,
+    }
+
+    if(BBAdata.GET.PAUSEDEBUG==2){
+        this.pause_showGameStats();
+    }else{
+        $('#pause').addClass('simpleInfo').html('<span class="bigP">P</span>');
     }
 }
 
@@ -130,6 +130,8 @@ GAMEobject.prototype.pause_keyMove = function(){
     this.pauseViewPoint.x -= this.keyLeftRight*chop;
     this.pauseViewPoint.y -= this.keyUpDown*chop;
     this.pauseViewPoint.o = false;
+
+    $('.aimer').html('<x>'+this.pauseViewPoint.x.toFixed(0)+'</x><y>'+this.pauseViewPoint.y.toFixed(0)+'</y>');
 
     $('#pause .Oshower').remove();
     this.frame_draw(this.pauseViewPoint);

@@ -12,6 +12,9 @@ GAMEobject.prototype.mapPlace_What = function(Setting, Place, What, defXY){
         if(isNaN(w)) Odata = {t:w, q:What[w]};
             else     Odata = What[w];
 
+        if(typeof Odata.q == 'undefined')
+            Odata.q = 1;
+
         for(elemI=0; elemI < Odata.q; ++elemI){
 
             mapXY = this.mapPlace_getPlace(defXY, elemI);
@@ -49,9 +52,13 @@ GAMEobject.prototype.mapPlace_What = function(Setting, Place, What, defXY){
                     for(var k in Place.GroupMods)
                         this.addBoardMod(L, Place.GroupMods[k]);
 
+                console.log(Odata);
+
                 var Team = false;
                 if(typeof Place.Team != 'undefined') Team = Place.Team;
                 if(typeof Odata.Team != 'undefined') Team = Odata.Team;
+                if(Odata.ObjMod)
+                    this.addBoardMod(L, Odata.ObjMod);
                 if(Team){
                     // this.addToTeam(L, Team);
                     this.addTeamMods(L, Team);
@@ -85,6 +92,7 @@ GAMEobject.prototype.mapPlace_setPlaceDef = function(Setting,Place,defXY){
     else if(Place.LineOf)   DEF.LineOf   = cloneObj(Place.LineOf);
     else if(Place.RingOf)   DEF.RingOf   = cloneObj(Place.RingOf);
     else if(Place.CircleOf) DEF.CircleOf = cloneObj(Place.CircleOf);
+    else if(Place.Point)    DEF.Point    = cloneObj(Place.Point);
     else                    DEF.Point    = {X:0,Y:0};
 
 

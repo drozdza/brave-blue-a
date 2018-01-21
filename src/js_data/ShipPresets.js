@@ -644,7 +644,7 @@ BBAdata['SHIPpresetsOld']={
         GlueFireToEstimated: 100,
         GlueFireToLaser: 70,
         KeysModules:{69:[0,5],82:[11],84:[2],81:[4],70:[8]},
-        Weapon1: 0,
+        Weapon1: 5,
         Weapon2: 7,
         MouseDown1: false,
         MouseDown2: false,
