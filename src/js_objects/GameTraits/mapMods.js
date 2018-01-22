@@ -34,30 +34,36 @@ GAMEobject.prototype.addBoardMod = function(o,MODname){
     delete(MOD.MapModActions);
 
     for(var KI in MOD){
-        if(KI=='overWriteObjects'){
-            for(var i in MOD[KI])
-                this.addBoardMod(o,BBAdata['ObjectData'][ MOD[KI][i] ]);
-        }else if(KI=='toDo'){
-            for(var i in MOD.toDo)
-                this.addToToDoList(o,MOD.toDo[i]);
-        }else if(KI=='weapon'){
-            for(var i in MOD.weapon)
-                this.addToWeapon(o,MOD.weapon[i]);
-        }else if(KI=='x'){
-            var oldX = O.x;
-            var oldY = O.y;
-            O.x = MOD.x;
-            O.y = MOD.y;
-            this.putOnXY(o,oldX,oldY);
-        }else if(KI=='y'){
-        }else if(KI=='mergeArrays'){
-            for(var u in MOD[KI]){
-                O[u] = mergeArrays(O[u],MOD[KI][u]);
+        switch(KI){
+            case 'overWriteObjects':
+                for(var i in MOD[KI])
+                    this.addBoardMod(o,BBAdata['ObjectData'][ MOD[KI][i] ]);
+            break; case 'removeToDo':
+            console.log('removeToDo');
+                for(var i in MOD.removeToDo)
+                    this.removeFromToDoList(o,MOD.removeToDo[i]);
+            break; case 'toDo':
+                for(var i in MOD.toDo)
+                    this.addToToDoList(o,MOD.toDo[i]);
+            break; case 'weapon':
+                for(var i in MOD.weapon)
+                    this.addToWeapon(o,MOD.weapon[i]);
+            break; case 'x':
+                var oldX = O.x;
+                var oldY = O.y;
+                O.x = MOD.x;
+                O.y = MOD.y;
+                this.putOnXY(o,oldX,oldY);
+            break; case 'y':
+            break; case 'mergeArrays':
+                for(var u in MOD[KI])
+                    O[u] = mergeArrays(O[u],MOD[KI][u]);
+            break; default:
+            if(typeof O[KI] != 'undefined'){
+                gentleCloneObj(O,MOD,KI);
+            }else{
+                O[KI] = cloneObj(MOD[KI]);
             }
-        }else if(typeof O[KI] != 'undefined'){
-            gentleCloneObj(O,MOD,KI);
-        }else{
-            O[KI] = cloneObj(MOD[KI]);
         }
     }
     for(var a in ACTIONS){
@@ -100,11 +106,23 @@ GAMEobject.prototype.addToToDoList = function(o,toDo){
             NtoDo[ NtoDo.length ] = toDo;
             N=false;
         }
-        NtoDo[ NtoDo.length ] = OtoDo[i];
+        NtoDo.push( OtoDo[i] );
     }
     if(N!=false)
         NtoDo[ NtoDo.length ] = toDo;
 
+    this.O[o].toDo = NtoDo;
+}
+GAMEobject.prototype.removeFromToDoList = function(o,name){
+    console.log(name);
+    var OtoDo = this.O[o].toDo;
+    var NtoDo=[];
+    for(var i=0; i<OtoDo.length; ++i){
+        if(isNaN(name) && OtoDo[i].T != name
+        || !isNaN(name) && OtoDo[i].N != name){
+            NtoDo.push( OtoDo[i] );
+        }
+    }
     this.O[o].toDo = NtoDo;
 }
 GAMEobject.prototype.addToWeapon = function(o,Weapon){

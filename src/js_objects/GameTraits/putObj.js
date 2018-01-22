@@ -1,6 +1,7 @@
 // to do refaktoryzacji
 GAMEobject.prototype.putObj_getModules = function(moduleName, moduleData){
     var Omods = {};
+    console.log(moduleName);
 
     if(typeof BBAdata.ObjectMod[moduleName] == 'undefined'){
         console.log('ObjectMod "'+moduleName+'" not found!');

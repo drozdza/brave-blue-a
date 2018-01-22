@@ -405,19 +405,26 @@ BBAdata.MAPS.HardCore={
 };
 
 BBAdata.MAPS.BuildTry={
-    BoardMods:['sitOnMap','allAvoid','violetColor'],
+    BoardMods:[
+        'sitOnMap',
+        'allAvoid',
+        'violetColor',
+    ],
     TeamMods:{
         team1:['greenColor'],
         team2:['orangeColor'],
     },
     Place:[
         {Random:{X:0, Y:0, Radius: 100}, What:[
-            {t:'carras',q:5, Team:'team1'},
+            // {t:'carras',q:5, Team:'team1'},
         ]},
         {Random:{X:500, Y:0, Radius: 100}, Team:'team2', What:[
-            {t:'carras',q:5},
+            // {t:'carras',q:5},
             {t:'tartaros',q:1}
         ]},
+        {Random:{X:500, Y:0, Radius: 100}, Team:'team2', What:{
+            M:2, D:5,
+        }},
         // {Random:{X:-400, Y:0, Radius: 300}, What:[
         //     {t:['Star','StarS','StarL','StarM'],q:30},
         // ]},

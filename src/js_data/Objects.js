@@ -418,6 +418,30 @@ BBAdata.ObjectMod.enemyShip={
     speedLvl: 2,
     spotLvl: 2,
 };
+BBAdata.ObjectMod.fighterEnemy={
+
+};
+BBAdata.ObjectMod.biggerEnemy={
+    doingNow: 'changeManouver',
+    doingTime: -1,
+    Manouver: 'goStraight',
+    toDo: [
+        {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+    ],
+
+    spotTick: 8,
+    spotArr: [0,
+        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+    ],
+    shipVariables:{
+        spotRad: {Const: 80, RandInt: 80},
+        spotRad2: {Const: 300, RandInt: 200},
+        spotAngle2: {Const: 30, RandInt: 30}
+    },
+
+};
 BBAdata.ObjectMod.viewLetterSmall={
     view:{
         Letter: 'A',
@@ -490,6 +514,7 @@ BBAdata.ObjectData.carras={
 BBAdata.ObjectData.muerto={
     LoadModules:{
         enemyShip:{},
+        biggerEnemy:{},
     },
     view:{
         Letter: 'M',
@@ -506,35 +531,16 @@ BBAdata.ObjectData.muerto={
         {t:'rose', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 50, lastShot: 100, AtOnce: 9, RoseAngle: 4, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}
     ],
 
-    doingNow: 'changeManouver',
-    doingTime: -1,
-    Manouver: 'goStraight',
-    toDo: [
-        {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
-    ],
-
     speedArr:[0,
         {S:1, T:1},
         {S:3, T:2},
         {S:6, T:2}
     ],
-    spotTick: 8,
-    spotArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
-    ],
-
-    shipVariables:{
-        spotRad: {Const: 80, RandInt: 80},
-        spotRad2: {Const: 300, RandInt: 200},
-        spotAngle2: {Const: 30, RandInt: 30}
-    },
-
 };
 BBAdata.ObjectData.nemezis={
     LoadModules:{
         enemyShip:{},
+        biggerEnemy:{},
     },
     view:{
         Letter: 'N',
@@ -553,34 +559,16 @@ BBAdata.ObjectData.nemezis={
 
     weapon:[{t:'bomb', Speed: 10, Dec: 50, BombType: 0, gunSpeed: 40, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}],
 
-    doingNow: 'changeManouver',
-    doingTime: -1,
-    Manouver: 'goStraight',
-    toDo: [
-        {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70},
-    ],
-
     speedArr:[0,
         {S:1, T:1},
         {S:3, T:2},
         {S:6, T:2}
     ],
-    spotTick: 8,
-    spotArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
-    ],
-
-    shipVariables:{
-        spotRad: {Const: 80, RandInt: 80},
-        spotRad2: {Const: 300, RandInt: 200},
-        spotAngle2: {Const: 30, RandInt: 30}
-    },
 };
 BBAdata.ObjectData.warastein={
     LoadModules:{
         enemyShip:{},
+        biggerEnemy:{},
     },
     view:{
         Letter: 'W',
@@ -597,12 +585,8 @@ BBAdata.ObjectData.warastein={
 
     weapon:[{t:'bomb', Speed: 10, Dec: 12, BombType: 0, gunSpeed: 140, lastShot: 100, maxSpeed: 2, makeAction: {Manuover: 'goStraight', doingTime:55, gotoSpeed:1}, minAlarm: 5, minDistToEnemy: 400}],
 
-    doingNow: 'changeManouver',
-    doingTime: -1,
-    Manouver: 'goStraight',
     toDo: [
         {N:61,T:'changeSpeed', maxSpeedLvl: 1, gotoSpeed: 2},
-        {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70}
     ],
 
     speedArr:[0,
@@ -610,23 +594,11 @@ BBAdata.ObjectData.warastein={
         {S:7, T:3},
         {S:7, T:3}
     ],
-    spotTick: 8,
-    spotArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
-    ],
-
-    shipVariables:{
-        spotRad: {Const: 120, RandInt: 80},
-        spotRad2: {Const: 300, RandInt: 200},
-        spotAngle2: {Const: 30, RandInt: 30}
-    },
-
 };
 BBAdata.ObjectData.dandares={
     LoadModules:{
         enemyShip:{},
+        biggerEnemy:{removeToDo:['changeManouver'],},
     },
     view:{
         Letter: 'D',
@@ -651,27 +623,11 @@ BBAdata.ObjectData.dandares={
     squadSchemeType: {t:'directPlaces', count: 16, radius: 100, placementT:'round', placement: 'oddFirst', makeFirst: 8, life: 3, data:{type:'shieldBlob', lifeM:6}},
     squadScheme: [],
 
-    doingNow: 'changeManouver',
-    doingTime: -1,
-    Manouver: 'goStraight',
-
     speedArr:[0,
         {S:1, T:0.5},
         {S:4, T:2},
         {S:8, T:2}
     ],
-    spotTick: 8,
-    spotArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
-    ],
-
-    shipVariables:{
-        spotRad: {Const: 80, RandInt: 80},
-        spotRad2: {Const: 300, RandInt: 200},
-        spotAngle2: {Const: 30, RandInt: 30}
-    },
 };
 BBAdata.ObjectData.shieldBlob={
     M: 'moving',
