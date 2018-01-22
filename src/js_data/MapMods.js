@@ -19,20 +19,20 @@
 
 
 
-BBAdata.MapMODS = {};
-BBAdata.MapMODS.sitOnMap={
+if(typeof BBAdata.ObjectMods == 'undefined') BBAdata.ObjectMods = {};
+BBAdata.ObjectMods.sitOnMap={
     toDo:[
         {N:23,T:'stayInRegion', X:0, Y:0, Radius: 700 },
         {N:1, T:'goStraight', straightMin: 200, straightPlus: 100 },
     ],
 };
-BBAdata.MapMODS.vuvisPlusSpeed={
+BBAdata.ObjectMods.vuvisPlusSpeed={
     who:['vuvis'],
     shipVariables:{
         speed: {Const: 34, Rand: 6},    // dont work
     },
 };
-BBAdata.MapMODS.startWithShield={
+BBAdata.ObjectMods.startWithShield={
     energyField: 5,
     MapModActions:[{
         t:'addShield',
@@ -44,14 +44,14 @@ BBAdata.MapMODS.startWithShield={
         },
     }],
 };
-BBAdata.MapMODS.colorGold={      view:{Color: 'gold'} };
-BBAdata.MapMODS.darkGreenColor={ view:{Color: '#070'} };
-BBAdata.MapMODS.greenColor={     view:{Color: '#0C0'} };
-BBAdata.MapMODS.orangeColor={    view:{Color: '#FC0'} };
-BBAdata.MapMODS.violetColor={    view:{Color: '#408'} };
-BBAdata.MapMODS.whiteColor={     view:{Color: 'white'} };
+BBAdata.ObjectMods.colorGold={      view:{Color: 'gold'} };
+BBAdata.ObjectMods.darkGreenColor={ view:{Color: '#070'} };
+BBAdata.ObjectMods.greenColor={     view:{Color: '#0C0'} };
+BBAdata.ObjectMods.orangeColor={    view:{Color: '#FC0'} };
+BBAdata.ObjectMods.violetColor={    view:{Color: '#408'} };
+BBAdata.ObjectMods.whiteColor={     view:{Color: 'white'} };
 
-BBAdata.MapMODS.allAvoid={
+BBAdata.ObjectMods.allAvoid={
     who:['carras','hajaher','cloaker','dregos','hiacynt','zarahiash','vitotas','slimensen','slimensen1','slimensen2','slimensen3','slimensen4'],
     toDo:[
         {N:74,T:'alarmAboutIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 5, alarmRadius: 150},
@@ -59,26 +59,26 @@ BBAdata.MapMODS.allAvoid={
         {N:72,T:'avoidIncomingFire', FlagsRequired:{incomingFireFlag:true}, minAlarm: 5, avoidTime: 12},
     ],
 };
-BBAdata.MapMODS.healthSplit={
+BBAdata.ObjectMods.healthSplit={
     who:['carras'],
     weapon:[{t:'healthSplit', gunSpeed: 5, lastShot: 100, minHealth: 1, Radius: 200, doNextWeapon: true}],
 };
-BBAdata.MapMODS.carras25health={
+BBAdata.ObjectMods.carras25health={
     who:['carras'],
     lifeM:25,
     life:25,
 };
-BBAdata.MapMODS.greenSquadMembers={
+BBAdata.ObjectMods.greenSquadMembers={
     squadSchemeType: {data:{SquadMods:['greenColor']}},
     MapModActions:[{t:'tryBuildSquads'}],
 };
-BBAdata.MapMODS.orhenesShipsI={
+BBAdata.ObjectMods.orhenesShipsI={
     who:['orhenes'],
     view:{Color: 'white'},
     squadSchemeType: {t:'loose', count: 8, data:{type:'enemyShip', objectType:'iskariot', SquadMods:['whiteColor']}},
     MapModActions:[{t:'tryBuildSquads'}],
 };
-BBAdata.MapMODS.orhenesSecure1={
+BBAdata.ObjectMods.orhenesSecure1={
     who:['orhenes'],
     squadSchemeTypeArray: [
         {t:'loose', count: 2, data:{type:'enemyShip', objectType:'fariax'}},
@@ -87,7 +87,7 @@ BBAdata.MapMODS.orhenesSecure1={
     ],
     MapModActions:[{t:'tryBuildSquads'}],
 };
-BBAdata.MapMODS.orhenesSecure2={
+BBAdata.ObjectMods.orhenesSecure2={
     who:['orhenes'],
     view: {Color:'#408'},
     squadSchemeTypeArray: [
@@ -97,7 +97,7 @@ BBAdata.MapMODS.orhenesSecure2={
     ],
     MapModActions:[{t:'tryBuildSquads'}],
 };
-BBAdata.MapMODS.orhenesSecure3={
+BBAdata.ObjectMods.orhenesSecure3={
     who:['orhenes'],
     view: {Color:'#070'},
     squadSchemeTypeArray: [
@@ -107,7 +107,7 @@ BBAdata.MapMODS.orhenesSecure3={
     ],
     MapModActions:[{t:'tryBuildSquads'}],
 };
-BBAdata.MapMODS.orhenesSecure4={
+BBAdata.ObjectMods.orhenesSecure4={
     who:['orhenes'],
     view: {Color:'#0C0'},
     squadSchemeTypeArray: [
@@ -117,7 +117,7 @@ BBAdata.MapMODS.orhenesSecure4={
     ],
     MapModActions:[{t:'tryBuildSquads'}],
 };
-BBAdata.MapMODS.orhenesSecure5={
+BBAdata.ObjectMods.orhenesSecure5={
     who:['orhenes'],
     view: {Color:'#408'},
     squadSchemeTypeArray: [
@@ -125,7 +125,7 @@ BBAdata.MapMODS.orhenesSecure5={
     ],
     MapModActions:[{t:'tryBuildSquads'}],
 };
-BBAdata.MapMODS.saisungVuvisOrbiters={
+BBAdata.ObjectMods.saisungVuvisOrbiters={
     who:['saisung'],
     view: {Color:'#408'},
     squadSchemeTypeArray: [
@@ -133,7 +133,7 @@ BBAdata.MapMODS.saisungVuvisOrbiters={
     ],
     MapModActions:[{t:'tryBuildSquads'}],
 };
-BBAdata.MapMODS.vuvisOrbit={
+BBAdata.ObjectMods.vuvisOrbit={
     who:['vuvis'],
     toDo:[
         {N:58,T:'goOrbit', minAlarm: 5},

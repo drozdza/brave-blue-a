@@ -1,5 +1,5 @@
 BBAdata.ObjectData={};
-BBAdata.ObjectMod={};
+BBAdata.ObjectMods={};
 // =============================================================================
 
 BBAdata.ObjectData.routePoint={
@@ -249,10 +249,10 @@ BBAdata.ObjectData.MineMod_hedgehog={
     },
 };
 
-BBAdata.ObjectMod.aliveUnit={
+BBAdata.ObjectMods.aliveUnit={
     lifeM: 1,
 };
-BBAdata.ObjectMod.Star={
+BBAdata.ObjectMods.Star={
     view:{
         LIBpath:'StarPath',
         PathSize:30,
@@ -392,7 +392,7 @@ BBAdata.ObjectData.enemyShip={
 };
 
 
-BBAdata.ObjectMod.enemyShip={
+BBAdata.ObjectMods.enemyShip={
     M: 'comp',
     TT: 'enemy',
     lastSpeedT: 0,
@@ -418,10 +418,10 @@ BBAdata.ObjectMod.enemyShip={
     speedLvl: 2,
     spotLvl: 2,
 };
-BBAdata.ObjectMod.fighterEnemy={
+BBAdata.ObjectMods.fighterEnemy={
 
 };
-BBAdata.ObjectMod.biggerEnemy={
+BBAdata.ObjectMods.biggerEnemy={
     doingNow: 'changeManouver',
     doingTime: -1,
     Manouver: 'goStraight',
@@ -442,7 +442,7 @@ BBAdata.ObjectMod.biggerEnemy={
     },
 
 };
-BBAdata.ObjectMod.viewLetterSmall={
+BBAdata.ObjectMods.viewLetterSmall={
     view:{
         Letter: 'A',
         LetterSize: 16,
@@ -451,7 +451,7 @@ BBAdata.ObjectMod.viewLetterSmall={
         HitPattern: 'HullFire_20',
     },
 };
-BBAdata.ObjectMod.viewLetterMedium={
+BBAdata.ObjectMods.viewLetterMedium={
     view:{
         Letter: 'A',
         LetterSize: 40,
@@ -460,7 +460,7 @@ BBAdata.ObjectMod.viewLetterMedium={
         HitPattern: 'HullFire_40',
     },
 };
-BBAdata.ObjectMod.viewLetterBig={
+BBAdata.ObjectMods.viewLetterBig={
     view:{
         Letter: 'A',
         LetterSize: 80,

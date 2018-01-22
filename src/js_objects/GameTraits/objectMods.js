@@ -14,11 +14,11 @@ GAMEobject.prototype.addTeamMods = function(o, Team){
             this.addBoardMod(o,Setting.TeamMods[Team][k]);
 }
 
-GAMEobject.prototype.addBoardMod = function(o,MODname){
+GAMEobject.prototype.addBoardMod = function(o,MODnameORobject){
     var MOD,O = this.O[o];
 
-    if(typeof MODname == 'string') MOD = cloneObj(BBAdata['MapMODS'][MODname]);
-            else                   MOD = cloneObj(MODname);
+    if(typeof MODnameORobject == 'string') MOD = cloneObj(BBAdata.ObjectMods[MODnameORobject]);
+            else                           MOD = cloneObj(MODnameORobject);
 
     if(typeof MOD.who != 'undefined'){
         var jest=false;
