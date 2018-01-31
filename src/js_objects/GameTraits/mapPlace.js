@@ -55,8 +55,8 @@ GAMEobject.prototype.mapPlace_What = function(Setting, Place, What, defXY){
                 var Team = false;
                 if(typeof Place.Team != 'undefined') Team = Place.Team;
                 if(typeof Odata.Team != 'undefined') Team = Odata.Team;
-                if(Odata.ObjMod)
-                    this.addBoardMod(L, Odata.ObjMod);
+                if(Odata.Mod)
+                    this.addBoardMod(L, Odata.Mod);
                 if(Team){
                     // this.addToTeam(L, Team);
                     this.addTeamMods(L, Team);

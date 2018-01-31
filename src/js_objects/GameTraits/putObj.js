@@ -1,14 +1,14 @@
 // to do refaktoryzacji
 GAMEobject.prototype.putObj_getModules = function(moduleName, moduleData){
     var Omods = {};
-    console.log(moduleName);
+    // console.log(moduleName);
 
-    if(typeof BBAdata.ObjectMod[moduleName] == 'undefined'){
-        console.log('ObjectMod "'+moduleName+'" not found!');
+    if(typeof BBAdata.ObjectMods[moduleName] == 'undefined'){
+        console.log('ObjectMods "'+moduleName+'" not found!');
         return {};
     }
 
-    Omods = cloneObj(BBAdata.ObjectMod[moduleName]);
+    Omods = cloneObj(BBAdata.ObjectMods[moduleName]);
 
     if(Omods.LoadModules){
         for(var mmName in Omods.LoadModules){

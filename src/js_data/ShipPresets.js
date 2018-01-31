@@ -664,7 +664,7 @@ BBAdata['SHIPpresetsOld']={
             {T:'healerProd',Disabled:0,Emin:4,Emax:16,E:0,Prod:0,ifProd:1440 },
             {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,E:0,Prod:0,ifProd:150 },
             {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,E:0,Prod:0,ifProd:150 },
-            {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,E:0,Prod:0,ifProd:150 },
+            {T:'Prod',      Disabled:0,subT:'Bomb',Storage:'Bomb',Emin:1,Emax:10,E:0,Prod:0,ifProd:50 },
             {T:'radar',     Disabled:1,Emin:1,Emax:30,E:0,Prod:0,ifProd:5400,Radius:4500},
         ],
         SpecialMoves:{
