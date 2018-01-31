@@ -100,7 +100,7 @@ GAMEobject.prototype.shipFunc_glueFireToEstimated = function(EsteemedPos){
     }
 
     for(var F in this.O){
-        if(!(this.O[F].T=='star' || this.O[F].T=='space_mine')) continue;
+        if(!(this.O[F].T=='star' || this.O[F].T=='Mine')) continue;
         if(this.O[F].undestructible > 0) continue;
         if(this.O[F].life < 1) continue;
         X = this.mouseX - this.O[F].x;

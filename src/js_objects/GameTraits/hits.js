@@ -87,7 +87,7 @@ GAMEobject.prototype.hit = function(o,q){
         }
         if(Q.TT=='enemy' || Q.mapType=='A' || Q.T=='missile' || Q.T=='bullet_bomb' || Q.T=='shieldBlob')
             this.makeDMG(q,O.DMG,o);
-        if(Q.T=='space_mine'){
+        if(Q.T=='Mine'){
             this.explodeBomb(q,Q.onDie);
             this.removeObj(o);
         }
@@ -247,7 +247,7 @@ GAMEobject.prototype.dieObj = function(O,o){
             this.C[umo]=0;
         ++this.C[umo];
     }
-    if(O.T!='missile' && O.T!='bullet_bomb' && O.T!='space_mine' && !O.onDieHideExplosion)
+    if(O.T!='missile' && O.T!='bullet_bomb' && O.T!='Mine' && !O.onDieHideExplosion)
         this.putObj_animation('hitBig', O.x, O.y);
 
     if(O.squadDirectPlace)
@@ -268,7 +268,7 @@ GAMEobject.prototype.dieObj = function(O,o){
         }
     }
 
-    if(O.T=='space_mine') {
+    if(O.T=='Mine') {
         O.toDo=[{T:'explode'}];
         O.Flags.gotHitFlag = false;
         O.doingTime = 3;

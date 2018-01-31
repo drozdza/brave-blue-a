@@ -209,7 +209,7 @@ GAMEobject.prototype.disbandSquad = function(O){
             if(sO.squadT && sO.squadT == 'laserAim'){
                 this.removeObj( O.squadScheme[i].Oid );
             }
-            if(sO.T == 'space_mine'){
+            if(sO.T == 'Mine'){
                 this.explodeBomb( O.squadScheme[i].Oid, sO.onDie );
                 this.removeObj(O.squadScheme[i].Oid);
             }

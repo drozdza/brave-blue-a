@@ -83,7 +83,7 @@ BBAdata.ObjectData.bullet_bomb={
     Manouver: 'goStraight',
     Flags:{},
 };
-BBAdata.ObjectData.space_mine={
+BBAdata.ObjectData.Mine={
     M: 'comp',
     view:{
         Letter: 'R',
@@ -2473,7 +2473,7 @@ BBAdata.ObjectData.hedgehog={
         life: 1,
         data:{
             type:'enemyShip',
-            objectType:'space_mine',
+            objectType:'Mine',
             Mod:{explodePreset:'MineNailsConePalm',overWriteObjects:['MineMod_Cone','MineMod_hedgehog']},
             squadAngleType:'alongDirection',
             lifeM:1

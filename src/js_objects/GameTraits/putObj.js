@@ -66,6 +66,9 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
 
     O = this.putObj_fromArray(O,Type);
 
+
+
+
     var Mode = O.M;
 
 
@@ -79,7 +82,7 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
         O.mapCollide      = ['M'];
     }
 
-    if(Type=='healing_missile' || Type=='energy_field_missile' || Type=='missile' || Type=='bullet_bomb' || Type=='space_mine' || Type=='shieldBlob'){
+    if(Type=='healing_missile' || Type=='energy_field_missile' || Type=='missile' || Type=='bullet_bomb' || Type=='Mine' || Type=='shieldBlob'){
         if(Side==2){
             O.mapType = 'M';
             O.mapCollide = ['E','ME','A'];
@@ -106,6 +109,8 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
     O.life = O.lifeM;
 
     this.O[ L ] = O;
+
+    this.addBoardMods(L);
 
     this.putObj_changeMode(L, Mode);
     this.tryBuildSquads(O,L);
@@ -302,7 +307,7 @@ GAMEobject.prototype.removeObj = function(o){
     if(o==0) return false;
     if(typeof this.O[o] == 'undefined') return false;
 
-    if(this.O[o].T=='space_mine'){
+    if(this.O[o].T=='Mine'){
         ++this.C['B_minesExplode'];
         --this.C['E:mines'];
     }

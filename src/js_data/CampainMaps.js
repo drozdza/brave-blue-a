@@ -94,7 +94,7 @@ BBAdata.MAPS.HardX = {
     Ship:{Start:{X: -500, Y: 0, A:90}},
     BoardMods:['sitOnMap'],
     Place:[
-        {Random:{X: 1000, Y: 0, Radius: 500}, What:{StarX:80}},
+        {Random:{X: 1000, Y: 0, Radius: 500}, What:{StarL:20,StarM:20,Star:20,StarS:20}},
         {Random:{X: 2000, Y: 0, Radius: 500}, What:{Q:12}},
     ]
 };

@@ -18,7 +18,7 @@ BBAdata.MAPS.First={
     },
     BoardMods:['sitOnMap','allAvoid'],
     Ship:{Start:{X: 0, Y: -400, A:180}},
-    Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{StarX: 20}}],
+    Place:[{Random:{X: 400, Y: 0, Radius: 200}, What:{StarL:5,StarM:5,Star:5,StarS:5}}],
     WinningConds:[{T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, RewardGold:100000, RewardFlags:{C_First:1}}],
     Routes:{C_First:{
             'First_A':{A:'First',B:'A'},
@@ -232,62 +232,62 @@ BBAdata.MAPS.Lx960={
 };
 BBAdata.MAPS.Lx373={
     BoardMods:['sitOnMap','allAvoid'],
-    Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{StarX: 60, Wi:10}}],
+    Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{StarL:15,StarM:15,Star:15,StarS:15, Wi:10}}],
 };
 BBAdata.MAPS.Lx948={
     BoardMods:['sitOnMap','allAvoid'],
-    Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{StarX: 60, Ni:20}}],
+    Place:[{Random:{X: 0, Y: 0, Radius: 800}, What:{StarL:15,StarM:15,Star:15,StarS:15, Ni:20}}],
 };
 BBAdata.MAPS.Lx1002={
     BoardMods:['sitOnMap','allAvoid'],
     Place:[
-        {RingOf:{X: 0, Y: 0, Radius: 800}, What:{StarX: 60}},
+        {RingOf:{X: 0, Y: 0, Radius: 800}, What:{StarL:15,StarM:15,Star:15,StarS:15}},
         {Random:{X: 0, Y: 0, Radius: 800}, What:{SH:20}}
     ],
 };
 BBAdata.MAPS.L={
     BoardMods:['sitOnMap','allAvoid'],
-    Place:[{Random:{X: 0, Y: 0, Radius: 1000}, What:{StarX: 60, L:10, F:5, M:10, T:10, K:3}}],
+    Place:[{Random:{X: 0, Y: 0, Radius: 1000}, What:{StarL:15,StarM:15,Star:15,StarS:15, L:10, F:5, M:10, T:10, K:3}}],
 };
 BBAdata.MAPS.Lx3450={
     BoardMods:['sitOnMap','allAvoid'],
     Place:[
-        {RingOf:{X: 0, Y: 0, Radius: 800, RadiusPlus:200}, What:{StarX: 60}},
+        {RingOf:{X: 0, Y: 0, Radius: 800, RadiusPlus:200}, What:{StarL:15,StarM:15,Star:15,StarS:15}},
         {Random:{X: 0, Y: 0, Radius: 800}, What:{SL2:12,SL3:12,SL4:12}}
     ],
 };
 BBAdata.MAPS.Lx1006={
     BoardMods:['sitOnMap','allAvoid'],
     Place:[
-        {RingOf:{X: 0, Y: 0, Radius: 800, RadiusPlus:200}, What:{StarX: 60}},
+        {RingOf:{X: 0, Y: 0, Radius: 800, RadiusPlus:200}, What:{StarL:15,StarM:15,Star:15,StarS:15}},
         {RingOf:{X: 0, Y: 0, Radius: 1200}, What:{TT:6}}
     ],
 };
 BBAdata.MAPS.Lx992={
     BoardMods:['sitOnMap','allAvoid'],
     Place:[
-        {RingOf:{X: 0, Y: 0, Radius: 800, RadiusPlus:200}, What:{StarX: 60}},
+        {RingOf:{X: 0, Y: 0, Radius: 800, RadiusPlus:200}, What:{StarL:15,StarM:15,Star:15,StarS:15}},
         {Random:{X: 0, Y: 0, Radius: 800}, What:{CD:8}}
     ],
 };
 BBAdata.MAPS.Lx937={
     BoardMods:['sitOnMap','allAvoid'],
     Place:[
-        {RingOf:{X: 0, Y: 0, Radius: 800, RadiusPlus:200}, What:{StarX: 60}},
+        {RingOf:{X: 0, Y: 0, Radius: 800, RadiusPlus:200}, What:{StarL:15,StarM:15,Star:15,StarS:15}},
         {RingOf:{X: 0, Y: 0, Radius: 1000}, What:{HH:10,L:1}}
     ],
 };
 BBAdata.MAPS.Lx467={
     BoardMods:['sitOnMap','allAvoid'],
     Place:[
-        {RingOf:{X: 0, Y: 0, Radius: 800, RadiusPlus:200}, What:{StarX: 60}},
+        {RingOf:{X: 0, Y: 0, Radius: 800, RadiusPlus:200}, What:{StarL:15,StarM:15,Star:15,StarS:15}},
         {RingOf:{X: 0, Y: 0, Radius: 1000}, What:{UU:20,L:1,K:4}}
     ],
 };
 BBAdata.MAPS.Lx5084={
     BoardMods:['sitOnMap','allAvoid'],
     Place:[
-        {RingOf:{X: 0, Y: 0, Radius: 800, RadiusPlus:200}, What:{StarX: 60}},
+        {RingOf:{X: 0, Y: 0, Radius: 800, RadiusPlus:200}, What:{StarL:15,StarM:15,Star:15,StarS:15}},
         {RingOf:{X: 0, Y: 0, Radius: 1000}, What:{Tu:10,Q:6,F:4,K:4}}
     ],
 };
@@ -349,11 +349,11 @@ BBAdata.MAPS.Lx1414={
 
 BBAdata.MAPS.HealthSplit={
     BoardMods:['sitOnMap','allAvoid','healthSplit','carras25health'],
-    Place:[{Random:{X: 0, Y: 0, Radius: 1000}, What:{StarX: 25, A: 10}}],
+    Place:[{Random:{X: 0, Y: 0, Radius: 1000}, What:{StarL:10,StarM:10,Star:10,StarS:10, A: 10}}],
 };
 BBAdata.MAPS.Stars={
     BoardMods:['sitOnMap','allAvoid'],
-    Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{StarX:120, I:20, C:20}}],
+    Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{StarL:30,StarM:30,Star:30,StarS:30, I:20, C:20}}],
 };
 BBAdata.MAPS.Followers={
     BoardMods:['sitOnMap','allAvoid'],
@@ -397,7 +397,7 @@ BBAdata.MAPS.HardCore={
             SH:10, TT:10, CD:5, HH:5, UU:5, Tu:8, Ii:5, HS:5, HS:8,
             Y:2, Yi:2, Yl:2, Yb:2,
         }},
-        {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarX:150,iD:10,Wi:10}},
+        {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarL:40,StarM:30,Star:40,StarS:40,iD:10,Wi:10}},
         {What:{Gstar:1},Mod:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}},
         {CircleOf:{X:0, Y:-3000, Radius: 120, Angle: 0, AnglePlus: 22.5}, What:{Star:16}},
         {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},

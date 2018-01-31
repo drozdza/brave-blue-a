@@ -7,7 +7,7 @@ GAMEobject.prototype.mapPlace = function(Setting,Place,defXY){
     this.mapPlace_removePlaceDef();
 }
 GAMEobject.prototype.mapPlace_What = function(Setting, Place, What, defXY){
-    var Odata,Otype,w,elemI,mapXY,L,StarType;
+    var Odata,Otype,w,elemI,mapXY,o;
     for(w in What){
         if(isNaN(w)) Odata = {t:w, q:What[w]};
             else     Odata = What[w];
@@ -32,53 +32,36 @@ GAMEobject.prototype.mapPlace_What = function(Setting, Place, What, defXY){
 
             if(typeof BBAdata.ShipNames[Otype] != 'undefined') Otype = BBAdata.ShipNames[Otype];
 
-            if(Otype=='StarX'){
-                StarType = ['','M','S','L'];
-                L = this.putObj('Star'+StarType[ parseInt(Math.random()*4) ], 1, mapXY.x, mapXY.y);
-            }else if(Otype=='RoundField'){
-                L = this.putObj('RoundField', 1, mapXY.x, mapXY.y);
-            }else if(Otype=='SquareField'){
-                L = this.putObj('SquareField', 1, mapXY.x, mapXY.y);
-            }else if(Otype=='ConeField'){
-                L = this.putObj('ConeField', 1, mapXY.x, mapXY.y);
-            }else if(Otype=='Mine'){
-                L = this.putObj('space_mine', 1, mapXY.x, mapXY.y);
-                ++this.C['B_minesSet'];
-                ++this.C['E:mines'];
-            } else {
-                L = this.putObj(Otype, 1, mapXY.x, mapXY.y);
-                
-                this.addBoardMods(L);
+            o = this.putObj(Otype, 1, mapXY.x, mapXY.y);
 
-                if(typeof Place.PlaceMods !='undefined')
-                    for(var k in Place.PlaceMods)
-                        this.addMod(L, Place.PlaceMods[k]);
 
-                var Team = false;
-                if(typeof Place.Team != 'undefined') Team = Place.Team;
-                if(typeof Odata.Team != 'undefined') Team = Odata.Team;
-                if(Odata.Mod)
-                    this.addMod(L, Odata.Mod);
-                if(Team){
-                    // this.addToTeam(L, Team);
-                    this.addTeamMods(L, Team);
-                }
+            if(typeof Place.PlaceMods !='undefined')
+                for(var k in Place.PlaceMods)
+                    this.addMod(o, Place.PlaceMods[k]);
+
+            var Team = false;
+            if(typeof Place.Team != 'undefined') Team = Place.Team;
+            if(typeof Odata.Team != 'undefined') Team = Odata.Team;
+            if(Team){
+                // this.addToTeam(o, Team);
+                this.addTeamMods(o, Team);
             }
+            if(Odata.Mod) this.addMod(o, Odata.Mod);
+            if(Place.Mod) this.addMod(o, Place.Mod);
+
             if (mapXY.N)
-                this.O[L].mapBuildName = mapXY.N;
+                this.O[o].mapBuildName = mapXY.N;
 
             if(typeof Place.Construct != 'undefined')
-                this.buildConstructs(L, Place.Construct);
+                this.buildConstructs(o, Place.Construct);
 
             if(typeof Place.Background != 'undefined'){
-                CanvasManager.CBM.deleteObjectFromBackground(L,false,1);
-                CanvasManager.CBM.addObjectToBackground(L,Place.Background);
-                this.removeFromXY(L);
-                this.O[L].mapType = false;
+                CanvasManager.CBM.deleteObjectFromBackground(o,false,1);
+                CanvasManager.CBM.addObjectToBackground(o,Place.Background);
+                this.removeFromXY(o);
+                this.O[o].mapType = false;
             }
 
-            if(typeof Place.objData !='undefined' && L!=-1)
-                this.addMod(L, Place.objData);
         }
     }
 }

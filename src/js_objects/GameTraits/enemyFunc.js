@@ -51,7 +51,7 @@ GAMEobject.prototype.shootShieldAddMissile = function(o,Target){
     this.O[L].MaxEnergyField = parseInt(this.O[Target].lifeM/2);
 }
 GAMEobject.prototype.dropSpaceMine = function(S,x,y,Angle,bombData){
-    var L = this.putObj('space_mine',S,x,y);
+    var L = this.putObj('Mine',S,x,y);
     if(Angle){
         this.O[L].angle=Angle;
         this.O[L].speed=20;
