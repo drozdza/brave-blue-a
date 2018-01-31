@@ -21,9 +21,9 @@ BBAdata.MAPS.Secure3 = {
         {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarX:120}},
         {RingOf:{X: 0, Y:0, Radius: 1400, RadiusPlus: 200}, What:{StarX:120}},
         {RingOf:{X: 0, Y:0, Radius: 2200}, What:{Star:180}},
-        {Random:{X: 0, Y: 0, Radius: 2200}, What: {Q:4}, GroupMods:['orhenesSecure1']},
-        {Random:{X: 0, Y: 0, Radius: 2200}, What: {Q:4}, GroupMods:['orhenesSecure2']},
+        {Random:{X: 0, Y: 0, Radius: 2200}, What: {Q:4}, PlaceMods:['orhenesSecure1']},
+        {Random:{X: 0, Y: 0, Radius: 2200}, What: {Q:4}, PlaceMods:['orhenesSecure2']},
         {CircleOf:{X:0, Y:-3000, Radius: 120, Angle: 0, AnglePlus: 22.5}, What:{Star:16}},
-        {What:{RoundField:1},objData:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
+        {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
     ],
 };

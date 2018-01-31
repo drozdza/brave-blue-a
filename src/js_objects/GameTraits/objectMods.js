@@ -3,7 +3,7 @@ GAMEobject.prototype.addBoardMods = function(o){
 
     if(typeof Setting.BoardMods !='undefined')
         for(var k in Setting.BoardMods)
-            this.addBoardMod(o,Setting.BoardMods[k]);
+            this.addMod(o,Setting.BoardMods[k]);
 }
 
 GAMEobject.prototype.addTeamMods = function(o, Team){
@@ -11,10 +11,10 @@ GAMEobject.prototype.addTeamMods = function(o, Team){
 
     if(typeof Setting.TeamMods != 'undefined' && typeof Setting.TeamMods[Team] != 'undefined')
         for(var k in Setting.TeamMods[Team])
-            this.addBoardMod(o,Setting.TeamMods[Team][k]);
+            this.addMod(o,Setting.TeamMods[Team][k]);
 }
 
-GAMEobject.prototype.addBoardMod = function(o,MODnameORobject){
+GAMEobject.prototype.addMod = function(o,MODnameORobject){
     var MOD,O = this.O[o];
 
     if(typeof MODnameORobject == 'string') MOD = cloneObj(BBAdata.ObjectMods[MODnameORobject]);
@@ -37,7 +37,7 @@ GAMEobject.prototype.addBoardMod = function(o,MODnameORobject){
         switch(KI){
             case 'overWriteObjects':
                 for(var i in MOD[KI])
-                    this.addBoardMod(o,BBAdata['ObjectData'][ MOD[KI][i] ]);
+                    this.addMod(o,BBAdata['ObjectData'][ MOD[KI][i] ]);
             break; case 'removeToDo':
             console.log('removeToDo');
                 for(var i in MOD.removeToDo)

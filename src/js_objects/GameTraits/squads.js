@@ -127,10 +127,10 @@ GAMEobject.prototype.setSquadMember = function(o,i,life){
 
     if(typeof OSS.SquadMods !='undefined')
         for(var k in OSS.SquadMods)
-            this.addBoardMod(Sid,OSS.SquadMods[k]);
+            this.addMod(Sid,OSS.SquadMods[k]);
 
     if(typeof OSS.objData !='undefined')
-        this.addBoardMod(Sid,OSS.objData);
+        this.addMod(Sid,OSS.objData);
     this.O[Sid].Flags=[];
 
     CanvasManager.requestCanvas( Sid );

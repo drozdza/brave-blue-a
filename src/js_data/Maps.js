@@ -185,15 +185,15 @@ BBAdata.MAPS.F={
 BBAdata.MAPS.Q={
     BoardMods:['sitOnMap'],
     Place:[
-        {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:3, K:2},GroupMods:['greenColor','greenSquadMembers']},
-        {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:3, K:2},GroupMods:['orangeColor','orhenesShipsI']},
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:3, K:2},PlaceMods:['greenColor','greenSquadMembers']},
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:3, K:2},PlaceMods:['orangeColor','orhenesShipsI']},
     ],
 };
 BBAdata.MAPS.Q2={
     BoardMods:['sitOnMap'],
     Place:[
-        {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:2, K:2},GroupMods:['orangeColor','orhenesShipsI']},
-        {Random:{X: 0, Y: 0, Radius: 800}, What:{Q:4},GroupMods:['orhenesSecure5']},
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:2, K:2},PlaceMods:['orangeColor','orhenesShipsI']},
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{Q:4},PlaceMods:['orhenesSecure5']},
     ],
 };
 BBAdata.MAPS.X={
@@ -219,7 +219,7 @@ BBAdata.MAPS.Lx171={
     BoardMods:['sitOnMap','allAvoid'],
     Place:[
         {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, v:20, K:2}},
-        {Random:{X: 0, Y: 0, Radius: 800}, What:{v:20}, GroupMods:['violetColor','vuvisOrbit']},
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{v:20}, PlaceMods:['violetColor','vuvisOrbit']},
     ],
 };
 BBAdata.MAPS.Lx1130={
@@ -343,7 +343,7 @@ BBAdata.MAPS.Lx1414={
     BoardMods:['sitOnMap','allAvoid','vuvisPlusSpeed'],
     Place:[
         {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, K:2, SI:6}},
-        {Random:{X: 0, Y: 0, Radius: 800}, What:{SI:6},GroupMods:['saisungVuvisOrbiters']}
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{SI:6},PlaceMods:['saisungVuvisOrbiters']}
     ],
 };
 
@@ -375,7 +375,7 @@ BBAdata.MAPS.BigOnes={
     Place:[
         {Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, D:10, M:10, N:10, J:10, W:5, T:10, E:10, G:10, R:10, B:10, K:10, F:10, Q:5,X:5,TT:10,Tu:5}},
         {CircleOf:{X:0, Y:-3000, Radius: 120, Angle: 0, AnglePlus: 22.5}, What:{Star:16}},
-        {What:{RoundField:1},objData:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
+        {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
     ],
 };
 BBAdata.MAPS.HardCore={
@@ -398,9 +398,9 @@ BBAdata.MAPS.HardCore={
             Y:2, Yi:2, Yl:2, Yb:2,
         }},
         {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarX:150,iD:10,Wi:10}},
-        {What:{Gstar:1},objData:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}},
+        {What:{Gstar:1},Mod:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}},
         {CircleOf:{X:0, Y:-3000, Radius: 120, Angle: 0, AnglePlus: 22.5}, What:{Star:16}},
-        {What:{RoundField:1},objData:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
+        {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
     ]
 };
 

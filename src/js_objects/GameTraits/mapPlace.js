@@ -2,7 +2,7 @@
 GAMEobject.prototype.mapPlace = function(Setting,Place,defXY){
     if(typeof defXY == 'undefined') defXY = {x:0,y:0,a:0};
 
-    this.mapPlace_setPlaceDef(Setting,Place,defXY);
+    this.mapPlace_setPlaceDef(Setting, Place, defXY);
     this.mapPlace_What(Setting, Place, Place.What, defXY);
     this.mapPlace_removePlaceDef();
 }
@@ -40,29 +40,31 @@ GAMEobject.prototype.mapPlace_What = function(Setting, Place, What, defXY){
             }else if(Otype=='SquareField'){
                 L = this.putObj('SquareField', 1, mapXY.x, mapXY.y);
             }else if(Otype=='ConeField'){
-                L = this.putObj('ConeField',1, mapXY.x, mapXY.y);
+                L = this.putObj('ConeField', 1, mapXY.x, mapXY.y);
             }else if(Otype=='Mine'){
-                L = this.putObj('space_mine',1, mapXY.x, mapXY.y);
+                L = this.putObj('space_mine', 1, mapXY.x, mapXY.y);
                 ++this.C['B_minesSet'];
                 ++this.C['E:mines'];
             } else {
-                L = this.putObj(Otype,1, mapXY.x, mapXY.y);
+                L = this.putObj(Otype, 1, mapXY.x, mapXY.y);
+                
                 this.addBoardMods(L);
-                if(typeof Place.GroupMods !='undefined')
-                    for(var k in Place.GroupMods)
-                        this.addBoardMod(L, Place.GroupMods[k]);
+
+                if(typeof Place.PlaceMods !='undefined')
+                    for(var k in Place.PlaceMods)
+                        this.addMod(L, Place.PlaceMods[k]);
 
                 var Team = false;
                 if(typeof Place.Team != 'undefined') Team = Place.Team;
                 if(typeof Odata.Team != 'undefined') Team = Odata.Team;
                 if(Odata.Mod)
-                    this.addBoardMod(L, Odata.Mod);
+                    this.addMod(L, Odata.Mod);
                 if(Team){
                     // this.addToTeam(L, Team);
                     this.addTeamMods(L, Team);
                 }
             }
-            if(mapXY.N)
+            if (mapXY.N)
                 this.O[L].mapBuildName = mapXY.N;
 
             if(typeof Place.Construct != 'undefined')
@@ -76,7 +78,7 @@ GAMEobject.prototype.mapPlace_What = function(Setting, Place, What, defXY){
             }
 
             if(typeof Place.objData !='undefined' && L!=-1)
-                this.addBoardMod(L,Place.objData);
+                this.addMod(L, Place.objData);
         }
     }
 }
