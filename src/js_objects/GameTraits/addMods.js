@@ -6,19 +6,20 @@ GAMEobject.prototype.addBoardMods = function(o){
             this.addMod(o,Setting.BoardMods[k]);
 }
 
-GAMEobject.prototype.addTeamMods = function(o, Team){
-    var Setting = this.MapSetting;
 
-    if(typeof Setting.TeamMods != 'undefined' && typeof Setting.TeamMods[Team] != 'undefined')
-        for(var k in Setting.TeamMods[Team])
-            this.addMod(o,Setting.TeamMods[Team][k]);
-}
-
-GAMEobject.prototype.addMod = function(o,MODnameORobject){
+GAMEobject.prototype.addMod = function(o, MODnameORobject){
     var MOD,O = this.O[o];
 
-    if(typeof MODnameORobject == 'string') MOD = cloneObj(BBAdata.ObjectMods[MODnameORobject]);
-            else                           MOD = cloneObj(MODnameORobject);
+    if(typeof MODnameORobject == 'string'){
+        MOD = cloneObj(BBAdata.ObjectMods[MODnameORobject]);
+    } else if(MODnameORobject instanceof Array){
+        for (var x in MODnameORobject) {
+            this.addMod(o, MODnameORobject[x]);
+        }
+        return false;
+    } else {
+        MOD = cloneObj(MODnameORobject);
+    }
 
     if(typeof MOD.who != 'undefined'){
         var jest=false;
@@ -129,7 +130,12 @@ GAMEobject.prototype.addToWeapon = function(o,Weapon){
     this.O[o].weapon.unshift(cloneObj(Weapon));
 }
 GAMEobject.prototype.addToTeam = function(o,Team){
+    var Setting = this.MapSetting;
     this.O[o].Team = Team;
+
+    if(typeof Setting.TeamMods != 'undefined' && typeof Setting.TeamMods[Team] != 'undefined')
+        for(var k in Setting.TeamMods[Team])
+            this.addMod(o, Setting.TeamMods[Team][k]);
 }
 
 GAMEobject.prototype.setRegionAnimation = function(o,animType){

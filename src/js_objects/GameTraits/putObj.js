@@ -19,10 +19,10 @@ GAMEobject.prototype.putObj_getModules = function(moduleName, moduleData){
     return Omods;
 }
 
-GAMEobject.prototype.putObj_fromArray = function(O){
+GAMEobject.prototype.putObj_fromArray = function(O, Type){
 
-    if(typeof BBAdata.ObjectData[O.T] != 'undefined'){
-        var OD = BBAdata.ObjectData[O.T];
+    if(typeof BBAdata.ObjectData[Type] != 'undefined'){
+        var OD = BBAdata.ObjectData[Type];
 
         if(OD.LoadModules){
             Omods = {};
@@ -55,18 +55,14 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
     var L = this.Olen++;
 
     var O={};
+    O = this.putObj_fromArray(O, Type);
     O.x = x;
     O.y = y;
     O.S = Side;
     O.T = Type;
     O.bornTime = this.tick;
     O.periodDMG = {};
-    O.radius = 15;
-    O.TT = 'dust';
-
-    O = this.putObj_fromArray(O,Type);
-
-
+    // O.TT = 'dust';
 
 
     var Mode = O.M;

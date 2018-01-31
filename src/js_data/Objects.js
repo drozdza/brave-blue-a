@@ -10,9 +10,11 @@ BBAdata.ObjectData.routePoint={
 
 BBAdata.ObjectData.destruction_field={
     M: 'region',
+    TT: 'dust',
 };
 BBAdata.ObjectData.healing_missile={
     M: 'comp',
+    TT: 'dust',
     view:{
         Letter: 'J',
         LetterSize: 12,
@@ -23,6 +25,7 @@ BBAdata.ObjectData.healing_missile={
     lifeM: 1,
     speed: 13,
     speedT: 20,
+    radius: 10,
     Heal: 1,
     doingTime: 230,
     onHit:{},
@@ -32,6 +35,7 @@ BBAdata.ObjectData.healing_missile={
 };
 BBAdata.ObjectData.energy_field_missile={
     M: 'comp',
+    TT: 'dust',
     view:{
         Letter: 'E',
         LetterSize: 12,
@@ -40,6 +44,7 @@ BBAdata.ObjectData.energy_field_missile={
     },
 
     lifeM: 1,
+    radius: 10,
     speed: 13,
     speedT: 20,
     doingTime: 230,
@@ -50,6 +55,7 @@ BBAdata.ObjectData.energy_field_missile={
 };
 BBAdata.ObjectData.missile={
     M: 'comp',
+    TT: 'dust',
     view:{
         Letter: 'Y',
         LetterSize: 12,
@@ -58,6 +64,7 @@ BBAdata.ObjectData.missile={
     },
 
     lifeM: 1,
+    radius: 10,
     speed: 15,
     speedT: 3,
     DMG:{Dmg:1,T:'explo'},
@@ -68,6 +75,7 @@ BBAdata.ObjectData.missile={
 };
 BBAdata.ObjectData.bullet_bomb={
     M: 'comp',
+    TT: 'dust',
     view:{
         Letter: 'P',
         LetterSize: 12,
@@ -76,6 +84,7 @@ BBAdata.ObjectData.bullet_bomb={
     },
 
     lifeM: 1,
+    radius: 10,
     speed: 15,
     speedT: 2,
     doingTime: 35,
@@ -305,6 +314,7 @@ BBAdata.ObjectData.Gstar={
         onBackground: 1,
     },
     M:'static',
+    TT: 'dust',
     radius: 90,
     undestructible: 1,
     bounceType: 'straight',
@@ -317,6 +327,7 @@ BBAdata.ObjectData.RoundField={
         onBackground: 1,
     },
     M: 'region',
+    TT: 'dust',
     radius: 50,
     undestructible: 1,
 };
@@ -326,6 +337,7 @@ BBAdata.ObjectData.SquareField={
         onBackground: 1,
     },
     M: 'region',
+    TT: 'dust',
     radius: 50,
     squareAngle: 0,
     squareLen: 50,
@@ -339,6 +351,7 @@ BBAdata.ObjectData.ConeField={
     },
 
     M: 'region',
+    TT: 'dust',
     radius: 50,
     coneAngle: 180,
     coneRad2: 50,

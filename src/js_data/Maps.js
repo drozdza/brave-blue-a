@@ -185,15 +185,15 @@ BBAdata.MAPS.F={
 BBAdata.MAPS.Q={
     BoardMods:['sitOnMap'],
     Place:[
-        {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:3, K:2},PlaceMods:['greenColor','greenSquadMembers']},
-        {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:3, K:2},PlaceMods:['orangeColor','orhenesShipsI']},
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:3, K:2},Mod:['greenColor','greenSquadMembers']},
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:3, K:2},Mod:['orangeColor','orhenesShipsI']},
     ],
 };
 BBAdata.MAPS.Q2={
     BoardMods:['sitOnMap'],
     Place:[
-        {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:2, K:2},PlaceMods:['orangeColor','orhenesShipsI']},
-        {Random:{X: 0, Y: 0, Radius: 800}, What:{Q:4},PlaceMods:['orhenesSecure5']},
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, Q:2, K:2},Mod:['orangeColor','orhenesShipsI']},
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{Q:4},Mod:['orhenesSecure5']},
     ],
 };
 BBAdata.MAPS.X={
@@ -219,7 +219,7 @@ BBAdata.MAPS.Lx171={
     BoardMods:['sitOnMap','allAvoid'],
     Place:[
         {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, v:20, K:2}},
-        {Random:{X: 0, Y: 0, Radius: 800}, What:{v:20}, PlaceMods:['violetColor','vuvisOrbit']},
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{v:20}, Mod:['violetColor','vuvisOrbit']},
     ],
 };
 BBAdata.MAPS.Lx1130={
@@ -343,7 +343,7 @@ BBAdata.MAPS.Lx1414={
     BoardMods:['sitOnMap','allAvoid','vuvisPlusSpeed'],
     Place:[
         {Random:{X: 0, Y: 0, Radius: 800}, What:{Star: 20, K:2, SI:6}},
-        {Random:{X: 0, Y: 0, Radius: 800}, What:{SI:6},PlaceMods:['saisungVuvisOrbiters']}
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{SI:6},Mod:['saisungVuvisOrbiters']}
     ],
 };
 
@@ -484,6 +484,11 @@ BBAdata.MAPS.BuildTry2={
             }},
         }},
     ],
+};
+BBAdata.MAPS.Empty={
+    Place:[
+        {CircleOf:{X:0, Y:0, Radius: 100, Angle: 0, AnglePlus: 60}, What:{StarL:6}},
+    ]
 };
 
 

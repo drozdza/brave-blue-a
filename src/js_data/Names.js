@@ -1,4 +1,4 @@
-BBAdata['ShipNames']={
+BBAdata['ShipShortNames']={
     M:'muerto',
     T:'tartaros',
     B:'belzebub',

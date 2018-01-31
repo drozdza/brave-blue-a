@@ -30,26 +30,18 @@ GAMEobject.prototype.mapPlace_What = function(Setting, Place, What, defXY){
             if(Array.isArray(Odata.t)) Otype = Odata.t[ parseInt(Math.random()*Odata.t.length) ];
                         else           Otype = Odata.t;
 
-            if(typeof BBAdata.ShipNames[Otype] != 'undefined') Otype = BBAdata.ShipNames[Otype];
+            if(typeof BBAdata.ShipShortNames[Otype] != 'undefined')
+                Otype = BBAdata.ShipShortNames[Otype];
 
             o = this.putObj(Otype, 1, mapXY.x, mapXY.y);
 
+            if(Odata.Team) this.addToTeam(o, Odata.Team);
+            if(Place.Team) this.addToTeam(o, Place.Team);
 
-            if(typeof Place.PlaceMods !='undefined')
-                for(var k in Place.PlaceMods)
-                    this.addMod(o, Place.PlaceMods[k]);
-
-            var Team = false;
-            if(typeof Place.Team != 'undefined') Team = Place.Team;
-            if(typeof Odata.Team != 'undefined') Team = Odata.Team;
-            if(Team){
-                // this.addToTeam(o, Team);
-                this.addTeamMods(o, Team);
-            }
             if(Odata.Mod) this.addMod(o, Odata.Mod);
             if(Place.Mod) this.addMod(o, Place.Mod);
 
-            if (mapXY.N)
+            if(mapXY.N)
                 this.O[o].mapBuildName = mapXY.N;
 
             if(typeof Place.Construct != 'undefined')
@@ -61,7 +53,6 @@ GAMEobject.prototype.mapPlace_What = function(Setting, Place, What, defXY){
                 this.removeFromXY(o);
                 this.O[o].mapType = false;
             }
-
         }
     }
 }
