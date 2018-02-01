@@ -282,7 +282,7 @@ GAMEobject.prototype.regionStateIn = function(q,o){
             } else {
                 Q[i] = SI[i];
             }
-            if(i=='fieldAnim') this.setRegionAnimation(q,SI.fieldAnim);
+            if(i=='fieldAnim') this.setRegionAnimation(this.O[ q ], SI.fieldAnim);
         }
     if(Q.stateOut){
         this.Ocomp[q]=1;
@@ -303,6 +303,6 @@ GAMEobject.prototype.regionStateOut = function(q){
             } else {
                 Q[i] = SI[i];
             }
-            if(i=='fieldAnim') this.setRegionAnimation(q,SI.fieldAnim);
+            if(i=='fieldAnim') this.setRegionAnimation(this.O[ q ], SI.fieldAnim);
         }
 }

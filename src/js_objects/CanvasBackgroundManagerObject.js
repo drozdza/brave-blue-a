@@ -17,12 +17,11 @@ function CanvasBackgroundManagerObject(){
             this.BGqueue.unshift(i);
     }
 
-    this.addObjectToBackground = function(o,BGnumber){
+    this.addObjectToBackground = function(O, BGnumber){
         var BGN = BGnumber || 1;
 
-        var O = GAME.O[o];
         O.view.onBackground = BGN;
-        var tab = GAME.findTabTiles(o,O.x,O.y,this.TileSize);
+        var tab = GAME.findTabTiles(O, O.x, O.y, this.TileSize);
 
         for(var TU in tab){
             if(typeof this.Tiles[BGN][TU] == 'undefined'){
@@ -30,32 +29,30 @@ function CanvasBackgroundManagerObject(){
                 $('#CanvasBackgrounds').append('<canvas id="CanvasBackgrounds_'+BGN+'_'+TU+'" width="'+(this.TileSize- -this.TileOffset)+'" height="'+(this.TileSize- -this.TileOffset)+'"></canvas>');
                 this.Tiles[BGN][TU].canvasId = document.getElementById('CanvasBackgrounds_'+BGN+'_'+TU);
             }
-            this.Tiles[BGN][TU].O[o]=1;
+            this.Tiles[BGN][TU].O[O.o]=1;
             this.composeBackgroundTile(TU,BGN);
         }
     }
-    this.deleteObjectFromBackground = function(o,tabX,BGnumber){
+    this.deleteObjectFromBackground = function(O, tabX, BGnumber){
         var BGN = BGnumber || 1;
-        var O = GAME.O[o];
         var tab = tabX || {};
 
         delete(O.view.onBackground);
 
         for(var TU in this.Tiles[BGN]){
-            if(typeof this.Tiles[BGN][TU].O[o] != 'undefined' && typeof tab[TU] == 'undefined'){
-                delete this.Tiles[BGN][TU].O[o];
+            if(typeof this.Tiles[BGN][TU].O[O.o] != 'undefined' && typeof tab[TU] == 'undefined'){
+                delete this.Tiles[BGN][TU].O[O.o];
                 this.composeBackgroundTile(TU,BGN);
             }
         }
     }
-    this.changeObjectPosition = function(o,BGnumber,BGnumber2){
-        var O = GAME.O[o];
+    this.changeObjectPosition = function(O, BGnumber, BGnumber2){
         var BGN = BGnumber || O.view.onBackground || 1;
         var BGN2 = BGnumber2 || O.view.onBackground || BGN;
-        var tab = GAME.findTabTiles(o,O.x,O.y,this.TileSize);
+        var tab = GAME.findTabTiles(O, O.x, O.y, this.TileSize);
 
-        this.deleteObjectFromBackground(o,tab,BGN2);
-        this.addObjectToBackground(o,BGN);
+        this.deleteObjectFromBackground(O, tab, BGN2);
+        this.addObjectToBackground(O, BGN);
     }
 
 

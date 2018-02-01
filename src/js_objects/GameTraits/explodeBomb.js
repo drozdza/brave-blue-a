@@ -103,14 +103,14 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
 
         if(explodeObj.simpleFilling){
             this.O[ L ].TT='simpleFilling';
-            CanvasManager.CBM.deleteObjectFromBackground(L);
+            CanvasManager.CBM.deleteObjectFromBackground(this.O[ L ]);
         }
 
         if(explodeObj.vectorForce)
             this.O[ L ].windAngle = O.angle;
 
         if(explodeObj.fieldAnim)
-            this.setRegionAnimation(L, explodeObj.fieldAnim);
+            this.setRegionAnimation(this.O[ L ], explodeObj.fieldAnim);
 
         if(explodeObj.moveAlong){
             this.O[ L ].angle = O.angle;
@@ -119,7 +119,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             delete( this.O[ L ].view.onBackground );
             this.Omoving[ L ]=1;
         }
-        this.putOnXY( L );
+        this.putOnXY( this.O[ L ] );
 
     }
     else if(explodeObj.explodeType=='putObjs'){
@@ -136,13 +136,13 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             this.cloneDataToObj(L,explodeObj,['life','lifeM','dec','doingTime'],['toDo','Flags']);
 
             if(explodeObj.objName=='shieldBlob')
-                CanvasManager.requestCanvas( L );
+                CanvasManager.requestCanvas( this.O[ L ] );
             if(explodeObj.moveAlong)
                 this.O[ L ].speed = explodeObj.moveAlong;
             if(explodeObj.objRandAngle)
                 this.O[ L ].angle = parseInt(Math.random()*360);
 
-            this.addBoardMods(L);
+            this.addBoardMods(this.O[L]);
         }
     }
     else if(explodeObj.explodeType=='setMine'){
@@ -204,7 +204,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
     if(O.squadScheme)
         this.disbandSquad(O);
     if(O.squadDirectPlace)
-        this.unbindWithSquad(O.squadDirectPlace.o,O.squadDirectPlace.i,o);
+        this.unbindWithSquad(this.O[ O.squadDirectPlace.o ], O.squadDirectPlace.i, o);
 
 
     this.removeObj(o);

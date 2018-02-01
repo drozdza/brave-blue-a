@@ -157,7 +157,7 @@ GAMEobject.prototype.decide_ship = function(e){
         }
 
         if(--this.specialMoveT < 0) this.specialMove = -1;
-        this.putOnXY(0, oldX, oldY);
+        this.putOnXY(O, oldX, oldY);
     }
 
     if(O.speed != Sx.speed)

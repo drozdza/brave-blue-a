@@ -1,4 +1,4 @@
-GAMEobject.prototype.addShield = function(O,o,Shield){
+GAMEobject.prototype.addShield = function(O, Shield){
     if(O.ShieldsRejection)
         if(O.ShieldsRejection[Shield.name])
             return false;
@@ -145,7 +145,7 @@ GAMEobject.prototype.testShields = function(O,o,DMG){
             }
 
             if(SH.AddShield){
-                this.addShield(O,o,SH.AddShield);
+                this.addShield(O, SH.AddShield);
             }
 
             if(SH.jumpOnHit){

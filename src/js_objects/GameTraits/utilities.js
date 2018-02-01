@@ -80,7 +80,7 @@ GAMEobject.prototype.teleportJump = function(o,Distance,angle,graphicType){
     O.y = Oy;
     this.O[ L ].pathD=pathD.concat(['L',{x: Ox, y: Oy}]);
     if(O.T!='bullet')
-        this.putOnXY(o,oldX,oldY);
+        this.putOnXY(O, oldX, oldY);
     if(graphic == 'TP_track')
         this.putObj_animation('hit_blue', Ox, Oy);
     if(graphic == 'TP_trackDark')

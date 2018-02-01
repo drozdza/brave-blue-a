@@ -1,6 +1,6 @@
 
-GAMEobject.prototype.findTabTiles = function(o,ox,oy,M){
-    var X1,Y1,X2,Y2,xi,yi,x,y, X,Y, tabS={}, O = this.O[o];
+GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
+    var X1,Y1,X2,Y2,xi,yi,x,y, X,Y, tabS={};
 
     if(typeof O.squareCorners !='undefined'){
         X1 = O.squareCorners.E.x1;
@@ -26,49 +26,47 @@ GAMEobject.prototype.findTabTiles = function(o,ox,oy,M){
     return tabS;
 }
 
-GAMEobject.prototype.putOnXY = function(o,ox,oy){
-    var O = this.O[o];
+GAMEobject.prototype.putOnXY = function(O, ox, oy){
     if(!O.mapType) return false;
     var s,oldS={},newS={};
 
     if(typeof oy!='undefined'){
-        oldS = this.findTabTiles(o,ox,oy,this.MapTileSize);
+        oldS = this.findTabTiles(O, ox, oy, this.MapTileSize);
     } else {
         this.Omap[O.mapType].elems++;
     }
 
-    newS = this.findTabTiles(o,O.x,O.y,this.MapTileSize);
+    newS = this.findTabTiles(O, O.x, O.y, this.MapTileSize);
 
     for(s in oldS)
         if(newS[s]!=1)
-            if(typeof this.Omap[O.mapType][s] !='undefined' && typeof this.Omap[O.mapType][s][o] !='undefined')
-                delete this.Omap[O.mapType][s][o];
+            if(typeof this.Omap[O.mapType][s] !='undefined' && typeof this.Omap[O.mapType][s][O.o] !='undefined')
+                delete this.Omap[O.mapType][s][O.o];
 
     for(s in newS)
         if(oldS[s]!=1){
             if(typeof this.Omap[O.mapType][s] == 'undefined')
                 this.Omap[O.mapType][s]={};
-            this.Omap[O.mapType][s][o]=1;
+            this.Omap[O.mapType][s][O.o]=1;
         }
 }
-GAMEobject.prototype.removeFromXY = function(o,addToDead){    //!!
-    var O = this.O[o];
+GAMEobject.prototype.removeFromXY = function(O, addToDead){    //!!
     if (!O.mapType) return true;
     var s,oldS={};
 
-    oldS = this.findTabTiles(o,O.x,O.y,this.MapTileSize);
+    oldS = this.findTabTiles(O, O.x, O.y, this.MapTileSize);
 
     this.Omap[O.mapType].elems--;
 
     for(s in oldS)
-        if(typeof this.Omap[O.mapType][s] !='undefined' && typeof this.Omap[O.mapType][s][o] !='undefined')
-            delete this.Omap[O.mapType][s][o];
+        if(typeof this.Omap[O.mapType][s] !='undefined' && typeof this.Omap[O.mapType][s][O.o] !='undefined')
+            delete this.Omap[O.mapType][s][O.o];
 
     if(addToDead)
         for(s in oldS){
             if(typeof this.Omap['D'][s]=='undefined')
                 this.Omap['D'][s]={};
-            this.Omap['D'][s][o]=1;
+            this.Omap['D'][s][O.o]=1;
         }
 }
 GAMEobject.prototype.getCollidingWithCircle = function(x,y,radius,collisionTab){

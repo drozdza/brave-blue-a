@@ -45,9 +45,7 @@ function CanvasManagerObject(){
         return this.C[ID];
     }
 
-    this.requestCanvas = function(o){
-        var O = GAME.O[o];
-
+    this.requestCanvas = function(O){
         if(typeof O.view == 'undefined') return false;
 
         var ID = this.canvasId(O);
@@ -59,9 +57,9 @@ function CanvasManagerObject(){
             Canvas = this.addCanvas(ID,O);
         }
 
-        GAME.O[o].canvasId = Canvas.Id;
-        GAME.O[o].canvasX = Canvas.X;
-        GAME.O[o].canvasY = Canvas.Y;
+        O.canvasId = Canvas.Id;
+        O.canvasX = Canvas.X;
+        O.canvasY = Canvas.Y;
     }
 
     this.addCanvas = function(ID,O){
@@ -519,9 +517,9 @@ function CanvasManagerObject(){
 
         if(O.fieldAnimMoving) return 1;
         if(typeof this.directRenders[ O.animType ].states == 'undefined'){
-            this.CBM.addObjectToBackground(o);
+            this.CBM.addObjectToBackground(O);
         } else {
-            this.CBM.deleteObjectFromBackground(o);
+            this.CBM.deleteObjectFromBackground(O);
 
             // this.regionAnim(GAME.mainCanvas.CH, O, GAME.mainCanvas.Px,GAME.mainCanvas.Py);
         }

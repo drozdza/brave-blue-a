@@ -58,7 +58,7 @@ GAMEobject.prototype.frame_decide = function(){
         if(this.tick < this.O[o].ActiveTime) continue;
         if(this.tick > this.O[o].DieTime){
             if(this.O[o].squadDirectPlace)
-                this.unbindWithSquad(this.O[o].squadDirectPlace.o,this.O[o].squadDirectPlace.i,o);
+                this.unbindWithSquad(this.O[ this.O[o].squadDirectPlace.o ], this.O[o].squadDirectPlace.i, o);
 
             if(this.O[o].onDie){
                 if(this.O[o].onDie.Do=='explode')
@@ -135,7 +135,7 @@ GAMEobject.prototype.frame_move = function(){
         }
 
         if(O.T!='bullet')
-            this.putOnXY(o,oldX,oldY);
+            this.putOnXY(O, oldX, oldY);
 
         if(o==0){
             this.ShipMoveX = O.x - oldX;

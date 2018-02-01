@@ -280,25 +280,25 @@ BBAdata.ObjectMods.Star={
 };
 
 BBAdata.ObjectData.Star={
-    LoadModules:{
+    LoadMods:{
         Star:{},
         aliveUnit:{lifeM:6},
     },
 };
 BBAdata.ObjectData.StarS={
-    LoadModules:{
+    LoadMods:{
         Star:{view:{PathSize: 18}, radius: 9},
         aliveUnit:{lifeM:6},
     },
 };
 BBAdata.ObjectData.StarM={
-    LoadModules:{
+    LoadMods:{
         Star:{view:{PathSize: 60}, radius: 30},
         aliveUnit:{lifeM:9},
     },
 };
 BBAdata.ObjectData.StarL={
-    LoadModules:{
+    LoadMods:{
         Star:{view:{PathSize: 80}, radius: 40},
         aliveUnit:{lifeM:17},
     },
@@ -484,7 +484,7 @@ BBAdata.ObjectMods.viewLetterBig={
 };
 
 BBAdata.ObjectData.carras={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
         viewLetterSmall:{view:{Letter: 'A', LetterSize: 16}},
     },
@@ -525,7 +525,7 @@ BBAdata.ObjectData.carras={
     },
 };
 BBAdata.ObjectData.muerto={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
         biggerEnemy:{},
     },
@@ -551,7 +551,7 @@ BBAdata.ObjectData.muerto={
     ],
 };
 BBAdata.ObjectData.nemezis={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
         biggerEnemy:{},
     },
@@ -579,7 +579,7 @@ BBAdata.ObjectData.nemezis={
     ],
 };
 BBAdata.ObjectData.warastein={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
         biggerEnemy:{},
     },
@@ -609,7 +609,7 @@ BBAdata.ObjectData.warastein={
     ],
 };
 BBAdata.ObjectData.dandares={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
         biggerEnemy:{removeToDo:['changeManouver'],},
     },
@@ -659,7 +659,7 @@ BBAdata.ObjectData.shieldBlob={
     radius: 21,
 };
 BBAdata.ObjectData.royale={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -703,7 +703,7 @@ BBAdata.ObjectData.royale={
     },
 };
 BBAdata.ObjectData.edison={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -756,7 +756,7 @@ BBAdata.ObjectData.edison={
 
 };
 BBAdata.ObjectData.hiacynt={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -805,7 +805,7 @@ BBAdata.ObjectData.hiacynt={
     },
 };
 BBAdata.ObjectData.iskariot={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -868,7 +868,7 @@ BBAdata.ObjectData.iskariot={
     },
 };
 BBAdata.ObjectData.tartaros={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -913,7 +913,7 @@ BBAdata.ObjectData.tartaros={
     },
 };
 BBAdata.ObjectData.belzebub={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -966,7 +966,7 @@ BBAdata.ObjectData.belzebub={
     },
 };
 BBAdata.ObjectData.koriaz={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1011,7 +1011,7 @@ BBAdata.ObjectData.koriaz={
     },
 };
 BBAdata.ObjectData.fariax={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1055,7 +1055,7 @@ BBAdata.ObjectData.fariax={
     },
 };
 BBAdata.ObjectData.dregos={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1109,7 +1109,7 @@ BBAdata.ObjectData.dregos={
     },
 };
 BBAdata.ObjectData.vitotas={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1167,7 +1167,7 @@ BBAdata.ObjectData.vitotas={
     },
 };
 BBAdata.ObjectData.cloaker={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1216,7 +1216,7 @@ BBAdata.ObjectData.cloaker={
     },
 };
 BBAdata.ObjectData.hajaher={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1267,7 +1267,7 @@ BBAdata.ObjectData.hajaher={
     },
 };
 BBAdata.ObjectData.orhenes={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1316,7 +1316,7 @@ BBAdata.ObjectData.orhenes={
     },
 };
 BBAdata.ObjectData.juggernaut={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1390,7 +1390,7 @@ BBAdata.ObjectData.juggernaut={
 
 };
 BBAdata.ObjectData.gargamon={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1448,7 +1448,7 @@ BBAdata.ObjectData.gargamon={
     },
 };
 BBAdata.ObjectData.xaurus={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1500,7 +1500,7 @@ BBAdata.ObjectData.xaurus={
     },
 };
 BBAdata.ObjectData.zarahiash={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1561,7 +1561,7 @@ BBAdata.ObjectData.zarahiash={
     },
 };
 BBAdata.ObjectData.durishka={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1626,7 +1626,7 @@ BBAdata.ObjectData.durishka={
     },
 };
 BBAdata.ObjectData.pitagoras={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1672,7 +1672,7 @@ BBAdata.ObjectData.pitagoras={
     },
 };
 BBAdata.ObjectData.patiarch={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1731,7 +1731,7 @@ BBAdata.ObjectData.patiarch={
     },
 };
 BBAdata.ObjectData.wariankiel={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1780,7 +1780,7 @@ BBAdata.ObjectData.wariankiel={
     Flags:{noStar:true},
 };
 BBAdata.ObjectData.vuvis={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1826,7 +1826,7 @@ BBAdata.ObjectData.vuvis={
     },
 };
 BBAdata.ObjectData.hirieshka={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1877,7 +1877,7 @@ BBAdata.ObjectData.hirieshka={
     },
 };
 BBAdata.ObjectData.nientes={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1936,7 +1936,7 @@ BBAdata.ObjectData.nientes={
     },
 };
 BBAdata.ObjectData.shieldoorz={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -1999,7 +1999,7 @@ BBAdata.ObjectData.shieldoorz={
     },
 };
 BBAdata.ObjectData.loliax={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -2045,7 +2045,7 @@ BBAdata.ObjectData.loliax={
     },
 };
 BBAdata.ObjectData.slimensen={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -2112,7 +2112,7 @@ BBAdata.ObjectData.slimensen={
     },
 };
 BBAdata.ObjectData.slimensen1={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     extends: 'slimensen',
@@ -2167,7 +2167,7 @@ BBAdata.ObjectData.slimensen1={
     },
 };
 BBAdata.ObjectData.slimensen2={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     extends: 'slimensen',
@@ -2222,7 +2222,7 @@ BBAdata.ObjectData.slimensen2={
     },
 };
 BBAdata.ObjectData.slimensen3={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     extends: 'slimensen',
@@ -2277,7 +2277,7 @@ BBAdata.ObjectData.slimensen3={
     },
 };
 BBAdata.ObjectData.slimensen4={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     extends: 'slimensen',
@@ -2332,7 +2332,7 @@ BBAdata.ObjectData.slimensen4={
     },
 };
 BBAdata.ObjectData.thunderton={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -2393,7 +2393,7 @@ BBAdata.ObjectData.thunderton={
     },
 };
 BBAdata.ObjectData.doomderos={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -2452,7 +2452,7 @@ BBAdata.ObjectData.doomderos={
     },
 };
 BBAdata.ObjectData.hedgehog={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -2516,7 +2516,7 @@ BBAdata.ObjectData.hedgehog={
     },
 };
 BBAdata.ObjectData.urser={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -2574,7 +2574,7 @@ BBAdata.ObjectData.urser={
     },
 };
 BBAdata.ObjectData.talrax={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -2627,7 +2627,7 @@ BBAdata.ObjectData.talrax={
     },
 };
 BBAdata.ObjectData.iskarianz={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -2698,7 +2698,7 @@ BBAdata.ObjectData.iskarianz={
     },
 };
 BBAdata.ObjectData.prisander={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -2750,7 +2750,7 @@ BBAdata.ObjectData.prisander={
     },
 };
 BBAdata.ObjectData.yehes={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -2797,7 +2797,7 @@ BBAdata.ObjectData.yehes={
     shipVariables:{},
 };
 BBAdata.ObjectData.yehestis={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -2844,7 +2844,7 @@ BBAdata.ObjectData.yehestis={
     shipVariables:{},
 };
 BBAdata.ObjectData.yeheslar={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -2891,7 +2891,7 @@ BBAdata.ObjectData.yeheslar={
     shipVariables:{},
 };
 BBAdata.ObjectData.yebuhas={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -2938,7 +2938,7 @@ BBAdata.ObjectData.yebuhas={
     shipVariables:{},
 };
 BBAdata.ObjectData.hesiolumbus={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{
@@ -2981,7 +2981,7 @@ BBAdata.ObjectData.hesiolumbus={
     shipVariables:{},
 };
 BBAdata.ObjectData.saisung={
-    LoadModules:{
+    LoadMods:{
         enemyShip:{},
     },
     view:{

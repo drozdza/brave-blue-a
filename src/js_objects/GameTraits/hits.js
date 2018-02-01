@@ -163,9 +163,9 @@ GAMEobject.prototype.makeOneTimeEffect = function(o,q){
         if(O.fieldAnim=='ElectricityField'){
             CanvasManager.change_regionAnim(O,o, 'EleFieldEnd', 'end', 24);
             if(O.squadDirectPlace)
-                this.unbindWithSquad(O.squadDirectPlace.o, O.squadDirectPlace.i, o);
+                this.unbindWithSquad(this.O[ O.squadDirectPlace.o ], O.squadDirectPlace.i, o);
             if(O.squadMaster)
-                this.unbindWithSquad(O.squadMaster.o, O.squadMaster.i, o);
+                this.unbindWithSquad(this.O[ O.squadMaster.o ], O.squadMaster.i, o);
         }
     }
 }
@@ -222,12 +222,12 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
     if(O.T=='ship') this.C['S_lifeLost']++;
 
     if(O.T=='ship') this.shipFunc_showHealth();
-    CanvasManager.requestCanvas(o);
+    CanvasManager.requestCanvas(O);
     if(O.view && O.view.onBackground)
-        CanvasManager.CBM.changeObjectPosition(o);
+        CanvasManager.CBM.changeObjectPosition(O);
     if(O.Flags) O.Flags.gotHitFlag = true;
 
-    if(O.life <= 0) this.dieObj(O,o);
+    if(O.life <= 0) this.dieObj(O);
     return true;
 }
 GAMEobject.prototype.showHits = function(x,y,number,type){
@@ -239,7 +239,8 @@ GAMEobject.prototype.showHits = function(x,y,number,type){
     }
 }
 
-GAMEobject.prototype.dieObj = function(O,o){
+GAMEobject.prototype.dieObj = function(O){
+    console.log(O);
     if(O.TT=='enemy'){
         this.C['D:enemies']++;
         var umo = 'D:'+O.T;
@@ -251,9 +252,9 @@ GAMEobject.prototype.dieObj = function(O,o){
         this.putObj_animation('hitBig', O.x, O.y);
 
     if(O.squadDirectPlace)
-        this.unbindWithSquad(O.squadDirectPlace.o, O.squadDirectPlace.i, o);
+        this.unbindWithSquad(this.O[ O.squadDirectPlace.o ], O.squadDirectPlace.i, O.o);
     if(O.squadMaster)
-        this.unbindWithSquad(O.squadMaster.o, O.squadMaster.i, o);
+        this.unbindWithSquad(this.O[ O.squadMaster.o ], O.squadMaster.i, O.o);
 
     if(O.squadScheme)
         this.disbandSquad(O);
@@ -273,9 +274,9 @@ GAMEobject.prototype.dieObj = function(O,o){
         O.Flags.gotHitFlag = false;
         O.doingTime = 3;
     }else if(O.onDie){
-        this.explodeBomb(o,O.onDie);
+        this.explodeBomb(O.o, O.onDie);
     }else
-        this.removeObj(o,true);
+        this.removeObj(O.o, true);
 
 
     return true;
@@ -293,9 +294,9 @@ GAMEobject.prototype.healObj = function(q,DMG,o){
     if(Q.life > Q.lifeM) Q.life = Q.lifeM;
     if(q == 0)
         this.shipFunc_showHealth();
-    CanvasManager.requestCanvas( q );
+    CanvasManager.requestCanvas( Q );
     if(Q.view && Q.view.onBackground)
-        CanvasManager.CBM.changeObjectPosition(q);
+        CanvasManager.CBM.changeObjectPosition(Q);
 
 }
 GAMEobject.prototype.hitEnergyField = function(o,q,DMG){
@@ -322,7 +323,7 @@ GAMEobject.prototype.giveEnergyField = function(q,DMG,o,max){
     if(typeof Q.Res['energyField'] == 'undefined')
         Q.Res['energyField'] = {R:0,M:max};
     if(Q.Res['energyField'].R >= max) return false;
-    this.addShield(Q,q,{
+    this.addShield(Q,{
         name: 'absorbtionShield',
         CatchDmgT: {normal:1, energy:1, explo:1},
         DmgReduction: 'energyField',

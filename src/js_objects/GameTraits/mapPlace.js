@@ -48,9 +48,9 @@ GAMEobject.prototype.mapPlace_What = function(Setting, Place, What, defXY){
                 this.buildConstructs(o, Place.Construct);
 
             if(typeof Place.Background != 'undefined'){
-                CanvasManager.CBM.deleteObjectFromBackground(o,false,1);
-                CanvasManager.CBM.addObjectToBackground(o,Place.Background);
-                this.removeFromXY(o);
+                CanvasManager.CBM.deleteObjectFromBackground(this.O[o], false, 1);
+                CanvasManager.CBM.addObjectToBackground(this.O[o], Place.Background);
+                this.removeFromXY(this.O[o]);
                 this.O[o].mapType = false;
             }
         }
@@ -193,8 +193,8 @@ GAMEobject.prototype.mapPlace_removeTagFromDEF = function(DEF, defXY){
                 var vY = centerXY.y - O.y;
                 if(Math.sqrt(vX*vX- -vY*vY) < SET.Radius){
                     O.TT='toDelete';
-                    CanvasManager.CBM.deleteObjectFromBackground(o);
-                    this.dieObj(o);
+                    CanvasManager.CBM.deleteObjectFromBackground(O);
+                    this.dieObj(this.O[ o ]);
                     this.removeObj(o);
                 }
             }

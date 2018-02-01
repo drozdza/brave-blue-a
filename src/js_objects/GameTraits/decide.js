@@ -17,7 +17,7 @@ GAMEobject.prototype.changeSpeedLvl = function(O,speedLvl){
     O.speed = O.speedArr[ speedLvl ].S;
     O.speedT = O.speedArr[ speedLvl ].T;
 }
-GAMEobject.prototype.makeAction = function(O,o,Action){
+GAMEobject.prototype.makeAction = function(O, Action){
     if(Action.doingNow) O.doingNow = Action.doingNow;
     if(Action.doingTime) O.doingTime = Action.doingTime;
     if(Action.doNotInterupt) O.doNotInterupt = Action.doNotInterupt;
@@ -26,11 +26,11 @@ GAMEobject.prototype.makeAction = function(O,o,Action){
     if(Action.gotoAlarm) O.alarmLvl = Action.gotoAlarm;
     if(Action.unCloak){
         delete O.view.Cloaked;
-        CanvasManager.requestCanvas(o);
+        CanvasManager.requestCanvas(O);
     }
     if(Action.changeView){
         O.view = O[ Action.changeView ];
-        CanvasManager.requestCanvas(o);
+        CanvasManager.requestCanvas(O);
     }
 }
 
@@ -247,7 +247,7 @@ GAMEobject.prototype.decide = function(o){
                     this.putObj_animation('hit_blue', O.x, O.y);
                     this.changeSpeedLvl(O,3);
                     O.view.Cloaked = true;
-                    CanvasManager.requestCanvas(o);
+                    CanvasManager.requestCanvas(O);
                 }
             }
 
@@ -262,7 +262,7 @@ GAMEobject.prototype.decide = function(o){
                         this.removeObj(o);
                     }else{
                         O.doingTime=15;
-                        CanvasManager.requestCanvas(o);
+                        CanvasManager.requestCanvas(O);
                     }
                 }
             }
@@ -500,7 +500,7 @@ GAMEobject.prototype.decide = function(o){
             if(O.doingTime%10 == 0){
                 if(O.life > 1){
                     O.life--;
-                    CanvasManager.requestCanvas(o);
+                    CanvasManager.requestCanvas(O);
                 } else this.removeObj(o);
                 return true;
             }
@@ -823,7 +823,7 @@ GAMEobject.prototype.decide = function(o){
 
                     if(OSS.type == 'shieldBlob'){
                         this.O[ OSS.Oid].life -=- 1;
-                        CanvasManager.requestCanvas( OSS.Oid );
+                        CanvasManager.requestCanvas( this.O[ OSS.Oid ] );
 
                         WP.lastShot = this.tick;
                         O.Res[ WP.usedRes ].R -= WP.usedResR;
@@ -841,7 +841,7 @@ GAMEobject.prototype.decide = function(o){
                         if(S.fieldAnim=='DestructionField'){
                             CanvasManager.change_regionAnim(S,s, 'DestrFieldEnd', 'end');
                         }else{
-                            this.unbindWithSquad(o,i,s);
+                            this.unbindWithSquad(this.O[o],i,s);
                             this.removeObj(s);
                         }
                         break;
@@ -861,7 +861,7 @@ GAMEobject.prototype.decide = function(o){
                 this.O[L].doingTime = 3;
                 this.O[L].life = 3;
                 this.O[L].lifeM = 3;
-                CanvasManager.requestCanvas( L );
+                CanvasManager.requestCanvas( this.O[ L ] );
                 WP.lastShot = this.tick;
             }
 
@@ -967,7 +967,7 @@ GAMEobject.prototype.decide = function(o){
                 var M = this.O[ O.squadScheme[iMember].Oid ];
                 if(M.bornTime- -WP.MemberAge > this.tick) continue;
 
-                this.unbindWithSquad(o, iMember, O.squadScheme[iMember].Oid );
+                this.unbindWithSquad(this.O[o], iMember, O.squadScheme[iMember].Oid );
 
                 M.speed = WP.Speed || 5;
                 M.DieTime = this.tick- -100;

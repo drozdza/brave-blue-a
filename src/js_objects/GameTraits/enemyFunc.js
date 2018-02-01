@@ -85,7 +85,7 @@ GAMEobject.prototype.shootBomb = function(o,Angle,Speed,Dec,bombData,teleportDat
 GAMEobject.prototype.addMaxShield = function(o,Duration,q){
     var L,O = this.O[o];
 
-    if(this.addShield(O,o, {
+    if(this.addShield(O, {
         name:'maxShield',
         CatchDmgT:{normal:1,energy:1,acid:1,explo:1},
         DmgReduction: 'infinite',
@@ -116,7 +116,7 @@ GAMEobject.prototype.trySplitHealth = function(o,Radius){
 
 }
 GAMEobject.prototype.addDamageTransfer = function(o,q,Duration){
-    if(this.addShield(this.O[o],o, {
+    if(this.addShield(this.O[o], {
         name: 'dmgTransfer',
         CatchDmgT:{normal:1,energy:1,acid:1,explo:1,super:1},
         DmgReduction: 'infinite',
@@ -140,7 +140,7 @@ GAMEobject.prototype.mergeShips = function(o,q){
 
     var L = this.putObj(what,O.S,x,y);
     this.O[L].angle = O.angle;
-    this.addBoardMods(L);
+    this.addBoardMods(this.O[L]);
 
     O.onDie = false;
     O.onDieDelete = true;
@@ -150,7 +150,7 @@ GAMEobject.prototype.mergeShips = function(o,q){
     Q.onDieDelete = true;
     Q.onDieHideExplosion = true;
 
-    this.dieObj(O,o);
-    this.dieObj(Q,q);
+    this.dieObj(O);
+    this.dieObj(Q);
 
 }

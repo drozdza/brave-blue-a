@@ -251,7 +251,7 @@ GAMEobject.prototype.openEndPortal = function(i){
     }
 
     var E = this.putObj('EndPortal',1,portalX,portalY);
-    this.setRegionAnimation(E,'EndPortal');
+    this.setRegionAnimation(this.O[ E ],'EndPortal');
 }
 GAMEobject.prototype.showEndGameCount = function(){
     var html='';

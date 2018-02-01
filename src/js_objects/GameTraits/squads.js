@@ -1,5 +1,5 @@
 
-GAMEobject.prototype.prepareSquadScheme = function(O,o){
+GAMEobject.prototype.prepareSquadScheme = function(O){
     O.squadScheme = [];
     var SSTs=[];
     if(O.squadSchemeType)
@@ -65,7 +65,7 @@ GAMEobject.prototype.prepareSquadScheme = function(O,o){
                 O.squadScheme[membersTotal- -il][j] = SST.data[j];
 
             if(SST.makeFirst && SST.makeFirst > membersTotal- -il){
-                this.setSquadMember(o,membersTotal- -il,SST.life);
+                this.setSquadMember(O, membersTotal- -il, SST.life);
             } else {
                 O.squadScheme[membersTotal- -il].Oid = -1;
             }
@@ -73,8 +73,7 @@ GAMEobject.prototype.prepareSquadScheme = function(O,o){
         membersTotal-=-SST.count;
     }
 }
-GAMEobject.prototype.setSquadMember = function(o,i,life){
-    var O = this.O[o];
+GAMEobject.prototype.setSquadMember = function(O, i, life){
     var OSS = O.squadScheme[i];
 
     var iX = O.x;
@@ -88,78 +87,74 @@ GAMEobject.prototype.setSquadMember = function(o,i,life){
     }
 
     if(OSS.type == 'shieldBlob'){
-        var Sid = this.putObj('shieldBlob',O.S,iX,iY);
+        var Sid = this.putObj('shieldBlob', O.S, iX, iY);
         var oS = this.O[Sid];
         oS.angle = iAngle;
         oS.life = life;
         oS.lifeM = OSS.lifeM;
-        this.bindWithSquad(o, i, Sid);
+        this.bindWithSquad(O, i, Sid);
     }
     if(OSS.type == 'RoundField'){
-        var Sid = this.putObj('RoundField',1,iX,iY);
+        var Sid = this.putObj('RoundField', 1, iX, iY);
         this.Omoving[Sid]=1;
-        this.bindWithSquad(o, i, Sid);
+        this.bindWithSquad(O, i, Sid);
     }
     if(OSS.type == 'ConeField'){
         var acType = 'region';
         if(OSS.acType) acType = OSS.acType;
-        var Sid = this.putObj('ConeField',1,iX,iY);
+        var Sid = this.putObj('ConeField', 1, iX, iY);
         this.putObj_changeMode(Sid, acType);
         this.Omoving[Sid]=1;
-        this.bindWithSquad(o, i, Sid);
+        this.bindWithSquad(O, i, Sid);
     }
     if(OSS.type == 'SquareField'){
-        var Sid = this.putObj('SquareField',1,iX,iY);
+        var Sid = this.putObj('SquareField', 1, iX, iY);
         this.Omoving[Sid]=1;
-        this.bindWithSquad(o, i, Sid);
+        this.bindWithSquad(O, i, Sid);
     }
     if(OSS.type == 'enemyShip'){
-        var Sid = this.putObj(OSS.objectType,1,iX,iY);
-        this.bindWithSquad(o, i, Sid);
+        var Sid = this.putObj(OSS.objectType, 1, iX, iY);
+        this.bindWithSquad(O, i, Sid);
     }
 
     if(OSS.placementT == 'directPlaces'){
-        CanvasManager.CBM.deleteObjectFromBackground( Sid );
+        CanvasManager.CBM.deleteObjectFromBackground(this.O[ Sid ]);
         delete this.O[ Sid ].view.onBackground;
     }
 
-    this.addBoardMods(Sid);
+    this.addBoardMods(this.O[ Sid ]);
 
     if(typeof OSS.SquadMods !='undefined')
-        for(var k in OSS.SquadMods)
-            this.addMod(Sid,OSS.SquadMods[k]);
+        this.addMod(this.O[ Sid ], OSS.SquadMods);
 
     if(typeof OSS.objData !='undefined')
-        this.addMod(Sid,OSS.objData);
-    this.O[Sid].Flags=[];
+        this.addMod(this.O[ Sid ], OSS.objData);
+    this.O[ Sid ].Flags=[];
 
-    CanvasManager.requestCanvas( Sid );
+    CanvasManager.requestCanvas( this.O[ Sid ] );
     return Sid;
 }
-GAMEobject.prototype.bindWithSquad = function(o,i,s){
-    var O = this.O[o];
+GAMEobject.prototype.bindWithSquad = function(O,i,s){
     var S = this.O[s];
 
     var OSS = O.squadScheme[i];
     if(OSS.placementT=='directPlaces'){
-        S.squadDirectPlace = {o:o, i:i};
+        S.squadDirectPlace = {o:O.o, i:i};
         S.speed = 0;
     }
     if(OSS.placementT=='loose'){
-        S.squadMaster = {o:o, i:i};
+        S.squadMaster = {o:O.o, i:i};
     }
     OSS.Oid = s;
     this.setFlagSquadFull(O);
 }
-GAMEobject.prototype.unbindWithSquad = function(o,i,s){
+GAMEobject.prototype.unbindWithSquad = function(O,i,s){
     var oS = this.O[s];
 
     if(oS.squadDirectPlace){
-        var O = this.O[o];
         O.squadScheme[i].Oid=-1;
     }
     if(oS.squadMaster){
-        var O = this.O[o];
         O.squadScheme[i].Oid=-1;
     }
 

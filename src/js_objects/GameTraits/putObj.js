@@ -1,40 +1,15 @@
-// to do refaktoryzacji
-GAMEobject.prototype.putObj_getModules = function(moduleName, moduleData){
-    var Omods = {};
-    // console.log(moduleName);
-
-    if(typeof BBAdata.ObjectMods[moduleName] == 'undefined'){
-        console.log('ObjectMods "'+moduleName+'" not found!');
-        return {};
-    }
-
-    Omods = cloneObj(BBAdata.ObjectMods[moduleName]);
-
-    if(Omods.LoadModules){
-        for(var mmName in Omods.LoadModules){
-            carefullyMergeObjects(Omods, this.putObj_getModules(mmName, Omods.LoadModules[mmName]) );
-        }
-    }
-    carefullyMergeObjects(Omods, moduleData);
-    return Omods;
-}
-
-GAMEobject.prototype.putObj_fromArray = function(O, Type){
+GAMEobject.prototype.putObj_getFromType = function(Type,o){
+    var O = {o:o};
 
     if(typeof BBAdata.ObjectData[Type] != 'undefined'){
         var OD = BBAdata.ObjectData[Type];
 
-        if(OD.LoadModules){
-            Omods = {};
-            for(var moduleName in OD.LoadModules)
-                carefullyMergeObjects(Omods, this.putObj_getModules(moduleName, OD.LoadModules[moduleName]));
-            carefullyMergeObjects(O, Omods);
+        if(OD.LoadMods){
+            var modO = this.loadInheritedMods(OD.LoadMods, o);
+            carefullyMergeObjects(O, modO);
+        } else {
+            O = cloneObj(OD);
         }
-
-        carefullyMergeObjects(O, OD);
-        // O = carefullyMergeObjects(OD, O);
-
-        delete(O.LoadModules);
     }
 
     if(O.explodePreset || O.exploAddTo || O.onHitDieExpire)
@@ -42,7 +17,6 @@ GAMEobject.prototype.putObj_fromArray = function(O, Type){
 
     return O;
 }
-
 
 GAMEobject.prototype.putObj = function(Type,Side,x,y){
     var MapRadius = 1000;
@@ -52,10 +26,10 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
             y = Math.random()*MapRadius*2-MapRadius;
         }while( Math.sqrt(x*x- -y*y) > MapRadius );
     }
-    var L = this.Olen++;
 
-    var O={};
-    O = this.putObj_fromArray(O, Type);
+    var o = this.Olen++;
+    var O = this.putObj_getFromType(Type,o);
+    O.o = o;
     O.x = x;
     O.y = y;
     O.S = Side;
@@ -64,15 +38,13 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
     O.periodDMG = {};
     // O.TT = 'dust';
 
-
     var Mode = O.M;
-
 
     if(O.shipVariables)
         this.putObj_shipVariables(O);
 
     if(O.TT=='enemy'){
-        this.Enemies[ L ] = 1;
+        this.Enemies[ O.o ] = 1;
         O.angle           = parseInt(Math.random()*360);
         O.mapType         = 'E';
         O.mapCollide      = ['M'];
@@ -104,45 +76,45 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
 
     O.life = O.lifeM;
 
-    this.O[ L ] = O;
+    this.O[ O.o ] = O;
 
-    this.addBoardMods(L);
+    this.addBoardMods(O);
 
-    this.putObj_changeMode(L, Mode);
-    this.tryBuildSquads(O,L);
+    this.putObj_changeMode(O, Mode);
+    this.tryBuildSquads(O);
 
     if(Type!='shieldBlob')
-        CanvasManager.requestCanvas( L );
+        CanvasManager.requestCanvas( O );
 
     if(O.view && O.view.onBackground)
-        CanvasManager.CBM.addObjectToBackground( L );
+        CanvasManager.CBM.addObjectToBackground( O );
 
     if(Mode != 'routePoint')
-        this.putOnXY( L );
-    return L;
+        this.putOnXY( O );
+
+    return O.o;
 }
-GAMEobject.prototype.putObj_changeMode = function(L, newMode){
-    var O = this.O[L];
+GAMEobject.prototype.putObj_changeMode = function(O, newMode){
     var oldMode = O.M;
     O.M = newMode;
 
     if(oldMode == 'comp' && newMode != 'comp')
-        delete this.Ocomp[ L ];
+        delete this.Ocomp[ O.o ];
     if(newMode == 'comp')
-        this.Ocomp[ L ] = O.S;
+        this.Ocomp[ O.o ] = O.S;
 
     if(oldMode == 'region' && newMode != 'region')
-        delete this.Oregion[ L ];
+        delete this.Oregion[ O.o ];
     if(newMode == 'region')
-        this.Oregion[ L ] = 1;
+        this.Oregion[ O.o ] = 1;
 
     if((oldMode=='static' || oldMode=='region') && (newMode!='static' && newMode!='region'))
-        delete this.Omoving[ L ];
+        delete this.Omoving[ O.o ];
     if(newMode!='static' && newMode!='region' && newMode!='routePoint')
-        this.Omoving[ L ] = 1;
+        this.Omoving[ O.o ] = 1;
 
     if(newMode == 'routePoint')
-        this.Oroute[ L ] = 1;
+        this.Oroute[ O.o ] = 1;
 
 }
 GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,DMG){
@@ -153,14 +125,14 @@ GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,DMG){
     O.T = 'bullet';
     O.M = 'comp';
     O.bornTime = this.tick;
-    O.periodDMG={};
+    O.periodDMG = {};
     O.TT = 'dust';
 
     O.speed  = Speed || 12;
     O.angle  = Angle  || 0;
     O.radius = 4;
     O.dec    = Dec || 30;
-    O.DMG  = DMG || {Dmg:1,T:'normal'};
+    O.DMG   = DMG || {Dmg:1,T:'normal'};
 
     ++this.C['B_bullets'];
     ++this.C['B_s'+Side+'_bullets'];
@@ -176,22 +148,24 @@ GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,DMG){
         O.mapCollide = ['P','M','R'];
     }
 
-    var L = this.Olen++;
-    this.Obullet[ L ] = Side;
-    this.Omoving[ L ] = 1;
-    this.O[ L ]= O;
+    var o = this.Olen++;
+    this.Obullet[ o ] = Side;
+    this.Omoving[ o ] = 1;
+    this.O[ o ] = O;
+    this.O[ o ].o = o;
 
-    return L;
+    return o;
 }
 
-GAMEobject.prototype.tryBuildSquads = function(O,L){
+GAMEobject.prototype.tryBuildSquads = function(O){
     if(O.squadSchemeType || O.squadSchemeTypeArray)
-        this.prepareSquadScheme(O,L);
+        this.prepareSquadScheme(O);
     if(O.prepareSquadScheme || O.squadScheme)
         this.setFlagSquadFull(O);
 }
 GAMEobject.prototype.putObj_shipVariables = function(O){
-
+    console.log(O);
+    
     for(var i in {speedArr:1,spotArr:1})
         for(var j=0; j<4; ++j)
             for(var k in O[i][j])
@@ -199,7 +173,7 @@ GAMEobject.prototype.putObj_shipVariables = function(O){
                     O[i][j][k] = this.getShipVariable(O, O[i][j][k]);
 
     delete O.shipVariables;
-    this.changeSpeedLvl(O,O.speedLvl);
+    this.changeSpeedLvl(O, O.speedLvl);
     return O;
 }
 
@@ -310,8 +284,8 @@ GAMEobject.prototype.removeObj = function(o){
 
     if(this.O[o].T!='bullet' && this.O[o].TT!='bgStars' && this.O[o].TT!='anim' && this.O[o].TT!='dirAnim'){    // Czyli co?
 
-        if(this.O[o].TT=='enemy') this.removeFromXY(o,true);
-                else              this.removeFromXY(o);
+        if(this.O[o].TT=='enemy') this.removeFromXY(this.O[o],true);
+                else              this.removeFromXY(this.O[o]);
         delete this.Enemies[o];
 
         if(typeof this.O[o].squadId !='undefined'){
@@ -322,14 +296,14 @@ GAMEobject.prototype.removeObj = function(o){
                 delete S.Members[o];
         }
     }
-    if(this.O[o].TT == 'bgStars') this.removeFromXY(o,true);
+    if(this.O[o].TT == 'bgStars') this.removeFromXY(this.O[o],true);
 
     if(this.O[o].TT == 'anim' || this.O[o].TT == 'dirAnim')
         delete this.Oanim[o];
 
     if(this.O[o].TT == 'enemy' && !this.O[o].onDieDelete){
         this.Odead[ o ]={T:this.O[o].T,x:this.O[o].x,y:this.O[o].y};
-        CanvasManager.CBM.addObjectToBackground(o);
+        CanvasManager.CBM.addObjectToBackground(this.O[o]);
     }
 
 

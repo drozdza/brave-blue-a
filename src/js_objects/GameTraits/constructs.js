@@ -1,5 +1,4 @@
-GAMEobject.prototype.buildConstructs = function(o,SETconstruct){
-    var O = this.O[o];
+GAMEobject.prototype.buildConstructs = function(O, SETconstruct){
     O.constructBuilder = SETconstruct.N;
     O.constructsDone = {};
 
@@ -7,7 +6,7 @@ GAMEobject.prototype.buildConstructs = function(o,SETconstruct){
     for(var q in nearList){
         var Q = this.O[q];
         if(typeof Q.constructBuilder != 'undefined' && Q.constructBuilder==SETconstruct.N)
-            if(typeof Q.constructsDone[q+'_'+o] == 'undefined'){
+            if(typeof Q.constructsDone[q+'_'+O.o] == 'undefined'){
                 var x = O.x - Q.x;
                 var y = O.y - Q.y;
 
@@ -30,7 +29,7 @@ GAMEobject.prototype.buildConstructs = function(o,SETconstruct){
                         bounceTeleport:true,
                     };
 
-                    var L = this.putObj('SquareField',1,x,y);
+                    var L = this.putObj('SquareField', 1, x, y);
                     this.addMod(L, objData);
                     Q.constructsDone[q+'_'+o] = L;
                     O.constructsDone[o+'_'+q] = L;
@@ -45,7 +44,7 @@ GAMEobject.prototype.onDieDesroyConstructs = function(O,o){
     for(var c in O.constructsDone){
         var co = O.constructsDone[c];
         if(typeof this.O[co] == 'undefined') continue;
-        CanvasManager.CBM.deleteObjectFromBackground(co);
+        CanvasManager.CBM.deleteObjectFromBackground(this.O[co]);
         this.removeObj(co);
     }
 }
