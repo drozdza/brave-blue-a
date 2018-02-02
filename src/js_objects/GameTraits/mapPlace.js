@@ -35,11 +35,11 @@ GAMEobject.prototype.mapPlace_What = function(Setting, Place, What, defXY){
 
             o = this.putObj(Otype, 1, mapXY.x, mapXY.y);
 
-            if(Odata.Team) this.addToTeam(o, Odata.Team);
-            if(Place.Team) this.addToTeam(o, Place.Team);
+            if(Odata.Team) this.addToTeam(this.O[o], Odata.Team);
+            if(Place.Team) this.addToTeam(this.O[o], Place.Team);
 
-            if(Odata.Mod) this.addMod(o, Odata.Mod);
-            if(Place.Mod) this.addMod(o, Place.Mod);
+            if(Odata.Mod) this.addMod(this.O[o], Odata.Mod);
+            if(Place.Mod) this.addMod(this.O[o], Place.Mod);
 
             if(mapXY.N)
                 this.O[o].mapBuildName = mapXY.N;

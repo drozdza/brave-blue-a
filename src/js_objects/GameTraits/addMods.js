@@ -151,13 +151,13 @@ GAMEobject.prototype.removeFromToDoList = function(O, name){
 GAMEobject.prototype.addToWeapon = function(O,Weapon){
     O.weapon.unshift(cloneObj(Weapon));
 }
-GAMEobject.prototype.addToTeam = function(o,Team){
+GAMEobject.prototype.addToTeam = function(O, Team){
     var Setting = this.MapSetting;
-    this.O[o].Team = Team;
+    O.Team = Team;
 
     if(typeof Setting.TeamMods != 'undefined' && typeof Setting.TeamMods[Team] != 'undefined')
         for(var k in Setting.TeamMods[Team])
-            this.addMod(o, Setting.TeamMods[Team][k]);
+            this.addMod(O, Setting.TeamMods[Team][k]);
 }
 
 GAMEobject.prototype.setRegionAnimation = function(O, animType){

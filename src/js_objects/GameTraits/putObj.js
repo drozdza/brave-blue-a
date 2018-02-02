@@ -165,12 +165,12 @@ GAMEobject.prototype.tryBuildSquads = function(O){
 }
 GAMEobject.prototype.putObj_shipVariables = function(O){
     console.log(O);
-    
-    for(var i in {speedArr:1,spotArr:1})
-        for(var j=0; j<4; ++j)
-            for(var k in O[i][j])
-                if(typeof O[i][j][k] == 'object' && typeof O[i][j][k].shipVar != 'undefined')
-                    O[i][j][k] = this.getShipVariable(O, O[i][j][k]);
+
+    // for(var i in {speedArr:1,spotArr:1})
+    //     for(var j=0; j<4; ++j)
+    //         for(var k in O[i][j])
+    //             if(typeof O[i][j][k] == 'object' && typeof O[i][j][k].shipVar != 'undefined')
+    //                 O[i][j][k] = this.getShipVariable(O, O[i][j][k]);
 
     delete O.shipVariables;
     this.changeSpeedLvl(O, O.speedLvl);

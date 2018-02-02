@@ -30,7 +30,7 @@ GAMEobject.prototype.buildConstructs = function(O, SETconstruct){
                     };
 
                     var L = this.putObj('SquareField', 1, x, y);
-                    this.addMod(L, objData);
+                    this.addMod(this.O[ L ], objData);
                     Q.constructsDone[q+'_'+o] = L;
                     O.constructsDone[o+'_'+q] = L;
                     O.onDieDesroyConstructs = true;
