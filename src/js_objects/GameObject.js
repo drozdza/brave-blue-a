@@ -1,5 +1,5 @@
 function GAMEobject(){
-    {
+
     this.Dx=1300;
     this.Dy=550;
     this.MapTileSize = 250;
@@ -72,6 +72,7 @@ function GAMEobject(){
 
     this.SHIP={};
     this.SHIPold={};
-    }
+
+    this.initObjectsQueue=[];
 
 }

@@ -1,4 +1,11 @@
 
+GAMEobject.prototype.frame_initObjects = function(){
+    var o;
+    while(o = this.initObjectsQueue.pop()){
+        this.initObject(this.O[o]);
+    }
+}
+
 GAMEobject.prototype.frame_decide = function(){
     var MS = (new Date()).getTime();
     $('#gameboardMarkers').html('');
@@ -219,6 +226,7 @@ GAMEobject.prototype.frame_draw = function(frameCenter){
 
 GAMEobject.prototype.frame = function(){
     if(BBAdata.GET.FRAMES==0){
+        this.frame_initObjects();
         this.frame_move();
         this.frame_decide();
         this.frame_draw();

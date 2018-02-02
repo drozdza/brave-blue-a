@@ -40,8 +40,6 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
 
     var Mode = O.M;
 
-    if(O.shipVariables)
-        this.putObj_shipVariables(O);
 
     if(O.TT=='enemy'){
         this.Enemies[ O.o ] = 1;
@@ -74,26 +72,35 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
         O.mapCollide = ['E'];
     }
 
-    O.life = O.lifeM;
-
     this.O[ O.o ] = O;
 
     this.addBoardMods(O);
 
     this.putObj_changeMode(O, Mode);
+
+    this.initObjectsQueue.push(O.o);
+
+    return O.o;
+}
+
+GAMEobject.prototype.initObject = function(O){
+    O.life = O.lifeM;
+
+    if(O.shipVariables)
+        this.putObj_shipVariables(O);
+
+    if(O.view && O.view.onBackground)
+        CanvasManager.CBM.addObjectToBackground( O );
+
     this.tryBuildSquads(O);
 
     if(Type!='shieldBlob')
         CanvasManager.requestCanvas( O );
 
-    if(O.view && O.view.onBackground)
-        CanvasManager.CBM.addObjectToBackground( O );
-
     if(Mode != 'routePoint')
         this.putOnXY( O );
-
-    return O.o;
 }
+
 GAMEobject.prototype.putObj_changeMode = function(O, newMode){
     var oldMode = O.M;
     O.M = newMode;
