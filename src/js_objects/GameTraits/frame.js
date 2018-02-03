@@ -1,8 +1,12 @@
 
 GAMEobject.prototype.frame_initObjects = function(){
-    var o;
-    while(o = this.initObjectsQueue.pop()){
-        // console.log(o);
+    for(var o in this.initObjectsQueue){
+        if(typeof this.O[o] == 'undefined') {
+            console.log('Object '+this.initObjectsQueue[o]+' somehow gone before beeing inited...');
+            delete (this.initObjectsQueue[o]);
+            continue;
+        }
+        console.log('Inited Something from Queue!');
         this.initObject(this.O[o]);
     }
 }

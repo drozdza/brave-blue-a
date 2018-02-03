@@ -252,6 +252,7 @@ GAMEobject.prototype.openEndPortal = function(i){
 
     var E = this.putObj('EndPortal',1,portalX,portalY);
     this.setRegionAnimation(this.O[ E ],'EndPortal');
+    this.initObject(this.O[E]);
 }
 GAMEobject.prototype.showEndGameCount = function(){
     var html='';

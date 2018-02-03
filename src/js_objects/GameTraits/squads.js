@@ -74,7 +74,7 @@ GAMEobject.prototype.prepareSquadScheme = function(O){
     }
 }
 GAMEobject.prototype.setSquadMember = function(O, i, life){
-    console.log(O, O.squadScheme,i);
+    // console.log(O, O.squadScheme,i);
     var OSS = O.squadScheme[i];
 
     var iX = O.x;
@@ -123,8 +123,6 @@ GAMEobject.prototype.setSquadMember = function(O, i, life){
         delete this.O[ Sid ].view.onBackground;
     }
 
-    this.addBoardMods(this.O[ Sid ]);
-
     if(typeof OSS.SquadMods !='undefined')
         this.addMod(this.O[ Sid ], OSS.SquadMods);
 
@@ -132,7 +130,7 @@ GAMEobject.prototype.setSquadMember = function(O, i, life){
         this.addMod(this.O[ Sid ], OSS.objData);
     this.O[ Sid ].Flags=[];
 
-    CanvasManager.requestCanvas( this.O[ Sid ] );
+    this.initObject(this.O[Sid]);
     return Sid;
 }
 GAMEobject.prototype.bindWithSquad = function(O,i,s){

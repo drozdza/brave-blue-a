@@ -53,6 +53,7 @@ GAMEobject.prototype.mapPlace_What = function(Setting, Place, What, defXY){
                 this.removeFromXY(this.O[o]);
                 this.O[o].mapType = false;
             }
+            this.initObject(this.O[o]);
         }
     }
 }

@@ -33,6 +33,7 @@ GAMEobject.prototype.shootMissile = function(o,Angle,Speed,Dec,SpeedT,DMG,explod
     if(DMG) this.O[L].DMG = cloneObj(DMG);
     if(explodePreset)
         this.cloneExplosionData({Do:'explode', explodePreset: explodePreset}, this.O[L]);
+    this.initObject(this.O[L]);
 
     ++this.C['B_missiles'];
     ++this.C['B_s'+O.S+'_missiles'];
@@ -42,6 +43,7 @@ GAMEobject.prototype.shootHealingMissile = function(o,Target){
     var L = this.putObj('healing_missile',O.S,O.x,O.y);
     this.O[L].angle = O.angle;
     this.O[L].FollowWho = Target;
+    this.initObject(this.O[L]);
 }
 GAMEobject.prototype.shootShieldAddMissile = function(o,Target){
     var O = this.O[o];
@@ -49,6 +51,7 @@ GAMEobject.prototype.shootShieldAddMissile = function(o,Target){
     this.O[L].angle = O.angle;
     this.O[L].FollowWho = Target;
     this.O[L].MaxEnergyField = parseInt(this.O[Target].lifeM/2);
+    this.initObject(this.O[L]);
 }
 GAMEobject.prototype.dropSpaceMine = function(S,x,y,Angle,bombData){
     var L = this.putObj('Mine',S,x,y);
@@ -63,6 +66,7 @@ GAMEobject.prototype.dropSpaceMine = function(S,x,y,Angle,bombData){
     }
 
     this.cloneExplosionData(bombData, this.O[L]);
+    this.initObject(this.O[L]);
 
     ++this.C['B_minesSet'];
     ++this.C['E:mines'];
@@ -78,6 +82,7 @@ GAMEobject.prototype.shootBomb = function(o,Angle,Speed,Dec,bombData,teleportDat
         this.O[L].TeleportMovement = teleportData;
 
     this.cloneExplosionData(bombData, this.O[L]);
+    this.initObject(this.O[L]);
 
     ++this.C['B_bombsShot'];
     ++this.C['B_s'+O.S+'_bombsShot'];
@@ -152,5 +157,5 @@ GAMEobject.prototype.mergeShips = function(o,q){
 
     this.dieObj(O);
     this.dieObj(Q);
-
+    this.initObject(this.O[L]);
 }

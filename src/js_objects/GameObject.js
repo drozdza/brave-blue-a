@@ -73,6 +73,6 @@ function GAMEobject(){
     this.SHIP={};
     this.SHIPold={};
 
-    this.initObjectsQueue=[];
+    this.initObjectsQueue={};
 
 }

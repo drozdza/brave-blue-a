@@ -78,13 +78,13 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
     this.putObj_changeMode(O, Mode);
 
     O.notInited = true;
-    this.initObjectsQueue.push(O.o);
+    this.initObjectsQueue[O.o] = O.T;
 
     return O.o;
 }
 
 GAMEobject.prototype.initObject = function(O){
-    // console.log(O);
+    delete (this.initObjectsQueue[O.o]);
     delete(O.notInited);
     O.life = O.lifeM;
 
@@ -102,7 +102,6 @@ GAMEobject.prototype.initObject = function(O){
     if(O.explodePreset || O.exploAddTo || O.onHitDieExpire){
         this.cloneExplosionData(O, O);
     }
-
 
     if(O.M != 'routePoint'){
         this.putOnXY( O );

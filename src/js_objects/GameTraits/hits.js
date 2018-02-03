@@ -5,37 +5,30 @@ GAMEobject.prototype.checkHits = function(o){
         var Found = this.getCollidingWithSquare(O,O.mapCollide);
     }else if(typeof O.coneAngle !='undefined'){
         var Found = this.getCollidingWithCone(O,O.mapCollide);
-    }else
+    }else{
         var Found = this.getCollidingWithCircle(O.x,O.y,O.radius,O.mapCollide);
+    }
     for(F in Found){
         this.hit(o,F);
     }
 }
 
 GAMEobject.prototype.checkShipHits = function(){
-    console.log('check!');
     var F,O = this.O[0];
     var Found = this.getCollidingWithCircle(O.x,O.y,O.radius,['A','ME','R']);
     for(F in Found){
-        console.log('Found!');
         this.hit(0,F);
-        this.hit(F,0);
     }
 }
 
 GAMEobject.prototype.hit = function(o,q){
     if(o==q) return 1;
+    if(o==0){ o=q; q=0;}
     var O = this.O[o];
     var Q = this.O[q];
 
-    // if(o==0) console.log(Q.T);
-
     if(typeof Q == 'undefined') return 1;
     if(typeof O == 'undefined') return 1;
-
-    if(O.T=='star'){   var U=Q; Q=O; O=U; }
-    if(O.T=='Gstar'){  var U=Q; Q=O; O=U; }
-    if(Q.T=='bullet'){ var U=Q; Q=O; O=U; }
 
     if(O.dontHit){ for(var i=0; i<O.dontHit.length; ++i) if(O.dontHit[i]==Q.mapType) return 1; }
     if(Q.dontHit){ for(var i=0; i<Q.dontHit.length; ++i) if(Q.dontHit[i]==O.mapType) return 1; }
@@ -67,10 +60,10 @@ GAMEobject.prototype.hit = function(o,q){
         return 1;
     }
 
-    if(Q.SlowDown && O.T=='ship'){
-        if(O.speed > Q.SlowDown) O.speed = Q.SlowDown;
-        if(this.specialMove != -1 && this.O[0].SpecialMoves)
-            if(this.O[0].SpecialMoves[ this.specialMove ].T=='changePosition'){
+    if(O.SlowDown && Q.T=='ship'){
+        if(Q.speed > O.SlowDown) Q.speed = O.SlowDown;
+        if(this.specialMove != -1 && Q.SpecialMoves)
+            if(Q.SpecialMoves[ this.specialMove ].T=='changePosition'){
                 this.specialMoveT = -1;
                 this.specialMove = -1;
             }
@@ -84,9 +77,7 @@ GAMEobject.prototype.hit = function(o,q){
     if(O.OneTimeEffect)    this.makeOneTimeEffect(o,q);
     if(Q.OneTimeEffect)    this.makeOneTimeEffect(q,o);
 
-    console.log(O.T);
     if(O.T=='missile' || O.T=='bullet'){
-        console.log('it was a missile');
         if(O.S==Q.S) return 1;
 
         if(Q.T=='ship'){
@@ -106,6 +97,7 @@ GAMEobject.prototype.hit = function(o,q){
 GAMEobject.prototype.makePeriodEffect = function(o,q){
     var O = this.O[o];
     var Q = this.O[q];
+    // console.log(O.T, Q.T);
 
     if(O.PeriodDelay)
         if(O.PeriodDelay- -O.bornTime > this.tick) return 1;

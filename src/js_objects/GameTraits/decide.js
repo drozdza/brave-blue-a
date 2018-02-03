@@ -862,6 +862,7 @@ GAMEobject.prototype.decide = function(o){
                 this.O[L].life = 3;
                 this.O[L].lifeM = 3;
                 CanvasManager.requestCanvas( this.O[ L ] );
+                this.initObject(this.O[L]);
                 WP.lastShot = this.tick;
             }
 

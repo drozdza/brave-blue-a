@@ -119,8 +119,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             delete( this.O[ L ].view.onBackground );
             this.Omoving[ L ]=1;
         }
-        this.putOnXY( this.O[ L ] );
-
+        this.initObject(this.O[L]);
     }
     else if(explodeObj.explodeType=='putObjs'){
         var objNumb = explodeObj.objMin;
@@ -142,7 +141,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
             if(explodeObj.objRandAngle)
                 this.O[ L ].angle = parseInt(Math.random()*360);
 
-            this.addBoardMods(this.O[L]);
+            this.initObject(this.O[L]);
         }
     }
     else if(explodeObj.explodeType=='setMine'){
@@ -163,6 +162,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
         this.O[L].undestructible=1;
         this.O[L].fiewOff=true;
         this.putObj_animation('explosion_'+explodeObj.Dist, O.x, O.y);
+        this.initObject(this.O[L]);
     }
 
     if(explodeObj.Shards)
@@ -197,6 +197,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
                     if(Sh.SpeedPlus) this.O[ L ].speed-=-Math.random()*Sh.SpeedPlus;
                     if(Sh.DecPlus)   this.O[ L ].doingTime-=-parseInt(Math.random()*Sh.DecPlus);
                     this.cloneExplosionData(Sh, this.O[L]);
+                    this.initObject(this.O[L]);
                 }
             }
         }
