@@ -77,12 +77,15 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
 
     this.putObj_changeMode(O, Mode);
 
+    O.notInited = true;
     this.initObjectsQueue.push(O.o);
 
     return O.o;
 }
 
 GAMEobject.prototype.initObject = function(O){
+    // console.log(O);
+    delete(O.notInited);
     O.life = O.lifeM;
 
     if(O.shipVariables){
@@ -290,7 +293,13 @@ GAMEobject.prototype.putObj_directAnim = function(Type,Data){
 
 GAMEobject.prototype.removeObj = function(o){
     if(o==0) return false;
-    if(typeof this.O[o] == 'undefined') return false;
+    if(typeof this.O[o] == 'undefined'){
+        // debugLog('Error: Object '+o+' allready not exists. Cannot removeObj()');
+        return false;
+    }
+    if(this.O[o].notInited){
+        errorLog('Error: Object '+this.O[o].t+'['+o+'] not inited yet.');
+    }
 
     if(this.O[o].T=='Mine'){
         ++this.C['B_minesExplode'];

@@ -74,6 +74,7 @@ GAMEobject.prototype.prepareSquadScheme = function(O){
     }
 }
 GAMEobject.prototype.setSquadMember = function(O, i, life){
+    console.log(O, O.squadScheme,i);
     var OSS = O.squadScheme[i];
 
     var iX = O.x;

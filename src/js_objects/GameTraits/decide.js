@@ -389,7 +389,7 @@ GAMEobject.prototype.decide = function(o){
                         }
 
                     if(iUnset !== false){
-                        this.setSquadMember(o,iUnset,1);
+                        this.setSquadMember(O,iUnset,1);
                         weMadeSomething = true;
                     }
                 }while(weMadeSomething);
@@ -754,7 +754,7 @@ GAMEobject.prototype.decide = function(o){
                     this.removeObj(O.squadScheme[0].Oid);
                     O.squadScheme[0].Oid = -1;
                 }
-                var Sid = this.setSquadMember(o,0,1);
+                var Sid = this.setSquadMember(O,0,1);
                 var oS = this.O[Sid];
                 oS.squadT = 'laserAim';
                 oS.squareAngle = O.laserAngle;
@@ -795,7 +795,7 @@ GAMEobject.prototype.decide = function(o){
                         }
 
                     if(iUnset !== false){
-                        this.setSquadMember(o,iUnset,1);
+                        this.setSquadMember(O,iUnset,1);
 
                         O.Res[ WP.usedRes ].R -= WP.usedResR;
                         WP.lastShot = this.tick;

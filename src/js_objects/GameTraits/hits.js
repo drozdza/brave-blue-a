@@ -7,14 +7,17 @@ GAMEobject.prototype.checkHits = function(o){
         var Found = this.getCollidingWithCone(O,O.mapCollide);
     }else
         var Found = this.getCollidingWithCircle(O.x,O.y,O.radius,O.mapCollide);
-    for(F in Found)
+    for(F in Found){
         this.hit(o,F);
+    }
 }
 
 GAMEobject.prototype.checkShipHits = function(){
+    console.log('check!');
     var F,O = this.O[0];
     var Found = this.getCollidingWithCircle(O.x,O.y,O.radius,['A','ME','R']);
     for(F in Found){
+        console.log('Found!');
         this.hit(0,F);
         this.hit(F,0);
     }
@@ -24,6 +27,9 @@ GAMEobject.prototype.hit = function(o,q){
     if(o==q) return 1;
     var O = this.O[o];
     var Q = this.O[q];
+
+    // if(o==0) console.log(Q.T);
+
     if(typeof Q == 'undefined') return 1;
     if(typeof O == 'undefined') return 1;
 
@@ -78,7 +84,9 @@ GAMEobject.prototype.hit = function(o,q){
     if(O.OneTimeEffect)    this.makeOneTimeEffect(o,q);
     if(Q.OneTimeEffect)    this.makeOneTimeEffect(q,o);
 
+    console.log(O.T);
     if(O.T=='missile' || O.T=='bullet'){
+        console.log('it was a missile');
         if(O.S==Q.S) return 1;
 
         if(Q.T=='ship'){

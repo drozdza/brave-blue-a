@@ -2,6 +2,7 @@
 GAMEobject.prototype.frame_initObjects = function(){
     var o;
     while(o = this.initObjectsQueue.pop()){
+        // console.log(o);
         this.initObject(this.O[o]);
     }
 }
@@ -225,18 +226,18 @@ GAMEobject.prototype.frame_draw = function(frameCenter){
 }
 
 GAMEobject.prototype.frame = function(){
-    debugLog('Frame');
+    // debugLog('Frame');
     if(BBAdata.GET.FRAMES==0){
-        debugLog('Frame: initObjects');
+        // debugLog('Frame: initObjects');
         this.frame_initObjects();
-        debugLog('Frame: move');
+        // debugLog('Frame: move');
         this.frame_move();
-        debugLog('Frame: decide');
+        // debugLog('Frame: decide');
         this.frame_decide();
-        debugLog('Frame: draw');
+        // debugLog('Frame: draw');
         this.frame_draw();
     }else if(BBAdata.GET.FRAMES > 0){
-        debugLog('Frame: initObjects');
+        // debugLog('Frame: initObjects');
         this.frame_initObjects();
         var FR = parseInt( 1000/this.Frames )-2;
         var now = new Date().getTime();
@@ -251,18 +252,18 @@ GAMEobject.prototype.frame = function(){
         if(BBAdata.GET.FRAMES==2){
             this.FRAME_TIME-=-FR;
         }
-        debugLog('Frame: move');
+        // debugLog('Frame: move');
         this.frame_move();
-        debugLog('Frame: decide');
+        // debugLog('Frame: decide');
         this.frame_decide();
         if(BBAdata.GET.FRAMES==3 || BBAdata.GET.FRAMES==4){
             PASSED-=FR;
             this.FRAME_TIME-=-FR;
             var X = 0;
             while(PASSED > FR){
-                debugLog('Frame: move');
+                // debugLog('Frame: move');
                 this.frame_move();
-                debugLog('Frame: decide');
+                // debugLog('Frame: decide');
                 this.frame_decide();
                 PASSED-=FR;
                 this.FRAME_TIME-=-FR;
@@ -273,7 +274,7 @@ GAMEobject.prototype.frame = function(){
             }
         } else {
         }
-        debugLog('Frame: draw');
+        // debugLog('Frame: draw');
         this.frame_draw();
     }
 
