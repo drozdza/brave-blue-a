@@ -1,16 +1,4 @@
 
-GAMEobject.prototype.frame_initObjects = function(){
-    for(var o in this.initObjectsQueue){
-        if(typeof this.O[o] == 'undefined') {
-            console.log('Object '+this.initObjectsQueue[o]+' somehow gone before beeing inited...');
-            delete (this.initObjectsQueue[o]);
-            continue;
-        }
-        console.log('Inited Something from Queue!');
-        this.initObject(this.O[o]);
-    }
-}
-
 GAMEobject.prototype.frame_decide = function(){
     var MS = (new Date()).getTime();
     $('#gameboardMarkers').html('');
@@ -232,8 +220,6 @@ GAMEobject.prototype.frame_draw = function(frameCenter){
 GAMEobject.prototype.frame = function(){
     // debugLog('Frame');
     if(BBAdata.GET.FRAMES==0){
-        // debugLog('Frame: initObjects');
-        this.frame_initObjects();
         // debugLog('Frame: move');
         this.frame_move();
         // debugLog('Frame: decide');
@@ -241,8 +227,6 @@ GAMEobject.prototype.frame = function(){
         // debugLog('Frame: draw');
         this.frame_draw();
     }else if(BBAdata.GET.FRAMES > 0){
-        // debugLog('Frame: initObjects');
-        this.frame_initObjects();
         var FR = parseInt( 1000/this.Frames )-2;
         var now = new Date().getTime();
         var PASSED = now - this.FRAME_TIME;

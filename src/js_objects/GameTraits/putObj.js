@@ -77,15 +77,10 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
 
     this.putObj_changeMode(O, Mode);
 
-    O.notInited = true;
-    this.initObjectsQueue[O.o] = O.T;
-
     return O.o;
 }
 
 GAMEobject.prototype.initObject = function(O){
-    delete (this.initObjectsQueue[O.o]);
-    delete(O.notInited);
     O.life = O.lifeM;
 
     if(O.shipVariables){

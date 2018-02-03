@@ -104,7 +104,7 @@ GAMEobject.prototype.setSquadMember = function(O, i, life){
         var acType = 'region';
         if(OSS.acType) acType = OSS.acType;
         var Sid = this.putObj('ConeField', 1, iX, iY);
-        this.putObj_changeMode(Sid, acType);
+        this.putObj_changeMode(this.O[Sid], acType);
         this.Omoving[Sid]=1;
         this.bindWithSquad(O, i, Sid);
     }
