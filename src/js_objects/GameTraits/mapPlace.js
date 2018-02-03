@@ -19,7 +19,7 @@ GAMEobject.prototype.mapPlace_What = function(Setting, Place, What, defXY){
 
             mapXY = this.mapPlace_getPlace(defXY, elemI);
             if(mapXY === false){
-                console.log('Error: Not enough mapPlaces!');
+                errorLog('Error: Not enough mapPlaces!');
                 break;
             }
             if(Odata.PlaceGroup){
@@ -93,7 +93,7 @@ GAMEobject.prototype.mapPlace_setPlaceDef = function(Setting,Place,defXY){
                     ++iSpot;
 
                     if(placeI > 500){
-                        console.log('Error: TOO LOOPY!!!!!!!!!!!!!!!');
+                        errorLog('Error: TOO LOOPY!!!!!!!!!!!!!!!');
                         break;
                     }
                 }

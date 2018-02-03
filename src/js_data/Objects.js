@@ -377,34 +377,6 @@ BBAdata.ObjectData.EndPortal={
 };
 
 
-BBAdata.ObjectData.enemyShip={
-    M: 'comp',
-    TT: 'enemy',
-    lastSpeedT: 0,
-    doSquad: -1,//??
-    dec: 50,    //??
-    ammo: -50,    //??
-    radius: 15,
-    Flags:{
-        spotEnemyFlag: false,
-        gotHitFlag: false,
-        heardExplosionFlag: false,
-        newOrderFlag: false,
-        awareAboutEnemy: false,
-        lastSeenEnemy: -1
-    },
-
-    Res:{},
-    toDo:[],
-    doingTime: -1,
-    Manouver: 'goStraight',
-
-    alarmLvl: 2,
-    speedLvl: 2,
-    spotLvl: 2,
-};
-
-
 BBAdata.ObjectMods.enemyShip={
     M: 'comp',
     TT: 'enemy',

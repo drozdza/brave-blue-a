@@ -3,13 +3,13 @@ BBAdata.MapGroups = {};
 
 if(BBAdata.GET.MAPSMODE){
 
-BBAdata.MAPS.Start = 'load';
-BBAdata.MAPS.U1 = 'load';
-BBAdata.MAPS.U2 = 'load';
-BBAdata.MAPS.U3 = 'load';
-BBAdata.MAPS.U4 = 'load';
-BBAdata.MAPS.M1 = 'load';
-BBAdata.MAPS['001'] = 'load';
+BBAdata.MAPS.Start='load';
+BBAdata.MAPS.U1='load';
+BBAdata.MAPS.U2='load';
+BBAdata.MAPS.U3='load';
+BBAdata.MAPS.U4='load';
+BBAdata.MAPS.M1='load';
+BBAdata.MAPS['001']='load';
 BBAdata.MAPS.First={
     StarMap:{ x:-200, y:-200, mouseRadius: 25, shipRadius: 20,
         Anims:[
@@ -359,11 +359,11 @@ BBAdata.MAPS.Followers={
     BoardMods:['sitOnMap','allAvoid'],
     Place:[{Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, A:15, U:10, S:10, I:10, C:10, V:10, K:10, F:10}}],
 };
-BBAdata.MAPS.Backgrounds = 'load';
-BBAdata.MAPS.Mines = 'load';
-BBAdata.MAPS.Secure = 'load';
-BBAdata.MAPS.Secure2 = 'load';
-BBAdata.MAPS.Secure3 = 'load';
+BBAdata.MAPS.Backgrounds='load';
+BBAdata.MAPS.Mines='load';
+BBAdata.MAPS.Secure='load';
+BBAdata.MAPS.Secure2='load';
+BBAdata.MAPS.Secure3='load';
 BBAdata.MAPS.BigOnes={
     BoardMods:['sitOnMap','allAvoid'],
     WinningConds:[
@@ -391,8 +391,9 @@ BBAdata.MAPS.HardCore={
     Ship:{Start:{X: 2400, Y: 0, A:90}},
     Place:[
         {Random:{X: 0, Y: 0, Radius: 2200}, What:{
-            A:5, U:5, S:5, I:10, D:10, M:5, N:5, J:5, W:5, T:5, E:10, C:5, G:5, R:5, H:5, B:5, V:5,
+            A:5, U:5, S:5, I:10, D:10, M:5, N:5, J:5, T:5, E:10, C:5, G:5, R:5, H:5, B:5, V:5,
             K:10, L:10, F:10,
+            W:5,
             Q:5, X:6, Z:5, PI:5, WP:5, Ni:10,
             SH:10, TT:10, CD:5, HH:5, UU:5, Tu:8, Ii:5, HS:5, HS:8,
             Y:2, Yi:2, Yl:2, Yb:2,

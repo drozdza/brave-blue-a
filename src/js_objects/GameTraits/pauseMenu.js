@@ -160,7 +160,7 @@ GAMEobject.prototype.pause_keyNearest = function(way){
         this.pauseViewPoint.x = this.O[oO].x;
         this.pauseViewPoint.y = this.O[oO].y;
 
-        console.log(oO);
+        debugLog(oO);
 
         this.pause_showGameStats_object(oO);
 

@@ -12,8 +12,7 @@ GAMEobject.prototype.putObj_getFromType = function(Type,o){
         }
     }
 
-    if(O.explodePreset || O.exploAddTo || O.onHitDieExpire)
-        this.cloneExplosionData(O, O);
+    carefullyMergeObjects(O, BBAdata.ObjectData[Type]);
 
     return O;
 }
@@ -86,19 +85,25 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
 GAMEobject.prototype.initObject = function(O){
     O.life = O.lifeM;
 
-    if(O.shipVariables)
+    if(O.shipVariables){
         this.putObj_shipVariables(O);
-
-    if(O.view && O.view.onBackground)
+    }
+    if(O.T!='shieldBlob'){
+        CanvasManager.requestCanvas( O );
+    }
+    if(O.view && O.view.onBackground){
         CanvasManager.CBM.addObjectToBackground( O );
-
+    }
     this.tryBuildSquads(O);
 
-    if(Type!='shieldBlob')
-        CanvasManager.requestCanvas( O );
+    if(O.explodePreset || O.exploAddTo || O.onHitDieExpire){
+        this.cloneExplosionData(O, O);
+    }
 
-    if(Mode != 'routePoint')
+
+    if(O.M != 'routePoint'){
         this.putOnXY( O );
+    }
 }
 
 GAMEobject.prototype.putObj_changeMode = function(O, newMode){
@@ -171,17 +176,20 @@ GAMEobject.prototype.tryBuildSquads = function(O){
         this.setFlagSquadFull(O);
 }
 GAMEobject.prototype.putObj_shipVariables = function(O){
-    console.log(O);
+    if(typeof O.shipVariables == 'undefined') return false;
 
-    // for(var i in {speedArr:1,spotArr:1})
-    //     for(var j=0; j<4; ++j)
-    //         for(var k in O[i][j])
-    //             if(typeof O[i][j][k] == 'object' && typeof O[i][j][k].shipVar != 'undefined')
-    //                 O[i][j][k] = this.getShipVariable(O, O[i][j][k]);
+    for(var i in {speedArr:1,spotArr:1}){
+        for(var j=0; j<4; ++j){
+            for(var k in O[i][j]){
+                if(typeof O[i][j][k] == 'object' && typeof O[i][j][k].shipVar != 'undefined'){
+                    O[i][j][k] = this.getShipVariable(O, O[i][j][k]);
+                }
+            }
+        }
+    }
 
     delete O.shipVariables;
     this.changeSpeedLvl(O, O.speedLvl);
-    return O;
 }
 
 GAMEobject.prototype.getShipVariable = function(O,VarRequest){

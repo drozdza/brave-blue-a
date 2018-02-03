@@ -455,23 +455,23 @@ GAMEobject.prototype.decide = function(o){
                 var speedT = O.speedT;
                 O.Tyk = Tyk;
                 if(Ei < speedT) speedT = Ei;
-                if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT;  console.log('Ax');}
-                if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; console.log('Ay');}
+                if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT;  errorLog('Ax');}
+                if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; errorLog('Ay');}
             }else if(PlayerDist < 100){
                 Tyk = (Tyk- -180)%360;
                 var speedT = O.speedT;
                 O.Tyk = Tyk;
                 if(Ei < speedT) speedT = Ei;
-                if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; console.log('Bx');}
-                if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; console.log('By');}
+                if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; errorLog('Bx');}
+                if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; errorLog('By');}
             }else{
                 O.lastSpeedT = 0;
                 Tyk = (Tyk- -180)%360;
                 var speedT = O.speedT;
                 O.Tyk = Tyk;
                 if(Ei < speedT) speedT = Ei;
-                if(Tyk > 90 && Tyk <= 270){ O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; console.log('Cx');}
-                if(Tyk <= 90 || Tyk > 270){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; console.log('Cy');}
+                if(Tyk > 90 && Tyk <= 270){ O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; errorLog('Cx');}
+                if(Tyk <= 90 || Tyk > 270){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; errorLog('Cy');}
             }
         }break;
         case 'goToXY':{

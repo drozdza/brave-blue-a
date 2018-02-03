@@ -60,7 +60,6 @@ GAMEobject.prototype.addMod = function(O, MODnameORobject){
                 for(var i in MOD[KI])
                     this.addMod(O, BBAdata['ObjectData'][ MOD[KI][i] ]);
             break; case 'removeToDo':
-            console.log('removeToDo');
                 for(var i in MOD.removeToDo)
                     this.removeFromToDoList(O, MOD.removeToDo[i]);
             break; case 'toDo':
@@ -76,6 +75,7 @@ GAMEobject.prototype.addMod = function(O, MODnameORobject){
                 O.y = MOD.y;
                 this.putOnXY(O, oldX, oldY);
             break; case 'y':
+
             break; case 'mergeArrays':
                 for(var u in MOD[KI])
                     O[u] = mergeArrays(O[u],MOD[KI][u]);
@@ -109,10 +109,6 @@ GAMEobject.prototype.addMod = function(O, MODnameORobject){
         this.cloneExplosionData(O,O);
     }
 
-    if(O.view && O.view.onBackground)
-        CanvasManager.CBM.changeObjectPosition( O );
-    CanvasManager.requestCanvas( O );
-    this.putOnXY( O );
 }
 GAMEobject.prototype.addToToDoList = function(O, toDo){
     if(typeof O.toDo == 'undefined'){

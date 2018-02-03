@@ -203,7 +203,7 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
     if(DMGval < 1) return true;
 
     if(O.life < 1){
-        if(o > 0) console.log(O.T+' ['+o+'] is dead but got hit!');
+        if(o > 0) errorLog(O.T+' ['+o+'] is dead but got hit!');
         return true;
     }
 
@@ -240,7 +240,6 @@ GAMEobject.prototype.showHits = function(x,y,number,type){
 }
 
 GAMEobject.prototype.dieObj = function(O){
-    console.log(O);
     if(O.TT=='enemy'){
         this.C['D:enemies']++;
         var umo = 'D:'+O.T;

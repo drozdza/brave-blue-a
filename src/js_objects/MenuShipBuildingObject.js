@@ -333,7 +333,7 @@ function MenuShipBuildingObject(){
         $('#shipyardContainer')
             .on('click','.shipElement_buy',function(){
                 var elementName = $(this).attr('elementName');
-                console.log('Ship Element: ', elementName);
+                debugLog('Ship Element: ', elementName);
                 MENU.SB.toggleShipElement(elementName);
                 MENU.SB.showPartEditor(elementName);
             })
@@ -454,7 +454,7 @@ function MenuShipBuildingObject(){
 
 
     this.toggleShipElementPart = function(elementName, elementCopy, elementUpgrade){
-        console.log('toggleShipElementPart(',elementName, elementCopy, elementUpgrade,')');
+        debugLog('toggleShipElementPart(',elementName, elementCopy, elementUpgrade,')');
         var S = this.SHIPelems[elementName];
 
         if(typeof S.Copies[elementCopy] == 'undefined'){
@@ -564,9 +564,9 @@ function MenuShipBuildingObject(){
         // remove unused hidden Storages
         for(var type in S.Storage){
             var ST = S.Storage[type];
-            console.log(ST);
+            debugLog(ST);
             if(typeof ST.Hidden != 'undefined' && ST.Hidden != ST.M){
-                console.log(ST.M, ST.Hidden);
+                debugLog(ST.M, ST.Hidden);
                 ST.M -= ST.Hidden;
                 delete S.Storage[type].Hidden;
             }
@@ -795,7 +795,7 @@ function MenuShipBuildingObject(){
             }
         }
         P+='\n}';
-        console.log(P);
+        debugLog(P);
     }
 
     this.showShipAssemblyView = function(){

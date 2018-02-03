@@ -59,7 +59,7 @@ GAMEobject.prototype.shipFunc_esteemedPositions = function(O,F){
         if(this.O[Fo].undestructible > 0) continue;
         if(this.O[Fo].life < 1) continue;
         WU = this.countFutureShoot(Fo,O.x,O.y,F.Speed,F.Dec);
-        console.log('Esteem:',WU);
+        debugLog('Esteem:',WU);
         if(WU.r){
             EsteemedPos[Fo]={x:WU.x,y:WU.y};
             var X = WU.x - this.O[0].x- -this.Dx/2;

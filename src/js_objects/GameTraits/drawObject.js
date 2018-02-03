@@ -1,7 +1,7 @@
 GAMEobject.prototype.drawObject = function(O,o,CH, Px,Py){
     var Radi = Math.PI/180;
 
-    if(!O){ console.log('There is no object to draw: '+o); return false;}
+    if(!O){ errorLog('There is no object to draw: '+o); return false;}
 
     if(BBAdata.GET.DEBUG > 0){
         CH.save();
