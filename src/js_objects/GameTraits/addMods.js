@@ -8,7 +8,7 @@ GAMEobject.prototype.loadInheritedMods = function(ModList, o){
         if(modData.LoadMods)
             modO = this.loadInheritedMods(modData.LoadMods, o);
 
-        this.addMod(modO, modData);
+        this.addMod(modO, modName);
         this.addMod(modO, ModList[modName]);
 
         carefullyMergeObjects(O, modO);
@@ -30,10 +30,14 @@ GAMEobject.prototype.addBoardMods = function(O){
 GAMEobject.prototype.addMod = function(O, MODnameORobject){
     var MOD;
 
+    if(typeof O.modNames == 'undefined') O.modNames = {};
+
     if(typeof MODnameORobject == 'string'){
+        O.modNames[MODnameORobject] = 1;
         MOD = cloneObj(BBAdata.ObjectMods[MODnameORobject]);
     } else if(MODnameORobject instanceof Array){
         for (var x in MODnameORobject) {
+            O.modNames[MODnameORobject[x]] = 1;
             this.addMod(O, MODnameORobject[x]);
         }
         return false;
@@ -41,17 +45,28 @@ GAMEobject.prototype.addMod = function(O, MODnameORobject){
         MOD = cloneObj(MODnameORobject);
     }
 
-    if(typeof MOD.who != 'undefined'){
+    if(typeof MOD.addTo != 'undefined'){
         var jest=false;
-        for(var i=0; i<MOD.who.length; ++i)
-            if(MOD.who[i]==O.T){
+        for(var i in MOD.addTo)
+            if(O.modNames[ MOD.addTo[i] ] == 1){
                 jest=true;
                 break;
             }
         if(!jest) return false;
     }
+    if(typeof MOD.dontAddTo != 'undefined'){
+        var jest=false;
+        for(var i in MOD.dontAddTo)
+            if(O.modNames[ MOD.dontAddTo[i] ] == 1){
+                jest=true;
+                break;
+            }
+        if(jest) return false;
+    }
+
+
     var ACTIONS = MOD.MapModActions;
-    delete(MOD.who);
+    delete(MOD.addTo);
     delete(MOD.MapModActions);
 
     for(var KI in MOD){

@@ -489,6 +489,7 @@ BBAdata.MAPS.BuildTry2={
 BBAdata.MAPS.Empty={
     Place:[
         // {CircleOf:{X:0, Y:0, Radius: 100, Angle: 0, AnglePlus: 60}, What:{StarL:6}},
+        {Random:{X: 0, Y: 0, Radius: 800}, What:{SH:20}}
     ]
 };
 

@@ -109,9 +109,6 @@ GAMEobject.prototype.frame_move = function(){
             if(O.squareCorners)
                 O.squareCorners = this.countSquareCorners(O.x,O.y,O.squareAngle,O.squareLen,O.squareWidth);
 
-
-
-
             if(typeof MasterS.squadAngleType != 'undefined' && MasterS.squadAngleType == 'alongDirection'){
                  O.angle = Master.angle- -MasterS.angle;
             } else {

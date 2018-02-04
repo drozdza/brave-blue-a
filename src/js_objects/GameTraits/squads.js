@@ -77,6 +77,8 @@ GAMEobject.prototype.setSquadMember = function(O, i, life){
     // console.log(O, O.squadScheme,i);
     var OSS = O.squadScheme[i];
 
+    console.log(OSS);
+
     var iX = O.x;
     var iY = O.y;
     var iAngle = parseInt(Math.random()*360);
@@ -123,11 +125,9 @@ GAMEobject.prototype.setSquadMember = function(O, i, life){
         delete this.O[ Sid ].view.onBackground;
     }
 
-    if(typeof OSS.SquadMods !='undefined')
-        this.addMod(this.O[ Sid ], OSS.SquadMods);
+    if(typeof OSS.Mod !='undefined')
+        this.addMod(this.O[ Sid ], OSS.Mod);
 
-    if(typeof OSS.objData !='undefined')
-        this.addMod(this.O[ Sid ], OSS.objData);
     this.O[ Sid ].Flags=[];
 
     this.initObject(this.O[Sid]);

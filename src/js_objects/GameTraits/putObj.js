@@ -11,6 +11,8 @@ GAMEobject.prototype.putObj_getFromType = function(Type,o){
             O = cloneObj(OD);
         }
     }
+    if(!O.modNames) O.modNames={};
+    O.modNames[Type] = 1;
 
     carefullyMergeObjects(O, BBAdata.ObjectData[Type]);
 

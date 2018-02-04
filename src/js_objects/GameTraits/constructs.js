@@ -18,7 +18,7 @@ GAMEobject.prototype.buildConstructs = function(O, SETconstruct){
                     var xx = O.x- -O.radius*Math.sin((-180-angle)*(Math.PI/180));
                     var yy = O.y- -O.radius*Math.cos((-180-angle)*(Math.PI/180));
 
-                    var objData = {
+                    var Mod = {
                         x: xx,
                         y: yy,
                         squareLen: distReal,
@@ -30,7 +30,7 @@ GAMEobject.prototype.buildConstructs = function(O, SETconstruct){
                     };
 
                     var L = this.putObj('SquareField', 1, x, y);
-                    this.addMod(this.O[ L ], objData);
+                    this.addMod(this.O[ L ], Mod);
                     this.initObject(this.O[ L ]);
                     Q.constructsDone[q+'_'+o] = L;
                     O.constructsDone[o+'_'+q] = L;
