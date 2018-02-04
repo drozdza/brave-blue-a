@@ -77,7 +77,7 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
 
     this.addBoardMods(O);
 
-    this.putObj_changeMode(O, Mode);
+    // this.putObj_changeMode(O, Mode);
 
     return O.o;
 }
@@ -104,6 +104,11 @@ GAMEobject.prototype.initObject = function(O){
         this.cloneExplosionData(O, O);
     }
 
+    if(typeof O.lists == 'undefined') console.log(O.T+' nie ma list!');
+    for (var list in O.lists) {
+        this[list][O.o] = O.S;
+    }
+
     if(O.M != 'routePoint'){
         this.putOnXY( O );
     }
@@ -128,8 +133,8 @@ GAMEobject.prototype.putObj_changeMode = function(O, newMode){
     if(newMode!='static' && newMode!='region' && newMode!='routePoint')
         this.Omoving[ O.o ] = 1;
 
-    if(newMode == 'routePoint')
-        this.Oroute[ O.o ] = 1;
+    // if(newMode == 'routePoint')
+    //     this.Oroute[ O.o ] = 1;
 
 }
 GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,DMG){

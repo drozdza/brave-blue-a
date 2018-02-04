@@ -5,16 +5,19 @@ BBAdata.ObjectMods={};
 BBAdata.ObjectData.routePoint={
     T: 'routePoint',
     M: 'routePoint',
+    lists:{Oroute:1},
     radius: 20,
 };
 
 BBAdata.ObjectData.destruction_field={
     M: 'region',
     TT: 'dust',
+    lists:{Oregion:1},
 };
 BBAdata.ObjectData.healing_missile={
     M: 'comp',
     TT: 'dust',
+    lists:{Ocomp:1,Omoving:1},
     view:{
         Letter: 'J',
         LetterSize: 12,
@@ -36,6 +39,7 @@ BBAdata.ObjectData.healing_missile={
 BBAdata.ObjectData.energy_field_missile={
     M: 'comp',
     TT: 'dust',
+    lists:{Ocomp:1,Omoving:1},
     view:{
         Letter: 'E',
         LetterSize: 12,
@@ -56,6 +60,7 @@ BBAdata.ObjectData.energy_field_missile={
 BBAdata.ObjectData.missile={
     M: 'comp',
     TT: 'dust',
+    lists:{Ocomp:1,Omoving:1},
     view:{
         Letter: 'Y',
         LetterSize: 12,
@@ -76,6 +81,7 @@ BBAdata.ObjectData.missile={
 BBAdata.ObjectData.bullet_bomb={
     M: 'comp',
     TT: 'dust',
+    lists:{Ocomp:1,Omoving:1},
     view:{
         Letter: 'P',
         LetterSize: 12,
@@ -94,6 +100,7 @@ BBAdata.ObjectData.bullet_bomb={
 };
 BBAdata.ObjectData.Mine={
     M: 'comp',
+    lists:{Ocomp:1,Omoving:1},
     view:{
         Letter: 'R',
         LetterSize: 10,
@@ -274,6 +281,7 @@ BBAdata.ObjectMods.Star={
 
     SlowDown:3,
     M: 'static',
+    lists:{Oregion:1},
     Flags:{},
     mapType:'A',
     TT:'bgStars',
@@ -314,6 +322,7 @@ BBAdata.ObjectData.Gstar={
         onBackground: 1,
     },
     M:'static',
+    lists:{Oregion:1},
     TT: 'dust',
     radius: 90,
     undestructible: 1,
@@ -327,6 +336,7 @@ BBAdata.ObjectData.RoundField={
         onBackground: 1,
     },
     M: 'region',
+    lists:{Oregion:1},
     TT: 'dust',
     radius: 50,
     undestructible: 1,
@@ -337,6 +347,7 @@ BBAdata.ObjectData.SquareField={
         onBackground: 1,
     },
     M: 'region',
+    lists:{Oregion:1},
     TT: 'dust',
     radius: 50,
     squareAngle: 0,
@@ -352,6 +363,7 @@ BBAdata.ObjectData.ConeField={
 
     M: 'region',
     TT: 'dust',
+    lists:{Oregion:1},
     radius: 50,
     coneAngle: 180,
     coneRad2: 50,
@@ -379,6 +391,7 @@ BBAdata.ObjectData.EndPortal={
 
 BBAdata.ObjectMods.enemyShip={
     M: 'comp',
+    lists:{Ocomp:1,Omoving:1},
     TT: 'enemy',
     lastSpeedT: 0,
     doSquad: -1,   //??
@@ -616,6 +629,7 @@ BBAdata.ObjectData.dandares={
 };
 BBAdata.ObjectData.shieldBlob={
     M: 'moving',
+    lists:{Omoving:1},
     view:{
         Letter: '#',
         LetterSize: 40,
