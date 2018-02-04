@@ -84,13 +84,17 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
 
 GAMEobject.prototype.initObject = function(O){
     O.life = O.lifeM;
+    if(O.lifeTo){
+        O.life = O.lifeTo;
+        delete(O.lifeTo);
+    }
 
     if(O.shipVariables){
         this.putObj_shipVariables(O);
     }
-    if(O.T!='shieldBlob'){
-        CanvasManager.requestCanvas( O );
-    }
+
+    CanvasManager.requestCanvas( O );
+
     if(O.view && O.view.onBackground){
         CanvasManager.CBM.addObjectToBackground( O );
     }

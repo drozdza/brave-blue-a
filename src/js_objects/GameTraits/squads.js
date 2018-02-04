@@ -93,7 +93,7 @@ GAMEobject.prototype.setSquadMember = function(O, i, life){
         var Sid = this.putObj('shieldBlob', O.S, iX, iY);
         var oS = this.O[Sid];
         oS.angle = iAngle;
-        oS.life = life;
+        oS.lifeTo = life;
         oS.lifeM = OSS.lifeM;
         this.bindWithSquad(O, i, Sid);
     }
