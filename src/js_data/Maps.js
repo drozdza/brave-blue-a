@@ -390,6 +390,8 @@ BBAdata.MAPS.HardCore={
     ],
     Ship:{Start:{X: 2400, Y: 0, A:90}},
     Place:[
+        {What:{ConeField:1},Mod:{x:0,y:0, radius: 3800, angle: 180, coneAngle: 179, coneRad2: 3300, simpleFilling: '#111', bounceType:'diagonal',bounceTeleport:true}},
+        {What:{ConeField:1},Mod:{x:0,y:0, radius: 3850, angle: 0, coneAngle: 3, coneRad2: 3250, simpleFilling: '#306', bounceType:'diagonal',bounceTeleport:true}},
         {Random:{X: 0, Y: 0, Radius: 2200}, What:{
             A:5, U:5, S:5, I:10, D:10, M:5, N:5, J:5, T:5, E:10, C:5, G:5, R:5, H:5, B:5, V:5,
             K:10, L:10, F:10,
