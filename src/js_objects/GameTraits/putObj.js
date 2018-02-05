@@ -37,40 +37,9 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
     O.T = Type;
     O.bornTime = this.tick;
     O.periodDMG = {};
-    // O.TT = 'dust';
-
-    var Mode = O.M;
-
 
     if(O.TT=='enemy'){
-        this.Enemies[ O.o ] = 1;
-        O.angle           = parseInt(Math.random()*360);
-        O.mapType         = 'E';
-        O.mapCollide      = ['M'];
-    }
-
-    if(Type=='healing_missile' || Type=='energy_field_missile' || Type=='missile' || Type=='bullet_bomb' || Type=='Mine' || Type=='shieldBlob'){
-        if(Side==2){
-            O.mapType = 'M';
-            O.mapCollide = ['E','ME','A'];
-        } else{
-            O.mapType = 'ME';
-            O.mapCollide = ['P','M'];
-        }
-    }
-
-    if(Mode=='region'){
-        O.mapType = 'R';
-        O.mapCollide = ['P','E','M','ME','A'];
-    }
-
-    if(Type=='EndPortal'){
-        O.mapType = 'A';
-        O.mapCollide = ['P'];
-    }
-
-    if(O.T=='healing_missile' || O.T=='energy_field_missile'){
-        O.mapCollide = ['E'];
+        O.angle = parseInt(Math.random()*360);
     }
 
     this.O[ O.o ] = O;
@@ -103,7 +72,7 @@ GAMEobject.prototype.initObject = function(O){
     }
 
     if(typeof O.lists == 'undefined') console.log(O.T+' nie ma list!');
-    for (var list in O.lists) {
+    for(var list in O.lists) {
         this[list][O.o] = O.S;
     }
 

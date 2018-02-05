@@ -23,6 +23,8 @@ GAMEobject.prototype.shipShootMissile = function(Enemy,Angle,Speed,Dec,SpeedT,de
     this.O[L].doingTime = Dec || 30;
     this.O[L].FollowWho = Enemy;
     this.O[L].angle = Angle;
+    this.O[L].mapType = 'M';
+    this.O[L].mapCollide = ['E','ME','A'];
 
     if(destrData.DMG)
         this.O[L].DMG = cloneObj(destrData.DMG);
@@ -41,6 +43,8 @@ GAMEobject.prototype.shipShootBomb = function(Speed,Dec,bombData,teleportData){
     this.O[L].speed = Speed || 10;
     this.O[L].doingTime = Dec || 30;
     this.O[L].angle = Angle;
+    this.O[L].mapType = 'M';
+    this.O[L].mapCollide = ['E','ME','A'];
 
     if(teleportData)
         this.O[L].TeleportMovement = teleportData;
@@ -72,6 +76,8 @@ GAMEobject.prototype.shipTeleportBomb = function(Distance,offTime,bombData){
     this.O[L].speed = 0;
     this.O[L].doingTime = offTime;
     this.O[L].angle = iRad;
+    this.O[L].mapType = 'M';
+    this.O[L].mapCollide = ['E','ME','A'];
     this.cloneExplosionData(bombData, this.O[L]);
 
     if(bombData.dontCollide){

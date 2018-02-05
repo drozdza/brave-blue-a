@@ -13,11 +13,15 @@ BBAdata.ObjectData.destruction_field={
     M: 'region',
     TT: 'dust',
     lists:{Oregion:1},
+    mapType: 'R',
+    mapCollide: ['P','E','M','ME','A'],
 };
 BBAdata.ObjectData.healing_missile={
     M: 'comp',
     TT: 'dust',
     lists:{Ocomp:1,Omoving:1},
+    mapType: 'ME',
+    mapCollide: ['E'],
     view:{
         Letter: 'J',
         LetterSize: 12,
@@ -40,6 +44,8 @@ BBAdata.ObjectData.energy_field_missile={
     M: 'comp',
     TT: 'dust',
     lists:{Ocomp:1,Omoving:1},
+    mapType: 'ME',
+    mapCollide: ['E'],
     view:{
         Letter: 'E',
         LetterSize: 12,
@@ -61,6 +67,8 @@ BBAdata.ObjectData.missile={
     M: 'comp',
     TT: 'dust',
     lists:{Ocomp:1,Omoving:1},
+    mapType: 'ME',
+    mapCollide: ['P','M'],
     view:{
         Letter: 'Y',
         LetterSize: 12,
@@ -82,6 +90,8 @@ BBAdata.ObjectData.bullet_bomb={
     M: 'comp',
     TT: 'dust',
     lists:{Ocomp:1,Omoving:1},
+    mapType: 'ME',
+    mapCollide: ['P','M'],
     view:{
         Letter: 'P',
         LetterSize: 12,
@@ -101,6 +111,8 @@ BBAdata.ObjectData.bullet_bomb={
 BBAdata.ObjectData.Mine={
     M: 'comp',
     lists:{Ocomp:1,Omoving:1},
+    mapType: 'ME',
+    mapCollide: ['P','M'],
     view:{
         Letter: 'R',
         LetterSize: 10,
@@ -335,9 +347,13 @@ BBAdata.ObjectData.RoundField={
         circleColor:[255,255,255,0.2],
         onBackground: 1,
     },
+
     M: 'region',
     lists:{Oregion:1},
+    mapType: 'R',
+    mapCollide: ['P','E','M','ME','A'],
     TT: 'dust',
+
     radius: 50,
     undestructible: 1,
 };
@@ -346,9 +362,13 @@ BBAdata.ObjectData.SquareField={
         color: 'red',
         onBackground: 1,
     },
+
     M: 'region',
     lists:{Oregion:1},
+    mapType: 'R',
+    mapCollide: ['P','E','M','ME','A'],
     TT: 'dust',
+
     radius: 50,
     squareAngle: 0,
     squareLen: 50,
@@ -362,8 +382,11 @@ BBAdata.ObjectData.ConeField={
     },
 
     M: 'region',
-    TT: 'dust',
     lists:{Oregion:1},
+    mapType: 'R',
+    mapCollide: ['P','E','M','ME','A'],
+    TT: 'dust',
+
     radius: 50,
     coneAngle: 180,
     coneRad2: 50,
@@ -376,6 +399,9 @@ BBAdata.ObjectData.EndPortal={
         onBackground: 1,
     },
     M: 'static',
+    mapType: 'ME',
+    mapCollide: ['P'],
+
     TT: 'regionAnim',
     animTick: 0,
     animType: 'EndPortalStart',
@@ -387,12 +413,33 @@ BBAdata.ObjectData.EndPortal={
     },
     dontHit:['B','E','BE','M','ME','A','R']
 };
+BBAdata.ObjectData.shieldBlob={
+    M: 'moving',
+    mapType: 'ME',
+    mapCollide: ['P','M'],
 
+    lists:{Omoving:1},
+    view:{
+        Letter: '#',
+        LetterSize: 40,
+        colorFill:[0,255,200,1],
+        Angle: 0,
+        HitPattern:'ShieldBlobHit',
+        backgroundCircle: 21,
+        colorCircle:[0,200,100,1],
+    },
+
+    SlowDown: 3,
+    lifeM: 3,
+    radius: 21,
+};
 
 BBAdata.ObjectMods.enemyShip={
     M: 'comp',
-    lists:{Ocomp:1,Omoving:1},
+    lists:{Enemies:1,Ocomp:1,Omoving:1},
     TT: 'enemy',
+    mapType: 'E',
+    mapCollide: ['M'],
     lastSpeedT: 0,
     doSquad: -1,   //??
     dec: 50,       //??
@@ -626,23 +673,6 @@ BBAdata.ObjectData.dandares={
         {S:4, T:2},
         {S:8, T:2}
     ],
-};
-BBAdata.ObjectData.shieldBlob={
-    M: 'moving',
-    lists:{Omoving:1},
-    view:{
-        Letter: '#',
-        LetterSize: 40,
-        colorFill:[0,255,200,1],
-        Angle: 0,
-        HitPattern:'ShieldBlobHit',
-        backgroundCircle: 21,
-        colorCircle:[0,200,100,1],
-    },
-
-    SlowDown: 3,
-    lifeM: 3,
-    radius: 21,
 };
 BBAdata.ObjectData.royale={
     LoadMods:{
