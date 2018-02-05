@@ -77,8 +77,6 @@ GAMEobject.prototype.putObj = function(Type,Side,x,y){
 
     this.addBoardMods(O);
 
-    // this.putObj_changeMode(O, Mode);
-
     return O.o;
 }
 
@@ -114,29 +112,18 @@ GAMEobject.prototype.initObject = function(O){
     }
 }
 
-GAMEobject.prototype.putObj_changeMode = function(O, newMode){
-    var oldMode = O.M;
-    O.M = newMode;
+GAMEobject.prototype.putObj_changeLists = function(O, lists){
+    for(var list in lists)
+        if(typeof O.lists[list] == 'undefined')
+            this[list][O.o] = O.S;
 
-    if(oldMode == 'comp' && newMode != 'comp')
-        delete this.Ocomp[ O.o ];
-    if(newMode == 'comp')
-        this.Ocomp[ O.o ] = O.S;
+    for(var list in O.lists)
+        if(typeof lists[list] == 'undefined')
+            delete this[list][O.o];
 
-    if(oldMode == 'region' && newMode != 'region')
-        delete this.Oregion[ O.o ];
-    if(newMode == 'region')
-        this.Oregion[ O.o ] = 1;
-
-    if((oldMode=='static' || oldMode=='region') && (newMode!='static' && newMode!='region'))
-        delete this.Omoving[ O.o ];
-    if(newMode!='static' && newMode!='region' && newMode!='routePoint')
-        this.Omoving[ O.o ] = 1;
-
-    // if(newMode == 'routePoint')
-    //     this.Oroute[ O.o ] = 1;
-
+    O.lists = lists;
 }
+
 GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,DMG){
     var O={};
     O.x = x;

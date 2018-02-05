@@ -126,7 +126,8 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
         if(explodeObj.objRand) objNumb-=-parseInt(Math.random()*(explodeObj.objRand- -1));
         for(var i=0; i<objNumb; ++i){
             L = this.putObj(explodeObj.objName,O.S,O.x,O.y);
-            this.putObj_changeMode(this.O[L], explodeObj.objType);
+            if(explodeObj.objLists)
+                this.putObj_changeLists(this.O[L], explodeObj.objLists);
 
             this.O[ L ].angle = O.angle;
             if(typeof explodeObj.objSpeed !='undefined')
