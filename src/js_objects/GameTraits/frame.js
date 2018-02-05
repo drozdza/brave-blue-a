@@ -203,7 +203,7 @@ GAMEobject.prototype.frame_draw = function(frameCenter){
             continue;
         }
 
-        this.drawObject(O,o, CH, Px,Py);
+        this.drawObject(O, CH, Px,Py);
     }
 
 

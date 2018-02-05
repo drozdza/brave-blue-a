@@ -67,8 +67,7 @@ function CanvasBackgroundManagerObject(){
         var Py = parseInt(tabPos[1])*this.TileSize;
 
         for(var o in this.Tiles[BGN][tabId].O){
-            var O = GAME.O[o];
-            GAME.drawObject(O,o, CanCon, Px,Py);
+            GAME.drawObject(GAME.O[o], CanCon, Px,Py);
         }
     }
 
