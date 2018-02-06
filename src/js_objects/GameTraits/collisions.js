@@ -1,6 +1,8 @@
 
 GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
-    var X1,Y1,X2,Y2,xi,yi,x,y, X,Y, tabS={};
+    var X1,Y1,X2,Y2,xi,yi,ux,uy,ur,x,y, X,Y, tabS={};
+
+    if(O.coneRad2) console.log('=================================================');
 
     if(typeof O.squareCorners !='undefined'){
         X1 = O.squareCorners.E.x1;
@@ -23,6 +25,72 @@ GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
         for(y=yi; y<=Y; ++y)
             tabS[ x+'_'+y ]=1;
     }
+
+    var U = [[0,0],[0,1],[1,1],[1,0]];
+
+
+    if(O.radius*3 > M){
+        for(x=xi; x<=X; ++x){
+            for(y=yi; y<=Y; ++y){
+                var toRemove = true;
+                for(var u in U){
+                    ux = (x- -U[u][0])*M - ox;
+                    uy = (y- -U[u][1])*M - oy;
+                    if(ux*ux + uy*uy < O.radius*O.radius){
+                        toRemove = false;
+                        break;
+                    }
+                }
+                if(toRemove) delete(tabS[x+'_'+y]);
+            }
+        }
+    }
+    if(O.coneRad2 && O.coneRad2*3 > M){
+        for(x=xi; x<=X; ++x){
+            for(y=yi; y<=Y; ++y){
+                var toRemove = true;
+                for(var u in U){
+                    ux = (x- -U[u][0])*M - ox;
+                    uy = (y- -U[u][1])*M - oy;
+                    if(x==1 && y==-2)
+                        console.log(ux,uy,O.coneRad2);
+                    if(ux*ux + uy*uy > O.coneRad2*O.coneRad2){
+                        toRemove = false;
+                        break;
+                    }
+                }
+                if(toRemove) delete(tabS[x+'_'+y]);
+            }
+        }
+    }
+    // if(O.coneAngle && O.radius*2 > M){
+    //     var r1 = (O.angle - O.coneAngle- -360)%360;
+    //     var r2 = (O.angle- -O.coneAngle- -360)%360;
+    //     for(x=xi; x<=X; ++x){
+    //         for(y=yi; y<=Y; ++y){
+    //             var toRemove = true;
+    //             for(var u in U){
+    //                 ux = (x- -U[u][0])*M - ox;
+    //                 uy = (y- -U[u][1])*M - oy;
+    //                 ur = (-Math.atan2(ux,uy)*180/Math.PI- -540)%360;
+    //                 console.log(r1, ur, r2);
+    //                 if(r2 > r1 && (ur >= r1 && ur <= r2)){
+    //                     console.log('du');
+    //                     toRemove = false;
+    //                     break;
+    //                 }
+    //                 if(r2 < r1 && (ur >= r1 || ur <= r2)){
+    //                     console.log('ku');
+    //                     toRemove = false;
+    //                     break;
+    //                 }
+    //             }
+    //             if(toRemove) delete(tabS[x+'_'+y]);
+    //         }
+    //     }
+    // }
+
+
     return tabS;
 }
 
