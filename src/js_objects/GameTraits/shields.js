@@ -214,7 +214,7 @@ GAMEobject.prototype.viewShields={
         fillStyle: 'rgba(255,0,0,0.1)',
     },
 };
-GAMEobject.prototype.drawShields = function(O,o,CH){
+GAMEobject.prototype.drawShields = function(O,CH){
     if(O.life < 1) return false;
     var lineWidth,ToDraw = [];
     for(var s in O.Shields){

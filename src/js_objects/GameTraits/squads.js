@@ -96,17 +96,17 @@ GAMEobject.prototype.setSquadMember = function(O, i, life){
     }
     if(OSS.type == 'RoundField'){
         var Sid = this.putObj('RoundField', 1, iX, iY);
-        this.putObj_changeLists(this.O[Sid], {Omoving:1});
+        this.putObj_changeLists(this.O[Sid], {Omoving:1, Oregion: 1});
         this.bindWithSquad(O, i, Sid);
     }
     if(OSS.type == 'ConeField'){
         var Sid = this.putObj('ConeField', 1, iX, iY);
-        this.putObj_changeLists(this.O[Sid], {Omoving:1});
+        this.putObj_changeLists(this.O[Sid], {Omoving:1, Oregion: 1});
         this.bindWithSquad(O, i, Sid);
     }
     if(OSS.type == 'SquareField'){
         var Sid = this.putObj('SquareField', 1, iX, iY);
-        this.putObj_changeLists(this.O[Sid], {Omoving:1});
+        this.putObj_changeLists(this.O[Sid], {Omoving:1, Oregion: 1});
         this.bindWithSquad(O, i, Sid);
     }
     if(OSS.type == 'enemyShip'){

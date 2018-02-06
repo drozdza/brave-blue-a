@@ -492,7 +492,7 @@ BBAdata.MAPS.Empty={
     Place:[
         {What:{ConeField:1},Mod:{x:0,y:0, radius: 1600, angle: 90, coneAngle: 179, coneRad2: 1300, simpleFilling: 'orange', bounceType:'diagonal',bounceTeleport:true}},
         {What:{ConeField:1},Mod:{x:0,y:0, radius: 1650, angle: 270, coneAngle: 3, coneRad2: 1250, simpleFilling: 'yellow', bounceType:'diagonal',bounceTeleport:true}},
-        {Random:{X: 0, Y: 0, Radius: 800}, What:{D:20}, Mod:{lifeM: 200}}
+        {Random:{X: 300, Y: 0, Radius: 0}, What:{E:21}, Mod:{lifeM: 100}}
     ]
 };
 

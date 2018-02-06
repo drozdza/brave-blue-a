@@ -54,7 +54,7 @@ GAMEobject.prototype.drawObject = function(O, CH, Px,Py){
         CH.drawImage(O.canvasId,-O.canvasX,-O.canvasY);
 
         if(O.Shields && !O.view.DontShowShields)
-            this.drawShields(O,o,CH);
+            this.drawShields(O,CH);
 
         CH.restore();
     }

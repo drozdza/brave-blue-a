@@ -91,6 +91,8 @@ GAMEobject.prototype.addMod = function(O, MODnameORobject){
                 this.putOnXY(O, oldX, oldY);
             break; case 'y':
 
+            break; case 'mapCollide':
+                O.mapCollide = cloneObj(MOD.mapCollide);
             break; case 'mergeArrays':
                 for(var u in MOD[KI])
                     O[u] = mergeArrays(O[u],MOD[KI][u]);
