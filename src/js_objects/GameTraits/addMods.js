@@ -88,7 +88,6 @@ GAMEobject.prototype.addMod = function(O, MODnameORobject){
                 var oldY = O.y;
                 O.x = MOD.x;
                 O.y = MOD.y;
-                this.putOnXY(O, oldX, oldY);
             break; case 'y':
 
             break; case 'mapCollide':
