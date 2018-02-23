@@ -1,4 +1,4 @@
-BBAdata['ExplosivesPresets']={
+BBAdata.ExplosivesPresets={
 
 
     ExplosionSize1:{
@@ -398,7 +398,34 @@ BBAdata['ExplosivesPresets']={
     MinePrison:{},
 
     ShieldBlob:{
-        onHitDieExpire:{Do:'explode', explodeType:'putObjs', objSpeed: 0, objMin:1, objName:'shieldBlob', objLists:{Ocomp:1,Omoving:1}, life:6, lifeM:6, toDo:[{T:'slowDownAndDie'}], doingTime: 480, Flags:[]}
+        onHitDieExpire:{
+            Do:'explode',
+            explodeType:'putObjs',
+            objSpeed: 0,
+            objMin:1,
+            objName:'shieldBlob',
+            objLists:{Ocomp:1,Omoving:1},
+            life:6,
+            lifeM:6,
+            toDo:[{T:'slowDownAndDie'}],
+            doingTime: 480,
+            Flags:[],
+        }
+    },
+    ShieldBlob2:{
+        onHitDieExpire:{
+            Do:'explode',
+            explodeType:'putObjs',
+            objSpeed: 0,
+            objMin:1,
+            objName:'shieldBlob',
+            objLists:{Ocomp:1,Omoving:1},
+            life:6,
+            lifeM:6,
+            toDo:[{T:'slowDownAndDie', slowDownSpeed:3, slowDownBy:2, dieOffset:200, dieSpeed:10}],
+            doingTime: 480,
+            Flags:[],
+        }
     },
     ShieldsBlobWall:{
         Dec: 30,
@@ -445,6 +472,22 @@ BBAdata['ExplosivesPresets']={
                 ShardsNum: 12,
                 explodePreset: 'ShieldBlob',
                 exploAddTo:{onHitDieExpire:{ doingTime:20, moveAlong:6, life:3, lifeM:3 }},
+                Dec: 1,
+                Angle: 0,
+                AngleNext: 30,
+                Speed: 2,
+            }]
+        }}
+    },
+    ShieldsBlobMine:{
+        exploAddTo:{
+            onHitDieExpire: {
+                Do:'explode',
+                explodeType: 'none',
+                Shards:[{
+                ShardsNum: 12,
+                explodePreset: 'ShieldBlob2',
+                exploAddTo:{onHitDieExpire:{ doingTime:8, moveAlong:6 }},
                 Dec: 1,
                 Angle: 0,
                 AngleNext: 30,

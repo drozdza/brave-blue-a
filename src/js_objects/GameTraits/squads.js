@@ -236,6 +236,9 @@ GAMEobject.prototype.squad_AlarmMaster = function(o,type,action){
             this.O[Oid][k] = Action.change[k];
 
     } else if(type=='explodeMaster'){
+        console.log('Di!');
+        console.log(M);
+        console.log(M.onDie);
         this.explodeBomb(Mi,M.onDie);
         this.removeObj(o);
 

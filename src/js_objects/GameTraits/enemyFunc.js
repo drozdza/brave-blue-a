@@ -53,7 +53,7 @@ GAMEobject.prototype.shootShieldAddMissile = function(o,Target){
     this.O[L].MaxEnergyField = parseInt(this.O[Target].lifeM/2);
     this.initObject(this.O[L]);
 }
-GAMEobject.prototype.dropSpaceMine = function(S,x,y,Angle,bombData){
+GAMEobject.prototype.dropSpaceMine = function(S,x,y,Angle,bombModData){
     var L = this.putObj('Mine',S,x,y);
     if(Angle){
         this.O[L].angle=Angle;
@@ -65,14 +65,15 @@ GAMEobject.prototype.dropSpaceMine = function(S,x,y,Angle,bombData){
         delete this.Omoving[L];
     }
 
-    this.cloneExplosionData(bombData, this.O[L]);
+    this.addMod(this.O[L], bombModData)
+//    this.cloneExplosionData(bombData, this.O[L]);
     this.initObject(this.O[L]);
 
     ++this.C['B_minesSet'];
     ++this.C['E:mines'];
 
 }
-GAMEobject.prototype.shootBomb = function(o,Angle,Speed,Dec,bombData,teleportData){
+GAMEobject.prototype.shootBomb = function(o,Angle,Speed,Dec,bombModData,teleportData){
     var O = this.O[o];
     var L = this.putObj('bullet_bomb',O.S,O.x,O.y);
     this.O[L].speed = Speed || 10;
@@ -81,7 +82,8 @@ GAMEobject.prototype.shootBomb = function(o,Angle,Speed,Dec,bombData,teleportDat
     if(teleportData)
         this.O[L].TeleportMovement = teleportData;
 
-    this.cloneExplosionData(bombData, this.O[L]);
+    this.addMod(this.O[L], bombModData);
+//    this.cloneExplosionData(bombModData, this.O[L]);
     this.initObject(this.O[L]);
 
     ++this.C['B_bombsShot'];

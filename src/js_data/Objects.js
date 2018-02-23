@@ -614,11 +614,11 @@ BBAdata.ObjectData.nemezis={
     lifeM: 4,
     radius: 20,
 
-    Bombs:[{
+    WeaponMods:[{
         onHitDieExpire:    {Do:'explode', DMG:{Dmg:4,T:'explo'}, Dist: 35},
     }],
 
-    weapon:[{t:'bomb', Speed: 10, Dec: 50, BombType: 0, gunSpeed: 40, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}],
+    weapon:[{t:'bomb', Speed: 10, Dec: 50, WeaponModType: 0, gunSpeed: 40, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}],
 
     speedArr:[0,
         {S:1, T:1},
@@ -642,9 +642,9 @@ BBAdata.ObjectData.warastein={
     lifeM: 11,
     radius: 23,
 
-    Bombs:[{ explodePreset:'WarasteinExploCone' }],
+    WeaponMods:[{ explodePreset:'WarasteinExploCone' }],
 
-    weapon:[{t:'bomb', Speed: 10, Dec: 12, BombType: 0, gunSpeed: 140, lastShot: 100, maxSpeed: 2, makeAction: {Manuover: 'goStraight', doingTime:55, gotoSpeed:1}, minAlarm: 5, minDistToEnemy: 400}],
+    weapon:[{t:'bomb', Speed: 10, Dec: 12, WeaponModType: 0, gunSpeed: 140, lastShot: 100, maxSpeed: 2, makeAction: {Manuover: 'goStraight', doingTime:55, gotoSpeed:1}, minAlarm: 5, minDistToEnemy: 400}],
 
     toDo: [
         {N:61,T:'changeSpeed', maxSpeedLvl: 1, gotoSpeed: 2},
@@ -960,15 +960,17 @@ BBAdata.ObjectData.belzebub={
     radius: 20,
 
 
-    Bombs:[{
-        onHit: {Do:'explode', DMG:{Dmg:4,T:'explo'}, Dist: 35},
-        onDie: {Do:'explode', DMG:{Dmg:4,T:'explo'}, Dist: 35},
-        onExpire: {Do:'explode', DMG:{Dmg:4,T:'explo'}, Dist: 35}
-    }],
+    WeaponMods:[
+        {explodePreset:'ExplosionSize2'},
+        {explodePreset:'NailedMine2'},
+        {explodePreset:'DestructionFieldMedium'},
+        {explodePreset:'StatisBulletBomb'},
+        {explodePreset:'HugeExplosionRose'},
+    ],
 
     weapon:[
-        {t:'dropSpaceMine', ShotMine: true, BombType: 0, gunSpeed: 120, lastShot: 100,  minAlarm: 5, minDistToEnemy: 260},
-        {t:'dropSpaceMine', gunSpeed: 750, BombType: 0, lastShot: 100,  maxAlarm: 4},
+        {t:'dropSpaceMine', ShotMine: true, WeaponModRandom: 4, gunSpeed: 120, lastShot: 100,  minAlarm: 5, minDistToEnemy: 260},
+        {t:'dropSpaceMine', gunSpeed: 750, WeaponModType: 4, lastShot: 100,  maxAlarm: 4},
 
     ],
 
@@ -1362,7 +1364,7 @@ BBAdata.ObjectData.juggernaut={
     lifeM: 12,
     radius: 40,
 
-    Bombs:[
+    WeaponMods:[
         { explodePreset:'ExplosionSize1' },
         { explodePreset:'ExplosionSize2' },
         { explodePreset:'ExplosionSize3' },
@@ -1390,7 +1392,7 @@ BBAdata.ObjectData.juggernaut={
     weapon:[
         {t:'refilResource', resource: 'energyField', gunSpeed: 60, maxSpeed: 2, doNextWeapon: true},
         {t:'refilResource', resource: 'exploShield', gunSpeed: 240, maxSpeed: 2, doNextWeapon: true},
-        {t:'bomb', Speed: 10, Dec: 50, BombRandom: 4, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}
+        {t:'bomb', Speed: 10, Dec: 50, WeaponModRandom: 4, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}
     ],
 
     doingNow: 'changeManouver',
@@ -1672,11 +1674,11 @@ BBAdata.ObjectData.pitagoras={
     lifeM: 4,
     radius: 20,
 
-    Bombs:[{
+    WeaponMods:[{
         explodePreset: 'NailsCircleToCenter',
     }],
 
-    weapon:[{t:'bomb', Speed: 10, Dec: 50, BombType: 0, gunSpeed: 40, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}],
+    weapon:[{t:'bomb', Speed: 10, Dec: 50, WeaponModType: 0, gunSpeed: 40, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}],
 
     doingNow: 'changeManouver',
     doingTime: -1,
@@ -2380,7 +2382,7 @@ BBAdata.ObjectData.thunderton={
 
 
 
-    Bombs:[{
+    WeaponMods:[{
         onHitDieExpire:    {Do:'explode', DMG:{Dmg:7,T:'explo'}, Dist: 80},
     }],
     Shields:[{
@@ -2396,7 +2398,7 @@ BBAdata.ObjectData.thunderton={
     Res: {'exploShield': {R:4,M:4,T:0}},
     weapon:[
         {t:'refilResource', resource: 'exploShield', gunSpeed: 240, maxSpeed: 2, doNextWeapon: true},
-        {t:'bomb', Speed: 0.1, Teleport:{ Dist: 35, Angle: 270, AngleRand: 180}, Dec: 10, BombType: 0, gunSpeed: 10, lastShot: 100, maxSpeed: 2, minAlarm: 5, gunWork:80, gunReload:900, minDistToEnemy:500},
+        {t:'bomb', Speed: 0.1, Teleport:{ Dist: 35, Angle: 270, AngleRand: 180}, Dec: 10, WeaponModType: 0, gunSpeed: 10, lastShot: 100, maxSpeed: 2, minAlarm: 5, gunWork:80, gunReload:900, minDistToEnemy:500},
     ],
 
     doingNow: 'changeManouver',
@@ -2620,7 +2622,7 @@ BBAdata.ObjectData.talrax={
     lifeM: 12,
     radius: 40,
 
-    Bombs:[
+    WeaponMods:[
         {explodePreset:'StrikeOfEvil'},
         {explodePreset:'EyeOfEvil'},
         {explodePreset:'BubbleStorm'},
@@ -2628,7 +2630,7 @@ BBAdata.ObjectData.talrax={
     ],
 
     weapon:[
-        {t:'bomb', Speed: 10, Dec: 10, BombRandom: 4, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
+        {t:'bomb', Speed: 10, Dec: 10, WeaponModRandom: 4, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
     ],
 
     doingNow: 'changeManouver',
@@ -2744,13 +2746,13 @@ BBAdata.ObjectData.prisander={
     lifeM: 22,
     radius: 30,
 
-    Bombs:[
+    WeaponMods:[
         {explodePreset:'MineZen'},
         {explodePreset:'StrikeOfMines'},
     ],
 
     weapon:[
-        {t:'bomb', Speed: 10, Dec: 10, BombRandom: 2, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600},
+        {t:'bomb', Speed: 10, Dec: 10, WeaponModRandom: 2, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600},
         {t:'missile', DMG:{Dmg:0,T:'normal'}, explodePreset:'EyeOfMines', Dec: 95, Speed: 12, gunSpeed: 120, lastShot: 0, minDistToEnemy: 400},
     ],
 
@@ -2796,14 +2798,14 @@ BBAdata.ObjectData.yehes={
     lifeM: 32,
     radius: 40,
 
-    Bombs:[
+    WeaponMods:[
         {explodePreset:'TeleportConeField'},
         {explodePreset:'TeleFastField'},
         {explodePreset:'ElectroBubbleShield'},
     ],
 
     weapon:[
-        {t:'bomb', Speed: 10, Dec: 10, BombRandom: 3, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
+        {t:'bomb', Speed: 10, Dec: 10, WeaponModRandom: 3, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
     ],
 
     doingNow: 'changeManouver',
@@ -2843,14 +2845,14 @@ BBAdata.ObjectData.yehestis={
     lifeM: 32,
     radius: 40,
 
-    Bombs:[
+    WeaponMods:[
         {explodePreset:'WindField'},
         {explodePreset:'ShieldsBlobWall'},
         {explodePreset:'ShieldsBlobBomb'},
     ],
 
     weapon:[
-        {t:'bomb', Speed: 10, Dec: 10, BombRandom: 3, gunSpeed: 80, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
+        {t:'bomb', Speed: 10, Dec: 10, WeaponModRandom: 3, gunSpeed: 80, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
     ],
 
     doingNow: 'changeManouver',
@@ -2890,14 +2892,14 @@ BBAdata.ObjectData.yeheslar={
     lifeM: 32,
     radius: 40,
 
-    Bombs:[
+    WeaponMods:[
         {explodePreset:'SlowDownConeFields'},
         {explodePreset:'EnergyBubbleShield'},
         {explodePreset:'TeleWall'},
     ],
 
     weapon:[
-        {t:'bomb', Speed: 10, Dec: 10, BombRandom: 3, gunSpeed: 80, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
+        {t:'bomb', Speed: 10, Dec: 10, WeaponModRandom: 3, gunSpeed: 80, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
     ],
 
     doingNow: 'changeManouver',
@@ -2937,14 +2939,14 @@ BBAdata.ObjectData.yebuhas={
     lifeM: 32,
     radius: 40,
 
-    Bombs:[
+    WeaponMods:[
         {explodePreset:'StasisBulletWall'},
         {explodePreset:'StatisBulletBomb'},
         {explodePreset:'GraviBall'},
     ],
 
     weapon:[
-        {t:'bomb', Speed: 10, Dec: 10, BombRandom: 3, gunSpeed: 80, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
+        {t:'bomb', Speed: 10, Dec: 10, WeaponModRandom: 3, gunSpeed: 80, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
     ],
 
     doingNow: 'changeManouver',
@@ -2984,12 +2986,12 @@ BBAdata.ObjectData.hesiolumbus={
     lifeM: 32,
     radius: 40,
 
-    Bombs:[
+    WeaponMods:[
         {explodePreset:'HealingField'},
     ],
 
     weapon:[
-        {t:'shootHealingBomb', BombType: 0, Speed: 6, Dec: 60, gunSpeed: 600, lastShot: 100, Radius: 360, minimalDmg: 8}
+        {t:'shootHealingBomb', WeaponModType: 0, Speed: 6, Dec: 60, gunSpeed: 600, lastShot: 100, Radius: 360, minimalDmg: 8}
     ],
 
     doingNow: 'changeManouver',

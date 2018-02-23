@@ -253,15 +253,19 @@ GAMEobject.prototype.decide = function(o){
 
             if(TD.T=='slowDownAndDie'){
                 if(O.speed > 0){
-                  O.speed -= 2;
-                  if(O.speed < 0) O.speed = 0;
-                  O.doingTime = 3;
+                  O.speed -= TD.slowDownBy || 2;
+                  if(O.speed <= 0){
+                      O.speed = 0;
+                      O.doingTime = TD.dieOffset || 0;
+                  } else {
+                      O.doingTime = TD.slowDownSpeed || 3;
+                  }
                 } else {
                     --O.life;
                     if(O.life < 1){
                         this.removeObj(o);
                     }else{
-                        O.doingTime=15;
+                        O.doingTime= TD.dieSpeed || 15;
                         CanvasManager.requestCanvas(O);
                     }
                 }
@@ -738,12 +742,12 @@ GAMEobject.prototype.decide = function(o){
             }
 
             if(WP.t == 'bomb'){
-                var bombData = false;
-                if(typeof WP.BombType !='undefined') bombData = O.Bombs[ WP.BombType ];
-                if(WP.BombRandom) bombData = O.Bombs[ parseInt(Math.random()*WP.BombRandom) ];
+                var bombModData = false;
+                if(typeof WP.WeaponModType !='undefined') bombModData = O.WeaponMods[ WP.WeaponModType ];
+                if(WP.WeaponModRandom) bombModData = O.WeaponMods[ parseInt(Math.random()*WP.WeaponModRandom) ];
                 var teleportData = false;
                 if(typeof WP.Teleport !='undefined') teleportData = WP.Teleport;
-                this.shootBomb(o,PlayerAngle,WP.Speed,WP.Dec,bombData,teleportData);
+                this.shootBomb(o,PlayerAngle,WP.Speed,WP.Dec,bombModData,teleportData);
                 WP.lastShot = this.tick;
             }
 
@@ -867,9 +871,12 @@ GAMEobject.prototype.decide = function(o){
             }
 
             if(WP.t == 'dropSpaceMine'){
-                bombData = O.Bombs[ WP.BombType ];
-                if(WP.ShotMine) this.dropSpaceMine(O.S,O.x,O.y,PlayerAngle,bombData);
-                    else        this.dropSpaceMine(O.S,O.x,O.y,false,bombData);
+                bombModData = false;
+                if(typeof WP.WeaponModType !='undefined') bombModData = O.WeaponMods[ WP.WeaponModType ];
+                if(WP.WeaponModRandom) bombModData = O.WeaponMods[ parseInt(Math.random()*WP.WeaponModRandom) ];
+
+                if(WP.ShotMine) this.dropSpaceMine(O.S,O.x,O.y,PlayerAngle,bombModData);
+                    else        this.dropSpaceMine(O.S,O.x,O.y,false,bombModData);
                 WP.lastShot = this.tick;
             }
 
@@ -898,12 +905,12 @@ GAMEobject.prototype.decide = function(o){
                         var Angle = parseInt(- (Math.atan2(X,Y)*180/Math.PI))%360;
                         var Dec = Math.min(parseInt(Dist / WP.Speed), WP.Dec);
 
-                        var bombData = false;
-                        if(typeof WP.BombType !='undefined') bombData = O.Bombs[ WP.BombType ];
-                        if(WP.BombRandom) bombData = O.Bombs[ parseInt(Math.random()*WP.BombRandom) ];
+                        var bombModData = false;
+                        if(typeof WP.WeaponModType !='undefined') bombModData = O.WeaponMods[ WP.WeaponModType ];
+                        if(WP.WeaponModRandom) bombModData = O.WeaponMods[ parseInt(Math.random()*WP.WeaponModRandom) ];
                         var teleportData = false;
                         if(typeof WP.Teleport !='undefined') teleportData = WP.Teleport;
-                        this.shootBomb(o,Angle,WP.Speed,Dec,bombData,teleportData);
+                        this.shootBomb(o,Angle,WP.Speed,Dec,bombModData,teleportData);
                         WP.lastShot = this.tick;
 
                         break;

@@ -222,7 +222,7 @@ GAMEobject.prototype.cloneExplosionData = function(D,O){
     }
 
     if(D.explodePreset)
-        this.cloneExplosionData(BBAdata['ExplosivesPresets'][ D.explodePreset ], O);
+        this.cloneExplosionData(BBAdata.ExplosivesPresets[ D.explodePreset ], O);
 
     if(D.TeleportMovement)
         O.TeleportMovement = cloneObj(D.TeleportMovement);

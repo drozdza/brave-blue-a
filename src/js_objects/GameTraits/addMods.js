@@ -83,13 +83,6 @@ GAMEobject.prototype.addMod = function(O, MODnameORobject){
             break; case 'weapon':
                 for(var i in MOD.weapon)
                     this.addToWeapon(O, MOD.weapon[i]);
-            break; case 'x':
-                var oldX = O.x;
-                var oldY = O.y;
-                O.x = MOD.x;
-                O.y = MOD.y;
-            break; case 'y':
-
             break; case 'mapCollide':
                 O.mapCollide = cloneObj(MOD.mapCollide);
             break; case 'mergeArrays':
@@ -121,7 +114,7 @@ GAMEobject.prototype.addMod = function(O, MODnameORobject){
         O.squareCorners = this.countSquareCorners(O.x,O.y,O.squareAngle,O.squareLen,O.squareWidth);
     }
 
-    if(typeof MOD.explodePreset != 'undefined'){
+    if(MOD.explodePreset || MOD.exploAddTo){
         this.cloneExplosionData(O,O);
     }
 

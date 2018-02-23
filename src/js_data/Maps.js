@@ -406,6 +406,34 @@ BBAdata.MAPS.HardCore={
         {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
     ]
 };
+BBAdata.MAPS.HardCoreDev={
+    BoardMods:['sitOnMap','allAvoid','violetColor'],
+    EndPortal:{X:0,Y:-120},
+    WinningConds:[
+        {T:'Main',C:{'E:enemies':{max:0,D:'killLeft'}}, RewardGold:150, RewardFlags:{Conquer:1}, EndPortal:{X:0,Y:0}},
+        {T:'Add',C:{'E:koriaz':{max:0,D:'killMax'}}},
+        {T:'Add',C:{'E:hedgehog':{max:0,D:'killMax'}}},
+        {T:'Add',C:{'E:thunderton':{max:0,D:'killMax'}}},
+        {T:'Add',C:{'E:patiarch':{max:0,D:'killMax'}}},
+    ],
+    Ship:{Start:{X: 2400, Y: 0, A:90}},
+    Place:[
+        {What:{ConeField:1},Mod:{x:0,y:0, radius: 3800, angle: 180, coneAngle: 179, coneRad2: 3300, simpleFilling: '#060606', bounceType:'diagonal',bounceTeleport:true}},
+        {What:{ConeField:1},Mod:{x:0,y:0, radius: 3850, angle: 0, coneAngle: 3, coneRad2: 3250, simpleFilling: '#306', bounceType:'diagonal',bounceTeleport:true}},
+        {Random:{X: 0, Y: 0, Radius: 2200}, What:{
+//            A:5, U:5, S:5, I:10,  M:5, N:5, J:5, T:5, E:10, C:5, G:5, R:5, H:5,
+            B:50, D:10,
+//            K:10, L:10, F:10, W:5,
+//            Q:5, X:6, Z:5, PI:5, WP:5, Ni:10,
+//            SH:10, TT:10, CD:5, HH:5, UU:5, Tu:8, Ii:5, HS:5, HS:8,
+//            Y:2, Yi:2, Yl:2, Yb:2,
+        }},
+//        {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarL:40,StarM:30,Star:40,StarS:40,iD:10,Wi:10}},
+        {What:{Gstar:1},Mod:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}},
+        {CircleOf:{X:0, Y:-3000, Radius: 120, Angle: 0, AnglePlus: 22.5}, What:{Star:16}},
+        {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
+    ]
+};
 
 BBAdata.MAPS.BuildTry={
     BoardMods:[
