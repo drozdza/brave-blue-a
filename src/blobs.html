@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+<head>
+    <title>Blob Tests</title>
+    <meta charset="utf-8" />
+    <script src="js/jquery.js"></script>
+    <style>
+    body{background: black; margin: 0;}
+    canvas{ display: block; position: absolute; top: 0px; left: 0px;}
+    </style>
+</head>
+<body>
+    <canvas id="thereheis" width="600" height="600"></canvas>
+    <!-- <canvas id="kariakis" width="600" height="600"></canvas> -->
+<script>
+function vCanvas(canvasId){
+    this.canvasId = canvasId;
+    this.C = document.getElementById(this.canvasId).getContext('2d');
+    this.W = $(window).width();
+    this.H = $(window).height();
+    $('#'+this.canvasId).attr({width: this.W, height: this.H});
+    this.clear = function(){
+        this.C.fillStyle = 'black';
+        this.C.fillRect(0,0,this.W,this.H);
+    }
+}
+
+C = new vCanvas('thereheis');
+// D = new vCanvas('kariakis');
+
+iPoints = 50;
+Points = {};
+for (var p = 0; p < iPoints; ++p) {
+    Points[p] = {
+        p: p,
+        x: 100+parseInt(Math.random()*(C.W-200)),
+        y: 100+parseInt(Math.random()*(C.H-200)),
+        r: 20+parseInt(Math.random()*20),
+        c: 200,
+        conns: {},
+        a:{q:parseInt(Math.random()*360),s:2},
+    };
+}
+
+setInterval(frame, 33);
+iFrame = 0;
+
+function frame(){
+    C.clear();
+    ++iFrame;
+
+    for (var p in Points){
+        var P = Points[p];
+        var I = Arq(P, P.a.s, P.a.q);
+        P.x = I.x;
+        P.y = I.y;
+    }
+    if (iFrame % 10 == 0) {
+        for(var p in Points){
+            var P = Points[p];
+            var x = 0, y = 0;
+            if (P.x < 0) x = -1;
+            if (P.y < 0) y = -1;
+            if (P.x > C.W) x = 1;
+            if (P.y > C.H) y = 1;
+            if (x!=0 && y!=0){
+                P.a.q = (180- -P.a.q)%360;
+                continue;
+            }
+            if (x!=0) {
+                P.a.q = (180 - P.a.q)%360;
+            }
+            if (y!=0) {
+                P.a.q = (270 - P.a.q)%360- -90;
+            }
+        }
+    }
+
+    if (iFrame % 3 == 0) {
+        for(var p in Points){
+            var P = Points[p];
+            for(var r in P.conns){
+                var R = Points[r];
+                var iX = P.x - R.x;
+                var iY = P.y - R.y;
+                var dist = Math.sqrt(iX*iX+iY*iY);
+                if (dist > P.c && Math.random() < 0.05) {
+                    delete (P.conns[r]);
+                    delete (Points[r].conns[p]);
+                }
+            }
+        }
+        for (var p in Points) for (var r in Points) if (p!=r) {
+            var P = Points[p];
+            var R = Points[r];
+            var iX = P.x - R.x;
+            var iY = P.y - R.y;
+            var dist = Math.sqrt(iX*iX+iY*iY);
+            if (dist < P.c) {
+                if(typeof (P.conns[r]) == 'undefined'){
+                    P.conns[r]={show:true, start:iFrame};
+                    R.conns[p]={show:false, start:iFrame};
+                } else {
+                    P.conns[r].show = true;
+                    R.conns[p].show = false;
+                }
+            }
+        }
+    }
+
+    C.C.fillStyle = 'orange';
+    for (var p in Points) {
+        var P = Points[p];
+        C.C.beginPath();
+        C.C.arc(P.x, P.y, P.r, 0, 2*Math.PI);
+        C.C.fill();
+    }
+
+    C.C.strokeStyle = 'green';
+    C.C.lineWidth = 1;
+    for (var p in Points) for (var r in Points[p].conns) if(Points[p].conns[r].show === true){
+        C.C.beginPath();
+        for(var i=0; i<2; ++i){
+            if (i == 1) {
+                P = Points[p];
+                R = Points[r];
+                iStart = iFrame - P.conns[r].start;
+            } else {
+                P = Points[r];
+                R = Points[p];
+                iStart = iFrame - P.conns[p].start;
+            }
+
+            if (iStart < 30) {
+                C.C.fillStyle = "rgba(255, 165, 0, "+(iStart/30)+")";
+            }else{
+                C.C.fillStyle = "orange";
+            }
+
+            var iX = P.x-R.x;
+            var iY = P.y-R.y;
+            var q = 270-Math.atan2(iX, iY)/Math.PI*180;
+            var d = Math.sqrt(iX*iX- -iY*iY)-P.r-R.r;
+
+            var sD = Math.min(P.r, R.r);
+            var rM = Math.min(sD, Math.abs(1- -sD*sD/d*0.6));
+
+            var M = Arq(P,  P.r- -d/2, q);
+
+            var Ps = Arq(P,P.r,q-90);
+            var Rs = Arq(R,R.r,q-90);
+            var Ms = Arq(M, rM, q-90);
+
+            var Pq = Arq(Ps, P.r*(4/3)*Math.tan(Math.PI/6), q);
+            var Rq = Arq(Rs, R.r*(4/3)*Math.tan(Math.PI/6), q-180);
+            var MP = Arq(Ms, d/2, q-180);
+            var MR = Arq(Ms, d/2, q);
+
+            C.C.moveTo(P.x, P.y);
+            C.C.lineTo(Ps.x, Ps.y);
+            C.C.bezierCurveTo(Pq.x, Pq.y, MP.x, MP.y, Ms.x, Ms.y);
+            C.C.bezierCurveTo(MR.x, MR.y, Rq.x, Rq.y, Rs.x, Rs.y);
+            C.C.lineTo(R.x, R.y);
+
+        }
+        C.C.fill();
+    }
+
+    C.C.fillStyle = 'yellow';
+    for (var p in Points) {
+        var P = Points[p];
+        C.C.beginPath();
+        C.C.arc(P.x, P.y, P.r-3, 0, 2*Math.PI);
+        C.C.fill();
+    }
+
+}
+
+
+function Arq(A,r,q) {
+    return {
+        x: A.x- -r*Math.cos(q*Math.PI/180),
+        y: A.y- -r*Math.sin(q*Math.PI/180),
+    }
+}
+
+</script>
+</body>
