@@ -71,7 +71,7 @@ GAMEobject.prototype.addMod = function(O, MODnameORobject){
 
     for(var KI in MOD){
         switch(KI){
-            case 'overWriteObjects':
+            case 'overWriteObjects': // To by trzeba jakoś zmienić ale nie wiadomo jak
                 for(var i in MOD[KI])
                     this.addMod(O, BBAdata['ObjectData'][ MOD[KI][i] ]);
             break; case 'removeToDo':
@@ -117,8 +117,8 @@ GAMEobject.prototype.addMod = function(O, MODnameORobject){
     if(MOD.explodePreset || MOD.exploAddTo){
         this.cloneExplosionData(O,O);
     }
-
 }
+
 GAMEobject.prototype.addToToDoList = function(O, toDo){
     if(typeof O.toDo == 'undefined'){
         return true;
