@@ -21,7 +21,7 @@ BBAdata['SHIPpresetsOld']={
             },
         },
         mapType: 'P',
-        mapCollide: ['A','ME'],
+        mapCollide: ['A','AP','ME'],
         periodDMG: {},
         Flags: {},
 
@@ -90,7 +90,7 @@ BBAdata['SHIPpresetsOld']={
             },
         },
         mapType: 'P',
-        mapCollide: ['A','ME'],
+        mapCollide: ['A','AP','ME'],
         periodDMG: {},
         Flags: {},
 
@@ -169,7 +169,7 @@ BBAdata['SHIPpresetsOld']={
             },
         },
         mapType: 'P',
-        mapCollide: ['A','ME'],
+        mapCollide: ['A','AP','ME'],
         periodDMG: {},
         Flags: {},
 
@@ -249,7 +249,7 @@ BBAdata['SHIPpresetsOld']={
             },
         },
         mapType: 'P',
-        mapCollide: ['A','ME'],
+        mapCollide: ['A','AP','ME'],
         periodDMG: {},
         Flags: {},
 
@@ -331,7 +331,7 @@ BBAdata['SHIPpresetsOld']={
             },
         },
         mapType: 'P',
-        mapCollide: ['A','ME'],
+        mapCollide: ['A','AP','ME'],
         periodDMG: {},
         Flags: {},
 
@@ -404,7 +404,7 @@ BBAdata['SHIPpresetsOld']={
             },
         },
         mapType: 'P',
-        mapCollide: ['A','ME'],
+        mapCollide: ['A','AP','ME'],
         periodDMG: {},
         Flags: {},
 
@@ -504,7 +504,7 @@ BBAdata['SHIPpresetsOld']={
             },
         },
         mapType: 'P',
-        mapCollide: ['A','ME'],
+        mapCollide: ['A','AP','ME'],
         periodDMG: {},
         Flags: {},
 
@@ -596,7 +596,7 @@ BBAdata['SHIPpresetsOld']={
             },
         },
         mapType: 'P',
-        mapCollide: ['A','ME'],
+        mapCollide: ['A','AP','ME'],
         periodDMG: {},
         Flags: {},
 
@@ -696,7 +696,7 @@ BBAdata['SHIPpresetsOld']={
             },
         },
         mapType: 'P',
-        mapCollide: ['A','ME'],
+        mapCollide: ['A','AP','ME'],
         periodDMG: {},
         Flags: {},
 
@@ -793,7 +793,7 @@ BBAdata['SHIPpresetsOld']={
             },
         },
         mapType: 'P',
-        mapCollide: ['A','ME'],
+        mapCollide: ['A','AP','ME'],
         periodDMG: {},
         Flags: {},
 

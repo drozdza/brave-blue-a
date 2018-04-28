@@ -24,7 +24,8 @@ function GAMEobject(){
     this.Omap['M']={elems:0};    // Missiles
     this.Omap['E']={elems:0};    // Enemies
     this.Omap['ME']={elems:0};   // MissilesE
-    this.Omap['A']={elems:0};    // Asteroids - only for Player Ship
+    this.Omap['A']={elems:0};    // Asteroids
+    this.Omap['AP']={elems:0};   // Asteroids - only for Player Ship
     this.Omap['R']={elems:0};    // Regions
     this.Omap['D']={elems:0};    // Dead objects (for spotting)
     this.Odead={};

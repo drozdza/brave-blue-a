@@ -422,7 +422,7 @@ BBAdata.MAPS.HardCoreDev={
         {What:{ConeField:1},Mod:{x:0,y:0, radius: 3850, angle: 0, coneAngle: 3, coneRad2: 3250, simpleFilling: '#306', bounceType:'diagonal',bounceTeleport:true}},
         {Random:{X: 0, Y: 0, Radius: 2200}, What:{
 //            A:5, U:5, S:5, I:10,  M:5, N:5, J:5, T:5, E:10, C:5, G:5, R:5, H:5,
-            B:50, D:10,
+            B:1, //D:10,
 //            K:10, L:10, F:10, W:5,
 //            Q:5, X:6, Z:5, PI:5, WP:5, Ni:10,
 //            SH:10, TT:10, CD:5, HH:5, UU:5, Tu:8, Ii:5, HS:5, HS:8,

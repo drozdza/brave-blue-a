@@ -39,8 +39,13 @@ GAMEobject.prototype.hit = function(o,q){
     if(O.bounceType){    this.regionAngleChange(O,Q); return 1; }
     if(Q.bounceType){    this.regionAngleChange(Q,O); return 1; }
 
-    if(O.stateIn){       this.regionStateIn(o,q); return 1; }
-    if(Q.stateIn){       this.regionStateIn(q,o); return 1; }
+
+    if(O.stateIn){
+        console.log(O.mapType, Q.mapType);
+        this.regionStateIn(o,q); return 1; }
+    if(Q.stateIn){
+        console.log(Q.mapType, O.mapType);
+        this.regionStateIn(q,o); return 1; }
 
     if(O.vectorType){    this.regionVectorChange(O,Q); return 1; }
     if(Q.vectorType){    this.regionVectorChange(Q,O); return 1; }

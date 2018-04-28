@@ -98,6 +98,8 @@ GAMEobject.prototype.putOnXY = function(O, ox, oy){
     if(!O.mapType) return false;
     var s,oldS={},newS={};
 
+    if(O.mapType != 'E' && O.mapType !='P') console.log(O.mapType);
+
     if(typeof oy!='undefined'){
         oldS = this.findTabTiles(O, ox, oy, this.MapTileSize);
     } else {
