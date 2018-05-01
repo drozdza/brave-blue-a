@@ -52,8 +52,7 @@ GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
                 for(var u in U){
                     ux = (x- -U[u][0])*M - ox;
                     uy = (y- -U[u][1])*M - oy;
-                    if(x==1 && y==-2)
-                        console.log(ux,uy,O.coneRad2);
+                    // if(x==1 && y==-2) console.log(ux,uy,O.coneRad2);
                     if(ux*ux + uy*uy > O.coneRad2*O.coneRad2){
                         toRemove = false;
                         break;
@@ -98,7 +97,7 @@ GAMEobject.prototype.putOnXY = function(O, ox, oy){
     if(!O.mapType) return false;
     var s,oldS={},newS={};
 
-    if(O.mapType != 'E' && O.mapType !='P') console.log(O.mapType);
+    // if(O.mapType != 'E' && O.mapType !='P') console.log(O.mapType);
 
     if(typeof oy!='undefined'){
         oldS = this.findTabTiles(O, ox, oy, this.MapTileSize);
@@ -148,6 +147,8 @@ GAMEobject.prototype.getCollidingWithCircle = function(x,y,radius,collisionTab){
     var M = this.MapTileSize;
     var xi = X1;
 
+    if (typeof collisionTab == 'undefined') return [];
+    // console.log(collisionTab);
     var jestCokolwiek = false;
     for(var ColT in collisionTab)
         if(this.Omap[ collisionTab[ColT] ].elems > 0){ jestCokolwiek=true; break; }
@@ -351,7 +352,7 @@ GAMEobject.prototype.countSquareCorners = function(x,y,angle,len,width){
     sC.E.y1 = sC.A.y;
     sC.E.y2 = sC.A.y;
 
-    for(var j in {'B':1,'C':1,'D':1}){
+    for(var j in {'EB':1,'C':1,'D':1}){
         if(sC.E.x1 > sC[j].x) sC.E.x1 = sC[j].x;
         if(sC.E.x2 < sC[j].x) sC.E.x2 = sC[j].x;
         if(sC.E.y1 > sC[j].y) sC.E.y1 = sC[j].y;

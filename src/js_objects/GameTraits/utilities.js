@@ -10,8 +10,8 @@ GAMEobject.prototype.shootLaser = function(o,Distance,Damage,angle){
     if(typeof angle != 'undefined')
         Angle = angle;
 
-    var enemyArr=['P','M','E','R'];
-    if(O.S==2) enemyArr=['E','ME','A','R'];
+    var enemyArr=['P','E','F'];
+    if(O.S==2) enemyArr=['E','EM','A','F'];
 
     var animType = 'laserShoot';
     var animsTab = ['violet', 'blue', 'lightblue', 'lightgreen', 'yellow', 'orange', 'red'];
@@ -63,7 +63,7 @@ GAMEobject.prototype.teleportJump = function(o,Distance,angle,graphicType){
         Ox = Ox- - K * Math.sin( (-parseInt(Angle)-180)*(Math.PI/180));
         Oy = Oy- - K * Math.cos( (-parseInt(Angle)-180)*(Math.PI/180));
 
-        Found = this.getCollidingWithCircle(Ox, Oy, O.radius, ['A','R']);
+        Found = this.getCollidingWithCircle(Ox, Oy, O.radius, ['A','F']);
         for(F in Found)
             if(this.O[F].bounceTeleport){
                 pathD = pathD.concat(['L',{x: Ox, y: Oy}]);

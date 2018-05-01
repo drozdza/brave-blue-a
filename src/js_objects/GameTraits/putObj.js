@@ -56,6 +56,9 @@ GAMEobject.prototype.initObject = function(O){
         delete(O.lifeTo);
     }
 
+    if (typeof O.mapCollide == 'undefined')
+        O.mapCollide = cloneObj(BBAdata.collisionMatrix[ O.mapType ]);
+
     if(O.shipVariables){
         this.putObj_shipVariables(O);
     }
@@ -115,14 +118,12 @@ GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,DMG){
 
     if(Side==3){
         O.mapType = 'B';
-        O.mapCollide = ['P','M','E','ME','A','R'];
     }else if(Side==2){
-        O.mapType = 'B';
-        O.mapCollide = ['E','ME','A','R'];
+        O.mapType = 'PB';
     }else{
-        O.mapType = 'BE';
-        O.mapCollide = ['P','M','R'];
+        O.mapType = 'EB';
     }
+    O.mapCollide = cloneObj(BBAdata.collisionBullets[ O.mapType ]);
 
     var o = this.Olen++;
     this.Obullet[ o ] = Side;

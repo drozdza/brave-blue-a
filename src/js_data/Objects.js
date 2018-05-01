@@ -13,15 +13,14 @@ BBAdata.ObjectData.destruction_field={
     M: 'region',
     TT: 'dust',
     lists:{Oregion:1},
-    mapType: 'R',
-    mapCollide: ['P','E','M','ME','A'],
+    mapType: 'F',
+    mapCollide: [],
 };
 BBAdata.ObjectData.healing_missile={
     M: 'comp',
     TT: 'dust',
     lists:{Ocomp:1,Omoving:1},
-    mapType: 'ME',
-    mapCollide: ['E'],
+    mapType: 'EM',
     view:{
         Letter: 'J',
         LetterSize: 12,
@@ -44,8 +43,7 @@ BBAdata.ObjectData.energy_field_missile={
     M: 'comp',
     TT: 'dust',
     lists:{Ocomp:1,Omoving:1},
-    mapType: 'ME',
-    mapCollide: ['E'],
+    mapType: 'EM',
     view:{
         Letter: 'E',
         LetterSize: 12,
@@ -67,8 +65,7 @@ BBAdata.ObjectData.missile={
     M: 'comp',
     TT: 'dust',
     lists:{Ocomp:1,Omoving:1},
-    mapType: 'ME',
-    mapCollide: ['P','M'],
+    mapType: 'EM',
     view:{
         Letter: 'Y',
         LetterSize: 12,
@@ -90,8 +87,7 @@ BBAdata.ObjectData.bullet_bomb={
     M: 'comp',
     TT: 'dust',
     lists:{Ocomp:1,Omoving:1},
-    mapType: 'ME',
-    mapCollide: ['P','M'],
+    mapType: 'EM',
     view:{
         Letter: 'P',
         LetterSize: 12,
@@ -111,8 +107,7 @@ BBAdata.ObjectData.bullet_bomb={
 BBAdata.ObjectData.Mine={
     M: 'comp',
     lists:{Ocomp:1,Omoving:1},
-    mapType: 'ME',
-    mapCollide: ['P','M'],
+    mapType: 'EM',
     view:{
         Letter: 'R',
         LetterSize: 10,
@@ -145,7 +140,7 @@ BBAdata.ObjectData.Mine={
         Mod: {
             simpleFilling: 'transparent',
             radius: 80,
-            mapType: 'AP',
+            mapType: 'A',
             stateIn: {explodeMaster:1},
         },
     },{
@@ -158,7 +153,7 @@ BBAdata.ObjectData.Mine={
         Mod: {
             viewOff: true,
             radius: 200,
-            mapType: 'AP',
+            mapType: 'A',
             stateIn: {informMaster:'enemyClose'},
             stateOut: {informMaster:'enemyFar'},
         },
@@ -176,7 +171,7 @@ BBAdata.ObjectData.MineMod_mediumCircle={
         onDisbandRemove:1,
         Mod: {
             simpleFilling: 'transparent',
-            mapType: 'AP',
+            mapType: 'A',
             radius: 50,
             stateIn: {explodeMaster:1},
         },
@@ -190,7 +185,7 @@ BBAdata.ObjectData.MineMod_mediumCircle={
         Mod: {
             viewOff: true,
             radius: 150,
-            mapType: 'AP',
+            mapType: 'A',
             stateIn: {informMaster:'enemyClose'},
             stateOut: {informMaster:'enemyFar'},
         },
@@ -207,7 +202,7 @@ BBAdata.ObjectData.MineMod_smallCircle={
         Mod: {
             simpleFilling: 'transparent',
             radius: 35,
-            mapType: 'AP',
+            mapType: 'A',
             stateIn: {explodeMaster:1},
         },
     },{
@@ -220,7 +215,7 @@ BBAdata.ObjectData.MineMod_smallCircle={
         Mod: {
             viewOff: true,
             radius: 130,
-            mapType: 'AP',
+            mapType: 'A',
             stateIn: {informMaster:'enemyClose'},
             stateOut: {informMaster:'enemyFar'},
         },
@@ -239,7 +234,7 @@ BBAdata.ObjectData.MineMod_Cone={
             radius: 210,
             coneRad2: 0,
             coneAngle: 20,
-            mapType: 'AP',
+            mapType: 'A',
             stateIn: {explodeMaster:1},
         },
     },{
@@ -254,7 +249,7 @@ BBAdata.ObjectData.MineMod_Cone={
             radius: 380,
             coneRad2: 60,
             coneAngle: 20,
-            mapType: 'AP',
+            mapType: 'A',
             stateIn: {informMaster:'enemyClose'},
             stateOut: {informMaster:'enemyFar'},
         },
@@ -342,8 +337,7 @@ BBAdata.ObjectData.RoundField={
 
     M: 'region',
     lists:{Oregion:1},
-    mapType: 'R',
-    mapCollide: ['P','E','M','ME','A'],
+    mapType: 'F',
     TT: 'dust',
 
     radius: 50,
@@ -357,8 +351,7 @@ BBAdata.ObjectData.SquareField={
 
     M: 'region',
     lists:{Oregion:1},
-    mapType: 'R',
-    mapCollide: ['P','E','M','ME','A'],
+    mapType: 'F',
     TT: 'dust',
 
     radius: 50,
@@ -375,8 +368,7 @@ BBAdata.ObjectData.ConeField={
 
     M: 'region',
     lists:{Oregion:1},
-    mapType: 'R',
-    mapCollide: ['P','E','M','ME','A'],
+    mapType: 'F',
     TT: 'dust',
 
     radius: 50,
@@ -391,24 +383,22 @@ BBAdata.ObjectData.EndPortal={
         onBackground: 1,
     },
     M: 'static',
-    mapType: 'ME',
-    mapCollide: ['P'],
+    mapType: 'PF',
 
     TT: 'regionAnim',
     animTick: 0,
     animType: 'EndPortalStart',
     radius: 50,
     undestructible: 1,
+    lists:{},
     stateIn:{
         changeCount:{gameEnded:1},
         changeAnim:{name:'EndPortalEnd',type:'end',time:45},
     },
-    dontHit:['B','E','BE','M','ME','A','R']
 };
 BBAdata.ObjectData.shieldBlob={
     M: 'moving',
-    mapType: 'ME',
-    mapCollide: ['P','M'],
+    mapType: 'EM',
 
     lists:{Omoving:1},
     view:{
@@ -431,7 +421,6 @@ BBAdata.ObjectMods.enemyShip={
     lists:{Enemies:1,Ocomp:1,Omoving:1},
     TT: 'enemy',
     mapType: 'E',
-    mapCollide: ['M'],
     lastSpeedT: 0,
     doSquad: -1,   //??
     dec: 50,       //??
@@ -737,7 +726,7 @@ BBAdata.ObjectData.edison={
         angle: 0,
         Oid: -1,
         placementT:'directPlaces',
-        Mod: {fieldAnim: 'ElectricityField', radius: 130, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDMG:{Dmg:4,T:'energy'}, mapType:'A', mapCollide:['P'],  dontHit:['B','BE','E','M','ME','A'], fieldAnimMoving:true}
+        Mod: {fieldAnim: 'ElectricityField', radius: 130, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDMG:{Dmg:4,T:'energy'}, mapType:'A',  dontHit:['EB','BE','E','P','EM','A'], fieldAnimMoving:true}
     }],
 
     doingNow: 'changeManouver',
@@ -925,7 +914,7 @@ BBAdata.ObjectData.belzebub={
         enemyShip:{},
     },
     view:{
-        Letter: 'B',
+        Letter: 'EB',
         LetterSize: 40,
         Color: 'red',
         Angle: 90,
@@ -1144,7 +1133,7 @@ BBAdata.ObjectData.vitotas={
         angle: 0,
         Oid: -1,
         placementT:'directPlaces',
-        Mod: {squareAngle: 20, squareLen: 450, squareWidth: 0.5, simpleFilling: 'red', dontHit:['B','BE','E','M','ME','A','R','P']}
+        Mod: {squareAngle: 20, squareLen: 450, squareWidth: 0.5, simpleFilling: 'red', dontHit:['EB','BE','E','P','EM','A','RF']}
     }],
 
     doingNow: 'changeManouver',
@@ -1538,7 +1527,7 @@ BBAdata.ObjectData.zarahiash={
         anglePlus: 180,
         Oid: -1,
         placementT:'directPlaces',
-        Mod: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 15, PeriodOffset: 10, dontHit:['B','BE','E','M','ME','A'], particlesOnBoard:true, fieldAnimMoving:true}
+        Mod: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 15, PeriodOffset: 10, dontHit:['EB','BE','E','P','EM','A'], particlesOnBoard:true, fieldAnimMoving:true}
     }],
 
     doingNow: 'changeManouver',
@@ -1913,7 +1902,7 @@ BBAdata.ObjectData.nientes={
         angle: 0,
         Oid: -1,
         placementT:'directPlaces',
-        Mod: {fieldAnim: 'ElectricityField', radius: 40, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDMG:{Dmg:3,T:'energy'}, dontHit:['B','BE','E','M','ME','A'], fieldAnimMoving:true}
+        Mod: {fieldAnim: 'ElectricityField', radius: 40, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDMG:{Dmg:3,T:'energy'}, dontHit:['EB','BE','E','P','EM','A'], fieldAnimMoving:true}
     }],
 
     doingNow: 'changeManouver',
@@ -1976,7 +1965,7 @@ BBAdata.ObjectData.shieldoorz={
         anglePlus: 0,
         Oid: -1,
         placementT:'directPlaces',
-        Mod: {fieldAnim: 'ShellField', radius: 65, angle: 180, coneAngle: 90, coneRad2: 0, bounceType:'diagonal', fieldAnimMoving:true, dontHit:['P','BE','E','ME']}
+        Mod: {fieldAnim: 'ShellField', radius: 65, angle: 180, coneAngle: 90, coneRad2: 0, bounceType:'diagonal', fieldAnimMoving:true, dontHit:['P','BE','E','EM']}
     }],
 
     doingNow: 'changeManouver',
@@ -2087,7 +2076,7 @@ BBAdata.ObjectData.slimensen={
         anglePlus: 180,
         Oid: -1,
         placementT:'directPlaces',
-        Mod: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 15, PeriodOffset: 10, dontHit:['B','BE','E','M','ME','A'], particlesOnBoard:true, fieldAnimMoving:true}
+        Mod: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 15, PeriodOffset: 10, dontHit:['EB','BE','E','P','EM','A'], particlesOnBoard:true, fieldAnimMoving:true}
     }],
 
     doingNow: 'changeManouver',
@@ -2430,7 +2419,7 @@ BBAdata.ObjectData.doomderos={
         angle: 0,
         Oid: -1,
         placementT:'directPlaces',
-        Mod: {fieldAnim: 'PlasmaField', radius: 40, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 1, PeriodOffset: 3, PeriodDelay: 130, dontHit:['B','BE'], fieldAnimMoving:true, onDie:{Do:'explode', DMG:{Dmg:13,T:'explo'}, Dist: 210}}
+        Mod: {fieldAnim: 'PlasmaField', radius: 40, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 1, PeriodOffset: 3, PeriodDelay: 130, dontHit:['EB','BE'], fieldAnimMoving:true, onDie:{Do:'explode', DMG:{Dmg:13,T:'explo'}, Dist: 210}}
     }],
 
     doingNow: 'changeManouver',
@@ -2553,7 +2542,7 @@ BBAdata.ObjectData.urser={
         angle: 0,
         Oid: -1,
         placementT:'directPlaces',
-        Mod: {fieldAnim: 'DestructionField', radius: 180, angle: 0, coneAngle: 50, coneRad2: 24, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 7, PeriodOffset: 7, particlesOnBoard:true, fieldAnimMoving:true, dontHit:['B','BE','E','M','ME','A'], mapType:'A', mapCollide:['P'], TT:'dust'}
+        Mod: {fieldAnim: 'DestructionField', radius: 180, angle: 0, coneAngle: 50, coneRad2: 24, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 7, PeriodOffset: 7, particlesOnBoard:true, fieldAnimMoving:true, dontHit:['EB','BE','E','P','EM','A'], mapType:'A', mapCollide:['P'], TT:'dust'}
     }],
 
     doingNow: 'changeManouver',

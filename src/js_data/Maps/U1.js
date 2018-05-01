@@ -58,14 +58,14 @@ BBAdata.MAPS.U1 = {
         {What:{RoundField:1},Mod:{x:-700,y:67, radius:10, simpleFilling: 'rgba(155,155,255,0.8)', teleportOnHit: 'aligned', teleportOnHitDist: 1000}},
 
 
-        {What:{RoundField:1},Mod:{x:-600,y:-1200, radius:200, fieldAnim: 'DestructionField', PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 6, PeriodOffset: 20, dontHit:['B','BE']}},
-        {What:{RoundField:1},Mod:{x:-975,y:-905, radius:200, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 20, OneTimeDMG:{Dmg:4,T:'energy'}, dontHit:['B','BE']}},
+        {What:{RoundField:1},Mod:{x:-600,y:-1200, radius:200, fieldAnim: 'DestructionField', PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 6, PeriodOffset: 20, dontHit:['EB']}},
+        {What:{RoundField:1},Mod:{x:-975,y:-905, radius:200, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 20, OneTimeDMG:{Dmg:4,T:'energy'}, dontHit:['EB']}},
         {What:{RoundField:1},Mod:{x:-600,y:-600, radius:200, fieldAnim: 'ShellField', PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 20, PeriodOffset: 20, SlowDownTo: 2, SlowDownBy: 3, dontHit:['E','P']}},
 
-        {What:{RoundField:1},Mod:{x:-910,y: 850, radius:60, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 20, OneTimeDMG:{Dmg:4,T:'energy'}, dontHit:['B','BE']}},
-        {What:{RoundField:1},Mod:{x:-800,y: 1020, radius:60, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeDMG:{Dmg:4,T:'energy'}, dontHit:['B','BE']}},
-        {What:{RoundField:1},Mod:{x:-600,y: 1100, radius:60, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 20, OneTimeDMG:{Dmg:4,T:'energy'}, dontHit:['B','BE']}},
-        {What:{RoundField:1},Mod:{x:-600,y: 800, radius:200, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
+        {What:{RoundField:1},Mod:{x:-910,y: 850, radius:60, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 20, OneTimeDMG:{Dmg:4,T:'energy'}, dontHit:['EB']}},
+        {What:{RoundField:1},Mod:{x:-800,y: 1020, radius:60, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeDMG:{Dmg:4,T:'energy'}, dontHit:['EB']}},
+        {What:{RoundField:1},Mod:{x:-600,y: 1100, radius:60, fieldAnim: 'ElectricityField', OneTimeEffect: 1, OneTimeOffset: 20, OneTimeDMG:{Dmg:4,T:'energy'}, dontHit:['EB']}},
+        {What:{RoundField:1},Mod:{x:-600,y: 800, radius:200, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['EB','E']}},
 
         {LineOf:{X:225, Y:750, Angle: 45, Distance: 80}, What:{Mine:7},Mod:{explodePreset:'NailedMine2'}},
         {LineOf:{X:280, Y:1030, Angle: 45, Distance: 80}, What:{Mine:11},Mod:{explodePreset:'NailedMine'}},

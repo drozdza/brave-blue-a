@@ -375,7 +375,7 @@ BBAdata.MAPS.BigOnes={
     Place:[
         {Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, D:10, M:10, N:10, J:10, W:5, T:10, E:10, G:10, R:10, B:10, K:10, F:10, Q:5,X:5,TT:10,Tu:5}},
         {CircleOf:{X:0, Y:-3000, Radius: 120, Angle: 0, AnglePlus: 22.5}, What:{Star:16}},
-        {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
+        {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['EB','E','BE']}},
     ],
 };
 BBAdata.MAPS.HardCore={
@@ -403,7 +403,7 @@ BBAdata.MAPS.HardCore={
         {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarL:40,StarM:30,Star:40,StarS:40,iD:10,Wi:10}},
         {What:{Gstar:1},Mod:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}},
         {CircleOf:{X:0, Y:-3000, Radius: 120, Angle: 0, AnglePlus: 22.5}, What:{Star:16}},
-        {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
+        {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['EB','E','BE']}},
     ]
 };
 BBAdata.MAPS.HardCoreDev={
@@ -431,7 +431,7 @@ BBAdata.MAPS.HardCoreDev={
 //        {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarL:40,StarM:30,Star:40,StarS:40,iD:10,Wi:10}},
         {What:{Gstar:1},Mod:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}},
         {CircleOf:{X:0, Y:-3000, Radius: 120, Angle: 0, AnglePlus: 22.5}, What:{Star:16}},
-        {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
+        {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['EB','E','BE']}},
     ]
 };
 

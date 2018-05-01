@@ -5,7 +5,7 @@ function GAMEobject(){
     this.MapTileSize = 250;
     this.Frames = BBAdata.GET.SETF;
     this.tick=0;
-    this.tickD=0;
+    this.tickD=0;               // Draw Ticks
     this.IntervalIndex=-1;
     this.pause=false;
     this.doEndGame=false;
@@ -19,17 +19,7 @@ function GAMEobject(){
     this.O={};                   // Object's - all of them
     this.Olen=0;
     this.Omap={};                // map of Maps
-    // No map for: B-Bullets, BE-BulletsE, T-TeleportsRoutes
-    this.Omap['P']={elems:1};    // Player
-    this.Omap['M']={elems:0};    // Missiles
-    this.Omap['E']={elems:0};    // Enemies
-    this.Omap['ME']={elems:0};   // MissilesE
-    this.Omap['A']={elems:0};    // Asteroids
-    this.Omap['AP']={elems:0};   // Asteroids - only for Player Ship
-    this.Omap['R']={elems:0};    // Regions
-    this.Omap['D']={elems:0};    // Dead objects (for spotting)
     this.Odead={};
-
 
     this.Omoving={};    // moving
     this.Ocomp={};      // sterowane statki / missile
@@ -54,7 +44,7 @@ function GAMEobject(){
     this.changeSpeedDelay = 0;
 
     this.showLaserInd = true;
-    this.RadarOld = {};    for(var i=0; i<360;++i) this.RadarOld[i]=[];
+    this.RadarOld = {}; for(var i=0; i<360;++i) this.RadarOld[i]=[];
     this.mouse_x = 0;
     this.mouse_y = 0;
     this.mouseX = 0;
@@ -67,6 +57,8 @@ function GAMEobject(){
     this.MSdecide=0;
     this.MSdraw=0;
     this.MSship=0;
+
+    this.hitStats = {hit:0,hitMin:-1,hitMax:-1,hitAvg:0};
 
     this.shipX=0;
     this.shipY=0;

@@ -1,7 +1,7 @@
 
 GAMEobject.prototype.shipFunc_glueFireToLaser = function(){
     var F,X,Y,R,dist=1000000,laserAim=false,radius = this.O[0].GlueFireToLaser;
-    var Found = this.getCollidingWithCircle(this.mouseX,this.mouseY,radius,['E','ME','A','R']);
+    var Found = this.getCollidingWithCircle(this.mouseX,this.mouseY,radius,['E','EM','A','F']);
 
     var laserAim = false;
     var dist = 1000000;
@@ -26,7 +26,7 @@ GAMEobject.prototype.shipFunc_glueFireToLaser = function(){
 }
 GAMEobject.prototype.shipFunc_glueFireToMissile = function(aimRadius){
     var F,X,Y,R,dist=1000000,laserAim=false;
-    var Found = this.getCollidingWithCircle(this.mouseX,this.mouseY,aimRadius,['E','ME','A','R']);
+    var Found = this.getCollidingWithCircle(this.mouseX,this.mouseY,aimRadius,['E','EM','A','F']);
 
     var missileAim = false;
     var dist = 1000000;
@@ -234,7 +234,7 @@ GAMEobject.prototype.shipFunc_showHealth = function(){
     for(var shieldType in O.ShieldStorage){
         var SS = O.ShieldStorage[shieldType];
         var shieldLetter = 'O';
-        if(shieldType=='bullet') shieldLetter = 'B';
+        if(shieldType=='bullet') shieldLetter = 'EB';
         if(shieldType=='explosion') shieldLetter = 'E';
 
         html+='<span class="XenergyField">';

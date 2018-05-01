@@ -274,11 +274,14 @@ GAMEobject.prototype.frame = function(){
                 $('#FPSpillar div:nth-child(151)').remove();
             }
             var html = '';
-            html += parseInt(this.O[0].x)+' '+parseInt(this.O[0].y)+'<br/>';
+            html += this.hitStats.hitMin+' '+parseInt(this.hitStats.hitAvg/FPS)+' '+this.hitStats.hitMax+'<br/>';
+            html += '['+parseInt(this.O[0].x)+' '+parseInt(this.O[0].y)+']<br/>';
             html += FPSu+' / '+FPS+' fps';
             $('#FPSnum').html(html);
             this.FPSy=this.tick;
             this.FPSz=this.tickD;
+
+            this.hitStats={hit:0,hitMin:-1,hitMax:-1,hitAvg:0};
 
             if(BBAdata.GET.FPS > 2){
                 var u = 1000 - this.MSship - this.MSdecide - this.MSmove - this.MSdraw;
@@ -300,6 +303,15 @@ GAMEobject.prototype.frame = function(){
         }
         this.FPSx=D;
     }
+
+    // count hitStats:
+    this.hitStats.hitAvg -=- this.hitStats.hit;
+    if (this.hitStats.hitMin===-1 || this.hitStats.hitMin > this.hitStats.hit)
+        this.hitStats.hitMin = this.hitStats.hit;
+    if (this.hitStats.hitMax===-1 || this.hitStats.hitMax < this.hitStats.hit)
+        this.hitStats.hitMax = this.hitStats.hit;
+    this.hitStats.hit=0;
+
 
     if(!this.pause && !this.doEndGame && GAME)
         if(BBAdata.GET.FRAMES < 4)

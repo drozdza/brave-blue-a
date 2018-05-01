@@ -49,15 +49,26 @@ GAMEobject.prototype.setBoard = function(){
       //  document.addEventListener('mouseup',function(e){     GAME.mouse_up(e); },false);
       //  document.addEventListener('mousemove',function(e){     GAME.mousemove(e); },false);
 }
+GAMEobject.prototype.setOmaps = function(){
+    var Omap={};
+    for (var i in BBAdata.collisionMatrix){
+        Omap[i] = {elems:0};
+    }
+    Omap['P'].elems = 1;
+    return Omap;
+}
+
 GAMEobject.prototype.start = function(Name,Setting,Ship){
     this.MapName = Name;
     this.MapSetting = Setting;
     this.gameHash = makeRandomHash();
+    this.Omap = this.setOmaps();
 
     this.prepareCounts();
     this.prepareWinningConds();
 
     this.O[0] = Ship;
+    this.O[0].mapCollide = cloneObj(BBAdata.collisionMatrix['P']);
     this.resize();
     this.setBoard();
     this.CanvasHandle = document.getElementById('MainCanvas').getContext('2d');
