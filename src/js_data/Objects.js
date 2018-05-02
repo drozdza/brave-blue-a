@@ -729,7 +729,7 @@ BBAdata.ObjectData.edison={
         angle: 0,
         Oid: -1,
         placementT:'directPlaces',
-        Mod: {fieldAnim: 'ElectricityField', radius: 130, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDMG:{Dmg:4,T:'energy'}, mapType:'A',  dontHit:['EB','BE','E','P','EM','A'], fieldAnimMoving:true}
+        Mod: {fieldAnim: 'ElectricityField', radius: 130, mapType:'PF', OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDMG:{Dmg:4,T:'energy'}, fieldAnimMoving:true}
     }],
 
     doingNow: 'changeManouver',
@@ -1905,7 +1905,7 @@ BBAdata.ObjectData.nientes={
         angle: 0,
         Oid: -1,
         placementT:'directPlaces',
-        Mod: {fieldAnim: 'ElectricityField', radius: 40, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDMG:{Dmg:3,T:'energy'}, dontHit:['EB','BE','E','P','EM','A'], fieldAnimMoving:true}
+        Mod: {fieldAnim: 'ElectricityField', mapType:'PF', radius: 40, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDMG:{Dmg:3,T:'energy'}, fieldAnimMoving:true}
     }],
 
     doingNow: 'changeManouver',

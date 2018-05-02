@@ -352,7 +352,7 @@ GAMEobject.prototype.countSquareCorners = function(x,y,angle,len,width){
     sC.E.y1 = sC.A.y;
     sC.E.y2 = sC.A.y;
 
-    for(var j in {'EB':1,'C':1,'D':1}){
+    for(var j in {'B':1,'C':1,'D':1}){
         if(sC.E.x1 > sC[j].x) sC.E.x1 = sC[j].x;
         if(sC.E.x2 < sC[j].x) sC.E.x2 = sC[j].x;
         if(sC.E.y1 > sC[j].y) sC.E.y1 = sC[j].y;
