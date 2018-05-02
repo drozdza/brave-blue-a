@@ -31,14 +31,12 @@ GAMEobject.prototype.hit = function(o,q){
     if(typeof Q == 'undefined') return 1;
     if(typeof O == 'undefined') return 1;
 
-    // if(O.mapType=='PM') console.log(O.T,Q.T);
-
 
     // if(O.dontHit){ for(var i=0; i<O.dontHit.length; ++i) if(O.dontHit[i]==Q.mapType) return 1; }
-    // if(Q.dontHit){ for(var i=0; i<Q.dontHit.length; ++i) if(Q.dontHit[i]==O.mapType) return 1; }
+    if(Q.dontHit){ for(var i=0; i<Q.dontHit.length; ++i) if(Q.dontHit[i]==O.mapType) return 1; }
     //
     // if(typeof O.SlowDownTo !='undefined'){ this.regionSpeedChange(O,Q); return 1; }
-    // if(typeof Q.SlowDownTo !='undefined'){ this.regionSpeedChange(Q,O); return 1; }
+    if(typeof Q.SlowDownTo !='undefined'){ this.regionSpeedChange(Q,O); return 1; }
     //
     // if(O.bounceType){    this.regionAngleChange(O,Q); return 1; }
     if(Q.bounceType){    this.regionAngleChange(Q,O); return 1; }
@@ -52,16 +50,19 @@ GAMEobject.prototype.hit = function(o,q){
 
     //
     // if(O.vectorType){    this.regionVectorChange(O,Q); return 1; }
-    // if(Q.vectorType){    this.regionVectorChange(Q,O); return 1; }
+    if(Q.vectorType){    this.regionVectorChange(Q,O); return 1; }
     //
     // if(O.teleportOnHit){ this.region_teleportOnHit(O,q); return 1; }
-    // if(Q.teleportOnHit){ this.region_teleportOnHit(Q,o); return 1; }
-    //
-    // if(O.T=='healing_missile' && O.FollowWho == q){
-    //     if(!this.healObj(q,1,o))
-    //         this.removeObj(o);
-    //     return 1;
-    // }
+    if(Q.teleportOnHit){ this.region_teleportOnHit(Q,o); return 1; }
+
+    if(Q.T=='healing_missile'){
+        console.log(Q.FollowWho, o);
+    }
+    if(O.T=='healing_missile' && O.FollowWho == q){
+        if(!this.healObj(q,1,o))
+            this.removeObj(o);
+        return 1;
+    }
     //
     // if(O.T=='energy_field_missile' && O.FollowWho == q){
     //     if(!this.giveEnergyField(q,1,o,O.MaxEnergyField))
@@ -69,10 +70,10 @@ GAMEobject.prototype.hit = function(o,q){
     //     return 1;
     // }
     //
-    if(O.SlowDown && Q.T=='ship'){
-        if(Q.speed > O.SlowDown) Q.speed = O.SlowDown;
-        if(this.specialMove != -1 && Q.SpecialMoves)
-            if(Q.SpecialMoves[ this.specialMove ].T=='changePosition'){
+    if(Q.SlowDown && O.T=='ship'){
+        if(O.speed > Q.SlowDown) O.speed = Q.SlowDown;
+        if(this.specialMove != -1 && O.SpecialMoves)
+            if(O.SpecialMoves[ this.specialMove ].T=='changePosition'){
                 this.specialMoveT = -1;
                 this.specialMove = -1;
             }

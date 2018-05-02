@@ -86,6 +86,15 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
 
         L = this.putObj(explodeObj.explodeType,O.S,O.x,O.y);
 
+        if (O.S==2) {
+            switch (this.O[L].mapType){
+                case 'PF':  this.O[L].mapType = 'PF';  break;
+                case 'EF':  this.O[L].mapType = 'EF';  break;
+                case 'PMF': this.O[L].mapType = 'EMF'; break;
+                case 'EMF': this.O[L].mapType = 'PMF'; break;
+            }
+        }
+
         this.cloneDataToObj(L,explodeObj,['radius', 'coneAngle', 'coneRad2',
             'PeriodTime', 'PeriodOffset', 'PeriodHeal',
             'OneTimeEffect', 'OneTimeOffset', 'OnDamageExpire',

@@ -21,6 +21,7 @@ BBAdata.ObjectData.healing_missile={
     TT: 'dust',
     lists:{Ocomp:1,Omoving:1},
     mapType: 'EM',
+    mapCollide: ['E','EMF','F'],
     view:{
         Letter: 'J',
         LetterSize: 12,
@@ -28,6 +29,7 @@ BBAdata.ObjectData.healing_missile={
         Angle: 180,
     },
 
+    life: 1,
     lifeM: 1,
     speed: 13,
     speedT: 20,
@@ -44,6 +46,7 @@ BBAdata.ObjectData.energy_field_missile={
     TT: 'dust',
     lists:{Ocomp:1,Omoving:1},
     mapType: 'EM',
+    mapCollide: ['E','EMF','F'],
     view:{
         Letter: 'E',
         LetterSize: 12,
@@ -140,7 +143,7 @@ BBAdata.ObjectData.Mine={
         Mod: {
             simpleFilling: 'transparent',
             radius: 80,
-            mapType: 'A',
+            mapType: 'PF',
             stateIn: {explodeMaster:1},
         },
     },{
@@ -153,7 +156,7 @@ BBAdata.ObjectData.Mine={
         Mod: {
             viewOff: true,
             radius: 200,
-            mapType: 'A',
+            mapType: 'PF',
             stateIn: {informMaster:'enemyClose'},
             stateOut: {informMaster:'enemyFar'},
         },
@@ -171,7 +174,7 @@ BBAdata.ObjectData.MineMod_mediumCircle={
         onDisbandRemove:1,
         Mod: {
             simpleFilling: 'transparent',
-            mapType: 'A',
+            mapType: 'PF',
             radius: 50,
             stateIn: {explodeMaster:1},
         },
@@ -185,7 +188,7 @@ BBAdata.ObjectData.MineMod_mediumCircle={
         Mod: {
             viewOff: true,
             radius: 150,
-            mapType: 'A',
+            mapType: 'PF',
             stateIn: {informMaster:'enemyClose'},
             stateOut: {informMaster:'enemyFar'},
         },
@@ -202,7 +205,7 @@ BBAdata.ObjectData.MineMod_smallCircle={
         Mod: {
             simpleFilling: 'transparent',
             radius: 35,
-            mapType: 'A',
+            mapType: 'PF',
             stateIn: {explodeMaster:1},
         },
     },{
@@ -215,7 +218,7 @@ BBAdata.ObjectData.MineMod_smallCircle={
         Mod: {
             viewOff: true,
             radius: 130,
-            mapType: 'A',
+            mapType: 'PF',
             stateIn: {informMaster:'enemyClose'},
             stateOut: {informMaster:'enemyFar'},
         },
@@ -234,7 +237,7 @@ BBAdata.ObjectData.MineMod_Cone={
             radius: 210,
             coneRad2: 0,
             coneAngle: 20,
-            mapType: 'A',
+            mapType: 'PF',
             stateIn: {explodeMaster:1},
         },
     },{
@@ -249,7 +252,7 @@ BBAdata.ObjectData.MineMod_Cone={
             radius: 380,
             coneRad2: 60,
             coneAngle: 20,
-            mapType: 'A',
+            mapType: 'PF',
             stateIn: {informMaster:'enemyClose'},
             stateOut: {informMaster:'enemyFar'},
         },

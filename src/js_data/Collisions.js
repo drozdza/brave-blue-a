@@ -12,7 +12,7 @@ BBAdata.collisionMatrix = {
     'D'   :[], // Dead objects (for spotting)
 };
 BBAdata.collisionBullets = {
-    'EB':['P','EMF','F'],
+    'EB':['P','PM','EMF','F'],
     'PB':['E','A','F','EMF'],
     'B':['P','E','A','F','EF','EM'],
 };
