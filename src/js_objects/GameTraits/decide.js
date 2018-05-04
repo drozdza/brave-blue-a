@@ -607,13 +607,14 @@ GAMEobject.prototype.decide = function(o){
                 break;
             }
             var dO = this.O[O.myStar];
-            if(dO.life < 1){
+            if(typeof dO == 'undefined' || dO.life < 1){
               O.Flags.noStar = true;
               O.doingTime = -1;
-            }
-            O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
-            O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
-        }break;
+          }else{
+              O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
+              O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
+          }
+      }break;
     }
 
     // Strzelamy

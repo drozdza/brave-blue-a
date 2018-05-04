@@ -401,7 +401,7 @@ BBAdata.ObjectData.EndPortal={
 };
 BBAdata.ObjectData.shieldBlob={
     M: 'moving',
-    mapType: 'EM',
+    mapType: 'A',
 
     lists:{Omoving:1},
     view:{
@@ -917,7 +917,7 @@ BBAdata.ObjectData.belzebub={
         enemyShip:{},
     },
     view:{
-        Letter: 'EB',
+        Letter: 'B',
         LetterSize: 40,
         Color: 'red',
         Angle: 90,
