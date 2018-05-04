@@ -131,14 +131,7 @@ GAMEobject.prototype.frame_move = function(){
             }
         }
 
-        if(O.T!='bullet')
-            this.putOnXY(O, oldX, oldY);
-
-        if(o==0){
-            this.ShipMoveX = O.x - oldX;
-            this.ShipMoveY = O.x - oldY;
-        }
-
+        if(O.T!='bullet') this.putOnXY(O, oldX, oldY);
     }
 
     this.MSmove-=-((new Date()).getTime() - MS);
