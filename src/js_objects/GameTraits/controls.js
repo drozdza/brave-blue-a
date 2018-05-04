@@ -94,10 +94,20 @@ GAMEobject.prototype.keyup = function(e){
     if(e.keyCode==38 || e.keyCode==87) this.keyUpDown=0;
     if(e.keyCode==40 || e.keyCode==83) this.keyUpDown=0;
 
-
     if(e.keyCode > 48 && e.keyCode < 58){    // Numeric 1-9
         if(e.keyCode-49 < this.O[0].Weapons.length)
             this.shipFunc_changeWeapon(1, e.keyCode-49);
+    }
+
+    if(e.keyCode == 77){
+        for(var o in this.Enemies){
+            var O = this.O[o];
+            var oldX = O.x;
+            var oldY = O.y;
+            O.x=0;
+            O.y=0;
+            this.putOnXY(O, oldX, oldY);
+        }
     }
 
     if(typeof this.O[0].KeysModules[ e.keyCode ] !='undefined'){
