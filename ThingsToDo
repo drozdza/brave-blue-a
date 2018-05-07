@@ -46,11 +46,14 @@ Others:
 =========================================================================
 - Shield Creators that needs to be powered by other ships
 
+- Mines: Immunity Mines that can be destroyed only by hitting the Ship
+
 - Missiles: Cursor followers
 
 - Missiles thrown out of ship, and then engaging
 
 - Asteroid stickers:
+    - Make their position[X,Y] absolute again
     - Can travel only around part of circle
     - Cannos all stay in the same spot
 
