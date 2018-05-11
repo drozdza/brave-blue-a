@@ -14,7 +14,6 @@ BBAdata.ObjectData.destruction_field={
     TT: 'dust',
     lists:{Oregion:1},
     mapType: 'F',
-    mapCollide: [],
 };
 BBAdata.ObjectData.healing_missile={
     M: 'comp',
@@ -2545,7 +2544,7 @@ BBAdata.ObjectData.urser={
         angle: 0,
         Oid: -1,
         placementT:'directPlaces',
-        Mod: {fieldAnim: 'DestructionField', radius: 180, angle: 0, coneAngle: 50, coneRad2: 24, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 7, PeriodOffset: 7, particlesOnBoard:true, fieldAnimMoving:true, dontHit:['EB','BE','E','P','EM','A'], mapType:'A', mapCollide:['P'], TT:'dust'}
+        Mod: {fieldAnim: 'DestructionField', radius: 180, angle: 0, coneAngle: 50, coneRad2: 24, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 7, PeriodOffset: 7, particlesOnBoard:true, fieldAnimMoving:true, mapType: 'PMF', TT:'dust'}
     }],
 
     doingNow: 'changeManouver',

@@ -355,7 +355,7 @@ BBAdata.ExplosivesPresets={
     // some to Y ship
 
     EnergyBubble:{
-        onHitDieExpire: {Do:'explode', explodeType:'RoundField', fieldAnim:'ShellField', bounceType:'diagonal', ExpireTime:240, angle: 0, mapType:'PF', radius: 45},
+        onHitDieExpire: {Do:'explode', explodeType:'RoundField', fieldAnim:'ShellField', bounceType:'diagonal', ExpireTime:240, angle: 0, mapType:'PMF', radius: 45},
     },
     EnergyBubbleShield:{
         Dec: 30,

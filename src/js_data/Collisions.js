@@ -1,6 +1,6 @@
 BBAdata.collisionMatrix = {
-    'P'   :['A','F','PF','PMF'], // Player
-    'PM'  :['E','A','PMF','F'], // Player Missiles/Bombs
+    'P'   :['A','EM','F','PF','PMF'], // Player
+    'PM'  :['E','A','EM','PMF','F'], // Player Missiles/Bombs
     'E'   :['EF','EMF','F'], // Enemies
     'EM'  :['EMF','F'],  // Enemy Missiles/Bombs
     'A'   :[], // Asteroids
@@ -13,6 +13,6 @@ BBAdata.collisionMatrix = {
 };
 BBAdata.collisionBullets = {
     'EB':['P','PM','EMF','F'],
-    'PB':['E','A','F','EMF'],
+    'PB':['E','EM','A','F','EMF'],
     'B':['P','E','A','F','EF','EM'],
 };
