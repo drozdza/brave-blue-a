@@ -517,6 +517,9 @@ BBAdata.ExplosivesPresets={
     WindField:{
         onHitDieExpire:{ Do:'explode', explodeType:'ConeField', fieldAnim:'WindField', ExpireTime:240, mapType:'F', dontHit:['E','EM','EB'], vectorType:'wind', vectorForce:5, windAngle:60, radius: 350, coneAngle: 50, coneRad2: 0}
     },
+    SmallWindField:{
+        onHitDieExpire:{ Do:'explode', explodeType:'ConeField', fieldAnim:'WindField', ExpireTime:240, mapType:'F', dontHit:['E','EM','EB'], vectorType:'wind', vectorForce:5, windAngle:60, radius: 150, coneAngle: 70, coneRad2: 0}
+    },
 
     EyeOfEvil:{
         onExpire: {

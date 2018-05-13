@@ -65,6 +65,7 @@ function GetMenuObject(){
                 bombs1: 'bombs1',
                 bombs2: 'bombs2',
                 best: 'best',
+                bestJumper: 'bestJumper',
                 bombardier: 'bombardier',
                 bombardier2: 'bombardier2',
                 kagelis: 'kagelis',

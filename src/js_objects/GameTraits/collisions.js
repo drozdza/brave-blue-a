@@ -2,7 +2,10 @@
 GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
     var X1,Y1,X2,Y2,xi,yi,ux,uy,ur,x,y, X,Y, tabS={};
 
-    // if(O.coneRad2) console.log('=================================================');
+    if(typeof O.coneRad2 != 'undefined'){
+        console.log(parseInt(O.x),parseInt(O.y),O.angle,O.radius);
+        console.log('=================================================');
+    }
 
     if(typeof O.squareCorners !='undefined'){
         X1 = O.squareCorners.E.x1;
@@ -41,7 +44,10 @@ GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
                         break;
                     }
                 }
-                if(toRemove) delete(tabS[x+'_'+y]);
+                if(toRemove) {
+                    console.log('delete(tabS['+x+'_'+y+']');
+                    delete(tabS[x+'_'+y]);
+                }
             }
         }
     }
@@ -58,7 +64,10 @@ GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
                         break;
                     }
                 }
-                if(toRemove) delete(tabS[x+'_'+y]);
+                if(toRemove) {
+                    console.log('delete(tabS['+x+'_'+y+']');
+                    delete(tabS[x+'_'+y]);
+                }
             }
         }
     }
@@ -84,7 +93,10 @@ GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
                         break;
                     }
                 }
-                if(toRemove) delete(tabS[x+'_'+y]);
+                if(toRemove) {
+                    console.log('delete(tabS['+x+'_'+y+']');
+                    delete(tabS[x+'_'+y]);
+                }
             }
         }
     }

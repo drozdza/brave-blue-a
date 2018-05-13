@@ -1,7 +1,7 @@
 function CanvasBackgroundManagerObject(){
 
     this.Tiles = {1:{}};
-    this.TileSize = 300;
+    this.TileSize = 400;
     this.TileOffset = 0;
     this.BGscale = {1:1};
     this.BGqueue = [1];
@@ -97,6 +97,7 @@ function CanvasBackgroundManagerObject(){
                         var T = this.Tiles[BGN][x+'_'+y];
                         var uX = parseInt(x*this.TileSize-PX);
                         var uY = parseInt(y*this.TileSize-PY);
+                        CH.strokeStyle = 'green';
                         if(uX < 0) --uX;
                         if(uY < 0) --uY;
                         if(uX == 0){
@@ -109,6 +110,7 @@ function CanvasBackgroundManagerObject(){
                         }
 
                         CH.drawImage(T.canvasId,uX,uY);
+                        CH.strokeRect(uX,uY, this.TileSize, this.TileSize);
                     }
         }
     }

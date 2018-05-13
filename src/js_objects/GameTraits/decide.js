@@ -545,6 +545,7 @@ GAMEobject.prototype.decide = function(o){
             }
             if(dO.life < 1){
               O.Flags.noStar = true;
+              O.myStar = false;
               O.doingTime = -1;
             }
 
@@ -556,9 +557,10 @@ GAMEobject.prototype.decide = function(o){
             if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
             if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
 
-
+            var oldX = O.x, oldY = O.y;
             O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
             O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
+            this.putOnXY(O, oldX, oldY);
         }break;
         case 'turnLeftOnStar':{
             if(O.myStar === false){
@@ -568,6 +570,7 @@ GAMEobject.prototype.decide = function(o){
             var dO = this.O[O.myStar];
             if(typeof dO == 'undefined'){
                 O.speed = 0;
+                O.myStar = false;
                 O.Manouver = 'goStraight';
                 return 1;
             }
@@ -577,8 +580,10 @@ GAMEobject.prototype.decide = function(o){
             }
 
             O.angle = (O.angle- -360- -O.speedT) %360;
+            var oldX = O.x, oldY = O.y;
             O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
             O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
+            this.putOnXY(O, oldX, oldY);
         }break;
         case 'turnRightOnStar':{
             if(O.myStar === false){
@@ -597,8 +602,10 @@ GAMEobject.prototype.decide = function(o){
             }
 
             O.angle = (O.angle- -360-O.speedT) %360;
+            var oldX = O.x, oldY = O.y;
             O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
             O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
+            this.putOnXY(O, oldX, oldY);
         }break;
         case 'iddleOnStar':{
             if(O.myStar === false || typeof O.myStar == 'undefined'){
@@ -611,8 +618,10 @@ GAMEobject.prototype.decide = function(o){
               O.Flags.noStar = true;
               O.doingTime = -1;
           }else{
+              var oldX = O.x, oldY = O.y;
               O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
               O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
+              this.putOnXY(O, oldX, oldY);
           }
       }break;
     }
