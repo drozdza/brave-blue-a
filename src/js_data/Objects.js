@@ -1967,7 +1967,7 @@ BBAdata.ObjectData.shieldoorz={
         anglePlus: 0,
         Oid: -1,
         placementT:'directPlaces',
-        Mod: {fieldAnim: 'ShellField', radius: 65, angle: 180, coneAngle: 90, coneRad2: 0, bounceType:'diagonal', fieldAnimMoving:true, dontHit:['P','BE','E','EM']}
+        Mod: {fieldAnim: 'ShellField', radius: 65, angle: 180, coneAngle: 90, coneRad2: 0, bounceType:'diagonal', fieldAnimMoving:true, mapType: 'F', dontHit:['P','E','EM','EB']}
     }],
 
     doingNow: 'changeManouver',

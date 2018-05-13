@@ -31,6 +31,8 @@ GAMEobject.prototype.hit = function(o,q){
     if(typeof Q == 'undefined') return 1;
     if(typeof O == 'undefined') return 1;
 
+    console.log(O.T, Q.T);
+
     // if(O.dontHit){ for(var i=0; i<O.dontHit.length; ++i) if(O.dontHit[i]==Q.mapType) return 1; }
     if(Q.dontHit){ for(var i=0; i<Q.dontHit.length; ++i) if(Q.dontHit[i]==O.mapType) return 1; }
 
@@ -85,11 +87,16 @@ GAMEobject.prototype.hit = function(o,q){
             this.explodeBomb(o,O.onHit);
             return true;
         }
+        if(Q.onHit && Q.onHit.Do=='explode'){
+            this.explodeBomb(q,Q.onHit);
+            return true;
+        }
 
         if(O.T == 'bullet') this.makeDMG(q,O.DMG,o);
 
         if(O.T == 'missile') this.makeDMG(q,O.DMG,o);
         if(Q.T == 'missile') this.makeDMG(o,Q.DMG,q);
+
     }
     // if(O.T=='missile' || O.T=='bullet'){
     //     if(O.S==Q.S) return 1;

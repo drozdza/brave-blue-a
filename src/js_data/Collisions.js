@@ -6,7 +6,7 @@ BBAdata.collisionMatrix = {
     'A'   :[], // Asteroids
     'F'   :['A'], // Fields
     'PF'  :[], // Player Fields
-    'EF'  :[], // Enemy Fields
+    'EF'  :['A'], // Enemy Fields
     'PMF' :[], // Player Fields
     'EMF' :[], // Enemy Fields
     'D'   :[], // Dead objects (for spotting)
