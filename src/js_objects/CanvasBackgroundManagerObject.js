@@ -97,7 +97,6 @@ function CanvasBackgroundManagerObject(){
                         var T = this.Tiles[BGN][x+'_'+y];
                         var uX = parseInt(x*this.TileSize-PX);
                         var uY = parseInt(y*this.TileSize-PY);
-                        CH.strokeStyle = 'green';
                         if(uX < 0) --uX;
                         if(uY < 0) --uY;
                         if(uX == 0){
@@ -110,7 +109,13 @@ function CanvasBackgroundManagerObject(){
                         }
 
                         CH.drawImage(T.canvasId,uX,uY);
-                        CH.strokeRect(uX,uY, this.TileSize, this.TileSize);
+
+                        if(BBAdata.GET.DEBUG >= 3) {
+                            CH.strokeStyle = 'green';
+                            CH.fillStyle = 'green';
+                            CH.strokeRect(uX, uY, this.TileSize, this.TileSize);
+                            CH.fillText('['+y+'_'+x+']', uX- -20, uY- -20);
+                        }
                     }
         }
     }
