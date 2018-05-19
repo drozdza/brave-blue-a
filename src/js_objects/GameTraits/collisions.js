@@ -32,7 +32,7 @@ GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
     var U = [[0,0],[0,1],[1,1],[1,0]];
 
 
-    if(O.radius*3 > M){
+    if(O.radius > 3*M){
         for(x=xi; x<=X; ++x){
             for(y=yi; y<=Y; ++y){
                 var toRemove = true;
@@ -45,7 +45,7 @@ GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
                     }
                 }
                 if(toRemove) {
-                    // console.log('delete(tabS['+x+'_'+y+']');
+                    // console.log('outerCircle: delete(tabS['+x+'_'+y+']');
                     delete(tabS[x+'_'+y]);
                 }
             }
@@ -65,7 +65,7 @@ GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
                     }
                 }
                 if(toRemove) {
-                    // console.log('delete(tabS['+x+'_'+y+']');
+                    // console.log('innerCircle: delete(tabS['+x+'_'+y+']');
                     delete(tabS[x+'_'+y]);
                 }
             }
@@ -94,7 +94,7 @@ GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
                     }
                 }
                 if(toRemove) {
-                    // console.log('delete(tabS['+x+'_'+y+']');
+                    // console.log('coneAngle: delete(tabS['+x+'_'+y+']');
                     delete(tabS[x+'_'+y]);
                 }
             }

@@ -111,10 +111,11 @@ function CanvasBackgroundManagerObject(){
                         CH.drawImage(T.canvasId,uX,uY);
 
                         if(BBAdata.GET.DEBUG >= 3) {
-                            CH.strokeStyle = 'green';
+                            CH.strokeStyle = '#00ff00';
                             CH.fillStyle = 'green';
+                            CH.font = '15px Arial';
                             CH.strokeRect(uX, uY, this.TileSize, this.TileSize);
-                            CH.fillText('['+y+'_'+x+']', uX- -20, uY- -20);
+                            CH.fillText('['+x+'_'+y+']', uX- -20, uY- -20);
                         }
                     }
         }
