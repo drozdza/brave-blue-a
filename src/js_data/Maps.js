@@ -418,7 +418,11 @@ BBAdata.MAPS.HardCoreDev={
     ],
     Ship:{Start:{X: 0, Y: 0, A:90}},
     Place:[
-        // {What:{ConeField:1},Mod:{x:0,y:0, radius: 3800, angle: 180, coneAngle: 179, coneRad2: 3300, simpleFilling: '#060606', bounceType:'diagonal',bounceTeleport:true}},
+        {What:{ConeField:1},Mod:{x:-200,y:-200, radius: 700, angle: 90, coneAngle: 10, coneRad2: 0, simpleFilling: 'orange', bounceType:'diagonal',bounceTeleport:true}},
+        {What:{ConeField:1},Mod:{x:1200,y:600, radius: 700, angle: 90, coneAngle: 10, coneRad2: 0, simpleFilling: 'yellow', bounceType:'diagonal',bounceTeleport:true}},
+        {What:{ConeField:1},Mod:{x:-200,y:1200, radius: 700, angle: 180, coneAngle: 10, coneRad2: 0, simpleFilling: 'green', bounceType:'diagonal',bounceTeleport:true}},
+        {What:{ConeField:1},Mod:{x:-1200,y:200, radius: 700, angle: 270, coneAngle: 10, coneRad2: 0, simpleFilling: 'red', bounceType:'diagonal',bounceTeleport:true}},
+        {What:{ConeField:1},Mod:{x:1200,y:1200, radius: 700, angle: 0, coneAngle: 10, coneRad2: 0, simpleFilling: 'blue', bounceType:'diagonal',bounceTeleport:true}},
         // {What:{ConeField:1},Mod:{x:0,y:0, radius: 3850, angle: 0, coneAngle: 3, coneRad2: 3250, simpleFilling: '#306', bounceType:'diagonal',bounceTeleport:true}},
         {Random:{X: 0, Y: 0, Radius: 100}, What:{
            // A:5, U:5, S:5, I:10,  M:5, N:5, J:5, T:5, E:10, C:5, G:5, R:5, H:5,

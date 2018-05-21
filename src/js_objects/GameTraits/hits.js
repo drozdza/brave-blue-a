@@ -31,8 +31,6 @@ GAMEobject.prototype.hit = function(o,q){
     if(typeof Q == 'undefined') return 1;
     if(typeof O == 'undefined') return 1;
 
-    console.log(O.T, Q.T);
-
     // if(O.dontHit){ for(var i=0; i<O.dontHit.length; ++i) if(O.dontHit[i]==Q.mapType) return 1; }
     if(Q.dontHit){ for(var i=0; i<Q.dontHit.length; ++i) if(Q.dontHit[i]==O.mapType) return 1; }
 
