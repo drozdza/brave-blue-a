@@ -547,7 +547,7 @@ BBAdata.SHIPpresetsOld['bestJumper']={
     ShowAmmoIndicator: true,
     GlueFireToEstimated: 100,
     GlueFireToLaser: 70,
-    KeysModules:{66:[6],69:[0,5],73:[3,9,10],77:[7],84:[2],81:[4],70:[8],82:[11]},
+    KeysModules:{66:[6],69:[0,5],73:[3,9,10],84:[2],81:[4],70:[8],82:[11]},
     Weapon1: 0,
     Weapon2: 8,
     MouseDown1: false,
