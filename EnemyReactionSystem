@@ -1,0 +1,132 @@
+
+Rozkazy:
+    - Lataj w przód
+    - Co jakiś czas leć w przód lub skręcaj
+    - Wylosuj punkt w okręgu i zawróć w jego stronę
+        - Jeśli wylecisz poza okrąg
+        - Podczas patrolu przemieszczamy się pomiędzy punktami
+            - Losowo
+            - Ułożone w ścieżki
+                - Kawałki ścieżek wybierane losowo
+                - Ścieżki jednostronne lub dwustronne
+
+
+
+
+
+
+
+
+- wiele tematów na grupę
+- tablice z elementami teamów
+- usuwanie elementów po teamie
+- rozkaz trzymania się środka danego elementu
+- rozkaz patrolowania
+- losowe patrolowanie kilku pathy
+- rozkazywanie całemu teamowi
+
+
+IDEAS:
+    - When some ship sees you, it runs to the base. It is succedd then base spawn (or somewhere else on the map) big chunk of heavy enemies.
+    - Adding squads to maps
+    - Following ships can avoid bullets and bombs
+    - add GroupName
+    - Make << go around squadMaster or attack what squadMaster attacks
+    - Small ships run from bigger ones (like big T)
+    - Ships try to avoid some Regions, or try to get out of them as fast as possible
+    - Ships may not inform others about dmg from regions
+    - Rozkaz - nie strzelać w czarnej dupie (pole grawitacyjne)
+    - SpaceSnakes!
+
+SQUADY:
+  Squad ma swojego szefa
+   - Szef nie wykonuje rozkazów squadu
+  Rozkaz squadu:
+    - Formacja
+      - Mamy różne typy formacji, typy statków mają konkretne podstawowe typy formacji.
+        - Zmienianie typów formacji w zależności od sytuacji?
+      - Niektóre formacje mają miejsca przeznaczone dla konkretnych typów statków, np. dla K albo F
+      - Szef formacji wylicza porządane miejsca dla każdego członka formacji
+      - Członkowie formacji próbują dogonić swoje miejsce, albo są na nie  przesuwani
+    - Orbitowanie wokół punktu (?)
+      - wyliczamy sobie jakąś stałą siłę skrętu
+      - próbujemy dolecieć do punktu XY
+      - jeśli wypadniemy poza obszar orbity +20%, wracamy do pola gwałtownie i orbitujemy dalej
+      ? A może lepiej wyznaczać jakiś punkt na orbicie do którego lecimy?
+    - Zdążanie do punktu (punktów)
+      - mamy listę punktów
+      - może być jednorazowa lub cykliczna
+      - jeśli dolecimy na X do jakiegoś punktu, wyznaczmay sobie następny
+    - Wracanie do punktu X jeśli jest się rannym (a wróg poza zasięgiem)
+    - Wysyłanie sygnałów o znalezieniu wroga
+    - Oczekiwanie w punkcie
+    - Okrążanie obszaru
+      - każdy ze statków ustawia się wokół jakiegoś obszaru i zwraca się do środka
+    - Rozejście się na boki wszystkich jednostek podczas ostrzału na follow (wysyła jednostka która oberwała)
+
+
+    - Szukanie wroga wokół punktu X na obszarze Y
+      - Patrzymy na ilość statków biorących udział w zadaniu
+      - każdy ze statków leci pod innym kontem w daną stronę.
+
+
+  - Strzelane seriami.
+    Np. mamy kilka M, i strzelają one na przemian po kilka (na 2 salwy, na 3 salwy) a nie chaotycznie.
+
+
+  Squad po stracie szefa może:
+    - rozwiązać się
+    - wybrać nowego szefa
+
+
+  Rozkazy?
+
+
+
+  STATEK MA:
+    - tryby szybkości: zero, wolno, normalnie, szybko
+    - Poziom czujności
+    - Tryb brawurowości
+
+    - Refleks/Wypatrywanie (co ile tyknięć statek wypatruje)
+    - Średnicę koła 100% wypatrywania
+    - Średnicę i rozwartość strefy dalekiego wypatrywania.
+
+
+  ZACHOWANIA
+    - zachowania są typowe dla jakiegoś typu statku
+
+    NP:
+       - [Przy oberwaniu] Sprawdza czy nie jest za mocno uszkodzona i czy nie zawrócić. Do miejsca zbiórki [!].
+       - [Raz na X tick][To robimy cały czas] Sprawdza czy nie ma wroga w pobliżu (statki moją podwójną strefę kontroli?
+       - Rajd na wroga, próba dogonienia go i strzelania do niego.
+       - Skręcanie. Wróg decyduje czy skręcić w prawo czy w lewo i o ile.
+       - Poruszanie się do najbliższej rannej jednostki która znajduje się z sasięgu.
+       - Jeśli wróg jest z zasięgu, próbujemy ukryć za jakąś inną jednostką.
+       - Uciekanie od Gracza.
+       - Uciekanie od Gracza poprzez skręcanie w losowych momentach.
+       - Brawurowość podnosi się jeśli statek trafi gracza, lub gdy zobaczy gracza który jest mocno ranny.
+
+       - Jeśli gracz leci bardzo wolno, orbitujemy wokół niego.
+
+  ROZKAZY
+
+    NP:
+      - Patrol. Wróg przemieszcza się do najbliższego punktu patrolowego, jeśli do niego dotrze, wyznacza sobie następny.
+
+      - Orbitowanie wokół punktu
+
+
+  STANY ALARMU:
+    [1]- Wyłączony
+    [2]- Nie poruszający się (refleks wolniejszy)
+    [3]- Nie zaalarmowany
+    [4]- Już widział wroga / dostał od kogoś informacje o wrogu
+
+    - Słyszał wybuchy, widział wraki
+
+
+    - Ścigający wroga
+
+    - Trzymający się na uboczu - brak amunicji lub ładowanie
+    - Uszkodzony - uciekający przed wrogiem
