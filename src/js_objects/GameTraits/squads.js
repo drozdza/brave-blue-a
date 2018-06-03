@@ -94,18 +94,8 @@ GAMEobject.prototype.setSquadMember = function(O, i, life){
         oS.lifeM = OSS.lifeM;
         this.bindWithSquad(O, i, Sid);
     }
-    if(OSS.type == 'RoundField'){
-        var Sid = this.putObj('RoundField', 1, iX, iY);
-        this.putObj_changeLists(this.O[Sid], {Omoving:1, Oregion: 1});
-        this.bindWithSquad(O, i, Sid);
-    }
-    if(OSS.type == 'ConeField'){
-        var Sid = this.putObj('ConeField', 1, iX, iY);
-        this.putObj_changeLists(this.O[Sid], {Omoving:1, Oregion: 1});
-        this.bindWithSquad(O, i, Sid);
-    }
-    if(OSS.type == 'SquareField'){
-        var Sid = this.putObj('SquareField', 1, iX, iY);
+    if(OSS.type == 'Field'){
+        var Sid = this.putObj(OSS.objName, 1, iX, iY);
         this.putObj_changeLists(this.O[Sid], {Omoving:1, Oregion: 1});
         this.bindWithSquad(O, i, Sid);
     }
@@ -236,9 +226,6 @@ GAMEobject.prototype.squad_AlarmMaster = function(o,type,action){
             this.O[Oid][k] = Action.change[k];
 
     } else if(type=='explodeMaster'){
-        console.log('Di!');
-        console.log(M);
-        console.log(M.onDie);
         this.explodeBomb(Mi,M.onDie);
         this.removeObj(o);
 

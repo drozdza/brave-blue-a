@@ -9,6 +9,8 @@ BBAdata.ObjectData.routePoint={
     radius: 20,
 };
 
+// STANDARD OBJECTS
+
 BBAdata.ObjectData.destruction_field={
     M: 'region',
     TT: 'dust',
@@ -106,165 +108,7 @@ BBAdata.ObjectData.bullet_bomb={
     Manouver: 'goStraight',
     Flags:{},
 };
-BBAdata.ObjectData.Mine={
-    M: 'comp',
-    lists:{Ocomp:1,Omoving:1},
-    mapType: 'EM',
-    view:{
-        Letter: 'R',
-        LetterSize: 10,
-        Color: '#ff0',
-        Angle: 0,
-    },
-    speed:0,
-    angle:0,
-    radius:6,
-    dec:0,
-    ammo:0,
-    toDo:[{T:'produceSquad'}],
-    doingTime:-1,
 
-    lifeM: 1,
-
-    explodePreset: 'NailedMine2',
-
-    squadActions:{
-        enemyClose: {squadMember:0, change:{simpleFilling: 'rgba(255,0,0,0.2)'}},
-        enemyFar:   {squadMember:0, change:{simpleFilling: 'transparent'}},
-    },
-    squadScheme: [{
-        type: 'RoundField',
-        radius: 0,
-        angle: 0,
-        Oid: -1,
-        placementT:'directPlaces',
-        onDisbandRemove:1,
-        Mod: {
-            simpleFilling: 'transparent',
-            radius: 80,
-            mapType: 'PF',
-            stateIn: {explodeMaster:1},
-        },
-    },{
-        type: 'RoundField',
-        radius: 0,
-        angle: 0,
-        Oid: -1,
-        placementT:'directPlaces',
-        onDisbandRemove:1,
-        Mod: {
-            viewOff: true,
-            radius: 200,
-            mapType: 'PF',
-            stateIn: {informMaster:'enemyClose'},
-            stateOut: {informMaster:'enemyFar'},
-        },
-    }],
-
-    Flags:{}
-};
-BBAdata.ObjectData.MineMod_mediumCircle={
-    squadScheme: [{
-        type: 'RoundField',
-        radius: 0,
-        angle: 0,
-        Oid: -1,
-        placementT:'directPlaces',
-        onDisbandRemove:1,
-        Mod: {
-            simpleFilling: 'transparent',
-            mapType: 'PF',
-            radius: 50,
-            stateIn: {explodeMaster:1},
-        },
-    },{
-        type: 'RoundField',
-        radius: 0,
-        angle: 0,
-        Oid: -1,
-        placementT:'directPlaces',
-        onDisbandRemove:1,
-        Mod: {
-            viewOff: true,
-            radius: 150,
-            mapType: 'PF',
-            stateIn: {informMaster:'enemyClose'},
-            stateOut: {informMaster:'enemyFar'},
-        },
-    }],
-};
-BBAdata.ObjectData.MineMod_smallCircle={
-    squadScheme: [{
-        type: 'RoundField',
-        radius: 0,
-        angle: 0,
-        Oid: -1,
-        placementT:'directPlaces',
-        onDisbandRemove:1,
-        Mod: {
-            simpleFilling: 'transparent',
-            radius: 35,
-            mapType: 'PF',
-            stateIn: {explodeMaster:1},
-        },
-    },{
-        type: 'RoundField',
-        radius: 0,
-        angle: 0,
-        Oid: -1,
-        placementT:'directPlaces',
-        onDisbandRemove:1,
-        Mod: {
-            viewOff: true,
-            radius: 130,
-            mapType: 'PF',
-            stateIn: {informMaster:'enemyClose'},
-            stateOut: {informMaster:'enemyFar'},
-        },
-    }],
-};
-BBAdata.ObjectData.MineMod_Cone={
-    squadScheme: [{
-        type: 'ConeField',
-        radius: 0,
-        angle: 0,
-        Oid: -1,
-        placementT:'directPlaces',
-        onDisbandRemove:1,
-        Mod: {
-            simpleFilling: 'transparent',
-            radius: 210,
-            coneRad2: 0,
-            coneAngle: 20,
-            mapType: 'PF',
-            stateIn: {explodeMaster:1},
-        },
-    },{
-        type: 'ConeField',
-        radius: -100,
-        angle: 0,
-        Oid: -1,
-        placementT:'directPlaces',
-        onDisbandRemove:1,
-        Mod: {
-            viewOff: true,
-            radius: 380,
-            coneRad2: 60,
-            coneAngle: 20,
-            mapType: 'PF',
-            stateIn: {informMaster:'enemyClose'},
-            stateOut: {informMaster:'enemyFar'},
-        },
-    }],
-};
-BBAdata.ObjectData.MineMod_hedgehog={
-    view:{
-        Letter: 'A',
-        LetterSize: 10,
-        Color: '#f00',
-        Angle: 0,
-    },
-};
 
 BBAdata.ObjectMods.aliveUnit={
     lifeM: 1,
@@ -331,55 +175,6 @@ BBAdata.ObjectData.Gstar={
     Flags:{},
     mapType:'A',
 };
-BBAdata.ObjectData.RoundField={
-    view:{
-        circleColor:[255,255,255,0.2],
-        onBackground: 1,
-    },
-
-    M: 'region',
-    lists:{Oregion:1},
-    mapType: 'F',
-    TT: 'dust',
-
-    radius: 50,
-    undestructible: 1,
-};
-BBAdata.ObjectData.SquareField={
-    view:{
-        color: 'red',
-        onBackground: 1,
-    },
-
-    M: 'region',
-    lists:{Oregion:1},
-    mapType: 'F',
-    TT: 'dust',
-
-    radius: 50,
-    squareAngle: 0,
-    squareLen: 50,
-    squareWidth: 15,
-    undestructible: 1,
-};
-BBAdata.ObjectData.ConeField={
-    view:{
-        color: 'red',
-        onBackground: 1,
-    },
-
-    M: 'region',
-    lists:{Oregion:1},
-    mapType: 'F',
-    TT: 'dust',
-
-    radius: 50,
-    coneAngle: 180,
-    coneRad2: 50,
-    angle: 0,
-    undestructible: 1,
-    Flags:{},
-};
 BBAdata.ObjectData.EndPortal={
     view:{
         onBackground: 1,
@@ -417,6 +212,444 @@ BBAdata.ObjectData.shieldBlob={
     lifeM: 3,
     radius: 21,
 };
+
+// MINES
+
+BBAdata.ObjectData.Mine={
+    M: 'comp',
+    lists:{Ocomp:1,Omoving:1},
+    mapType: 'EM',
+    view:{
+        Letter: 'R',
+        LetterSize: 10,
+        Color: '#ff0',
+        Angle: 0,
+    },
+    speed:0,
+    angle:0,
+    radius:6,
+    dec:0,
+    ammo:0,
+    toDo:[{T:'produceSquad'}],
+    doingTime:-1,
+
+    lifeM: 1,
+
+    explodePreset: 'NailedMine2',
+
+    squadActions:{
+        enemyClose: {squadMember:0, change:{simpleFilling: 'rgba(255,0,0,0.2)'}},
+        enemyFar:   {squadMember:0, change:{simpleFilling: 'transparent'}},
+    },
+    squadScheme: [{
+        type: 'Field',
+        objName: 'RoundField',
+        radius: 0,
+        angle: 0,
+        Oid: -1,
+        placementT:'directPlaces',
+        onDisbandRemove:1,
+        Mod: {
+            simpleFilling: 'transparent',
+            radius: 80,
+            mapType: 'PF',
+            stateIn: {explodeMaster:1},
+        },
+    },{
+        type: 'Field',
+        objName: 'RoundField',
+        radius: 0,
+        angle: 0,
+        Oid: -1,
+        placementT:'directPlaces',
+        onDisbandRemove:1,
+        Mod: {
+            viewOff: true,
+            radius: 200,
+            mapType: 'PF',
+            stateIn: {informMaster:'enemyClose'},
+            stateOut: {informMaster:'enemyFar'},
+        },
+    }],
+
+    Flags:{}
+};
+BBAdata.ObjectData.MineMod_mediumCircle={
+    squadScheme: [{
+        type: 'Field',
+        objName: 'RoundField',
+        radius: 0,
+        angle: 0,
+        Oid: -1,
+        placementT:'directPlaces',
+        onDisbandRemove:1,
+        Mod: {
+            simpleFilling: 'transparent',
+            mapType: 'PF',
+            radius: 50,
+            stateIn: {explodeMaster:1},
+        },
+    },{
+        type: 'Field',
+        objName: 'RoundField',
+        radius: 0,
+        angle: 0,
+        Oid: -1,
+        placementT:'directPlaces',
+        onDisbandRemove:1,
+        Mod: {
+            viewOff: true,
+            radius: 150,
+            mapType: 'PF',
+            stateIn: {informMaster:'enemyClose'},
+            stateOut: {informMaster:'enemyFar'},
+        },
+    }],
+};
+BBAdata.ObjectData.MineMod_smallCircle={
+    squadScheme: [{
+        type: 'Field',
+        objName: 'RoundField',
+        radius: 0,
+        angle: 0,
+        Oid: -1,
+        placementT:'directPlaces',
+        onDisbandRemove:1,
+        Mod: {
+            simpleFilling: 'transparent',
+            radius: 35,
+            mapType: 'PF',
+            stateIn: {explodeMaster:1},
+        },
+    },{
+        type: 'Field',
+        objName: 'RoundField',
+        radius: 0,
+        angle: 0,
+        Oid: -1,
+        placementT:'directPlaces',
+        onDisbandRemove:1,
+        Mod: {
+            viewOff: true,
+            radius: 130,
+            mapType: 'PF',
+            stateIn: {informMaster:'enemyClose'},
+            stateOut: {informMaster:'enemyFar'},
+        },
+    }],
+};
+BBAdata.ObjectData.MineMod_Cone={
+    squadScheme: [{
+        type: 'Field',
+        objName: 'ConeField',
+        radius: 0,
+        angle: 0,
+        Oid: -1,
+        placementT:'directPlaces',
+        onDisbandRemove:1,
+        Mod: {
+            simpleFilling: 'transparent',
+            radius: 210,
+            coneRad2: 0,
+            coneAngle: 20,
+            mapType: 'PF',
+            stateIn: {explodeMaster:1},
+        },
+    },{
+        type: 'Field',
+        objName: 'ConeField',
+        radius: -100,
+        angle: 0,
+        Oid: -1,
+        placementT:'directPlaces',
+        onDisbandRemove:1,
+        Mod: {
+            viewOff: true,
+            radius: 380,
+            coneRad2: 60,
+            coneAngle: 20,
+            mapType: 'PF',
+            stateIn: {informMaster:'enemyClose'},
+            stateOut: {informMaster:'enemyFar'},
+        },
+    }],
+};
+BBAdata.ObjectData.MineMod_hedgehog={
+    view:{
+        Letter: 'A',
+        LetterSize: 10,
+        Color: '#f00',
+        Angle: 0,
+    },
+};
+
+
+// FIELDS
+
+BBAdata.ObjectMods.RoundField={
+    view:{
+        circleColor:[255,255,255,0.2],
+        onBackground: 1,
+    },
+
+    M: 'region',
+    lists:{Oregion:1},
+    mapType: 'F',
+    TT: 'dust',
+
+    radius: 50,
+    undestructible: 1,
+};
+BBAdata.ObjectMods.SquareField={
+    view:{
+        color: 'red',
+        onBackground: 1,
+    },
+
+    M: 'region',
+    lists:{Oregion:1},
+    mapType: 'F',
+    TT: 'dust',
+
+    radius: 50,
+    squareAngle: 0,
+    squareLen: 50,
+    squareWidth: 15,
+    undestructible: 1,
+};
+BBAdata.ObjectMods.ConeField={
+    view:{
+        color: 'red',
+        onBackground: 1,
+    },
+
+    M: 'region',
+    lists:{Oregion:1},
+    mapType: 'F',
+    TT: 'dust',
+
+    radius: 50,
+    coneAngle: 180,
+    coneRad2: 50,
+    angle: 50,
+    undestructible: 1,
+    Flags:{},
+};
+
+BBAdata.ObjectData.RoundField={
+    LoadMods:{
+        RoundField:{},
+    },
+};
+BBAdata.ObjectData.SquareField={
+    LoadMods:{
+        SquareField:{},
+    },
+};
+BBAdata.ObjectData.ConeField={
+    LoadMods:{
+        ConeField:{},
+    },
+};
+
+BBAdata.ObjectMods.DestructionField={
+    radius:200,
+    fieldAnim: 'DestructionField',
+    PeriodDMG: {Dmg:1,T:'normal'},
+    PeriodTime: 40,
+    PeriodOffset: 50,
+    ExpireTime: 300,
+    mapType: 'F',
+
+};
+BBAdata.ObjectData.RoundDestructionField={
+    LoadMods:{
+        RoundField:{},
+        DestructionField:{},
+    },
+};
+BBAdata.ObjectData.ConeDestructionField={
+    LoadMods:{
+        ConeField:{},
+        DestructionField:{},
+    },
+    mapType: 'PMF',
+};
+
+BBAdata.ObjectMods.ElectricityField={
+    radius: 160,
+    fieldAnim: 'ElectricityField',
+    OneTimeEffect: 1,
+    OneTimeOffset: 0,
+    OneTimeDMG: {Dmg:3, T:'energy'},
+    OnDamageExpire: 1,
+    ExpireTime: 60,
+    mapType: 'PF',
+};
+BBAdata.ObjectData.RoundElectricityField={
+    LoadMods:{
+        RoundField:{},
+        ElectricityField:{},
+    },
+};
+
+BBAdata.ObjectMods.HealingField={
+    radius: 160,
+    fieldAnim: 'HealingField',
+    ExpireTime: 360,
+    PeriodTime: 30,
+    PeriodOffset: 5,
+    PeriodHeal: 1,
+    mapType: 'EF',
+};
+BBAdata.ObjectData.RoundHealingField={
+    LoadMods:{
+        RoundField:{},
+        HealingField:{},
+    },
+};
+
+BBAdata.ObjectMods.PlasmaField={
+    radius: 40,
+    fieldAnim: 'PlasmaField',
+    PeriodDMG:{Dmg:1, T:'normal'},
+    PeriodTime: 1,
+    PeriodOffset: 1,
+    PeriodDelay: 130,
+    mapType: 'F',
+    dontHit:['EB','BE'],
+    fieldAnimMoving: true,
+    onDie:{Do:'explode', DMG:{Dmg:13, T:'explo'}, Dist: 210},
+};
+BBAdata.ObjectData.RoundPlasmaField={
+    LoadMods:{
+        RoundField:{},
+        PlasmaField:{},
+    },
+};
+
+BBAdata.ObjectMods.TeleField={
+    radius: 30,
+    simpleFilling: 'rgba(0,0,255,0.2)',
+    teleportOnHit: 'withAngle',
+    teleportOnHitDist: 520,
+    teleportOnHitDistPlus: 200,
+    mapType: 'F',
+    dontHit: ['E','EB','EM'],
+};
+BBAdata.ObjectData.RoundTeleField={
+    LoadMods:{
+        RoundField:{},
+        TeleField:{},
+    },
+};
+BBAdata.ObjectData.ConeTeleField={
+    LoadMods:{
+        ConeField:{},
+        TeleField:{},
+    },
+};
+BBAdata.ObjectMods.PlayerTeleField={
+    LoadMods:{
+        TeleField:{},
+    },
+    mapType:'PF',
+    dontHit:[],
+};
+BBAdata.ObjectData.RoundPlayerTeleField={
+    LoadMods:{
+        RoundField:{},
+        PlayerTeleField:{},
+    },
+};
+
+BBAdata.ObjectMods.ShellField={
+    radius: 45,
+    fieldAnim: 'ShellField',
+    bounceType: 'diagonal',
+    angle: 0,
+    mapType: 'F',
+    dontHit:['E','EM','EB'],
+};
+BBAdata.ObjectData.RoundShellField={
+    LoadMods:{
+        RoundField:{},
+        ShellField:{},
+    },
+};
+BBAdata.ObjectData.ConeShellField={
+    LoadMods:{
+        ConeField:{},
+        ShellField:{},
+    },
+    dontHit:['P','E','EM','EB'],
+};
+
+BBAdata.ObjectMods.SlowDownShellField={
+    fieldAnim: 'ShellField',
+    SlowDownTo: 2.5,
+    SlowDownBy: 11,
+    mapType: 'F',
+    dontHit: ['E','EM','EB'],
+};
+BBAdata.ObjectData.ConeSlowDownShellField={
+    LoadMods:{
+        ConeField:{},
+        SlowDownShellField:{},
+    },
+};
+
+BBAdata.ObjectMods.WindField={
+    radius: 55,
+    fieldAnim: 'WindField',
+    vectorType: 'wind',
+    vectorForce: 5,
+    mapType: 'F',
+    dontHit: ['E','EM','EB'],
+};
+BBAdata.ObjectData.RoundWindField={
+    LoadMods:{
+        RoundField:{},
+        WindField:{},
+    },
+};
+BBAdata.ObjectData.ConeWindField={
+    LoadMods:{
+        ConeField:{},
+        WindField:{},
+    },
+};
+
+BBAdata.ObjectMods.GravityField={
+    radius: 120,
+    fieldAnim: 'GravityField',
+    vectorType: 'gravity',
+    vectorForce: 9,
+    mapType: 'F',
+    dontHit: ['E','EM','EB'],
+};
+BBAdata.ObjectData.RoundGravityField={
+    LoadMods:{
+        RoundField:{},
+        GravityField:{},
+    },
+};
+
+BBAdata.ObjectData.LaserMarker={
+    LoadMods:{
+        SquareField:{},
+    },
+    radius: 0,
+    squareAngle: 20,
+    squareLen: 450,
+    squareWidth: 0.5,
+    simpleFilling: 'red',
+    dontHit:['EB','BE','E','P','EM','A','RF'],
+};
+
+
+// ENEMIES
+
 
 BBAdata.ObjectMods.enemyShip={
     M: 'comp',
@@ -723,12 +956,13 @@ BBAdata.ObjectData.edison={
     ],
 
     squadScheme: [{
-        type: 'RoundField',
+        type: 'Field',
+        objName: 'RoundElectricityField',
         radius: 0,
         angle: 0,
         Oid: -1,
-        placementT:'directPlaces',
-        Mod: {fieldAnim: 'ElectricityField', radius: 130, mapType:'PF', OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDMG:{Dmg:4,T:'energy'}, fieldAnimMoving:true}
+        placementT: 'directPlaces',
+        Mod: {radius: 130, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDMG:{Dmg:4,T:'energy'}, fieldAnimMoving:true}
     }],
 
     doingNow: 'changeManouver',
@@ -1130,12 +1364,13 @@ BBAdata.ObjectData.vitotas={
     ],
 
     squadScheme: [{
-        type: 'SquareField',
+        type: 'Field',
+        objName: 'LaserMarker',
         radius: 0,
         angle: 0,
         Oid: -1,
         placementT:'directPlaces',
-        Mod: {squareAngle: 20, squareLen: 450, squareWidth: 0.5, simpleFilling: 'red', dontHit:['EB','BE','E','P','EM','A','RF']}
+        Mod: {squareAngle: 20, squareLen: 450}
     }],
 
     doingNow: 'changeManouver',
@@ -1523,13 +1758,14 @@ BBAdata.ObjectData.zarahiash={
     ],
 
     squadScheme: [{
-        type: 'ConeField',
+        type: 'Field',
+        objName: 'ConeDestructionField',
         radius: 200,
         angle: 0,
         anglePlus: 180,
         Oid: -1,
         placementT:'directPlaces',
-        Mod: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 15, PeriodOffset: 10, dontHit:['EB','BE','E','P','EM','A'], particlesOnBoard:true, fieldAnimMoving:true}
+        Mod: {radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 15, PeriodOffset: 10, particlesOnBoard:true, fieldAnimMoving:true},
     }],
 
     doingNow: 'changeManouver',
@@ -1899,12 +2135,13 @@ BBAdata.ObjectData.nientes={
     ],
 
     squadScheme: [{
-        type: 'RoundField',
+        type: 'Field',
+        objName: 'RoundElectricityField',
         radius: 50,
         angle: 0,
         Oid: -1,
-        placementT:'directPlaces',
-        Mod: {fieldAnim: 'ElectricityField', mapType:'PF', radius: 40, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDMG:{Dmg:3,T:'energy'}, fieldAnimMoving:true}
+        placementT: 'directPlaces',
+        Mod: {radius: 40, OneTimeEffect: 1, OneTimeOffset: 3, OneTimeDMG:{Dmg:3,T:'energy'}, fieldAnimMoving:true}
     }],
 
     doingNow: 'changeManouver',
@@ -1961,13 +2198,14 @@ BBAdata.ObjectData.shieldoorz={
     ],
 
     squadScheme: [{
-        type: 'ConeField',
+        type: 'Field',
+        objName: 'ConeShellField',
         radius: 0,
         angle: 0,
         anglePlus: 0,
         Oid: -1,
         placementT:'directPlaces',
-        Mod: {fieldAnim: 'ShellField', radius: 65, angle: 180, coneAngle: 90, coneRad2: 0, bounceType:'diagonal', fieldAnimMoving:true, mapType: 'F', dontHit:['P','E','EM','EB']}
+        Mod: {radius: 65, angle: 180, coneAngle: 90, coneRad2: 0, bounceType:'diagonal', fieldAnimMoving:true}
     }],
 
     doingNow: 'changeManouver',
@@ -2070,16 +2308,6 @@ BBAdata.ObjectData.slimensen={
         {t:'rose', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 7, gunSpeed: 20, lastShot: 100, AtOnce: 60, RoseAngle: 6, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
 
     ],
-
-    squadScheme: [{
-        type: 'ConeField',
-        radius: 200,
-        angle: 0,
-        anglePlus: 180,
-        Oid: -1,
-        placementT:'directPlaces',
-        Mod: {fieldAnim: 'DestructionField', radius: 185, angle: 0, coneAngle: 18, coneRad2: 10, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 15, PeriodOffset: 10, dontHit:['EB','BE','E','P','EM','A'], particlesOnBoard:true, fieldAnimMoving:true}
-    }],
 
     doingNow: 'changeManouver',
     doingTime: -1,
@@ -2416,12 +2644,13 @@ BBAdata.ObjectData.doomderos={
     ],
 
     squadScheme: [{
-        type: 'RoundField',
+        type: 'Field',
+        objName: 'RoundPlasmaField',
         radius: 50,
         angle: 0,
         Oid: -1,
-        placementT:'directPlaces',
-        Mod: {fieldAnim: 'PlasmaField', radius: 40, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 1, PeriodOffset: 3, PeriodDelay: 130, dontHit:['EB','BE'], fieldAnimMoving:true, onDie:{Do:'explode', DMG:{Dmg:13,T:'explo'}, Dist: 210}}
+        placementT: 'directPlaces',
+        Mod: {radius: 40, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 1, PeriodOffset: 3, PeriodDelay: 130, fieldAnimMoving:true, onDie:{Do:'explode', DMG:{Dmg:13, T:'explo'}, Dist: 210}}
     }],
 
     doingNow: 'changeManouver',
@@ -2539,12 +2768,13 @@ BBAdata.ObjectData.urser={
     ],
 
     squadScheme: [{
-        type: 'ConeField',
+        type: 'Field',
+        objName: 'ConeDestructionField',
         radius: 0,
         angle: 0,
         Oid: -1,
         placementT:'directPlaces',
-        Mod: {fieldAnim: 'DestructionField', radius: 180, angle: 0, coneAngle: 50, coneRad2: 24, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 7, PeriodOffset: 7, particlesOnBoard:true, fieldAnimMoving:true, mapType: 'PMF', TT:'dust'}
+        Mod: {radius: 180, angle: 0, coneAngle: 50, coneRad2: 24, PeriodDMG:{Dmg:1,T:'normal'}, PeriodTime: 7, PeriodOffset: 7, particlesOnBoard:true, fieldAnimMoving:true},
     }],
 
     doingNow: 'changeManouver',

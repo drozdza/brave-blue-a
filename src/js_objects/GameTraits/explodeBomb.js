@@ -82,10 +82,8 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
 
         }
     }
-    else if(explodeObj.explodeType=='RoundField' || explodeObj.explodeType=='ConeField'){
-
-        L = this.putObj(explodeObj.explodeType,O.S,O.x,O.y);
-
+    else if(explodeObj.explodeType=='Field'){
+        L = this.putObj(explodeObj.objName,O.S,O.x,O.y);
 
         this.cloneDataToObj(L,explodeObj,['radius', 'coneAngle', 'coneRad2',
             'PeriodTime', 'PeriodOffset', 'PeriodHeal',
@@ -108,7 +106,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
 
         this.O[ L ].DieTime = this.tick- -explodeObj.ExpireTime;
 
-        if(explodeObj.explodeType=='ConeField')
+        if(explodeObj.putAlong)
             this.O[ L ].angle = O.angle;
 
         if(explodeObj.simpleFilling){

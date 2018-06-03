@@ -553,7 +553,6 @@ BBAdata.SHIPpresetsOld['bestJumper']={
     MouseDown1: false,
     MouseDown2: false,
     Weapons:[
-        // {T:'bomb',    gunS:0,GunSpeed: 5,  Use:{Bomb:1}, Speed: 10, Dec: 1, explodePreset:'SmallWindField'},
         {T:'single',  gunS:0,GunSpeed: 3,  Use:{Ammo:1}, Speed: 18, Dec: 90, DMG:{Dmg:11,T:'normal'},},
         {T:'double',  gunS:0,GunSpeed: 1,  Use:{Ammo:2}, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
         {T:'rose',    gunS:0,GunSpeed: 4,  Use:{Ammo:5}, AtOnce: 9, RoseAngle: 3, Speed: 15, Dec: 30, DMG:{Dmg:1,T:'normal'},},
