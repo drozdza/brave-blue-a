@@ -299,7 +299,7 @@ GAMEobject.prototype.removeObj = function(o){
     if(this.O[o].TT == 'enemy' && !this.O[o].onDieDelete){
         this.Odead[ o ]={T:this.O[o].T,x:this.O[o].x,y:this.O[o].y};
         CanvasManager.CBM.addObjectToBackground(this.O[o]);
-    }else{
+    }else if(this.O[o].TT!='bgStars'){
         if(this.O[o].view && this.O[o].view.onBackground)
             CanvasManager.CBM.deleteObjectFromBackground(this.O[o]);
     }
