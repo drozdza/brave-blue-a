@@ -56,8 +56,15 @@ GAMEobject.prototype.initObject = function(O){
         delete(O.lifeTo);
     }
 
+    if (typeof O.mapCollide == 'undefined')
+        O.mapCollide = cloneObj(BBAdata.collisionMatrix[ O.mapType ]);
+
     if(O.shipVariables){
         this.putObj_shipVariables(O);
+    }
+
+    if(typeof O.simpleFilling != 'undefined'){
+        O.TT = 'simpleFilling';
     }
 
     CanvasManager.requestCanvas( O );
@@ -69,6 +76,10 @@ GAMEobject.prototype.initObject = function(O){
 
     if(O.explodePreset || O.exploAddTo || O.onHitDieExpire){
         this.cloneExplosionData(O, O);
+    }
+
+    if(typeof O.fieldAnim != 'undefined'){
+        this.setRegionAnimation(O, O.fieldAnim);
     }
 
     if(typeof O.lists == 'undefined') console.log(O.T+' nie ma list!');
@@ -115,14 +126,12 @@ GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,DMG){
 
     if(Side==3){
         O.mapType = 'B';
-        O.mapCollide = ['P','M','E','ME','A','R'];
     }else if(Side==2){
-        O.mapType = 'B';
-        O.mapCollide = ['E','ME','A','R'];
+        O.mapType = 'PB';
     }else{
-        O.mapType = 'BE';
-        O.mapCollide = ['P','M','R'];
+        O.mapType = 'EB';
     }
+    O.mapCollide = cloneObj(BBAdata.collisionBullets[ O.mapType ]);
 
     var o = this.Olen++;
     this.Obullet[ o ] = Side;
@@ -281,6 +290,7 @@ GAMEobject.prototype.removeObj = function(o){
                 delete S.Members[o];
         }
     }
+
     if(this.O[o].TT == 'bgStars') this.removeFromXY(this.O[o],true);
 
     if(this.O[o].TT == 'anim' || this.O[o].TT == 'dirAnim')
@@ -289,6 +299,9 @@ GAMEobject.prototype.removeObj = function(o){
     if(this.O[o].TT == 'enemy' && !this.O[o].onDieDelete){
         this.Odead[ o ]={T:this.O[o].T,x:this.O[o].x,y:this.O[o].y};
         CanvasManager.CBM.addObjectToBackground(this.O[o]);
+    }else if(this.O[o].TT!='bgStars'){
+        if(this.O[o].view && this.O[o].view.onBackground)
+            CanvasManager.CBM.deleteObjectFromBackground(this.O[o]);
     }
 
 

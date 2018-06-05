@@ -375,7 +375,7 @@ BBAdata.MAPS.BigOnes={
     Place:[
         {Random:{X: 0, Y: 0, Radius: 2200}, What:{Star:120, D:10, M:10, N:10, J:10, W:5, T:10, E:10, G:10, R:10, B:10, K:10, F:10, Q:5,X:5,TT:10,Tu:5}},
         {CircleOf:{X:0, Y:-3000, Radius: 120, Angle: 0, AnglePlus: 22.5}, What:{Star:16}},
-        {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
+        {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['EB','E','BE']}},
     ],
 };
 BBAdata.MAPS.HardCore={
@@ -403,7 +403,7 @@ BBAdata.MAPS.HardCore={
         {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarL:40,StarM:30,Star:40,StarS:40,iD:10,Wi:10}},
         {What:{Gstar:1},Mod:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}},
         {CircleOf:{X:0, Y:-3000, Radius: 120, Angle: 0, AnglePlus: 22.5}, What:{Star:16}},
-        {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
+        {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['EB','E','BE']}},
     ]
 };
 BBAdata.MAPS.HardCoreDev={
@@ -416,22 +416,29 @@ BBAdata.MAPS.HardCoreDev={
         {T:'Add',C:{'E:thunderton':{max:0,D:'killMax'}}},
         {T:'Add',C:{'E:patiarch':{max:0,D:'killMax'}}},
     ],
-    Ship:{Start:{X: 2400, Y: 0, A:90}},
+    Ship:{Start:{X: 0, Y: 0, A:90}},
     Place:[
-        {What:{ConeField:1},Mod:{x:0,y:0, radius: 3800, angle: 180, coneAngle: 179, coneRad2: 3300, simpleFilling: '#060606', bounceType:'diagonal',bounceTeleport:true}},
-        {What:{ConeField:1},Mod:{x:0,y:0, radius: 3850, angle: 0, coneAngle: 3, coneRad2: 3250, simpleFilling: '#306', bounceType:'diagonal',bounceTeleport:true}},
-        {Random:{X: 0, Y: 0, Radius: 2200}, What:{
-//            A:5, U:5, S:5, I:10,  M:5, N:5, J:5, T:5, E:10, C:5, G:5, R:5, H:5,
-            B:50, D:10,
-//            K:10, L:10, F:10, W:5,
-//            Q:5, X:6, Z:5, PI:5, WP:5, Ni:10,
-//            SH:10, TT:10, CD:5, HH:5, UU:5, Tu:8, Ii:5, HS:5, HS:8,
-//            Y:2, Yi:2, Yl:2, Yb:2,
+        {What:{ConeField:1},Mod:{x:-200,y:-200, radius: 700, angle: 90, coneAngle: 10, coneRad2: 0, simpleFilling: 'orange', bounceType:'diagonal',bounceTeleport:true}},
+        {What:{ConeField:1},Mod:{x:1200,y:600, radius: 700, angle: 90, coneAngle: 10, coneRad2: 0, simpleFilling: 'yellow', bounceType:'diagonal',bounceTeleport:true}},
+        {What:{ConeField:1},Mod:{x:-200,y:1200, radius: 700, angle: 180, coneAngle: 10, coneRad2: 0, simpleFilling: 'green', bounceType:'diagonal',bounceTeleport:true}},
+        {What:{ConeField:1},Mod:{x:-1200,y:200, radius: 700, angle: 270, coneAngle: 10, coneRad2: 0, simpleFilling: 'red', bounceType:'diagonal',bounceTeleport:true}},
+        {What:{ConeField:1},Mod:{x:1200,y:1200, radius: 700, angle: 0, coneAngle: 10, coneRad2: 0, simpleFilling: 'blue', bounceType:'diagonal',bounceTeleport:true}},
+        // {What:{ConeField:1},Mod:{x:0,y:0, radius: 3850, angle: 0, coneAngle: 3, coneRad2: 3250, simpleFilling: '#306', bounceType:'diagonal',bounceTeleport:true}},
+        {Random:{X: 0, Y: 0, Radius: 100}, What:{
+           // A:5, U:5, S:5, I:10,  M:5, N:5, J:5, T:5, E:10, C:5, G:5, R:5, H:5,
+            // B:10,
+            // D:10,
+           // K:10, L:10, F:10,
+            // Wi:20, //W:10,
+           // Q:5, X:6, Z:5, PI:5, WP:5, Ni:10,
+           // SH:10, TT:10, CD:5, HH:5, UU:5, Tu:8, Ii:5, HS:5, HS:8,
+          Yi:1, // Y:2, Yi:2, Yl:2, Yb:2,
         }},
 //        {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarL:40,StarM:30,Star:40,StarS:40,iD:10,Wi:10}},
-        {What:{Gstar:1},Mod:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}},
-        {CircleOf:{X:0, Y:-3000, Radius: 120, Angle: 0, AnglePlus: 22.5}, What:{Star:16}},
-        {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
+        // {What:{Gstar:1},Mod:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}},
+        // {CircleOf:{X:0, Y:0, Radius: 560, Angle: 0, AnglePlus: 15}, What:{StarL:24}},
+        // {CircleOf:{X:0, Y:0, Radius: 500, Angle: 7.5, AnglePlus: 15}, What:{StarL:24}},
+        // {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['EB','E','BE']}},
     ]
 };
 

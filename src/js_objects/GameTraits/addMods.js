@@ -105,10 +105,7 @@ GAMEobject.prototype.addMod = function(O, MODnameORobject){
     }
 
     if(typeof MOD.fieldAnim != 'undefined')
-        this.setRegionAnimation(O, MOD.fieldAnim);
-
-    if(typeof MOD.simpleFilling != 'undefined')
-        O.TT='simpleFilling';
+        O.fieldAnim = MOD.fieldAnim;
 
     if(typeof MOD.squareAngle != 'undefined'){
         O.squareCorners = this.countSquareCorners(O.x,O.y,O.squareAngle,O.squareLen,O.squareWidth);

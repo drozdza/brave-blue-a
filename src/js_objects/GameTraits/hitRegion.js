@@ -176,7 +176,7 @@ GAMEobject.prototype.regionAngleChange_fieldCone = function(Q,O){
     //  return O;
 }
 GAMEobject.prototype.regionAngleChange_fieldSquare = function(Q,O){
-    var A1,A2,M,N,Mar = ['A','B','C','D','A'];
+    var A1,A2,M,N,Mar = ['A','EB','C','D','A'];
     var Radi = Math.PI/180;
 
     for(var i=0; i<4; ++i){

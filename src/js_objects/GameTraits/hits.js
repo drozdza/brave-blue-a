@@ -15,37 +15,41 @@ GAMEobject.prototype.checkHits = function(o){
 
 GAMEobject.prototype.checkShipHits = function(){
     var F,O = this.O[0];
-    var Found = this.getCollidingWithCircle(O.x,O.y,O.radius,['A','ME','R']);
+    var Found = this.getCollidingWithCircle(O.x,O.y,O.radius,['A','EM','F']);
     for(F in Found){
         this.hit(0,F);
     }
 }
 
 GAMEobject.prototype.hit = function(o,q){
+    ++this.hitStats.hit;
     if(o==q) return 1;
-    if(o==0){ o=q; q=0;}
+    // if(o==0){ o=q; q=0;}
     var O = this.O[o];
     var Q = this.O[q];
 
     if(typeof Q == 'undefined') return 1;
     if(typeof O == 'undefined') return 1;
 
-    if(O.dontHit){ for(var i=0; i<O.dontHit.length; ++i) if(O.dontHit[i]==Q.mapType) return 1; }
+    // if(O.dontHit){ for(var i=0; i<O.dontHit.length; ++i) if(O.dontHit[i]==Q.mapType) return 1; }
     if(Q.dontHit){ for(var i=0; i<Q.dontHit.length; ++i) if(Q.dontHit[i]==O.mapType) return 1; }
 
-    if(typeof O.SlowDownTo !='undefined'){ this.regionSpeedChange(O,Q); return 1; }
+    // if(typeof O.SlowDownTo !='undefined'){ this.regionSpeedChange(O,Q); return 1; }
     if(typeof Q.SlowDownTo !='undefined'){ this.regionSpeedChange(Q,O); return 1; }
 
-    if(O.bounceType){    this.regionAngleChange(O,Q); return 1; }
+    // if(O.bounceType){    this.regionAngleChange(O,Q); return 1; }
     if(Q.bounceType){    this.regionAngleChange(Q,O); return 1; }
 
-    if(O.stateIn){       this.regionStateIn(o,q); return 1; }
-    if(Q.stateIn){       this.regionStateIn(q,o); return 1; }
+    // SHIP INTERACTIONS:
+    if(o==0 && Q.stateIn){
+        this.regionStateIn(q,o); return 1;
+    }
 
-    if(O.vectorType){    this.regionVectorChange(O,Q); return 1; }
+
+    // if(O.vectorType){    this.regionVectorChange(O,Q); return 1; }
     if(Q.vectorType){    this.regionVectorChange(Q,O); return 1; }
 
-    if(O.teleportOnHit){ this.region_teleportOnHit(O,q); return 1; }
+    // if(O.teleportOnHit){ this.region_teleportOnHit(O,q); return 1; }
     if(Q.teleportOnHit){ this.region_teleportOnHit(Q,o); return 1; }
 
     if(O.T=='healing_missile' && O.FollowWho == q){
@@ -60,16 +64,14 @@ GAMEobject.prototype.hit = function(o,q){
         return 1;
     }
 
-    if(O.SlowDown && Q.T=='ship'){
-        if(Q.speed > O.SlowDown) Q.speed = O.SlowDown;
-        if(this.specialMove != -1 && Q.SpecialMoves)
-            if(Q.SpecialMoves[ this.specialMove ].T=='changePosition'){
+    if(Q.SlowDown && O.T=='ship'){
+        if(O.speed > Q.SlowDown) O.speed = Q.SlowDown;
+        if(this.specialMove != -1 && O.SpecialMoves)
+            if(O.SpecialMoves[ this.specialMove ].T=='changePosition'){
                 this.specialMoveT = -1;
                 this.specialMove = -1;
             }
     }
-
-    if(O.onHit && O.onHit.Do=='explode' && Q.S!=O.S && Q.M!='region'){    this.explodeBomb(o,O.onHit);    return true; }
 
     if(O.PeriodTime)    this.makePeriodEffect(o,q);
     if(Q.PeriodTime)    this.makePeriodEffect(q,o);
@@ -77,27 +79,43 @@ GAMEobject.prototype.hit = function(o,q){
     if(O.OneTimeEffect)    this.makeOneTimeEffect(o,q);
     if(Q.OneTimeEffect)    this.makeOneTimeEffect(q,o);
 
-    if(O.T=='missile' || O.T=='bullet'){
-        if(O.S==Q.S) return 1;
+    // ATTAKS:
+    if (['PF','PMF','EF','EMF','F'].indexOf(Q.mapType) === -1) {
+        if(O.onHit && O.onHit.Do=='explode'){
+            this.explodeBomb(o,O.onHit);
+            return true;
+        }
+        if(Q.onHit && Q.onHit.Do=='explode'){
+            this.explodeBomb(q,Q.onHit);
+            return true;
+        }
 
-        if(Q.T=='ship'){
-            this.makeDMG(q,O.DMG,o);
-            this.shipFunc_showHealth();
-        }
-        if(Q.TT=='enemy' || Q.mapType=='A' || Q.T=='missile' || Q.T=='bullet_bomb' || Q.T=='shieldBlob')
-            this.makeDMG(q,O.DMG,o);
-        if(Q.T=='Mine'){
-            this.explodeBomb(q,Q.onDie);
-            this.removeObj(o);
-        }
-        if(Q.T=='healing_missile' || Q.T=='energy_field_missile')
-            this.removeObj(q);
+        if(O.T == 'bullet') this.makeDMG(q,O.DMG,o);
+
+        if(O.T == 'missile') this.makeDMG(q,O.DMG,o);
+        if(Q.T == 'missile') this.makeDMG(o,Q.DMG,q);
+
     }
+    // if(O.T=='missile' || O.T=='bullet'){
+    //     if(O.S==Q.S) return 1;
+    //
+    //     if(Q.T=='ship'){
+    //         this.makeDMG(q,O.DMG,o);
+    //         this.shipFunc_showHealth();
+    //     }
+    //     if(Q.TT=='enemy' || Q.mapType=='A' || Q.T=='missile' || Q.T=='bullet_bomb' || Q.T=='shieldBlob')
+    //         this.makeDMG(q,O.DMG,o);
+    //     if(Q.T=='Mine'){
+    //         this.explodeBomb(q,Q.onDie);
+    //         this.removeObj(o);
+    //     }
+    //     if(Q.T=='healing_missile' || Q.T=='energy_field_missile')
+    //         this.removeObj(q);
+    // }
 }
 GAMEobject.prototype.makePeriodEffect = function(o,q){
     var O = this.O[o];
     var Q = this.O[q];
-    // console.log(O.T, Q.T);
 
     if(O.PeriodDelay)
         if(O.PeriodDelay- -O.bornTime > this.tick) return 1;
@@ -172,6 +190,8 @@ GAMEobject.prototype.makeOneTimeEffect = function(o,q){
 GAMEobject.prototype.makeDMG = function(o,DMG,q){
     if(typeof this.O[o] == 'undefined') return 1;
     var O = this.O[o];
+
+    // console.log('makeDMG(',O.T,')');
 
     var AnimHits, DMGval = DMG.Dmg;
 

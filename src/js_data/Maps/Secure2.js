@@ -23,6 +23,6 @@ BBAdata.MAPS.Secure2 = {
         {Random:{X: 0, Y: 0, Radius: 2200}, What: {Q:4}, Mod:['orhenesSecure3']},
         {Random:{X: 0, Y: 0, Radius: 2200}, What: {Q:4}, Mod:['orhenesSecure4']},
         {CircleOf:{X:0, Y:-3000, Radius: 120, Angle: 0, AnglePlus: 22.5}, What:{Star:16}},
-        {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['B','E','BE']}},
+        {What:{RoundField:1},Mod:{x:0,y: -3000, radius: 50, fieldAnim: 'HealingField', PeriodTime: 50, PeriodOffset: 5, PeriodHeal: 1, dontHit:['EB','E','BE']}},
     ],
 };

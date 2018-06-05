@@ -182,7 +182,7 @@ function showObjInTable(obj,lvls,lvl){
     lvl = lvl || 0;
     if(lvl > 7) return '';
     var html='';
-    var rows = 0;
+    var rows = 1;
 
     for(var i in obj){
         if(typeof lvls[lvl] != 'undefined' && typeof lvls[lvl][i] != 'undefined' && lvls[lvl][i]=='noshow')

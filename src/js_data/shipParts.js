@@ -20,7 +20,6 @@ BBAdata.SHIPempty={
         },
     },
     mapType: 'P',
-    mapCollide: ['A','ME'],
     periodDMG: {},
     Flags: {},
 

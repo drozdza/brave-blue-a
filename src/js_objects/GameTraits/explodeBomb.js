@@ -82,23 +82,31 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
 
         }
     }
-    else if(explodeObj.explodeType=='RoundField' || explodeObj.explodeType=='ConeField'){
-
-        L = this.putObj(explodeObj.explodeType,O.S,O.x,O.y);
+    else if(explodeObj.explodeType=='Field'){
+        L = this.putObj(explodeObj.objName,O.S,O.x,O.y);
 
         this.cloneDataToObj(L,explodeObj,['radius', 'coneAngle', 'coneRad2',
-            'PeriodTime', 'PeriodOffset','PeriodHeal',
+            'PeriodTime', 'PeriodOffset', 'PeriodHeal',
             'OneTimeEffect', 'OneTimeOffset', 'OnDamageExpire',
             'bounceForce', 'bounceType',
             'teleportOnHit', 'teleportOnHitDist', 'teleportOnHitDistPlus',
             'simpleFilling', 'fieldAnim',
             'vectorType', 'vectorForce',
-            'SlowDownTo', 'SlowDownBy',
-        ],['OneTimeDMG','PeriodDMG','dontHit','TeleportMovement']);
+            'SlowDownTo', 'SlowDownBy', 'mapType',
+        ],['OneTimeDMG', 'PeriodDMG', 'dontHit', 'TeleportMovement']);
+
+        if (O.S==2) {
+            switch (this.O[L].mapType){
+                case 'PF':  this.O[L].mapType = 'EF';  break;
+                case 'EF':  this.O[L].mapType = 'PF';  break;
+                case 'PMF': this.O[L].mapType = 'EMF'; break;
+                case 'EMF': this.O[L].mapType = 'PMF'; break;
+            }
+        }
 
         this.O[ L ].DieTime = this.tick- -explodeObj.ExpireTime;
 
-        if(explodeObj.explodeType=='ConeField')
+        if(explodeObj.putAlong)
             this.O[ L ].angle = O.angle;
 
         if(explodeObj.simpleFilling){
@@ -159,7 +167,7 @@ GAMEobject.prototype.explodeBomb = function(o,explodeObj){
         this.O[L].PeriodDMG = cloneObj(explodeObj.DMG);
         this.O[L].PeriodTime = 10;
         this.O[L].dontHurtOwnMissile = true;
-        this.O[L].dontHit=['B','BE'];
+        this.O[L].dontHit=['EB','BE'];
         this.O[L].undestructible=1;
         this.O[L].fiewOff=true;
         this.putObj_animation('explosion_'+explodeObj.Dist, O.x, O.y);

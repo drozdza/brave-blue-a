@@ -1,7 +1,7 @@
 function CanvasBackgroundManagerObject(){
 
     this.Tiles = {1:{}};
-    this.TileSize = 300;
+    this.TileSize = 400;
     this.TileOffset = 0;
     this.BGscale = {1:1};
     this.BGqueue = [1];
@@ -109,6 +109,14 @@ function CanvasBackgroundManagerObject(){
                         }
 
                         CH.drawImage(T.canvasId,uX,uY);
+
+                        if(BBAdata.GET.DEBUG >= 3) {
+                            CH.strokeStyle = '#00ff00';
+                            CH.fillStyle = 'green';
+                            CH.font = '15px Arial';
+                            CH.strokeRect(uX, uY, this.TileSize, this.TileSize);
+                            CH.fillText('['+x+'_'+y+']', uX- -20, uY- -20);
+                        }
                     }
         }
     }

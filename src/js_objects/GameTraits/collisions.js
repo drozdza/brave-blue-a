@@ -2,8 +2,6 @@
 GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
     var X1,Y1,X2,Y2,xi,yi,ux,uy,ur,x,y, X,Y, tabS={};
 
-    // if(O.coneRad2) console.log('=================================================');
-
     if(typeof O.squareCorners !='undefined'){
         X1 = O.squareCorners.E.x1;
         Y1 = O.squareCorners.E.y1;
@@ -29,7 +27,7 @@ GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
     var U = [[0,0],[0,1],[1,1],[1,0]];
 
 
-    if(O.radius*3 > M){
+    if(O.radius > 3*M){
         for(x=xi; x<=X; ++x){
             for(y=yi; y<=Y; ++y){
                 var toRemove = true;
@@ -52,8 +50,6 @@ GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
                 for(var u in U){
                     ux = (x- -U[u][0])*M - ox;
                     uy = (y- -U[u][1])*M - oy;
-                    if(x==1 && y==-2)
-                        console.log(ux,uy,O.coneRad2);
                     if(ux*ux + uy*uy > O.coneRad2*O.coneRad2){
                         toRemove = false;
                         break;
@@ -64,6 +60,20 @@ GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
         }
     }
     if(O.coneAngle && O.radius*2 > M){
+        var tabOK = {};
+        var iRad = 0;
+        while (true) {
+            var X3 = O.x- -iRad*Math.sin( (-O.angle- -180)/180*Math.PI );
+            var Y3 = O.y- -iRad*Math.cos( (-O.angle- -180)/180*Math.PI );
+            xt = parseInt(X3/M); if(X3<0) xt-=1;
+            yt = parseInt(Y3/M); if(Y3<0) yt-=1;
+            tabOK[xt+'_'+yt] = 1;
+
+            iRad-=-M;
+            if (iRad == O.radius- -M) break;
+            if (iRad > O.radius) iRad = O.radius;
+        }
+
         var r1 = (O.angle - O.coneAngle- -360)%360;
         var r2 = (O.angle- -O.coneAngle- -360)%360;
         for(x=xi; x<=X; ++x){
@@ -73,23 +83,21 @@ GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
                     ux = (x- -U[u][0])*M - ox;
                     uy = (y- -U[u][1])*M - oy;
                     ur = (-Math.atan2(ux,uy)*180/Math.PI- -540)%360;
-                    // console.log(r1, ur, r2);
                     if(r2 > r1 && (ur >= r1 && ur <= r2)){
-                        // console.log('du');
                         toRemove = false;
                         break;
                     }
                     if(r2 < r1 && (ur >= r1 || ur <= r2)){
-                        // console.log('ku');
                         toRemove = false;
                         break;
                     }
                 }
-                if(toRemove) delete(tabS[x+'_'+y]);
+                if(toRemove && typeof tabOK[x+'_'+y] == 'undefined')
+                    delete(tabS[x+'_'+y]);
+
             }
         }
     }
-
 
     return tabS;
 }
@@ -97,6 +105,8 @@ GAMEobject.prototype.findTabTiles = function(O, ox, oy, M){
 GAMEobject.prototype.putOnXY = function(O, ox, oy){
     if(!O.mapType) return false;
     var s,oldS={},newS={};
+
+    // if(O.mapType != 'E' && O.mapType !='P') console.log(O.mapType);
 
     if(typeof oy!='undefined'){
         oldS = this.findTabTiles(O, ox, oy, this.MapTileSize);
@@ -146,6 +156,8 @@ GAMEobject.prototype.getCollidingWithCircle = function(x,y,radius,collisionTab){
     var M = this.MapTileSize;
     var xi = X1;
 
+    if (typeof collisionTab == 'undefined') return [];
+    // console.log(collisionTab);
     var jestCokolwiek = false;
     for(var ColT in collisionTab)
         if(this.Omap[ collisionTab[ColT] ].elems > 0){ jestCokolwiek=true; break; }
