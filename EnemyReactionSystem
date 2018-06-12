@@ -1,23 +1,156 @@
 
-Rozkazy:
-    - Lataj w przód
-    - Co jakiś czas leć w przód lub skręcaj
-    - Wylosuj punkt w okręgu i zawróć w jego stronę
-        - Jeśli wylecisz poza okrąg
-        - Podczas patrolu przemieszczamy się pomiędzy punktami
-            - Losowo
-            - Ułożone w ścieżki
-                - Kawałki ścieżek wybierane losowo
-                - Ścieżki jednostronne lub dwustronne
+
+================================ CURRENT STATE =================================
+========================== TASKS:
+- lowerSpeedForResources: if some resouces not full, slow down
+- speedUpIfResources: if all resources full, speed up
+
+- changeSpeed: changeSpeedLvl
+
+- lowerAlarmLvl: if flag:lastSeenEnemy is old lower the alarm lvl
+- stayInRegion: M:goToXY
+
+- alarmAboutSpottedEnemy: Alarm:spotEnemyFlag
+- alarmAboutIncomingFire: Alarm:incomingFireFlag
+
+- changeManouver: M:[goStraight, turnRight, turnLeft]
+- changeManouver2: M1:goStraiht <-> M2:[turnRight, turnLeft]
+
+- avoidIncomingFire: M:[turnRight, turnLeft]
+
+- followEnemy: M:followEnemy
+- followEnemyCloaked: cloak and M:followEnemy
+
+- goAroundEnemy: M:goAroundEnemy
+- goOrbit: M:goOrbit
+
+- slowDownAndDie: slow down and do:onDie
+- slowDown: slow down and do:doAtStop
+- die: do:onDie
+- expire: do:onExpire
+- explode: do:onExplode
+
+- regionStateOut: do:regionStateOut
+
+- goStraight: M:goStraight
+
+- goToStar: search nearest star and set M:goToStar
+- followEnemyAroundStar: M:followEnemyAroundStar
+- goRandomAroundStar: M:[iddleOnStar, turnRightOnStar, turnLeftOnStar]
+
+- mergeSearch: if other enemy is ready to merge with M:mergeWith
+
+- produceSquad: go around squad array and try produce some missing squad member
+
+======================== MANOUVERS:
+# - followEntity
+# - followEnemy
+# - goAroundEnemy
+# - goOrbit
+# - goToXY
+# - turnLeft
+# - turnRight
+# - goStraight
+- decay: lose life
+- goToStar
+# - followEnemyAroundStar
+# - turnLeftOnStar
+# - turnRightOnStar
+# - iddleOnStar
+
+======================= WEAPONS:
+- getAcurateAngle: do:countFutureShoot
+
+- single: bullet
+- double: bullets
+- double2: bullets not angled
+- rose:
+- crabBullets:
+
+- missile:
+- missilesDouble:
+
+- missileX5: 5 missiles in row
+- missileCrown: up to 12 missiles at once
+
+- bomb:
+
+- laserAim:
+- laserShoot:
+
+- refilResource:
+- changeAction:
+
+- produceSquad:
+- healSquad: add life to squad member (in some advanced pattern)
+- killSquadMember:
+
+- shotShieldBlob:
+
+- dropSpaceMine:
+
+- addMaxShield:
+- shootHealingMissile:
+- shootHealingBomb:
+- shootShieldAddMissile:
+
+- healthSplit:
+- giveDamangeTransfer:
+- healSelf:
+- mergeWith:
+
+- shootSquadMember: release plasma field
+
+================================================================================
+
+
+
+Manouvers:
+	- idle
+
+	- goStraight
+	- turnLeft
+	- turnRight
+
+	- followPoint (near Entity)
+
+	- orbitAround (Entity)
+	- orbitAround2 (Entity)
+
+	- idleOnStar
+	- walkOnStarFollow (Entity)(with angle: [0, 180])
+	- walkOnStarLeft
+	- walkOnStarRight
+
+
+StrangeWeapons:
+	- getAcurateAngle
+	- laserAim
+	- healSelf?
+	- mergeWith
+	- changeAction
+# Rozkazy:
+#     - Lataj w przód
+#     - Co jakiś czas leć w przód lub skręcaj
+#     - Wylosuj punkt w okręgu i zawróć w jego stronę
+#         - Jeśli wylecisz poza okrąg
+#         - Podczas patrolu przemieszczamy się pomiędzy punktami
+#             - Losowo
+#             - Ułożone w ścieżki
+#                 - Kawałki ścieżek wybierane losowo
+#                 - Ścieżki jednostronne lub dwustronne
+#
+
+
+============= Organizacja:
+- Squady: czy ktoś może być memberem więcej niż jednego squadu?
+- Tribes: wrogowie mogą współpracowąć ze wszystkimi wrogami albo tylko tymi ze swojego (lub innego konkretnego) plemienia
 
 
 
 
 
-
-
-
-- wiele tematów na grupę
+- wiele teamtów na grupę
 - tablice z elementami teamów
 - usuwanie elementów po teamie
 - rozkaz trzymania się środka danego elementu
