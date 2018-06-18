@@ -13,6 +13,14 @@
     <canvas id="thereheis" width="600" height="600"></canvas>
     <!-- <canvas id="kariakis" width="600" height="600"></canvas> -->
 <script>
+
+COLORS = ['0,0,0','255,255,0','255,165,0'];
+iPoints = 50;
+COLORS = ['0,0,0','40,0,0','20,10,10'];
+iPoints = 100;
+
+Points = {};
+
 function vCanvas(canvasId){
     this.canvasId = canvasId;
     this.C = document.getElementById(this.canvasId).getContext('2d');
@@ -20,7 +28,7 @@ function vCanvas(canvasId){
     this.H = $(window).height();
     $('#'+this.canvasId).attr({width: this.W, height: this.H});
     this.clear = function(){
-        this.C.fillStyle = 'black';
+        this.C.fillStyle = 'rgb('+COLORS[0]+')';
         this.C.fillRect(0,0,this.W,this.H);
     }
 }
@@ -28,8 +36,6 @@ function vCanvas(canvasId){
 C = new vCanvas('thereheis');
 // D = new vCanvas('kariakis');
 
-iPoints = 50;
-Points = {};
 for (var p = 0; p < iPoints; ++p) {
     Points[p] = {
         p: p,
@@ -108,7 +114,7 @@ function frame(){
         }
     }
 
-    C.C.fillStyle = 'orange';
+    C.C.fillStyle = 'rgb('+COLORS[2]+')';
     for (var p in Points) {
         var P = Points[p];
         C.C.beginPath();
@@ -132,9 +138,9 @@ function frame(){
             }
 
             if (iStart < 30) {
-                C.C.fillStyle = "rgba(255, 165, 0, "+(iStart/30)+")";
+                C.C.fillStyle = 'rgba('+COLORS[2]+', '+(iStart/30)+')';
             }else{
-                C.C.fillStyle = "orange";
+                C.C.fillStyle = 'rgb('+COLORS[2]+')';
             }
 
             var iX = P.x-R.x;
@@ -166,7 +172,7 @@ function frame(){
         C.C.fill();
     }
 
-    C.C.fillStyle = 'yellow';
+    C.C.fillStyle = 'rgb('+COLORS[1]+')';
     for (var p in Points) {
         var P = Points[p];
         C.C.beginPath();
