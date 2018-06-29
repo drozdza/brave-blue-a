@@ -44,12 +44,12 @@ BBAdata.ObjectMods.startWithShield={
         },
     }],
 };
-BBAdata.ObjectMods.colorGold={      view:{Color: 'gold'}, addTo:['enemyShip'], dontAddTo:['durishka'], };
-BBAdata.ObjectMods.darkGreenColor={ view:{Color: '#070'}, addTo:['enemyShip'], dontAddTo:['durishka'], };
-BBAdata.ObjectMods.greenColor={     view:{Color: '#0C0'}, addTo:['enemyShip'], dontAddTo:['durishka'], };
-BBAdata.ObjectMods.orangeColor={    view:{Color: '#FC0'}, addTo:['enemyShip'], dontAddTo:['durishka'], };
-BBAdata.ObjectMods.violetColor={    view:{Color: '#408'}, addTo:['enemyShip'], dontAddTo:['durishka'], };
-BBAdata.ObjectMods.whiteColor={     view:{Color: 'white'}, addTo:['enemyShip'], dontAddTo:['durishka'], };
+BBAdata.ObjectMods.colorGold={      view:{Color: 'gold'}, addTo:['enemyShip2'], dontAddTo:['durishka'], };
+BBAdata.ObjectMods.darkGreenColor={ view:{Color: '#070'}, addTo:['enemyShip2'], dontAddTo:['durishka'], };
+BBAdata.ObjectMods.greenColor={     view:{Color: '#0C0'}, addTo:['enemyShip2'], dontAddTo:['durishka'], };
+BBAdata.ObjectMods.orangeColor={    view:{Color: '#FC0'}, addTo:['enemyShip2'], dontAddTo:['durishka'], };
+BBAdata.ObjectMods.violetColor={    view:{Color: '#408'}, addTo:['enemyShip2'], dontAddTo:['durishka'], };
+BBAdata.ObjectMods.whiteColor={     view:{Color: 'white'}, addTo:['enemyShip2'], dontAddTo:['durishka'], };
 
 BBAdata.ObjectMods.allAvoid={
     addTo:['carras','hajaher','cloaker','dregos','hiacynt','zarahiash','vitotas','slimensen','slimensen1','slimensen2','slimensen3','slimensen4'],
