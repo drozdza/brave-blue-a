@@ -1,5 +1,63 @@
 
 
+
+
+Fight:
+[TryAttack]
+[BeBrave]
+[AttackInGroup]
+- Go Solo
+- Go in Group
+- Go Surround Enemy
+- Synchronize Attacks
+- Make Squad
+- Hide in Group
+- Manouver If Hitted
+- Alert about beeing Hit
+- Monouver If Someone Hitted
+- Flee
+
+Flee from Fight:
+- Seek Resources
+- Seek Safe Region
+- Seek Healing
+- Alarm Around
+- Go Alarm Center
+
+
+Patrol:
+- Random Change Manouver (straight, left, right)
+- Stay in Region
+- Go Between Points
+
+Stay&Support:
+- Shot only
+- Give Health, Shields, Resources
+
+
+
+Flags:
+- Ever Seen Enemy
+- Last Seen Enemy (seconds)
+- Know About Enemy
+- Resources Ends
+- Resources Low
+- Weapon Ends
+- Last Weapon Shot
+- Weapon Loading
+
+
+
+
+
+
+
+
+
+
+
+
+
 ================================ CURRENT STATE =================================
 ========================== TASKS:
 - lowerSpeedForResources: if some resouces not full, slow down

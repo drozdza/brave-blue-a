@@ -1,4 +1,4 @@
-if(BBAdata.GET.MAPSMODE)
+if(BBAdata.GET.MAPSMODE == 1)
 BBAdata.MAPS.Secure3 = {
     BoardMods:['sitOnMap','allAvoid','colorGold'],
     WinningConds:[

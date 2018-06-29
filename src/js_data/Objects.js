@@ -679,6 +679,37 @@ BBAdata.ObjectMods.enemyShip={
     speedLvl: 2,
     spotLvl: 2,
 };
+BBAdata.ObjectMods.enemyShip2={
+    M: 'comp',
+    lists:{Enemies:1,Othink:1,Omoving:1},
+    TT: 'enemy',
+    mapType: 'E',
+    lastSpeedT: 0,
+    doSquad: -1,   //??
+    dec: 50,       //??
+    ammo: -50,     //??
+    radius: 15,
+    Flags:{
+        spotEnemyFlag: false,
+        gotHitFlag: false,
+        heardExplosionFlag: false,
+        newOrderFlag: false,
+        awareAboutEnemy: false,
+        lastSeenEnemy: -1
+    },
+
+    Res:{},
+
+    Manouver: 'goStraight',
+
+    ThinkNow:'',
+    ThinkTick: 0,
+    ThinkState: 'patroling',
+    Thinks: {},
+
+    speedLvl: 2,
+    spotLvl: 2,
+};
 BBAdata.ObjectMods.fighterEnemy={
 
 };
@@ -733,25 +764,37 @@ BBAdata.ObjectMods.viewLetterBig={
 
 BBAdata.ObjectData.carras={
     LoadMods:{
-        enemyShip:{},
+        enemyShip2:{},
         viewLetterSmall:{view:{Letter: 'A', LetterSize: 16}},
     },
-
 
     lifeM: 5,
     radius: 15,
 
     weapon:[{t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5}],
 
-    doingNow: 'changeManouver',
     Manouver: 'goStraight',
-    toDo: [
-        {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
-        {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, gotoAlarm: 4, goToSpotLvl: 2},
-        {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3 },
-        {N:18,T:'changeManouver2', maxAlarm: 4, minAlarm: 3, straightMin: 20, straightPlus: 80, turnMin: 10, turnPlus: 80  },
-        {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
-    ],
+
+    ThinkNow: 'changeManouver',
+    ThinkTick: 0,
+    ThinkState: 'patroling',
+    Thinks: {
+        followEnemy:{S:{attacking:1},},
+        lookAround:{S:{patroling:1},},
+        changeManouver:{S:{patroling:1}, D:[
+            {M:'goStraight', Time:80, TimePlus:40, notTwice:1},
+            {M:'turnLeft', Time:20, TimePlus:50, maxTurn:180},
+        ]},
+    },
+
+    // doingNow: 'changeManouver',
+    // toDo: [
+    //     {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
+    //     {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, gotoAlarm: 4, goToSpotLvl: 2},
+    //     {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3 },
+    //     {N:18,T:'changeManouver2', maxAlarm: 4, minAlarm: 3, straightMin: 20, straightPlus: 80, turnMin: 10, turnPlus: 80  },
+    //     {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+    // ],
 
     speedArr:[0,
         {S: {shipVar:'speed',Add:-2}, T:0.7},

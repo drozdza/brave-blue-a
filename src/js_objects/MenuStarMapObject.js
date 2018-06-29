@@ -173,6 +173,11 @@ function MenuStarMapObject(){
         this.prepareMapGroups();
 
         var noMapY = -50;
+        var vMapX = -400;
+        if(BBAdata.GET.MAPSMODE == 2){
+            noMapY = 0;
+            vMapX = 0;
+        }
 
         for(var m in BBAdata.MAPS){
             var M = BBAdata.MAPS[m];
@@ -197,7 +202,7 @@ function MenuStarMapObject(){
 
             }else{
                 this.StarMap[m]={
-                    x: -400,
+                    x: vMapX,
                     y: noMapY*30,
                     t: 'simple',
                     name: m,

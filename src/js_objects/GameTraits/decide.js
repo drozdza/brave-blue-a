@@ -1,4 +1,281 @@
 
+GAMEobject.prototype.oThink = function(o){
+    var O = this.O[o];
+
+
+    for(var iThink in O.Thinks){
+        var Think = O.Thinks[iThink];
+        // =============== Clasify:
+        if (Think.S && typeof Think.S[O.ThinkState] == 'undefined') continue;
+        if (Think.skipChance && Math.random()*100 > Think.skipChance) continue;
+
+        // =============== Do:
+        switch(iThink){
+            case 'changeManouver':{
+                var i = 0;
+                for (var d in Think.D)
+                    if (!(Think.D[d].notTwice && O.Manouver == Think.D[d].M))
+                        ++i;
+
+                var ri = parseInt(Math.random()*i);
+                if(Think.D[ri].notTwice && O.Manouver == Think.D[ri].M) ++ri;
+                var D = Think.D[ri];
+                O.Manouver = D.M;
+                var time = D.Time;
+                if(D.TimePlus) time -=- parseInt(Math.random()*D.TimePlus);
+                if(D.maxTurn){
+                    var maxTurnTime = parseInt(D.maxTurn/O.speedT);
+                    if(time > maxTurnTime) time = maxTurnTime;
+                }
+                O.ThinkTick = this.tick- -time;
+
+                console.log(O.Manouver, time);
+            } break;
+        }
+
+        if (!Think.continueThinks) break;
+    }
+}
+
+GAMEobject.prototype.oManouver = function(O){
+    switch(O.Manouver){
+        case 'followEntity':{
+            if(typeof this.O[O.FollowWho] == 'undefined' || this.O[O.FollowWho].life <= 0){
+                O.Manouver = 'goStraight';
+                O.lastSpeedT = 0;
+            }
+            if(typeof this.O[O.FollowWho] !='undefined'){
+                var wiX = O.x-this.O[O.FollowWho].x;
+                var wiY = O.y-this.O[O.FollowWho].y;
+            }
+            if(typeof wiX!='undefined'){
+                var Angle = parseInt(- (Math.atan2(wiX,wiY)*180/Math.PI)- -360)%360;
+                var Tyk = (O.angle-Angle- -360)%360;
+                var Ei = 180 - Math.abs( Tyk - 180);
+                var speedT = O.speedT;
+                O.Tyk = Tyk;
+                if(Ei < speedT) speedT = Ei;
+                if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
+                if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
+            }
+        }break;
+        case 'followEnemy':{
+            var Tyk = (O.angle-PlayerAngle- -360)%360;
+            var Ei = 180 - Math.abs( Tyk - 180);
+            var speedT = O.speedT;
+            O.Tyk = Tyk;
+            if(Ei < speedT) speedT = Ei;
+            if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
+            if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
+        }break;
+        case 'goAroundEnemy':{
+            var Tyk = (O.angle-PlayerAngle- -360)%360;
+            var Ei = 180 - Math.abs(Tyk - 180);
+            if(PlayerDist < 150) Tyk = (Tyk- -180)%360;
+            var speedT = O.speedT;
+            O.Tyk = Tyk;
+            if(Ei < speedT) speedT = Ei;
+            if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
+            if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
+        }break;
+        case 'goOrbit':{
+            var Tyk = (O.angle-PlayerAngle- -360)%360;
+            var Ei = 180 - Math.abs(Tyk - 180);
+            if(PlayerDist > 160){
+                var speedT = O.speedT;
+                O.Tyk = Tyk;
+                if(Ei < speedT) speedT = Ei;
+                if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT;  errorLog('Ax');}
+                if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; errorLog('Ay');}
+            }else if(PlayerDist < 100){
+                Tyk = (Tyk- -180)%360;
+                var speedT = O.speedT;
+                O.Tyk = Tyk;
+                if(Ei < speedT) speedT = Ei;
+                if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; errorLog('Bx');}
+                if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; errorLog('By');}
+            }else{
+                O.lastSpeedT = 0;
+                Tyk = (Tyk- -180)%360;
+                var speedT = O.speedT;
+                O.Tyk = Tyk;
+                if(Ei < speedT) speedT = Ei;
+                if(Tyk > 90 && Tyk <= 270){ O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; errorLog('Cx');}
+                if(Tyk <= 90 || Tyk > 270){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; errorLog('Cy');}
+            }
+        }break;
+        case 'goToXY':{
+            var wiX = O.x-O.goToX;
+            var wiY = O.y-O.goToY;
+            var Angle = parseInt(- (Math.atan2(wiX,wiY)*180/Math.PI)- -360)%360;
+            var Tyk = (O.angle-Angle- -360)%360;
+            var Ei = 180 - Math.abs( Tyk - 180);
+            var speedT = O.speedT;
+            if(Ei < speedT) speedT = Ei;
+            if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
+            if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
+        }break;
+        case 'turnLeft':{ // OK
+            O.angle = (O.angle- -360- -O.speedT) %360;
+            O.lastSpeedT = O.speedT;
+        }break;
+        case 'turnRight':{ // OK
+            O.angle = (O.angle- -360-O.speedT) %360;
+            O.lastSpeedT =-O.speedT;
+        }break;
+        case 'goStraight':{ // OK
+            O.lastSpeedT = 0;
+        }break;
+        case 'decay':{
+            if(O.doingTime%10 == 0){
+                if(O.life > 1){
+                    O.life--;
+                    CanvasManager.requestCanvas(O);
+                } else this.removeObj(o);
+                return true;
+            }
+        }break;
+        case 'goToStar':{
+            var dO = this.O[O.goingToStar];
+            if(typeof dO == 'undefined'){
+                O.speed = 0;
+                O.Manouver = 'goStraight';
+                return 1;
+            }
+            if(dO.life < 1){
+                O.doingTime = -1;
+                O.goingToStar = false;
+            }
+            var diX = O.x-dO.x;
+            var diY = O.y-dO.y;
+            var miDist = Math.sqrt(diX*diX- -diY*diY);
+            if(miDist <= dO.radius){
+                O.myStar = O.goingToStar;
+                O.angle = parseInt(-Math.atan2(diX,diY)*180/Math.PI- -180)%360;
+                O.Flags.noStar = false;
+                O.doingTime = -1;
+            }else{
+                O.angle = parseInt(- (Math.atan2(diX,diY)*180/Math.PI))%360;
+            }
+        }break;
+        case 'followEnemyAroundStar':{
+            if(O.myStar === false){
+                O.Flags.noStar = true;
+                O.doingTime = -1;
+            }
+            var dO = this.O[O.myStar];
+            if(typeof dO == 'undefined'){
+                O.speed = 0;
+                O.Manouver = 'goStraight';
+                return 1;
+            }
+            if(dO.life < 1){
+              O.Flags.noStar = true;
+              O.myStar = false;
+              O.doingTime = -1;
+            }
+
+            var Tyk = (O.angle-PlayerAngle- -360)%360;
+            var Ei = 180 - Math.abs( Tyk - 180);
+            var speedT = O.speedT;
+            O.Tyk = Tyk;
+            if(Ei < speedT) speedT = Ei;
+            if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
+            if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
+
+            var oldX = O.x, oldY = O.y;
+            O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
+            O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
+            this.putOnXY(O, oldX, oldY);
+        }break;
+        case 'turnLeftOnStar':{
+            if(O.myStar === false){
+                O.Flags.noStar = true;
+                O.doingTime = -1;
+            }
+            var dO = this.O[O.myStar];
+            if(typeof dO == 'undefined'){
+                O.speed = 0;
+                O.myStar = false;
+                O.Manouver = 'goStraight';
+                return 1;
+            }
+            if(dO.life < 1){
+              O.Flags.noStar = true;
+              O.doingTime = -1;
+            }
+
+            O.angle = (O.angle- -360- -O.speedT) %360;
+            var oldX = O.x, oldY = O.y;
+            O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
+            O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
+            this.putOnXY(O, oldX, oldY);
+        }break;
+        case 'turnRightOnStar':{
+            if(O.myStar === false){
+                O.Flags.noStar = true;
+                O.doingTime = -1;
+            }
+            var dO = this.O[O.myStar];
+            if(typeof dO == 'undefined'){
+                O.speed = 0;
+                O.Manouver = 'goStraight';
+                return 1;
+            }
+            if(dO.life < 1){
+              O.Flags.noStar = true;
+              O.doingTime = -1;
+            }
+
+            O.angle = (O.angle- -360-O.speedT) %360;
+            var oldX = O.x, oldY = O.y;
+            O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
+            O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
+            this.putOnXY(O, oldX, oldY);
+        }break;
+        case 'iddleOnStar':{
+            if(O.myStar === false || typeof O.myStar == 'undefined'){
+                O.Flags.noStar = true;
+                O.doingTime = -1;
+                break;
+            }
+            var dO = this.O[O.myStar];
+            if(typeof dO == 'undefined' || dO.life < 1){
+              O.Flags.noStar = true;
+              O.doingTime = -1;
+          }else{
+              var oldX = O.x, oldY = O.y;
+              O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
+              O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
+              this.putOnXY(O, oldX, oldY);
+          }
+      }break;
+    }
+
+}
+
+GAMEobject.prototype.oLook = function(o){
+
+}
+GAMEobject.prototype.oShot = function(o){
+
+}
+
+GAMEobject.prototype.changeThinkType = function(o, newThinkType){
+    var O = this.O[o];
+
+    if (typeof O.ThinkStacks[newThinkType] == 'undefifed') {
+        console.log(O.T+' ('+o+') try to get "'+newThinkType+'" think type but have no related thinks');
+    }
+    O.ThinkType = newThinkType;
+    if (typeof O.ThinkStacks[newThinkType].lookAround == 'undefined') {
+        delete this.Olook[o];
+    } else {
+        this.Olook[o];
+    }
+}
+
+
 GAMEobject.prototype.alarmAround = function(o,DistAlert,AlarmFlag){
     var uO,X,Y,Dist,O = this.O[o];
 
@@ -17,20 +294,19 @@ GAMEobject.prototype.changeSpeedLvl = function(O,speedLvl){
     O.speed = O.speedArr[ speedLvl ].S;
     O.speedT = O.speedArr[ speedLvl ].T;
 }
+// WEAPONS MAKE ACTION
 GAMEobject.prototype.makeAction = function(O, Action){
-    if(Action.doingNow) O.doingNow = Action.doingNow;
-    if(Action.doingTime) O.doingTime = Action.doingTime;
-    if(Action.doNotInterupt) O.doNotInterupt = Action.doNotInterupt;
-    if(Action.Manouver)  O.Manouver = Action.Manouver;
+    if(Action.doingNow)          O.doingNow = Action.doingNow;
+    if(Action.doingTime)         O.doingTime = Action.doingTime;
+    if(Action.doNotInterupt)     O.doNotInterupt = Action.doNotInterupt;
+    if(Action.Manouver)          O.Manouver = Action.Manouver;
     if(!isNaN(Action.gotoSpeed)) this.changeSpeedLvl(O, Action.gotoSpeed);
-    if(Action.gotoAlarm) O.alarmLvl = Action.gotoAlarm;
-    if(Action.unCloak){
-        delete O.view.Cloaked;
-        CanvasManager.requestCanvas(O);
+    if(Action.gotoAlarm)         O.alarmLvl = Action.gotoAlarm;
+    if(Action.unCloak){          delete O.view.Cloaked;
+                                 CanvasManager.requestCanvas(O);
     }
-    if(Action.changeView){
-        O.view = O[ Action.changeView ];
-        CanvasManager.requestCanvas(O);
+    if(Action.changeView){       O.view = O[ Action.changeView ];
+                                 CanvasManager.requestCanvas(O);
     }
 }
 
@@ -188,28 +464,6 @@ GAMEobject.prototype.decide = function(o){
             if(TD.T=='alarmAboutIncomingFire'){
                 this.alarmAround(o,TD.alarmRadius,'incomingFireFlag');
                 continue;
-            }
-
-            if(TD.T=='changeManouver'){
-                var maxTurnTime = parseInt(180/O.speedT);
-                switch(parseInt(Math.random()*3)){
-                    case 0: O.Manouver = 'goStraight'; O.doingTime = TD.straightMin- -parseInt(Math.random()*TD.straightPlus); break;
-                    case 1: O.Manouver = 'turnRight';  O.doingTime = TD.turnMin- -parseInt(Math.random()*TD.turnPlus); if(O.doingTime > maxTurnTime) O.doingTime = maxTurnTime; break;
-                    case 2: O.Manouver = 'turnLeft';  O.doingTime = TD.turnMin- -parseInt(Math.random()*TD.turnPlus); if(O.doingTime > maxTurnTime) O.doingTime = maxTurnTime; break;
-                }
-            }
-
-            if(TD.T=='changeManouver2'){
-                if(O.Manouver =='goStraight'){
-                    var maxTurnTime = parseInt(180/O.speedT);
-                    switch(parseInt(Math.random()*2)){
-                        case 0: O.Manouver = 'turnRight';  O.doingTime = TD.turnMin- -parseInt(Math.random()*TD.turnPlus); if(O.doingTime > maxTurnTime) O.doingTime = maxTurnTime; break;
-                        case 1: O.Manouver = 'turnLeft';  O.doingTime = TD.turnMin- -parseInt(Math.random()*TD.turnPlus); if(O.doingTime > maxTurnTime) O.doingTime = maxTurnTime; break;
-                    }
-                }else{
-                    O.Manouver = 'goStraight';
-                    O.doingTime = TD.straightMin- -parseInt(Math.random()*TD.straightPlus);
-                }
             }
 
             if(TD.T=='avoidIncomingFire'){
@@ -408,222 +662,6 @@ GAMEobject.prototype.decide = function(o){
             O.doingNow = TD.T;
             break;
         }
-    }
-
-
-    // Wykonujemy zadanie
-    switch(O.Manouver){
-        case 'followEntity':{
-            if(typeof this.O[O.FollowWho] == 'undefined' || this.O[O.FollowWho].life <= 0){
-                O.Manouver = 'goStraight';
-                O.lastSpeedT = 0;
-            }
-            if(typeof this.O[O.FollowWho] !='undefined'){
-                var wiX = O.x-this.O[O.FollowWho].x;
-                var wiY = O.y-this.O[O.FollowWho].y;
-            }
-            if(typeof wiX!='undefined'){
-                var Angle = parseInt(- (Math.atan2(wiX,wiY)*180/Math.PI)- -360)%360;
-                var Tyk = (O.angle-Angle- -360)%360;
-                var Ei = 180 - Math.abs( Tyk - 180);
-                var speedT = O.speedT;
-                O.Tyk = Tyk;
-                if(Ei < speedT) speedT = Ei;
-                if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
-                if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
-            }
-        }break;
-        case 'followEnemy':{
-            var Tyk = (O.angle-PlayerAngle- -360)%360;
-            var Ei = 180 - Math.abs( Tyk - 180);
-            var speedT = O.speedT;
-            O.Tyk = Tyk;
-            if(Ei < speedT) speedT = Ei;
-            if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
-            if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
-        }break;
-        case 'goAroundEnemy':{
-            var Tyk = (O.angle-PlayerAngle- -360)%360;
-            var Ei = 180 - Math.abs(Tyk - 180);
-            if(PlayerDist < 150) Tyk = (Tyk- -180)%360;
-            var speedT = O.speedT;
-            O.Tyk = Tyk;
-            if(Ei < speedT) speedT = Ei;
-            if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
-            if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
-        }break;
-        case 'goOrbit':{
-            var Tyk = (O.angle-PlayerAngle- -360)%360;
-            var Ei = 180 - Math.abs(Tyk - 180);
-            if(PlayerDist > 160){
-                var speedT = O.speedT;
-                O.Tyk = Tyk;
-                if(Ei < speedT) speedT = Ei;
-                if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT;  errorLog('Ax');}
-                if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; errorLog('Ay');}
-            }else if(PlayerDist < 100){
-                Tyk = (Tyk- -180)%360;
-                var speedT = O.speedT;
-                O.Tyk = Tyk;
-                if(Ei < speedT) speedT = Ei;
-                if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; errorLog('Bx');}
-                if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; errorLog('By');}
-            }else{
-                O.lastSpeedT = 0;
-                Tyk = (Tyk- -180)%360;
-                var speedT = O.speedT;
-                O.Tyk = Tyk;
-                if(Ei < speedT) speedT = Ei;
-                if(Tyk > 90 && Tyk <= 270){ O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; errorLog('Cx');}
-                if(Tyk <= 90 || Tyk > 270){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; errorLog('Cy');}
-            }
-        }break;
-        case 'goToXY':{
-            var wiX = O.x-O.goToX;
-            var wiY = O.y-O.goToY;
-            var Angle = parseInt(- (Math.atan2(wiX,wiY)*180/Math.PI)- -360)%360;
-            var Tyk = (O.angle-Angle- -360)%360;
-            var Ei = 180 - Math.abs( Tyk - 180);
-            var speedT = O.speedT;
-            if(Ei < speedT) speedT = Ei;
-            if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
-            if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
-        }break;
-        case 'turnLeft':{
-            O.angle = (O.angle- -360- -O.speedT) %360;
-            O.lastSpeedT = O.speedT;
-        }break;
-        case 'turnRight':{
-            O.angle = (O.angle- -360-O.speedT) %360;
-            O.lastSpeedT =-O.speedT;
-        }break;
-        case 'goStraight':{
-            O.lastSpeedT = 0;
-        }break;
-        case 'decay':{
-            if(O.doingTime%10 == 0){
-                if(O.life > 1){
-                    O.life--;
-                    CanvasManager.requestCanvas(O);
-                } else this.removeObj(o);
-                return true;
-            }
-        }break;
-        case 'goToStar':{
-            var dO = this.O[O.goingToStar];
-            if(typeof dO == 'undefined'){
-                O.speed = 0;
-                O.Manouver = 'goStraight';
-                return 1;
-            }
-            if(dO.life < 1){
-                O.doingTime = -1;
-                O.goingToStar = false;
-            }
-            var diX = O.x-dO.x;
-            var diY = O.y-dO.y;
-            var miDist = Math.sqrt(diX*diX- -diY*diY);
-            if(miDist <= dO.radius){
-                O.myStar = O.goingToStar;
-                O.angle = parseInt(-Math.atan2(diX,diY)*180/Math.PI- -180)%360;
-                O.Flags.noStar = false;
-                O.doingTime = -1;
-            }else{
-                O.angle = parseInt(- (Math.atan2(diX,diY)*180/Math.PI))%360;
-            }
-        }break;
-        case 'followEnemyAroundStar':{
-            if(O.myStar === false){
-                O.Flags.noStar = true;
-                O.doingTime = -1;
-            }
-            var dO = this.O[O.myStar];
-            if(typeof dO == 'undefined'){
-                O.speed = 0;
-                O.Manouver = 'goStraight';
-                return 1;
-            }
-            if(dO.life < 1){
-              O.Flags.noStar = true;
-              O.myStar = false;
-              O.doingTime = -1;
-            }
-
-            var Tyk = (O.angle-PlayerAngle- -360)%360;
-            var Ei = 180 - Math.abs( Tyk - 180);
-            var speedT = O.speedT;
-            O.Tyk = Tyk;
-            if(Ei < speedT) speedT = Ei;
-            if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
-            if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
-
-            var oldX = O.x, oldY = O.y;
-            O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
-            O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
-            this.putOnXY(O, oldX, oldY);
-        }break;
-        case 'turnLeftOnStar':{
-            if(O.myStar === false){
-                O.Flags.noStar = true;
-                O.doingTime = -1;
-            }
-            var dO = this.O[O.myStar];
-            if(typeof dO == 'undefined'){
-                O.speed = 0;
-                O.myStar = false;
-                O.Manouver = 'goStraight';
-                return 1;
-            }
-            if(dO.life < 1){
-              O.Flags.noStar = true;
-              O.doingTime = -1;
-            }
-
-            O.angle = (O.angle- -360- -O.speedT) %360;
-            var oldX = O.x, oldY = O.y;
-            O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
-            O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
-            this.putOnXY(O, oldX, oldY);
-        }break;
-        case 'turnRightOnStar':{
-            if(O.myStar === false){
-                O.Flags.noStar = true;
-                O.doingTime = -1;
-            }
-            var dO = this.O[O.myStar];
-            if(typeof dO == 'undefined'){
-                O.speed = 0;
-                O.Manouver = 'goStraight';
-                return 1;
-            }
-            if(dO.life < 1){
-              O.Flags.noStar = true;
-              O.doingTime = -1;
-            }
-
-            O.angle = (O.angle- -360-O.speedT) %360;
-            var oldX = O.x, oldY = O.y;
-            O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
-            O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
-            this.putOnXY(O, oldX, oldY);
-        }break;
-        case 'iddleOnStar':{
-            if(O.myStar === false || typeof O.myStar == 'undefined'){
-                O.Flags.noStar = true;
-                O.doingTime = -1;
-                break;
-            }
-            var dO = this.O[O.myStar];
-            if(typeof dO == 'undefined' || dO.life < 1){
-              O.Flags.noStar = true;
-              O.doingTime = -1;
-          }else{
-              var oldX = O.x, oldY = O.y;
-              O.x = dO.x- -dO.radius*Math.sin((-O.angle- -180)*Math.PI/180);
-              O.y = dO.y- -dO.radius*Math.cos((-O.angle- -180)*Math.PI/180);
-              this.putOnXY(O, oldX, oldY);
-          }
-      }break;
     }
 
     // Strzelamy

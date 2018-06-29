@@ -83,9 +83,11 @@ GAMEobject.prototype.drawObject = function(O, CH, Px,Py){
     if(BBAdata.GET.ORDERS > 1 && O.TT == 'enemy'){
         CH.save();
         CH.fillStyle = 'white';
-        CH.font = "13px Arial";
+        CH.font = "12px Arial";
         CH.textAlign = "left";
-        CH.fillText(O.alarmLvl+' '+O.doingNow, O.x-Px-O.radius, O.y-Py-O.radius-7);
+        CH.fillText(O.ThinkState, O.x-Px-O.radius, O.y-Py-O.radius-18);
+        CH.fillText(O.ThinkNow,   O.x-Px-O.radius, O.y-Py-O.radius-9);
+        CH.fillText(O.Manouver,   O.x-Px-O.radius, O.y-Py-O.radius);
         CH.restore();
     }
 }

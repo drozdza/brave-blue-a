@@ -53,7 +53,7 @@ function GetMenuObject(){
         },
         MAPSMODE:{
             get: 'mapsMode',
-            values: {Campain:false, Test:1},
+            values: {Campain:false, Test:1, Tost:2},
             default: false,
         },
         SHIPPRESET:{

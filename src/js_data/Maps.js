@@ -1,7 +1,7 @@
 BBAdata.MAPS={};
 BBAdata.MapGroups = {};
 
-if(BBAdata.GET.MAPSMODE){
+if(BBAdata.GET.MAPSMODE ==1){
 
 BBAdata.MAPS.Start='load';
 BBAdata.MAPS.U1='load';
@@ -434,7 +434,7 @@ BBAdata.MAPS.HardCoreDev={
            // SH:10, TT:10, CD:5, HH:5, UU:5, Tu:8, Ii:5, HS:5, HS:8,
           Yi:1, // Y:2, Yi:2, Yl:2, Yb:2,
         }},
-//        {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarL:40,StarM:30,Star:40,StarS:40,iD:10,Wi:10}},
+       // {RingOf:{X: 0, Y:0, Radius: 1200, RadiusPlus: 600}, What:{StarL:40,StarM:30,Star:40,StarS:40,iD:10,Wi:10}},
         // {What:{Gstar:1},Mod:{x:0,y:0,bounceType:'diagonal',bounceTeleport:true}},
         // {CircleOf:{X:0, Y:0, Radius: 560, Angle: 0, AnglePlus: 15}, What:{StarL:24}},
         // {CircleOf:{X:0, Y:0, Radius: 500, Angle: 7.5, AnglePlus: 15}, What:{StarL:24}},

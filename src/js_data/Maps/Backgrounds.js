@@ -1,4 +1,4 @@
-if(BBAdata.GET.MAPSMODE)
+if(BBAdata.GET.MAPSMODE == 1)
 BBAdata.MAPS.Backgrounds = {
     Backgrounds:{2: 0.7, 3: 0.3},
     Place:[

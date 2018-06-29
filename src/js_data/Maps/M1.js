@@ -1,4 +1,4 @@
-if(BBAdata.GET.MAPSMODE)
+if(BBAdata.GET.MAPSMODE == 1)
 BBAdata.MAPS.M1 = {
     Place:[
         {Random:{X:-400, Y:0, Radius: 50}, What:{Mine: 60},Mod:{explodePreset:'ExplosionSize1'}},

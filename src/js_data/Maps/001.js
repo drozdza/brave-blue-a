@@ -1,4 +1,4 @@
-if(BBAdata.GET.MAPSMODE)
+if(BBAdata.GET.MAPSMODE == 1)
 BBAdata.MAPS['001'] = {
     StarMap:{ x:100, y:50, mouseRadius: 70, shipRadius: 20,
         Anims:[

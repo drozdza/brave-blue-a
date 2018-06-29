@@ -1,4 +1,4 @@
-if(BBAdata.GET.MAPSMODE)
+if(BBAdata.GET.MAPSMODE == 1)
 BBAdata.MAPS.Start = {
     Place:[
         {Random:{X:0, Y:0, Radius: 600}, What:{Star: 300, K: 1}},

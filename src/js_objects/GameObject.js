@@ -12,17 +12,20 @@ function GAMEobject(){
     this.endGameShown=false;
     this.playerEndGame=false;
 
-    this.C={};                   // Counts all the statistics
+    this.C={};          // Counts all the statistics
 
-    this.Enemies={};             // Tablica Enemies
+    this.Enemies={};    // Tablica Enemies
 
-    this.O={};                   // Object's - all of them
+    this.O={};          // Object's - all of them
     this.Olen=0;
-    this.Omap={};                // map of Maps
+    this.Omap={};       // map of Maps
     this.Odead={};
 
     this.Omoving={};    // moving
-    this.Ocomp={};      // sterowane statki / missile
+    this.Ocomp={};      // sterowane statki / missile - stare
+    this.Othink={};     // sterowane statki / missile
+    this.Olook={};      // rozglądający się
+
     this.Obullet={};    // tablica kul
     this.Oanim={};      // animations
     this.Oregion={};    // regions

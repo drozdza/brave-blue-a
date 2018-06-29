@@ -65,6 +65,7 @@ GAMEobject.prototype.mapPlace_setPlaceDef = function(Setting,Place,defXY){
     var DEF = {};
          if(Place.Random)   DEF.Random   = cloneObj(Place.Random);
     else if(Place.LineOf)   DEF.LineOf   = cloneObj(Place.LineOf);
+    else if(Place.Egzact)   DEF.Egzact   = cloneObj(Place.Egzact);
     else if(Place.RingOf)   DEF.RingOf   = cloneObj(Place.RingOf);
     else if(Place.CircleOf) DEF.CircleOf = cloneObj(Place.CircleOf);
     else if(Place.Point)    DEF.Point    = cloneObj(Place.Point);
@@ -143,6 +144,7 @@ GAMEobject.prototype.mapPlace_getPosFromDEF = function(DEF, defXY, elemI){
     if(DEF.Point)    SET = DEF.Point;
     if(DEF.Random)   SET = DEF.Random;
     if(DEF.LineOf)   SET = DEF.LineOf;
+    if(DEF.Egzact)   SET = DEF.Egzact;
     if(DEF.RingOf)   SET = DEF.RingOf;
     if(DEF.CircleOf) SET = DEF.CircleOf;
 
@@ -163,6 +165,12 @@ GAMEobject.prototype.mapPlace_getPosFromDEF = function(DEF, defXY, elemI){
     if(DEF.LineOf){
         x = centerXY.x- -elemI*SET.Distance*Math.cos(centerXY.a*Radi);
         y = centerXY.y- -elemI*SET.Distance*Math.sin(centerXY.a*Radi);
+    }
+    if(DEF.Egzact){
+        // Tu można obliczyć obrót centerXY.a
+        // Można też obsłużyć DEF.Egzact[elemI].a;
+        x = centerXY.x- -DEF.Egzact[elemI].x;
+        y = centerXY.y- -DEF.Egzact[elemI].y;
     }
     if(DEF.CircleOf){
         if(SET.Max && SET.Max <= elemI) return false;

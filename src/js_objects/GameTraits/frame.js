@@ -48,6 +48,18 @@ GAMEobject.prototype.frame_decide = function(){
     for(o in this.Ocomp)
         this.decide(o);
 
+    for(o in this.Olook)
+        if(this.O[o].LookTick <= this.tick)
+            this.oLook(o);
+
+    for(o in this.Othink)
+        if(this.O[o].ThinkTick <= this.tick)
+            this.oThink(o);
+
+
+    for(o in this.Oshot)
+        this.oShot(o);
+
 
     // Animations Decide
     for(o in this.Oanim)
@@ -94,6 +106,9 @@ GAMEobject.prototype.frame_move = function(){
     for(o in this.Omoving){
         O = this.O[o];
         if(O.M=='static') continue;
+
+        if(O.Manouver) this.oManouver(O);
+
         oldX = O.x;
         oldY = O.y;
 
