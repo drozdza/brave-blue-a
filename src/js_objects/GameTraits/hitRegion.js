@@ -83,7 +83,7 @@ GAMEobject.prototype.regionAngleChange_fieldCone = function(Q,O){
     var coneAngle2 = (Q.angle- -Q.coneAngle- -720)%360;
 
     var beenOut = 'nop';
-    if(!betweenAngles(oldAngle,coneAngle1,coneAngle2)) beenOut='yes';
+    if(!isBetweenAngles(oldAngle,coneAngle1,coneAngle2)) beenOut='yes';
 
     if(beenOut=='yes'){
         var varA1 = Math.abs(oAngle - coneAngle1);
@@ -101,7 +101,7 @@ GAMEobject.prototype.regionAngleChange_fieldCone = function(Q,O){
             uY = Q.y- -Q.radius * Math.cos((-coneAngle1-180)*Radi);
             varA2 = (-Math.atan2(O.x-uX,O.y-uY)/Radi- -180)%360;
 
-            if(betweenAngles(O.angle,varA1,varA2)) hitAngle='left';
+            if(isBetweenAngles(O.angle,varA1,varA2)) hitAngle='left';
         }
         if(beenOut=='tryRight'){
             uX = Q.x- -Q.radius * Math.sin((-coneAngle2-180)*Radi);
@@ -112,7 +112,7 @@ GAMEobject.prototype.regionAngleChange_fieldCone = function(Q,O){
             uY = Q.y- -Q.coneRad2 * Math.cos((-coneAngle2-180)*Radi);
             varA2 = (-Math.atan2(O.x-uX,O.y-uY)/Radi- -180)%360;
 
-            if(betweenAngles(O.angle,varA1,varA2)) hitAngle='right';
+            if(isBetweenAngles(O.angle,varA1,varA2)) hitAngle='right';
         }
     }
 
@@ -186,7 +186,7 @@ GAMEobject.prototype.regionAngleChange_fieldSquare = function(Q,O){
         A1 = (-Math.atan2(O.x-N.x,O.y-N.y)/Radi- -180)%360;
         A2 = (-Math.atan2(O.x-M.x,O.y-M.y)/Radi- -180)%360;
 
-        if(betweenAngles(O.angle,A1,A2)){
+        if(isBetweenAngles(O.angle,A1,A2)){
             //  this.putObj_animation('hit', M.x, M.y);
             //  this.putObj_animation('hit', N.x, N.y);
             if(Q.bounceType=='straight'){

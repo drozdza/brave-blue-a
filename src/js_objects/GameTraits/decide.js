@@ -11,81 +11,78 @@ GAMEobject.prototype.oThink = function(o){
 
         // =============== Do:
         switch(iThink){
-            case 'changeManouver':{
-                var i = 0;
-                for (var d in Think.D)
-                    if (!(Think.D[d].notTwice && O.Manouver == Think.D[d].M))
-                        ++i;
-
-                var ri = parseInt(Math.random()*i);
-                if(Think.D[ri].notTwice && O.Manouver == Think.D[ri].M) ++ri;
-                var D = Think.D[ri];
-                O.Manouver = D.M;
-                var time = D.Time;
-                if(D.TimePlus) time -=- parseInt(Math.random()*D.TimePlus);
-                if(D.maxTurn){
-                    var maxTurnTime = parseInt(D.maxTurn/O.speedT);
-                    if(time > maxTurnTime) time = maxTurnTime;
-                }
-                O.ThinkTick = this.tick- -time;
-            } break;
-            case 'followRoute':{
-                var R = Think.Route;
-                var Route = this.MapSetting.Routes[R];
-                if(typeof O.routes == 'undefined') {
-                    O.routes[R][-1];
-                }
-                // O.Manouver =
-            }
+            case 'followEnemy':    this.oThink_followEnemy(O, Think); break;
+            case 'changeManouver': this.oThink_changeManouver(O, Think); break;
+            case 'followRoute':    this.oThink_followRoute(O,Think); break;
         }
 
         if (!Think.continueThinks) break;
     }
 }
 
+GAMEobject.prototype.oThink_followEnemy = function(O,Think){
+    var Radius = 100;
+    if (typeof Think.Radius != 'undefined') Radius = Think.Radius;
+    var xy = randXYinDist(Radius);
+    O.Follow = {
+        o: 0,
+        x: xy.x,
+        y: xy.y,
+    }
+    O.Manouver = 'followObject';
+    var time = 30;
+    if (Think.Time)     time = Think.Time;
+    if (Think.TimePlus) time -=- parseInt(Math.random()*Think.TimePlus);
+    O.ThinkTick = this.tick- -time;
+}
+GAMEobject.prototype.oThink_changeManouver = function(O,Think){
+    var i = 0;
+    for (var d in Think.D)
+        if (!(Think.D[d].notTwice && O.Manouver == Think.D[d].M))
+            ++i;
+
+    var ri = parseInt(Math.random()*i);
+    if(Think.D[ri].notTwice && O.Manouver == Think.D[ri].M) ++ri;
+    var D = Think.D[ri];
+    O.Manouver = D.M;
+    var time = D.Time;
+    if(D.TimePlus) time -=- parseInt(Math.random()*D.TimePlus);
+    if(D.maxTurn){
+        var maxTurnTime = parseInt(D.maxTurn/O.speedT);
+        if(time > maxTurnTime) time = maxTurnTime;
+    }
+    O.ThinkTick = this.tick- -time;
+}
+
+GAMEobject.prototype.oThink_followRoute = function(O,Think){
+    console.log('oThink_followRoute()');
+    var rName = Think.Route;
+    var Route = this.MapSetting.Routes[rName];
+    if(typeof O.routes == 'undefined') {
+        O.routes = {Stack:[-1], repeats:0, Point:false};
+    }
+    var Place = false;
+    if (typeof this.MapSetting.Place[O.routes.Point] != 'undefined') {
+        Place = this.MapSetting.Place[O.routes.Point];
+    }
+    if (Place !== false) {
+        var dist = getDistAB(O, this.O[Place]);
+        console.log(dist);
+    }
+    // var Ro = Route;
+    // for(var r in O.routes){
+    //     if ()
+    //     Ro = Ro.P[r];
+    // }
+    // O.Manouver =
+    // are we on current P?
+    // choose next P from list
+    // (go down a list)
+    // (go up a list)
+}
+// DEPRECATED
 GAMEobject.prototype.oManouver = function(O){
     switch(O.Manouver){
-        case 'turnLeft':{
-            O.angle = (O.angle- -360- -O.speedT) %360;
-            O.lastSpeedT = O.speedT;
-        }break;
-        case 'turnRight':{
-            O.angle = (O.angle- -360-O.speedT) %360;
-            O.lastSpeedT =-O.speedT;
-        }break;
-        case 'goStraight':{
-            O.lastSpeedT = 0;
-        }break;
-        // THOSE ABOVE ARE OK
-        case 'followEntity':{
-            if(typeof this.O[O.FollowWho] == 'undefined' || this.O[O.FollowWho].life <= 0){
-                O.Manouver = 'goStraight';
-                O.lastSpeedT = 0;
-            }
-            if(typeof this.O[O.FollowWho] !='undefined'){
-                var wiX = O.x-this.O[O.FollowWho].x;
-                var wiY = O.y-this.O[O.FollowWho].y;
-            }
-            if(typeof wiX!='undefined'){
-                var Angle = parseInt(- (Math.atan2(wiX,wiY)*180/Math.PI)- -360)%360;
-                var Tyk = (O.angle-Angle- -360)%360;
-                var Ei = 180 - Math.abs( Tyk - 180);
-                var speedT = O.speedT;
-                O.Tyk = Tyk;
-                if(Ei < speedT) speedT = Ei;
-                if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
-                if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
-            }
-        }break;
-        case 'followEnemy':{
-            var Tyk = (O.angle-PlayerAngle- -360)%360;
-            var Ei = 180 - Math.abs( Tyk - 180);
-            var speedT = O.speedT;
-            O.Tyk = Tyk;
-            if(Ei < speedT) speedT = Ei;
-            if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
-            if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
-        }break;
         case 'goAroundEnemy':{
             var Tyk = (O.angle-PlayerAngle- -360)%360;
             var Ei = 180 - Math.abs(Tyk - 180);
@@ -121,17 +118,6 @@ GAMEobject.prototype.oManouver = function(O){
                 if(Tyk > 90 && Tyk <= 270){ O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; errorLog('Cx');}
                 if(Tyk <= 90 || Tyk > 270){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; errorLog('Cy');}
             }
-        }break;
-        case 'goToXY':{
-            var wiX = O.x-O.goToX;
-            var wiY = O.y-O.goToY;
-            var Angle = parseInt(- (Math.atan2(wiX,wiY)*180/Math.PI)- -360)%360;
-            var Tyk = (O.angle-Angle- -360)%360;
-            var Ei = 180 - Math.abs( Tyk - 180);
-            var speedT = O.speedT;
-            if(Ei < speedT) speedT = Ei;
-            if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
-            if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
         }break;
         case 'decay':{
             if(O.doingTime%10 == 0){
@@ -260,6 +246,42 @@ GAMEobject.prototype.oManouver = function(O){
     }
 
 }
+
+GAMEobject.prototype.oManouver_turnLeft = function(O){
+    O.angle = (O.angle- -360- -O.speedT) %360;
+    O.lastSpeedT = O.speedT;
+}
+GAMEobject.prototype.oManouver_turnRight = function(O){
+    O.angle = (O.angle- -360-O.speedT) %360;
+    O.lastSpeedT =-O.speedT;
+}
+GAMEobject.prototype.oManouver_goStraight = function(O){
+    O.lastSpeedT = 0;
+}
+GAMEobject.prototype.oManouver_followObject = function(O){
+    if (typeof this.O[O.Follow.o] == 'undefined' || this.O[O.Follow.o].life <= 0){
+        O.Manouver = 'goStraight';
+        O.lastSpeedT = 0;
+        O.ThinkTick = this.tick;
+
+        return false;
+    }
+    var Q = this.O[O.Follow.o];
+    var Angle = getAngleAB(O, {x:Q.x- -O.Follow.x, y:Q.y- -O.Follow.y});
+    var AngleDiff = (O.angle-Angle- -360)%360;
+    var neededTurning = 180 - Math.abs(AngleDiff - 180);
+    var speedT = O.speedT;
+    if(neededTurning < speedT)
+        speedT = neededTurning;
+    if(AngleDiff > 180){
+        O.angle = (O.angle- -speedT- -360)%360;
+        O.lastSpeedT = speedT;
+    }else{
+        O.angle = (O.angle - speedT- -360)%360;
+        O.lastSpeedT = -speedT;
+    }
+}
+
 
 GAMEobject.prototype.oLook = function(o){
 

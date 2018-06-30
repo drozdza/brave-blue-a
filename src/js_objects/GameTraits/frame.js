@@ -107,7 +107,7 @@ GAMEobject.prototype.frame_move = function(){
         O = this.O[o];
         if(O.M=='static') continue;
 
-        if(O.Manouver) this.oManouver(O);
+        if(O.Manouver) this['oManouver_'+O.Manouver](O);
 
         oldX = O.x;
         oldY = O.y;

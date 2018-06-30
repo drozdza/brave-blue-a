@@ -775,16 +775,16 @@ BBAdata.ObjectData.carras={
 
     Manouver: 'goStraight',
 
-    ThinkNow: 'changeManouver',
+    ThinkNow: 'followRoute',
     ThinkTick: 0,
     ThinkState: 'patroling',
     Thinks: {
-        followEnemy:{S:{attacking:1},},
+        followEnemy:{S:{patroling:1}, Time: 200, TimePlus: 200, Radius: 50},
         lookAround:{S:{patroling:1}, continueThinks:1},
-        // changeManouver:{S:{patroling:1}, D:[
-        //     {M:'goStraight', Time:80, TimePlus:40, notTwice:1},
-        //     {M:'turnLeft', Time:20, TimePlus:50, maxTurn:180},
-        // ]},
+        changeManouver:{S:{patroling:1}, D:[
+            {M:'goStraight', Time:80, TimePlus:40, notTwice:1},
+            {M:'turnLeft', Time:20, TimePlus:50, maxTurn:180},
+        ]},
         followRoute:{S:{patroling:1}, Route:'R1'},
     },
 
@@ -816,6 +816,7 @@ BBAdata.ObjectData.carras={
         spotAngle2: {Const: 30, RandInt: 30}
     },
 };
+
 BBAdata.ObjectData.muerto={
     LoadMods:{
         enemyShip:{},

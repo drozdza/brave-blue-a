@@ -48,6 +48,7 @@ BBAdata.ObjectMods.colorGold={      view:{Color: 'gold'}, addTo:['enemyShip2'], 
 BBAdata.ObjectMods.darkGreenColor={ view:{Color: '#070'}, addTo:['enemyShip2'], dontAddTo:['durishka'], };
 BBAdata.ObjectMods.greenColor={     view:{Color: '#0C0'}, addTo:['enemyShip2'], dontAddTo:['durishka'], };
 BBAdata.ObjectMods.orangeColor={    view:{Color: '#FC0'}, addTo:['enemyShip2'], dontAddTo:['durishka'], };
+BBAdata.ObjectMods.orangeXColor={   view:{Color: 'orange'}, addTo:['enemyShip2'], dontAddTo:['durishka'], };
 BBAdata.ObjectMods.violetColor={    view:{Color: '#408'}, addTo:['enemyShip2'], dontAddTo:['durishka'], };
 BBAdata.ObjectMods.whiteColor={     view:{Color: 'white'}, addTo:['enemyShip2'], dontAddTo:['durishka'], };
 

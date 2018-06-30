@@ -22,10 +22,9 @@ GAMEobject.prototype.putObj_getFromType = function(Type,o){
 GAMEobject.prototype.putObj = function(Type,Side,x,y){
     var MapRadius = 1000;
     if(typeof x === "undefined"){
-        do{
-            x = Math.random()*MapRadius*2-MapRadius;
-            y = Math.random()*MapRadius*2-MapRadius;
-        }while( Math.sqrt(x*x- -y*y) > MapRadius );
+        var xy = randXYinDist(MapRadius);
+        x = xy.x;
+        y = xy.y;
     }
 
     var o = this.Olen++;

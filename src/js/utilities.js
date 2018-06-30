@@ -1,3 +1,5 @@
+
+// CLONING
 function cloneObj(obj){
     var copy;
     if (null == obj || "object" != typeof obj) return obj;
@@ -16,12 +18,7 @@ function cloneObj(obj){
         return copy;
     }
 }
-function debugLog(){
-    for(var a in arguments) console.log(arguments[a]);
-}
-function errorLog(){
-    for(var a in arguments) console.log(arguments[a]);
-}
+
 function gentleCloneObj(A,B,i){
     if(B[i] instanceof Object){
         if(typeof A[i] == 'undefined'){
@@ -39,16 +36,6 @@ function gentleCloneObj(A,B,i){
     }
 }
 
-function betweenAngles(what,angle1,angle2){
-    what = (what- -720)%360;
-    angle1 = (angle1- -720)%360;
-    angle2 = (angle2- -720)%360;
-
-    if(angle1 > angle2 && (angle1 < what || angle2 > what)) return true;
-    if(angle1 < angle2 && angle1 < what && angle2 > what)   return true;
-    return false;
-}
-
 function mergeArrays(arr1,arr2){
     if(typeof arr1 == 'undefined') arr1={};
 
@@ -61,6 +48,7 @@ function mergeArrays(arr1,arr2){
     }
     return arr1;
 }
+
 function carefullyMergeObjects(O1, O2){
     for(var o in O2){
         if(typeof O1[o] == 'undefined'){
@@ -77,56 +65,6 @@ function carefullyMergeObjects(O1, O2){
     }
 
     return O1;
-}
-
-function showAsSeconds(i){
-    var min = parseInt(i/60);
-    var sec = i - min*60;
-    var html = '';
-    if(min>0) html += min+' min ';
-    return html+sec+' sec';
-}
-
-function makeRandomHash(Length){
-    var L = Length || 10;
-    var Hash='';
-    var Chars = '0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm';
-    for(var i=0; i<L; ++i)
-        Hash+=Chars.charAt(Math.random()*62);
-    return Hash;
-}
-
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-function Energy2Speed(Energy,Weight,Multiply){
-    var W = (Weight/100)/Multiply;
-    var Speed = Math.sqrt(Energy/W);
-    return Speed;
-}
-function Speed2Energy(Speed,Weight,Multiply){
-    var W = (Weight/100)/Multiply;
-    var Energy = Speed*Speed*W;
-    return Energy;
 }
 
 function mergeObjects(A,B){
@@ -148,7 +86,50 @@ function mergeObjects(A,B){
     return A;
 }
 
+// DEBUG & STUFF
+function debugLog(){
+    for(var a in arguments) console.log(arguments[a]);
+}
+function errorLog(){
+    for(var a in arguments) console.log(arguments[a]);
+}
+function showAsSeconds(i){
+    var min = parseInt(i/60);
+    var sec = i - min*60;
+    var html = '';
+    if(min>0) html += min+' min ';
+    return html+sec+' sec';
+}
 
+function makeRandomHash(Length){
+    var L = Length || 10;
+    var Hash='';
+    var Chars = '0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm';
+    for(var i=0; i<L; ++i)
+        Hash+=Chars.charAt(Math.random()*62);
+    return Hash;
+}
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
 function showObject(obj,lvl1,lvl2,lvl3){
     var s='';
     for(var a in obj){
@@ -231,6 +212,18 @@ function ArrayShuffle(A1){
     return A2;
 }
 
+// 2D MATH
+function Energy2Speed(Energy,Weight,Multiply){
+    var W = (Weight/100)/Multiply;
+    var Speed = Math.sqrt(Energy/W);
+    return Speed;
+}
+function Speed2Energy(Speed,Weight,Multiply){
+    var W = (Weight/100)/Multiply;
+    var Energy = Speed*Speed*W;
+    return Energy;
+}
+
 function sumTwoXYA(A, B){
     var Radi = Math.PI/180;
     var XYA = {x:0, y:0, a:0};
@@ -252,4 +245,39 @@ function sumTwoXYA(A, B){
     }
 
     return XYA;
+}
+function getDistAB(A, B){
+    var x = B.x - A.x;
+    var y = B.y - A.y;
+    return Math.sqrt(x*x- -y*y);
+}
+function getAngleAB(A,B){
+    var x = A.x - B.x;
+    var y = A.y - B.y;;
+    return parseInt(- (Math.atan2(x,y)*180/Math.PI)- -360)%360;
+
+}
+
+function isDistAB(A, B, dist){
+    var x = B.x - A.x;
+    var y = B.y - A.y;
+    return (dist*dist >= x*x- -y*y);
+}
+function isBetweenAngles(what,angle1,angle2){
+    what = (what- -720)%360;
+    angle1 = (angle1- -720)%360;
+    angle2 = (angle2- -720)%360;
+
+    if(angle1 > angle2 && (angle1 < what || angle2 > what)) return true;
+    if(angle1 < angle2 && angle1 < what && angle2 > what)   return true;
+    return false;
+}
+
+function randXYinDist(dist){
+    do{
+        x = Math.random()*dist*2-dist;
+        y = Math.random()*dist*2-dist;
+    }while(x*x- -y*y > dist*dist);
+
+    return {x:x,y:y};
 }
