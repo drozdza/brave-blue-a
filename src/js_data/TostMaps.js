@@ -26,7 +26,7 @@ BBAdata.MAPS.TheNewBegining={
         {Point:{X: 330, Y:-560}, What:[{t:'routePoint', Mod:{rName:'B3'}}]},
     ],
     Routes:{
-        R1:{T:'rand',P:['C1','C3','B2']},
+        R1:{T:'any',P:['C1','C3','B2']},
         R2:{T:'inOrder',P:[
                 'A1','A2','A3',
                 {T:'oneOf',P:[

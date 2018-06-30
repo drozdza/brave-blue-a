@@ -28,9 +28,15 @@ GAMEobject.prototype.oThink = function(o){
                     if(time > maxTurnTime) time = maxTurnTime;
                 }
                 O.ThinkTick = this.tick- -time;
-
-                console.log(O.Manouver, time);
             } break;
+            case 'followRoute':{
+                var R = Think.Route;
+                var Route = this.MapSetting.Routes[R];
+                if(typeof O.routes == 'undefined') {
+                    O.routes[R][-1];
+                }
+                // O.Manouver =
+            }
         }
 
         if (!Think.continueThinks) break;
@@ -39,6 +45,18 @@ GAMEobject.prototype.oThink = function(o){
 
 GAMEobject.prototype.oManouver = function(O){
     switch(O.Manouver){
+        case 'turnLeft':{
+            O.angle = (O.angle- -360- -O.speedT) %360;
+            O.lastSpeedT = O.speedT;
+        }break;
+        case 'turnRight':{
+            O.angle = (O.angle- -360-O.speedT) %360;
+            O.lastSpeedT =-O.speedT;
+        }break;
+        case 'goStraight':{
+            O.lastSpeedT = 0;
+        }break;
+        // THOSE ABOVE ARE OK
         case 'followEntity':{
             if(typeof this.O[O.FollowWho] == 'undefined' || this.O[O.FollowWho].life <= 0){
                 O.Manouver = 'goStraight';
@@ -114,17 +132,6 @@ GAMEobject.prototype.oManouver = function(O){
             if(Ei < speedT) speedT = Ei;
             if(Tyk > 180){  O.angle = (O.angle- -speedT- -360)%360; O.lastSpeedT = speedT; }
             if(Tyk <= 180){ O.angle = (O.angle - speedT- -360)%360; O.lastSpeedT = -speedT; }
-        }break;
-        case 'turnLeft':{ // OK
-            O.angle = (O.angle- -360- -O.speedT) %360;
-            O.lastSpeedT = O.speedT;
-        }break;
-        case 'turnRight':{ // OK
-            O.angle = (O.angle- -360-O.speedT) %360;
-            O.lastSpeedT =-O.speedT;
-        }break;
-        case 'goStraight':{ // OK
-            O.lastSpeedT = 0;
         }break;
         case 'decay':{
             if(O.doingTime%10 == 0){
@@ -260,21 +267,6 @@ GAMEobject.prototype.oLook = function(o){
 GAMEobject.prototype.oShot = function(o){
 
 }
-
-GAMEobject.prototype.changeThinkType = function(o, newThinkType){
-    var O = this.O[o];
-
-    if (typeof O.ThinkStacks[newThinkType] == 'undefifed') {
-        console.log(O.T+' ('+o+') try to get "'+newThinkType+'" think type but have no related thinks');
-    }
-    O.ThinkType = newThinkType;
-    if (typeof O.ThinkStacks[newThinkType].lookAround == 'undefined') {
-        delete this.Olook[o];
-    } else {
-        this.Olook[o];
-    }
-}
-
 
 GAMEobject.prototype.alarmAround = function(o,DistAlert,AlarmFlag){
     var uO,X,Y,Dist,O = this.O[o];
