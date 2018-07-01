@@ -31,7 +31,7 @@ BBAdata.MAPS.TheNewBegining={
             'A1','A2','A3',
             {T:'rand',repeat:1, P:[
                 {T:'order',repeat:3, P:['B3','B2','B1']},
-                {T:'order',repeat:3, P:['C3','C2','C1']}
+                {T:'order',repeat:3, P:['C3','C2','C1']},
             ]}
         ]},
         R3:{T:'order',P:[
@@ -40,6 +40,7 @@ BBAdata.MAPS.TheNewBegining={
             'A2',
             {T:'randOnce',repeat:3, P:['A3','B3','C3']},
         ]},
+        R4:{T:'rand',repeat:1000, P:['A2','A3','C3']},
     },
 };
 }

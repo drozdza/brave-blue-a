@@ -707,7 +707,7 @@ BBAdata.ObjectMods.enemyShip2={
     ThinkState: 'patroling',
     Thinks: {},
 
-    speedLvl: 2,
+    speedLvl: 'normal',
     spotLvl: 2,
 };
 BBAdata.ObjectMods.fighterEnemy={
@@ -786,7 +786,7 @@ BBAdata.ObjectData.carras={
         //     {M:'goStraight', Time:80, TimePlus:40, notTwice:1},
             // {M:'turnLeft', Time:20, TimePlus:50, maxTurn:180},
         // ]},
-        followRoute:{S:{patroling:1}, Route:'R3'},
+        followRoute:{S:{patroling:1}, Route:'R2'},
     },
 
     // doingNow: 'changeManouver',
@@ -798,11 +798,11 @@ BBAdata.ObjectData.carras={
     //     {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
     // ],
 
-    speedArr:[0,
-        {S: {shipVar:'speed',Add:-2}, T:0.7},
-        {S: {shipVar:'speed'}, T:14.5},
-        {S: {shipVar:'speed',Add:3}, T:2.5}
-    ],
+    speedArr:{
+        slow:{S: {shipVar:'speed',Add:-2}, T:0.7},
+        normal:{S: {shipVar:'speed'}, T:2.5},
+        max:{S: {shipVar:'speed',Add:3}, T:2.5}
+    },
     spotTick: 8,
     spotArr: [0,
         {T:'single',Ref: 20, Rad: {shipVar:'spotRad'}},
@@ -811,7 +811,7 @@ BBAdata.ObjectData.carras={
     ],
 
     shipVariables:{
-        speed: {Const: 16, Rand: 4},
+        speed: {Const: 6.5, Rand: 1},
         spotRad: {Const: 80, RandInt: 80},
         spotRad2: {Const: 300, RandInt: 200},
         spotAngle2: {Const: 30, RandInt: 30}

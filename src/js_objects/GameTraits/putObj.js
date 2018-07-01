@@ -151,7 +151,7 @@ GAMEobject.prototype.putObj_shipVariables = function(O){
     if(typeof O.shipVariables == 'undefined') return false;
 
     for(var i in {speedArr:1,spotArr:1}){
-        for(var j=0; j<4; ++j){
+        for(var j in O[i]){
             for(var k in O[i][j]){
                 if(typeof O[i][j][k] == 'object' && typeof O[i][j][k].shipVar != 'undefined'){
                     O[i][j][k] = this.getShipVariable(O, O[i][j][k]);

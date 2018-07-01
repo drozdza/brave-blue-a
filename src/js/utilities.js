@@ -284,12 +284,15 @@ function randXYinDist(dist){
 
 
 
-function countAThroughB(A, B){
-    console.log(A,B);
-    var r = A.s*(180/A.st)/(Math.PI*2);
-    console.log(r);
+function isAAbleToGetB(A, angle, speed, speedT, B){
+    var radius = speed*(180/speedT)/(Math.PI);
+    var P = [90,-90];
+    for(var p in P){
+        var C = sumTwoXYA(
+            {x:A.x, y:A.y, a: angle},
+            {x:0, y:radius, a: P[p]},
+        );
+        if(getDistAB(B,C) < radius) return false;
+    }
+    return true;
 }
-//
-// XCA = {x:100,y:100,angle:200,s:10,st:2};
-// XCB = {x:40,y:120};
-// countAThroughB(XCA,XCB);

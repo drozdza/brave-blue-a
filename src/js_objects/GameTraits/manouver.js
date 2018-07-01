@@ -36,6 +36,13 @@ GAMEobject.prototype.oManouver_followObject = function(O){
         if (O.Follow.thinkOnBeen) {
             O.ThinkTick = this.tick;
         }
+        this.changeSpeedLvl(O, O.speedLvl);
+    }
+
+    if (!O.Follow.been && O.Follow.followAdjust && this.tick-O.Follow.followStart > 500) {
+        O.Follow.followStart = this.tick;
+        O.Manouver = 'goStraight';
+        O.ThinkTick = this.tick- -15- -parseInt(Math.random()*15);
     }
 }
 
