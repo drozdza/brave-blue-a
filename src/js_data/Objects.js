@@ -677,7 +677,7 @@ BBAdata.ObjectMods.enemyShip={
 
     alarmLvl: 2,
     speedLvl: 2,
-    spotLvl: 2,
+    lookLvl: 2,
 };
 BBAdata.ObjectMods.enemyShip2={
     M: 'comp',
@@ -708,7 +708,7 @@ BBAdata.ObjectMods.enemyShip2={
     Thinks: {},
 
     speedLvl: 'normal',
-    spotLvl: 2,
+    lookLvl: 2,
 };
 BBAdata.ObjectMods.fighterEnemy={
 
@@ -722,7 +722,7 @@ BBAdata.ObjectMods.biggerEnemy={
     ],
 
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -779,12 +779,12 @@ BBAdata.ObjectData.carras={
     ThinkTick: 0,
     ThinkState: 'patroling',
     Thinks: {
-        // followEnemy:{S:{patroling:1}, Time: 200, TimePlus: 200, Radius: 50},
-        // followEnemy:{S:{patroling:1}, Time: 200, TimePlus: 200, Radius: 50, AnglePlus:180},
-        // lookAround:{S:{patroling:1}, continueThinks:1},
+        followEnemy:{S:{runningAway:1}, Time: 200, TimePlus: 200, Radius: 50, MaxEnemyDist: 200, AnglePlus:180},
+        followEnemy:{S:{attacking:1}, Time: 200, TimePlus: 200, Radius: 50},
+        lookAround:{S:{patroling:1}, continueThinks:1},
         // changeManouver:{S:{patroling:1}, D:[
         //     {M:'goStraight', Time:80, TimePlus:40, notTwice:1},
-            // {M:'turnLeft', Time:20, TimePlus:50, maxTurn:180},
+        //     {M:'turnLeft', Time:20, TimePlus:50, maxTurn:180},
         // ]},
         followRoute:{S:{patroling:1}, Route:'R2'},
     },
@@ -799,12 +799,12 @@ BBAdata.ObjectData.carras={
     // ],
 
     speedArr:{
-        slow:{S: {shipVar:'speed',Add:-2}, T:0.7},
-        normal:{S: {shipVar:'speed'}, T:2.5},
-        max:{S: {shipVar:'speed',Add:3}, T:2.5}
+        slow:   {S: {shipVar:'speed',Add:-2}, T:0.7},
+        normal: {S: {shipVar:'speed'}, T:2.5},
+        max:    {S: {shipVar:'speed',Add:3}, T:2.5}
     },
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 20, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 20, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 20, Rad: {shipVar:'spotRad2'}}
@@ -968,7 +968,7 @@ BBAdata.ObjectData.royale={
         {S:6, T:2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -1021,7 +1021,7 @@ BBAdata.ObjectData.edison={
         {S:5, T:6}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -1071,7 +1071,7 @@ BBAdata.ObjectData.hiacynt={
         {S:10,T:2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -1132,7 +1132,7 @@ BBAdata.ObjectData.iskariot={
         {S: {shipVar:'speed',Add:4}, T:{shipVar:'speedT'}}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 20, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 20, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 20, Rad: {shipVar:'spotRad2'}}
@@ -1179,7 +1179,7 @@ BBAdata.ObjectData.tartaros={
         {S:8, T:6}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -1234,7 +1234,7 @@ BBAdata.ObjectData.belzebub={
         {S:8, T:3}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -1279,7 +1279,7 @@ BBAdata.ObjectData.koriaz={
         {S:5, T:1}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -1323,7 +1323,7 @@ BBAdata.ObjectData.fariax={
         {S:7, T:0.2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -1375,7 +1375,7 @@ BBAdata.ObjectData.dregos={
         {S: {shipVar:'speed',Add:3}, T:{shipVar:'speedT'}}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -1434,7 +1434,7 @@ BBAdata.ObjectData.vitotas={
       {S: {shipVar:'speed',Add:3}, T:{shipVar:'speedT'}}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -1485,7 +1485,7 @@ BBAdata.ObjectData.cloaker={
         {S:12, T:4}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -1534,7 +1534,7 @@ BBAdata.ObjectData.hajaher={
         {S: {shipVar:'speed',Add:3}, T:{shipVar:'speedT'}}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -1585,7 +1585,7 @@ BBAdata.ObjectData.orhenes={
         {S:1.7, T:0.4}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -1658,7 +1658,7 @@ BBAdata.ObjectData.juggernaut={
         {S:1, T:1}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -1717,7 +1717,7 @@ BBAdata.ObjectData.gargamon={
         {S:7, T:0.2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -1767,7 +1767,7 @@ BBAdata.ObjectData.xaurus={
         {S:{shipVar:'speed',Add:4},  T:{shipVar:'speedT'}}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -1829,7 +1829,7 @@ BBAdata.ObjectData.zarahiash={
         {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -1898,7 +1898,7 @@ BBAdata.ObjectData.durishka={
         {S:4, T:2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad'}}
@@ -1942,7 +1942,7 @@ BBAdata.ObjectData.pitagoras={
         {S:6, T:2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -2001,7 +2001,7 @@ BBAdata.ObjectData.patiarch={
         {S:1,   T:1}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -2049,7 +2049,7 @@ BBAdata.ObjectData.wariankiel={
         {S:5, T:2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -2094,7 +2094,7 @@ BBAdata.ObjectData.vuvis={
         {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -2145,7 +2145,7 @@ BBAdata.ObjectData.hirieshka={
         {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -2205,7 +2205,7 @@ BBAdata.ObjectData.nientes={
         {S: {shipVar:'speed',Add:6}, T:{shipVar:'speedT'}}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 20, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 20, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 20, Rad: {shipVar:'spotRad2'}}
@@ -2271,7 +2271,7 @@ BBAdata.ObjectData.shieldoorz={
         {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'single',Ref: 10, Rad: {shipVar:'spotRad'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad'}}
@@ -2317,7 +2317,7 @@ BBAdata.ObjectData.loliax={
         {S:7, T:0.2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -2372,7 +2372,7 @@ BBAdata.ObjectData.slimensen={
         {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -2427,7 +2427,7 @@ BBAdata.ObjectData.slimensen1={
         {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -2482,7 +2482,7 @@ BBAdata.ObjectData.slimensen2={
         {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -2537,7 +2537,7 @@ BBAdata.ObjectData.slimensen3={
         {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -2592,7 +2592,7 @@ BBAdata.ObjectData.slimensen4={
         {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -2655,7 +2655,7 @@ BBAdata.ObjectData.thunderton={
         {S:3, T:0.2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -2713,7 +2713,7 @@ BBAdata.ObjectData.doomderos={
         {S: {shipVar:'speed',Add:6}, T:{shipVar:'speedT'}}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 20, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 20, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 20, Rad: {shipVar:'spotRad2'}}
@@ -2779,7 +2779,7 @@ BBAdata.ObjectData.hedgehog={
         {S:4, T:2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -2838,7 +2838,7 @@ BBAdata.ObjectData.urser={
         {S:5.5, T:2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -2891,7 +2891,7 @@ BBAdata.ObjectData.talrax={
         {S:1, T:0.2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -2960,7 +2960,7 @@ BBAdata.ObjectData.iskarianz={
         {S: {shipVar:'speed',Add:4}, T:{shipVar:'speedT'}}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 20, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 20, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 20, Rad: {shipVar:'spotRad2'}}
@@ -3014,7 +3014,7 @@ BBAdata.ObjectData.prisander={
         {S:3, T:2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
@@ -3066,7 +3066,7 @@ BBAdata.ObjectData.yehes={
         {S:1,   T:0.2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single', Ref: 30, Rad: 500},
         {T:'single', Ref: 30, Rad: 500},
         {T:'single', Ref: 30, Rad: 500}
@@ -3113,7 +3113,7 @@ BBAdata.ObjectData.yehestis={
         {S:1, T:0.2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 30, Rad: 500},
         {T:'single',Ref: 30, Rad: 500},
         {T:'single',Ref: 30, Rad: 500}
@@ -3160,7 +3160,7 @@ BBAdata.ObjectData.yeheslar={
         {S:1, T:0.2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 30, Rad: 500},
         {T:'single',Ref: 30, Rad: 500},
         {T:'single',Ref: 30, Rad: 500}
@@ -3207,7 +3207,7 @@ BBAdata.ObjectData.yebuhas={
         {S:1, T:0.2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 30, Rad: 500},
         {T:'single',Ref: 30, Rad: 500},
         {T:'single',Ref: 30, Rad: 500}
@@ -3250,7 +3250,7 @@ BBAdata.ObjectData.hesiolumbus={
         {S:1,   T:0.2}
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single', Ref: 30, Rad: 500},
         {T:'single', Ref: 30, Rad: 500},
         {T:'single', Ref: 30, Rad: 500}
@@ -3296,7 +3296,7 @@ BBAdata.ObjectData.saisung={
 
     ],
     spotTick: 8,
-    spotArr: [0,
+    lookArr: [0,
         {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
         {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}

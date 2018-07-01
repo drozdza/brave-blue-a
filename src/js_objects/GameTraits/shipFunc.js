@@ -250,8 +250,8 @@ GAMEobject.prototype.showEnemySpotRegion = function(o){
     var html,O = this.O[o];
     O.showSpotRegion = true;
 
-    if(typeof O.spotLvl =='undefined') return false;
-    var ST = O.spotArr[ O.spotLvl ];
+    if(typeof O.lookLvl =='undefined') return false;
+    var ST = O.lookArr[ O.lookLvl ];
     if(ST.T=='double'){
         var X1 = ST.Rad * Math.sin((180-ST.Angle2)*(Math.PI/180));
         var Y1 = ST.Rad * Math.cos((180-ST.Angle2)*(Math.PI/180));

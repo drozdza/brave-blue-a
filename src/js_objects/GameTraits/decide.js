@@ -8,11 +8,13 @@ GAMEobject.prototype.oThink = function(o){
         // =============== Clasify:
         if (Think.S && typeof Think.S[O.ThinkState] == 'undefined') continue;
         if (Think.skipChance && Math.random()*100 > Think.skipChance) continue;
+        if (Think.MaxEnemyDist && getDistAB(this.O[0], O) > Think.MaxEnemyDist) continue;
 
         // =============== Do:
         switch(iThink){
             case 'followEnemy':    this.oThink_followEnemy(O, Think); break;
             case 'changeManouver': this.oThink_changeManouver(O, Think); break;
+            case 'lookAround':     this.oThink_lookAround(O, Think); break;
             case 'followRoute':    this.oThink_followRoute(O,Think); break;
         }
 
@@ -23,12 +25,108 @@ GAMEobject.prototype.oThink = function(o){
 GAMEobject.prototype.oThink_followEnemy = function(O,Think){
     var Radius = 100;
     if (typeof Think.Radius != 'undefined') Radius = Think.Radius;
-    this.enemy_setFollow(O, 0, Radius, 0 || Think.AnglePlus);
+    var Angle = 0;
+    if (typeof Think.AnglePlus != 'undefined') Angle = Think.AnglePlus;
+    this.enemy_setFollow(O, 0, Radius, Angle);
     var time = 30;
     if (Think.Time)     time = Think.Time;
     if (Think.TimePlus) time -=- parseInt(Math.random()*Think.TimePlus);
     O.ThinkTick = this.tick- -time;
 }
+GAMEobject.prototype.oThink_changeManouver = function(O,Think){
+    var i = 0;
+    for (var d in Think.D)
+        if (!(Think.D[d].notTwice && O.Manouver == Think.D[d].M))
+            ++i;
+
+    var ri = parseInt(Math.random()*i);
+    if(Think.D[ri].notTwice && O.Manouver == Think.D[ri].M) ++ri;
+    var D = Think.D[ri];
+    O.Manouver = D.M;
+    var time = D.Time;
+    if(D.TimePlus) time -=- parseInt(Math.random()*D.TimePlus);
+    if(D.maxTurn){
+        var maxTurnTime = parseInt(D.maxTurn/O.speedT);
+        if(time > maxTurnTime) time = maxTurnTime;
+    }
+    O.ThinkTick = this.tick- -time;
+}
+
+GAMEobject.prototype.oThink_followRoute = function(O,Think){
+    O.ThinkTick = this.tick + 30;
+    O.Manouver = 'followObject';
+    var rName = Think.Route;
+    var Route = this.MapSetting.Routes[rName];
+    if(typeof O.routes == 'undefined') {
+        O.routes = {Stack:[-1], Repeats:[0], RandOnce:[], Point:false};
+        O.Follow = {been:true};
+    }
+
+    if (O.Follow.been){
+        do {
+            var keepGoing = true;
+            var lvl = O.routes.Stack.length-1;
+            var R = Route;
+            for (var i=0; i<lvl; ++i)
+                R = R.P[ O.routes.Stack[i] ];
+
+            ++O.routes.Repeats[lvl];
+            if(R.repeat && O.routes.Repeats[lvl] > R.repeat){
+                O.routes.Stack.pop();
+                O.routes.Repeats.pop();
+                --lvl;
+                continue;
+            }
+            if (R.T=='randOnce' && O.routes.Stack[lvl] == -1) {
+                O.routes.RandOnce[lvl] = [];
+                for(var i in R.P) O.routes.RandOnce[lvl].push(i);
+                O.routes.RandOnce[lvl] = ArrayShuffle(O.routes.RandOnce[lvl]);
+            }
+            if (R.T=='randOnce') {
+                O.routes.Stack[lvl] = O.routes.RandOnce[lvl].pop();
+            }
+            if (R.T=='rand' || (R.T=='randOrder' && O.routes.Stack[lvl] == -1)) {
+                O.routes.Stack[lvl] = parseInt(Math.random()*R.P.length);
+            }
+            if (R.T=='order' || (R.T=='randOrder' && O.routes.Stack[lvl] != -1)) {
+                ++O.routes.Stack[lvl];
+                if(O.routes.Stack[lvl] >= R.P.length)
+                    O.routes.Stack[lvl] = 0;
+            }
+
+            var ilvl = O.routes.Stack[lvl];
+            if (typeof R.P[ ilvl ] == 'object') {
+                O.routes.Stack.push(-1);
+                O.routes.Repeats.push(0);
+                continue;
+            } else {
+                break;
+                keepGoing = false;
+            }
+        } while(keepGoing);
+
+        var ilvl = O.routes.Stack[lvl];
+        var R = Route;
+        for (var i=0; i<lvl; ++i)
+            R = R.P[ O.routes.Stack[i] ];
+        var RN = R.P[ ilvl ];
+
+        if (isNaN(RN)) {
+            for (var oR in this.Oroute) {
+                if (this.O[oR].rName == RN) {
+                    RN = oR;
+                    R.P[ ilvl ] = oR;
+                }
+            }
+        }
+        this.enemy_setFollow(O, RN, this.O[RN].radius, 0, true, true);
+    }
+}
+
+GAMEobject.prototype.oThink_lookAround = function(O, Think){
+
+}
+
 GAMEobject.prototype.enemy_setFollow = function(O, Obj, Radius, Angle, thinkOnBeen, adjustSpeed){
     var xy = randXYinDist(Radius);
     O.Follow = {
@@ -54,110 +152,44 @@ GAMEobject.prototype.enemy_setFollow = function(O, Obj, Radius, Angle, thinkOnBe
 
     O.Manouver = 'followObject';
 }
-GAMEobject.prototype.oThink_changeManouver = function(O,Think){
-    var i = 0;
-    for (var d in Think.D)
-        if (!(Think.D[d].notTwice && O.Manouver == Think.D[d].M))
-            ++i;
-
-    var ri = parseInt(Math.random()*i);
-    if(Think.D[ri].notTwice && O.Manouver == Think.D[ri].M) ++ri;
-    var D = Think.D[ri];
-    O.Manouver = D.M;
-    var time = D.Time;
-    if(D.TimePlus) time -=- parseInt(Math.random()*D.TimePlus);
-    if(D.maxTurn){
-        var maxTurnTime = parseInt(D.maxTurn/O.speedT);
-        if(time > maxTurnTime) time = maxTurnTime;
-    }
-    O.ThinkTick = this.tick- -time;
-}
-
-GAMEobject.prototype.oThink_followRoute = function(O,Think){
-    O.ThinkTick = this.tick + 30;
-    O.Manouver = 'followObject';
-    // console.log('oThink_followRoute()');
-    var rName = Think.Route;
-    var Route = this.MapSetting.Routes[rName];
-    if(typeof O.routes == 'undefined') {
-        O.routes = {Stack:[-1], Repeats:[0], RandOnce:[], Point:false};
-        O.Follow = {been:true};
-    }
-
-    if (O.Follow.been){
-        // console.log("I've been in previous point.");
-        do {
-            var keepGoing = true;
-            var lvl = O.routes.Stack.length-1;
-            var R = Route;
-            for (var i=0; i<lvl; ++i)
-                R = R.P[ O.routes.Stack[i] ];
-
-            // console.log(O.routes.Stack, lvl , R);
-            ++O.routes.Repeats[lvl];
-            if(R.repeat && O.routes.Repeats[lvl] > R.repeat){
-                // console.log('to many repeats');
-                O.routes.Stack.pop();
-                O.routes.Repeats.pop();
-                --lvl;
-                // O.routes.Stack[lvl] = -1;
-                continue;
-            }
-            if (R.T=='randOnce' && O.routes.Stack[lvl] == -1) {
-                O.routes.RandOnce[lvl] = [];
-                for(var i in R.P) O.routes.RandOnce[lvl].push(i);
-                O.routes.RandOnce[lvl] = ArrayShuffle(O.routes.RandOnce[lvl]);
-            }
-            if (R.T=='randOnce') {
-                O.routes.Stack[lvl] = O.routes.RandOnce[lvl].pop();
-            }
-            if (R.T=='rand' || (R.T=='randOrder' && O.routes.Stack[lvl] == -1)) {
-                O.routes.Stack[lvl] = parseInt(Math.random()*R.P.length);
-            }
-            if (R.T=='order' || (R.T=='randOrder' && O.routes.Stack[lvl] != -1)) {
-                ++O.routes.Stack[lvl];
-                if(O.routes.Stack[lvl] >= R.P.length)
-                    O.routes.Stack[lvl] = 0;
-            }
-
-            var ilvl = O.routes.Stack[lvl];
-            // console.log('[',ilvl,']');
-
-            if (typeof R.P[ ilvl ] == 'object') {
-                // console.log('CurrentPoint is object');
-                O.routes.Stack.push(-1);
-                O.routes.Repeats.push(0);
-                continue;
-            } else {
-                break;
-                keepGoing = false;
-            }
-
-        } while(keepGoing);
-
-        var ilvl = O.routes.Stack[lvl];
-        var R = Route;
-        for (var i=0; i<lvl; ++i)
-            R = R.P[ O.routes.Stack[i] ];
-
-        var RN = R.P[ ilvl ];
-
-        // console.log('CHOSEN >>', RN);
-        if (isNaN(RN)) {
-            for (var oR in this.Oroute) {
-                if (this.O[oR].rName == RN) {
-                    RN = oR;
-                    R.P[ ilvl ] = oR;
-                }
-            }
-        }
-        // console.log(this.O[RN])
-        this.enemy_setFollow(O, RN, this.O[RN].radius, 0, true, true);
-    }
-}
 
 
 GAMEobject.prototype.oLook = function(o){
+
+    // if(O.lookLvl){
+    //     if(this.tick % (O.lookArr[ O.lookLvl ].Ref) == 0){
+    //         var SP = O.lookArr[ O.lookLvl ];
+    //         if((SP.T=='single' || SP.T=='double') && PlayerDist < SP.Rad){
+    //             O.Flags.spotEnemyFlag = true;
+    //         }
+    //         if(SP.T=='double' && !O.Flags.spotEnemyFlag){
+    //             var A = (PlayerAngle -O.angle- -720- -SP.Angle2)%360;
+    //             if(PlayerDist < SP.Rad2 && A < SP.Angle2*2){
+    //                 O.Flags.spotEnemyFlag = true;
+    //             }
+    //         }
+    //         // Szukamy grupy i pocisku
+    //         if(!O.Flags.awareAboutEnemy){
+    //             for(var U in this.Odead){
+    //                 var uX = O.x-this.Odead[U].x;
+    //                 var uY = O.y-this.Odead[U].y;
+    //                 var uDist = Math.sqrt(uX*uX- -uY*uY);
+    //                 var uAngle = parseInt(- (Math.atan2(uX,uY)*180/Math.PI))%360;
+    //                 if((SP.T=='single' || SP.T=='double') && uDist < SP.Rad){
+    //                     O.Flags.awareAboutEnemy = true;
+    //                     break;
+    //                 }
+    //                 if(SP.T=='double' && !O.Flags.spotEnemyFlag){
+    //                     var uA = (uAngle -O.angle- -720- -SP.Angle2)%360;
+    //                     if(uDist < SP.Rad2 && uA < SP.Angle2*2){
+    //                         O.Flags.awareAboutEnemy = true;
+    //                         break;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
 }
 GAMEobject.prototype.oShot = function(o){
@@ -217,42 +249,6 @@ GAMEobject.prototype.decide = function(o){
             Angle -=- parseInt(Math.random()*TELE.AngleRand);
         this.teleportJump(o,TELE.Dist,Angle,'TP_trackDark');
 
-    }
-
-    // Spotting
-    if(O.spotLvl){
-        if(this.tick % (O.spotArr[ O.spotLvl ].Ref) == 0){
-            var SP = O.spotArr[ O.spotLvl ];
-            if((SP.T=='single' || SP.T=='double') && PlayerDist < SP.Rad){
-                O.Flags.spotEnemyFlag = true;
-            }
-            if(SP.T=='double' && !O.Flags.spotEnemyFlag){
-                var A = (PlayerAngle -O.angle- -720- -SP.Angle2)%360;
-                if(PlayerDist < SP.Rad2 && A < SP.Angle2*2){
-                    O.Flags.spotEnemyFlag = true;
-                }
-            }
-            // Szukamy grupy i pocisku
-            if(!O.Flags.awareAboutEnemy){
-                for(var U in this.Odead){
-                    var uX = O.x-this.Odead[U].x;
-                    var uY = O.y-this.Odead[U].y;
-                    var uDist = Math.sqrt(uX*uX- -uY*uY);
-                    var uAngle = parseInt(- (Math.atan2(uX,uY)*180/Math.PI))%360;
-                    if((SP.T=='single' || SP.T=='double') && uDist < SP.Rad){
-                        O.Flags.awareAboutEnemy = true;
-                        break;
-                    }
-                    if(SP.T=='double' && !O.Flags.spotEnemyFlag){
-                        var uA = (uAngle -O.angle- -720- -SP.Angle2)%360;
-                        if(uDist < SP.Rad2 && uA < SP.Angle2*2){
-                            O.Flags.awareAboutEnemy = true;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
     }
 
     /*
@@ -545,7 +541,7 @@ GAMEobject.prototype.decide = function(o){
 
             // Dodatkowe wywołania akcji
             if(TD.gotoAlarm) O.alarmLvl = TD.gotoAlarm;
-            if(TD.goToSpotLvl)  O.spotLvl = TD.goToSpotLvl;
+            if(TD.goToSpotLvl)  O.lookLvl = TD.goToSpotLvl;
 
             O.doingNow = TD.T;
             break;
