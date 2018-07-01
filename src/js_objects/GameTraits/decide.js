@@ -23,17 +23,22 @@ GAMEobject.prototype.oThink = function(o){
 GAMEobject.prototype.oThink_followEnemy = function(O,Think){
     var Radius = 100;
     if (typeof Think.Radius != 'undefined') Radius = Think.Radius;
-    var xy = randXYinDist(Radius);
-    O.Follow = {
-        o: 0,
-        x: xy.x,
-        y: xy.y,
-    }
-    O.Manouver = 'followObject';
+    this.enemy_setFollow(O, 0, Radius, 0 || Think.AnglePlus);
     var time = 30;
     if (Think.Time)     time = Think.Time;
     if (Think.TimePlus) time -=- parseInt(Math.random()*Think.TimePlus);
     O.ThinkTick = this.tick- -time;
+}
+GAMEobject.prototype.enemy_setFollow = function(O, Obj, Radius, Angle){
+    var xy = randXYinDist(Radius);
+    O.Follow = {
+        o: Obj,
+        x: xy.x,
+        y: xy.y,
+        a: 0 || Angle,
+        been: false,
+    }
+    O.Manouver = 'followObject';
 }
 GAMEobject.prototype.oThink_changeManouver = function(O,Think){
     var i = 0;

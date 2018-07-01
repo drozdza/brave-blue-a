@@ -14,11 +14,10 @@ GAMEobject.prototype.oManouver_followObject = function(O){
         O.Manouver = 'goStraight';
         O.lastSpeedT = 0;
         O.ThinkTick = this.tick;
-
         return false;
     }
     var Q = this.O[O.Follow.o];
-    var Angle = getAngleAB(O, {x:Q.x- -O.Follow.x, y:Q.y- -O.Follow.y});
+    var Angle = getAngleAB(O, {x:Q.x- -O.Follow.x, y:Q.y- -O.Follow.y})- -O.Follow.a;
     var AngleDiff = (O.angle-Angle- -360)%360;
     var neededTurning = 180 - Math.abs(AngleDiff - 180);
     var speedT = O.speedT;
@@ -31,6 +30,9 @@ GAMEobject.prototype.oManouver_followObject = function(O){
         O.angle = (O.angle - speedT- -360)%360;
         O.lastSpeedT = -speedT;
     }
+    
+    if (isDistAB(O, {x:Q.x- -O.Follow.x, y:Q.y- -O.Follow.y}, O.speed))
+        O.Follow.been = true;
 }
 
 // DEPRECATED

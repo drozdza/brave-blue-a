@@ -305,6 +305,8 @@ GAMEobject.prototype.removeObj = function(o){
 
 
     delete this.Omoving[o];
+    delete this.Othink[o];
+    delete this.Olook[o];
     delete this.Ocomp[o];
     delete this.Obullet[o];
     delete this.Oregion[o];
