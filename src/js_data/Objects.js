@@ -779,13 +779,14 @@ BBAdata.ObjectData.carras={
     ThinkTick: 0,
     ThinkState: 'patroling',
     Thinks: {
-        followEnemy:{S:{patroling:1}, Time: 200, TimePlus: 200, Radius: 50},
-        lookAround:{S:{patroling:1}, continueThinks:1},
-        changeManouver:{S:{patroling:1}, D:[
-            {M:'goStraight', Time:80, TimePlus:40, notTwice:1},
-            {M:'turnLeft', Time:20, TimePlus:50, maxTurn:180},
-        ]},
-        followRoute:{S:{patroling:1}, Route:'R1'},
+        // followEnemy:{S:{patroling:1}, Time: 200, TimePlus: 200, Radius: 50},
+        // followEnemy:{S:{patroling:1}, Time: 200, TimePlus: 200, Radius: 50, AnglePlus:180},
+        // lookAround:{S:{patroling:1}, continueThinks:1},
+        // changeManouver:{S:{patroling:1}, D:[
+        //     {M:'goStraight', Time:80, TimePlus:40, notTwice:1},
+            // {M:'turnLeft', Time:20, TimePlus:50, maxTurn:180},
+        // ]},
+        followRoute:{S:{patroling:1}, Route:'R2'},
     },
 
     // doingNow: 'changeManouver',

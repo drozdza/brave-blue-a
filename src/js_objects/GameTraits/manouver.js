@@ -30,9 +30,13 @@ GAMEobject.prototype.oManouver_followObject = function(O){
         O.angle = (O.angle - speedT- -360)%360;
         O.lastSpeedT = -speedT;
     }
-    
-    if (isDistAB(O, {x:Q.x- -O.Follow.x, y:Q.y- -O.Follow.y}, O.speed))
+
+    if (isDistAB(O, {x:Q.x- -O.Follow.x, y:Q.y- -O.Follow.y}, O.speed)){
         O.Follow.been = true;
+        if (O.Follow.thinkOnBeen) {
+            O.ThinkTick = this.tick;
+        }
+    }
 }
 
 // DEPRECATED
