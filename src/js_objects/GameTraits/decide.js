@@ -66,13 +66,12 @@ GAMEobject.prototype.oThink_followRoute = function(O,Think){
     var rName = Think.Route;
     var Route = this.MapSetting.Routes[rName];
     if(typeof O.routes == 'undefined') {
-        O.routes = {Stack:[-1], Repeats:[0], Point:false};
+        O.routes = {Stack:[-1], Repeats:[0], RandOnce:[], Point:false};
         O.Follow = {been:true};
     }
 
-
     if (O.Follow.been){
-        console.log("I've been in previous point.");
+        // console.log("I've been in previous point.");
         do {
             var keepGoing = true;
             var lvl = O.routes.Stack.length-1;
@@ -80,30 +79,38 @@ GAMEobject.prototype.oThink_followRoute = function(O,Think){
             for (var i=0; i<lvl; ++i)
                 R = R.P[ O.routes.Stack[i] ];
 
-            console.log(O.routes.Stack, lvl , R);
+            // console.log(O.routes.Stack, lvl , R);
             ++O.routes.Repeats[lvl];
             if(R.repeat && O.routes.Repeats[lvl] > R.repeat){
-                console.log('to many repeats');
+                // console.log('to many repeats');
                 O.routes.Stack.pop();
                 O.routes.Repeats.pop();
                 --lvl;
-                O.routes.Stack[lvl] = -1;
-                // O.routes.Repeats = 0;
+                // O.routes.Stack[lvl] = -1;
                 continue;
             }
-            if (R.T=='rand') {
+            if (R.T=='randOnce' && O.routes.Stack[lvl] == -1) {
+                O.routes.RandOnce[lvl] = [];
+                for(var i in R.P) O.routes.RandOnce[lvl].push(i);
+                O.routes.RandOnce[lvl] = ArrayShuffle(O.routes.RandOnce[lvl]);
+            }
+            if (R.T=='randOnce') {
+                O.routes.Stack[lvl] = O.routes.RandOnce[lvl].pop();
+            }
+            if (R.T=='rand' || (R.T=='randOrder' && O.routes.Stack[lvl] == -1)) {
                 O.routes.Stack[lvl] = parseInt(Math.random()*R.P.length);
             }
-            if (R.T=='inOrder') {
+            if (R.T=='order' || (R.T=='randOrder' && O.routes.Stack[lvl] != -1)) {
                 ++O.routes.Stack[lvl];
                 if(O.routes.Stack[lvl] >= R.P.length)
                     O.routes.Stack[lvl] = 0;
             }
+
             var ilvl = O.routes.Stack[lvl];
-            console.log('[',ilvl,']');
+            // console.log('[',ilvl,']');
 
             if (typeof R.P[ ilvl ] == 'object') {
-                console.log('CurrenPoint is object');
+                // console.log('CurrentPoint is object');
                 O.routes.Stack.push(-1);
                 O.routes.Repeats.push(0);
                 continue;
@@ -121,8 +128,7 @@ GAMEobject.prototype.oThink_followRoute = function(O,Think){
 
         var RN = R.P[ ilvl ];
 
-        console.log('CHOSEN >>', RN);
-
+        // console.log('CHOSEN >>', RN);
         if (isNaN(RN)) {
             for (var oR in this.Oroute) {
                 if (this.O[oR].rName == RN) {
@@ -131,6 +137,7 @@ GAMEobject.prototype.oThink_followRoute = function(O,Think){
                 }
             }
         }
+        // console.log(this.O[RN])
         this.enemy_setFollow(O, RN, this.O[RN].radius, 0, true);
     }
 }

@@ -3,11 +3,14 @@ BBAdata.MAPS.TheNewBegining={
     TeamMods:{
         'team1':['orangeXColor'],
         'team2':['violetColor'],
+        // 'team3':['violetColor'],
     },
     Place:[
         {What:{Gstar:3},Egzact:[{x:-150,y:-120},{x:150,y:-120},{x:0,y:150}],Mod:{bounceType:'diagonal',bounceTeleport:true}},
         {Random:{X:500, Y:0, Radius: 100}, Team:'team2', What:[{t:'carras', q:1}]},
         {Random:{X:500, Y:0, Radius: 100}, Team:'team1', What:[{t:'carras', q:13}]},
+        {Random:{X:500, Y:0, Radius: 100}, Team:'team3', What:[{t:'carras', q:6}]},
+        {Random:{X:500, Y:0, Radius: 100}, Team:'team2', What:[{t:'carras', q:20}]},
 
         {Point:{X: -400, Y:0}, What:[{t:'routePoint', Mod:{radius: 120, rName:'routePoint1'}}]},
         {Point:{X: 400, Y:50}, What:[{t:'routePoint', Mod:{rName:'routePoint2'}}]},
@@ -24,13 +27,19 @@ BBAdata.MAPS.TheNewBegining={
     ],
     Routes:{
         R1:{T:'rand',repeat:1000, P:['C1','C3','B2']},
-        R2:{T:'inOrder',P:[
+        R2:{T:'order',P:[
             'A1','A2','A3',
             {T:'rand',repeat:1, P:[
-                {T:'inOrder',repeat:3, P:['B3','B2','B1']},
-                {T:'inOrder',repeat:3, P:['C3','C2','C1']}
+                {T:'order',repeat:3, P:['B3','B2','B1']},
+                {T:'order',repeat:3, P:['C3','C2','C1']}
             ]}
-        ]}
+        ]},
+        R3:{T:'order',P:[
+            'A2',
+            {T:'randOrder',repeat:3, P:['A1','B1','C1']},
+            'A2',
+            {T:'randOnce',repeat:3, P:['A3','B3','C3']},
+        ]},
     },
 };
 }

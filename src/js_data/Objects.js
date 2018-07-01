@@ -786,7 +786,7 @@ BBAdata.ObjectData.carras={
         //     {M:'goStraight', Time:80, TimePlus:40, notTwice:1},
             // {M:'turnLeft', Time:20, TimePlus:50, maxTurn:180},
         // ]},
-        followRoute:{S:{patroling:1}, Route:'R2'},
+        followRoute:{S:{patroling:1}, Route:'R3'},
     },
 
     // doingNow: 'changeManouver',
@@ -800,7 +800,7 @@ BBAdata.ObjectData.carras={
 
     speedArr:[0,
         {S: {shipVar:'speed',Add:-2}, T:0.7},
-        {S: {shipVar:'speed'}, T:2.5},
+        {S: {shipVar:'speed'}, T:14.5},
         {S: {shipVar:'speed',Add:3}, T:2.5}
     ],
     spotTick: 8,
@@ -811,7 +811,7 @@ BBAdata.ObjectData.carras={
     ],
 
     shipVariables:{
-        speed: {Const: 6.5, Rand: 1},
+        speed: {Const: 16, Rand: 4},
         spotRad: {Const: 80, RandInt: 80},
         spotRad2: {Const: 300, RandInt: 200},
         spotAngle2: {Const: 30, RandInt: 30}

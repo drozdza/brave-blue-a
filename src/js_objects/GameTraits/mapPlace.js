@@ -71,7 +71,6 @@ GAMEobject.prototype.mapPlace_setPlaceDef = function(Setting,Place,defXY){
     else if(Place.Point)    DEF.Point    = cloneObj(Place.Point);
     else                    DEF.Point    = {X:0,Y:0};
 
-
     if(Place.PlaceGroup){
         DEF.PlaceGroup = cloneObj(Place.PlaceGroup);
         var PG = Setting.PlaceGroups[DEF.PlaceGroup.N];

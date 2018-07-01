@@ -281,3 +281,15 @@ function randXYinDist(dist){
 
     return {x:x,y:y};
 }
+
+
+
+function countAThroughB(A, B){
+    console.log(A,B);
+    var r = A.s*(180/A.st)/(Math.PI*2);
+    console.log(r);
+}
+//
+// XCA = {x:100,y:100,angle:200,s:10,st:2};
+// XCB = {x:40,y:120};
+// countAThroughB(XCA,XCB);
