@@ -37,21 +37,35 @@ Stay&Support:
 
 
 Flags:
-- Ever Seen Enemy
-- Last Seen Enemy (seconds)
-- Know About Enemy
 - Resources Ends
 - Resources Low
 - Weapon Ends
 - Last Weapon Shot
 - Weapon Loading
 
+- 1. Ready For Enemy
+- 2. Enemy Is There
+- 3. Someone Seen Enemy
+- 4. Seen Enemy
+- 5. Nearby Sees Enemy
+- 6. I See Enemy
+
+- Low Life
+- Nearby Got Hit
+- I Got Hit
 
 
 
-
-
-
+TheStates:
+- Off
+- Idle
+- Patroling
+- Attacking
+- Planned Attack (?)
+- Heroic Attack (?)
+- Running Away
+- Going For Resourses
+- Defending
 
 
 

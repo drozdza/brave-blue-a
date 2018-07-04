@@ -3,7 +3,7 @@ GAMEobject.prototype.oThink = function(O){
     for(var iThink in O.ThinkLists){
         var Think = O.ThinkLists[iThink];
         // =============== Clasify:
-        if (Think.S && typeof Think.S[O.ThinkState] == 'undefined') continue;
+        if (Think.S && typeof Think.S[O.TheState] == 'undefined') continue;
         // =============== Do:
         switch(Think.T){
             case 'lookAround':     this.oThink_lookAround(O, Think); break;
@@ -13,7 +13,7 @@ GAMEobject.prototype.oThink = function(O){
     for(var iThink in O.Thinks){
         var Think = O.Thinks[iThink];
         // =============== Clasify:
-        if (Think.S && typeof Think.S[O.ThinkState] == 'undefined') continue;
+        if (Think.S && typeof Think.S[O.TheState] == 'undefined') continue;
         if (Think.skipChance && Math.random()*100 > Think.skipChance) continue;
         if (Think.MaxEnemyDist && getDistAB(this.O[0], O) > Think.MaxEnemyDist) continue;
         // =============== Do:
@@ -164,23 +164,23 @@ GAMEobject.prototype.enemy_setFollow = function(O, Obj, Radius, Angle, thinkOnBe
 
 
 GAMEobject.prototype.oLook = function(O){
-    if (!O.LookType) {
-        // console.log('oLook(): Brak O.LookType');
-    }
     var P = this.O[0];
     var Look = O.LookArr[O.LookType];
     var PlayerDist = getDistAB(O,P);
 
+    O.LookTick -=- Look.ticks;
+
     if((Look.T=='single' || Look.T=='double') && PlayerDist < Look.Rad){
         O.Flags.spotEnemyFlag = true;
-        console.log('A player!');
+        this.oFlag_Add(O, 'VI_ISeeEnemy');
+        return true;
     }
     if(Look.T=='double' && !O.Flags.spotEnemyFlag){
         var PlayerAngle = getAngleAB(O,P);
         var A = (PlayerAngle -O.angle- -720- -Look.Angle2)%360;
         if(PlayerDist < Look.Rad2 && A < Look.Angle2*2){
-            console.log('A Player!');
-            O.Flags.spotEnemyFlag = true;
+            this.oFlag_Add(O, 'VI_ISeeEnemy');
+            return true;
         }
     }
     // Szukamy grupy i pocisku
@@ -191,23 +191,44 @@ GAMEobject.prototype.oLook = function(O){
     //         var uDist = Math.sqrt(uX*uX- -uY*uY);
     //         var uAngle = parseInt(- (Math.atan2(uX,uY)*180/Math.PI))%360;
     //         if((Look.T=='single' || Look.T=='double') && uDist < Look.Rad){
-    //             O.Flags.awareAboutEnemy = true;
-    //             break;
+                    // this.oFlag_Add(O, 'II_EnemyIsThere');
+                    // return true;
     //         }
     //         if(Look.T=='double' && !O.Flags.spotEnemyFlag){
     //             var uA = (uAngle -O.angle- -720- -Look.Angle2)%360;
     //             if(uDist < Look.Rad2 && uA < Look.Angle2*2){
-    //                 O.Flags.awareAboutEnemy = true;
-    //                 break;
+                    // this.oFlag_Add(O, 'II_EnemyIsThere');
+                    // return true;
     //             }
     //         }
     //     }
     // }
-    O.LookTick -=- Look.ticks;
 
 }
-GAMEobject.prototype.oShot = function(o){
+GAMEobject.prototype.oShot = function(O){
 
+}
+
+GAMEobject.prototype.oFlag_Add = function(O, FlagName, eventTick){
+    var tick = this.tick;
+    if (typeof eventTick != 'undefined') tick = eventTick;
+
+    if (FlagName == 'VI_ISeeEnemy') {
+        this.TheState_change(O, 'attacking');
+    }
+
+
+    //changeTheState
+
+
+    O.Flags['FlagName'] = tick;
+}
+
+GAMEobject.prototype.TheState_change = function(O, NewState){
+    // add/remove oLook, remove oShot
+
+    O.TheState = NewState;
+    O.ThinkTick = this.tick;
 }
 
 GAMEobject.prototype.alarmAround = function(o,DistAlert,AlarmFlag){

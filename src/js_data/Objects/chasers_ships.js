@@ -15,7 +15,7 @@ BBAdata.ObjectData.carras={
 
     ThinkNow: 'followRoute',
     ThinkTick: 0,
-    ThinkState: 'patroling',
+    TheState: 'patroling',
 
     ThinkLists: {
         lookAround:{T:'lookAround', S:{patroling:1}, LookType:'curious'},

@@ -85,7 +85,7 @@ GAMEobject.prototype.drawObject = function(O, CH, Px,Py){
         CH.fillStyle = 'white';
         CH.font = "12px Arial";
         CH.textAlign = "left";
-        CH.fillText(O.ThinkState, O.x-Px-O.radius, O.y-Py-O.radius-18);
+        CH.fillText(O.TheState, O.x-Px-O.radius, O.y-Py-O.radius-18);
         CH.fillText(O.ThinkNow,   O.x-Px-O.radius, O.y-Py-O.radius-9);
         CH.fillText(O.Manouver,   O.x-Px-O.radius, O.y-Py-O.radius);
         CH.restore();

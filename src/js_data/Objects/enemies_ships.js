@@ -12,12 +12,22 @@ BBAdata.ObjectMods.enemyShip={
     ammo: -50,     //??
     radius: 15,
     Flags:{
-        spotEnemyFlag: false,
-        gotHitFlag: false,
-        heardExplosionFlag: false,
-        newOrderFlag: false,
-        awareAboutEnemy: false,
-        lastSeenEnemy: -1
+        ResourcesEnds: false,
+        ResourcesLow: false,
+        WeaponEnds: false,
+        LastWeaponShot: 0,
+        WeaponLoading: false,
+
+        I_ReadyForEnemy: -1000,
+        II_EnemyIsThere: -1000,
+        III_SomeoneSeenEnemy: -1000,
+        IV_SeenEnemy: -1000,
+        V_NearbySeesEnemy: -1000,
+        VI_ISeeEnemy: -1000,
+
+        LowLife: false,
+        NearbyGotHit: -1000,
+        IGotHit: -1000,
     },
 
     Res:{},
@@ -54,7 +64,7 @@ BBAdata.ObjectMods.enemyShip2={
 
     ThinkNow:'',
     ThinkTick: 0,
-    ThinkState: 'patroling',
+    TheState: 'patroling',
     ThinkLists: {},
     Thinks: {},
 
