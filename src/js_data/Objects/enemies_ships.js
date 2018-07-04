@@ -35,9 +35,9 @@ BBAdata.ObjectMods.enemyShip={
     doingTime: -1,
     Manouver: 'goStraight',
 
-    alarmLvl: 2,
+
     speedLvl: 2,
-    lookLvl: 2,
+    LookType: 2,
 };
 BBAdata.ObjectMods.enemyShip2={
     M: 'comp',
@@ -68,6 +68,7 @@ BBAdata.ObjectMods.enemyShip2={
     ThinkLists: {},
     Thinks: {},
 
+    WeaponType: false,
     LookTick: 0,
     LookType: false,
     speedLvl: 'normal',

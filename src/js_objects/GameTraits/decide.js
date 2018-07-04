@@ -1,15 +1,5 @@
 
 GAMEobject.prototype.oThink = function(O){
-    for(var iThink in O.ThinkLists){
-        var Think = O.ThinkLists[iThink];
-        // =============== Clasify:
-        if (Think.S && typeof Think.S[O.TheState] == 'undefined') continue;
-        // =============== Do:
-        switch(Think.T){
-            case 'lookAround':     this.oThink_lookAround(O, Think); break;
-        }
-    }
-
     for(var iThink in O.Thinks){
         var Think = O.Thinks[iThink];
         // =============== Clasify:
@@ -127,15 +117,6 @@ GAMEobject.prototype.oThink_followRoute = function(O,Think){
     }
 }
 
-GAMEobject.prototype.oThink_lookAround = function(O, Think){
-    O.LookType = Think.LookType;
-    if (typeof this.Olook[O.o] == 'undefined') {
-        this.Olook[O.o] = 1;
-    }
-    O.LookTick = this.tick;
-
-}
-
 GAMEobject.prototype.enemy_setFollow = function(O, Obj, Radius, Angle, thinkOnBeen, adjustSpeed){
     var xy = randXYinDist(Radius);
     O.Follow = {
@@ -213,8 +194,9 @@ GAMEobject.prototype.oFlag_Add = function(O, FlagName, eventTick){
     var tick = this.tick;
     if (typeof eventTick != 'undefined') tick = eventTick;
 
+    // This as settings
     if (FlagName == 'VI_ISeeEnemy') {
-        this.TheState_change(O, 'attacking');
+        this.oTheState(O, 'attacking');
     }
 
 
@@ -224,12 +206,52 @@ GAMEobject.prototype.oFlag_Add = function(O, FlagName, eventTick){
     O.Flags['FlagName'] = tick;
 }
 
-GAMEobject.prototype.TheState_change = function(O, NewState){
-    // add/remove oLook, remove oShot
+GAMEobject.prototype.oTheState = function(O, NewState){
+    if(typeof O.TheStateLists[O.TheState] != 'undefined'){
+        for(var iStateThing in O.TheStateLists[O.TheState]){
+            var StateThing = O.TheStateLists[O.TheState][iStateThing];
+            switch(StateThing.T){
+                case 'lookAround': this.oTheStageRemove_lookAround(O, StateThing); break;
+                case 'shot':       this.oTheStageRemove_shot(O, StateThing); break;
+            }
+        }
+    }
 
     O.TheState = NewState;
-    O.ThinkTick = this.tick;
+
+    if(typeof O.TheStateLists[O.TheState] != 'undefined'){
+        for(var iStateThing in O.TheStateLists[O.TheState]){
+            var StateThing = O.TheStateLists[O.TheState][iStateThing];
+            switch(StateThing.T){
+                case 'lookAround': this.oTheStageAdd_lookAround(O, StateThing); break;
+                case 'shot':       this.oTheStageAdd_shot(O, StateThing); break;
+            }
+        }
+    }
+
+    O.ThinkTick = this.tick; // ?
 }
+
+GAMEobject.prototype.oTheStageRemove_lookAround = function(O, StateThing){
+    delete(this.Olook[O.o]);
+}
+GAMEobject.prototype.oTheStageAdd_lookAround = function(O, StateThing){
+    O.LookType = StateThing.LookType;
+    if (typeof this.Olook[O.o] == 'undefined') {
+        this.Olook[O.o] = 1;
+    }
+    O.LookTick = this.tick;
+}
+GAMEobject.prototype.oTheStageRemove_shot = function(O, StateThing){
+    delete(this.Oshot[O.o]);
+}
+GAMEobject.prototype.oTheStageAdd_shot = function(O, StateThing){
+    O.WeaponType = StateThing.WeaponType;
+    if (typeof this.Oshot[O.o] == 'undefined') {
+        this.Oshot[O.o] = 1;
+    }
+}
+
 
 GAMEobject.prototype.alarmAround = function(o,DistAlert,AlarmFlag){
     var uO,X,Y,Dist,O = this.O[o];

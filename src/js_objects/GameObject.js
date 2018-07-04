@@ -25,6 +25,7 @@ function GAMEobject(){
     this.Ocomp={};      // sterowane statki / missile - stare
     this.Othink={};     // sterowane statki / missile
     this.Olook={};      // rozglądający się
+    this.Oshot={};      // array of shoting entities
 
     this.Obullet={};    // tablica kul
     this.Oanim={};      // animations

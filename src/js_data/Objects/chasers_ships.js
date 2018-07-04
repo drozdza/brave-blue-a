@@ -9,17 +9,26 @@ BBAdata.ObjectData.carras={
     lifeM: 5,
     radius: 15,
 
-    weapon:[{t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5}],
+    WeaponType: 'single',
+    weapon:{
+        single:{t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5},
+    },
 
     Manouver: 'goStraight',
 
+    TheState: 'patroling',
+    TheStateLists: {
+        attacking: {
+            shot:{T:'shot', WeaponType: 'single'},
+            lookAround:{T:'lookAround', LookType:'fighting'},
+        },
+        patroling: {
+            lookAround:{T:'lookAround', LookType:'curious'},
+        }
+    },
+
     ThinkNow: 'followRoute',
     ThinkTick: 0,
-    TheState: 'patroling',
-
-    ThinkLists: {
-        lookAround:{T:'lookAround', S:{patroling:1}, LookType:'curious'},
-    },
     Thinks: {
         followEnemy2:{T:'followEnemy', S:{runningAway:1}, Time: 200, TimePlus: 200, Radius: 50, MaxEnemyDist: 200, AnglePlus:180},
         followEnemy:{T:'followEnemy', S:{attacking:1}, Time: 200, TimePlus: 200, Radius: 50},

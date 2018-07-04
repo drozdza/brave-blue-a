@@ -81,6 +81,10 @@ GAMEobject.prototype.initObject = function(O){
         this.setRegionAnimation(O, O.fieldAnim);
     }
 
+    if(typeof O.TheState != 'undefined'){
+        this.oTheState(O, O.TheState);
+    }
+
     if(typeof O.lists == 'undefined') console.log(O.T+' nie ma list!');
     for(var list in O.lists) {
         this[list][O.o] = O.S;
