@@ -467,5 +467,5 @@ GAMEobject.prototype.decide_ship = function(e){
             Sx.Storage[storU].R = O.Storage[storU].R;
         }
 
-    this.checkShields(O,0);
+    this.checkShields(O);
 }

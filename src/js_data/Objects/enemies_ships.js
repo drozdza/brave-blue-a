@@ -55,10 +55,12 @@ BBAdata.ObjectMods.enemyShip2={
     ThinkNow:'',
     ThinkTick: 0,
     ThinkState: 'patroling',
+    ThinkLists: {},
     Thinks: {},
 
+    LookTick: 0,
+    LookType: false,
     speedLvl: 'normal',
-    lookLvl: 2,
 };
 BBAdata.ObjectMods.fighterEnemy={
 
@@ -71,10 +73,10 @@ BBAdata.ObjectMods.biggerEnemy={
         {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
     ],
 
-    spotTick: 8,
-    lookArr: [0,
+    LookTick: 8,
+    LookArr: [0,
         {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {SV:'spotAngle2'}},
         {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
     shipVariables:{

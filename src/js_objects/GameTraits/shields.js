@@ -52,13 +52,13 @@ GAMEobject.prototype.ShieldValues={
     shieldAdder: 4,
     dmgTransfer: 3,
 };
-GAMEobject.prototype.checkShields = function(O,o){
+GAMEobject.prototype.checkShields = function(O){
     var sh,SH;
     for(sh in O.Shields){
         SH = O.Shields[sh];
         if(SH.ExpireTime != 'infinite' && SH.ExpireTime < this.tick){
-            this.removeShield(O,o,sh);
-            this.checkShields(O,o);
+            this.removeShield(O,O.o,sh);
+            this.checkShields(O);
             break;
         }
     }

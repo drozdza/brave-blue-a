@@ -46,15 +46,15 @@ GAMEobject.prototype.frame_decide = function(){
     for(o in this.Ocomp)
         this.checkHits(o);
     for(o in this.Ocomp)
-        this.decide(o);
+        this.decide(this.O[o]);
 
     for(o in this.Olook)
         if(this.O[o].LookTick <= this.tick)
-            this.oLook(o);
+            this.oLook(this.O[o]);
 
     for(o in this.Othink)
         if(this.O[o].ThinkTick <= this.tick)
-            this.oThink(o);
+            this.oThink(this.O[o]);
 
 
     for(o in this.Oshot)
@@ -88,7 +88,7 @@ GAMEobject.prototype.frame_decide = function(){
     for(o in this.O){
         O = this.O[o];
         if(O.TT=='regionAnim')
-        CanvasManager.age_regionAnim(O,o);
+            CanvasManager.age_regionAnim(O,o);
     }
 
 

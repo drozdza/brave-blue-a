@@ -150,7 +150,7 @@ GAMEobject.prototype.tryBuildSquads = function(O){
 GAMEobject.prototype.putObj_shipVariables = function(O){
     if(typeof O.shipVariables == 'undefined') return false;
 
-    for(var i in {speedArr:1,lookArr:1}){
+    for(var i in {SpeedArr:1,LookArr:1}){
         for(var j in O[i]){
             for(var k in O[i][j]){
                 if(typeof O[i][j][k] == 'object' && typeof O[i][j][k].SV != 'undefined'){
