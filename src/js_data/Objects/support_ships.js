@@ -1,822 +1,4 @@
-BBAdata.ObjectData={};
-BBAdata.ObjectMods={};
-// =============================================================================
 
-BBAdata.ObjectData.routePoint={
-    T: 'routePoint',
-    M: 'routePoint',
-    lists:{Oroute:1},
-    radius: 20,
-};
-
-// STANDARD OBJECTS
-
-BBAdata.ObjectData.destruction_field={
-    M: 'region',
-    TT: 'dust',
-    lists:{Oregion:1},
-    mapType: 'F',
-};
-BBAdata.ObjectData.healing_missile={
-    M: 'comp',
-    TT: 'dust',
-    lists:{Ocomp:1,Omoving:1},
-    mapType: 'EM',
-    mapCollide: ['E','EMF','F'],
-    view:{
-        Letter: 'J',
-        LetterSize: 12,
-        Color: '#0f0',
-        Angle: 180,
-    },
-
-    life: 1,
-    lifeM: 1,
-    speed: 13,
-    speedT: 20,
-    radius: 10,
-    Heal: 1,
-    doingTime: 230,
-    onHit:{},
-    toDo: [{T:'expire'}],
-    Manouver: 'followEntity',
-    Flags:{},
-};
-BBAdata.ObjectData.energy_field_missile={
-    M: 'comp',
-    TT: 'dust',
-    lists:{Ocomp:1,Omoving:1},
-    mapType: 'EM',
-    mapCollide: ['E','EMF','F'],
-    view:{
-        Letter: 'E',
-        LetterSize: 12,
-        Color: '#0f0',
-        Angle: 180,
-    },
-
-    lifeM: 1,
-    radius: 10,
-    speed: 13,
-    speedT: 20,
-    doingTime: 230,
-    onHit:{},
-    toDo: [{T:'expire'}],
-    Manouver: 'followEntity',
-    Flags:{},
-};
-BBAdata.ObjectData.missile={
-    M: 'comp',
-    TT: 'dust',
-    lists:{Ocomp:1,Omoving:1},
-    mapType: 'EM',
-    view:{
-        Letter: 'Y',
-        LetterSize: 12,
-        Color: '#ff0',
-        Angle: 0,
-    },
-
-    lifeM: 1,
-    radius: 10,
-    speed: 15,
-    speedT: 3,
-    DMG:{Dmg:1,T:'explo'},
-    doingTime: 200,
-    toDo: [{T:'expire'}],
-    Manouver: 'followEntity',
-    Flags:{},
-};
-BBAdata.ObjectData.bullet_bomb={
-    M: 'comp',
-    TT: 'dust',
-    lists:{Ocomp:1,Omoving:1},
-    mapType: 'EM',
-    view:{
-        Letter: 'P',
-        LetterSize: 12,
-        Color: '#ff0',
-        Angle: 0,
-    },
-
-    lifeM: 1,
-    radius: 10,
-    speed: 15,
-    speedT: 2,
-    doingTime: 35,
-    toDo: [{T:'expire'}],
-    Manouver: 'goStraight',
-    Flags:{},
-};
-
-
-BBAdata.ObjectMods.aliveUnit={
-    lifeM: 1,
-};
-BBAdata.ObjectMods.Star={
-    view:{
-        LIBpath:'StarPath',
-        PathSize:30,
-        Color:'white',
-        Angle:0,
-        HitPattern:'StarHit',
-        onBackground: 1,
-    },
-    radius:15,
-
-    SlowDown:3,
-    M: 'static',
-    lists:{Oregion:1},
-    Flags:{},
-    mapType:'A',
-    TT:'bgStars',
-};
-
-BBAdata.ObjectData.Star={
-    LoadMods:{
-        Star:{},
-        aliveUnit:{lifeM:6},
-    },
-};
-BBAdata.ObjectData.StarS={
-    LoadMods:{
-        Star:{view:{PathSize: 18}, radius: 9},
-        aliveUnit:{lifeM:6},
-    },
-};
-BBAdata.ObjectData.StarM={
-    LoadMods:{
-        Star:{view:{PathSize: 60}, radius: 30},
-        aliveUnit:{lifeM:9},
-    },
-};
-BBAdata.ObjectData.StarL={
-    LoadMods:{
-        Star:{view:{PathSize: 80}, radius: 40},
-        aliveUnit:{lifeM:17},
-    },
-};
-
-BBAdata.ObjectData.Gstar={
-    view:{
-        LIBpath:'StarPath',
-        PathSize:170,
-        Color:'yellow',
-        Angle:0,
-        XY:180,
-        onBackground: 1,
-    },
-    M:'static',
-    lists:{Oregion:1},
-    TT: 'dust',
-    radius: 90,
-    undestructible: 1,
-    bounceType: 'straight',
-    Flags:{},
-    mapType:'A',
-};
-BBAdata.ObjectData.EndPortal={
-    view:{
-        onBackground: 1,
-    },
-    M: 'static',
-    mapType: 'PF',
-
-    TT: 'regionAnim',
-    animTick: 0,
-    animType: 'EndPortalStart',
-    radius: 50,
-    undestructible: 1,
-    lists:{},
-    stateIn:{
-        changeCount:{gameEnded:1},
-        changeAnim:{name:'EndPortalEnd',type:'end',time:45},
-    },
-};
-BBAdata.ObjectData.shieldBlob={
-    M: 'moving',
-    mapType: 'A',
-
-    lists:{Omoving:1},
-    view:{
-        Letter: '#',
-        LetterSize: 40,
-        colorFill:[0,255,200,1],
-        Angle: 0,
-        HitPattern:'ShieldBlobHit',
-        backgroundCircle: 21,
-        colorCircle:[0,200,100,1],
-    },
-
-    SlowDown: 3,
-    lifeM: 3,
-    radius: 21,
-};
-
-// MINES
-
-BBAdata.ObjectData.Mine={
-    M: 'comp',
-    lists:{Ocomp:1,Omoving:1},
-    mapType: 'EM',
-    view:{
-        Letter: 'R',
-        LetterSize: 10,
-        Color: '#ff0',
-        Angle: 0,
-    },
-    speed:0,
-    angle:0,
-    radius:6,
-    dec:0,
-    ammo:0,
-    toDo:[{T:'produceSquad'}],
-    doingTime:-1,
-
-    lifeM: 1,
-
-    explodePreset: 'NailedMine2',
-
-    squadActions:{
-        enemyClose: {squadMember:0, change:{simpleFilling: 'rgba(255,0,0,0.2)'}},
-        enemyFar:   {squadMember:0, change:{simpleFilling: 'transparent'}},
-    },
-    squadScheme: [{
-        type: 'Field',
-        objName: 'RoundField',
-        radius: 0,
-        angle: 0,
-        Oid: -1,
-        placementT:'directPlaces',
-        onDisbandRemove:1,
-        Mod: {
-            simpleFilling: 'transparent',
-            radius: 80,
-            mapType: 'PF',
-            stateIn: {explodeMaster:1},
-        },
-    },{
-        type: 'Field',
-        objName: 'RoundField',
-        radius: 0,
-        angle: 0,
-        Oid: -1,
-        placementT:'directPlaces',
-        onDisbandRemove:1,
-        Mod: {
-            viewOff: true,
-            radius: 200,
-            mapType: 'PF',
-            stateIn: {informMaster:'enemyClose'},
-            stateOut: {informMaster:'enemyFar'},
-        },
-    }],
-
-    Flags:{}
-};
-BBAdata.ObjectData.MineMod_mediumCircle={
-    squadScheme: [{
-        type: 'Field',
-        objName: 'RoundField',
-        radius: 0,
-        angle: 0,
-        Oid: -1,
-        placementT:'directPlaces',
-        onDisbandRemove:1,
-        Mod: {
-            simpleFilling: 'transparent',
-            mapType: 'PF',
-            radius: 50,
-            stateIn: {explodeMaster:1},
-        },
-    },{
-        type: 'Field',
-        objName: 'RoundField',
-        radius: 0,
-        angle: 0,
-        Oid: -1,
-        placementT:'directPlaces',
-        onDisbandRemove:1,
-        Mod: {
-            viewOff: true,
-            radius: 150,
-            mapType: 'PF',
-            stateIn: {informMaster:'enemyClose'},
-            stateOut: {informMaster:'enemyFar'},
-        },
-    }],
-};
-BBAdata.ObjectData.MineMod_smallCircle={
-    squadScheme: [{
-        type: 'Field',
-        objName: 'RoundField',
-        radius: 0,
-        angle: 0,
-        Oid: -1,
-        placementT:'directPlaces',
-        onDisbandRemove:1,
-        Mod: {
-            simpleFilling: 'transparent',
-            radius: 35,
-            mapType: 'PF',
-            stateIn: {explodeMaster:1},
-        },
-    },{
-        type: 'Field',
-        objName: 'RoundField',
-        radius: 0,
-        angle: 0,
-        Oid: -1,
-        placementT:'directPlaces',
-        onDisbandRemove:1,
-        Mod: {
-            viewOff: true,
-            radius: 130,
-            mapType: 'PF',
-            stateIn: {informMaster:'enemyClose'},
-            stateOut: {informMaster:'enemyFar'},
-        },
-    }],
-};
-BBAdata.ObjectData.MineMod_Cone={
-    squadScheme: [{
-        type: 'Field',
-        objName: 'ConeField',
-        radius: 0,
-        angle: 0,
-        Oid: -1,
-        placementT:'directPlaces',
-        onDisbandRemove:1,
-        Mod: {
-            simpleFilling: 'transparent',
-            radius: 210,
-            coneRad2: 0,
-            coneAngle: 20,
-            mapType: 'PF',
-            stateIn: {explodeMaster:1},
-        },
-    },{
-        type: 'Field',
-        objName: 'ConeField',
-        radius: -100,
-        angle: 0,
-        Oid: -1,
-        placementT:'directPlaces',
-        onDisbandRemove:1,
-        Mod: {
-            viewOff: true,
-            radius: 380,
-            coneRad2: 60,
-            coneAngle: 20,
-            mapType: 'PF',
-            stateIn: {informMaster:'enemyClose'},
-            stateOut: {informMaster:'enemyFar'},
-        },
-    }],
-};
-BBAdata.ObjectData.MineMod_hedgehog={
-    view:{
-        Letter: 'A',
-        LetterSize: 10,
-        Color: '#f00',
-        Angle: 0,
-    },
-};
-
-
-// FIELDS
-
-BBAdata.ObjectMods.RoundField={
-    view:{
-        circleColor:[255,255,255,0.2],
-        onBackground: 1,
-    },
-
-    M: 'region',
-    lists:{Oregion:1},
-    mapType: 'F',
-    TT: 'dust',
-
-    radius: 50,
-    undestructible: 1,
-};
-BBAdata.ObjectMods.SquareField={
-    view:{
-        color: 'red',
-        onBackground: 1,
-    },
-
-    M: 'region',
-    lists:{Oregion:1},
-    mapType: 'F',
-    TT: 'dust',
-
-    radius: 50,
-    squareAngle: 0,
-    squareLen: 50,
-    squareWidth: 15,
-    undestructible: 1,
-};
-BBAdata.ObjectMods.ConeField={
-    view:{
-        color: 'red',
-        onBackground: 1,
-    },
-
-    M: 'region',
-    lists:{Oregion:1},
-    mapType: 'F',
-    TT: 'dust',
-
-    radius: 50,
-    coneAngle: 180,
-    coneRad2: 50,
-    angle: 50,
-    undestructible: 1,
-    Flags:{},
-};
-
-BBAdata.ObjectData.RoundField={
-    LoadMods:{
-        RoundField:{},
-    },
-};
-BBAdata.ObjectData.SquareField={
-    LoadMods:{
-        SquareField:{},
-    },
-};
-BBAdata.ObjectData.ConeField={
-    LoadMods:{
-        ConeField:{},
-    },
-};
-
-BBAdata.ObjectMods.DestructionField={
-    radius:200,
-    fieldAnim: 'DestructionField',
-    PeriodDMG: {Dmg:1,T:'normal'},
-    PeriodTime: 40,
-    PeriodOffset: 50,
-    ExpireTime: 300,
-    mapType: 'F',
-
-};
-BBAdata.ObjectData.RoundDestructionField={
-    LoadMods:{
-        RoundField:{},
-        DestructionField:{},
-    },
-};
-BBAdata.ObjectData.ConeDestructionField={
-    LoadMods:{
-        ConeField:{},
-        DestructionField:{},
-    },
-    mapType: 'PMF',
-};
-
-BBAdata.ObjectMods.ElectricityField={
-    radius: 160,
-    fieldAnim: 'ElectricityField',
-    OneTimeEffect: 1,
-    OneTimeOffset: 0,
-    OneTimeDMG: {Dmg:3, T:'energy'},
-    OnDamageExpire: 1,
-    ExpireTime: 60,
-    mapType: 'PF',
-};
-BBAdata.ObjectData.RoundElectricityField={
-    LoadMods:{
-        RoundField:{},
-        ElectricityField:{},
-    },
-};
-
-BBAdata.ObjectMods.HealingField={
-    radius: 160,
-    fieldAnim: 'HealingField',
-    ExpireTime: 360,
-    PeriodTime: 30,
-    PeriodOffset: 5,
-    PeriodHeal: 1,
-    mapType: 'EF',
-};
-BBAdata.ObjectData.RoundHealingField={
-    LoadMods:{
-        RoundField:{},
-        HealingField:{},
-    },
-};
-
-BBAdata.ObjectMods.PlasmaField={
-    radius: 40,
-    fieldAnim: 'PlasmaField',
-    PeriodDMG:{Dmg:1, T:'normal'},
-    PeriodTime: 1,
-    PeriodOffset: 1,
-    PeriodDelay: 130,
-    mapType: 'F',
-    dontHit:['EB','BE'],
-    fieldAnimMoving: true,
-    onDie:{Do:'explode', DMG:{Dmg:13, T:'explo'}, Dist: 210},
-};
-BBAdata.ObjectData.RoundPlasmaField={
-    LoadMods:{
-        RoundField:{},
-        PlasmaField:{},
-    },
-};
-
-BBAdata.ObjectMods.TeleField={
-    radius: 30,
-    simpleFilling: 'rgba(0,0,255,0.2)',
-    teleportOnHit: 'withAngle',
-    teleportOnHitDist: 520,
-    teleportOnHitDistPlus: 200,
-    mapType: 'F',
-    dontHit: ['E','EB','EM'],
-};
-BBAdata.ObjectData.RoundTeleField={
-    LoadMods:{
-        RoundField:{},
-        TeleField:{},
-    },
-};
-BBAdata.ObjectData.ConeTeleField={
-    LoadMods:{
-        ConeField:{},
-        TeleField:{},
-    },
-};
-BBAdata.ObjectMods.PlayerTeleField={
-    LoadMods:{
-        TeleField:{},
-    },
-    mapType:'PF',
-    dontHit:[],
-};
-BBAdata.ObjectData.RoundPlayerTeleField={
-    LoadMods:{
-        RoundField:{},
-        PlayerTeleField:{},
-    },
-};
-
-BBAdata.ObjectMods.ShellField={
-    radius: 45,
-    fieldAnim: 'ShellField',
-    bounceType: 'diagonal',
-    angle: 0,
-    mapType: 'F',
-    dontHit:['E','EM','EB'],
-};
-BBAdata.ObjectData.RoundShellField={
-    LoadMods:{
-        RoundField:{},
-        ShellField:{},
-    },
-};
-BBAdata.ObjectData.ConeShellField={
-    LoadMods:{
-        ConeField:{},
-        ShellField:{},
-    },
-    dontHit:['P','E','EM','EB'],
-};
-
-BBAdata.ObjectMods.SlowDownShellField={
-    fieldAnim: 'ShellField',
-    SlowDownTo: 2.5,
-    SlowDownBy: 11,
-    mapType: 'F',
-    dontHit: ['E','EM','EB'],
-};
-BBAdata.ObjectData.ConeSlowDownShellField={
-    LoadMods:{
-        ConeField:{},
-        SlowDownShellField:{},
-    },
-};
-
-BBAdata.ObjectMods.WindField={
-    radius: 55,
-    fieldAnim: 'WindField',
-    vectorType: 'wind',
-    vectorForce: 5,
-    mapType: 'F',
-    dontHit: ['E','EM','EB'],
-};
-BBAdata.ObjectData.RoundWindField={
-    LoadMods:{
-        RoundField:{},
-        WindField:{},
-    },
-};
-BBAdata.ObjectData.ConeWindField={
-    LoadMods:{
-        ConeField:{},
-        WindField:{},
-    },
-};
-
-BBAdata.ObjectMods.GravityField={
-    radius: 120,
-    fieldAnim: 'GravityField',
-    vectorType: 'gravity',
-    vectorForce: 9,
-    mapType: 'F',
-    dontHit: ['E','EM','EB'],
-};
-BBAdata.ObjectData.RoundGravityField={
-    LoadMods:{
-        RoundField:{},
-        GravityField:{},
-    },
-};
-
-BBAdata.ObjectData.LaserMarker={
-    LoadMods:{
-        SquareField:{},
-    },
-    radius: 0,
-    squareAngle: 20,
-    squareLen: 450,
-    squareWidth: 0.5,
-    simpleFilling: 'red',
-    dontHit:['EB','BE','E','P','EM','A','RF'],
-};
-
-
-// ENEMIES
-
-
-BBAdata.ObjectMods.enemyShip={
-    M: 'comp',
-    lists:{Enemies:1,Ocomp:1,Omoving:1},
-    TT: 'enemy',
-    mapType: 'E',
-    lastSpeedT: 0,
-    doSquad: -1,   //??
-    dec: 50,       //??
-    ammo: -50,     //??
-    radius: 15,
-    Flags:{
-        spotEnemyFlag: false,
-        gotHitFlag: false,
-        heardExplosionFlag: false,
-        newOrderFlag: false,
-        awareAboutEnemy: false,
-        lastSeenEnemy: -1
-    },
-
-    Res:{},
-    toDo:[],
-    doingTime: -1,
-    Manouver: 'goStraight',
-
-    alarmLvl: 2,
-    speedLvl: 2,
-    lookLvl: 2,
-};
-BBAdata.ObjectMods.enemyShip2={
-    M: 'comp',
-    lists:{Enemies:1,Othink:1,Omoving:1},
-    TT: 'enemy',
-    mapType: 'E',
-    lastSpeedT: 0,
-    doSquad: -1,   //??
-    dec: 50,       //??
-    ammo: -50,     //??
-    radius: 15,
-    Flags:{
-        spotEnemyFlag: false,
-        gotHitFlag: false,
-        heardExplosionFlag: false,
-        newOrderFlag: false,
-        awareAboutEnemy: false,
-        lastSeenEnemy: -1
-    },
-
-    Res:{},
-
-    Manouver: 'goStraight',
-
-    ThinkNow:'',
-    ThinkTick: 0,
-    ThinkState: 'patroling',
-    Thinks: {},
-
-    speedLvl: 'normal',
-    lookLvl: 2,
-};
-BBAdata.ObjectMods.fighterEnemy={
-
-};
-BBAdata.ObjectMods.biggerEnemy={
-    doingNow: 'changeManouver',
-    doingTime: -1,
-    Manouver: 'goStraight',
-    toDo: [
-        {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
-    ],
-
-    spotTick: 8,
-    lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
-    ],
-    shipVariables:{
-        spotRad: {Const: 80, RandInt: 80},
-        spotRad2: {Const: 300, RandInt: 200},
-        spotAngle2: {Const: 30, RandInt: 30}
-    },
-
-};
-BBAdata.ObjectMods.viewLetterSmall={
-    view:{
-        Letter: 'A',
-        LetterSize: 16,
-        Color: 'red',
-        Angle: 0,
-        HitPattern: 'HullFire_20',
-    },
-};
-BBAdata.ObjectMods.viewLetterMedium={
-    view:{
-        Letter: 'A',
-        LetterSize: 40,
-        Color: 'red',
-        Angle: 0,
-        HitPattern: 'HullFire_40',
-    },
-};
-BBAdata.ObjectMods.viewLetterBig={
-    view:{
-        Letter: 'A',
-        LetterSize: 80,
-        Color: 'red',
-        Angle: 0,
-        HitPattern: 'HullFire_80',
-    },
-};
-
-BBAdata.ObjectData.carras={
-    LoadMods:{
-        enemyShip2:{},
-        viewLetterSmall:{view:{Letter: 'A', LetterSize: 16}},
-    },
-
-    lifeM: 5,
-    radius: 15,
-
-    weapon:[{t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5}],
-
-    Manouver: 'goStraight',
-
-    ThinkNow: 'followRoute',
-    ThinkTick: 0,
-    ThinkState: 'patroling',
-    Thinks: {
-        followEnemy:{S:{runningAway:1}, Time: 200, TimePlus: 200, Radius: 50, MaxEnemyDist: 200, AnglePlus:180},
-        followEnemy:{S:{attacking:1}, Time: 200, TimePlus: 200, Radius: 50},
-        lookAround:{S:{patroling:1}, continueThinks:1},
-        // changeManouver:{S:{patroling:1}, D:[
-        //     {M:'goStraight', Time:80, TimePlus:40, notTwice:1},
-        //     {M:'turnLeft', Time:20, TimePlus:50, maxTurn:180},
-        // ]},
-        followRoute:{S:{patroling:1}, Route:'R2'},
-    },
-
-    // doingNow: 'changeManouver',
-    // toDo: [
-    //     {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
-    //     {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, gotoAlarm: 4, goToSpotLvl: 2},
-    //     {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3 },
-    //     {N:18,T:'changeManouver2', maxAlarm: 4, minAlarm: 3, straightMin: 20, straightPlus: 80, turnMin: 10, turnPlus: 80  },
-    //     {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
-    // ],
-
-    speedArr:{
-        slow:   {S: {shipVar:'speed',Add:-2}, T:0.7},
-        normal: {S: {shipVar:'speed'}, T:2.5},
-        max:    {S: {shipVar:'speed',Add:3}, T:2.5}
-    },
-    spotTick: 8,
-    lookArr: [0,
-        {T:'single',Ref: 20, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 20, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 20, Rad: {shipVar:'spotRad2'}}
-    ],
-
-    shipVariables:{
-        speed: {Const: 6.5, Rand: 1},
-        spotRad: {Const: 80, RandInt: 80},
-        spotRad2: {Const: 300, RandInt: 200},
-        spotAngle2: {Const: 30, RandInt: 30}
-    },
-};
 
 BBAdata.ObjectData.muerto={
     LoadMods:{
@@ -969,9 +151,9 @@ BBAdata.ObjectData.royale={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -1022,9 +204,9 @@ BBAdata.ObjectData.edison={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -1072,9 +254,9 @@ BBAdata.ObjectData.hiacynt={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -1127,15 +309,15 @@ BBAdata.ObjectData.iskariot={
     ],
 
     speedArr:[0,
-        {S: {shipVar:'speed',Add:-5}, T:{shipVar:'speedT',Add:-0.6}},
-        {S: {shipVar:'speed'}, T:{shipVar:'speedT'}},
-        {S: {shipVar:'speed',Add:4}, T:{shipVar:'speedT'}}
+        {S: {SV:'speed',Add:-5}, T:{SV:'speedT',Add:-0.6}},
+        {S: {SV:'speed'}, T:{SV:'speedT'}},
+        {S: {SV:'speed',Add:4}, T:{SV:'speedT'}}
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 20, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 20, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 20, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 20, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 20, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 20, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -1180,9 +362,9 @@ BBAdata.ObjectData.tartaros={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -1235,9 +417,9 @@ BBAdata.ObjectData.belzebub={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -1280,9 +462,9 @@ BBAdata.ObjectData.koriaz={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -1324,9 +506,9 @@ BBAdata.ObjectData.fariax={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -1370,15 +552,15 @@ BBAdata.ObjectData.dregos={
     ],
 
     speedArr:[0,
-        {S: {shipVar:'speed',Add:-5}, T:{shipVar:'speedT',Add:-2}},
-        {S: {shipVar:'speed'}, T:{shipVar:'speedT'}},
-        {S: {shipVar:'speed',Add:3}, T:{shipVar:'speedT'}}
+        {S: {SV:'speed',Add:-5}, T:{SV:'speedT',Add:-2}},
+        {S: {SV:'speed'}, T:{SV:'speedT'}},
+        {S: {SV:'speed',Add:3}, T:{SV:'speedT'}}
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -1429,15 +611,15 @@ BBAdata.ObjectData.vitotas={
     ],
 
     speedArr:[0,
-      {S: {shipVar:'speed',Add:-4}, T:{shipVar:'speedT'}},
-      {S: {shipVar:'speed'}, T:{shipVar:'speedT'}},
-      {S: {shipVar:'speed',Add:3}, T:{shipVar:'speedT'}}
+      {S: {SV:'speed',Add:-4}, T:{SV:'speedT'}},
+      {S: {SV:'speed'}, T:{SV:'speedT'}},
+      {S: {SV:'speed',Add:3}, T:{SV:'speedT'}}
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -1486,9 +668,9 @@ BBAdata.ObjectData.cloaker={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -1529,15 +711,15 @@ BBAdata.ObjectData.hajaher={
     ],
 
     speedArr:[0,
-        {S: {shipVar:'speed',Add:-4}, T:{shipVar:'speedT',Add:-1.5}},
-        {S: {shipVar:'speed'}, T:{shipVar:'speedT'}},
-        {S: {shipVar:'speed',Add:3}, T:{shipVar:'speedT'}}
+        {S: {SV:'speed',Add:-4}, T:{SV:'speedT',Add:-1.5}},
+        {S: {SV:'speed'}, T:{SV:'speedT'}},
+        {S: {SV:'speed',Add:3}, T:{SV:'speedT'}}
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -1586,9 +768,9 @@ BBAdata.ObjectData.orhenes={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -1659,9 +841,9 @@ BBAdata.ObjectData.juggernaut={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -1718,9 +900,9 @@ BBAdata.ObjectData.gargamon={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -1762,15 +944,15 @@ BBAdata.ObjectData.xaurus={
     ],
 
     speedArr:[0,
-        {S:{shipVar:'speed',Add:-2}, T:1},
-        {S:{shipVar:'speed'},        T:{shipVar:'speedT',Add:1}},
-        {S:{shipVar:'speed',Add:4},  T:{shipVar:'speedT'}}
+        {S:{SV:'speed',Add:-2}, T:1},
+        {S:{SV:'speed'},        T:{SV:'speedT',Add:1}},
+        {S:{SV:'speed',Add:4},  T:{SV:'speedT'}}
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -1824,15 +1006,15 @@ BBAdata.ObjectData.zarahiash={
     ],
 
     speedArr:[0,
-        {S:{shipVar:'speed',Add:-2}, T:1},
-        {S:{shipVar:'speed'},        T:{shipVar:'speedT',Add:-1}},
-        {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        {S:{SV:'speed',Add:-2}, T:1},
+        {S:{SV:'speed'},        T:{SV:'speedT',Add:-1}},
+        {S:{SV:'speed',Add:3},  T:{SV:'speedT'}}
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -1899,9 +1081,9 @@ BBAdata.ObjectData.durishka={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad'}}
     ],
 
     shipVariables:{
@@ -1943,9 +1125,9 @@ BBAdata.ObjectData.pitagoras={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -2002,9 +1184,9 @@ BBAdata.ObjectData.patiarch={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -2050,9 +1232,9 @@ BBAdata.ObjectData.wariankiel={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -2089,15 +1271,15 @@ BBAdata.ObjectData.vuvis={
     ],
 
     speedArr:[0,
-        {S:{shipVar:'speed',Add:-2}, T:1},
-        {S:{shipVar:'speed'},        T:{shipVar:'speedT',Add:-1}},
-        {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        {S:{SV:'speed',Add:-2}, T:1},
+        {S:{SV:'speed'},        T:{SV:'speedT',Add:-1}},
+        {S:{SV:'speed',Add:3},  T:{SV:'speedT'}}
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -2140,15 +1322,15 @@ BBAdata.ObjectData.hirieshka={
     ],
 
     speedArr:[0,
-        {S:{shipVar:'speed',Add:-2}, T:1},
-        {S:{shipVar:'speed'},        T:{shipVar:'speedT',Add:-1}},
-        {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        {S:{SV:'speed',Add:-2}, T:1},
+        {S:{SV:'speed'},        T:{SV:'speedT',Add:-1}},
+        {S:{SV:'speed',Add:3},  T:{SV:'speedT'}}
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -2200,15 +1382,15 @@ BBAdata.ObjectData.nientes={
     ],
 
     speedArr:[0,
-        {S: {shipVar:'speed',Add:-2}, T:{shipVar:'speedT',Add:-0.6}},
-        {S: {shipVar:'speed'}, T:{shipVar:'speedT'}},
-        {S: {shipVar:'speed',Add:6}, T:{shipVar:'speedT'}}
+        {S: {SV:'speed',Add:-2}, T:{SV:'speedT',Add:-0.6}},
+        {S: {SV:'speed'}, T:{SV:'speedT'}},
+        {S: {SV:'speed',Add:6}, T:{SV:'speedT'}}
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 20, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 20, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 20, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 20, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 20, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 20, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -2266,15 +1448,15 @@ BBAdata.ObjectData.shieldoorz={
     ],
 
     speedArr:[{S:0, T:6},
-        {S:0.5, T:{shipVar:'speedT',Add:2}},
-        {S:{shipVar:'speed'},        T:{shipVar:'speedT',Add:-1}},
-        {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        {S:0.5, T:{SV:'speedT',Add:2}},
+        {S:{SV:'speed'},        T:{SV:'speedT',Add:-1}},
+        {S:{SV:'speed',Add:3},  T:{SV:'speedT'}}
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'single',Ref: 10, Rad: {shipVar:'spotRad'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'single',Ref: 10, Rad: {SV:'spotRad'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad'}}
     ],
 
     shipVariables:{
@@ -2318,9 +1500,9 @@ BBAdata.ObjectData.loliax={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -2367,15 +1549,15 @@ BBAdata.ObjectData.slimensen={
     ],
 
     speedArr:[0,
-        {S:{shipVar:'speed',Add:-2}, T:1},
-        {S:{shipVar:'speed'},        T:{shipVar:'speedT'}},
-        {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        {S:{SV:'speed',Add:-2}, T:1},
+        {S:{SV:'speed'},        T:{SV:'speedT'}},
+        {S:{SV:'speed',Add:3},  T:{SV:'speedT'}}
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -2422,15 +1604,15 @@ BBAdata.ObjectData.slimensen1={
     ],
 
     speedArr:[0,
-        {S:{shipVar:'speed',Add:-2}, T:1},
-        {S:{shipVar:'speed'},        T:{shipVar:'speedT'}},
-        {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        {S:{SV:'speed',Add:-2}, T:1},
+        {S:{SV:'speed'},        T:{SV:'speedT'}},
+        {S:{SV:'speed',Add:3},  T:{SV:'speedT'}}
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -2477,15 +1659,15 @@ BBAdata.ObjectData.slimensen2={
     ],
 
     speedArr:[0,
-        {S:{shipVar:'speed',Add:-2}, T:1},
-        {S:{shipVar:'speed'},        T:{shipVar:'speedT'}},
-        {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        {S:{SV:'speed',Add:-2}, T:1},
+        {S:{SV:'speed'},        T:{SV:'speedT'}},
+        {S:{SV:'speed',Add:3},  T:{SV:'speedT'}}
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -2532,15 +1714,15 @@ BBAdata.ObjectData.slimensen3={
     ],
 
     speedArr:[0,
-        {S:{shipVar:'speed',Add:-2}, T:1},
-        {S:{shipVar:'speed'},        T:{shipVar:'speedT'}},
-        {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        {S:{SV:'speed',Add:-2}, T:1},
+        {S:{SV:'speed'},        T:{SV:'speedT'}},
+        {S:{SV:'speed',Add:3},  T:{SV:'speedT'}}
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -2587,15 +1769,15 @@ BBAdata.ObjectData.slimensen4={
     ],
 
     speedArr:[0,
-        {S:{shipVar:'speed',Add:-2}, T:1},
-        {S:{shipVar:'speed'},        T:{shipVar:'speedT'}},
-        {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT'}}
+        {S:{SV:'speed',Add:-2}, T:1},
+        {S:{SV:'speed'},        T:{SV:'speedT'}},
+        {S:{SV:'speed',Add:3},  T:{SV:'speedT'}}
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -2656,9 +1838,9 @@ BBAdata.ObjectData.thunderton={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -2708,15 +1890,15 @@ BBAdata.ObjectData.doomderos={
     ],
 
     speedArr:[{S: 0, T:3},
-        {S: {shipVar:'speed',Add:-2}, T:{shipVar:'speedT',Add:-0.6}},
-        {S: {shipVar:'speed'}, T:{shipVar:'speedT'}},
-        {S: {shipVar:'speed',Add:6}, T:{shipVar:'speedT'}}
+        {S: {SV:'speed',Add:-2}, T:{SV:'speedT',Add:-0.6}},
+        {S: {SV:'speed'}, T:{SV:'speedT'}},
+        {S: {SV:'speed',Add:6}, T:{SV:'speedT'}}
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 20, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 20, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 20, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 20, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 20, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 20, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -2780,9 +1962,9 @@ BBAdata.ObjectData.hedgehog={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -2839,9 +2021,9 @@ BBAdata.ObjectData.urser={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -2892,9 +2074,9 @@ BBAdata.ObjectData.talrax={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -2955,15 +2137,15 @@ BBAdata.ObjectData.iskarianz={
     ],
 
     speedArr:[0,
-        {S: {shipVar:'speed',Add:-5}, T:{shipVar:'speedT',Add:-0.6}},
-        {S: {shipVar:'speed'}, T:{shipVar:'speedT'}},
-        {S: {shipVar:'speed',Add:4}, T:{shipVar:'speedT'}}
+        {S: {SV:'speed',Add:-5}, T:{SV:'speedT',Add:-0.6}},
+        {S: {SV:'speed'}, T:{SV:'speedT'}},
+        {S: {SV:'speed',Add:4}, T:{SV:'speedT'}}
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 20, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 20, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 20, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 20, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 20, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 20, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -3015,9 +2197,9 @@ BBAdata.ObjectData.prisander={
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{
@@ -3290,16 +2472,16 @@ BBAdata.ObjectData.saisung={
     ],
 
     speedArr:[0,
-        {S:{shipVar:'speed',Add:-4}, T:1},
-        {S:{shipVar:'speed'},        T:{shipVar:'speedT'}},
-        {S:{shipVar:'speed',Add:3},  T:{shipVar:'speedT',Add:-1}}
+        {S:{SV:'speed',Add:-4}, T:1},
+        {S:{SV:'speed'},        T:{SV:'speedT'}},
+        {S:{SV:'speed',Add:3},  T:{SV:'speedT',Add:-1}}
 
     ],
     spotTick: 8,
     lookArr: [0,
-        {T:'single',Ref: 15, Rad: {shipVar:'spotRad'}},
-        {T:'double',Ref: 10, Rad: {shipVar:'spotRad'}, Rad2: {shipVar:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
-        {T:'single',Ref: 45, Rad: {shipVar:'spotRad2'}}
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
     ],
 
     shipVariables:{

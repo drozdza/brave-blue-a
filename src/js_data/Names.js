@@ -1,4 +1,4 @@
-BBAdata['ShipShortNames']={
+BBAdata.ShipShortNames={
     M:'muerto',
     T:'tartaros',
     B:'belzebub',
@@ -49,7 +49,7 @@ BBAdata['ShipShortNames']={
     HS:'hesiolumbus',
     SI:'saisung',
 };
-BBAdata['ModuleNames'] = {
+BBAdata.ModuleNames = {
     healerProd:         'Heal',
     esteemProd:         '<div class="smaller_title">Moves Estimation</div>',
     shieldProd:         'Shield',

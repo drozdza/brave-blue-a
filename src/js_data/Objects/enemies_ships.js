@@ -1,23 +1,120 @@
-if(typeof BBAdata.ObjectMods == 'undefined') BBAdata.ObjectMods = {};
+// ENEMIES
 
-/*
-            {N:74,T:'alarmAboutIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 5, alarmRadius: 220},
-            {N:73,T:'avoidIncomingFire', FlagsRequired:{gotHitFlag:true}, minAlarm: 2, avoidTime: 12},
-            {N:72,T:'avoidIncomingFire', FlagsRequired:{incomingFireFlag:true}, minAlarm: 5, avoidTime: 12},
 
-            {N:67,T:'lowerSpeedForResources', minAlarm: 0, wantedRes: 'missilePack', wantedResR: 20, gotoSpeed: 1},
-            {N:66,T:'speedUpIfResources', minAlarm: 0, wantedRes: 'missilePack', wantedResR: 20, gotoSpeed: 2},
-            {N:61,T:'speedUp', maxSpeedLvl: 1, gotoSpeed: 2},
+BBAdata.ObjectMods.enemyShip={
+    M: 'comp',
+    lists:{Enemies:1,Ocomp:1,Omoving:1},
+    TT: 'enemy',
+    mapType: 'E',
+    lastSpeedT: 0,
+    doSquad: -1,   //??
+    dec: 50,       //??
+    ammo: -50,     //??
+    radius: 15,
+    Flags:{
+        spotEnemyFlag: false,
+        gotHitFlag: false,
+        heardExplosionFlag: false,
+        newOrderFlag: false,
+        awareAboutEnemy: false,
+        lastSeenEnemy: -1
+    },
 
-            {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
-            {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, gotoAlarm: 4, goToSpotLvl: 2},
-            {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3 },
-            {N:23,T:'stayInRegion', X:0, Y:0, Radius: 1700 },
-            {N:18,T:'changeManouver2', maxAlarm: 4, minAlarm: 3, straightMin: 20, straightPlus: 80, turnMin: 10, turnPlus: 80  },
-            {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
-            {N:1, T:'goStraight', straightMin: 200, straightPlus: 100 },
-*/
+    Res:{},
+    toDo:[],
+    doingTime: -1,
+    Manouver: 'goStraight',
 
+    alarmLvl: 2,
+    speedLvl: 2,
+    lookLvl: 2,
+};
+BBAdata.ObjectMods.enemyShip2={
+    M: 'comp',
+    lists:{Enemies:1,Othink:1,Omoving:1},
+    TT: 'enemy',
+    mapType: 'E',
+    lastSpeedT: 0,
+    doSquad: -1,   //??
+    dec: 50,       //??
+    ammo: -50,     //??
+    radius: 15,
+    Flags:{
+        spotEnemyFlag: false,
+        gotHitFlag: false,
+        heardExplosionFlag: false,
+        newOrderFlag: false,
+        awareAboutEnemy: false,
+        lastSeenEnemy: -1
+    },
+
+    Res:{},
+
+    Manouver: 'goStraight',
+
+    ThinkNow:'',
+    ThinkTick: 0,
+    ThinkState: 'patroling',
+    Thinks: {},
+
+    speedLvl: 'normal',
+    lookLvl: 2,
+};
+BBAdata.ObjectMods.fighterEnemy={
+
+};
+BBAdata.ObjectMods.biggerEnemy={
+    doingNow: 'changeManouver',
+    doingTime: -1,
+    Manouver: 'goStraight',
+    toDo: [
+        {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
+    ],
+
+    spotTick: 8,
+    lookArr: [0,
+        {T:'single',Ref: 15, Rad: {SV:'spotRad'}},
+        {T:'double',Ref: 10, Rad: {SV:'spotRad'}, Rad2: {SV:'spotRad2'}, Angle2: {spipVar:'spotAngle2'}},
+        {T:'single',Ref: 45, Rad: {SV:'spotRad2'}}
+    ],
+    shipVariables:{
+        spotRad: {Const: 80, RandInt: 80},
+        spotRad2: {Const: 300, RandInt: 200},
+        spotAngle2: {Const: 30, RandInt: 30}
+    },
+
+};
+BBAdata.ObjectMods.viewLetterSmall={
+    view:{
+        Letter: 'A',
+        LetterSize: 16,
+        Color: 'red',
+        Angle: 0,
+        HitPattern: 'HullFire_20',
+    },
+};
+BBAdata.ObjectMods.viewLetterMedium={
+    view:{
+        Letter: 'A',
+        LetterSize: 40,
+        Color: 'red',
+        Angle: 0,
+        HitPattern: 'HullFire_40',
+    },
+};
+BBAdata.ObjectMods.viewLetterBig={
+    view:{
+        Letter: 'A',
+        LetterSize: 80,
+        Color: 'red',
+        Angle: 0,
+        HitPattern: 'HullFire_80',
+    },
+};
+
+
+
+// OLD MODS
 
 
 BBAdata.ObjectMods.sitOnMap={

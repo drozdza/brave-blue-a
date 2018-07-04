@@ -153,8 +153,8 @@ GAMEobject.prototype.putObj_shipVariables = function(O){
     for(var i in {speedArr:1,lookArr:1}){
         for(var j in O[i]){
             for(var k in O[i][j]){
-                if(typeof O[i][j][k] == 'object' && typeof O[i][j][k].shipVar != 'undefined'){
-                    O[i][j][k] = this.getShipVariable(O, O[i][j][k]);
+                if(typeof O[i][j][k] == 'object' && typeof O[i][j][k].SV != 'undefined'){
+                    O[i][j][k] = this.getSViable(O, O[i][j][k]);
                 }
             }
         }
@@ -164,10 +164,10 @@ GAMEobject.prototype.putObj_shipVariables = function(O){
     this.changeSpeedLvl(O, O.speedLvl);
 }
 
-GAMEobject.prototype.getShipVariable = function(O,VarRequest){
+GAMEobject.prototype.getSViable = function(O,VarRequest){
     var variable;
 
-    var VarDef = O.shipVariables[ VarRequest.shipVar ];
+    var VarDef = O.shipVariables[ VarRequest.SV ];
     if(VarDef.Rand){
         VarDef.Const -=- Math.random()*VarDef.Rand;
         delete VarDef.Rand;
@@ -177,7 +177,7 @@ GAMEobject.prototype.getShipVariable = function(O,VarRequest){
         delete VarDef.RandInt;
     }
 
-    var V = O.shipVariables[ VarRequest.shipVar ].Const;
+    var V = O.shipVariables[ VarRequest.SV ].Const;
     if(VarRequest.Add) V -=- VarRequest.Add;
     return V;
 }
