@@ -9,8 +9,7 @@ GAMEobject.prototype.oFlag_Add = function(O, FlagName, eventTick){
 }
 
 GAMEobject.prototype.oTheState = function(O, NewState){
-    if (O.TheState == NewState)
-        return true;
+    if (O.TheState == NewState) return true;
 
     if(typeof O.TheStateLists[O.TheState] != 'undefined'){
         for(var iStateThing in O.TheStateLists[O.TheState]){
@@ -51,7 +50,7 @@ GAMEobject.prototype.oTheStageRemove_shot = function(O, StateThing){
     delete(this.Oshot[O.o]);
 }
 GAMEobject.prototype.oTheStageAdd_shot = function(O, StateThing){
-    O.WeaponType = StateThing.WeaponType;
+    O.WeaponTypes = cloneObj(StateThing.WeaponTypes);
     if (typeof this.Oshot[O.o] == 'undefined') {
         this.Oshot[O.o] = 1;
     }

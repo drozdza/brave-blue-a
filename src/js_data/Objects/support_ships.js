@@ -1073,7 +1073,7 @@ BBAdata.ObjectData.durishka={
         {N:15,T:'changeManouver', minAlarm: 7, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70},
     ],
 
-    speedLvl: 1,
+    SpeedLvl: 1,
     SpeedArr:[0,
         {S:0, T:12},
         {S:2, T:4},

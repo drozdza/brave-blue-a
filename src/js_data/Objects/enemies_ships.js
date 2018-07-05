@@ -29,11 +29,11 @@ BBAdata.ObjectMods.enemyShip2={
     ThinkLists: {},
     Thinks: {},
 
-    WeaponType: false,
+    WeaponTypes: {},
     Weapons:{},
     LookTick: 0,
     LookType: false,
-    speedLvl: 'normal',
+    SpeedLvl: 'normal',
 };
 BBAdata.ObjectMods.fighterEnemy={
 
@@ -251,6 +251,6 @@ BBAdata.ObjectMods.enemyShip={
     Manouver: 'goStraight',
 
 
-    speedLvl: 2,
+    SpeedLvl: 2,
     LookType: 2,
 };

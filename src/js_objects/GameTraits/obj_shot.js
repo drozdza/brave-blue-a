@@ -1,12 +1,40 @@
 
 GAMEobject.prototype.oShot_single = function(O){
+    var WP = O.Weapons.single;
+    if(!this.oShotCheck(O,WP)) return false;
 
-    // co z Conditions?
-    // co z gun reload
-
-
+    var PlayerAngle = getAngleAB(O,this.O[0]);
     this.putBullet(O.S,O.x,O.y,WP.Speed,WP.Dec,PlayerAngle,WP.DMG);
     WP.lastShot = this.tick;
+}
+
+GAMEobject.prototype.oShotCheck = function(O,WP){
+    if(WP.gunSpeed > (this.tick-WP.lastShot)) return false;
+    if(WP.maxSpeed && WP.maxSpeed < O.SpeedLvl) return false;
+    if(WP.minDistToEnemy && WP.minDistToEnemy < getDistAB(O,this.O[0])) return false;
+    if(WP.doingNow && WP.doingNow != O.doingNow) return false;
+    if(WP.doingTime && WP.doingTime != O.doingTime) return false;
+    if(WP.usedRes && O.Res[ WP.usedRes ].R < WP.usedResR) return false;
+
+    // ????
+    // if(WP.FlagsRequired){
+    //     var notAllFlags = false;
+    //     for(var flag in WP.FlagsRequired)
+    //         if(O.Flags[ flag ] !== WP.FlagsRequired[ flag ])
+    //             notAllFlags = true;
+    //     if(notAllFlags) return false;
+    // }
+
+    //========== GUN RELOAD
+    if(WP.gunReload){
+        if(typeof WP.lastGunReload == 'undefined')
+            WP.lastGunReload = this.tick;
+        if(WP.lastGunReload- -WP.gunReload <= this.tick)
+            WP.lastGunReload = this.tick;
+        if(WP.lastGunReload- -WP.gunWork <= this.tick)
+            return false;
+    }
+    return true;
 }
 
 GAMEobject.prototype.oShot = function(O){
@@ -15,33 +43,6 @@ GAMEobject.prototype.oShot = function(O){
         var WP = O.Weapons[wp];
 
         //========== CONDITIONS
-        if(WP.minAlarm && WP.minAlarm > O.alarmLvl) continue;
-        if(WP.maxAlarm && WP.maxAlarm < O.alarmLvl) continue;
-        if(WP.maxSpeed && WP.maxSpeed < O.speedLvl) continue;
-        if(WP.minSpeed && WP.minSpeed > O.speedLvl) continue;    // Czy w ogóle kiedyś użyjemy tego?
-        if(WP.minDistToEnemy && WP.minDistToEnemy < PlayerDist) continue;
-        if(WP.gunSpeed > (this.tick-WP.lastShot)) continue;
-        if(WP.doingNow && WP.doingNow != O.doingNow) continue;
-        if(WP.doingTime && WP.doingTime != O.doingTime) continue;
-        if(WP.usedRes && O.Res[ WP.usedRes ].R < WP.usedResR) continue;
-
-        if(WP.FlagsRequired){
-            var notAllFlags = false;
-            for(var flag in WP.FlagsRequired)
-                if(O.Flags[ flag ] !== WP.FlagsRequired[ flag ])
-                    notAllFlags = true;
-            if(notAllFlags) continue;
-        }
-
-        //========== GUN RELOAD
-        if(WP.gunReload){
-            if(typeof WP.lastGunReload == 'undefined')
-                WP.lastGunReload = this.tick;
-            if(WP.lastGunReload- -WP.gunReload <= this.tick)
-                WP.lastGunReload = this.tick;
-            if(WP.lastGunReload- -WP.gunWork <= this.tick)
-                continue;
-        }
 
         if(WP.makeAction) this.makeAction(O,o,WP.makeAction);
 

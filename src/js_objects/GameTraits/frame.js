@@ -57,8 +57,11 @@ GAMEobject.prototype.frame_decide = function(){
             this.oThink(this.O[o]);
 
 
-    for(o in this.Oshot)
-        this.oShot(o);
+    for(o in this.Oshot){
+        for(w in this.O[o].WeaponTypes){
+            this['oShot_'+w](this.O[o]);
+        }
+    }
 
 
     // Animations Decide

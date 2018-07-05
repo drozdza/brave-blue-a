@@ -82,7 +82,9 @@ GAMEobject.prototype.initObject = function(O){
     }
 
     if(typeof O.TheState != 'undefined'){
-        this.oTheState(O, O.TheState);
+        var TheState = O.TheState;
+        O.TheState = false;
+        this.oTheState(O, TheState);
     }
 
     if(typeof O.lists == 'undefined') console.log(O.T+' nie ma list!');
@@ -165,7 +167,7 @@ GAMEobject.prototype.putObj_shipVariables = function(O){
     }
 
     delete O.shipVariables;
-    this.changeSpeedLvl(O, O.speedLvl);
+    this.changeSpeedLvl(O, O.SpeedLvl);
 }
 
 GAMEobject.prototype.getSViable = function(O,VarRequest){
@@ -311,6 +313,7 @@ GAMEobject.prototype.removeObj = function(o){
     delete this.Omoving[o];
     delete this.Othink[o];
     delete this.Olook[o];
+    delete this.Oshot[o];
     delete this.Ocomp[o];
     delete this.Obullet[o];
     delete this.Oregion[o];

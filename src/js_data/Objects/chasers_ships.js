@@ -9,9 +9,9 @@ BBAdata.ObjectData.carras={
     lifeM: 5,
     radius: 15,
 
-    WeaponType: 'single',
+    WeaponTypes: {},
     Weapons:{
-        single:{t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5},
+        single:{t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 0, minDistToEnemy:450},
     },
 
     Manouver: 'goStraight',
@@ -19,7 +19,7 @@ BBAdata.ObjectData.carras={
     TheState: 'patroling',
     TheStateLists: {
         attacking: {
-            shot:{T:'shot', WeaponType: 'single'},
+            shot:{T:'shot', WeaponTypes: {single:1}},
             lookAround:{T:'lookAround', LookType:'fighting'},
         },
         patroling: {

@@ -36,7 +36,7 @@ GAMEobject.prototype.oManouver_followObject = function(O){
         if (O.Follow.thinkOnBeen) {
             O.ThinkTick = this.tick;
         }
-        this.changeSpeedLvl(O, O.speedLvl);
+        this.changeSpeedLvl(O, O.SpeedLvl);
     }
 
     if (!O.Follow.been && O.Follow.followAdjust && this.tick-O.Follow.followStart > 500) {

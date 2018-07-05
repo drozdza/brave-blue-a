@@ -4,8 +4,9 @@ GAMEobject.prototype.oThink = function(O){
         var Think = O.Thinks[iThink];
         // =============== Clasify:
         if (Think.S && typeof Think.S[O.TheState] == 'undefined') continue;
-        if (Think.skipChance && Math.random()*100 > Think.skipChance) continue;
+        // if (Think.skipChance && Math.random()*100 > Think.skipChance) continue;
         if (Think.MaxEnemyDist && getDistAB(this.O[0], O) > Think.MaxEnemyDist) continue;
+
         // =============== Do:
         switch(Think.T){
             case 'followEnemy':    this.oThink_followEnemy(O, Think); break;
@@ -16,6 +17,8 @@ GAMEobject.prototype.oThink = function(O){
 }
 
 GAMEobject.prototype.oThink_followEnemy = function(O,Think){
+    O.speed = O.SpeedArr[O.SpeedLvl].S;
+
     var Radius = 100;
     if (typeof Think.Radius != 'undefined') Radius = Think.Radius;
     var Angle = 0;
@@ -28,6 +31,7 @@ GAMEobject.prototype.oThink_followEnemy = function(O,Think){
 }
 
 GAMEobject.prototype.oThink_changeManouver = function(O,Think){
+    O.speed = O.SpeedArr[O.SpeedLvl].S;
     var i = 0;
     for (var d in Think.D)
         if (!(Think.D[d].notTwice && O.Manouver == Think.D[d].M))
@@ -143,10 +147,9 @@ GAMEobject.prototype.enemy_setFollow = function(O, Obj, Radius, Angle, thinkOnBe
     O.Manouver = 'followObject';
 }
 
-
-
+//==============================================================================
 //============================== DEPRECATED ====================================
-
+//==============================================================================
 
 
 GAMEobject.prototype.alarmAround = function(o,DistAlert,AlarmFlag){
@@ -162,10 +165,10 @@ GAMEobject.prototype.alarmAround = function(o,DistAlert,AlarmFlag){
         }
     }
 }
-GAMEobject.prototype.changeSpeedLvl = function(O,speedLvl){
-    O.speedLvl = speedLvl;
-    O.speed = O.SpeedArr[ speedLvl ].S;
-    O.speedT = O.SpeedArr[ speedLvl ].T;
+GAMEobject.prototype.changeSpeedLvl = function(O,SpeedLvl){
+    O.SpeedLvl = SpeedLvl;
+    O.speed = O.SpeedArr[ SpeedLvl ].S;
+    O.speedT = O.SpeedArr[ SpeedLvl ].T;
 }
 // WEAPONS MAKE ACTION
 GAMEobject.prototype.makeAction = function(O, Action){
@@ -242,8 +245,8 @@ GAMEobject.prototype.decide = function(O){
             // Sprawdzamy Czy akcja się nadaje
             if(TD.minAlarm && TD.minAlarm > O.alarmLvl) continue;
             if(TD.maxAlarm && TD.maxAlarm < O.alarmLvl) continue;
-            if(!isNaN(TD.maxSpeedLvl) && TD.maxSpeedLvl < O.speedLvl) continue;
-            if(TD.minSpeedLvl && TD.minSpeedLvl > O.speedLvl) continue;
+            if(!isNaN(TD.maxSpeedLvl) && TD.maxSpeedLvl < O.SpeedLvl) continue;
+            if(TD.minSpeedLvl && TD.minSpeedLvl > O.SpeedLvl) continue;
             if(TD.usedRes && O.Res[ TD.usedRes ].R < TD.usedResR) continue;
             if(TD.minDistToEnemy && TD.minDistToEnemy < PlayerDist) continue;
 
@@ -330,7 +333,7 @@ GAMEobject.prototype.decide = function(O){
             if(TD.T=='followEnemyCloaked'){
                 O.doingTime = TD.doingTime || 400;
                 O.Manouver = 'followEnemy';
-                if(O.speedLvl < 3){
+                if(O.SpeedLvl < 3){
                     this.putObj_animation('hit_blue', O.x, O.y);
                     this.changeSpeedLvl(O,3);
                     O.view.Cloaked = true;
