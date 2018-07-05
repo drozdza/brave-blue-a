@@ -57,7 +57,7 @@ GAMEobject.prototype.makeShipControlPanel = function(){
 
 }
 
-GAMEobject.prototype.decide_ship = function(e){
+GAMEobject.prototype.player_decide = function(e){
     var O = this.O[0];
     var Sx = this.SHIPold;
     O.lastSpeedT = 0;

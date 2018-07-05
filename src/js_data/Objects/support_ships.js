@@ -16,7 +16,7 @@ BBAdata.ObjectData.muerto={
     lifeM: 9,
     radius: 20,
 
-    weapon:[
+    Weapon:[
         {t:'rose', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 50, lastShot: 100, AtOnce: 9, RoseAngle: 4, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}
     ],
 
@@ -46,7 +46,7 @@ BBAdata.ObjectData.nemezis={
         onHitDieExpire:    {Do:'explode', DMG:{Dmg:4,T:'explo'}, Dist: 35},
     }],
 
-    weapon:[{t:'bomb', Speed: 10, Dec: 50, WeaponModType: 0, gunSpeed: 40, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}],
+    Weapon:[{t:'bomb', Speed: 10, Dec: 50, WeaponModType: 0, gunSpeed: 40, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}],
 
     SpeedArr:[0,
         {S:1, T:1},
@@ -72,7 +72,7 @@ BBAdata.ObjectData.warastein={
 
     WeaponMods:[{ explodePreset:'WarasteinExploCone' }],
 
-    weapon:[{t:'bomb', Speed: 10, Dec: 12, WeaponModType: 0, gunSpeed: 140, lastShot: 100, maxSpeed: 2, makeAction: {Manuover: 'goStraight', doingTime:55, gotoSpeed:1}, minAlarm: 5, minDistToEnemy: 400}],
+    Weapon:[{t:'bomb', Speed: 10, Dec: 12, WeaponModType: 0, gunSpeed: 140, lastShot: 100, maxSpeed: 2, makeAction: {Manuover: 'goStraight', doingTime:55, gotoSpeed:1}, minAlarm: 5, minDistToEnemy: 400}],
 
     toDo: [
         {N:61,T:'changeSpeed', maxSpeedLvl: 1, gotoSpeed: 2},
@@ -103,7 +103,7 @@ BBAdata.ObjectData.dandares={
     ShieldsRejection:{maxShield:1},
 
     Res: {'prodSquad': {R:5,M:5,T:0}},
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'prodSquad', gunSpeed: 22, maxSpeed: 2, doNextWeapon: true},
         {t:'healSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prodSquad', usedResR: 1, maxSpeed: 2, doNextWeapon: true},
         {t:'produceSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prodSquad', usedResR: 1, maxSpeed: 2, doNextWeapon: true},
@@ -133,7 +133,7 @@ BBAdata.ObjectData.royale={
     lifeM: 16,
     radius: 20,
 
-    weapon:[
+    Weapon:[
         {t:'missileCrown', DMG:{Dmg:1,T:'explo'}, Dec: 95, Speed: 12, gunSpeed: 120, lastShot: 0, minDistToEnemy: 400},
     ],
 
@@ -178,7 +178,7 @@ BBAdata.ObjectData.edison={
     radius: 20,
 
     Res: {'fieldCharges': {R:10,M:10,T:0}},
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'fieldCharges', gunSpeed: 16, maxSpeed: 2, FlagsRequired:{squadFull:false}, doNextWeapon: true},
         {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, maxSpeed: 2, FlagsRequired:{squadFull:false }},
     ],
@@ -232,7 +232,7 @@ BBAdata.ObjectData.hiacynt={
     radius: 15,
 
     Res: {'shieldBlobProd': {R:0,M:10,T:0}},
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'shieldBlobProd', gunSpeed: 20, maxSpeed: 2, doNextWeapon: true},
         {t:'changeAction', minSpeed: 3, minDistToEnemy: 50, makeAction: {doingNow:'shooting', gotoSpeed:2, doingTime:31, Manouver:'goStraight'}, doingNow:'followEnemy', usedRes:'shieldBlobProd', usedResR: 10},
         {t:'shotShieldBlob', RandAngle:20, Dec: 25, Speed: 16, gunSpeed: 3, lastShot: 0, doingNow:'shooting'},
@@ -292,7 +292,7 @@ BBAdata.ObjectData.iskariot={
     }],
 
     Res: {'onHitJump': {M:3,R:3,T:0}},
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'onHitJump', gunSpeed: 300, maxSpeed: 2, doNextWeapon: true},
         {t:'double2', DMG:{Dmg:1,T:'normal'}, Dec: 35, Speed: 12, gunSpeed: 20, lastShot: 100, maxSpeed: 2, minAlarm: 5},
     ],
@@ -343,7 +343,7 @@ BBAdata.ObjectData.tartaros={
     lifeM: 9,
     radius: 27,
 
-    weapon:[
+    Weapon:[
         {t:'double', Speed:12, Dec:30, DMG:{Dmg:1,T:'normal'}, doingNow:'shooting', gunSpeed:1,  maxSpeed:2},
         {t:'changeAction', makeAction: {Manuover:'goStraight', doingNow:'shooting', doingTime:10, doNotInterupt:true}, gunSpeed: 110, lastShot: 100,  minAlarm: 5, minDistToEnemy: 400}
     ],
@@ -397,7 +397,7 @@ BBAdata.ObjectData.belzebub={
         {explodePreset:'HugeExplosionRose'},
     ],
 
-    weapon:[
+    Weapon:[
         {t:'dropSpaceMine', ShotMine: true, WeaponModRandom: 4, gunSpeed: 120, lastShot: 100,  minAlarm: 5, minDistToEnemy: 260},
         {t:'dropSpaceMine', gunSpeed: 750, WeaponModType: 4, lastShot: 100,  maxAlarm: 4},
 
@@ -444,7 +444,7 @@ BBAdata.ObjectData.koriaz={
     radius: 10,
 
     ShieldsRejection:{maxShield:1},
-    weapon:[
+    Weapon:[
         {t:'addMaxShield', Radius: 500, shieldTime: 15, gunSpeed: 12, lastShot: 100},
     ],
 
@@ -488,7 +488,7 @@ BBAdata.ObjectData.fariax={
     lifeM: 9,
     radius: 20,
 
-    weapon:[
+    Weapon:[
         {t:'shootHealingMissile', Radius: 350, gunSpeed: 20, lastShot: 100},
     ],
 
@@ -533,7 +533,7 @@ BBAdata.ObjectData.dregos={
     radius: 15,
 
     Res: {'missilePack': {R:6,M:6,T:0}},
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'missilePack', gunSpeed: 90, maxSpeed: 1, doNextWeapon: true},
         {t:'missilesDouble', gunSpeed: 140, lastShot: 100, usedRes: 'missilePack', usedResR: 1, minSpeed: 2, minAlarm: 5, minDistToEnemy: 500},
     ],
@@ -586,7 +586,7 @@ BBAdata.ObjectData.vitotas={
     lifeM: 5,
     radius: 15,
 
-    weapon:[
+    Weapon:[
         {t:'laserAim', minDistToEnemy: 400, lastShot: 100, gunSpeed: 100, makeAction:{ doingNow:'laserAim', doingTime:30, Manouver: 'goStraight', doNotInterupt: true}},
         {t:'laserShoot', DMG:{Dmg:4,T:'energy'}, Distance: 450, gunSpeed: 1, lastShot: 0, doingNow: 'laserAim', doingTime: 1, makeAction:{doingNow:'followEnemy', doingTime: 40, doNotInterupt: true}},
     ],
@@ -646,7 +646,7 @@ BBAdata.ObjectData.cloaker={
     radius: 15,
 
     Res: {'cloakingProd': {R:0,M:10,T:0}},
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'cloakingProd', gunSpeed: 22, maxSpeed: 2, doNextWeapon: true},
         {t:'changeAction', minSpeed: 3, minDistToEnemy: 50, makeAction: {doingNow:'shooting', gotoSpeed:2, doingTime:8, Manouver:'goStraight', unCloak:true}, doingNow:'followEnemyCloaked', usedRes:'cloakingProd', usedResR: 10},
         {t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 25, Speed: 14, gunSpeed: 2, lastShot: 0, doingNow:'shooting'},
@@ -694,7 +694,7 @@ BBAdata.ObjectData.hajaher={
     lifeM: 6,
     radius: 15,
 
-    weapon:[
+    Weapon:[
         {t:'getAcurateAngle', Dec: 50, Speed: 10, maxSpeed: 2, minAlarm: 5, doNextWeapon:true},
         {t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 25, lastShot: 100, maxSpeed: 2, minAlarm: 5}
     ],
@@ -746,7 +746,7 @@ BBAdata.ObjectData.orhenes={
     radius: 40,
 
     Res: {'prodSquad': {R:40,M:80,T:0}},
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'prodSquad', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
         {t:'produceSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prodSquad', usedResR: 10, maxSpeed: 2, minDistToEnemy:400, doNextWeapon: true},
     ],
@@ -819,7 +819,7 @@ BBAdata.ObjectData.juggernaut={
     }],
 
     Res: {energyField: {R:20,M:20,T:0}, exploShield: {R:2,M:2,T:0}},
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'energyField', gunSpeed: 60, maxSpeed: 2, doNextWeapon: true},
         {t:'refilResource', resource: 'exploShield', gunSpeed: 240, maxSpeed: 2, doNextWeapon: true},
         {t:'bomb', Speed: 10, Dec: 50, WeaponModRandom: 4, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}
@@ -879,7 +879,7 @@ BBAdata.ObjectData.gargamon={
     }],
 
     Res: {'missilePack': {R:0,M:10,T:0}},
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'missilePack', gunSpeed: 18, maxSpeed: 2, doNextWeapon: true},
         {t:'changeAction', makeAction: {doingNow:'shooting', doingTime: 33, Manouver:'goStraight'}, doingNow:'followEnemy', doingTime:1, usedRes:'missilePack', usedResR: 10},
         {t:'missileX5', DMG:{Dmg:1,T:'explo'}, Dec: 25, Speed: 14, gunSpeed: 8, lastShot: 0, doingNow:'shooting', minDistToEnemy: 500},
@@ -929,7 +929,7 @@ BBAdata.ObjectData.xaurus={
 
 
     Res: {'ammoPack': {R:0,M:10,T:0}},
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'ammoPack', gunSpeed: 20, maxSpeed: 2, doNextWeapon: true},
         {t:'changeAction', minDistToEnemy: 70, makeAction: {doingNow:'shooting', gotoSpeed: 2, doingTime: 20, Manouver:'goStraight', doNotInterupt:true}, doingNow:'followEnemy', usedRes:'ammoPack', usedResR: 10 },
         {t:'crabBullets', DMG:{Dmg:1,T:'normal'}, Dec: 35, Speed: 12, gunSpeed: 5, lastShot: 0, doingNow:'shooting', minDistToEnemy: 500},
@@ -979,7 +979,7 @@ BBAdata.ObjectData.zarahiash={
     radius: 15,
 
     Res: {'fieldCharges': {R:0,M:10,T:0}},
-    weapon:[
+    Weapon:[
         {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true},maxSpeed: 2},
         {t:'refilResource', resource: 'fieldCharges', gunSpeed: 20, maxSpeed: 2, doNextWeapon: true},
         {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', minDistToEnemy:500, usedResR: 10, doingNow:'followEnemy', makeAction:{doingNow:'followEnemy', doingTime:220, Manouver:'followEnemy',doNotInterupt:true}},
@@ -1057,7 +1057,7 @@ BBAdata.ObjectData.durishka={
     radius: 20,
 
     ShieldsRejection:{maxShield:1},
-    weapon:[
+    Weapon:[
         {t:'changeAction', makeAction: {doingNow:'standBy', gotoSpeed: 1, gotoAlarm: 4, doingTime: 30, changeView: 'view1', Manouver: 'goStraight', doNotInterupt:true}, doingNow:'lowerAlarmLvl'},
         {t:'changeAction', makeAction: {doingNow:'shooting', doingTime: 30, changeView: 'view2', gotoAlarm: 7, Manouver: 'followEnemy', doNotInterupt:true}, doingNow:'standBy', minAlarm: 5, maxAlarm: 6},
         {t:'changeAction', doingNow: 'shooting', doingTime: 1, makeAction: {gotoSpeed: 2, gotoAlarm: 7, doingNow:'changeManouver', doingTime: 30, Manouver:'goStraight'}},
@@ -1109,7 +1109,7 @@ BBAdata.ObjectData.pitagoras={
         explodePreset: 'NailsCircleToCenter',
     }],
 
-    weapon:[{t:'bomb', Speed: 10, Dec: 50, WeaponModType: 0, gunSpeed: 40, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}],
+    Weapon:[{t:'bomb', Speed: 10, Dec: 50, WeaponModType: 0, gunSpeed: 40, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 400}],
 
     doingNow: 'changeManouver',
     doingTime: -1,
@@ -1164,7 +1164,7 @@ BBAdata.ObjectData.patiarch={
         HitActionObj: 'bounce',
     }],
     ShieldsRejection:{dmgTransfer:1},
-    weapon:[
+    Weapon:[
         {t:'giveDamangeTransfer', gunSpeed: 12, lastShot: 100, Radius: 350, immunityTime: 15},
         {t:'healSelf', gunSpeed: 30, lastShot: 100}
     ],
@@ -1211,7 +1211,7 @@ BBAdata.ObjectData.wariankiel={
     radius: 12,
 
     Res: {},
-    weapon:[
+    Weapon:[
         {t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 25, Speed: 10, gunSpeed: 2, lastShot: 0, gunWork: 6, gunReload: 60, minDistToEnemy: 250, FlagsRequired:{noStar: false}},
     ],
 
@@ -1260,7 +1260,7 @@ BBAdata.ObjectData.vuvis={
     radius: 9,
 
     Res: {},
-    weapon:[{t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5}],
+    Weapon:[{t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5}],
 
     doingNow: 'changeManouver',
     doingTime: -1,
@@ -1306,7 +1306,7 @@ BBAdata.ObjectData.hirieshka={
     radius: 25,
 
     Res: {},
-    weapon:[
+    Weapon:[
         {t:'double2', Speed:15, Dec:30, DMG:{Dmg:1,T:'normal'}, Wide: 15, doingNow:'shooting', gunSpeed: 6},
         {t:'changeAction', makeAction: {Manuover:'goStraight', doingNow:'shooting', doingTime:30, doNotInterupt:true}, gunSpeed: 110, lastShot: 100,  minAlarm: 5, minDistToEnemy: 400}
     ],
@@ -1357,7 +1357,7 @@ BBAdata.ObjectData.nientes={
     radius: 15,
 
     Res: {'fieldCharges': {R:10, M:10,T:0}},
-    weapon:[
+    Weapon:[
         {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, maxSpeed: 2, FlagsRequired:{squadFull:false }},
         {t:'refilResource', resource: 'fieldCharges', gunSpeed: 16, maxSpeed: 2, FlagsRequired:{squadFull:false}, doNextWeapon: true},
     ],
@@ -1417,7 +1417,7 @@ BBAdata.ObjectData.shieldoorz={
     radius: 25,
 
     Res: {'fieldCharges': {R:0,M:10,T:0}},
-    weapon:[
+    Weapon:[
         {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true}, minSpeed: 2},
         {t:'refilResource', resource: 'fieldCharges', gunSpeed: 30, minSpeed: 2, doNextWeapon: true},
         {t:'double2', Speed:10, Dec:50, DMG:{Dmg:1,T:'normal'}, Wide: 15, gunSpeed: 1, gunWork: 11, gunReload: 50, gunSiteChange: 3, maxSpeed:1, minSpeed:1},
@@ -1482,7 +1482,7 @@ BBAdata.ObjectData.loliax={
 
     ShieldsRejection:{absorbtionShield:1},
 
-    weapon:[
+    Weapon:[
         {t:'shootShieldAddMissile', Radius: 350, gunSpeed: 20, lastShot: 100},
     ],
 
@@ -1531,7 +1531,7 @@ BBAdata.ObjectData.slimensen={
     onDie: {Do:'explode', explodeType: 'putObjs', objRandAngle:true, objName:'slimensen1', objMin:2, objRand:2},
 
     Res: {'mergeAbility': {R:0,M:20,T:0}},
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'mergeAbility', gunSpeed: 120, maxSpeed: 2, doNextWeapon: true},
         {t:'rose', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 7, gunSpeed: 20, lastShot: 100, AtOnce: 60, RoseAngle: 6, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
 
@@ -1588,7 +1588,7 @@ BBAdata.ObjectData.slimensen1={
     onDieHideExplosion: true,
     onDie: {Do:'explode', explodeType: 'putObjs', objRandAngle:true, objName:'slimensen2', objMin:2, objRand:2},
 
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'mergeAbility', gunSpeed: 60, maxSpeed: 2, doNextWeapon: true},
         {t:'mergeWith', doingNow: 'mergeWith', doNextWeapon: true},
         {t:'rose', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 13, gunSpeed: 30, lastShot: 100, AtOnce: 11, RoseAngle: 4, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
@@ -1643,7 +1643,7 @@ BBAdata.ObjectData.slimensen2={
     onDieHideExplosion: true,
     onDie: {Do:'explode', explodeType: 'putObjs', objRandAngle:true, objName:'slimensen3', objMin:2, objRand:2},
 
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'mergeAbility', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
         {t:'mergeWith', doingNow: 'mergeWith', doNextWeapon: true},
         {t:'double2', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 13, gunSpeed: 5, gunWork: 20, gunReload: 90, Wide:10, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
@@ -1698,7 +1698,7 @@ BBAdata.ObjectData.slimensen3={
     onDieHideExplosion: true,
     onDie: {Do:'explode', explodeType: 'putObjs', objRandAngle:true, objName:'slimensen4', objMin:2, objRand:2},
 
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'mergeAbility', gunSpeed: 15, maxSpeed: 2, doNextWeapon: true},
         {t:'mergeWith', doingNow: 'mergeWith', doNextWeapon: true},
         {t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 13, gunSpeed: 5, gunWork: 20, gunReload: 90, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
@@ -1753,7 +1753,7 @@ BBAdata.ObjectData.slimensen4={
     onDieHideExplosion: false,
     onDie: false,
 
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'mergeAbility', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
         {t:'mergeWith', doingNow: 'mergeWith', doNextWeapon: true},
         {t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 13, gunSpeed: 30, lastShot: 100, maxSpeed: 2, minAlarm: 5,minDistToEnemy:500},
@@ -1819,7 +1819,7 @@ BBAdata.ObjectData.thunderton={
     }],
 
     Res: {'exploShield': {R:4,M:4,T:0}},
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'exploShield', gunSpeed: 240, maxSpeed: 2, doNextWeapon: true},
         {t:'bomb', Speed: 0.1, Teleport:{ Dist: 35, Angle: 270, AngleRand: 180}, Dec: 10, WeaponModType: 0, gunSpeed: 10, lastShot: 100, maxSpeed: 2, minAlarm: 5, gunWork:80, gunReload:900, minDistToEnemy:500},
     ],
@@ -1865,7 +1865,7 @@ BBAdata.ObjectData.doomderos={
     radius: 30,
 
     Res: {'fieldCharges': {R:0,M:10,T:0}},
-    weapon:[
+    Weapon:[
         {t:'shootSquadMember', Speed: 7, MemberAge: 130, DieTime: 100},
         {t:'produceSquad', gunSpeed: 1, makeAction: {doingNow:'followEnemyX', gotoSpeed: 0, doingTime: 130, Manouver:'followEnemy', doNotInterupt:true}, lastShot: 100, usedRes:'fieldCharges', usedResR: 10, maxSpeed: 2, FlagsRequired:{squadFull:false}, minDistToEnemy:450},
         {t:'refilResource', resource: 'fieldCharges', gunSpeed: 10, maxSpeed: 2, FlagsRequired:{squadFull:false}},
@@ -1928,7 +1928,7 @@ BBAdata.ObjectData.hedgehog={
     ShieldsRejection:{maxShield:1},
 
     Res: {'prodSquad': {R:5,M:5,T:0}},
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'prodSquad', gunSpeed: 60, maxSpeed: 2, doNextWeapon: true},
         {t:'produceSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prodSquad', usedResR: 5, maxSpeed: 2, doNextWeapon: true},
     ],
@@ -1989,7 +1989,7 @@ BBAdata.ObjectData.urser={
     radius: 20,
 
     Res: {'fieldCharges': {R:0,M:10,T:0}},
-    weapon:[
+    Weapon:[
         {t:'killSquadMember', gunSpeed: 55, FlagsRequired:{squadFull:true},maxSpeed: 2},
         {t:'refilResource', resource: 'fieldCharges', gunSpeed: 20, maxSpeed: 2, doNextWeapon: true},
         {t:'produceSquad', gunSpeed: 1, lastShot: 100, usedRes:'fieldCharges', minDistToEnemy:500, usedResR: 10, doingNow:'followEnemy', makeAction:{doingNow:'followEnemy', doingTime:220, Manouver:'followEnemy',doNotInterupt:true}},
@@ -2054,7 +2054,7 @@ BBAdata.ObjectData.talrax={
         {explodePreset:'ExplosionWorm2'},
     ],
 
-    weapon:[
+    Weapon:[
         {t:'bomb', Speed: 10, Dec: 10, WeaponModRandom: 4, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
     ],
 
@@ -2120,7 +2120,7 @@ BBAdata.ObjectData.iskarianz={
     }],
 
     Res: {onHitMaxShield: {R:2,M:2,T:0}},
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'onHitMaxShield', gunSpeed: 450, maxSpeed: 2, doNextWeapon: true},
         {t:'double2', DMG:{Dmg:1,T:'normal'}, Dec: 35, Speed: 12, gunSpeed: 5, gunWork: 20, gunReload: 90, lastShot: 100, maxSpeed: 2, minAlarm: 5},
     ],
@@ -2176,7 +2176,7 @@ BBAdata.ObjectData.prisander={
         {explodePreset:'StrikeOfMines'},
     ],
 
-    weapon:[
+    Weapon:[
         {t:'bomb', Speed: 10, Dec: 10, WeaponModRandom: 2, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600},
         {t:'missile', DMG:{Dmg:0,T:'normal'}, explodePreset:'EyeOfMines', Dec: 95, Speed: 12, gunSpeed: 120, lastShot: 0, minDistToEnemy: 400},
     ],
@@ -2229,7 +2229,7 @@ BBAdata.ObjectData.yehes={
         {explodePreset:'ElectroBubbleShield'},
     ],
 
-    weapon:[
+    Weapon:[
         {t:'bomb', Speed: 10, Dec: 10, WeaponModRandom: 3, gunSpeed: 100, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
     ],
 
@@ -2276,7 +2276,7 @@ BBAdata.ObjectData.yehestis={
         {explodePreset:'ShieldsBlobBomb'},
     ],
 
-    weapon:[
+    Weapon:[
         {t:'bomb', Speed: 10, Dec: 10, WeaponModRandom: 3, gunSpeed: 80, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
     ],
 
@@ -2323,7 +2323,7 @@ BBAdata.ObjectData.yeheslar={
         {explodePreset:'TeleWall'},
     ],
 
-    weapon:[
+    Weapon:[
         {t:'bomb', Speed: 10, Dec: 10, WeaponModRandom: 3, gunSpeed: 80, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
     ],
 
@@ -2370,7 +2370,7 @@ BBAdata.ObjectData.yebuhas={
         {explodePreset:'GraviBall'},
     ],
 
-    weapon:[
+    Weapon:[
         {t:'bomb', Speed: 10, Dec: 10, WeaponModRandom: 3, gunSpeed: 80, lastShot: 100, maxSpeed: 2, minAlarm: 5, minDistToEnemy: 600}
     ],
 
@@ -2415,7 +2415,7 @@ BBAdata.ObjectData.hesiolumbus={
         {explodePreset:'HealingField'},
     ],
 
-    weapon:[
+    Weapon:[
         {t:'shootHealingBomb', WeaponModType: 0, Speed: 6, Dec: 60, gunSpeed: 600, lastShot: 100, Radius: 360, minimalDmg: 8}
     ],
 
@@ -2455,7 +2455,7 @@ BBAdata.ObjectData.saisung={
     radius: 25,
 
     Res: {'prodSquad': {R:18, M:18,T:0}},
-    weapon:[
+    Weapon:[
         {t:'refilResource', resource: 'prodSquad', gunSpeed: 30, maxSpeed: 2, doNextWeapon: true},
         {t:'produceSquad', gunSpeed: 0, lastShot: 0, usedRes: 'prodSquad', usedResR: 3, maxSpeed: 2, minDistToEnemy:400, doNextWeapon: true},
     ],

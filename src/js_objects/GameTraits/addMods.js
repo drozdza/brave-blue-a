@@ -151,7 +151,7 @@ GAMEobject.prototype.removeFromToDoList = function(O, name){
     O.toDo = NtoDo;
 }
 GAMEobject.prototype.addToWeapon = function(O,Weapon){
-    O.weapon.unshift(cloneObj(Weapon));
+    O.Weapons[Weapon.T] = cloneObj(Weapon);
 }
 GAMEobject.prototype.addToTeam = function(O, Team){
     var Setting = this.MapSetting;

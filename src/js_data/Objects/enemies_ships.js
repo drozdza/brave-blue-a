@@ -1,44 +1,6 @@
 // ENEMIES
 
 
-BBAdata.ObjectMods.enemyShip={
-    M: 'comp',
-    lists:{Enemies:1,Ocomp:1,Omoving:1},
-    TT: 'enemy',
-    mapType: 'E',
-    lastSpeedT: 0,
-    doSquad: -1,   //??
-    dec: 50,       //??
-    ammo: -50,     //??
-    radius: 15,
-    Flags:{
-        ResourcesEnds: false,
-        ResourcesLow: false,
-        WeaponEnds: false,
-        LastWeaponShot: 0,
-        WeaponLoading: false,
-
-        I_ReadyForEnemy: -1000,
-        II_EnemyIsThere: -1000,
-        III_SomeoneSeenEnemy: -1000,
-        IV_SeenEnemy: -1000,
-        V_NearbySeesEnemy: -1000,
-        VI_ISeeEnemy: -1000,
-
-        LowLife: false,
-        NearbyGotHit: -1000,
-        IGotHit: -1000,
-    },
-
-    Res:{},
-    toDo:[],
-    doingTime: -1,
-    Manouver: 'goStraight',
-
-
-    speedLvl: 2,
-    LookType: 2,
-};
 BBAdata.ObjectMods.enemyShip2={
     M: 'comp',
     lists:{Enemies:1,Othink:1,Omoving:1},
@@ -69,6 +31,7 @@ BBAdata.ObjectMods.enemyShip2={
     Thinks: {},
 
     WeaponType: false,
+    Weapons:{},
     LookTick: 0,
     LookType: false,
     speedLvl: 'normal',
@@ -172,7 +135,7 @@ BBAdata.ObjectMods.allAvoid={
 };
 BBAdata.ObjectMods.healthSplit={
     addTo:['carras'],
-    weapon:[{t:'healthSplit', gunSpeed: 5, lastShot: 100, minHealth: 1, Radius: 200, doNextWeapon: true}],
+    Weapon:[{t:'healthSplit', gunSpeed: 5, lastShot: 100, minHealth: 1, Radius: 200, doNextWeapon: true}],
 };
 BBAdata.ObjectMods.carras25health={
     addTo:['carras'],
@@ -249,4 +212,46 @@ BBAdata.ObjectMods.vuvisOrbit={
     toDo:[
         {N:58,T:'goOrbit', minAlarm: 5},
     ],
+};
+
+
+// DEPRECATED:
+
+BBAdata.ObjectMods.enemyShip={
+    M: 'comp',
+    lists:{Enemies:1,Ocomp:1,Omoving:1},
+    TT: 'enemy',
+    mapType: 'E',
+    lastSpeedT: 0,
+    doSquad: -1,   //??
+    dec: 50,       //??
+    ammo: -50,     //??
+    radius: 15,
+    Flags:{
+        ResourcesEnds: false,
+        ResourcesLow: false,
+        WeaponEnds: false,
+        LastWeaponShot: 0,
+        WeaponLoading: false,
+
+        I_ReadyForEnemy: -1000,
+        II_EnemyIsThere: -1000,
+        III_SomeoneSeenEnemy: -1000,
+        IV_SeenEnemy: -1000,
+        V_NearbySeesEnemy: -1000,
+        VI_ISeeEnemy: -1000,
+
+        LowLife: false,
+        NearbyGotHit: -1000,
+        IGotHit: -1000,
+    },
+
+    Res:{},
+    toDo:[],
+    doingTime: -1,
+    Manouver: 'goStraight',
+
+
+    speedLvl: 2,
+    LookType: 2,
 };

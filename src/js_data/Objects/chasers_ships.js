@@ -10,7 +10,7 @@ BBAdata.ObjectData.carras={
     radius: 15,
 
     WeaponType: 'single',
-    weapon:{
+    Weapons:{
         single:{t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 100, maxSpeed: 2, minAlarm: 5},
     },
 

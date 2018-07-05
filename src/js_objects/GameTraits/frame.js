@@ -7,7 +7,7 @@ GAMEobject.prototype.frame_decide = function(){
     this.checkHits(0);
 
     if(this.C.playerDead===0 && this.playerEndGame===false)
-        this.decide_ship();
+        this.player_decide();
 
 
     this.MSship-=- ((new Date()).getTime() - MS);
