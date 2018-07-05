@@ -1,6 +1,5 @@
 // ENEMIES
 
-
 BBAdata.ObjectMods.enemyShip2={
     M: 'comp',
     lists:{Enemies:1,Othink:1,Omoving:1},

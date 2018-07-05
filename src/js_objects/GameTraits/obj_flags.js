@@ -1,17 +1,11 @@
 GAMEobject.prototype.oFlag_Add = function(O, FlagName, eventTick){
-    var tick = this.tick;
-    if (typeof eventTick != 'undefined') tick = eventTick;
 
     // This as settings
     if (FlagName == 'VI_ISeeEnemy') {
         this.oTheState(O, 'attacking');
     }
 
-
-    //changeTheState
-
-
-    O.Flags['FlagName'] = tick;
+    O.Flags['FlagName'] = eventTick;
 }
 
 GAMEobject.prototype.oTheState = function(O, NewState){
