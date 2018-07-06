@@ -36,7 +36,7 @@ BBAdata.ObjectData.carras={
         //     {M:'goStraight', Time:80, TimePlus:40, notTwice:1},
         //     {M:'turnLeft', Time:20, TimePlus:50, maxTurn:180},
         // ]},
-        avoidIncomingFire:{T:'avoidIncomingFire', S:{}},
+        avoidIncomingFire:{T:'avoidIncomingFire', S:{}, Time: 8, TimePlus: 10, dontInterupt:true},
         followRoute:{T:'followRoute', S:{patroling:1}, Route:'R2'},
     },
     FlagReactions: {

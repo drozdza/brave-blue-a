@@ -25,6 +25,7 @@ GAMEobject.prototype.oFlag_changeTheState = function(O, FlagReaction, eventTick)
     this.oTheState(O, FlagReaction.TheState);
 }
 GAMEobject.prototype.oFlag_makeThink = function(O, FlagReaction, eventTick){
+    if(O.DoNotInteruptThinksUntil > this.tick) return false;    
     if(!this.oFlagCheckTheStates(O, FlagReaction)) return false;
 
     var Think = O.Thinks[ FlagReaction.Think ];

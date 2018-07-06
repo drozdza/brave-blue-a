@@ -245,7 +245,11 @@ GAMEobject.prototype.makeDMG = function(o,DMG,q){
     CanvasManager.requestCanvas(O);
     if(O.view && O.view.onBackground)
         CanvasManager.CBM.changeObjectPosition(O);
-    if(O.Flags) O.Flags.gotHitFlag = true;
+
+    if(O.o != 0){
+        if(O.Flags) this.oFlagAdd(O, 'IGotHit');
+        if(O.lowLifePercentage && (O.life/O.lifeM)*100 < O.lowLifePercentage) this.oFlagAdd(O, 'LowLife');
+    }
 
     if(O.life <= 0) this.dieObj(O);
     return true;

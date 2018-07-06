@@ -10,6 +10,7 @@ BBAdata.ObjectMods.enemyShip2={
     dec: 50,       //??
     ammo: -50,     //??
     radius: 15,
+    lowLifePercentage: 35,
     Flags:{
         ResourcesEnds: false,
         ResourcesLow: false,
@@ -28,13 +29,15 @@ BBAdata.ObjectMods.enemyShip2={
         NearbyGotHit: -1000,
         IGotHit: -1000,
     },
-    
+    FlagReactions: {},
+
     Res:{},
 
     Manouver: 'goStraight',
 
     ThinkNow:'',
     ThinkTick: 0,
+    DoNotInteruptThinksUntil: 0,
     TheState: 'patroling',
     ThinkLists: {},
     Thinks: {},

@@ -1,5 +1,5 @@
 if(BBAdata.GET.MAPSMODE == 2){
-BBAdata.MAPS.TheNewBegining={
+BBAdata.MAPS.TheNewBeginning={
     Ship:{Start:{X: 0, Y: 0, A:270}},
     TeamMods:{
         'team1':['orangeXColor'],

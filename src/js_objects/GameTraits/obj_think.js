@@ -118,10 +118,23 @@ GAMEobject.prototype.oThink_followRoute = function(O,Think){
 }
 
 GAMEobject.prototype.oThink_avoidIncomingFire = function(O,Think){
-    switch(parseInt(Math.random()*2)){
-        case 0: O.Manouver = 'turnRight'; O.doingTime = 15; break;
-        case 1: O.Manouver = 'turnLeft';  O.doingTime = 15; break;
+    if(O.lastSpeedT > 0) {
+        O.Manouver = 'turnRight';
+    } else if(O.lastSpeedT < 0) {
+        O.Manouver = 'turnLeft';
+    } else if(parseInt(Math.random()*2)){
+        O.Manouver = 'turnRight';
+    } else {
+        O.Manouver = 'turnLeft';
     }
+
+    var tick = this.tick- -10;
+    if(Think.Time) tick = this.tick- -Think.Time;
+    if(Think.TimePlus) tick-=-parseInt(Math.random()*Think.TimePlus);
+    O.ThinkTick = tick;
+
+    if(Think.dontInterupt)
+        O.DoNotInteruptThinksUntil = O.ThinkTick;
 }
 
 GAMEobject.prototype.enemy_setFollow = function(O, Obj, Radius, Angle, thinkOnBeen, adjustSpeed){
@@ -231,11 +244,6 @@ GAMEobject.prototype.decide = function(O){
             O.Flags.lastSeenEnemy = this.tick;
             O.Flags.awareAboutEnemy = true;
         }
-
-        if(O.Flags.gotHitFlag==true && O.T!='avoidIncomingFire')
-            O.doingTime = -1;
-        if(O.Flags.incomingFireFlag==true && O.T!='avoidIncomingFire')
-            O.doingTime = -1;
     }
 
     // Jak się skończy czas to szukamy kolejnego zadania
@@ -303,20 +311,6 @@ GAMEobject.prototype.decide = function(O){
             if(TD.T=='alarmAboutIncomingFire'){
                 this.alarmAround(o,TD.alarmRadius,'incomingFireFlag');
                 continue;
-            }
-
-            if(TD.T=='avoidIncomingFire'){
-                switch(parseInt(Math.random()*2)){
-                    case 0: O.Manouver = 'turnRight'; O.doingTime = TD.avoidTime; break;
-                    case 1: O.Manouver = 'turnLeft';  O.doingTime = TD.avoidTime; break;
-                }
-            }
-
-            if(TD.T=='followEnemy'){
-                O.doingTime = TD.doingTime || 50;
-                O.Manouver = 'followEnemy';
-                if(!isNaN(TD.gotoSpeed))
-                    this.changeSpeedLvl(O,TD.gotoSpeed);
             }
 
             if(TD.T=='goAroundEnemy'){
