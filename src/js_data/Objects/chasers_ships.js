@@ -36,38 +36,38 @@ BBAdata.ObjectData.carras={
         //     {M:'goStraight', Time:80, TimePlus:40, notTwice:1},
         //     {M:'turnLeft', Time:20, TimePlus:50, maxTurn:180},
         // ]},
-        avoidIncomingFire:{T:'avoidIncomingFire' },
+        avoidIncomingFire:{T:'avoidIncomingFire', S:{}},
         followRoute:{T:'followRoute', S:{patroling:1}, Route:'R2'},
     },
     FlagReactions: {
-        'I_ReadyForEnemy': [
+        I_ReadyForEnemy:{
             changeTheState: {T:'changeTheState', TheState:'patroling', reqTheState:{ off:1, idle:1 }},
-        ],
-        'II_EnemyIsThere': [
+        },
+        II_EnemyIsThere:{
             changeTheState: {T:'changeTheState', TheState:'patroling', reqTheState:{ off:1, idle:1 }},
-        ],
-        'V_NearbySeesEnemy': [
+        },
+        V_NearbySeesEnemy:{
             addFlags:{T:'addFlags', Flags:['I_ReadyForEnemy','II_EnemyIsThere','III_SomeoneSeenEnemy']},
-            emitNearbySeesEnemy: {T:'emitFlag', Flag:'V_NearbySeesEnemy', Radius: 150, offTime: 3, pChance: 25},
+            emitNearbySeesEnemy: {T:'emitFlag', Flag:'V_NearbySeesEnemy', Radius: 50, offTime: 7, pChance: 25},
             changeTheState: {T:'changeTheState', TheState:'attacking', reqTheState:{ off:1, idle:1, patroling:1 }},
-        ],
-        'VI_ISeeEnemy': [
+        },
+        VI_ISeeEnemy:{
             addFlags: {T:'addFlags', Flags:['I_ReadyForEnemy','II_EnemyIsThere','III_SomeoneSeenEnemy','IV_SeenEnemy']},
-            emitNearbySeesEnemy: {T:'emitFlag', Flag:'V_NearbySeesEnemy', Radius: 200, offTime: 3},
+            emitNearbySeesEnemy: {T:'emitFlag', Flag:'V_NearbySeesEnemy', Radius: 50, offTime: 7},
             changeTheState: {T:'changeTheState', TheState:'attacking', reqTheState:{ off:1, idle:1, patroling:1 }},
-        ],
-        'IGotHit': [
+        },
+        IGotHit:{
             addFlags:{T:'addFlags', Flags:['I_ReadyForEnemy','II_EnemyIsThere']},
             emitGotHit: {T:'emitFlag', Flag:'NearbyGotHit', Radius: 150},
             makeThink: {T:'makeThink', Think:'avoidIncomingFire', notTheState:{ beeingHeroic:1 }}
-        ],
-        'NearbyGotHit': [
+        },
+        NearbyGotHit:{
             addFlags:{T:'addFlags', Flags:['I_ReadyForEnemy','II_EnemyIsThere']},
             makeThink: {T:'makeThink', Think:'avoidIncomingFire', notTheState:{ beeingHeroic:1 }}
-        ],
-        'LowLife': [
+        },
+        LowLife:{
             changeTheState: {T:'changeTheState', TheState:'fleeing', notTheState:{ beeingHeroic:1 }},
-        ],
+        },
     },
 
     // doingNow: 'changeManouver',

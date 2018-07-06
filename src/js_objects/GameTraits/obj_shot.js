@@ -12,8 +12,8 @@ GAMEobject.prototype.oShotCheck = function(O,WP){
     if(WP.gunSpeed > (this.tick-WP.lastShot)) return false;
     if(WP.maxSpeed && WP.maxSpeed < O.SpeedLvl) return false;
     if(WP.minDistToEnemy && WP.minDistToEnemy < getDistAB(O,this.O[0])) return false;
-    if(WP.doingNow && WP.doingNow != O.doingNow) return false;
-    if(WP.doingTime && WP.doingTime != O.doingTime) return false;
+    // if(WP.doingNow && WP.doingNow != O.doingNow) return false;
+    // if(WP.doingTime && WP.doingTime != O.doingTime) return false;
     if(WP.usedRes && O.Res[ WP.usedRes ].R < WP.usedResR) return false;
 
     // ????

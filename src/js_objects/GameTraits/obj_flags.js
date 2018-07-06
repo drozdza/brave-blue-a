@@ -1,7 +1,7 @@
 GAMEobject.prototype.oFlagAdd = function(O, FlagName, eventTick){
     for(var fr in O.FlagReactions[FlagName]){
         var FlagReaction = O.FlagReactions[FlagName][fr];
-        this['oFlag_'+Reaction.T](O, FlagReaction, eventTick);
+        this['oFlag_'+FlagReaction.T](O, FlagReaction, eventTick);
     }
 
     O.Flags['FlagName'] = eventTick;
@@ -9,7 +9,7 @@ GAMEobject.prototype.oFlagAdd = function(O, FlagName, eventTick){
 
 GAMEobject.prototype.oFlag_addFlags = function(O, FlagReaction, eventTick){
     for(var f in FlagReaction.Flags)
-        this.oFlagAdd(O, f, eventTick);
+        this.oFlagAdd(O, FlagReaction.Flags[f], eventTick);
 }
 GAMEobject.prototype.oFlag_emitFlag = function(O, FlagReaction, eventTick){
     if (FlagReaction.pChance && Math.random()*100 > FlagReaction.pChance) return false;
@@ -20,12 +20,12 @@ GAMEobject.prototype.oFlag_emitFlag = function(O, FlagReaction, eventTick){
     this.setEventEmitter(tick, {T:'emitFlag', x:O.x, y:O.y, r:FlagReaction.Radius, FlagName: FlagReaction.Flag, eventTick:eventTick});
 }
 GAMEobject.prototype.oFlag_changeTheState = function(O, FlagReaction, eventTick){
-    if(!this.oFlagCheckReqs(O, FlagReaction)) return false;
+    if(!this.oFlagCheckTheStates(O, FlagReaction)) return false;
 
     this.oTheState(O, FlagReaction.TheState);
 }
 GAMEobject.prototype.oFlag_makeThink = function(O, FlagReaction, eventTick){
-    if(!this.oFlagCheckReqs(O, FlagReaction)) return false;
+    if(!this.oFlagCheckTheStates(O, FlagReaction)) return false;
 
     var Think = O.Thinks[ FlagReaction.Think ];
     this['oThink_'+Think.T](O, Think);

@@ -117,6 +117,13 @@ GAMEobject.prototype.oThink_followRoute = function(O,Think){
     }
 }
 
+GAMEobject.prototype.oThink_avoidIncomingFire = function(O,Think){
+    switch(parseInt(Math.random()*2)){
+        case 0: O.Manouver = 'turnRight'; O.doingTime = 15; break;
+        case 1: O.Manouver = 'turnLeft';  O.doingTime = 15; break;
+    }
+}
+
 GAMEobject.prototype.enemy_setFollow = function(O, Obj, Radius, Angle, thinkOnBeen, adjustSpeed){
     var xy = randXYinDist(Radius);
     O.Follow = {
