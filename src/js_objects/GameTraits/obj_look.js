@@ -7,14 +7,14 @@ GAMEobject.prototype.oLook = function(O){
 
     if((Look.T=='single' || Look.T=='double') && PlayerDist < Look.Rad){
         O.Flags.spotEnemyFlag = true;
-        this.oFlag_Add(O, 'VI_ISeeEnemy', this.tick);
+        this.oFlagAdd(O, 'VI_ISeeEnemy', this.tick);
         return true;
     }
     if(Look.T=='double' && !O.Flags.spotEnemyFlag){
         var PlayerAngle = getAngleAB(O,P);
         var A = (PlayerAngle -O.angle- -720- -Look.Angle2)%360;
         if(PlayerDist < Look.Rad2 && A < Look.Angle2*2){
-            this.oFlag_Add(O, 'VI_ISeeEnemy', this.tick);
+            this.oFlagAdd(O, 'VI_ISeeEnemy', this.tick);
             return true;
         }
     }
@@ -26,13 +26,13 @@ GAMEobject.prototype.oLook = function(O){
     //         var uDist = Math.sqrt(uX*uX- -uY*uY);
     //         var uAngle = parseInt(- (Math.atan2(uX,uY)*180/Math.PI))%360;
     //         if((Look.T=='single' || Look.T=='double') && uDist < Look.Rad){
-                    // this.oFlag_Add(O, 'II_EnemyIsThere', this.tick);
+                    // this.oFlagAdd(O, 'II_EnemyIsThere', this.tick);
                     // return true;
     //         }
     //         if(Look.T=='double' && !O.Flags.spotEnemyFlag){
     //             var uA = (uAngle -O.angle- -720- -Look.Angle2)%360;
     //             if(uDist < Look.Rad2 && uA < Look.Angle2*2){
-                    // this.oFlag_Add(O, 'II_EnemyIsThere', this.tick);
+                    // this.oFlagAdd(O, 'II_EnemyIsThere', this.tick);
                     // return true;
     //             }
     //         }

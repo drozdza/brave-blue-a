@@ -8,11 +8,7 @@ GAMEobject.prototype.oThink = function(O){
         if (Think.MaxEnemyDist && getDistAB(this.O[0], O) > Think.MaxEnemyDist) continue;
 
         // =============== Do:
-        switch(Think.T){
-            case 'followEnemy':    this.oThink_followEnemy(O, Think); break;
-            case 'changeManouver': this.oThink_changeManouver(O, Think); break;
-            case 'followRoute':    this.oThink_followRoute(O,Think); break;
-        }
+        this['oThink_'+Think.T](O, Think);
     }
 }
 

@@ -35,6 +35,8 @@ function GAMEobject(){
     this.Squads={};     // moving in Squads
     this.SquadLen=0;
 
+    this.DelayedEvents={};
+
     this.keyLeftRight=0;
     this.keyUpDown=0;
 

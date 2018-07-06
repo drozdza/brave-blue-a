@@ -1,57 +1,52 @@
-GAMEobject.prototype.oFlag_Add = function(O, FlagName, eventTick){
-
-    // This as settings
-    if (FlagName == 'VI_ISeeEnemy') {
-        this.oTheState(O, 'attacking');
+GAMEobject.prototype.oFlagAdd = function(O, FlagName, eventTick){
+    for(var fr in O.FlagReactions[FlagName]){
+        var FlagReaction = O.FlagReactions[FlagName][fr];
+        this['oFlag_'+Reaction.T](O, FlagReaction, eventTick);
     }
 
     O.Flags['FlagName'] = eventTick;
 }
 
-GAMEobject.prototype.oTheState = function(O, NewState){
-    if (O.TheState == NewState) return true;
+GAMEobject.prototype.oFlag_addFlags = function(O, FlagReaction, eventTick){
+    for(var f in FlagReaction.Flags)
+        this.oFlagAdd(O, f, eventTick);
+}
+GAMEobject.prototype.oFlag_emitFlag = function(O, FlagReaction, eventTick){
+    if (FlagReaction.pChance && Math.random()*100 > FlagReaction.pChance) return false;
 
-    if(typeof O.TheStateLists[O.TheState] != 'undefined'){
-        for(var iStateThing in O.TheStateLists[O.TheState]){
-            var StateThing = O.TheStateLists[O.TheState][iStateThing];
-            switch(StateThing.T){
-                case 'lookAround': this.oTheStageRemove_lookAround(O, StateThing); break;
-                case 'shot':       this.oTheStageRemove_shot(O, StateThing); break;
-            }
-        }
-    }
+    var tick = this.tick;
+    if(typeof FlagReaction.offTime != 'undefined') tick -=- FlagReaction.offTime;
 
-    O.TheState = NewState;
+    this.setEventEmitter(tick, {T:'emitFlag', x:O.x, y:O.y, r:FlagReaction.Radius, FlagName: FlagReaction.Flag, eventTick:eventTick});
+}
+GAMEobject.prototype.oFlag_changeTheState = function(O, FlagReaction, eventTick){
+    if(!this.oFlagCheckReqs(O, FlagReaction)) return false;
 
-    if(typeof O.TheStateLists[O.TheState] != 'undefined'){
-        for(var iStateThing in O.TheStateLists[O.TheState]){
-            var StateThing = O.TheStateLists[O.TheState][iStateThing];
-            switch(StateThing.T){
-                case 'lookAround': this.oTheStageAdd_lookAround(O, StateThing); break;
-                case 'shot':       this.oTheStageAdd_shot(O, StateThing); break;
-            }
-        }
-    }
+    this.oTheState(O, FlagReaction.TheState);
+}
+GAMEobject.prototype.oFlag_makeThink = function(O, FlagReaction, eventTick){
+    if(!this.oFlagCheckReqs(O, FlagReaction)) return false;
 
-    O.ThinkTick = this.tick; // ?
+    var Think = O.Thinks[ FlagReaction.Think ];
+    this['oThink_'+Think.T](O, Think);
 }
 
-GAMEobject.prototype.oTheStageRemove_lookAround = function(O, StateThing){
-    delete(this.Olook[O.o]);
-}
-GAMEobject.prototype.oTheStageAdd_lookAround = function(O, StateThing){
-    O.LookType = StateThing.LookType;
-    if (typeof this.Olook[O.o] == 'undefined') {
-        this.Olook[O.o] = 1;
+GAMEobject.prototype.oFlagCheckTheStates = function(O, FlagReaction){
+    if (FlagReaction.reqTheState) {
+        var isReqTheState = false;
+        for(var theState in FlagReaction.reqTheState)
+            if (O.TheState == theState)
+                isReqTheState = true;
+        if (!isReqTheState) return false;
     }
-    O.LookTick = this.tick;
-}
-GAMEobject.prototype.oTheStageRemove_shot = function(O, StateThing){
-    delete(this.Oshot[O.o]);
-}
-GAMEobject.prototype.oTheStageAdd_shot = function(O, StateThing){
-    O.WeaponTypes = cloneObj(StateThing.WeaponTypes);
-    if (typeof this.Oshot[O.o] == 'undefined') {
-        this.Oshot[O.o] = 1;
+
+    if (FlagReaction.notTheState) {
+        var isNotTheState = true;
+        for(var theState in FlagReaction.notTheState)
+            if (O.TheState == theState)
+                isNotTheState = false;
+        if (!isNotTheState) return false;
     }
+
+    return true;
 }
