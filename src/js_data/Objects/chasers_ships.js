@@ -18,7 +18,11 @@ BBAdata.ObjectData.carras={
 
     TheState: 'patroling',
     TheStateLists: {
+        fleeing:{
+            speed:{T:'speed', SpeedLvl:'max'},
+        },
         attacking: {
+            speed:{T:'speed', SpeedLvl:'normal'},
             shot:{T:'shot', WeaponTypes: {single:1}},
             look:{T:'look', LookType:'fighting'},
         },

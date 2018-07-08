@@ -35,3 +35,7 @@ GAMEobject.prototype.oTheStageAdd_shot = function(O, StateThing){
         this.Oshot[O.o] = 1;
     }
 }
+GAMEobject.prototype.oTheStageRemove_speed = function(O, StateThing){}
+GAMEobject.prototype.oTheStageAdd_speed = function(O, StateThing){
+    this.changeSpeedLvl(O, StateThing.SpeedLvl);
+}

@@ -1,5 +1,20 @@
 ------------- Closest Works:
 
+
+ - Jeśli od X nie widziałeś wroga a masz status Fighting, wróć do bazy
+ - Co jakiś czas ostrzegaj okolicznych że widziałeś wroga (np. poza walką)
+ - Lataj losowo i jeśli jesteś za daleko to zawróć w stronę bazy
+ - Uciekaj w stronę najbliższego punktu z pomocą (ochrona, leczenie)
+ - Uciekaj od wroga jeśi jest blisko
+ - Statki z pomocą potrafią rzucać punkty z pomocą
+ - Priorytetyzacja punktów z pomocą
+ - Wybór punktów na podstawie Teamów
+ - Stan - Broń bazy
+
+
+
+
+
 Others:
  - Debug Mode: count number of rendered objects, rendered backgrounds, changed backgrounds
 
