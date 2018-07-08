@@ -6,6 +6,7 @@ GAMEobject.prototype.oThink = function(O){
         if (Think.S && typeof Think.S[O.TheState] == 'undefined') continue;
         // if (Think.skipChance && Math.random()*100 > Think.skipChance) continue;
         if (Think.MaxEnemyDist && getDistAB(this.O[0], O) > Think.MaxEnemyDist) continue;
+        if (Think.FlagMinTime && O.Flags[Think.FlagMinTime.Flag]- -Think.FlagMinTime.Time > this.tick) continue;
 
         // =============== Do:
         this['oThink_'+Think.T](O, Think);
@@ -136,6 +137,13 @@ GAMEobject.prototype.oThink_avoidIncomingFire = function(O,Think){
     if(Think.dontInterupt)
         O.DoNotInteruptThinksUntil = O.ThinkTick;
 }
+
+GAMEobject.prototype.oThink_changeTheState = function(O,Think){
+    O.Follow.been = true;
+    this.oTheState(O,Think.TheState);
+}
+
+// HELPERS:
 
 GAMEobject.prototype.enemy_setFollow = function(O, Obj, Radius, Angle, thinkOnBeen, adjustSpeed){
     var xy = randXYinDist(Radius);

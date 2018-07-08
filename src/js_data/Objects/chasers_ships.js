@@ -34,9 +34,10 @@ BBAdata.ObjectData.carras={
     ThinkNow: 'followRoute',
     ThinkTick: 0,
     Thinks: {
-        followEnemy2:{T:'followEnemy', S:{fleeing:1}, Time: 20, TimePlus: 20, Radius: 50, AnglePlus:180, MaxEnemyDist: 200,},
+        resignFromFight:{T:'changeTheState', S:{attacking:1}, TheState: 'patroling', Time: 5, FlagMinTime:{Flag:'V_NearbySeesEnemy',Time:240}},
+        followEnemy2:{T:'followEnemy', S:{fleeing:1}, Time: 20, TimePlus: 20, Radius: 50, AnglePlus:180, MaxEnemyDist: 200},
         followEnemy:{T:'followEnemy', S:{attacking:1}, Time: 200, TimePlus: 200, Radius: 50},
-        // changeManouver:{S:{patroling:1}, D:[
+        // changeManouver:{T:'changeManouver', S:{patroling:1}, D:[
         //     {M:'goStraight', Time:80, TimePlus:40, notTwice:1},
         //     {M:'turnLeft', Time:20, TimePlus:50, maxTurn:180},
         // ]},
@@ -49,20 +50,21 @@ BBAdata.ObjectData.carras={
         },
         II_EnemyIsThere:{
             changeTheState: {T:'changeTheState', TheState:'patroling', reqTheState:{ off:1, idle:1 }},
+            emitReadiness: {T:'emitFlagLater', Flag:'II_EnemyIsThere', Radius: 200, periodOffTime: 50, offTime: 2, periodTime: 60, nPeriods: 15},
         },
         V_NearbySeesEnemy:{
             addFlags:{T:'addFlags', Flags:['I_ReadyForEnemy','II_EnemyIsThere','III_SomeoneSeenEnemy']},
-            emitNearbySeesEnemy: {T:'emitFlag', Flag:'V_NearbySeesEnemy', Radius: 50, offTime: 7, pChance: 25},
+            emitNearbySeesEnemy: {T:'emitFlagXY', Flag:'V_NearbySeesEnemy', Radius: 50, offTime: 7, pChance: 25},
             changeTheState: {T:'changeTheState', TheState:'attacking', reqTheState:{ off:1, idle:1, patroling:1 }},
         },
         VI_ISeeEnemy:{
-            addFlags: {T:'addFlags', Flags:['I_ReadyForEnemy','II_EnemyIsThere','III_SomeoneSeenEnemy','IV_SeenEnemy']},
-            emitNearbySeesEnemy: {T:'emitFlag', Flag:'V_NearbySeesEnemy', Radius: 50, offTime: 7},
+            addFlags: {T:'addFlags', Flags:['V_NearbySeesEnemy','IV_SeenEnemy']},
+            emitNearbySeesEnemy: {T:'emitFlagXY', Flag:'V_NearbySeesEnemy', Radius: 50, offTime: 7},
             changeTheState: {T:'changeTheState', TheState:'attacking', reqTheState:{ off:1, idle:1, patroling:1 }},
         },
         IGotHit:{
             addFlags:{T:'addFlags', Flags:['I_ReadyForEnemy','II_EnemyIsThere']},
-            emitGotHit: {T:'emitFlag', Flag:'NearbyGotHit', Radius: 150},
+            emitGotHit: {T:'emitFlagXY', Flag:'NearbyGotHit', Radius: 150},
             makeThink: {T:'makeThink', Think:'avoidIncomingFire', notTheState:{ beeingHeroic:1 }}
         },
         NearbyGotHit:{

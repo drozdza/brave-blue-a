@@ -4,20 +4,45 @@ GAMEobject.prototype.oFlagAdd = function(O, FlagName, eventTick){
         this['oFlag_'+FlagReaction.T](O, FlagReaction, eventTick);
     }
 
-    O.Flags['FlagName'] = eventTick;
+    O.Flags[FlagName] = eventTick;
 }
 
 GAMEobject.prototype.oFlag_addFlags = function(O, FlagReaction, eventTick){
     for(var f in FlagReaction.Flags)
         this.oFlagAdd(O, FlagReaction.Flags[f], eventTick);
 }
-GAMEobject.prototype.oFlag_emitFlag = function(O, FlagReaction, eventTick){
+GAMEobject.prototype.oFlag_emitFlagXY = function(O, FlagReaction, eventTick){
     if (FlagReaction.pChance && Math.random()*100 > FlagReaction.pChance) return false;
 
     var tick = this.tick;
     if(typeof FlagReaction.offTime != 'undefined') tick -=- FlagReaction.offTime;
 
-    this.setEventEmitter(tick, {T:'emitFlag', x:O.x, y:O.y, r:FlagReaction.Radius, FlagName: FlagReaction.Flag, eventTick:eventTick});
+    this.setEventEmitter(tick, {
+        T: 'emitFlagXY',
+        x: O.x,
+        y: O.y,
+        r: FlagReaction.Radius,
+        FlagName: FlagReaction.Flag,
+        eventTick:eventTick
+    });
+}
+GAMEobject.prototype.oFlag_emitFlagLater = function(O, FlagReaction, eventTick){
+    // if (FlagReaction.pChance && Math.random()*100 > FlagReaction.pChance) return false;
+    if(O.emitLater) return false;
+    O.emitLater = true;
+
+    var tick = this.tick;
+    if(typeof FlagReaction.periodOffTime != 'undefined') tick -=- FlagReaction.periodOffTime;
+
+    this.setEventEmitter(tick, {
+        T: 'emitFlagLater',
+        o: O.o,
+        r: FlagReaction.Radius,
+        FlagName: FlagReaction.Flag,
+        offTime: FlagReaction.offTime,
+        periodTime: FlagReaction.periodTime,
+        nPeriods: FlagReaction.nPeriods,
+    });
 }
 GAMEobject.prototype.oFlag_changeTheState = function(O, FlagReaction, eventTick){
     if(!this.oFlagCheckTheStates(O, FlagReaction)) return false;
@@ -25,7 +50,7 @@ GAMEobject.prototype.oFlag_changeTheState = function(O, FlagReaction, eventTick)
     this.oTheState(O, FlagReaction.TheState);
 }
 GAMEobject.prototype.oFlag_makeThink = function(O, FlagReaction, eventTick){
-    if(O.DoNotInteruptThinksUntil > this.tick) return false;    
+    if(O.DoNotInteruptThinksUntil > this.tick) return false;
     if(!this.oFlagCheckTheStates(O, FlagReaction)) return false;
 
     var Think = O.Thinks[ FlagReaction.Think ];
