@@ -18,11 +18,12 @@ GAMEobject.prototype.oManouver_followObject = function(O){
     }
     var Q = this.O[O.Follow.o];
     var Angle = getAngleAB(O, {x:Q.x- -O.Follow.x, y:Q.y- -O.Follow.y})- -O.Follow.a;
-    var AngleDiff = (O.angle-Angle- -360)%360;
+    var AngleDiff = (O.angle-Angle- -720)%360;
     var neededTurning = 180 - Math.abs(AngleDiff - 180);
     var speedT = O.speedT;
     if(neededTurning < speedT)
-    speedT = neededTurning;
+        speedT = neededTurning;
+        
     if(AngleDiff > 180){
         O.angle = (O.angle- -speedT- -360)%360;
         O.lastSpeedT = speedT;
@@ -46,7 +47,12 @@ GAMEobject.prototype.oManouver_followObject = function(O){
     }
 }
 
-// DEPRECATED
+
+//==============================================================================
+//=============================== DEPRECATED ===================================
+//==============================================================================
+
+
 GAMEobject.prototype.oManouver = function(O){
     switch(O.Manouver){
         case 'goAroundEnemy':{
