@@ -2,7 +2,7 @@
 BBAdata.ObjectData.routePoint={
     T: 'routePoint',
     M: 'routePoint',
-    lists:{Oroute:1},
+    lists:{},
     radius: 20,
 };
 

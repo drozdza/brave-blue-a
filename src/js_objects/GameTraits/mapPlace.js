@@ -35,6 +35,8 @@ GAMEobject.prototype.mapPlace_What = function(Setting, Place, What, defXY){
 
             o = this.putObj(Otype, 1, mapXY.x, mapXY.y);
 
+            if(What[w].N) this.mapPlace_addAsRoutePoint(this.O[o], What[w].N);
+
             if(Odata.Team) this.addToTeam(this.O[o], Odata.Team);
             if(Place.Team) this.addToTeam(this.O[o], Place.Team);
 
@@ -208,4 +210,9 @@ GAMEobject.prototype.mapPlace_removeTagFromDEF = function(DEF, defXY){
             }
         }
     }
+}
+
+GAMEobject.prototype.mapPlace_addAsRoutePoint = function(O, Name){
+    O.rName = Name;
+    this.Oroute[Name] = O.o;
 }

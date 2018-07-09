@@ -119,16 +119,8 @@ GAMEobject.prototype.oThink_followRoute = function(O,Think){
         for (var i=0; i<lvl; ++i)
             R = R.P[ O.routes.Stack[i] ];
         var RN = R.P[ ilvl ];
+        RN = this.Oroute[RN];
 
-        // To by trzeba od razu zamienić
-        if (isNaN(RN)) {
-            for (var oR in this.Oroute) {
-                if (this.O[oR].rName == RN) {
-                    RN = oR;
-                    R.P[ ilvl ] = oR;
-                }
-            }
-        }
         this.enemy_setFollow(O, RN, this.O[RN].radius, 0, true, true);
     }
 }
