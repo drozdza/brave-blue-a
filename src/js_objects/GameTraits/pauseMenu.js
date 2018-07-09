@@ -116,7 +116,7 @@ GAMEobject.prototype.pause_showGameStats_object = function(o){
     html +='<span style="font-size: 35px;">ID: '+o+' ('+O.T+')</span><br/>';
 
     html += showObjInTable(O,[
-        {T:'noshow',canvasId:'noshow',Flags:'inline'},
+        {T:'noshow',canvasId:'noshow',},//Flags:'inline'},
         {},
         {CatchDmgT:'inline',Angle2:'inline'},
     ]).html;

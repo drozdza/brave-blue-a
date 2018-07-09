@@ -56,11 +56,9 @@ GAMEobject.prototype.frame_decide = function(){
         if(this.O[o].ThinkTick <= this.tick)
             this.oThink(this.O[o]);
 
-    for(o in this.Oshot){
-        for(w in this.O[o].WeaponTypes){
+    for(o in this.Oshot)
+        for(w in this.O[o].WeaponTypes)
             this['oShot_'+w](this.O[o]);
-        }
-    }
 
     for(e in this.DelayedEvents[this.tick]){
         var Event = this.DelayedEvents[this.tick][e];

@@ -18,8 +18,6 @@ GAMEobject.prototype.oEvent_emitFlagLater = function(Event){
     if(typeof this.O[Event.o] == 'undefined') return false;
     var O = this.O[Event.o];
 
-    console.log(Event);
-
     var tick = this.tick;
     if(typeof Event.offTime != 'undefined') tick -=- Event.offTime;
 
@@ -37,7 +35,6 @@ GAMEobject.prototype.oEvent_emitFlagLater = function(Event){
     var tick = this.tick;
     if(typeof Event.offTime != 'undefined') tick -=- Event.periodTime;
 
-
     this.setEventEmitter(tick, {
         T:'emitFlagLater',
         o: O.o,
@@ -48,16 +45,4 @@ GAMEobject.prototype.oEvent_emitFlagLater = function(Event){
         periodTime: Event.periodTime,
         nPeriods: Event.nPeriods,
     });
-
 }
-
-/*    this.setEventEmitter(tick, {
-        T:'emitFlagLater',
-        o:O.o,
-        r:FlagReaction.Radius,
-        FlagName: FlagReaction.Flag,
-        eventTick:eventTick,
-        offTime: FlagReaction.offTime,
-        periodTime: FlagReaction.periodTime,
-        nPeriods: FlagReaction.nPeriods,
-    }); */

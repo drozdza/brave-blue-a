@@ -34,15 +34,22 @@ BBAdata.ObjectData.carras={
     ThinkNow: 'followRoute',
     ThinkTick: 0,
     Thinks: {
-        resignFromFight:{T:'changeTheState', S:{attacking:1}, TheState: 'patroling', Time: 5, FlagMinTime:{Flag:'V_NearbySeesEnemy',Time:240}},
+        followEnemy3:{T:'followRoutePoint', S:{defending:1}, Time: 20, TimePlus: 20, RoutePoint: 'routePoint1', Radius: 100, MinFromObj: 600},
+        followEnemy3:{T:'followEnemy', S:{defending:1}, Time: 30, TimePlus: 60, Radius: 0, MaxEnemyDist: 400},
+        changeManouver:{T:'changeManouver', S:{defending:1}, D:[
+            {M:'goStraight', Time:20, TimePlus:30, notTwice:1},
+            {M:'turnLeft', Time:20, TimePlus:50, maxTurn:180},
+        ]},
+
         followEnemy2:{T:'followEnemy', S:{fleeing:1}, Time: 20, TimePlus: 20, Radius: 50, AnglePlus:180, MaxEnemyDist: 200},
+        followEnemy3:{T:'followRoutePoint', S:{fleeing:1}, Time: 20, TimePlus: 20, RoutePoint: 'routePoint1', Radius: 100},
+
+        resignFromFight:{T:'changeTheState', S:{attacking:1}, TheState: 'patroling', Time: 5, FlagMinTime:{Flag:'V_NearbySeesEnemy',Time:240}},
         followEnemy:{T:'followEnemy', S:{attacking:1}, Time: 200, TimePlus: 200, Radius: 50},
-        // changeManouver:{T:'changeManouver', S:{patroling:1}, D:[
-        //     {M:'goStraight', Time:80, TimePlus:40, notTwice:1},
-        //     {M:'turnLeft', Time:20, TimePlus:50, maxTurn:180},
-        // ]},
-        avoidIncomingFire:{T:'avoidIncomingFire', S:{}, Time: 8, TimePlus: 10, dontInterupt:true},
+
         followRoute:{T:'followRoute', S:{patroling:1}, Route:'R2'},
+
+        avoidIncomingFire:{T:'avoidIncomingFire', S:{}, Time: 8, TimePlus: 10, dontInterupt:true},
     },
     FlagReactions: {
         I_ReadyForEnemy:{
@@ -75,15 +82,6 @@ BBAdata.ObjectData.carras={
             changeTheState: {T:'changeTheState', TheState:'fleeing', notTheState:{ beeingHeroic:1 }},
         },
     },
-
-    // doingNow: 'changeManouver',
-    // toDo: [
-    //     {N:55,T:'alarmAboutSpottedEnemy', minAlarm: 5, alarmRadius: 250},
-    //     {N:45,T:'lowerAlarmLvl', minAlarm: 5, minEnemyDontSeen: 750, gotoAlarm: 4, goToSpotLvl: 2},
-    //     {N:35,T:'followEnemy', minAlarm: 5, goToSpotLvl: 3 },
-    //     {N:18,T:'changeManouver2', maxAlarm: 4, minAlarm: 3, straightMin: 20, straightPlus: 80, turnMin: 10, turnPlus: 80  },
-    //     {N:15,T:'changeManouver', maxAlarm: 3, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
-    // ],
 
     SpeedArr:{
         slow:   {S: {SV:'speed',Add:-2}, T:0.7},

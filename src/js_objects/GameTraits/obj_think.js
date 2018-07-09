@@ -27,6 +27,20 @@ GAMEobject.prototype.oThink_followEnemy = function(O,Think){
     O.ThinkTick = this.tick- -time;
 }
 
+GAMEobject.prototype.oThink_followRoutePoint = function(O,Think){
+    var RoutePoint = Think.RoutePoint;
+
+    // var Radius = 100;
+    // if (typeof Think.Radius != 'undefined') Radius = Think.Radius;
+    // var Angle = 0;
+    // if (typeof Think.AnglePlus != 'undefined') Angle = Think.AnglePlus;
+    // this.enemy_setFollow(O, 0, Radius, Angle);
+    // var time = 30;
+    // if (Think.Time)     time = Think.Time;
+    // if (Think.TimePlus) time -=- parseInt(Math.random()*Think.TimePlus);
+    // O.ThinkTick = this.tick- -time;
+}
+
 GAMEobject.prototype.oThink_changeManouver = function(O,Think){
     O.speed = O.SpeedArr[O.SpeedLvl].S;
     var i = 0;
@@ -106,6 +120,7 @@ GAMEobject.prototype.oThink_followRoute = function(O,Think){
             R = R.P[ O.routes.Stack[i] ];
         var RN = R.P[ ilvl ];
 
+        // To by trzeba od razu zamienić
         if (isNaN(RN)) {
             for (var oR in this.Oroute) {
                 if (this.O[oR].rName == RN) {
