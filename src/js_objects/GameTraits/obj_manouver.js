@@ -23,7 +23,7 @@ GAMEobject.prototype.oManouver_followObject = function(O){
     var speedT = O.speedT;
     if(neededTurning < speedT)
         speedT = neededTurning;
-        
+
     if(AngleDiff > 180){
         O.angle = (O.angle- -speedT- -360)%360;
         O.lastSpeedT = speedT;

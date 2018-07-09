@@ -7,9 +7,12 @@ GAMEobject.prototype.oThink = function(O){
         // if (Think.skipChance && Math.random()*100 > Think.skipChance) continue;
         if (Think.MaxEnemyDist && getDistAB(this.O[0], O) > Think.MaxEnemyDist) continue;
         if (Think.FlagMinTime && O.Flags[Think.FlagMinTime.Flag]- -Think.FlagMinTime.Time > this.tick) continue;
+        if (Think.MinFromRoutePoint && isDistAB(O, this.O[this.Oroute[Think.RoutePoint]], Think.MinFromRoutePoint)) continue;
 
         // =============== Do:
         this['oThink_'+Think.T](O, Think);
+        O.ThinkNow = iThink;
+        break;
     }
 }
 
@@ -20,7 +23,7 @@ GAMEobject.prototype.oThink_followEnemy = function(O,Think){
     if (typeof Think.Radius != 'undefined') Radius = Think.Radius;
     var Angle = 0;
     if (typeof Think.AnglePlus != 'undefined') Angle = Think.AnglePlus;
-    this.enemy_setFollow(O, 0, Radius, Angle);
+    this.obj_setFollow(O, 0, Radius, Angle);
     var time = 30;
     if (Think.Time)     time = Think.Time;
     if (Think.TimePlus) time -=- parseInt(Math.random()*Think.TimePlus);
@@ -28,17 +31,13 @@ GAMEobject.prototype.oThink_followEnemy = function(O,Think){
 }
 
 GAMEobject.prototype.oThink_followRoutePoint = function(O,Think){
-    var RoutePoint = Think.RoutePoint;
+    var RP = this.O[this.Oroute[Think.RoutePoint]];
 
-    // var Radius = 100;
-    // if (typeof Think.Radius != 'undefined') Radius = Think.Radius;
-    // var Angle = 0;
-    // if (typeof Think.AnglePlus != 'undefined') Angle = Think.AnglePlus;
-    // this.enemy_setFollow(O, 0, Radius, Angle);
-    // var time = 30;
-    // if (Think.Time)     time = Think.Time;
-    // if (Think.TimePlus) time -=- parseInt(Math.random()*Think.TimePlus);
-    // O.ThinkTick = this.tick- -time;
+    this.obj_setFollow(O, this.Oroute[Think.RoutePoint], RP.radius, 0);
+    var time = 30;
+    if (Think.Time)     time = Think.Time;
+    if (Think.TimePlus) time -=- parseInt(Math.random()*Think.TimePlus);
+    O.ThinkTick = this.tick- -time;
 }
 
 GAMEobject.prototype.oThink_changeManouver = function(O,Think){
@@ -121,7 +120,7 @@ GAMEobject.prototype.oThink_followRoute = function(O,Think){
         var RN = R.P[ ilvl ];
         RN = this.Oroute[RN];
 
-        this.enemy_setFollow(O, RN, this.O[RN].radius, 0, true, true);
+        this.obj_setFollow(O, RN, this.O[RN].radius, 0, true, true);
     }
 }
 
@@ -152,7 +151,7 @@ GAMEobject.prototype.oThink_changeTheState = function(O,Think){
 
 // HELPERS:
 
-GAMEobject.prototype.enemy_setFollow = function(O, Obj, Radius, Angle, thinkOnBeen, adjustSpeed){
+GAMEobject.prototype.obj_setFollow = function(O, Obj, Radius, Angle, thinkOnBeen, adjustSpeed){
     var xy = randXYinDist(Radius);
     O.Follow = {
         o: Obj,

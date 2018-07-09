@@ -16,7 +16,7 @@ BBAdata.ObjectData.carras={
 
     Manouver: 'goStraight',
 
-    TheState: 'patroling',
+    TheState: 'defending',
     TheStateLists: {
         fleeing:{
             speed:{T:'speed', SpeedLvl:'max'},
@@ -34,15 +34,16 @@ BBAdata.ObjectData.carras={
     ThinkNow: 'followRoute',
     ThinkTick: 0,
     Thinks: {
-        followEnemy3:{T:'followRoutePoint', S:{defending:1}, Time: 20, TimePlus: 20, RoutePoint: 'routePoint1', Radius: 100, MinFromObj: 600},
-        followEnemy3:{T:'followEnemy', S:{defending:1}, Time: 30, TimePlus: 60, Radius: 0, MaxEnemyDist: 400},
+        goToCenter:{T:'followRoutePoint', S:{defending:1}, Time: 20, TimePlus: 20, RoutePoint: 'routePoint1', Radius: 100, MinFromRoutePoint: 400},
+        followEnemy:{T:'followEnemy', S:{defending:1}, Time: 30, TimePlus: 60, Radius: 0, MaxEnemyDist: 400},
         changeManouver:{T:'changeManouver', S:{defending:1}, D:[
             {M:'goStraight', Time:20, TimePlus:30, notTwice:1},
             {M:'turnLeft', Time:20, TimePlus:50, maxTurn:180},
+            {M:'turnRight', Time:20, TimePlus:50, maxTurn:180},
         ]},
 
-        followEnemy2:{T:'followEnemy', S:{fleeing:1}, Time: 20, TimePlus: 20, Radius: 50, AnglePlus:180, MaxEnemyDist: 200},
-        followEnemy3:{T:'followRoutePoint', S:{fleeing:1}, Time: 20, TimePlus: 20, RoutePoint: 'routePoint1', Radius: 100},
+        fleeFromEnemy:{T:'followEnemy', S:{fleeing:1}, Time: 20, TimePlus: 20, Radius: 50, AnglePlus:180, MaxEnemyDist: 200},
+        fleeToCenter:{T:'followRoutePoint', S:{fleeing:1}, Time: 20, TimePlus: 20, RoutePoint: 'routePoint1', Radius: 100},
 
         resignFromFight:{T:'changeTheState', S:{attacking:1}, TheState: 'patroling', Time: 5, FlagMinTime:{Flag:'V_NearbySeesEnemy',Time:240}},
         followEnemy:{T:'followEnemy', S:{attacking:1}, Time: 200, TimePlus: 200, Radius: 50},
