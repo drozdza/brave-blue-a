@@ -43,17 +43,21 @@ GAMEobject.prototype.oTheStageAdd_speed = function(O, StateThing){
 }
 
 GAMEobject.prototype.oTheStageRemove_markPoint = function(O, StateThing){
-
+    if(O.childMarkPoint) {
+        this.removeObj(O.childMarkPoint);
+        delete(O.childMarkPoint);
+    }
 }
 GAMEobject.prototype.oTheStageAdd_markPoint = function(O, StateThing){
     var o = this.putObj('routePoint'+StateThing.pT,1,O.x,O.y);
 
     this.O[o].radius = StateThing.Radius;
     this.O[o].rName='Obj['+O.o+']: healing';
-    
+
     this.O[o].lists['Omoving'] = 1;
     this.O[o].parentDirectXY = O.o;
     this.O[o].moveFunc = 'parentDirectXY';
+    O.childMarkPoint = o;
 
     this.initObject(this.O[o]);
 }

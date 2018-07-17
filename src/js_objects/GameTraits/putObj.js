@@ -313,6 +313,8 @@ GAMEobject.prototype.removeObj = function(o){
             CanvasManager.CBM.deleteObjectFromBackground(this.O[o]);
     }
 
+    if(this.O[o].childMarkPoint) this.removeObj(this.O[o].childMarkPoint);
+
 
     delete this.Omoving[o];
     delete this.Othink[o];
