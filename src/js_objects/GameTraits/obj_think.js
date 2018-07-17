@@ -16,6 +16,26 @@ GAMEobject.prototype.oThink = function(O){
     }
 }
 
+GAMEobject.prototype.oThink_changeManouver = function(O,Think){
+    O.speed = O.SpeedArr[O.SpeedLvl].S;
+    var i = 0;
+    for (var d in Think.D)
+        if (!(Think.D[d].notTwice && O.Manouver == Think.D[d].M))
+            ++i;
+
+    var ri = parseInt(Math.random()*i);
+    if(Think.D[ri].notTwice && O.Manouver == Think.D[ri].M) ++ri;
+    var D = Think.D[ri];
+    O.Manouver = D.M;
+    var time = D.Time;
+    if(D.TimePlus) time -=- parseInt(Math.random()*D.TimePlus);
+    if(D.maxTurn){
+        var maxTurnTime = parseInt(D.maxTurn/O.speedT);
+        if(time > maxTurnTime) time = maxTurnTime;
+    }
+    O.ThinkTick = this.tick- -time;
+}
+
 GAMEobject.prototype.oThink_followEnemy = function(O,Think){
     O.speed = O.SpeedArr[O.SpeedLvl].S;
 
@@ -37,26 +57,6 @@ GAMEobject.prototype.oThink_followRoutePoint = function(O,Think){
     var time = 30;
     if (Think.Time)     time = Think.Time;
     if (Think.TimePlus) time -=- parseInt(Math.random()*Think.TimePlus);
-    O.ThinkTick = this.tick- -time;
-}
-
-GAMEobject.prototype.oThink_changeManouver = function(O,Think){
-    O.speed = O.SpeedArr[O.SpeedLvl].S;
-    var i = 0;
-    for (var d in Think.D)
-        if (!(Think.D[d].notTwice && O.Manouver == Think.D[d].M))
-            ++i;
-
-    var ri = parseInt(Math.random()*i);
-    if(Think.D[ri].notTwice && O.Manouver == Think.D[ri].M) ++ri;
-    var D = Think.D[ri];
-    O.Manouver = D.M;
-    var time = D.Time;
-    if(D.TimePlus) time -=- parseInt(Math.random()*D.TimePlus);
-    if(D.maxTurn){
-        var maxTurnTime = parseInt(D.maxTurn/O.speedT);
-        if(time > maxTurnTime) time = maxTurnTime;
-    }
     O.ThinkTick = this.tick- -time;
 }
 
@@ -181,20 +181,6 @@ GAMEobject.prototype.obj_setFollow = function(O, Obj, Radius, Angle, thinkOnBeen
 //============================== DEPRECATED ====================================
 //==============================================================================
 
-
-GAMEobject.prototype.alarmAround = function(o,DistAlert,AlarmFlag){
-    var uO,X,Y,Dist,O = this.O[o];
-
-    for(var uo in this.Enemies) if(uo!=o){
-        uO = this.O[uo];
-        X = O.x-uO.x;
-        Y = O.y-uO.y;
-        Dist = Math.sqrt(X*X- -Y*Y);
-        if(Dist < DistAlert){
-            this.O[uo].Flags[AlarmFlag] = true;
-        }
-    }
-}
 GAMEobject.prototype.changeSpeedLvl = function(O,SpeedLvl){
     O.SpeedLvl = SpeedLvl;
     O.speed = O.SpeedArr[ SpeedLvl ].S;
@@ -316,15 +302,6 @@ GAMEobject.prototype.decide = function(O){
                 O.goToX = TD.X;
                 O.goToY = TD.Y;
                 O.doingTime = 160;
-            }
-
-            if(TD.T=='alarmAboutSpottedEnemy'){
-                this.alarmAround(o,TD.alarmRadius,'spotEnemyFlag');
-                continue;
-            }
-            if(TD.T=='alarmAboutIncomingFire'){
-                this.alarmAround(o,TD.alarmRadius,'incomingFireFlag');
-                continue;
             }
 
             if(TD.T=='goAroundEnemy'){
