@@ -3,6 +3,7 @@
 BBAdata.ObjectData.Mine={
     M: 'comp',
     lists:{Ocomp:1,Omoving:1},
+    moveFunc: 'move',
     mapType: 'EM',
     view:{
         Letter: 'R',

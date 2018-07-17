@@ -6,6 +6,7 @@ BBAdata.SHIPpresetsOld['start']={
     S: 2,
     T: 'ship',
     speedM: 0,
+    moveFunc: 'move',
     lastSpeedT: 0,
     M: 'moving',
     view:{
@@ -75,6 +76,7 @@ BBAdata.SHIPpresetsOld['destFields']={
     T: 'ship',
     speedM: 0,
     lastSpeedT: 0,
+    moveFunc: 'move',
     M: 'moving',
     view:{
         Letter: 'A',
@@ -153,6 +155,7 @@ BBAdata.SHIPpresetsOld['bombs1']={
     T: 'ship',
     speedM: 0,
     lastSpeedT: 0,
+    moveFunc: 'move',
     M: 'moving',
     view:{
         Letter: 'A',
@@ -232,6 +235,7 @@ BBAdata.SHIPpresetsOld['bombs2']={
     T: 'ship',
     speedM: 0,
     lastSpeedT: 0,
+    moveFunc: 'move',
     M: 'moving',
     view:{
         Letter: 'A',
@@ -313,6 +317,7 @@ BBAdata.SHIPpresetsOld['moves1']={
     T: 'ship',
     speedM: 0,
     lastSpeedT: 0,
+    moveFunc: 'move',
     M: 'moving',
     view:{
         Letter: 'A',
@@ -385,6 +390,7 @@ BBAdata.SHIPpresetsOld['best']={
     T: 'ship',
     speedM: 0,
     lastSpeedT: 0,
+    moveFunc: 'move',
     M: 'moving',
     view:{
         Letter: 'A',
@@ -484,6 +490,7 @@ BBAdata.SHIPpresetsOld['bestJumper']={
     T: 'ship',
     speedM: 0,
     lastSpeedT: 0,
+    moveFunc: 'move',
     M: 'moving',
     view:{
         Letter: 'A',
@@ -591,6 +598,7 @@ BBAdata.SHIPpresetsOld['bombardier']={
     T: 'ship',
     speedM: 0,
     lastSpeedT: 0,
+    moveFunc: 'move',
     M: 'moving',
     view:{
         Letter: 'A',
@@ -682,6 +690,7 @@ BBAdata.SHIPpresetsOld['bombardier2']={
     T: 'ship',
     speedM: 0,
     lastSpeedT: 0,
+    moveFunc: 'move',
     M: 'moving',
     view:{
         Letter: 'A',
@@ -778,6 +787,7 @@ BBAdata.SHIPpresetsOld['kagelis']={
     T: 'ship',
     speedM: 0,
     lastSpeedT: 0,
+    moveFunc: 'move',
     M: 'moving',
     view:{
         Letter: 'A',
@@ -874,6 +884,7 @@ BBAdata.SHIPpresetsOld['ethernal']={
     T: 'ship',
     speedM: 0,
     lastSpeedT: 0,
+    moveFunc: 'move',
     M: 'moving',
     view:{
         Letter: 'A',

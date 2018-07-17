@@ -32,6 +32,7 @@ BBAdata.ObjectData.healing_missile={
     TT: 'dust',
     lists:{Ocomp:1,Omoving:1},
     mapType: 'EM',
+    moveFunc: 'move',
     mapCollide: ['E','EMF','F'],
     view:{
         Letter: 'J',
@@ -56,6 +57,7 @@ BBAdata.ObjectData.energy_field_missile={
     M: 'comp',
     TT: 'dust',
     lists:{Ocomp:1,Omoving:1},
+    moveFunc: 'move',
     mapType: 'EM',
     mapCollide: ['E','EMF','F'],
     view:{
@@ -79,6 +81,7 @@ BBAdata.ObjectData.missile={
     M: 'comp',
     TT: 'dust',
     lists:{Ocomp:1,Omoving:1},
+    moveFunc: 'move',
     mapType: 'EM',
     view:{
         Letter: 'Y',
@@ -101,6 +104,7 @@ BBAdata.ObjectData.bullet_bomb={
     M: 'comp',
     TT: 'dust',
     lists:{Ocomp:1,Omoving:1},
+    moveFunc: 'move',
     mapType: 'EM',
     view:{
         Letter: 'P',
@@ -208,6 +212,7 @@ BBAdata.ObjectData.shieldBlob={
     mapType: 'A',
 
     lists:{Omoving:1},
+    moveFunc: 'move',
     view:{
         Letter: '#',
         LetterSize: 40,

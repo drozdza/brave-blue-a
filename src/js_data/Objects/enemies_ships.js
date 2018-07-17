@@ -4,6 +4,7 @@ BBAdata.ObjectMods.enemyShip2={
     M: 'comp',
     lists:{Enemies:1,Othink:1,Omoving:1},
     TT: 'enemy',
+    moveFunc: 'move',
     mapType: 'E',
     lastSpeedT: 0,
     doSquad: -1,   //??

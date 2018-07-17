@@ -106,6 +106,9 @@ GAMEobject.prototype.putObj_changeLists = function(O, lists){
         if(typeof lists[list] == 'undefined')
             delete this[list][O.o];
 
+    if(typeof lists.Omoving != 'undefined' && typeof O.moveFunc == 'undefined'){
+        O.moveFunc = 'move';
+    }
     O.lists = lists;
 }
 
@@ -125,6 +128,7 @@ GAMEobject.prototype.putBullet = function(Side,x,y,Speed,Dec,Angle,DMG){
     O.radius = 4;
     O.dec    = Dec || 30;
     O.DMG   = DMG || {Dmg:1,T:'normal'};
+    O.moveFunc = 'bullet';
 
     ++this.C['B_bullets'];
     ++this.C['B_s'+Side+'_bullets'];

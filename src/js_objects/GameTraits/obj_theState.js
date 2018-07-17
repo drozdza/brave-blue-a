@@ -50,8 +50,10 @@ GAMEobject.prototype.oTheStageAdd_markPoint = function(O, StateThing){
 
     this.O[o].radius = StateThing.Radius;
     this.O[o].rName='Obj['+O.o+']: healing';
-    this.O[o].parentDirectXY = O.o;
+    
     this.O[o].lists['Omoving'] = 1;
+    this.O[o].parentDirectXY = O.o;
+    this.O[o].moveFunc = 'parentDirectXY';
 
     this.initObject(this.O[o]);
 }

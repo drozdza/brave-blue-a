@@ -124,6 +124,7 @@ GAMEobject.prototype.bindWithSquad = function(O,i,s){
     if(OSS.placementT=='directPlaces'){
         S.squadDirectPlace = {o:O.o, i:i};
         S.speed = 0;
+        S.moveFunc = 'squadDirectPlace';
     }
     if(OSS.placementT=='loose'){
         S.squadMaster = {o:O.o, i:i};
