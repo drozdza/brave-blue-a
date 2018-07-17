@@ -27,18 +27,8 @@ BBAdata.ObjectData.fariax={
     TheStateLists: {
         defending: {
             markPoint:{T:'markPoint', pT:'Healing', Radius: 120},
+            shot:{T:'shot', WeaponTypes: {shotHealingMissile:1}},
         },
-        fleeing:{
-            speed:{T:'speed', SpeedLvl:'max'},
-        },
-        attacking: {
-            speed:{T:'speed', SpeedLvl:'normal'},
-            shot:{T:'shot', WeaponTypes: {single:1}},
-            look:{T:'look', LookType:'fighting'},
-        },
-        patroling: {
-            look:{T:'look', LookType:'curious'},
-        }
     },
 
     ThinkNow: 'followRoute',

@@ -8,6 +8,19 @@ GAMEobject.prototype.oShot_single = function(O){
     WP.lastShot = this.tick;
 }
 
+GAMEobject.prototype.oShot_shotHealingMissile = function(O){
+    var WP = O.Weapons.shotHealingMissile;
+    if(!this.oShotCheck(O,WP)) return false;
+
+    var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
+    for(var i in inRange) if(i != O.o)
+        if(this.O[i].life < this.O[i].lifeM){
+            this.shootHealingMissile(O.o,i);
+            WP.lastShot = this.tick;
+            break;
+        }
+}
+
 GAMEobject.prototype.oShotCheck = function(O,WP){
     if(WP.gunSpeed > (this.tick-WP.lastShot)) return false;
     if(WP.maxSpeed && WP.maxSpeed < O.SpeedLvl) return false;
@@ -51,10 +64,8 @@ GAMEobject.prototype.oShot = function(O){
             if(WU.r)  PlayerAngle = WU.a;
         }
 
-        if(WP.t == 'single'){
-            this.putBullet(O.S,O.x,O.y,WP.Speed,WP.Dec,PlayerAngle,WP.DMG);
-            WP.lastShot = this.tick;
-        }
+
+        // ========== DEPRECATED WEAPONS
         if(WP.t == 'double'){
             if(WP.gunSiteChange){
                 var Kuk = -45;
@@ -281,15 +292,6 @@ GAMEobject.prototype.oShot = function(O){
             for(var i in inRange)
                 this.addMaxShield(i,WP.shieldTime,O.o);
             WP.lastShot = this.tick;
-        }
-        if(WP.t == 'shootHealingMissile'){
-            var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
-            for(var i in inRange) if(i != O.o)
-                if(this.O[i].life < this.O[i].lifeM){
-                    this.shootHealingMissile(O.o,i);
-                    WP.lastShot = this.tick;
-                    break;
-                }
         }
 
         if(WP.t == 'shootHealingBomb'){

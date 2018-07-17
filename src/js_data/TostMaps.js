@@ -10,7 +10,7 @@ BBAdata.MAPS.TheNewBeginning={
         {What:{Gstar:3},Egzact:[{x:-150,y:-120},{x:150,y:-120},{x:0,y:150}],Mod:{bounceType:'diagonal',bounceTeleport:true}},
         // {Random:{X:700, Y:0, Radius: 100}, Team:'team2', What:[{t:'carras', q:1}]},
         // {Random:{X:700, Y:0, Radius: 100}, Team:'team1', What:[{t:'carras', q:13}]},
-        // {Random:{X:700, Y:0, Radius: 100}, Team:'team3', What:[{t:'carras', q:6}]},
+        {Random:{X:700, Y:0, Radius: 100}, Team:'team3', What:[{t:'carras', q:6}]},
         // {Random:{X:700, Y:0, Radius: 100}, Team:'team2', What:[{t:'carras', q:20}]},
         {Random:{X:700, Y:0, Radius: 100}, Team:'team3', What:[{t:'fariax', q:1}]},
 
