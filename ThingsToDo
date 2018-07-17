@@ -46,6 +46,8 @@ To Test:
 
 - Shield Creators that needs to be powered by other ships
 
+- Ship[speed:10], with ejected missiles[speed:13,speedT:20]
+
 - Mines: Immunity Mines that can be destroyed only by hitting the Ship
 - Mina zatrzymująca
 

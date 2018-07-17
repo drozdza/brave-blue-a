@@ -13,7 +13,8 @@ GAMEobject.prototype.oManouver_followObject = function(O){
     if (typeof this.O[O.Follow.o] == 'undefined' || this.O[O.Follow.o].life <= 0){
         O.Manouver = 'goStraight';
         O.lastSpeedT = 0;
-        O.ThinkTick = this.tick;
+        if(O.Follow.thinkOnLost)
+            O.ThinkTick = this.tick;
         return false;
     }
     var Q = this.O[O.Follow.o];

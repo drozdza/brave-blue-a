@@ -38,11 +38,14 @@ GAMEobject.prototype.shootMissile = function(o,Angle,Speed,Dec,SpeedT,DMG,explod
     ++this.C['B_missiles'];
     ++this.C['B_s'+O.S+'_missiles'];
 }
-GAMEobject.prototype.shootHealingMissile = function(o,Target){
+GAMEobject.prototype.shotHealingMissile = function(o,oTarget){
     var O = this.O[o];
     var L = this.putObj('healing_missile',O.S,O.x,O.y);
+
+    this.obj_setFollow(this.O[L], oTarget, 0);
     this.O[L].angle = O.angle;
-    this.O[L].FollowWho = Target;
+    this.O[L].ThinkTick = this.tick- -230;
+
     this.initObject(this.O[L]);
 }
 GAMEobject.prototype.shootShieldAddMissile = function(o,Target){

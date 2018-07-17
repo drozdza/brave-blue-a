@@ -15,7 +15,7 @@ GAMEobject.prototype.oShot_shotHealingMissile = function(O){
     var inRange = this.getCollidingWithCircle(O.x,O.y,WP.Radius,['E']);
     for(var i in inRange) if(i != O.o)
         if(this.O[i].life < this.O[i].lifeM){
-            this.shootHealingMissile(O.o,i);
+            this.shotHealingMissile(O.o,i);
             WP.lastShot = this.tick;
             break;
         }

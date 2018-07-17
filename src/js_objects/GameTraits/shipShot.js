@@ -20,10 +20,13 @@ GAMEobject.prototype.shipShootMissile = function(Enemy,Angle,Speed,Dec,SpeedT,de
     var L = this.putObj('missile',O.S,O.x,O.y);
     this.O[L].speed = Speed || 12;
     this.O[L].speedT = SpeedT || 3;
-    this.O[L].doingTime = Dec || 30;
-    this.O[L].FollowWho = Enemy;
+
+    this.O[L].ThinkTick = this.tick + (Dec || 30);
+
+    this.obj_setFollow(this.O[L], Enemy);
     this.O[L].angle = Angle;
     this.O[L].mapType = 'PM';
+
 
     if(destrData.DMG)
         this.O[L].DMG = cloneObj(destrData.DMG);

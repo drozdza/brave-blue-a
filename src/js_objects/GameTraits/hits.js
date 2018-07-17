@@ -52,7 +52,7 @@ GAMEobject.prototype.hit = function(o,q){
     // if(O.teleportOnHit){ this.region_teleportOnHit(O,q); return 1; }
     if(Q.teleportOnHit){ this.region_teleportOnHit(Q,o); return 1; }
 
-    if(O.T=='healing_missile' && O.FollowWho == q){
+    if(O.T=='healing_missile' && O.Follow.o == q){
         if(!this.healObj(q,1,o))
             this.removeObj(o);
         return 1;

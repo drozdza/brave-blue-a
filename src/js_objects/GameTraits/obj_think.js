@@ -120,7 +120,7 @@ GAMEobject.prototype.oThink_followRoute = function(O,Think){
         var RN = R.P[ ilvl ];
         RN = this.Oroute[RN];
 
-        this.obj_setFollow(O, RN, this.O[RN].radius, 0, true, true);
+        this.obj_setFollow(O, RN, this.O[RN].radius, 0, true, true, true);
     }
 }
 
@@ -149,20 +149,31 @@ GAMEobject.prototype.oThink_changeTheState = function(O,Think){
     this.oTheState(O,Think.TheState);
 }
 
+GAMEobject.prototype.oThink_expire = function(O,Think){
+    if(O.onExpire){
+        if(O.onExpire.Do == 'explode'){
+            this.explodeBomb(O.o,O.onExpire);
+        }
+    } else
+        this.removeObj(O.o);
+
+}
+
 // HELPERS:
 
-GAMEobject.prototype.obj_setFollow = function(O, Obj, Radius, Angle, thinkOnBeen, adjustSpeed){
-    var xy = randXYinDist(Radius);
+GAMEobject.prototype.obj_setFollow = function(O, Obj, Radius, Angle, thinkOnBeen, thinkOnLost, adjustSpeed){
+    var xy = randXYinDist(Radius || 0);
     O.Follow = {
         o: Obj,
         x: xy.x,
         y: xy.y,
-        a: 0 || Angle,
+        a: Angle || 0,
         been: false,
         followStart: this.tick,
-        followAdjust: false || adjustSpeed,
-        thinkOnBeen: false || thinkOnBeen,
-    }
+        thinkOnBeen: thinkOnBeen || false,
+        thinkOnLost: thinkOnLost || false,
+        followAdjust: adjustSpeed || false,
+    };
 
     if (adjustSpeed) {
         var sx = isAAbleToGetB({x:O.x, y:O.y}, O.angle, O.speed, O.speedT, {x:this.O[Obj].x- -O.Follow.x, y:this.O[Obj].y- -O.Follow.y});
@@ -182,6 +193,7 @@ GAMEobject.prototype.obj_setFollow = function(O, Obj, Radius, Angle, thinkOnBeen
 //==============================================================================
 
 GAMEobject.prototype.changeSpeedLvl = function(O,SpeedLvl){
+    if(typeof O.SpeedArr == 'undefined') return false;
     O.SpeedLvl = SpeedLvl;
     O.speed = O.SpeedArr[ SpeedLvl ].S;
     O.speedT = O.SpeedArr[ SpeedLvl ].T;
@@ -368,16 +380,6 @@ GAMEobject.prototype.decide = function(O){
                     this.removeObj(O.o);
                 return true;
             }
-            if(TD.T=='expire'){
-                if(O.onExpire){
-                    if(O.onExpire.Do=='explode'){
-                        this.explodeBomb(O.o,O.onExpire);
-                    }
-                } else
-                    this.removeObj(O.o);
-                return true;
-            }
-
             if(TD.T=='regionStateOut'){
                 this.regionStateOut(O.o);
                 return true;

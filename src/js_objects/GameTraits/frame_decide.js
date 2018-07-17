@@ -43,14 +43,14 @@ GAMEobject.prototype.frame_decide = function(){
 
     // Comp Decide
     for(o in this.Ocomp)
-        this.checkHits(o);
-    for(o in this.Ocomp)
         this.decide(this.O[o]);
 
     for(o in this.Olook)
         if(this.O[o].LookTick <= this.tick)
             this.oLook(this.O[o]);
 
+    for(o in this.Othink)
+        this.checkHits(o);
     for(o in this.Othink)
         if(this.O[o].ThinkTick <= this.tick)
             this.oThink(this.O[o]);

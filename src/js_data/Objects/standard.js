@@ -13,8 +13,8 @@ BBAdata.ObjectData.routePointHealing={
     M: 'routePoint',
     lists:{},
     radius: 20,
-    pointColor: '0,120,0',
-    textColor: '0,180,0',
+    pointColor: '0,60,0',
+    textColor: '0,120,0',
 };
 
 
@@ -27,12 +27,47 @@ BBAdata.ObjectData.destruction_field={
     lists:{Oregion:1},
     mapType: 'F',
 };
-BBAdata.ObjectData.healing_missile={
+BBAdata.ObjectMods.missile={
     M: 'comp',
     TT: 'dust',
-    lists:{Ocomp:1,Omoving:1},
-    mapType: 'EM',
+    lists:{Othink:1,Omoving:1},
     moveFunc: 'move',
+    mapType: 'EM',
+
+    lifeM: 1,
+    radius: 10,
+
+    ThinkNow: '',
+    Thinks: {
+        expire:{T:'expire'},
+    },
+    ThinkTick: 0,
+
+    Manouver: 'followObject',
+
+    Flags:{},
+    FlagReactions:{},
+};
+BBAdata.ObjectData.missile={
+    LoadMods:{
+        missile:{},
+    },
+    view:{
+        Letter: 'Y',
+        LetterSize: 12,
+        Color: '#ff0',
+        Angle: 0,
+    },
+
+    speed: 15,
+    speedT: 3,
+
+    DMG:{Dmg:1,T:'explo'},
+};
+BBAdata.ObjectData.healing_missile={
+    LoadMods:{
+        missile:{},
+    },
     mapCollide: ['E','EMF','F'],
     view:{
         Letter: 'J',
@@ -41,24 +76,15 @@ BBAdata.ObjectData.healing_missile={
         Angle: 180,
     },
 
-    life: 1,
-    lifeM: 1,
     speed: 13,
     speedT: 20,
-    radius: 10,
+
     Heal: 1,
-    doingTime: 230,
-    onHit:{},
-    toDo: [{T:'expire'}],
-    Manouver: 'followEntity',
-    Flags:{},
 };
 BBAdata.ObjectData.energy_field_missile={
-    M: 'comp',
-    TT: 'dust',
-    lists:{Ocomp:1,Omoving:1},
-    moveFunc: 'move',
-    mapType: 'EM',
+    LoadMods:{
+        missile:{},
+    },
     mapCollide: ['E','EMF','F'],
     view:{
         Letter: 'E',
@@ -67,39 +93,14 @@ BBAdata.ObjectData.energy_field_missile={
         Angle: 180,
     },
 
-    lifeM: 1,
-    radius: 10,
     speed: 13,
     speedT: 20,
     doingTime: 230,
     onHit:{},
     toDo: [{T:'expire'}],
     Manouver: 'followEntity',
-    Flags:{},
 };
-BBAdata.ObjectData.missile={
-    M: 'comp',
-    TT: 'dust',
-    lists:{Ocomp:1,Omoving:1},
-    moveFunc: 'move',
-    mapType: 'EM',
-    view:{
-        Letter: 'Y',
-        LetterSize: 12,
-        Color: '#ff0',
-        Angle: 0,
-    },
 
-    lifeM: 1,
-    radius: 10,
-    speed: 15,
-    speedT: 3,
-    DMG:{Dmg:1,T:'explo'},
-    doingTime: 200,
-    toDo: [{T:'expire'}],
-    Manouver: 'followEntity',
-    Flags:{},
-};
 BBAdata.ObjectData.bullet_bomb={
     M: 'comp',
     TT: 'dust',
@@ -121,6 +122,7 @@ BBAdata.ObjectData.bullet_bomb={
     toDo: [{T:'expire'}],
     Manouver: 'goStraight',
     Flags:{},
+    FlagReactions:{},
 };
 
 
@@ -142,6 +144,7 @@ BBAdata.ObjectMods.Star={
     M: 'static',
     lists:{Oregion:1},
     Flags:{},
+    FlagReactions:{},
     mapType:'A',
     TT:'bgStars',
 };
@@ -187,6 +190,7 @@ BBAdata.ObjectData.Gstar={
     undestructible: 1,
     bounceType: 'straight',
     Flags:{},
+    FlagReactions:{},
     mapType:'A',
 };
 BBAdata.ObjectData.EndPortal={

@@ -160,7 +160,7 @@ TheStates:
 - dropSpaceMine:
 
 - addMaxShield:
-- shootHealingMissile:
+- shotHealingMissile:
 - shootHealingBomb:
 - shootShieldAddMissile:
 
