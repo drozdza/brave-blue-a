@@ -14,29 +14,20 @@ BBAdata.ObjectData.fariax={
     lifeM: 9,
     radius: 20,
 
-    Weapon:[
-        {t:'shootHealingMissile', Radius: 350, gunSpeed: 20, lastShot: 100},
-    ],
-
-    doingNow: 'changeManouver',
-    doingTime: -1,
-    Manouver: 'goStraight',
-    toDo: [
-        {N:15,T:'changeManouver', maxAlarm: 5, straightMin: 60, straightPlus: 100, turnMin: 30, turnPlus: 70  },
-    ],
-
-
 // ---------------------------------------
 
     WeaponTypes: {},
     Weapons:{
-        single:{t:'single', DMG:{Dmg:1,T:'normal'}, Dec: 50, Speed: 10, gunSpeed: 15, lastShot: 0, minDistToEnemy:450},
+        shotHealingMissile:{t:'shotHealingMissile', Radius: 350, gunSpeed: 20, gunSpeed: 15, lastShot: 0},
     },
 
     Manouver: 'goStraight',
 
     TheState: 'defending',
     TheStateLists: {
+        defending: {
+            markPoint:{T:'markPoint', pT:'Healing', Radius: 120},
+        },
         fleeing:{
             speed:{T:'speed', SpeedLvl:'max'},
         },

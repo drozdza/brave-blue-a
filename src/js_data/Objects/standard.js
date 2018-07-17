@@ -4,7 +4,20 @@ BBAdata.ObjectData.routePoint={
     M: 'routePoint',
     lists:{},
     radius: 20,
+    pointColor: '20,0,40',
+    textColor: '40,0,80',
 };
+
+BBAdata.ObjectData.routePointHealing={
+    T: 'routePoint',
+    M: 'routePoint',
+    lists:{},
+    radius: 20,
+    pointColor: '0,120,0',
+    textColor: '0,180,0',
+};
+
+
 
 // STANDARD OBJECTS
 

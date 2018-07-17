@@ -26,18 +26,18 @@ GAMEobject.prototype.drawObject = function(O, CH, Px,Py){
         CH.restore();
     }
 
-    if(BBAdata.GET.ORDERS > 0 && O.T == 'routePoint'){
+    if(BBAdata.GET.ORDERS > 0 && O.M == 'routePoint'){
         CH.save();
         CH.beginPath();
         CH.arc(O.x-Px, O.y-Py,O.radius,0,2*Math.PI,true);
         CH.closePath();
-        CH.fillStyle = "rgba(20,0,40,0.3)";
-        CH.strokeStyle = "rgba(20,0,40,0.5)";
+        CH.fillStyle = "rgba("+O.pointColor+",0.3)";
+        CH.strokeStyle = "rgba("+O.pointColor+",0.5)";
         CH.lineWidth = 10;
         CH.setLineDash([20,5]);
         CH.fill();
         CH.stroke();
-        CH.fillStyle = 'rgb(40,0,80)';
+        CH.fillStyle = 'rgb('+O.textColor+')';
         CH.font = "20px Arial";
         CH.textAlign = "center";
         CH.fillText(O.rName, O.x-Px, O.y-Py- -O.radius- -20);

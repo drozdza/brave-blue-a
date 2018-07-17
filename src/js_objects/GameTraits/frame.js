@@ -137,6 +137,11 @@ GAMEobject.prototype.frame_move = function(){
                     O.angle = (O.angle- -MasterS.anglePlus)%360;
             }
         }
+        else if( O.parentDirectXY ){
+            var Parent = this.O[ O.parentDirectXY ];
+            O.x = Parent.x;
+            O.y = Parent.y;
+        }
         else {
             O.x -=- O.speed * Math.sin( (-parseInt(O.angle)-180)*PIx);
             O.y -=- O.speed * Math.cos( (-parseInt(O.angle)-180)*PIx);
